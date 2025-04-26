@@ -54,7 +54,7 @@ project "SandBox"
 	postbuildcommands {
 
 		-- Copy wasm to Nepnep
-		'xcopy /Y /I "%{cfg.targetdir}/**.wasm" "../Nepnep/static/wasm/"'
+		'xcopy /Y /I "%{cfg.targetdir}\\**.wasm" "..\\Nepnep\\static\\wasm\"'
 	}
 
 	-- Platform: Windows

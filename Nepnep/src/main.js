@@ -25,7 +25,7 @@ async function loadWasmStreaming(url) {
     }
 }
 
-loadWasmStreaming('http://localhost:8000/SandBox.wasm')
+loadWasmStreaming('wasm/SandBox.wasm')
     .then(obj => {
 
         console.log(obj.exports)
@@ -37,11 +37,4 @@ loadWasmStreaming('http://localhost:8000/SandBox.wasm')
         )
         console.log(functionNames)
 
-        const add = exports._Z3addii
-        const wasmMain = exports._Z8wasmMainv
-        const main = exports.__original_main
-
-        console.log(add)
-        console.log(wasmMain())
-        console.log(main())
     })

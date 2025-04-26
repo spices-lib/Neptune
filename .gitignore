@@ -30,4 +30,4 @@ Makefile
 /Nepnep/node_modules
 /Nepnep/dist
 /Nepnep/static/wasm
-Nepnep/package.json
+Nepnep/package-lock.json
