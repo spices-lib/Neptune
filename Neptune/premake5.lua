@@ -39,6 +39,8 @@ project "Neptune"
 	{
 		"src",                                                -- Engine Source Folder.
 		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
+		"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+		"%{IncludeDir.emscripten_glfw}/external",              -- Library: emscripten_glfw Header Folder.
 	}
 
 	-- The Solution Dependency

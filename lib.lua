@@ -5,3 +5,4 @@
 -- Includes
 IncludeDir                                = {}
 IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                        -- Include: emscripten
+IncludeDir["emscripten_glfw"]             = "%{wks.location}/Neptune/vendor/emscripten-glfw/"                            -- Include: emscripten-glfw

@@ -36,6 +36,8 @@ project "SandBox"
 		"%{wks.location}/Neptune/src",                        -- Engine Source Folder.
 		"src",                                                -- SandBox Source Folder.
 		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
+		"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+		"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
@@ -48,6 +50,11 @@ project "SandBox"
 	links
 	{
 		"Neptune",                             -- Dependency: Neptune
+	}
+
+	linkoptions
+	{
+		"--use-port=contrib.glfw3"             -- Dependency: emscripten-glfw 
 	}
 
 	-- The Solution PostCommands

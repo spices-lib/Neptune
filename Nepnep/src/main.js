@@ -27,14 +27,5 @@ async function loadWasmStreaming(url) {
 
 loadWasmStreaming('wasm/SandBox.wasm')
     .then(obj => {
-
-        console.log(obj.exports)
-
-        const exports = obj.exports
-
-        const functionNames = Object.keys(exports).filter(
-            key => typeof exports[key] == 'function'
-        )
-        console.log(functionNames)
-
+        console.log(obj)
     })

@@ -6,23 +6,19 @@
 #pragma once
 #include <emscripten.h>
 #include <iostream>
+#include <GLFW/emscripten_glfw3.h>
 
 EMSCRIPTEN_KEEPALIVE
-int add(int a, int b)
+int wasmMain()
 {
-    return a + b;
-}
+    glfwInit();
 
-EMSCRIPTEN_KEEPALIVE
-std::string wasmMain()
-{
-    return "Hello World\n";
+    return 0;
 }
 
 /**
 * @brief Main Function.
 */
 int main() {
-
     return 0;
 }
