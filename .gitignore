@@ -25,3 +25,8 @@ Makefile
 /Neptune/Makefile
 /SandBox/Makefile
 /Test/Makefile
+
+/Nepnep/.idea
+/Nepnep/node_modules
+/Nepnep/dist
+Nepnep/package.json
