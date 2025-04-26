@@ -38,6 +38,7 @@ project "Neptune"
 	includedirs
 	{
 		"src",                                                -- Engine Source Folder.
+		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
 	}
 
 	-- The Solution Dependency

@@ -34,7 +34,8 @@ project "Test"
 	includedirs
 	{
 		"%{wks.location}/Neptune/src",                        -- Engine Source Folder.
-		"src",                                                -- Engine Source Folder.
+		"src",                                                -- UnitTest Source Folder.
+		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.

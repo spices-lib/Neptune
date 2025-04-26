@@ -29,4 +29,5 @@ Makefile
 /Nepnep/.idea
 /Nepnep/node_modules
 /Nepnep/dist
+/Nepnep/static/wasm
 Nepnep/package.json

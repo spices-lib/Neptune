@@ -34,7 +34,8 @@ project "SandBox"
 	includedirs
 	{
 		"%{wks.location}/Neptune/src",                        -- Engine Source Folder.
-		"src",                                                -- Engine Source Folder.
+		"src",                                                -- SandBox Source Folder.
+		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
@@ -47,6 +48,13 @@ project "SandBox"
 	links
 	{
 		"Neptune",                             -- Dependency: Neptune
+	}
+
+	-- The Solution PostCommands
+	postbuildcommands {
+
+		-- Copy wasm to Nepnep
+		'xcopy /Y /I "%{cfg.targetdir}/**.wasm" "../Nepnep/static/wasm/"'
 	}
 
 	-- Platform: Windows

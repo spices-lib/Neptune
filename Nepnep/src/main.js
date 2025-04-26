@@ -25,7 +25,7 @@ async function loadWasmStreaming(url) {
     }
 }
 
-loadWasmStreaming('WebCPP.wasm')
+loadWasmStreaming('http://localhost:8000/SandBox.wasm')
     .then(obj => {
 
         console.log(obj.exports)

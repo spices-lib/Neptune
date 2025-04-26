@@ -4,3 +4,4 @@
 
 -- Includes
 IncludeDir                                = {}
+IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                        -- Include: emscripten
