@@ -1,4 +1,4 @@
-import { WASI } from '@wasmer/wasi';
+import { WASI } from '@wasmer/wasi'
 
 const wasi = {
     fd_write: () => {},
