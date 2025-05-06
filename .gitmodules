@@ -1,0 +1,27 @@
+[submodule "Neptune/vendor/spdlog"]
+	path = Neptune/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Neptune/vendor/ImGuizmo"]
+	path = Neptune/vendor/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo
+[submodule "Neptune/vendor/tracy"]
+	path = Neptune/vendor/tracy
+	url = https://github.com/wolfpld/tracy
+[submodule "Neptune/vendor/IconFontCppHeaders"]
+	path = Neptune/vendor/IconFontCppHeaders
+	url = https://github.com/juliettef/IconFontCppHeaders
+[submodule "Neptune/vendor/imgui"]
+	path = Neptune/vendor/imgui
+	url = https://github.com/spices-lib/imgui
+[submodule "Neptune/vendor/yaml-cpp"]
+	path = Neptune/vendor/yaml-cpp
+	url = https://github.com/spices-lib/yaml-cpp
+[submodule "Neptune/vendor/implot"]
+	path = Neptune/vendor/implot
+	url = https://github.com/spices-lib/implot
+[submodule "Test/vendor/googletest"]
+	path = Test/vendor/googletest
+	url = https://github.com/spices-lib/googletest
+[submodule "Neptune/vendor/glm"]
+	path = Neptune/vendor/glm
+	url = https://github.com/spices-lib/glm

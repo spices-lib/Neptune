@@ -1,0 +1,41 @@
+#pragma once
+#include "Core/Core.h"
+#include "Render/Renderer/Renderer.h"
+
+namespace Spices {
+
+	class TestRenderer : public Renderer
+	{
+	public:
+
+		TestRenderer(
+			const std::string&                           rendererName   ,
+			VulkanState&                                 vulkanState    ,
+			const std::shared_ptr<VulkanDescriptorPool>& desctiptorPool ,
+			const std::shared_ptr<VulkanDevice>&         device         ,
+			const std::shared_ptr<RendererResourcePool>& rendererResourcePool
+		);
+
+		virtual ~TestRenderer() {};
+		virtual void Render(TimeStep& ts, FrameInfo& frameInfo) override;
+
+	private:
+
+		virtual void CreateRendererPass() override;
+		virtual void CreateDescriptorSet() override;
+
+		/**
+		* @brief The interface is inherited from Renderer.
+		* Create Material Specific Pipeline.
+		* @param[in] material Registry material.
+		* @param[in] layout VkPipelineLayout.
+		* @param[in] subPass Handled subPass.
+		*/
+		virtual void CreatePipeline(
+			std::shared_ptr<Material>        material  ,
+			VkPipelineLayout&                layout    ,
+			std::shared_ptr<RendererSubPass> subPass
+		) override;
+	};
+
+}

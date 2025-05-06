@@ -27,11 +27,47 @@ project "Neptune"
 		"src/**.h",
 		"src/**.hpp",
 		"src/**.cpp",
+
+		-- Engine Shader Headers.
+		"assets/Shaders/src/Header/**.h",
+
+		-- Library: std_image Files.
+		"vendor/stb_image/**.h",
+		"vendor/stb_image/**.cpp",
+		
+		-- Library: glm Files.
+		"vendor/glm/glm/**.hpp",
+		"vendor/glm/glm/**.inl",
+
+		-- Library: ImGuizmo Files.
+		"vendor/ImGuizmo/ImGuizmo.cpp",
+		"vendor/ImGuizmo/ImGuizmo.h",
+
+		-- Library: tracy Files.
+		"vendor/tracy/public/TracyClient.cpp",
+		"vendor/tracy/public/tracy/Tracy.hpp",
+
+		-- Library: IconFontCppHeaders Files.
+		"vendor/IconFontCppHeaders/**.h",
 	}
 
 	-- Macros Definitions
 	defines
 	{
+		-- Define Engine Assets Folder.
+		'NEPTUNE_ASSETS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/assets/")',
+
+		-- Define Engine Logs Folder.
+		'NEPTUNE_CONSOLElOGFILE_PATH=std::string("saved/ConsoleLog/")',
+
+		-- Define Engine Extent Processes Folder.
+		'NEPTUNE_EXTENT_PROCESS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/../vendor/")',
+
+		-- Define Engine Use OpenGL API for Rendering, though we may support multipile Rendering API.
+		"RENDERAPI_OPENGL",
+
+		-- Define Platform : Windows.
+		"PLATFORM_WINDOWS"
 	}
 
 	-- The Solution Additional Include Folder.
@@ -40,13 +76,39 @@ project "Neptune"
 		"src",                                                -- Engine Source Folder.
 		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
 		"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-		"%{IncludeDir.emscripten_glfw}/external",              -- Library: emscripten_glfw Header Folder.
+		"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
+		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
+		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
+		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
+		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
+		"%{IncludeDir.rapidyaml}",                            -- Library: rapidyaml Source Folder.
+		"%{IncludeDir.ImPlot}",                               -- Library: ImPlot Source Folder.
+		"%{IncludeDir.spdlog}",                               -- Library: spdlog Source Folder.
+		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
+		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
+		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 	}
 
 	-- The Solution Dependency
 	links
 	{
+		"imgui",                              -- Dependency: imgui
+		"yaml-cpp",                           -- Dependency: yaml-cpp
+		"implot",                             -- Dependency: implot
 	}
+
+	-- Library: std_image is included this solution, do not use PreCompiler Header.
+	filter "files:vendor/stb_image/**.cpp"
+	flags { "NoPCH" }
+
+	-- Library: ImGuizmo is included this solution, do not use PreCompiler Header.
+	filter "files:vendor/ImGuizmo/**.cpp"
+	flags { "NoPCH" }
+
+	-- Library: tracy is included this solution, do not use PreCompiler Header.
+	filter "files:vendor/tracy/public/**.cpp"
+	flags { "NoPCH" }
 
 	-- Platform: Windows
 	filter "system:windows"
@@ -77,6 +139,9 @@ project "Neptune"
 		-- Debug Specific Solution Macro Definitions.
 		defines 
 		{
+			"NEPTUNE_DEBUG",                 -- Debug Symbol.
+			"TRACY_ENABLE",                  -- tracy Feature Enable.
+			"TRACY_ON_DEMAND",               -- Used if want profile on demand.
 		}
 
 		runtime "Debug"
@@ -88,6 +153,9 @@ project "Neptune"
 		-- Release Specific Solution Macro Definitions.
 		defines 
 		{
+			"NEPTUNE_RELEASE",               -- Release Symbol.
+			"TRACY_ENABLE",                  -- tracy Feature Enable.
+			"TRACY_ON_DEMAND",               -- Used if want profile on demand.
 		}
 
 		runtime "Release"

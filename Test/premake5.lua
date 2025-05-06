@@ -28,14 +28,34 @@ project "Test"
 	-- Macros Definitions
 	defines
 	{
+		-- Define Engine Use OpenGL API for Rendering, though we may support multipile Rendering API.
+		"RENDERAPI_OPENGL",
+
+		-- Define Platform : Windows.
+		"PLATFORM_WINDOWS"
 	}
 
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
 		"%{wks.location}/Neptune/src",                        -- Engine Source Folder.
+		"%{IncludeDir.googletest}",			                  -- Library: googletest Source Folder.
+		"%{IncludeDir.googlemock}",			                  -- Library: googlemock Source Folder.
 		"src",                                                -- UnitTest Source Folder.
 		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
+		"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+		"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
+		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
+		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
+		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
+		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
+		"%{IncludeDir.rapidyaml}",                            -- Library: rapidyaml Source Folder.
+		"%{IncludeDir.ImPlot}",                               -- Library: ImPlot Source Folder.
+		"%{IncludeDir.spdlog}",                               -- Library: spdlog Source Folder.
+		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
+		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
+		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
@@ -48,6 +68,7 @@ project "Test"
 	links
 	{
 		"Neptune",                             -- Dependency: Neptune
+		"googlemock",                          -- Dependency: googlemock
 	}
 
 	-- Platform: Windows
@@ -58,6 +79,8 @@ project "Test"
 		-- Windows Specific Solution Macro Definitions.
 		defines
 		{
+			-- Use winsock2.h instead of winsock.h.
+			"WIN32_LEAN_AND_MEAN"
 		}
 
 	-- Configuration: Debug
@@ -66,6 +89,9 @@ project "Test"
 		-- Debug Specific Solution Macro Definitions.
 		defines
 		{
+			"NEPTUNE_DEBUG",                   -- Debug Symbol.
+			"TRACY_ENABLE",                    -- tracy Feature Enable.
+			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
 		}
 
 		runtime "Debug"
@@ -77,6 +103,9 @@ project "Test"
 		-- Release Specific Solution Macro Definitions.
 		defines
 		{
+			"NEPTUNE_RELEASE",                 -- Release Symbol.
+			"TRACY_ENABLE",                    -- tracy Feature Enable.
+			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
 		}
 
 		runtime "Release"

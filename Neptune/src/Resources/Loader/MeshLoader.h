@@ -1,0 +1,95 @@
+/**
+* @file MeshLoader.h.
+* @brief The MeshLoader Class Definitions.
+* @author Spices.
+*/
+
+#pragma once
+#include "Core/Core.h"
+
+namespace Spices {
+
+	/**
+	* @brief Forward declare.
+	*/
+	class MeshPack;
+
+	/**
+	* @brief This enum defines tree types of mesh file.
+	*/
+	enum MeshExtension
+	{
+		/**
+		* @brief error type
+		*/
+		UNKNOWN = 0,
+
+		/**
+		* @brief obj type
+		*/
+		OBJ = 1,
+
+		/**
+		* @brief fbx type
+		*/
+		FBX = 2,
+
+		/**
+		* @brief binary type
+		*/
+		SASSET = 3,
+	};
+	
+	/**
+	* @brief MeshLoader Class.
+	* This class only defines static function for load data from mesh file.
+	*/
+	class MeshLoader
+	{
+	public:
+
+		/**
+		* @brief Public called API, it is entrance.
+		* @param[in] fileName mesh file name.
+		* @param[in,out] outMeshPack mesh pack pointer, only pass this to it.
+		* Feel free for using row pointer here, it's very safe, for this API only called during MeshPack.
+		* @return Returns true if load data successfully.
+		*/
+		static bool Load(const std::string& fileName, MeshPack* outMeshPack);
+
+	private:
+
+		/**
+		* @brief Load data from a .obj file.
+		* @param[in] fileName Mesh file path in disk.
+		* @param[in,out] outMeshPack mesh pack pointer, only pass this to it.
+		* @return Returns true if load data successfully.
+		*/
+		static bool LoadFromOBJ(const std::string& fileName, MeshPack* outMeshPack);
+
+		/**
+		* @brief Load data from a .fbx file.
+		* @param[in] fileName Mesh file path in disk.
+		* @param[in,out] outMeshPack mesh pack pointer, only pass this to it.
+		* @return Returns true if load data successfully.
+		*/
+		static bool LoadFromFBX(const std::string& fileName, MeshPack* outMeshPack);
+
+		/**
+		* @brief Load data from a .sasset file.
+		* @param[in] fileName Mesh file path in disk.
+		* @param[in,out] outMeshPack mesh pack pointer, only pass this to it.
+		* @return Returns true if load data successfully.
+		*/
+		static bool LoadFromSASSET(const std::string& fileName, const MeshPack* outMeshPack);
+
+		/**
+		* @brief Write the read data to the sasset file.
+		* @param[in] fileName Mesh file path in disk.
+		* @param[in] folderIndex Index of Resource Folder.
+		* @param[in,out] outMeshPack mesh pack pointer, only pass this to it.
+		* @return Returns true if write data successfully.
+		*/
+		static bool WriteSASSET(int folderIndex, const std::string& fileName, const MeshPack* outMeshPack);
+	};
+}
