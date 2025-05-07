@@ -7,9 +7,9 @@
 #include "Pchheader.h"
 #include "ScopeTimer.h"
 
-namespace Spices {
+namespace Neptune {
 
-	Spices::ScopeTimer::ScopeTimer(const std::string& log)
+	Neptune::ScopeTimer::ScopeTimer(const std::string& log)
 		: m_Log(log)
 	{
 		/**
@@ -18,7 +18,7 @@ namespace Spices {
 		m_InTime = std::chrono::high_resolution_clock::now();
 	}
 
-	Spices::ScopeTimer::~ScopeTimer()
+	Neptune::ScopeTimer::~ScopeTimer()
 	{
 		/**
 		* @brief Init Leave Time.
@@ -28,7 +28,7 @@ namespace Spices {
 		std::stringstream ss;
 		ss << "ScopeTimer : " << std::chrono::duration<float, std::chrono::milliseconds::period>(m_LeaveTime - m_InTime).count() << " milliseconds " << m_Log;
 
-		SPICES_CORE_INFO(ss.str())
+		NEPTUNE_CORE_INFO(ss.str())
 	}
 
 }

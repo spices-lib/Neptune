@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Event.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class is inherited from Event Class.
@@ -60,12 +60,20 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with SlateResize.
 		*/
-		EVENT_CLASS_TYPE(SlateResize)
+        static EventType GetStaticType() {
+            return EventType::SlateResize;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "SlateResize";
+        }
 
 		/**
 		* @brief Specific this Class Category with EventCategorySlate.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategorySlate)
+        virtual int GetCategoryFlags() const override {
+            return EventCategorySlate;
+        }
 
 	private:
 

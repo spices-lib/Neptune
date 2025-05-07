@@ -10,7 +10,7 @@
 #include "Scripts/NativeScript.h"
 #include <memory>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief NativeScriptSystem Class.

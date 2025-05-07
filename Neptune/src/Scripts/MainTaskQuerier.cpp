@@ -12,7 +12,7 @@ namespace Neptune {
 
 	void MainTaskQuerier::OnTick(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		auto& taskQueue = ThreadModel::Get()->GetMainTaskQueue();
 

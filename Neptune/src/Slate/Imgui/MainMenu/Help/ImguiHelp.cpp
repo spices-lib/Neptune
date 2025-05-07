@@ -10,7 +10,7 @@
 #include "Systems/SlateSystem.h"
 #include "ImguiAbout.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiHelp::ImguiHelp(
         const std::string& panelName , 
@@ -18,7 +18,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
        * @brief Instance a ImguiAbout.
@@ -28,7 +28,7 @@ namespace Spices {
 
     void ImguiHelp::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render About.

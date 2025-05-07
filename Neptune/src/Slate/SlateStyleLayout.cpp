@@ -11,13 +11,13 @@
 #include "Render/Vulkan/VulkanRenderBackend.h"
 #include "..\Core\Thread\ThreadModel.h"
 
-namespace Spices {
+namespace Neptune {
 
 	std::shared_ptr<SlateStyleLayout> SlateStyleLayout::m_Layout = nullptr;
 
 	std::shared_ptr<SlateStyleLayout> SlateStyleLayout::Get()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (!m_Layout)
 		{
@@ -29,7 +29,7 @@ namespace Spices {
 
 	void SlateStyleLayout::SetLayout(StyleLayoutEnum layout)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		switch (layout)
 		{
@@ -50,7 +50,7 @@ namespace Spices {
 
 	void SlateStyleLayout::LoadLayout()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::string filepath = FileLibrary::FileLibrary_OpenInExplore(
 			"Slate Layout (*.ini)\0*.ini\0",
@@ -67,7 +67,7 @@ namespace Spices {
 
 	void SlateStyleLayout::StoreLayout()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::string filepath = FileLibrary::FileLibrary_SaveInExplore(
 			"Slate Layout (*.ini)\0*.ini\0",
@@ -86,7 +86,7 @@ namespace Spices {
 
 	void SlateStyleLayout::StoreLayoutCache()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::stringstream ss;
 
@@ -99,7 +99,7 @@ namespace Spices {
 
 	void SlateStyleLayout::LoadLayoutCache()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::stringstream ss;
 		ss << "saved/SlateCache/CacheLayout.ini";
@@ -109,7 +109,7 @@ namespace Spices {
 
 	void SlateStyleLayout::QuickStoreLayout()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::stringstream ss;
 
@@ -122,7 +122,7 @@ namespace Spices {
 
 	void SlateStyleLayout::QuickLoadLayout()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::stringstream ss;
 		ss << "saved/SlateCache/QuickLayout.ini";

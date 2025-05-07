@@ -10,7 +10,7 @@
 
 #include "Preferences/ImguiPreferences.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiEdit::ImguiEdit(
         const std::string& panelName,
@@ -18,7 +18,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance.
@@ -28,7 +28,7 @@ namespace Spices {
 
     void ImguiEdit::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render ImguiFileMenu.

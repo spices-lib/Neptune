@@ -9,11 +9,11 @@
 #include "World/World/World.h"
 #include "Slate/SlateInfoBar.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiInfoBar::OnUpdate(TimeStep& ts)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Clear slected infobar.
@@ -49,7 +49,7 @@ namespace Spices {
 
     void ImguiInfoBar::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
         
         /**
         * @brief Begin render ContentBrowser.
@@ -57,7 +57,7 @@ namespace Spices {
         Begin(m_PanelName, 1.0f, ImGuiWindowFlags_NoTitleBar);
 
         {
-            SPICES_PROFILE_ZONEN("ImguiInfoBar");
+            NEPTUNE_PROFILE_ZONEN("ImguiInfoBar");
 
             float width = ImGui::GetContentRegionAvail().x;
             ImGui::Spacing();
@@ -111,7 +111,7 @@ namespace Spices {
         }
 
         {
-            SPICES_PROFILE_ZONEN("ImguiInfoBar::DisplayList");
+            NEPTUNE_PROFILE_ZONEN("ImguiInfoBar::DisplayList");
 
             if (ImGui::BeginPopupContextWindow(0, 1))
             {
@@ -137,7 +137,7 @@ namespace Spices {
 
     void ImguiInfoBar::Push(std::shared_ptr<SlateInfoBar> instance)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         m_InfoBars.push_back(instance->GetInfo(), instance);
     }

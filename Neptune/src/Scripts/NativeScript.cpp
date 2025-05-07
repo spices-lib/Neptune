@@ -11,7 +11,7 @@ namespace Neptune {
 
 	void NativeScriptRegister::OnUpdate(TimeStep& ts) const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		for (size_t i = 0; i < m_NativeScripts.size(); i++)
 		{
@@ -21,7 +21,7 @@ namespace Neptune {
 
 	void NativeScriptRegister::OnEvent(Event& event) const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		for (size_t i = 0; i < m_NativeScripts.size(); i++)
 		{

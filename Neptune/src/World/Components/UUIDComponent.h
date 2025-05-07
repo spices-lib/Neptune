@@ -9,7 +9,7 @@
 #include "Component.h"
 #include "Core/UUID.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief UUIDComponent Class.

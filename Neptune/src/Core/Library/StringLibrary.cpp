@@ -11,11 +11,11 @@
 #include <locale>
 #include <codecvt>
 
-namespace Spices {
+namespace Neptune {
 
 	std::vector<std::string> StringLibrary::SplitString(const std::string& input, char delimiter)
 	{
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         std::vector<std::string> result;
         size_t start = 0;
@@ -34,14 +34,14 @@ namespace Spices {
 
     bool StringLibrary::StringsEqual(const char* str0, const char* str1)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         return strcmp(str0, str1) == 0;
     }
 
     std::wstring StringLibrary::CharToWChar(const char* c)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 
@@ -50,7 +50,7 @@ namespace Spices {
 
     std::string StringLibrary::WCharToChar(const wchar_t* wc)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 

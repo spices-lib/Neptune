@@ -11,7 +11,7 @@
 
 #include "glm/glm.hpp"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief DirectionalLightComponent Class.

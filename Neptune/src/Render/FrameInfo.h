@@ -6,12 +6,11 @@
 
 #pragma once
 #include "Core/Core.h"
-#include "Resources/Mesh/Mesh.h"
-
+#include "Core/Container/LinkedUnorderedMap.h"
 // STL Header.
 #include <memory>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Forward Declare.
@@ -21,7 +20,6 @@ namespace Spices {
 	enum class RendererType
 	{
 		Rasterization,
-		PathTracing,
 	};
 	
 	/**

@@ -8,7 +8,7 @@
 #include "RenderSystem.h"
 #include "Resources/Mesh/Mesh.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void RenderSystem::OnSystemInitialize()
 	{
@@ -25,7 +25,7 @@ namespace Spices {
 
 	void RenderSystem::OnSystemUpdate(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Begin Render this frame.
@@ -50,7 +50,7 @@ namespace Spices {
 
 	void RenderSystem::OnEvent(Event& event)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_RenderFrontend->OnEvent(event);
 	}

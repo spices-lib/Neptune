@@ -10,7 +10,7 @@
 
 #include <imgui_internal.h>
 
-namespace Spices {
+namespace Neptune {
 
 	ImguiViewportToolBar::ImguiViewportToolBar(
 		const std::string& panelName,
@@ -23,7 +23,7 @@ namespace Spices {
 
 	void ImguiViewportToolBar::OnRender()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.149f, 0.16f, 0.164f, 1.0f));
 		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.156f, 0.302f, 0.353f, 1.0f));
@@ -77,7 +77,7 @@ namespace Spices {
 		static int rendererSelected = 0;
 
 		{
-			SPICES_PROFILE_ZONEN("ImguiViewportToolBar::RendererMode");
+			NEPTUNE_PROFILE_ZONEN("ImguiViewportToolBar::RendererMode");
 
 			std::string buttonName;
 			switch(FrameInfo::Get().m_RendererType)

@@ -6,7 +6,7 @@
 #include "Core/Input/Input.h"
 #include "Core/Input/MouseButtonCodes.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void MeshController::OnConstruction()
 	{

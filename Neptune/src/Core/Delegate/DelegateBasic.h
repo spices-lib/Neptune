@@ -10,7 +10,7 @@
 
 #include <functional>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Basic Class of Delegate.
@@ -83,12 +83,12 @@ namespace Spices {
 	template<typename ...Args>
 	inline bool Delegate_Basic<Args...>::Bind(std::function<void(Args...)> func)
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		uint64_t* addr = reinterpret_cast<uint64_t*>(&func);
 		if (m_Agents->has_key(*addr))
 		{
-			SPICES_CORE_WARN("Agent Function binding repeatly.");
+			NEPTUNE_CORE_WARN("Agent Function binding repeatly.");
 			return false;
 		}
 
@@ -103,12 +103,12 @@ namespace Spices {
 	template<typename ...Args>
 	inline bool Delegate_Basic<Args...>::UnBind(std::function<void(Args...)> func)
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		uint64_t* addr = reinterpret_cast<uint64_t*>(&func);
 		if (!m_Agents->has_key(*addr))
 		{
-			SPICES_CORE_WARN("Agent Function not binded yet.");
+			NEPTUNE_CORE_WARN("Agent Function not binded yet.");
 			return false;
 		}
 
@@ -123,7 +123,7 @@ namespace Spices {
 	template<typename ...Args>
 	inline void Delegate_Basic<Args...>::Broadcast(Args&&... args)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_Agents->for_each([&](const auto& k, const auto& v) {
 			v(std::forward<Args>(args)...);
@@ -136,10 +136,10 @@ namespace Spices {
 * None Parameter Specific.
 */
 #define DELEGATE_NONE_PARAM(name)                                      \
-	class Delegate##name : public Spices::Delegate_Basic<>             \
+	class Delegate##name : public Neptune::Delegate_Basic<>             \
 	{                                                                  \
 	public:                                                            \
-		Delegate##name() : Spices::Delegate_Basic<>() {}               \
+		Delegate##name() : Neptune::Delegate_Basic<>() {}               \
 		virtual ~Delegate##name() = default;                           \
 	};
 
@@ -148,10 +148,10 @@ namespace Spices {
 * One Parameter Specific.
 */
 #define DELEGATE_ONE_PARAM(name, p0)                                       \
-	class Delegate##name : public Spices::Delegate_Basic<##p0>             \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0>             \
 	{                                                                      \
 	public:                                                                \
-		Delegate##name() : Spices::Delegate_Basic<##p0>() {}               \
+		Delegate##name() : Neptune::Delegate_Basic<##p0>() {}               \
 		virtual ~Delegate##name() = default;                               \
 	}; 
 
@@ -160,10 +160,10 @@ namespace Spices {
 * Two Parameter Specific.
 */
 #define DELEGATE_TWO_PARAM(name, p0, p1)                                                 \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1>                     \
 	{                                                                                    \
 	public:                                                                              \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1>() {}                       \
 		virtual ~Delegate##name() = default;                                             \
 	};
 
@@ -172,10 +172,10 @@ namespace Spices {
 * Three Parameter Specific.
 */
 #define DELEGATE_THREE_PARAM(name, p0, p1, p2)                                                 \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2>                     \
 	{                                                                                          \
 	public:                                                                                    \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2>() {}                       \
 		virtual ~Delegate##name() = default;                                                   \
 	};
 
@@ -184,10 +184,10 @@ namespace Spices {
 * Four Parameter Specific.
 */
 #define DELEGATE_FOUR_PARAM(name, p0, p1, p2, p3)                                                    \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3>                     \
 	{                                                                                                \
 	public:                                                                                          \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3>() {}                       \
 		virtual ~Delegate##name() = default;                                                         \
 	};
 
@@ -196,10 +196,10 @@ namespace Spices {
 * Five Parameter Specific.
 */
 #define DELEGATE_FIVE_PARAM(name, p0, p1, p2, p3, p4)                                                      \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4>                     \
 	{                                                                                                      \
 	public:                                                                                                \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4>() {}                       \
 		virtual ~Delegate##name() = default;                                                               \
 	};
 
@@ -208,10 +208,10 @@ namespace Spices {
 * Six Parameter Specific.
 */
 #define DELEGATE_SIX_PARAM(name, p0, p1, p2, p3, p4, p5)                                                         \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5>                     \
 	{                                                                                                            \
 	public:                                                                                                      \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5>() {}                       \
 		virtual ~Delegate##name() = default;                                                                     \
 	};
 
@@ -220,10 +220,10 @@ namespace Spices {
 * Seven Parameter Specific.
 */
 #define DELEGATE_SEVEN_PARAM(name, p0, p1, p2, p3, p4, p5, p6)                                                         \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6>                     \
 	{                                                                                                                  \
 	public:                                                                                                            \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6>() {}                       \
 		virtual ~Delegate##name() = default;                                                                           \
 	};
 
@@ -232,10 +232,10 @@ namespace Spices {
 * Eight Parameter Specific.
 */
 #define DELEGATE_EIGHT_PARAM(name, p0, p1, p2, p3, p4, p5, p6, p7)                                                           \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7>                     \
 	{                                                                                                                        \
 	public:                                                                                                                  \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7>() {}                       \
 		virtual ~Delegate##name() = default;                                                                                 \
 	};
 
@@ -244,10 +244,10 @@ namespace Spices {
 * Nine Parameter Specific.
 */
 #define DELEGATE_NINE_PARAM(name, p0, p1, p2, p3, p4, p5, p6, p7, p8)                                                              \
-	class Delegate##name : public Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7, ##p8>                     \
+	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7, ##p8>                     \
 	{                                                                                                                              \
 	public:                                                                                                                        \
-		Delegate##name() : Spices::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7, ##p8>() {}                       \
+		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7, ##p8>() {}                       \
 		virtual ~Delegate##name() = default;                                                                                       \
 	};
 

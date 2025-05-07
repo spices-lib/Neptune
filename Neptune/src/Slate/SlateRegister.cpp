@@ -9,11 +9,11 @@
 #include "Core/Thread/ThreadPoolBasic.h"
 #include "Core/Event/KeyEvent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void SlateRegister::OnUpdate(TimeStep& ts) const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter hash map.
@@ -26,7 +26,7 @@ namespace Spices {
 
 	void SlateRegister::OnRender() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter hash map.
@@ -39,7 +39,7 @@ namespace Spices {
 
 	void SlateRegister::OnEvent(Event& event)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter hash map.
@@ -52,14 +52,14 @@ namespace Spices {
 
 	std::shared_ptr<ImguiViewport> SlateRegister::GetViewPort()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return std::static_pointer_cast<ImguiViewport>(m_SlatesRenderContainer["ViewPort"]);
 	}
 
 	std::shared_ptr<ImguiSlate> SlateRegister::GetSlate(const std::string& name)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (m_SlatesEventContainer.find(name) != m_SlatesEventContainer.end())
 		{

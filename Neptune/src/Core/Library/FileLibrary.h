@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 
     /**
     * @brief This Struct is FILE* handle pointer Wrapper.

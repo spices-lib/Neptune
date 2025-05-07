@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Event.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class is inherited from Event Class.
@@ -32,7 +32,9 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Category with EventCategoryKeyboard and EventCategoryInput.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryKeyboard | EventCategoryInput;
+        }
 		
 	protected:
 
@@ -93,7 +95,13 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with KeyPressed.
 		*/
-		EVENT_CLASS_TYPE(KeyPressed)
+        static EventType GetStaticType() {
+            return EventType::KeyPressed;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "KeyPressed";
+        }
 		
 	private:
 
@@ -138,7 +146,13 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with KeyReleased.
 		*/
-		EVENT_CLASS_TYPE(KeyReleased)
+        static EventType GetStaticType() {
+            return EventType::KeyReleased;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "KeyReleased";
+        }
 	};
 
 	/**
@@ -176,6 +190,12 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with KeyTyped.
 		*/
-		EVENT_CLASS_TYPE(KeyTyped)
+        static EventType GetStaticType() {
+            return EventType::KeyTyped;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "KeyTyped";
+        }
 	};
 }

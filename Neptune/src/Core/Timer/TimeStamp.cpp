@@ -9,7 +9,7 @@
 
 #include <time.h>
 
-namespace Spices {
+namespace Neptune {
 
 	TimeStamp::TimeStamp()
 		: m_MicroSecondsSinceEpoch(0)
@@ -26,7 +26,7 @@ namespace Spices {
 
 	std::string TimeStamp::ToString() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		char buf[128] = { 0 };
 		tm* ti_time = nullptr;

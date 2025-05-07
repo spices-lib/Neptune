@@ -12,7 +12,7 @@
 #include "Utilities/ImguiUtilities.h"
 #include "ImguiViewportMenu.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiWindow::ImguiWindow(
         const std::string& panelName , 
@@ -20,7 +20,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance a Visualizer.
@@ -40,7 +40,7 @@ namespace Spices {
 
     void ImguiWindow::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         if (ImGui::BeginMenu(m_PanelName.c_str()))
         {

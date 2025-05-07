@@ -7,11 +7,11 @@
 #include "Pchheader.h"
 #include "ImguiMaterialPanel.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiMaterialPanel::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Begin render Property.
@@ -30,7 +30,7 @@ namespace Spices {
         * @brief Begin render Search Input Text.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiMaterialPanel::Search");
+            NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::Search");
 
             ImGui::Spacing();
             ImGui::PushItemWidth(m_PanelSize.x - ImGuiH::GetLineItemSize().x * 2.0f - ImGui::GetStyle().WindowPadding.x);
@@ -91,7 +91,7 @@ namespace Spices {
         */
         if (m_FrameInfo.m_PickEntityID.size() == 0)
         {
-            SPICES_PROFILE_ZONEN("ImguiMaterialPanel::End");
+            NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::End");
             
             ImGui::PopStyleVar();
             End();
@@ -103,7 +103,7 @@ namespace Spices {
         * @brief Render Datails.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiMaterialPanel::Datails");
+            NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::Datails");
 
             {
                 ImGui::PushID("ImguiMaterialPanel::Add");
@@ -164,10 +164,10 @@ namespace Spices {
         * @brief Render All Parameter.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiMaterialPanel::Parameter");
+            NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::Parameter");
             
             {
-                SPICES_PROFILE_ZONEN("ImguiMaterialPanel::ShaderParameter");
+                NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::ShaderParameter");
 
                 ImGuiH::DrawTreeTitle("Shader", nullptr, [&](){
                     for(auto& pair : material->GetShaderPath())
@@ -187,7 +187,7 @@ namespace Spices {
             }
 
             {
-                SPICES_PROFILE_ZONEN("ImguiMaterialPanel::TextureParameter");
+                NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::TextureParameter");
 
                 ImGuiH::DrawTreeTitle("Texture", nullptr, [&](){
                     material->GetTextureParams().for_each([&](const auto& k, const auto& v) {
@@ -208,7 +208,7 @@ namespace Spices {
             }
 
             {
-                SPICES_PROFILE_ZONEN("ImguiMaterialPanel::ConstantParameter");
+                NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::ConstantParameter");
 
                 ImGuiH::DrawTreeTitle("Parameter", nullptr, [&](){
                     material->GetConstantParams().for_each([&](const std::string& k, ConstantParams& v){
@@ -259,7 +259,7 @@ namespace Spices {
             }
 
             {
-                SPICES_PROFILE_ZONEN("ImguiMaterialPanel::Property");
+                NEPTUNE_PROFILE_ZONEN("ImguiMaterialPanel::Property");
 
 
             }

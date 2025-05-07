@@ -9,7 +9,7 @@
 
 #include "Systems/SlateSystem.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiAbout::ImguiAbout(
         const std::string& panelName , 
@@ -20,7 +20,7 @@ namespace Spices {
 
     void ImguiAbout::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         if (!m_IsSlateOn) return;
 

@@ -7,12 +7,12 @@
 #include "Pchheader.h"
 #include "RendererResource.h"
 
-namespace Spices {
+namespace Neptune {
 
 	RendererResource::RendererResource(const RendererResourceCreateInfo& info)
 		: m_Info(info)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Set local variable.
@@ -34,14 +34,14 @@ namespace Spices {
 			m_Texture = std::make_unique<Texture2DCube>(info);
 			break;
 		default:
-			SPICES_CORE_ERROR("Not supported Texture Class Type");
+			NEPTUNE_CORE_ERROR("Not supported Texture Class Type");
 			break;
 		}
 	}
 
 	void RendererResource::OnResized(const uint32_t width, const uint32_t height)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Go on if can resize,
@@ -73,7 +73,7 @@ namespace Spices {
 			m_Texture = std::make_unique<Texture2DCube>(m_Info);
 			break;
 		default:
-			SPICES_CORE_ERROR("Not supported Texture Class Type");
+			NEPTUNE_CORE_ERROR("Not supported Texture Class Type");
 			break;
 		}
 	}

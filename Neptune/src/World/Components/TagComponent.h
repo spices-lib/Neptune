@@ -11,7 +11,7 @@
 #include <string>
 #include <set>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief TagComponent Class.

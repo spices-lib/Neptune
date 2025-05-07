@@ -11,7 +11,7 @@
 
 #include <memory>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief SlateSystem Class.

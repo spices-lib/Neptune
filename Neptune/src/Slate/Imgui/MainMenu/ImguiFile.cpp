@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "ImguiFile.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiFile::ImguiFile(
         const std::string& panelName,
@@ -15,12 +15,12 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
     }
 
     void ImguiFile::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render ImguiFileMenu.

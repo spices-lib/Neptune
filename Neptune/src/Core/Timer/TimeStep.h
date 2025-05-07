@@ -9,7 +9,7 @@
 #include "Core/Core.h"
 #include <chrono>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class handles our engine time step during frames.

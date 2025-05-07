@@ -12,7 +12,7 @@
 
 #include <any>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief CameraController Class.

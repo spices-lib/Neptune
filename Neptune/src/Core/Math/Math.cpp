@@ -10,9 +10,9 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/matrix_decompose.hpp>
 
-namespace Spices {
+namespace Neptune {
 
-    bool Spices::DecomposeTransform(
+    bool Neptune::DecomposeTransform(
         const glm::mat4& transform, 
         glm::vec3& translation,
         glm::vec3& rotation,

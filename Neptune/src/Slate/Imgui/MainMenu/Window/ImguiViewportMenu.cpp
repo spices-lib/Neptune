@@ -9,7 +9,7 @@
 
 #include "Systems/SlateSystem.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiViewportMenu::ImguiViewportMenu(
         const std::string& panelName ,
@@ -21,7 +21,7 @@ namespace Spices {
 
     void ImguiViewportMenu::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render Utilities.

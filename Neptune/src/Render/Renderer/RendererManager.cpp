@@ -8,14 +8,14 @@
 #include "Renderer.h"
 #include "RendererManager.h"
 
-namespace Spices {
+namespace Neptune {
 
 	std::unique_ptr<RendererManager>                                  RendererManager::m_RendererManager;
 	scl::linked_unordered_map<std::string, std::shared_ptr<Renderer>> RendererManager::m_Identities;
 
 	RendererManager& RendererManager::Get()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if(!m_RendererManager)
 		{
@@ -27,7 +27,7 @@ namespace Spices {
 	
 	void RendererManager::Run(TimeStep& ts, FrameInfo& frameInfo)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter all renderer in order.
@@ -50,7 +50,7 @@ namespace Spices {
 
 	void RendererManager::OnWindowResizeOver()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter all renderer in order.
@@ -63,7 +63,7 @@ namespace Spices {
 
 	void RendererManager::OnSlateResize()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter all renderer in order.
@@ -76,7 +76,7 @@ namespace Spices {
 
 	void RendererManager::OnMeshAddedWorld()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Iter all renderer in order.
@@ -89,7 +89,7 @@ namespace Spices {
 
 	std::shared_ptr<Renderer> RendererManager::GetRenderer(const std::string& name)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (m_Identities.has_key(name))
 		{
@@ -99,7 +99,7 @@ namespace Spices {
 		std::stringstream ss;
 		ss << "RendererManager::GetRenderer: Not such a renderer called: " << name;
 
-		SPICES_CORE_ERROR(ss.str())
+		NEPTUNE_CORE_ERROR(ss.str())
 
 		return nullptr;
 	}

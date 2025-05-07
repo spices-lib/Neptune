@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include <chrono>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This class helps recording scope time and output logs.
@@ -46,6 +46,6 @@ namespace Spices {
 		std::string m_Log;
 	};
 
-#define SCOPE_TIME_COUNTER(...)   ::Spices::ScopeTimer thisScopeTimeCounter(__VA_ARGS__);
+#define SCOPE_TIME_COUNTER(...)   ::Neptune::ScopeTimer thisScopeTimeCounter(__VA_ARGS__);
 
 }

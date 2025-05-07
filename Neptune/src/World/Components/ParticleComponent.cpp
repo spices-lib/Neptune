@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "ParticleComponent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	ParticleComponent::ParticleComponent(const std::string& tag)
 	{

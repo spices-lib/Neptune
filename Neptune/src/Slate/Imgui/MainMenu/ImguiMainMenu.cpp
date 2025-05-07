@@ -18,7 +18,7 @@
 #include "Slate/SlateStyleLayout.h"
 #include <imgui_internal.h>
 
-namespace Spices {
+namespace Neptune {
 
     ImguiMainMenu::ImguiMainMenu(
         const std::string& panelName , 
@@ -26,7 +26,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance Child Item.
@@ -42,7 +42,7 @@ namespace Spices {
 
     void ImguiMainMenu::OnRender()
 	{
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(6.0f, 6.0f));
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
@@ -84,7 +84,7 @@ namespace Spices {
             * @brief Render Menu Tools.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Menu Tools");
+                NEPTUNE_PROFILE_ZONEN("Render Menu Tools");
 
                 if (ImGui::BeginMenu("Tools"))
                 {
@@ -133,7 +133,7 @@ namespace Spices {
             {
                 ImGuiH::MainMenuTitleSeparator();
 
-                SPICES_PROFILE_ZONEN("Render Menu Layout");
+                NEPTUNE_PROFILE_ZONEN("Render Menu Layout");
 
                 if (ImGui::MenuItem("Default", "Ctrl+1")) 
                 {
@@ -236,7 +236,7 @@ namespace Spices {
             * @brief Render Menu Live.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Menu Live");
+                NEPTUNE_PROFILE_ZONEN("Render Menu Live");
 
                 ImGui::SameLine(m_PanelSize.x - 6.0f * ImGuiH::GetLineItemSize().x);
                 ImGui::Text(ICON_TEXT(ICON_MD_FLASH_ON,LIVE));

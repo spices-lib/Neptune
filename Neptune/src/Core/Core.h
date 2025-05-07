@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Debugger/Tracy/TracyProfilerWrapper.h"
+#include "Core/Timer/TimeStep.h"
 #include "Log/Log.h"
 
 namespace Neptune {
@@ -21,7 +22,7 @@ namespace Neptune {
         {                                                                                                     \
             std::stringstream ss;                                                                             \
             ss << "Assert Failed \n    At File: " << __FILE__ << " \n   At Line: " << __LINE__ << "\n   ";    \
-            SPICES_CORE_ERROR(ss.str())                                                                       \
+            NEPTUNE_CORE_ERROR(ss.str())                                                                       \
         }                                                                                                     \
     }                                                                                                         \
 

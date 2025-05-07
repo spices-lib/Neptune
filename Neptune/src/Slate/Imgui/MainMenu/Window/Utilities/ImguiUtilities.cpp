@@ -10,7 +10,7 @@
 #include "Debugger/ImguiDebugger.h"
 #include "Statistics/ImguiStatistics.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiUtilities::ImguiUtilities(
         const std::string& panelName ,
@@ -18,7 +18,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance.
@@ -29,7 +29,7 @@ namespace Spices {
 
     void ImguiUtilities::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render Utilities.

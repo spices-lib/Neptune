@@ -11,7 +11,7 @@
 #include "ImguiGBufferVisualizer.h"
 #include "ImguiVirtualGeometryVisualizer.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiVisualizer::ImguiVisualizer(
         const std::string& panelName , 
@@ -19,7 +19,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance.
@@ -30,7 +30,7 @@ namespace Spices {
 
     void ImguiVisualizer::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render Visualizer.

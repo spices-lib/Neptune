@@ -10,7 +10,7 @@
 #include "Resources/Material/Material.h"
 #include "Resources/ResourcePool/ResourcePool.h"
 
-namespace Spices {
+namespace Neptune {
 
 	SlateImage::SlateImage(const std::string& textureName, const std::string& materialName)
         : m_TextureName(textureName)
@@ -18,7 +18,7 @@ namespace Spices {
         , m_TextureID(0)
         , m_Material(nullptr)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
         ReBuildTextureID();
         ReBuildMaterial();
@@ -26,7 +26,7 @@ namespace Spices {
 
     SlateImage::~SlateImage()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Free old Texture image DescriptorSet.
@@ -48,7 +48,7 @@ namespace Spices {
 
     void SlateImage::ReBuildTextureID()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Free old Texture image DescriptorSet.
@@ -72,7 +72,7 @@ namespace Spices {
 
     void SlateImage::ReBuildMaterial()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Unload useless material.

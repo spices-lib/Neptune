@@ -28,7 +28,7 @@ namespace scl {
             std::stringstream ss;
             ss << "runtime_memory_block:: add failed: already has the element: " << name;
             
-            SPICES_CORE_WARN(ss.str());
+            NEPTUNE_CORE_WARN(ss.str());
             return;
         }
 
@@ -40,7 +40,7 @@ namespace scl {
         /**
         * @brief Add to bytes_ with parameter type.
         */
-        bytes_ += Spices::StrType2Size(type);
+        bytes_ += Neptune::StrType2Size(type);
     }
 
     void runtime_memory_block::build()

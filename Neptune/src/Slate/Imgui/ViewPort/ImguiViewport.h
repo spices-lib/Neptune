@@ -10,7 +10,7 @@
 #include "Core/Container/BehaveStateList.h"
 #include "Slate/SlateImage.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Forward Declare.

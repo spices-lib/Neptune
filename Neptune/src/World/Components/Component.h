@@ -11,7 +11,7 @@
 #include <entt.hpp>
 #include <imgui.h>
 
-namespace Spices
+namespace Neptune
 {
 	/**
 	* @brief Forward Declare

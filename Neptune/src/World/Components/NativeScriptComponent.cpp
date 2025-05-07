@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "NativeScriptComponent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	NativeScriptComponent::NativeScriptComponent(std::shared_ptr<NativeScriptComponent> realComp)
 	{

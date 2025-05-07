@@ -14,13 +14,13 @@
 #include "Resources/Mesh/Mesh.h"
 #include "Resources/Shader/Shader.h"
 
-namespace Spices {
+namespace Neptune {
 
 	std::vector<std::string> ResourceSystem::m_ResourceSearchFolder = { SPICES_ENGINE_ASSETS_PATH };
 
 	void ResourceSystem::OnSystemInitialize()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Create Default Resource in different ResourccePool.
@@ -34,7 +34,7 @@ namespace Spices {
 
 	void ResourceSystem::OnSystemShutDown()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Release all Resources

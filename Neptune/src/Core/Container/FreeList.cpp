@@ -17,11 +17,11 @@ namespace scl {
 		/**
 		* @brief Insert to begin.
 		*/
-		Spices::MemoryPool::PointerSpace(obj) = m_Freelist;
+		Neptune::MemoryPool::PointerSpace(obj) = m_Freelist;
 		m_Freelist   = obj;
 
 		/**
-		* @brief Recoring end pointer.
+		* @brief Recording end pointer.
 		*/
 		if (m_Size == 0)
 		{
@@ -39,12 +39,12 @@ namespace scl {
 		* @brief Pop from begin.
 		*/
 		void* obj  = m_Freelist;
-		m_Freelist = Spices::MemoryPool::PointerSpace(obj);
+		m_Freelist = Neptune::MemoryPool::PointerSpace(obj);
 
 		--m_Size;
 
 		/**
-		* @brief Unrecoring end pointer.
+		* @brief Unrecording end pointer.
 		*/
 		if (m_Size == 0)
 		{
@@ -59,11 +59,11 @@ namespace scl {
 		/**
 		* @brief Insert to begin.
 		*/
-		Spices::MemoryPool::PointerSpace(end) = m_Freelist;
+		Neptune::MemoryPool::PointerSpace(end) = m_Freelist;
 		m_Freelist = start;
 
 		/**
-		* @brief Recoring end pointer.
+		* @brief Recording end pointer.
 		*/
 		if (m_Size == 0)
 		{
@@ -84,15 +84,15 @@ namespace scl {
 		*/
 		for (size_t i = 0; i < size - 1; ++i)
 		{
-			end = Spices::MemoryPool::PointerSpace(end);
+			end = Neptune::MemoryPool::PointerSpace(end);
 		}
 
-		m_Freelist = Spices::MemoryPool::PointerSpace(end);
-		Spices::MemoryPool::PointerSpace(end) = nullptr;
+		m_Freelist = Neptune::MemoryPool::PointerSpace(end);
+		Neptune::MemoryPool::PointerSpace(end) = nullptr;
 		m_Size -= size;
 
 		/**
-		* @brief Unrecoring end pointer.
+		* @brief Unrecording end pointer.
 		*/
 		if (m_Size == 0)
 		{

@@ -8,7 +8,7 @@
 #include "ImguiPostProcessing.h"
 #include "World/World/World.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiPostProcessing::ImguiPostProcessing(
         const std::string& panelName ,
@@ -16,17 +16,17 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
     }
 
     void ImguiPostProcessing::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         const float columeWidth = ImGuiH::GetLineItemSize().x * 10.0f;
 
         {
-            SPICES_PROFILE_ZONEN("ImguiPostProcessing::Bloom");
+            NEPTUNE_PROFILE_ZONEN("ImguiPostProcessing::Bloom");
 
             const auto material = ResourcePool<Material>::Load<Material>("PostProcessRenderer.Bloom.Default");
             
@@ -34,7 +34,7 @@ namespace Spices {
         }
 
         {
-            SPICES_PROFILE_ZONEN("ImguiPostProcessing::ToneMapping");
+            NEPTUNE_PROFILE_ZONEN("ImguiPostProcessing::ToneMapping");
 
             const auto material = ResourcePool<Material>::Load<Material>("PostProcessRenderer.ToneMapping.Default");
 

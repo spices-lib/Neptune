@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 
     /**
     * @brief Thread Static Function Library.

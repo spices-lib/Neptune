@@ -13,7 +13,7 @@
 
 #endif
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief MemoryPool Class.
@@ -106,19 +106,14 @@ namespace Spices {
 	*/
 	inline static void* SystemAlloc(size_t kpage)
 	{
-#ifdef _WIN32
-
 		/**
 		* @brief alloc bytes = kpage * 8KB.
 		*/
-		void* ptr = VirtualAlloc(0, kpage << MemoryPool::PAGE_SHIFT, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-#else
-
-#endif
+		void* ptr = malloc(kpage << MemoryPool::PAGE_SHIFT);
 
 		if (ptr == nullptr)
 		{
-			SPICES_CORE_ERROR("Memory alloc failed.")
+			NEPTUNE_CORE_ERROR("Memory alloc failed.")
 		}
 
 		SPICES_PROFILE_ALLOC_N(ptr, kpage << MemoryPool::PAGE_SHIFT, memoryPoolNames[1]);
@@ -134,11 +129,7 @@ namespace Spices {
 	{
 		SPICES_PROFILE_FREE_N(ptr, memoryPoolNames[1]);
 
-#ifdef _WIN32
+		free(ptr);
 
-		VirtualFree(ptr, 0, MEM_RELEASE);
-#else
-
-#endif
 	}
 }

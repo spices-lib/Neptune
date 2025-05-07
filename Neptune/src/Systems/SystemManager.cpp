@@ -8,7 +8,7 @@
 #include "SystemManager.h"
 #include "Core/Event/Event.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Defines the static SystemManager variable.
@@ -22,31 +22,31 @@ namespace Spices {
 
 	SystemManager::~SystemManager()
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		m_SystemManager = nullptr;
 	}
 
 	SystemManager::SystemManager()
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		/**
-		* @brief Set Golbal EventCallBack
+		* @brief Set Global EventCallBack
 		*/
 		Event::SetEventCallbackFn(BIND_EVENT_FN(SystemManager::OnEvent));
 	}
 
 	SystemManager& SystemManager::Get()
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		return *m_SystemManager;
 	}
 
 	void SystemManager::Run(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		m_Identities.for_each([&](auto& k, auto& v) {
 			v->OnSystemUpdate(ts);

@@ -9,7 +9,7 @@
 
 #include "Render/Vulkan/VulkanRenderBackend.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiVirtualGeometryVisualizer::ImguiVirtualGeometryVisualizer(
         const std::string& panelName,
@@ -17,14 +17,14 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         QueryID();
     }
 
     void ImguiVirtualGeometryVisualizer::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         if (!m_IsSlateOn) return;
 
@@ -39,7 +39,7 @@ namespace Spices {
         * @brief Render TriangleID.
         */
         {
-            SPICES_PROFILE_ZONEN("Render TriangleID");
+            NEPTUNE_PROFILE_ZONEN("Render TriangleID");
 
             ImGui::Text("TriangleID");
             ImGui::Image(m_BufferID.TriangleID, size);
@@ -50,7 +50,7 @@ namespace Spices {
         * @brief Render MeshletID.
         */
         {
-            SPICES_PROFILE_ZONEN("Render MeshletID");
+            NEPTUNE_PROFILE_ZONEN("Render MeshletID");
 
             ImGui::Text("MeshletID");
             ImGui::Image(m_BufferID.MeshletID, size);
@@ -66,7 +66,7 @@ namespace Spices {
 
     void ImguiVirtualGeometryVisualizer::OnEvent(Event& event)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance a EventDispatcher.
@@ -81,7 +81,7 @@ namespace Spices {
 
     bool ImguiVirtualGeometryVisualizer::OnSlateResized(SlateResizeEvent& event)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Free old DescriptorSet.
@@ -104,7 +104,7 @@ namespace Spices {
 
     void ImguiVirtualGeometryVisualizer::QueryID()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         VkDescriptorImageInfo* triangleID       = VulkanRenderBackend::GetRendererResourcePool()->AccessResource({ "TriangleID" });
         VkDescriptorImageInfo* meshletID        = VulkanRenderBackend::GetRendererResourcePool()->AccessResource({ "MeshletID" });

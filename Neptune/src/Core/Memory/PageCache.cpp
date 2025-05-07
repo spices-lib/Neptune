@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "PageCache.h"
 
-namespace Spices {
+namespace Neptune {
 
 	PageCache PageCache::m_PageCache;
 

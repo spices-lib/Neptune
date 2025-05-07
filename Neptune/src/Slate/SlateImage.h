@@ -9,7 +9,7 @@
 #include "Slate/Imgui/ImguiUtils.h"
 #include "Resources/Material/Material.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Slate image draw context.

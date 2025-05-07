@@ -7,14 +7,14 @@
 #include "Pchheader.h"
 #include "TimeStep.h"
 
-namespace Spices {
+namespace Neptune {
 
 	TimeStep::TimeStep()
 		: m_FrameTime(0.0f)
 		, m_GameTime(0.0f)
 		, m_Frames(0)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Init GameTime and FrameTime.
@@ -25,7 +25,7 @@ namespace Spices {
 
 	void TimeStep::Flush()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Recording the current time.

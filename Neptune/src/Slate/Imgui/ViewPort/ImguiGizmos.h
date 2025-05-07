@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Slate/Imgui/ImguiUtils.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief The ImguiGizmos Class.

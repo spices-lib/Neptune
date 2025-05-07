@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Using ClassType instead std::reference_wrapper<const std::type_info>.

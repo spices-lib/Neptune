@@ -9,11 +9,11 @@
 #include "Render/FrameInfo.h"
 #include "World/Entity.h"
 
-namespace Spices {
+namespace Neptune {
 
 	SpriteComponent::SpriteComponent()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::shared_ptr<PlanePack> pack = std::make_shared<PlanePack>(2, 2);
 		//pack->SetMaterial(path);
@@ -24,7 +24,7 @@ namespace Spices {
 
 	void SpriteComponent::SetMaterial(const std::string& materialPath)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		auto& e = FrameInfo::Get().m_World->QueryEntitybyID((uint32_t)m_Owner);
 

@@ -10,7 +10,7 @@
 #include "Core/Library/ClassLibrary.h"
 #include "Core/Container/LinkedUnorderedMap.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Forward Declare.
@@ -147,7 +147,7 @@ namespace Spices {
 				std::stringstream ss;
 				ss << systemName << " has been pushed ";
 
-				SPICES_CORE_ERROR(ss.str());
+                NEPTUNE_CORE_ERROR(ss.str());
 			}
 
 			m_Identities.push_back(systemName, std::make_shared<T>(systemName, std::forward<Args>(args)...));
@@ -159,7 +159,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << systemName << " pushed ";
 
-			SPICES_CORE_INFO(ss.str());
+            NEPTUNE_CORE_INFO(ss.str());
 
 			return *m_SystemManager;
 		}
@@ -177,7 +177,7 @@ namespace Spices {
 				std::stringstream ss;
 				ss << systemName << " has been poped ";
 
-				SPICES_CORE_ERROR(ss.str())
+				NEPTUNE_CORE_ERROR(ss.str())
 			}
 
 			// system shutdown
@@ -187,7 +187,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << systemName << " poped ";
 
-			SPICES_CORE_INFO(ss.str())
+            NEPTUNE_CORE_INFO(ss.str())
 
 			m_Identities.erase(systemName);
 

@@ -104,7 +104,7 @@ namespace scl {
 		void insert_recursive_async(
 			Node*&                             node  , 
 			std::shared_ptr<std::vector<item>> points ,
-			Spices::ThreadPool*                threadPool,
+			Neptune::ThreadPool*                threadPool,
 			int                                depth
 		);
 
@@ -184,7 +184,7 @@ namespace scl {
 		* @param[in] points Inserted points in k d.
 		* @param[in] threadPool ThreadPool.
 		*/
-		void insert_async(const std::vector<item>& points, Spices::ThreadPool* threadPool);
+		void insert_async(const std::vector<item>& points, Neptune::ThreadPool* threadPool);
 
 		/**
 		* @brief Search for a point in the kd_tree.
@@ -287,7 +287,7 @@ namespace scl {
 		}
 		else
 		{
-			SPICES_CORE_ERROR("Cannot insert a KDTree Node which is not empty.");
+            NEPTUNE_CORE_ERROR("Cannot insert a KDTree Node which is not empty.");
 		}
 
 		/**
@@ -320,7 +320,7 @@ namespace scl {
 	inline void kd_tree<K>::insert_recursive_async(
 		Node*&                             node       , 
 		std::shared_ptr<std::vector<item>> points     ,
-		Spices::ThreadPool*                threadPool ,
+		Neptune::ThreadPool*                threadPool ,
 		int                                depth
 	)
 	{
@@ -381,7 +381,7 @@ namespace scl {
 		}
 		else
 		{
-			SPICES_CORE_ERROR("Cannot insert a KDTree Node which is not empty.");
+			NEPTUNE_CORE_ERROR("Cannot insert a KDTree Node which is not empty.");
 		}
 
 		/**
@@ -605,7 +605,7 @@ namespace scl {
 	}
 
 	template<uint32_t K>
-	inline void kd_tree<K>::insert_async(const std::vector<item>& points, Spices::ThreadPool* threadPool)
+	inline void kd_tree<K>::insert_async(const std::vector<item>& points, Neptune::ThreadPool* threadPool)
 	{
 		std::future<bool> rval = threadPool->SubmitPoolTask([&]() {
 			insert_recursive_async(m_Root, std::make_shared<std::vector<item>>(points), threadPool, 0);

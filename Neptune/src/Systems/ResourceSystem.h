@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "SystemManager.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief ResourceSystem Class.

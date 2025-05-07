@@ -9,11 +9,11 @@
 #include "Render/FrameInfo.h"
 #include "World/Entity.h"
 
-namespace Spices {
+namespace Neptune {
 
 	SkyBoxComponent::SkyBoxComponent()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Use SpherePack Instead
@@ -36,14 +36,14 @@ namespace Spices {
 
 	void SkyBoxComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		MeshComponent::DrawThis();
 	}
 
 	void SkyBoxComponent::SetMaterial(const std::string& materialPath)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		auto e = FrameInfo::Get().m_World->QueryEntitybyID((uint32_t)m_Owner);
 

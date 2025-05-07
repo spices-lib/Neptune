@@ -10,7 +10,7 @@
 #include "Core/Library/ClassLibrary.h"
 #include "Core/Container/LinkedUnorderedMap.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Forward declare
@@ -80,7 +80,7 @@ namespace Spices {
 		template<typename T, typename ... Args>
 		RendererManager& Push(Args&& ... args)
 		{
-			SPICES_PROFILE_ZONE;
+			NEPTUNE_PROFILE_ZONE;
 
 			std::string rendererName = ClassLibrary::GetClassString(typeid(T));
 
@@ -92,7 +92,7 @@ namespace Spices {
 				std::stringstream ss;
 				ss << rendererName << " has been pushed ";
 
-				SPICES_CORE_ERROR(ss.str());
+				NEPTUNE_CORE_ERROR(ss.str());
 			}
 
 			m_Identities.push_back(rendererName, std::make_shared<T>(rendererName, std::forward<Args>(args)...));
@@ -104,7 +104,7 @@ namespace Spices {
 			*/
 			std::stringstream ss;
 			ss << rendererName << " pushed ";
-			SPICES_CORE_INFO(ss.str());
+			NEPTUNE_CORE_INFO(ss.str());
 
 			return *m_RendererManager;
 		}
@@ -115,7 +115,7 @@ namespace Spices {
 		*/
 		static RendererManager& Pop(const std::string& rendererName)
 		{
-			SPICES_PROFILE_ZONE;
+			NEPTUNE_PROFILE_ZONE;
 
 			/**
 			* @brief Pop system to map
@@ -125,7 +125,7 @@ namespace Spices {
 				std::stringstream ss;
 				ss << rendererName << " has been popped ";
 
-				SPICES_CORE_ERROR(ss.str())
+				NEPTUNE_CORE_ERROR(ss.str())
 			}
 
 			/**
@@ -134,7 +134,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << rendererName << " popped ";
 
-			SPICES_CORE_INFO(ss.str());
+			NEPTUNE_CORE_INFO(ss.str());
 
 			m_Identities.erase(rendererName);
 
@@ -159,7 +159,7 @@ namespace Spices {
 	template<typename T>
 	inline void RendererManager::IterRenderer(T&& fn)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_Identities.for_each(fn);
 	}

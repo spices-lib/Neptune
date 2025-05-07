@@ -10,7 +10,7 @@
 #include "Core/Library/MemoryLibrary.h"
 #include "Core/Container/Vector.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief enum of ObjectPool expand mode
@@ -203,7 +203,7 @@ namespace Spices {
 				void* memoryBlock = SystemAlloc(m_ExpandBytes >> 13);
 				if (!memoryBlock)
 				{
-					SPICES_CORE_ERROR("Memory alloc failed")
+					NEPTUNE_CORE_ERROR("Memory alloc failed")
 
 					return nullptr;
 				}

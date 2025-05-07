@@ -12,7 +12,7 @@
 #include "Debugger/Perf/NsightPerfGPUProfilerContinuous.h"
 #include "Core/Library/ProcessLibrary.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiDebugger::ImguiDebugger(
         const std::string& panelName ,
@@ -23,7 +23,7 @@ namespace Spices {
 
     void ImguiDebugger::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
         ImGui::SeparatorText("CPU Stage");

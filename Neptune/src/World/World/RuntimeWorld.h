@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "World.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief RuntimeWorld Class.

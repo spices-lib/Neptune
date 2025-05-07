@@ -11,7 +11,7 @@
 #include "Render/FrameInfo.h"
 #include "World/Entity.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void MeshComponent::OnSerialize()
 	{
@@ -25,7 +25,7 @@ namespace Spices {
 
 	void MeshComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		ImGui::Spacing();
 		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2.0f, 6.0f));
@@ -39,7 +39,7 @@ namespace Spices {
 							//ImGuiTreeNodeFlags_Bullet           ;
 		
 		{
-			SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack");
+			NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack");
 			
 			ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.196f, 0.204f, 0.2f, 1.0f));
 			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.164f, 0.18f, 0.184f, 1.0f));
@@ -51,7 +51,7 @@ namespace Spices {
 				for (uint64_t i = 0; i < m_Mesh->GetPacks().size(); i++)
 				{
 					{
-						SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Item");
+						NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Item");
 						
 						std::stringstream ss;
 						ss << "MeshPack [" << i << "]";
@@ -62,7 +62,7 @@ namespace Spices {
 							const float seperatorWidthS = ImGuiH::GetLineItemSize().x - 3.0f * ImGui::GetStyle().IndentSpacing;
 							
 							{
-								SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Icon");
+								NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Icon");
 								
 								ImGui::Spacing();
 								ImGui::PushID("Geometries");
@@ -77,7 +77,7 @@ namespace Spices {
 								const ImVec2 textSize = ImVec2(2.0f * ImGuiH::GetLineItemSize().x, ImGuiH::GetLineItemSize().y);
 							
 								{
-									SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Prim");
+									NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Prim");
 									
 									std::stringstream ss0;
 									ss0 << "/World/MeshComponent/Mesh/" << ss.str();
@@ -90,7 +90,7 @@ namespace Spices {
 								}
 								
 								{
-									SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Path");
+									NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Path");
 									
 									std::stringstream ss1;
 									ss1 << "/World/MeshComponent/" << ss.str();
@@ -101,7 +101,7 @@ namespace Spices {
 								}
 								
 								{
-									SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Type");
+									NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Type");
 									
 									auto meshPack = *m_Mesh->GetPacks().find_value(static_cast<uint32_t>(i));
 									std::string type = meshPack->GetPackType();
@@ -123,7 +123,7 @@ namespace Spices {
 							ImGui::Spacing();
 							
 							{
-								SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Shadows");
+								NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Shadows");
 
 								ImGuiH::DrawPropertyItem("Cast Shadows", columnWidth, nullptr, [&]() {
 									static bool isCastShadow = true;
@@ -142,7 +142,7 @@ namespace Spices {
 							}
 
 							{
-								SPICES_PROFILE_ZONEN("MeshComponent Mesh Pack Visible");
+								NEPTUNE_PROFILE_ZONEN("MeshComponent Mesh Pack Visible");
 
 								ImGuiH::DrawPropertyItem("Visible", columnWidth, nullptr, [&]() {
 									static bool isVisible = true;
@@ -175,7 +175,7 @@ namespace Spices {
 		}
 		
 		{
-			SPICES_PROFILE_ZONEN("MeshComponent Materials");
+			NEPTUNE_PROFILE_ZONEN("MeshComponent Materials");
 			
 			ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.196f, 0.204f, 0.2f, 1.0f));
 			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.164f, 0.18f, 0.184f, 1.0f));
@@ -187,7 +187,7 @@ namespace Spices {
 				for (uint64_t i = 0; i < m_Mesh->GetPacks().size(); i++)
 				{
 					{
-						SPICES_PROFILE_ZONEN("MeshComponent Materials Item");
+						NEPTUNE_PROFILE_ZONEN("MeshComponent Materials Item");
 						
 						std::stringstream ss;
 						ss << "Materials [" << i << "]";
@@ -198,7 +198,7 @@ namespace Spices {
 							const float seperatorWidthS = ImGuiH::GetLineItemSize().x - 3.0f * ImGui::GetStyle().IndentSpacing;
 							
 							{
-								SPICES_PROFILE_ZONEN("MeshComponent Materials Icon");
+								NEPTUNE_PROFILE_ZONEN("MeshComponent Materials Icon");
 								
 								ImGui::Spacing();
 								ImGui::PushID("Materials");
@@ -216,7 +216,7 @@ namespace Spices {
 								const ImVec2 textSize = ImVec2(2.0f * ImGuiH::GetLineItemSize().x, ImGuiH::GetLineItemSize().y);
 							
 								{
-									SPICES_PROFILE_ZONEN("MeshComponent Materials Prim");
+									NEPTUNE_PROFILE_ZONEN("MeshComponent Materials Prim");
 									
 									std::stringstream ss0;
 									ss0 << "/World/MeshComponent/Mesh/" << ss.str();
@@ -229,7 +229,7 @@ namespace Spices {
 								}
 								
 								{
-									SPICES_PROFILE_ZONEN("MeshComponent Materials Path");
+									NEPTUNE_PROFILE_ZONEN("MeshComponent Materials Path");
 									
 									char buffer1[256] = {};
 									ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
@@ -239,7 +239,7 @@ namespace Spices {
 								}
 								
 								{
-									SPICES_PROFILE_ZONEN("MeshComponent Materials Type");
+									NEPTUNE_PROFILE_ZONEN("MeshComponent Materials Type");
 									
 									ImGui::CenteredText("Type", textSize);
 									ImGui::SameLine(2.0f * ImGuiH::GetLineItemSize().x);
@@ -273,7 +273,7 @@ namespace Spices {
 
 	void MeshComponent::SetMesh(std::shared_ptr<Mesh> mesh)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		auto& e = FrameInfo::Get().m_World->QueryEntitybyID((uint32_t)m_Owner);
 

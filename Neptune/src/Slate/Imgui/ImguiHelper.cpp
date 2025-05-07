@@ -18,11 +18,11 @@
 #include <imgui_widgets.cpp>
 #include <backends/imgui_impl_vulkan.cpp>
 
-namespace Spices {
+namespace Neptune {
 
     void ImGuiH::SetStyle()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Set Dark Style.
@@ -126,7 +126,7 @@ namespace Spices {
 
     void ImGuiH::SetFonts(FontMode fontmode)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGuiIO& io = ImGui::GetIO();
         const float high_dpi_scale = GetDPIScale();
@@ -190,7 +190,7 @@ namespace Spices {
 
     void ImGuiH::MainDockSpace(Side side, float alpha)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         // Keeping the unique ID of the dock space
         ImGuiID dockspaceID = ImGui::GetID("DockSpace");
@@ -306,7 +306,7 @@ namespace Spices {
 
     void ImGuiH::CustomMaterialImage(SlateImage* context, ImVec2 size)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGuiWindow* window = ImGui::GetCurrentWindow();
         const ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
@@ -340,7 +340,7 @@ namespace Spices {
         std::function<void()> valFunc
     )
     {
-        SPICES_PROFILE_ZONEN("DrawPropertyItem");
+        NEPTUNE_PROFILE_ZONEN("DrawPropertyItem");
 
         ImGui::PushID(itemName.c_str());
         ImGui::Columns(2, 0, false);
@@ -370,7 +370,7 @@ namespace Spices {
         std::function<void()> treeFunc
     )
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         constexpr ImGuiTreeNodeFlags treeNodeFlags = 
 				ImGuiTreeNodeFlags_DefaultOpen      | 
@@ -421,7 +421,7 @@ namespace Spices {
         std::function<void()> treeFunc
     )
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         constexpr ImGuiTreeNodeFlags treeNodeFlags = 
 				ImGuiTreeNodeFlags_DefaultOpen      | 
@@ -453,83 +453,6 @@ namespace Spices {
         }
 
         ImGui::PopStyleColor(4);
-    }
-
-    void ImGuiH::DrawMaterial(
-        const std::string&               name    , 
-        float                            width   , 
-        const std::shared_ptr<Material>& material
-    )
-    {
-        SPICES_PROFILE_ZONE;
-
-        ImGuiH::DrawTreeTitle(name, nullptr, [&]() {
-
-            material->GetConstantParams().for_each([&](const std::string& k, ConstantParams& v){
-                ImGuiH::DrawPropertyItem(k, width, nullptr, [&](){
-                    if(v.value.paramType == "float")
-                    {
-                        if (ImGuiH::DrawMaterialConstParams<float>(material, ImGuiDataType_Float, 1, "%.3f", v))
-                        {
-                            FrameInfo::Get().m_World->Mark(World::NeedUpdateTLAS | World::FrushStableFrame);
-                        }
-                    }
-                    else if(v.value.paramType == "float2")
-                    {
-                        if (ImGuiH::DrawMaterialConstParams<glm::vec2>(material, ImGuiDataType_Float, 2, "%.3f", v))
-                        {
-                            FrameInfo::Get().m_World->Mark(World::NeedUpdateTLAS | World::FrushStableFrame);
-                        }
-                    }
-                    else if(v.value.paramType == "float3")
-                    {
-                        if (ImGuiH::DrawMaterialConstParams<glm::vec3>(material, ImGuiDataType_Float, 3, "%.3f", v))
-                        {
-                            FrameInfo::Get().m_World->Mark(World::NeedUpdateTLAS | World::FrushStableFrame);
-                        }
-                    }
-                    else if(v.value.paramType == "float4")
-                    {
-                        if (ImGuiH::DrawMaterialConstParams<glm::vec4>(material, ImGuiDataType_Float, 4, "%.3f", v))
-                        {
-                            FrameInfo::Get().m_World->Mark(World::NeedUpdateTLAS | World::FrushStableFrame);
-                        }
-                    }
-                    else if(v.value.paramType == "int")
-                    {
-                        if (ImGuiH::DrawMaterialConstParams<int>(material, ImGuiDataType_S32, 1, "%d", v))
-                        {
-                            FrameInfo::Get().m_World->Mark(World::NeedUpdateTLAS | World::FrushStableFrame);
-                        }
-                    }
-                    else if (v.value.paramType == "bool")
-                    {
-                        bool  f = std::any_cast<bool>(v.value.paramValue);
-                        bool nf = f;
-                        bool df = std::any_cast<bool>(v.defaultValue.paramValue);
-
-                        const float seperatorWidthS = ImGuiH::GetLineItemSize().x - 3.0f * ImGui::GetStyle().IndentSpacing;
-                        ImGuiH::Checkbox(&nf);
-                        if (nf != f)
-                        {
-                            v.value.paramValue = nf;
-                            material->UpdateMaterial();
-                        }
-                        ImGui::SameLine();
-                        ImGui::PushItemWidth(100.0f);
-                        ImGui::SeparatorText("##");
-                        ImGui::PopItemWidth();
-                        ImGui::SameLine(ImGui::GetContentRegionAvail().x - ImGui::GetStyle().ItemSpacing.x);
-                        if (ImGuiH::DrawResetIcon(f != df))
-                        {
-                            v.value.paramValue = df;
-                            material->UpdateMaterial();
-                        }
-                    }
-                });
-                return false;
-            });
-        });
     }
 
     bool ImGuiH::S_DragScalarN(
@@ -583,7 +506,7 @@ namespace Spices {
 
     float ImGuiH::GetDPIScale()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         // Cached DPI scale, so that this doesn't change after the first time code calls getDPIScale.
         // A negative value indicates that the value hasn't been computed yet.

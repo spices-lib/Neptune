@@ -63,7 +63,7 @@ namespace Neptune {
 		*/
 		std::deque<InfoLevelHelper> m_CriticalLogInfos;
 
-		void Clear() 
+		void Clear()
 		{
             NEPTUNE_PROFILE_ZONE;
 

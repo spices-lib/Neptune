@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include <any>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Caches of Renderer data.
@@ -28,7 +28,7 @@ namespace Spices {
 		*/
 		virtual ~RendererCache()
 		{
-			SPICES_PROFILE_ZONE;
+			NEPTUNE_PROFILE_ZONE;
 			
 			ClearCaches();
 		}
@@ -40,7 +40,7 @@ namespace Spices {
 		template<typename T>
 		void PushToCaches(T&& any)
 		{
-			SPICES_PROFILE_ZONE;
+			NEPTUNE_PROFILE_ZONE;
 
 			std::unique_lock<std::mutex> lock(m_Mutex);
 			
@@ -52,7 +52,7 @@ namespace Spices {
 		*/
 		void ClearCaches()
 		{
-			SPICES_PROFILE_ZONE;
+			NEPTUNE_PROFILE_ZONE;
 
 			std::unique_lock<std::mutex> lock(m_Mutex);
 			

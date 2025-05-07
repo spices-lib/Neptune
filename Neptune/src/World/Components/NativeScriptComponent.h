@@ -13,7 +13,7 @@
 #include "Core/Event/WindowEvent.h"
 #include "Core/Event/SlateEvent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief NativeScriptComponent Class.

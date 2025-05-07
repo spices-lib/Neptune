@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "LandscapeComponent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void LandscapeComponent::OnSerialize()
 	{

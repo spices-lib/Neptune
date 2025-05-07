@@ -6,7 +6,7 @@
 
 #include <any>
 
-namespace Spices {
+namespace Neptune {
 
 	class MeshController : public NativeScriptComponent
 	{

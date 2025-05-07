@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Event.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class is inherited from Event Class.
@@ -59,12 +59,20 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with MouseMoved.
 		*/
-		EVENT_CLASS_TYPE(MouseMoved)
+        static EventType GetStaticType() {
+            return EventType::MouseMoved;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "MouseMoved";
+        }
 
 		/**
 		* @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryMouse | EventCategoryInput;
+        }
 
 	private:
 
@@ -128,12 +136,20 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with MouseScrolled.
 		*/
-		EVENT_CLASS_TYPE(MouseScrolled)
+        static EventType GetStaticType() {
+            return EventType::MouseScrolled;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "MouseScrolled";
+        }
 
 		/**
 		* @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryMouse | EventCategoryInput;
+        }
 		
 	private:
 
@@ -169,7 +185,9 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryMouse | EventCategoryInput;
+        }
 		
 	protected:
 
@@ -222,7 +240,13 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type MouseButtonPressed.
 		*/
-		EVENT_CLASS_TYPE(MouseButtonPressed)
+        static EventType GetStaticType() {
+            return EventType::MouseButtonPressed;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "MouseButtonPressed";
+        }
 	};
 
 	/**
@@ -260,6 +284,12 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type MouseButtonReleased.
 		*/
-		EVENT_CLASS_TYPE(MouseButtonReleased)
+        static EventType GetStaticType() {
+            return EventType::MouseButtonReleased;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "MouseButtonReleased";
+        }
 	};
 }

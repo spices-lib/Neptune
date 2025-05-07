@@ -12,7 +12,7 @@
 
 #include <memory>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief SkyBoxComponent Class.

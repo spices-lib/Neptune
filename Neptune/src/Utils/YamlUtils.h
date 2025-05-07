@@ -95,9 +95,9 @@ namespace YAML {
 	};
 
 	template<>
-	struct convert<Spices::TextureParam>
+	struct convert<Neptune::TextureParam>
 	{
-		static Node encode(const Spices::TextureParam& param)
+		static Node encode(const Neptune::TextureParam& param)
 		{
 			Node node;
 			node.push_back(param.textureType);
@@ -105,7 +105,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool decode(const Node& node, Spices::TextureParam& param)
+		static bool decode(const Node& node, Neptune::TextureParam& param)
 		{
 			if (!node.IsSequence() || node.size() != 2)
 			{
@@ -120,9 +120,9 @@ namespace YAML {
 	};
 
 	template<>
-	struct convert<Spices::ConstantParam>
+	struct convert<Neptune::ConstantParam>
 	{
-		static Node encode(const Spices::ConstantParam& param)
+		static Node encode(const Neptune::ConstantParam& param)
 		{
 			Node node;
 			node.push_back(param.paramType);
@@ -136,22 +136,22 @@ namespace YAML {
 			else
 			{
 				std::stringstream ss;
-				ss << "YAML::convert<Spices::Material::ConstantParam>: not supported paramType: " << param.paramType;
+				ss << "YAML::convert<Neptune::Material::ConstantParam>: not supported paramType: " << param.paramType;
 				
-				SPICES_CORE_WARN(ss.str())
+				NEPTUNE_CORE_WARN(ss.str())
 			}
 			
 			return node;
 		}
 
-		static bool decode(const Node& node, Spices::ConstantParam& param)
+		static bool decode(const Node& node, Neptune::ConstantParam& param)
 		{
 			if (!node.IsSequence() || node.size() != 2)
 			{
 				std::stringstream ss;
-				ss << "YAML::convert<Spices::Material::ConstantParam>: bad node size, current size is" << node.size() << ", required 4";
+				ss << "YAML::convert<Neptune::Material::ConstantParam>: bad node size, current size is" << node.size() << ", required 4";
 				
-				SPICES_CORE_WARN(ss.str())
+				NEPTUNE_CORE_WARN(ss.str())
 				return false;
 			}
 
@@ -166,9 +166,9 @@ namespace YAML {
 			else
 			{
 				std::stringstream ss;
-				ss << "YAML::convert<Spices::Material::ConstantParam>: not supported paramType: " << param.paramType;
+				ss << "YAML::convert<Neptune::Material::ConstantParam>: not supported paramType: " << param.paramType;
 				
-				SPICES_CORE_WARN(ss.str())
+				NEPTUNE_CORE_WARN(ss.str())
 			}
 
 			return true;
@@ -176,7 +176,7 @@ namespace YAML {
 	};
 }
 
-namespace Spices {
+namespace Neptune {
 
 	YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec2& v)
 	{
@@ -240,7 +240,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << "YAML::operator<<: not supported paramType: " << p.paramType;
 				
-			SPICES_CORE_WARN(ss.str())
+			NEPTUNE_CORE_WARN(ss.str())
 			
 			out << YAML::EndSeq;
 		}

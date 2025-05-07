@@ -12,7 +12,7 @@
 #include <imgui_internal.h>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace Spices {
+namespace Neptune {
 	
 	void PointLightComponent::OnSerialize()
 	{
@@ -24,21 +24,21 @@ namespace Spices {
 
 	void PointLightComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		ImGui::Spacing();
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 3.0f });
 		float columeWidth = ImGuiH::GetLineItemSize().x * 6.5f;
 		
 		{
-			SPICES_PROFILE_ZONEN("PointLightComponent Color");
+			NEPTUNE_PROFILE_ZONEN("PointLightComponent Color");
 			
 			ImGuiH::DrawPropertyItem("Color", columeWidth, nullptr, [&]() {
 
 				float itemWidth = (ImGui::GetContentRegionAvail().x - 8.0f * ImGuiH::GetLineItemSize().x) / 3.0f;
 
 				{
-					SPICES_PROFILE_ZONEN("PointLightComponent Color R");
+					NEPTUNE_PROFILE_ZONEN("PointLightComponent Color R");
 					ImGui::PushID("PointLightComponent Color R");
 
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
@@ -64,7 +64,7 @@ namespace Spices {
 				}
 
 				{
-					SPICES_PROFILE_ZONEN("PointLightComponent Color G");
+					NEPTUNE_PROFILE_ZONEN("PointLightComponent Color G");
 					ImGui::PushID("PointLightComponent Color G");
 				
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
@@ -90,7 +90,7 @@ namespace Spices {
 				}
 
 				{
-					SPICES_PROFILE_ZONEN("PointLightComponent Color B");
+					NEPTUNE_PROFILE_ZONEN("PointLightComponent Color B");
 					ImGui::PushID("PointLightComponent Color B");
 				
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
@@ -116,7 +116,7 @@ namespace Spices {
 				}
 
 				{
-					SPICES_PROFILE_ZONEN("PointLightComponent Color Picker");
+					NEPTUNE_PROFILE_ZONEN("PointLightComponent Color Picker");
 					ImGui::PushID("PointLightComponent Color Picker");
 				
 					ImGui::PushStyleColor(ImGuiCol_FrameBg, ImGui::GetStyle().Colors[ImGuiCol_WindowBg]);
@@ -137,7 +137,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("PointLightComponent Intensity");
+			NEPTUNE_PROFILE_ZONEN("PointLightComponent Intensity");
 
 			ImGuiH::DrawPropertyItem("Intensity", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
@@ -156,7 +156,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("PointLightComponent Constantf");
+			NEPTUNE_PROFILE_ZONEN("PointLightComponent Constantf");
 
 			ImGuiH::DrawPropertyItem("Constantf", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
@@ -175,7 +175,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("PointLightComponent Linear");
+			NEPTUNE_PROFILE_ZONEN("PointLightComponent Linear");
 
 			ImGuiH::DrawPropertyItem("Linear", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
@@ -194,7 +194,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("PointLightComponent Quadratic");
+			NEPTUNE_PROFILE_ZONEN("PointLightComponent Quadratic");
 
 			ImGuiH::DrawPropertyItem("Quadratic", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);

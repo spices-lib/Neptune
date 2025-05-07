@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "RuntimeWorld.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void RuntimeWorld::OnPreActivate()
 	{

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Core/Memory/MemoryPool.h"
 
-namespace Spices {
+namespace Neptune {
     
 /**
 * @brief Use MemoryPool for memories management. 
@@ -47,9 +47,9 @@ namespace Spices {
         */
         static void* mallocFromPool(size_t size)
         {
-            void* ptr = Spices::MemoryPool::Alloc(size);
+            void* ptr = Neptune::MemoryPool::Alloc(size);
 
-            SPICES_PROFILE_ALLOC_N(ptr, size, Spices::memoryPoolNames[2]);
+            SPICES_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[2]);
 
             return std::move(ptr);
         }
@@ -63,7 +63,7 @@ namespace Spices {
         {
             void* ptr = malloc(size);
 
-            SPICES_PROFILE_ALLOC_N(ptr, size, Spices::memoryPoolNames[0]);
+            SPICES_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[0]);
 
             return std::move(ptr);
         }
@@ -78,7 +78,7 @@ namespace Spices {
         {
             void* ptr = _aligned_malloc(size, static_cast<size_t>(align));
 
-            SPICES_PROFILE_ALLOC_N(ptr, size, Spices::memoryPoolNames[0]);
+            SPICES_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[0]);
 
             return std::move(ptr);
         }
@@ -89,9 +89,9 @@ namespace Spices {
         */
         static void freeToPool(void* ptr)
         {
-            SPICES_PROFILE_FREE_N(ptr, Spices::memoryPoolNames[2]);
+            SPICES_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[2]);
 
-            Spices::MemoryPool::Free(ptr);
+            Neptune::MemoryPool::Free(ptr);
         }
 
         /**
@@ -100,7 +100,7 @@ namespace Spices {
         */
         static void freeToOS(void* ptr)
         {
-            SPICES_PROFILE_FREE_N(ptr, Spices::memoryPoolNames[0]);
+            SPICES_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[0]);
 
             free(ptr);
         }
@@ -112,7 +112,7 @@ namespace Spices {
         */
         static void freeToOS_Aligned(void* ptr, std::align_val_t align)
         {
-            SPICES_PROFILE_FREE_N(ptr, Spices::memoryPoolNames[0]);
+            SPICES_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[0]);
 
             _aligned_free(ptr);
         }
@@ -131,8 +131,8 @@ namespace Spices {
 /**
 * @brief Macros of modify Process instance state.
 */
-#define PROCESS_INSTANCE_ENTRY  { Spices::MemoryEntry::SetProcessState(Spices::ProcessState::Run); }
-#define PROCESS_INSTANCE_EXIT   { Spices::MemoryEntry::SetProcessState(Spices::ProcessState::Exit); }
+#define PROCESS_INSTANCE_ENTRY  { Neptune::MemoryEntry::SetProcessState(Neptune::ProcessState::Run); }
+#define PROCESS_INSTANCE_EXIT   { Neptune::MemoryEntry::SetProcessState(Neptune::ProcessState::Exit); }
 
 /******************************************* override new delete ***********************************************************/
 
@@ -145,24 +145,24 @@ namespace Spices {
 */
 void* operator new(size_t size)
 {
-    switch (Spices::MemoryEntry::GetProcessState())
+    switch (Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief allocate memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            return Spices::MemoryEntry::mallocFromPool(size);
+            return Neptune::MemoryEntry::mallocFromPool(size);
         }
 
         /**
         * @brief allocate memory using malloc before MemoryPool is initialized or already exit.
         */
-        case Spices::ProcessState::BeforeEntry:
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::Exit:
         default:
         {
-            return Spices::MemoryEntry::mallocFromOS(size);
+            return Neptune::MemoryEntry::mallocFromOS(size);
         }
     }
 }
@@ -174,24 +174,24 @@ void* operator new(size_t size)
 */
 void* operator new[](size_t size)
 {
-   switch (Spices::MemoryEntry::GetProcessState())
+   switch (Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief allocate memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            return Spices::MemoryEntry::mallocFromPool(size);
+            return Neptune::MemoryEntry::mallocFromPool(size);
         }
 
         /**
         * @brief allocate memory using malloc before MemoryPool is initialized or already exit.
         */
-        case Spices::ProcessState::BeforeEntry:
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::Exit:
         default:
         {
-            return Spices::MemoryEntry::mallocFromOS(size);
+            return Neptune::MemoryEntry::mallocFromOS(size);
         }
     }
 }
@@ -202,30 +202,30 @@ void* operator new[](size_t size)
 */
 void operator delete(void* ptr) noexcept
 {
-    switch(Spices::MemoryEntry::GetProcessState())
+    switch(Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief free memory using free before MemoryPool is initialized.
         */
-        case Spices::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::BeforeEntry:
         {
-            Spices::MemoryEntry::freeToOS(ptr);
+            Neptune::MemoryEntry::freeToOS(ptr);
             return;
         }
 
         /**
         * @brief free memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            Spices::MemoryEntry::freeToPool(ptr);
+            Neptune::MemoryEntry::freeToPool(ptr);
             return;
         }
 
         /**
         * @brief Do nothing while exist program.
         */
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::Exit:
         {
             return;
         }
@@ -235,7 +235,7 @@ void operator delete(void* ptr) noexcept
         */
         default:
         {
-            Spices::MemoryEntry::freeToOS(ptr);
+            Neptune::MemoryEntry::freeToOS(ptr);
             return;
         }
     }
@@ -247,30 +247,30 @@ void operator delete(void* ptr) noexcept
 */
 void operator delete[](void* ptr) noexcept
 {
-    switch(Spices::MemoryEntry::GetProcessState())
+    switch(Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief free memory using free before MemoryPool is initialized.
         */
-        case Spices::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::BeforeEntry:
         {
-            Spices::MemoryEntry::freeToOS(ptr);
+            Neptune::MemoryEntry::freeToOS(ptr);
             return;
         }
 
         /**
         * @brief free memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            Spices::MemoryEntry::freeToPool(ptr);
+            Neptune::MemoryEntry::freeToPool(ptr);
             return;
         }
 
         /**
         * @brief Do nothing while exist program.
         */
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::Exit:
         {
             return;
         }
@@ -280,7 +280,7 @@ void operator delete[](void* ptr) noexcept
         */
         default:
         {
-            Spices::MemoryEntry::freeToOS(ptr);
+            Neptune::MemoryEntry::freeToOS(ptr);
             return;
         }
     }
@@ -300,24 +300,24 @@ void operator delete[](void* ptr) noexcept
 */
 void* operator new(size_t size, std::align_val_t align)
 {
-    switch (Spices::MemoryEntry::GetProcessState())
+    switch (Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief allocate memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            return Spices::MemoryEntry::mallocFromPool(static_cast<size_t>(align));
+            return Neptune::MemoryEntry::mallocFromPool(static_cast<size_t>(align));
         }
 
         /**
         * @brief allocate memory using malloc before MemoryPool is initialized or already exit.
         */
-        case Spices::ProcessState::BeforeEntry:
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::Exit:
         default:
         {
-            return Spices::MemoryEntry::mallocFromOS_Aligned(size, align);
+            return Neptune::MemoryEntry::mallocFromOS_Aligned(size, align);
         }
     }
 }
@@ -330,24 +330,24 @@ void* operator new(size_t size, std::align_val_t align)
 */
 void* operator new[](size_t size, std::align_val_t align)
 {
-    switch (Spices::MemoryEntry::GetProcessState())
+    switch (Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief allocate memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            return Spices::MemoryEntry::mallocFromPool(static_cast<size_t>(align));
+            return Neptune::MemoryEntry::mallocFromPool(static_cast<size_t>(align));
         }
 
         /**
         * @brief allocate memory using malloc before MemoryPool is initialized or already exit.
         */
-        case Spices::ProcessState::BeforeEntry:
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::Exit:
         default:
         {
-            return Spices::MemoryEntry::mallocFromOS_Aligned(size, align);
+            return Neptune::MemoryEntry::mallocFromOS_Aligned(size, align);
         }
     }
 }
@@ -359,30 +359,30 @@ void* operator new[](size_t size, std::align_val_t align)
 */
 void operator delete(void* ptr, std::align_val_t align) noexcept
 {
-    switch(Spices::MemoryEntry::GetProcessState())
+    switch(Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief free memory using free before MemoryPool is initialized.
         */
-        case Spices::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::BeforeEntry:
         {
-            Spices::MemoryEntry::freeToOS_Aligned(ptr, align);
+            Neptune::MemoryEntry::freeToOS_Aligned(ptr, align);
             return;
         }
 
         /**
         * @brief free memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            Spices::MemoryEntry::freeToPool(ptr);
+            Neptune::MemoryEntry::freeToPool(ptr);
             return;
         }
 
         /**
         * @brief Do nothing while exist program.
         */
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::Exit:
         {
             return;
         }
@@ -392,7 +392,7 @@ void operator delete(void* ptr, std::align_val_t align) noexcept
         */
         default:
         {
-            Spices::MemoryEntry::freeToOS_Aligned(ptr, align);
+            Neptune::MemoryEntry::freeToOS_Aligned(ptr, align);
             return;
         }
     }
@@ -405,30 +405,30 @@ void operator delete(void* ptr, std::align_val_t align) noexcept
 */
 void operator delete[](void* ptr, std::align_val_t align) noexcept
 {
-    switch(Spices::MemoryEntry::GetProcessState())
+    switch(Neptune::MemoryEntry::GetProcessState())
     {
         /**
         * @brief free memory using free before MemoryPool is initialized.
         */
-        case Spices::ProcessState::BeforeEntry:
+        case Neptune::ProcessState::BeforeEntry:
         {
-            Spices::MemoryEntry::freeToOS_Aligned(ptr, align);
+            Neptune::MemoryEntry::freeToOS_Aligned(ptr, align);
             return;
         }
 
         /**
         * @brief free memory using MemoryPool if is initialized.
         */
-        case Spices::ProcessState::Run:
+        case Neptune::ProcessState::Run:
         {
-            Spices::MemoryEntry::freeToPool(ptr);
+            Neptune::MemoryEntry::freeToPool(ptr);
             return;
         }
 
         /**
         * @brief Do nothing while exist program.
         */
-        case Spices::ProcessState::Exit:
+        case Neptune::ProcessState::Exit:
         {
             return;
         }
@@ -438,7 +438,7 @@ void operator delete[](void* ptr, std::align_val_t align) noexcept
         */
         default:
         {
-            Spices::MemoryEntry::freeToOS_Aligned(ptr, align);
+            Neptune::MemoryEntry::freeToOS_Aligned(ptr, align);
             return;
         }
     }
@@ -454,7 +454,7 @@ void operator delete[](void* ptr, std::align_val_t align) noexcept
 */
 void* operator new(size_t size)
 {
-    return std::move(Spices::MemoryEntry::mallocFromOS(size));
+    return std::move(Neptune::MemoryEntry::mallocFromOS(size));
 }
 
 /**
@@ -465,7 +465,7 @@ void* operator new(size_t size)
 */
 void* operator new[](size_t size)
 {
-    return std::move(Spices::MemoryEntry::mallocFromOS(size));
+    return std::move(Neptune::MemoryEntry::mallocFromOS(size));
 }
 
 /**
@@ -475,7 +475,7 @@ void* operator new[](size_t size)
 */
 void operator delete(void* ptr) noexcept
 {
-    Spices::MemoryEntry::freeToOS(ptr);
+    Neptune::MemoryEntry::freeToOS(ptr);
 }
 
 /**
@@ -485,7 +485,7 @@ void operator delete(void* ptr) noexcept
 */
 void operator delete[](void* ptr) noexcept
 {
-    Spices::MemoryEntry::freeToOS(ptr);
+    Neptune::MemoryEntry::freeToOS(ptr);
 }
 
 
@@ -501,7 +501,7 @@ void operator delete[](void* ptr) noexcept
 */
 void* operator new(size_t size, std::align_val_t align)
 {
-    return std::move(Spices::MemoryEntry::mallocFromOS_Aligned(size, align));
+    return std::move(Neptune::MemoryEntry::mallocFromOS_Aligned(size, align));
 }
 
 /**
@@ -513,7 +513,7 @@ void* operator new(size_t size, std::align_val_t align)
 */
 void* operator new[](size_t size, std::align_val_t align)
 {
-    return std::move(Spices::MemoryEntry::mallocFromOS_Aligned(size, align));
+    return std::move(Neptune::MemoryEntry::mallocFromOS_Aligned(size, align));
 }
 
 /**
@@ -524,7 +524,7 @@ void* operator new[](size_t size, std::align_val_t align)
 */
 void operator delete(void* ptr, std::align_val_t align) noexcept
 {
-    Spices::MemoryEntry::freeToOS_Aligned(ptr, align);
+    Neptune::MemoryEntry::freeToOS_Aligned(ptr, align);
 }
 
 /**
@@ -535,7 +535,7 @@ void operator delete(void* ptr, std::align_val_t align) noexcept
 */
 void operator delete[](void* ptr, std::align_val_t align) noexcept
 {
-    Spices::MemoryEntry::freeToOS_Aligned(ptr, align);
+    Neptune::MemoryEntry::freeToOS_Aligned(ptr, align);
 }
 
 #endif

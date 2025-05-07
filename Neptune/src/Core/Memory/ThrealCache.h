@@ -9,7 +9,7 @@
 #include "MemoryPool.h"
 #include "Core/Container/FreeList.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Thread memory cache.

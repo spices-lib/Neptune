@@ -9,7 +9,7 @@
 #include "Component.h"
 #include "GamePlay/Camera.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief CameraComponent Class.

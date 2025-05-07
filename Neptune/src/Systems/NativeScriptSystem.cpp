@@ -18,7 +18,7 @@
 #include "Scripts/WorldMarkQuerier.h"
 #include "Scripts/MainTaskQuerier.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void NativeScriptSystem::OnSystemInitialize()
 	{
@@ -35,7 +35,7 @@ namespace Spices {
 
 	void NativeScriptSystem::OnSystemUpdate(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Update NativeScript( C++ );
@@ -53,7 +53,7 @@ namespace Spices {
 
 	void NativeScriptSystem::OnEvent(Event& event)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_NativeScriptRegister->OnEvent(event);
 

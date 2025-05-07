@@ -9,7 +9,7 @@
 
 #include <commdlg.h>
 
-namespace Spices {
+namespace Neptune {
 
 	bool FileLibrary::FileLibrary_Exists(const char* path)
 	{

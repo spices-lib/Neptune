@@ -9,7 +9,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Struct defines camera projection type.

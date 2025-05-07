@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "TagComponent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	TagComponent::TagComponent(const std::string& tag)
 	{
@@ -26,7 +26,7 @@ namespace Spices {
 
 	void TagComponent::RemoveTag(const std::string& tag)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		assert(m_Tags.size() > 0);
 
@@ -35,7 +35,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << "Remove tag failed: Entity " << *m_Tags.begin() << " must have at lease one tag.";
 
-			SPICES_CORE_WARN(ss.str())
+			NEPTUNE_CORE_WARN(ss.str())
 
 			return;
 		}
@@ -45,7 +45,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << "Remove tag failed: Entity " << *m_Tags.begin() << " do not have tag of " << tag;
 
-			SPICES_CORE_WARN(ss.str())
+			NEPTUNE_CORE_WARN(ss.str())
 
 			return;
 		}
@@ -55,7 +55,7 @@ namespace Spices {
 
 	void TagComponent::Rename(const std::string& tag)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		assert(m_Tags.size() > 0);
 
@@ -65,7 +65,7 @@ namespace Spices {
 
 	void TagComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::vector<std::string> tagBuffer(m_Tags.begin(), m_Tags.end());
 		
@@ -74,7 +74,7 @@ namespace Spices {
 		float columeWidth = ImGuiH::GetLineItemSize().x * 6.5f;
 
 		{
-			SPICES_PROFILE_ZONEN("TagComponent Tags");
+			NEPTUNE_PROFILE_ZONEN("TagComponent Tags");
 			
 			for(int i = 0; i < tagBuffer.size(); i++)
 			{

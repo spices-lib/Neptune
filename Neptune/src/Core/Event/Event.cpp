@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "Event.h"
 
-namespace Spices {
+namespace Neptune {
 	
 	/**
 	* @brief Single instance of Root Event Function Pointer.
@@ -16,14 +16,14 @@ namespace Spices {
 
 	Event::EventCallbackFn Event::GetEventCallbackFn()
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		return EventCallback;
 	}
 
 	void Event::SetEventCallbackFn(const EventCallbackFn& callback)
 	{
-		SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		EventCallback = callback;
 	}

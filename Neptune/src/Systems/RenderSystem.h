@@ -14,7 +14,7 @@
 #include <unordered_map>
 #include <memory>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief ResourceSystem Class.

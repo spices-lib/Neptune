@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief String Static Function Library.

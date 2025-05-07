@@ -11,7 +11,7 @@
 #include "ImguiDisplayOptions.h"
 #include "ImguiPostProcessing.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiPreferences::ImguiPreferences(
         const std::string& panelName ,
@@ -19,7 +19,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance.
@@ -30,7 +30,7 @@ namespace Spices {
 
     void ImguiPreferences::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
         
         if (!m_IsSlateOn) return;
 
@@ -42,7 +42,7 @@ namespace Spices {
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(2.0f, 4.0f));
 
         {
-            SPICES_PROFILE_ZONEN("ImguiPreferences::Reset");
+            NEPTUNE_PROFILE_ZONEN("ImguiPreferences::Reset");
 
             ImGui::Spacing();
             ImGui::SetWindowFontScale(1.15f);
@@ -59,7 +59,7 @@ namespace Spices {
         static ImguiSlate* selectedSlate = nullptr;
 
         {
-            SPICES_PROFILE_ZONEN("ImguiPreferences::ItemLists");
+            NEPTUNE_PROFILE_ZONEN("ImguiPreferences::ItemLists");
 
             ImGui::PushID("ImguiPreferences::ItemLists");
             ImGui::Columns(2, 0, false);
@@ -110,7 +110,7 @@ namespace Spices {
         }
 
         {
-            SPICES_PROFILE_ZONEN("ImguiPreferences::Item");
+            NEPTUNE_PROFILE_ZONEN("ImguiPreferences::Item");
 
 			float itemHeight = ImGui::GetStyle().ItemSpacing.y;
 			if (ImGui::BeginChild("ImguiPreferences::Item", ImVec2(0, -itemHeight), ImGuiChildFlags_None, ImGuiWindowFlags_HorizontalScrollbar))

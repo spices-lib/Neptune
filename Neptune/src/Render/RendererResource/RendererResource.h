@@ -10,7 +10,7 @@
 #include "Resources/Texture/Texture2DArray.h"
 #include "Resources/Texture/Texture2DCube.h"
 
-namespace Spices{
+namespace Neptune{
 
 	/**
 	* @brief Forward Declare

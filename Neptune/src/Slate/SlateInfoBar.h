@@ -9,7 +9,7 @@
 #include "Systems/SlateSystem.h"
 #include "Slate/Imgui/ImguiInfoBar.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class defines InfoBar instance.
@@ -122,7 +122,7 @@ namespace Spices {
 	template<typename R>
 	inline void SlateInfoBar::Create(const std::string& info, std::function<std::any()> rateFunc, std::function<bool(SlateInfoBar*)> destroyFunc)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		auto ptr = dynamic_cast<ImguiInfoBar*>(SlateSystem::GetRegister()->GetSlate("InfoBar").get());
 

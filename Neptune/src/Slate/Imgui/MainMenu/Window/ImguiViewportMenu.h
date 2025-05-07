@@ -10,7 +10,7 @@
 
 #define MaxViewportNum 2
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief The ImguiViewportMenu Class.

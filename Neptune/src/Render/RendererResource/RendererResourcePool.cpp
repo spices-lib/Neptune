@@ -8,11 +8,11 @@
 #include "RendererResourcePool.h"
 #include "Render/Vulkan/VulkanImage.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void RendererResourcePool::OnSlateResize(uint32_t width, uint32_t height) const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Call all Resource's OnResized().
@@ -25,7 +25,7 @@ namespace Spices {
 
 	VkDescriptorImageInfo* RendererResourcePool::AccessResource(const RendererResourceCreateInfo& info, uint32_t mipLevel)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Create one if isn't exist.
@@ -40,14 +40,14 @@ namespace Spices {
 
 	std::shared_ptr<VulkanImage> RendererResourcePool::AccessRowResource(const std::string& name)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (m_RendererResource.find(name) == m_RendererResource.end())
 		{
 			std::stringstream ss;
 			ss << "Resource: " << name << " not found.";
 
-			SPICES_CORE_ERROR(ss.str())
+			NEPTUNE_CORE_ERROR(ss.str())
 		}
 
 		return m_RendererResource[name]->GetTexture()->GetResource<VulkanImage>();

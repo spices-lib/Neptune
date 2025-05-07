@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Input.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class Is Windows Platform Specific Input Class.

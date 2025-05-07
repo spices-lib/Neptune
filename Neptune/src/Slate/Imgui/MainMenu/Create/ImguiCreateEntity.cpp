@@ -9,7 +9,7 @@
 
 #include "Systems/SlateSystem.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiCreateEntity::ImguiCreateEntity(
         const std::string& panelName , 
@@ -20,7 +20,7 @@ namespace Spices {
 
     void ImguiCreateEntity::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render Create.
@@ -33,7 +33,7 @@ namespace Spices {
             * @brief Begin render Mesh.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Mesh");
+                NEPTUNE_PROFILE_ZONEN("Render Mesh");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_POLYMER, Mesh)))
                 {
@@ -76,7 +76,7 @@ namespace Spices {
             * @brief Begin render Shape.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Shape");
+                NEPTUNE_PROFILE_ZONEN("Render Shape");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_FORMAT_SHAPES, Shape)))
                 {
@@ -97,7 +97,7 @@ namespace Spices {
             * @brief Begin render Light.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Light");
+                NEPTUNE_PROFILE_ZONEN("Render Light");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_WB_TWIGHLIGHT, Light)))
                 {
@@ -116,7 +116,7 @@ namespace Spices {
             * @brief Begin render Audio.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Audio");
+                NEPTUNE_PROFILE_ZONEN("Render Audio");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_MULTITRACK_AUDIO, Audio)))
                 {
@@ -147,7 +147,7 @@ namespace Spices {
             * @brief Begin render Material.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Material");
+                NEPTUNE_PROFILE_ZONEN("Render Material");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_PANORAMA_PHOTOSPHERE_SELECT, Material)))
                 {
@@ -252,7 +252,7 @@ namespace Spices {
             * @brief Begin render Physics.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Physics");
+                NEPTUNE_PROFILE_ZONEN("Render Physics");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_WATERFALL_CHART, Physics)))
                 {
@@ -285,7 +285,7 @@ namespace Spices {
             * @brief Begin render Flow.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Flow");
+                NEPTUNE_PROFILE_ZONEN("Render Flow");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_FLOOD, Flow)))
                 {
@@ -311,7 +311,7 @@ namespace Spices {
             * @brief Begin render Flow.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Particles");
+                NEPTUNE_PROFILE_ZONEN("Render Particles");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_FORMAT_SHAPES, Particles)))
                 {
@@ -340,7 +340,7 @@ namespace Spices {
             * @brief Begin render Navigation.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Navigation");
+                NEPTUNE_PROFILE_ZONEN("Render Navigation");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_NAVIGATION, Navigation)))
                 {
@@ -354,7 +354,7 @@ namespace Spices {
             * @brief Begin render Visual Scripting.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Visual Scripting");
+                NEPTUNE_PROFILE_ZONEN("Render Visual Scripting");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_JAVASCRIPT, Visual Scripting)))
                 {
@@ -370,7 +370,7 @@ namespace Spices {
             * @brief Begin render BasisCurves.
             */
             {
-                SPICES_PROFILE_ZONEN("Render BasisCurves");
+                NEPTUNE_PROFILE_ZONEN("Render BasisCurves");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_POLYLINE, BasisCurves)))
                 {
@@ -394,7 +394,7 @@ namespace Spices {
             * @brief Begin render Animation.
             */
             {
-                SPICES_PROFILE_ZONEN("Render Animation");
+                NEPTUNE_PROFILE_ZONEN("Render Animation");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_ANIMATION, Animation)))
                 {
@@ -408,7 +408,7 @@ namespace Spices {
             * @brief Begin render UI.
             */
             {
-                SPICES_PROFILE_ZONEN("Render UI");
+                NEPTUNE_PROFILE_ZONEN("Render UI");
 
                 if (ImGui::BeginMenu(ICON_TEXT(ICON_MD_SQUARE, UI)))
                 {

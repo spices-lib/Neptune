@@ -11,11 +11,11 @@
 #include <psapi.h>
 #include <stdio.h>
 
-namespace Spices {
+namespace Neptune {
 
 	bool ProcessLibrary::OpenProcess(const char* processPath, const char* commandLine)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		STARTUPINFO StartInfo;
 		PROCESS_INFORMATION info;
@@ -43,7 +43,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << "Process: " << processPath << " Open Failed";
 
-			SPICES_CORE_WARN(ss.str());
+			NEPTUNE_CORE_WARN(ss.str());
 			return false;
 		}
 
@@ -52,12 +52,12 @@ namespace Spices {
 
 	bool ProcessLibrary::CloseProcess(const char* processName)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		const std::string temp = std::string("C:/Windows/System32/TASKKILL.exe /F /IM ") + processName;
 		if(system(temp.c_str()) != 0)
 		{
-			SPICES_CORE_WARN("Process: " + std::string(processName) + " Close Failed")
+			NEPTUNE_CORE_WARN("Process: " + std::string(processName) + " Close Failed")
 			return false;
 		}
 
@@ -66,7 +66,7 @@ namespace Spices {
 
 	float ProcessLibrary::ProcessMemoryInUsed()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		PROCESS_MEMORY_COUNTERS pmc;
 		if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc)))

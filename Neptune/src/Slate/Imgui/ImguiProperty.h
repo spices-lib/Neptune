@@ -10,7 +10,7 @@
 
 #include "World/Entity.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief The ImguiProperty Class.

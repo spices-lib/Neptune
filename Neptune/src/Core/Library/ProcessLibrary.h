@@ -9,7 +9,7 @@
 
 #include <Windows.h>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Process Static Function Library.

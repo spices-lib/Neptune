@@ -7,11 +7,11 @@
 #include "Pchheader.h"
 #include "ImguiProperty.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiProperty::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Begin render Property.
@@ -30,7 +30,7 @@ namespace Spices {
         * @brief Begin render Search Input Text.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiProperty::Search");
+            NEPTUNE_PROFILE_ZONEN("ImguiProperty::Search");
 
             ImGui::Spacing();
             ImGui::PushItemWidth(m_PanelSize.x - ImGuiH::GetLineItemSize().x * 2.0f - ImGui::GetStyle().WindowPadding.x);
@@ -55,7 +55,7 @@ namespace Spices {
         */
         if (m_FrameInfo.m_PickEntityID.size() == 0)
         {
-            SPICES_PROFILE_ZONEN("ImguiProperty::End");
+            NEPTUNE_PROFILE_ZONEN("ImguiProperty::End");
             
             ImGui::PopStyleVar();
             End();
@@ -67,7 +67,7 @@ namespace Spices {
         * @brief Render Datails.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiProperty::Datails");
+            NEPTUNE_PROFILE_ZONEN("ImguiProperty::Datails");
 
             {
                 ImGui::PushID("ImguiProperty::Add");
@@ -129,7 +129,7 @@ namespace Spices {
         * @brief Render All Component.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiProperty::Components");
+            NEPTUNE_PROFILE_ZONEN("ImguiProperty::Components");
 
             entt::entity item = static_cast<entt::entity>(*m_FrameInfo.m_PickEntityID.end_k());
             Entity entity(item, m_FrameInfo.m_World.get());

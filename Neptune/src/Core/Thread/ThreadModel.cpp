@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "ThreadModel.h"
 
-namespace Spices {
+namespace Neptune {
 
 	std::shared_ptr<ThreadModel> ThreadModel::m_ThreadModel = nullptr;
 		
@@ -19,7 +19,7 @@ namespace Spices {
 
 	std::shared_ptr<ThreadModel> ThreadModel::Get()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (!m_ThreadModel)
 		{
@@ -31,7 +31,7 @@ namespace Spices {
 
 	void ThreadModel::InitCustomThreadPool()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (!m_CustomThreadPool)
 		{
@@ -43,7 +43,7 @@ namespace Spices {
 
 	void ThreadModel::InitGameThreadPool()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (!m_GameThreadPool)
 		{
@@ -56,7 +56,7 @@ namespace Spices {
 
 	void ThreadModel::InitRHIThreadPool(std::function<void(std::shared_ptr<VulkanCmdThreadPool>& ptr)> fn)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (!m_RHIThreadPool)
 		{
@@ -66,35 +66,35 @@ namespace Spices {
 
 	void ThreadModel::ShutDownCustomThreadPool()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_CustomThreadPool = nullptr;
 	}
 
 	void ThreadModel::ShutDownGameThreadPool()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_GameThreadPool = nullptr;
 	}
 
 	void ThreadModel::ShutDownRHIThreadPool()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_RHIThreadPool = nullptr;
 	}
 
 	void ThreadModel::ClearMainThreadTaskQueue()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_MainThreadTasks.Clear();
 	}
 
 	void ThreadModel::ShutDownThreadModel()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		ShutDownRHIThreadPool();
 		ShutDownGameThreadPool();

@@ -12,11 +12,11 @@
 #include "World/Entity.h"
 #include "Core/Library/ProcessLibrary.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiFloatingInfo::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         const ImVec2 work_pos  = m_Owner->GetPanelPos();
         const ImVec2 work_size = m_Owner->GetPanelSize();

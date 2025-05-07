@@ -7,11 +7,11 @@
 #include "Pchheader.h"
 #include "ImguiOperation.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiOperation::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
         
         /**
         * @brief Begin render ContentBrowser.
@@ -22,7 +22,7 @@ namespace Spices {
         const float fontSize = ImGui::GetContentRegionAvail().x / ImGuiH::GetLineItemSize().x;
 
         {
-            SPICES_PROFILE_ZONEN("ImguiOperation Separator");
+            NEPTUNE_PROFILE_ZONEN("ImguiOperation Separator");
 
             ImGui::Spacing();
             ImGui::Spacing();
@@ -42,7 +42,7 @@ namespace Spices {
         }
 
         {
-            SPICES_PROFILE_ZONEN("ImguiOperation Icon");
+            NEPTUNE_PROFILE_ZONEN("ImguiOperation Icon");
 
             ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(2.0f, 4.0f));
             ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.567f, 0.629f, 0.641f, 1.0f));

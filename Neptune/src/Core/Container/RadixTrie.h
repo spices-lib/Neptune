@@ -147,7 +147,7 @@ namespace scl {
 		/**
 		* @brief ObjectPool of Leaf.
 		*/
-		Spices::ObjectPool<Leaf> m_LeafPool;
+		Neptune::ObjectPool<Leaf> m_LeafPool;
 
 	public:
 
@@ -155,7 +155,7 @@ namespace scl {
 		* @brief Constructor Function.
 		*/
 		explicit radix_trie()
-			: m_LeafPool{ Spices::ObjectPoolSizeMode::FixedObjects, 20 }
+			: m_LeafPool{ Neptune::ObjectPoolSizeMode::FixedObjects, 20 }
 		{
 			m_Root = new Node;
 		}
@@ -266,12 +266,12 @@ namespace scl {
 		/**
 		* @brief ObjectPool of Node.
 		*/
-		Spices::ObjectPool<Node> m_NodePool;
+		Neptune::ObjectPool<Node> m_NodePool;
 
 		/**
 		* @brief ObjectPool of Leaf.
 		*/
-		Spices::ObjectPool<Leaf> m_LeafPool;
+		Neptune::ObjectPool<Leaf> m_LeafPool;
 
 	public:
 
@@ -279,8 +279,8 @@ namespace scl {
 		* @brief Constructor Function.
 		*/
 		explicit radix_trie()
-			: m_NodePool{ Spices::ObjectPoolSizeMode::FixedObjects, 20 }
-			, m_LeafPool{ Spices::ObjectPoolSizeMode::FixedObjects, 20 }
+			: m_NodePool{ Neptune::ObjectPoolSizeMode::FixedObjects, 20 }
+			, m_LeafPool{ Neptune::ObjectPoolSizeMode::FixedObjects, 20 }
 		{
 			m_Root = m_NodePool.New();
 		}

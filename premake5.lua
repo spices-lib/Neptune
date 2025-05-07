@@ -28,5 +28,10 @@ include "SandBox"
 -- Project: Test.
 include "Test"
 
--- Samples Project.
-group "Samples"
+-- Project Dependencies.
+group "Dependencies"
+	include "Neptune/vendor/imgui"           -- Dependency imgui.
+	include "Neptune/vendor/yaml-cpp"        -- Dependency yaml-cpp.
+	include "Neptune/vendor/implot"          -- Dependency implot.
+	include "Test/vendor/googletest"         -- Dependency googletest.
+group ""

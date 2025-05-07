@@ -12,7 +12,7 @@
 #include "Render/Vulkan/VulkanRenderBackend.h"
 #include "Core/Library/ProcessLibrary.h"
 
-namespace Spices {
+namespace Neptune {
 
 	ImguiConsole::ImguiConsole(
 		const std::string&       panelName , 
@@ -25,7 +25,7 @@ namespace Spices {
 
 	void ImguiConsole::OnRender()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Begin render Console.
@@ -38,7 +38,7 @@ namespace Spices {
 		* @brief Render ClearConsoleIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console ClearConsoleIcon");
+			NEPTUNE_PROFILE_ZONEN("Console ClearConsoleIcon");
 
 			if (ImGui::Button(ICON_MD_FORMAT_CLEAR, ImGuiH::GetLineItemSize()))
 			{
@@ -51,7 +51,7 @@ namespace Spices {
 		* @brief Render OpenLogFileIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console OpenLogFileIcon");
+			NEPTUNE_PROFILE_ZONEN("Console OpenLogFileIcon");
 
 			ImGui::SameLine();
 			if (ImGui::Button(ICON_MD_EDIT_NOTE, ImGuiH::GetLineItemSize()))
@@ -71,7 +71,7 @@ namespace Spices {
 		* @brief Render OpenLogFolderIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console OpenLogFolderIcon");
+			NEPTUNE_PROFILE_ZONEN("Console OpenLogFolderIcon");
 
 			ImGui::SameLine();
 			if (ImGui::Button(ICON_MD_FOLDER, ImGuiH::GetLineItemSize()))
@@ -102,7 +102,7 @@ namespace Spices {
 		* @brief Render EnableCommandFieldIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console EnableCommandFieldIcon");
+			NEPTUNE_PROFILE_ZONEN("Console EnableCommandFieldIcon");
 
 			ImGui::SameLine();
 			if (ImGui::Button(ICON_MD_TERMINAL, ImGuiH::GetLineItemSize())) m_EnableCmdInput = !m_EnableCmdInput;
@@ -113,7 +113,7 @@ namespace Spices {
 		* @brief Render FilterIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console FilterIcon");
+			NEPTUNE_PROFILE_ZONEN("Console FilterIcon");
 
 			ImGui::SameLine(m_PanelSize.x - ImGuiH::GetLineItemSize().x * 5.7f - 220.0f);
 			if (ImGui::Button(ICON_MD_FILTER_ALT, ImGuiH::GetLineItemSize())) {}
@@ -124,7 +124,7 @@ namespace Spices {
 		* @brief Render VerboseIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console VerboseIcon");
+			NEPTUNE_PROFILE_ZONEN("Console VerboseIcon");
 
 			ImGui::SameLine();
 			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.83f, 0.83f, 0.83f, 1.0f));
@@ -137,7 +137,7 @@ namespace Spices {
 		* @brief Render InfoIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console InfoIcon");
+			NEPTUNE_PROFILE_ZONEN("Console InfoIcon");
 
 			ImGui::SameLine();
 			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.574f, 0.829f, 1.0f, 1.0f));
@@ -150,7 +150,7 @@ namespace Spices {
 		* @brief Render WarningIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console WarningIcon");
+			NEPTUNE_PROFILE_ZONEN("Console WarningIcon");
 
 			ImGui::SameLine();
 			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.974f, 0.896f, 0.39f, 1.0f));
@@ -167,7 +167,7 @@ namespace Spices {
 		* @brief Render ErrorIcon.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console ErrorIcon");
+			NEPTUNE_PROFILE_ZONEN("Console ErrorIcon");
 
 			ImGui::SameLine();
 			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.641f, 0.59f, 1.0f));
@@ -190,7 +190,7 @@ namespace Spices {
 		* @brief Render Search Input Text.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console Search Input Text");
+			NEPTUNE_PROFILE_ZONEN("Console Search Input Text");
 
 			ImGui::SameLine();
 			ImGui::PushItemWidth(200);
@@ -213,7 +213,7 @@ namespace Spices {
 		* @brief Render Console ScrollingRegion.
 		*/
 		{
-			SPICES_PROFILE_ZONEN("Console ScrollingRegion");
+			NEPTUNE_PROFILE_ZONEN("Console ScrollingRegion");
 
 			ImGui::PushStyleColor(ImGuiCol_ChildBg, ImGui::GetStyleColorVec4(ImGuiCol_FrameBg));
 			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImGui::GetStyleColorVec4(ImGuiCol_Border));
@@ -328,7 +328,7 @@ namespace Spices {
 		{
 			if (m_EnableCmdInput)
 			{
-				SPICES_PROFILE_ZONEN("Console Command-line");
+				NEPTUNE_PROFILE_ZONEN("Console Command-line");
 
 				ImGui::Spacing();
 				ImGui::Separator();
@@ -363,7 +363,7 @@ namespace Spices {
 
 	int ImguiConsole::TextEditCallbackStub(ImGuiInputTextCallbackData* data)
 	{
-		SPICES_CORE_INFO(data->Buf);
+		NEPTUNE_CORE_INFO(data->Buf);
 
 		return 0;
 	}

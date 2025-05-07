@@ -18,11 +18,11 @@
 #include "Systems/SlateSystem.h"
 #include "Core/Memory/MemoryPool.h"
 
-namespace Spices {
+namespace Neptune {
 
 	Application::Application()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Init Log Class.
@@ -47,7 +47,7 @@ namespace Spices {
 
 	Application::~Application()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Destroy our Specific World.
@@ -99,7 +99,7 @@ namespace Spices {
 		*/
 		while (!glfwWindowShouldClose(VulkanRenderBackend::GetState().m_Windows))
 		{
-			SPICES_PROFILE_ZONEN("MainLoop");
+			NEPTUNE_PROFILE_ZONEN("MainLoop");
 
 			/**
 			* @brief Wait for glfw events.

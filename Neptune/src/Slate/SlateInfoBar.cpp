@@ -7,6 +7,6 @@
 #include "Pchheader.h"
 #include "SlateInfoBar.h"
 
-namespace Spices {
+namespace Neptune {
 
 }

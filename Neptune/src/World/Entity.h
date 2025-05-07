@@ -10,7 +10,7 @@
 #include "World/Components/UUIDComponent.h"
 #include "World/World.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Entity Class.
@@ -57,7 +57,7 @@ namespace Spices {
 				std::stringstream ss;
 				ss << "Entity: " << (int)m_EntityHandle << " already has such component.";
 
-				SPICES_CORE_WARN(ss.str())
+				NEPTUNE_CORE_WARN(ss.str())
 				return GetComponent<T>();
 			}
 

@@ -10,7 +10,7 @@
 #include <functional>
 #include <sstream>
 
-namespace Spices {
+namespace Neptune {
 	
 	/**
 	* @brief This enum defines what specific event type is.
@@ -181,7 +181,7 @@ namespace Spices {
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			SPICES_PROFILE_ZONE;
+			NEPTUNE_PROFILE_ZONE;
 
 			/**
 			* @brief If Specific Event handle function takes the same type with Stored Event type,

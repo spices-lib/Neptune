@@ -11,7 +11,7 @@
 #include "Core/Container/RadixTrie.h"
 #include "ObjectPool.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Page memory cache.

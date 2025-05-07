@@ -15,7 +15,7 @@
 #include "..\..\..\Core\Thread\ThreadModel.h"
 #include "Slate/SlateStyleLayout.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiViewport::ImguiViewport(
         const std::string& panelName , 
@@ -25,10 +25,10 @@ namespace Spices {
         : ImguiSlate(panelName, frameInfo)
         , m_Index(index)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         {
-            SPICES_PROFILE_ZONEN("Create SceneColor ImTextureID");
+            NEPTUNE_PROFILE_ZONEN("Create SceneColor ImTextureID");
 
             m_ViewportContext = std::make_shared<SlateImage>("SceneColor", "SlateRenderer.Slate.Default");
         }
@@ -112,7 +112,7 @@ namespace Spices {
 
     void ImguiViewport::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         m_ToggleStateList->GetState()->ExecuteBehave("Toggle");
 
@@ -125,7 +125,7 @@ namespace Spices {
         * @brief Render Viewport image.
         */
         {
-            SPICES_PROFILE_ZONEN("Render Viewport Image");
+            NEPTUNE_PROFILE_ZONEN("Render Viewport Image");
 
             ImGuiH::CustomMaterialImage(m_ViewportContext.get(), m_PanelSize);
         }
@@ -155,7 +155,7 @@ namespace Spices {
 
     void ImguiViewport::OnEvent(Event& event)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance a EventDispatcher.
@@ -172,7 +172,7 @@ namespace Spices {
 
     void ImguiViewport::QueryIsResizedThisFrame(const ImVec2& thisFrameSize)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Clamp min value to 1 for viewport.
@@ -193,7 +193,7 @@ namespace Spices {
 
     std::pair<uint32_t, uint32_t> ImguiViewport::GetMousePosInViewport() const
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGuiIO& io = ImGui::GetIO();
         ImVec2 viewportPos = io.MousePos - m_PanelPos;
@@ -208,14 +208,14 @@ namespace Spices {
 
     void ImguiViewport::Toggle() const
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         m_ToggleStateList->ResetState();
     }
 
     bool ImguiViewport::OnSlateResize(SlateResizeEvent& event) const
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Recreate SceneColor SlateImage.
@@ -230,7 +230,7 @@ namespace Spices {
 
     bool ImguiViewport::OnWindowResizeOver(WindowResizeOverEvent& event) const
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Recreate SceneColor SlateImage.
@@ -245,7 +245,7 @@ namespace Spices {
 
     bool ImguiViewport::OnToggleSlate(KeyPressedEvent& event) const
     {
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (event.GetKeyCode() == Key::F11)
 		{

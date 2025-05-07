@@ -10,7 +10,7 @@
 
 #include <memory>
 
-namespace Spices {
+namespace Neptune {
 	
 	/**
 	* @brief Application Class.
@@ -58,4 +58,4 @@ namespace Spices {
 * @brief extern WorldCreation definition in Game.
 * @return Returns World Pointer.
 */
-extern std::shared_ptr<Spices::World> Spices::CreateWorld();
+extern std::shared_ptr<Neptune::World> Neptune::CreateWorld();

@@ -8,7 +8,6 @@
 #include "Core/Core.h"
 #include "Core/UUID.h"
 #include "entt.hpp"
-#include "World/WorldFunctions/WorldFunctions.h"
 
 #include "World/Components/CameraComponent.h"
 #include "World/Components/TransformComponent.h"
@@ -25,7 +24,7 @@
 #include "World/Components/ParticleComponent.h"
 #include "World/Components/WidgetComponent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* Forward Declare
@@ -275,7 +274,7 @@ namespace Spices {
 	template <typename T, typename F>
 	void World::ViewComponent(F&& fn)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		std::shared_lock<std::shared_mutex> lock(m_Mutex);
 		
@@ -292,7 +291,7 @@ namespace Spices {
 	template <typename T, typename F>
 	void World::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -308,7 +307,7 @@ namespace Spices {
 	template<typename T, typename F>
 	inline void World::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -328,7 +327,7 @@ namespace Spices {
 	template<typename F>
 	inline void World::ViewRoot(F&& fn)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -342,7 +341,7 @@ namespace Spices {
 	template <typename T, typename ... Args>
 	T& World::AddComponent(entt::entity e, Args&&... args)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -352,7 +351,7 @@ namespace Spices {
 	template <typename T>
 	T& World::GetComponent(entt::entity e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		/**
 		* @note lock cause bug here.
@@ -365,7 +364,7 @@ namespace Spices {
 	template <typename T>
 	void World::RemoveComponent(entt::entity e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::shared_mutex> lock(m_Mutex);
 		
@@ -375,7 +374,7 @@ namespace Spices {
 	template <typename T>
 	bool World::HasComponent(entt::entity e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -385,7 +384,7 @@ namespace Spices {
 	template<typename T>
 	void World::OnComponentAdded(Entity* entity, T& component)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		component.OnComponentAdded(*entity);
 	}

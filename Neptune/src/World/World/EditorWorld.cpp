@@ -10,13 +10,12 @@
 #include "Render/FrameInfo.h"
 #include "Systems/SystemManager.h"
 #include "GamePlay/CameraController.h"
-#include "Extensions/HoudiniLiveLink/HoudiniSession.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void EditorWorld::OnPreActivate()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		// camera
 		{
@@ -31,32 +30,11 @@ namespace Spices {
 
 			cameraentity.AddComponent<NativeScriptComponent>(std::make_shared<CameraController>());
 		}
-		
-		// skybox
-		{
-			Entity skyboxentity = CreateEntity("SkyBox");
-			SkyBoxComponent& skyboxComp = skyboxentity.AddComponent<SkyBoxComponent>();
-			skyboxComp.SetMaterial("BasePassRenderer.SkyBox.little_paris_eiffel_tower_4k");
-			TransformComponent& transformComp = skyboxentity.GetComponent<TransformComponent>();
-			transformComp.SetScale({50000000.0f, 50000000.0f, 50000000.0f});
-		}
-
-		// directionallight
-		{
-			Entity dirlightentity = CreateEntity("DirectionalLight_0");
-			TransformComponent& transformComp = dirlightentity.GetComponent<TransformComponent>();
-			DirectionalLightComponent& dirlightComp = dirlightentity.AddComponent<DirectionalLightComponent>();
-			transformComp.SetRotation({0.0f, 25.0f, 50.0f});
-			dirlightComp.SetColor({ 1.0f, 1.0f, 1.0f });
-			dirlightComp.SetIntensity(5.0f);
-		}
-
-		HoudiniEngine::HoudiniSession session {};
 	}
  
 	void EditorWorld::OnActivate(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		SystemManager::Run(ts);
 	}

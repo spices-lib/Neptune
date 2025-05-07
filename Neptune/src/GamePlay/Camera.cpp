@@ -10,11 +10,11 @@
 #include "Render/FrameInfo.h"
 #include "Slate/SlateInfoBar.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void Camera::SetPerspective(float fov, float nearPlane, float aspectRatio)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		m_ProjectionType = ProjectionType::Perspective;
 
@@ -25,7 +25,7 @@ namespace Spices {
 
 	void Camera::SetPerspective(float aspectRatio)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		m_ProjectionType = ProjectionType::Perspective;
 		
@@ -34,7 +34,7 @@ namespace Spices {
 
 	void Camera::SetOrthographic(float left, float right, float top, float bottom, float nearPlane, float farPlane)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		m_ProjectionType = ProjectionType::Orthographic;
 
@@ -48,7 +48,7 @@ namespace Spices {
 
 	void Camera::ResetStableFrames()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		if (FrameInfo::Get().m_RendererType == RendererType::Rasterization) return;
 		
@@ -66,7 +66,7 @@ namespace Spices {
 
 	const glm::mat4 Camera::GetPMatrix() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		switch (m_ProjectionType)
 		{
@@ -93,7 +93,7 @@ namespace Spices {
 
 	void Camera::CalculatePMatrixReverseZ()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		switch (m_ProjectionType)
 		{

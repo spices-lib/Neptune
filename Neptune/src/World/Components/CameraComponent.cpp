@@ -9,7 +9,7 @@
 #include "Render/FrameInfo.h"
 #include "World/World/World.h"
 
-namespace Spices {
+namespace Neptune {
 
 	CameraComponent::CameraComponent(bool isActive)
 		: m_IsActive(isActive)
@@ -27,14 +27,14 @@ namespace Spices {
 
 	void CameraComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		ImGui::Spacing();
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 3.0f });
 		float columeWidth = ImGuiH::GetLineItemSize().x * 6.5f;
 
 		{
-			SPICES_PROFILE_ZONEN("CameraComponent FOV");
+			NEPTUNE_PROFILE_ZONEN("CameraComponent FOV");
 
 			ImGuiH::DrawPropertyItem("FOV", columeWidth, nullptr, [&](){
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
@@ -53,7 +53,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("CameraComponent Near Plane");
+			NEPTUNE_PROFILE_ZONEN("CameraComponent Near Plane");
 
 			ImGuiH::DrawPropertyItem("Near Plane", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
@@ -72,7 +72,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("CameraComponent AspectRatio");
+			NEPTUNE_PROFILE_ZONEN("CameraComponent AspectRatio");
 
 			ImGuiH::DrawPropertyItem("AspectRatio", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);

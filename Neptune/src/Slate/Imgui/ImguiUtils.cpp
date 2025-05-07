@@ -9,7 +9,7 @@
 
 #include "Render/Vulkan/VulkanImage.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiSlate::Begin(float alpha, ImGuiWindowFlags flags)
     {
@@ -18,7 +18,7 @@ namespace Spices {
 
     void ImguiSlate::Begin(const std::string& panelName, float alpha, ImGuiWindowFlags flags)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         m_WindowFlags |= flags;
         m_WindowFlags |= ImGuiWindowFlags_NoCollapse;
@@ -47,7 +47,7 @@ namespace Spices {
         * @brief Query Slate State, maybe implementate in parent.
         */
         {
-            SPICES_PROFILE_ZONEN("Query Slate State");
+            NEPTUNE_PROFILE_ZONEN("Query Slate State");
 
             m_PanelPos   = ImGui::GetWindowPos();
             m_IsFocused  = ImGui::IsWindowFocused();
@@ -57,14 +57,14 @@ namespace Spices {
 
     void ImguiSlate::End()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGui::End(); 
     }
 
     void ImguiSlate::LoadSlateIcon(ImTextureID& id, const std::string& iconFile)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         auto rowPtr = ResourcePool<Texture>::Load<Texture2D>(iconFile, iconFile);
         auto info = rowPtr->GetResource<VulkanImage>()->GetImageInfo();
@@ -74,7 +74,7 @@ namespace Spices {
 
     void ImguiSlate::QueryIsResizedThisFrame(const ImVec2& thisFrameSize)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         if (m_PanelSize.x != thisFrameSize.x || m_PanelSize.y != thisFrameSize.y)
         {

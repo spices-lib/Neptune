@@ -15,7 +15,7 @@
 #include "ImguiGPURuntimeProfilerHUD.h"
 #include "ImguiRendererProfilerHUD.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiStatistics::ImguiStatistics(
         const std::string& panelName ,
@@ -23,7 +23,7 @@ namespace Spices {
     )
         : ImguiSlate(panelName, frameInfo)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Instance.
@@ -35,7 +35,7 @@ namespace Spices {
 
     void ImguiStatistics::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.5f, 0.5f, 0.5f, 1.0f));
         ImGui::SeparatorText("GPU Stage");

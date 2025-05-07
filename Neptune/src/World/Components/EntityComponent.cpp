@@ -10,7 +10,7 @@
 #include "World/World/World.h"
 #include "World/Entity.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void EntityComponent::OnSerialize()
 	{
@@ -23,7 +23,7 @@ namespace Spices {
 
 	void EntityComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (ImGui::BeginChild("Entity Attachments", ImVec2(0, std::min(m_Entities.size() + 0.2f, 10.0f) * ImGuiH::GetLineItemSize().x), ImGuiChildFlags_None, ImGuiWindowFlags_HorizontalScrollbar))
 		{
@@ -48,7 +48,7 @@ namespace Spices {
 
 	void EntityComponent::AddEntity(uint32_t entity)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_Entities.insert(entity);
 		
@@ -58,7 +58,7 @@ namespace Spices {
 
 	void EntityComponent::RemoveEntity(uint32_t entity)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_Entities.erase(entity);
 		Entity e((entt::entity)entity, FrameInfo::Get().m_World.get());

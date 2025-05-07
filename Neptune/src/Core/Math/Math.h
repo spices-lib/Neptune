@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Core/Input/KeyCodes.h"
 
-namespace Spices {
+namespace Neptune {
 
     /**
     * @brief double unsigned int
@@ -175,16 +175,16 @@ namespace std {
     /**
     * @brief Hash function used for unordered_map.
     */
-    template<> struct hash<Spices::UInt2> {
-        size_t operator()(Spices::UInt2 const& info) const noexcept
+    template<> struct hash<Neptune::UInt2> {
+        size_t operator()(Neptune::UInt2 const& info) const noexcept
         {
             return (hash<uint32_t>()(info.x) ^
                 (hash<uint32_t>()(info.y) << 1));
         }
     };
 
-    template<> struct hash<Spices::String2> {
-        size_t operator()(Spices::String2 const& info) const noexcept
+    template<> struct hash<Neptune::String2> {
+        size_t operator()(Neptune::String2 const& info) const noexcept
         {
             return (hash<std::string>()(info.x) ^
                 (hash<std::string>()(info.y) << 1));

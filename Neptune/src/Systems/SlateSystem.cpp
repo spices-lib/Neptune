@@ -11,20 +11,20 @@
 #include "Core/Event/Event.h"
 #include "Core/Log/Console.h"
 
-namespace Spices {
+namespace Neptune {
 
 	std::shared_ptr<SlateRegister> SlateSystem::m_SlateRegister;
 
 	SlateSystem::~SlateSystem()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_SlateRegister = nullptr;
 	}
 
 	void SlateSystem::OnSystemInitialize()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_SlateRegister = std::make_shared<SlateRegister>();
 
@@ -50,14 +50,14 @@ namespace Spices {
 
 	void SlateSystem::OnSystemUpdate(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_SlateRegister->OnUpdate(ts);
 	}
 
 	void SlateSystem::OnEvent(Event& event)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_SlateRegister->OnEvent(event);
 	}

@@ -6,11 +6,11 @@
 #include <Systems/ResourceSystem.h>
 #include <Extensions/Gltf/GltfCollection.h>
 
-namespace Spices {
+namespace Neptune {
 
 	void GameEditorWorld::OnPreActivate()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		ResourceSystem::RegistryResourceFolder(SPICES_GAME_ASSETS_PATH);
 
@@ -19,14 +19,14 @@ namespace Spices {
 
 	void GameEditorWorld::OnActivate(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		EditorWorld::OnActivate(ts);
 	}
 
 	void GameEditorWorld::OnDeactivate()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		EditorWorld::OnDeactivate();
 	}

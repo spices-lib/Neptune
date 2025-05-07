@@ -9,7 +9,7 @@
 #include "Debugger/Perf/NsightPerfGPUProfilerHUD.h"
 #include "Render/Vulkan/VulkanRenderBackend.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiVideoMemoryRuntimeHUD::ImguiVideoMemoryRuntimeHUD(
         const std::string&  panelName ,
@@ -20,7 +20,7 @@ namespace Spices {
 
     void ImguiVideoMemoryRuntimeHUD::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         if (!m_IsSlateOn) return;
 
@@ -70,7 +70,7 @@ namespace Spices {
         * @brief Begin render Search Input Text.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiVideoMemoryRuntimeHUD::Search");
+            NEPTUNE_PROFILE_ZONEN("ImguiVideoMemoryRuntimeHUD::Search");
 
             ImGui::Spacing();
             ImGui::PushItemWidth(m_PanelSize.x - ImGuiH::GetLineItemSize().x * 2.0f - ImGui::GetStyle().WindowPadding.x);
@@ -93,7 +93,7 @@ namespace Spices {
         float columeWidth = ImGuiH::GetLineItemSize().x * 6.5f;
 
         {
-            SPICES_PROFILE_ZONEN("ImguiVideoMemoryRuntimeHUD::Total");
+            NEPTUNE_PROFILE_ZONEN("ImguiVideoMemoryRuntimeHUD::Total");
 
             ImGuiH::DrawTreeTitle("Memory Total", nullptr, [&]() { 
                 ImGuiH::DrawPropertyItem("Usage:", columeWidth, nullptr, [&]() {
@@ -124,7 +124,7 @@ namespace Spices {
         }
         
         {
-            SPICES_PROFILE_ZONEN("ImguiVideoMemoryRuntimeHUD::Heaps");
+            NEPTUNE_PROFILE_ZONEN("ImguiVideoMemoryRuntimeHUD::Heaps");
 
             for (int i = 0; i < nHeaps; i++)
             {
@@ -170,7 +170,7 @@ namespace Spices {
 
     std::string ImguiVideoMemoryRuntimeHUD::ConvertBytestoString(uint64_t bytes)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         if (bytes / 1024.0f < 1.0f)
         {
@@ -211,7 +211,7 @@ namespace Spices {
 
     std::string ImguiVideoMemoryRuntimeHUD::ConvertMemoryFlagtoString(VkMemoryHeapFlags flag)
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         switch (flag)
         {

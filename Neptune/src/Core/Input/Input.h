@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 	
 	/**
 	* @brief This Class Is a wrapper of Platform Specific Input Query.

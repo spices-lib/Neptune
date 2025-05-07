@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "UUID.h"
 
-namespace Spices {
+namespace Neptune {
 
 	static std::random_device s_RandomDevice;
 	static std::mt19937_64 s_Engine(s_RandomDevice());
@@ -25,7 +25,7 @@ namespace Spices {
 
 	std::string UUID::ToString()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::stringstream ss;
 		ss << m_UUID;

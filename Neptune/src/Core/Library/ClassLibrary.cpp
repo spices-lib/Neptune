@@ -8,7 +8,7 @@
 #include "ClassLibrary.h"
 #include "StringLibrary.h"
 
-namespace Spices {
+namespace Neptune {
 
 	std::string ClassLibrary::GetClassString(ClassType t)
 	{

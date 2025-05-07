@@ -2,7 +2,7 @@
 #include <Core/Core.h>
 #include <World/World/EditorWorld.h>
 
-namespace Spices {
+namespace Neptune {
 
 	class GameEditorWorld : public EditorWorld
 	{

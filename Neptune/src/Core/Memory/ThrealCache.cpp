@@ -9,7 +9,7 @@
 #include "CentralCache.h"
 #include "ObjectPool.h"
 
-namespace Spices {
+namespace Neptune {
 
 	ThreadCache::~ThreadCache()
 	{

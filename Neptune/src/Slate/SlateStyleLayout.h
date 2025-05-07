@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Enum of Slate StyleLayout

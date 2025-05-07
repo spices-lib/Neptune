@@ -10,7 +10,7 @@
 
 #include <tracy/Tracy.hpp>
 #include <tracy/TracyC.h>
-#include <tracy/TracyOpenGL.hpp>
+//#include <tracy/TracyOpenGL.hpp>
 #include <vector>
 #include <memory>
 
@@ -52,7 +52,7 @@ namespace Neptune {
 		* @brief Get Context.
 		* @return Returns Context.
 		*/
-		tracy::GpuCtx*& GetContext() { return m_Context; }
+		//tracy::GpuCtx*& GetContext() { return m_Context; }
 
 	private:
 
@@ -69,11 +69,11 @@ namespace Neptune {
 		/**
 		* @brief Tracy Vulkan Context.
 		*/
-		tracy::GpuCtx* m_Context;
+		//tracy::GpuCtx* m_Context;
 		
 	};
 
-#ifdef TRACY_ENABLE
+/*#ifdef TRACY_ENABLE
 
 #define NEPTUNE_PROFILE_GPU_CREATEINSTANCE(...)                           { TracyGPUContext::CreateInstance(__VA_ARGS__); }
 #define NEPTUNE_PROFILE_FRAME                                             FrameMark
@@ -92,7 +92,7 @@ namespace Neptune {
 #define NEPTUNE_PROFILE_VK_ZONE(cmdbuf, name)                             //TracyVkZone(TracyGPUContext::Get().GetContext(), cmdbuf, name)
 #define NEPTUNE_PROFILE_VK_COLLECT(cmdbuf)                                //TracyVkCollect(TracyGPUContext::Get().GetContext(), cmdbuf)
 
-#else
+#else*/
 
 #define NEPTUNE_PROFILE_GPU_CREATEINSTANCE(...)
 #define NEPTUNE_PROFILE_FRAME
@@ -111,7 +111,7 @@ namespace Neptune {
 #define NEPTUNE_PROFILE_VK_ZONE(cmdbuf, name)
 #define NEPTUNE_PROFILE_VK_COLLECT(cmdbuf)
 
-#endif
+//#endif
 
 #ifdef TRACY_ENABLE
 

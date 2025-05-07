@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 	
 	/**
 	* @brief This class helps to generate a uuid for one resource.
@@ -57,9 +57,9 @@ namespace Spices {
 namespace std {
 
 	template<>
-	struct hash<Spices::UUID>
+	struct hash<Neptune::UUID>
 	{
-		std::size_t operator()(const Spices::UUID& uuid) const noexcept
+		std::size_t operator()(const Neptune::UUID& uuid) const noexcept
 		{
 			return hash<uint64_t>()((uint64_t)uuid);
 		}

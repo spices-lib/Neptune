@@ -26,7 +26,7 @@ namespace Neptune {
 
 	bool WorldPickIDQuerier::OnMouseButtonPressed(MouseButtonPressedEvent& e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		/**
 		* @brief The first frame, we will not get register pointer.

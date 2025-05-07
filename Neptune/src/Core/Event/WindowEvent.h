@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Event.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class is inherited from Event Class.
@@ -61,12 +61,20 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with WindowResize.
 		*/
-		EVENT_CLASS_TYPE(WindowResize)
+        static EventType GetStaticType() {
+            return EventType::WindowResize;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "WindowResize";
+        }
 
 		/**
 		* @brief Specific this Class Category with EventCategoryApplication.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryApplication;
+        }
 
 	private:
 
@@ -101,12 +109,20 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with WindowClose.
 		*/
-		EVENT_CLASS_TYPE(WindowClose)
+        static EventType GetStaticType() {
+            return EventType::WindowClose;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "WindowClose";
+        }
 
 		/**
 		* @brief Specific this Class Category with EventCategoryApplication.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryApplication;
+        }
 	};
 
 	/**
@@ -160,12 +176,20 @@ namespace Spices {
 		/**
 		* @brief Specific this Class Type with WindowResizeOver.
 		*/
-		EVENT_CLASS_TYPE(WindowResizeOver)
+        static EventType GetStaticType() {
+            return EventType::WindowResizeOver;
+        } virtual EventType GetEventType() const override {
+            return GetStaticType();
+        } virtual const char* GetName() const override {
+            return "WindowResizeOver";
+        }
 
 		/**
 		* @brief Specific this Class Category with EventCategoryApplication.
 		*/
-		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+        virtual int GetCategoryFlags() const override {
+            return EventCategoryApplication;
+        }
 
 	private:
 

@@ -4,7 +4,7 @@
 #include "Core/Event/Event.h"
 #include "Render/Vulkan/VulkanRenderBackend.h"
 
-namespace Spices {
+namespace Neptune {
 
 	class RenderFrontend
 	{

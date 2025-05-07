@@ -8,7 +8,7 @@
 #include "CentralCache.h"
 #include "PageCache.h"
 
-namespace Spices {
+namespace Neptune {
 
 	CentralCache CentralCache::m_CentralCache;
 

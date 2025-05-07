@@ -12,7 +12,7 @@
 #include "imgui_internal.h"
 #include <glm/gtc/type_ptr.hpp>
 
-namespace Spices {
+namespace Neptune {
 
 	void DirectionalLightComponent::OnSerialize()
 	{
@@ -25,21 +25,21 @@ namespace Spices {
 
 	void DirectionalLightComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		ImGui::Spacing();
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 3.0f });
 		float columeWidth = ImGuiH::GetLineItemSize().x * 6.5f;
 
 		{
-			SPICES_PROFILE_ZONEN("DirectionalLightComponent Color");
+			NEPTUNE_PROFILE_ZONEN("DirectionalLightComponent Color");
 			
 			ImGuiH::DrawPropertyItem("Color", columeWidth, nullptr, [&]() {
 			
 				float itemWidth = (ImGui::GetContentRegionAvail().x - 8.0f * ImGuiH::GetLineItemSize().x) / 3.0f;
 
 				{
-					SPICES_PROFILE_ZONEN("DirectionalLightComponent Color R");
+					NEPTUNE_PROFILE_ZONEN("DirectionalLightComponent Color R");
 					ImGui::PushID("DirectionalLightComponent Color R");
 
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
@@ -65,7 +65,7 @@ namespace Spices {
 				}
 
 				{
-					SPICES_PROFILE_ZONEN("DirectionalLightComponent Color G");
+					NEPTUNE_PROFILE_ZONEN("DirectionalLightComponent Color G");
 					ImGui::PushID("DirectionalLightComponent Color G");
 
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
@@ -91,7 +91,7 @@ namespace Spices {
 				}
 
 				{
-					SPICES_PROFILE_ZONEN("DirectionalLightComponent Color B");
+					NEPTUNE_PROFILE_ZONEN("DirectionalLightComponent Color B");
 					ImGui::PushID("DirectionalLightComponent Color B");
 
 					ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
@@ -117,7 +117,7 @@ namespace Spices {
 				}
 
 				{
-					SPICES_PROFILE_ZONEN("DirectionalLightComponent Color Picker");
+					NEPTUNE_PROFILE_ZONEN("DirectionalLightComponent Color Picker");
 					ImGui::PushID("DirectionalLightComponent Color Picker");
 
 					ImGui::PushStyleColor(ImGuiCol_FrameBg, ImGui::GetStyle().Colors[ImGuiCol_WindowBg]);
@@ -138,7 +138,7 @@ namespace Spices {
 		}
 
 		{
-			SPICES_PROFILE_ZONEN("DirectionalLightComponent Intensity");
+			NEPTUNE_PROFILE_ZONEN("DirectionalLightComponent Intensity");
 
 			ImGuiH::DrawPropertyItem("Intensity", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);

@@ -2,7 +2,7 @@
 #include "Core/Core.h"
 #include "Component.h"
 
-namespace Spices {
+namespace Neptune {
 
 
 }

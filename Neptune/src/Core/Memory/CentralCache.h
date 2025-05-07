@@ -9,7 +9,7 @@
 #include "MemoryPool.h"
 #include "Core/Container/SpanList.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief Central memory cache.

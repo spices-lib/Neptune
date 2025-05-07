@@ -10,7 +10,7 @@
 #include "PageCache.h"
 #include "ThrealCache.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void* MemoryPool::Alloc(size_t size)
 	{
@@ -167,7 +167,7 @@ namespace Spices {
 
 		else
 		{
-			SPICES_CORE_ERROR("Access invalid free_lits index")
+			NEPTUNE_CORE_ERROR("Access invalid free_lits index")
 			return 8 * 1024;
 		}
 	}

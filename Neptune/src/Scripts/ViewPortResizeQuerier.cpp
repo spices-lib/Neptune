@@ -15,7 +15,7 @@ namespace Neptune {
 
 	void ViewPortResizeQuerier::OnTick(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		/**
 		* @brief The first frame, we will not get register pointer.

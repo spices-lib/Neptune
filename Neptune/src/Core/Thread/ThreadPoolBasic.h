@@ -11,7 +11,7 @@
 #include <future>
 #include <queue>
 
-namespace Spices {
+namespace Neptune {
 
 	const     uint32_t THREAD_MAX_THRESHHOLD = std::thread::hardware_concurrency();
 	constexpr uint32_t THREAD_MAX_IDLE_TIME  = 60;
@@ -399,7 +399,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void Thread<Params...>::Start()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::thread t(m_Func, this);
 		t.detach();
@@ -408,7 +408,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void Thread<Params...>::ReceiveThreadTask(std::function<void(Params...)> func)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::mutex> lock(m_Mutex);
 
@@ -419,7 +419,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline auto Thread<Params...>::RequireTask() -> Thread<Params...>::ThreadTask
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::mutex> lock(m_Mutex);
 
@@ -439,7 +439,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void Thread<Params...>::Wait() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		while (m_ThreadTasks.load() != 0 || m_IsInTask.load()) {};
 	}
@@ -447,7 +447,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void Thread<Params...>::SetThreadInTask(bool isInTask)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_IsInTask = isInTask;
 	}
@@ -455,7 +455,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::SetMode(PoolMode mode)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (CheckRunningState()) return;
 		m_PoolMode = mode;
@@ -475,7 +475,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline ThreadPool_Basic<Params...>::~ThreadPool_Basic()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_IsPoolRunning = false;
 
@@ -490,7 +490,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::SetThreadIdleTimeOut(int idleTime)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (CheckRunningState()) return;
 		m_ThreadIdleTimeOut = idleTime;
@@ -499,7 +499,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::Wait()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		auto idleCond = [&]() {
 			return m_IdleThreadSize.load() == m_NThreads.load() && m_Tasks.load() == 0;
@@ -520,7 +520,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::Continue()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_IsSuspend = false;
 
@@ -533,7 +533,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::Suspend()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_IsSuspend = true;
 
@@ -545,7 +545,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::SubmitThreadTask_LightWeight(uint32_t threadId, std::function<void(Params...)> func)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		{
 			std::unique_lock<std::mutex> lock(m_Mutex);
@@ -559,7 +559,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::SubmitThreadTask_LightWeight_ForEach(std::function<void(Params...)> func)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		{
 			std::unique_lock<std::mutex> lock(m_Mutex);
@@ -576,7 +576,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::ThreadFunc(Thread<>* thread)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Name thread.
@@ -681,7 +681,7 @@ namespace Spices {
 	template<typename ...Params>
 	inline void ThreadPool_Basic<Params...>::Start(int initThreadSize)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		m_IsPoolRunning = true;
 		m_InitThreadSize = initThreadSize;
@@ -702,7 +702,7 @@ namespace Spices {
 	template<typename Func, typename ...Args>
 	inline auto ThreadPool_Basic<Params...>::SubmitPoolTask(Func&& func, Args && ...args) -> std::future<decltype(func(std::forward<Args>(args)...))>
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		using RType = decltype(func(args...));
 

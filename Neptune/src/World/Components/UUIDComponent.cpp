@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "UUIDComponent.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void UUIDComponent::OnSerialize()
 	{
@@ -21,14 +21,14 @@ namespace Spices {
 
 	void UUIDComponent::DrawThis()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		ImGui::Spacing();
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 3.0f });
 		float columeWidth = ImGuiH::GetLineItemSize().x * 6.5f;
 
 		{
-			SPICES_PROFILE_ZONEN("UUIDComponent UUID");
+			NEPTUNE_PROFILE_ZONEN("UUIDComponent UUID");
 
 			ImGuiH::DrawPropertyItem("UUID", columeWidth, nullptr, [&]() {
 				ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);

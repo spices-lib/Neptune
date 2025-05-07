@@ -8,7 +8,7 @@
 #include "ImguiGPURuntimeProfilerHUD.h"
 #include "Debugger/Perf/NsightPerfGPUProfilerHUD.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiGPURuntimeProfilerHUD::ImguiGPURuntimeProfilerHUD(
         const std::string& panelName ,
@@ -19,7 +19,7 @@ namespace Spices {
 
     void ImguiGPURuntimeProfilerHUD::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         NSIGHTPERF_GPUPROFILERHUD_SETINSESSION(m_IsSlateOn)
 
@@ -42,7 +42,7 @@ namespace Spices {
         * @brief Begin render Search Input Text.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiGPURuntimeProfilerHUD::Search");
+            NEPTUNE_PROFILE_ZONEN("ImguiGPURuntimeProfilerHUD::Search");
 
             ImGui::Spacing();
             ImGui::PushItemWidth(m_PanelSize.x - ImGuiH::GetLineItemSize().x * 2.0f - ImGui::GetStyle().WindowPadding.x);

@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "FrameInfo.h"
 
-namespace Spices
+namespace Neptune
 {
 	static FrameInfo m_FrameInfo;
 

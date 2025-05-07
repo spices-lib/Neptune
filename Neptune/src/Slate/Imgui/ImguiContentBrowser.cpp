@@ -7,11 +7,11 @@
 #include "Pchheader.h"
 #include "ImguiContentBrowser.h"
 
-namespace Spices {
+namespace Neptune {
 
     void ImguiContentBrowser::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render ContentBrowser.

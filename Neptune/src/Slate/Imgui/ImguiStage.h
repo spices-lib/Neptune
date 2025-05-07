@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "ImguiUtils.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief The ImguiStage Class.

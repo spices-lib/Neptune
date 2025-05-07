@@ -2,11 +2,11 @@
 #include "GameEditorWorld.h"
 #include <Core/Memory/MemoryPool.h>
 
-namespace Spices {
+namespace Neptune {
 
 	std::shared_ptr<World> CreateWorld()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return std::make_shared<GameEditorWorld>();
 	}

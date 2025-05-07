@@ -10,11 +10,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-namespace Spices {
+namespace Neptune {
 
 	glm::mat4 Transform::ToMatrix()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return std::move(
 			glm::translate(glm::mat4(1.0f), position) * 
@@ -25,7 +25,7 @@ namespace Spices {
 
 	glm::mat4 Transform::GetRoatationMatrix(const glm::vec3& rotation)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return 
 			std::move(
@@ -40,7 +40,7 @@ namespace Spices {
 
 	glm::mat4 Transform::ToMatrix(const Transform& transform)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return std::move(
 			glm::translate(glm::mat4(1.0f), transform.position) * 

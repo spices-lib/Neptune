@@ -9,7 +9,7 @@
 #include "World/Components/Component.h"
 #include "Resources/Mesh/Mesh.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief SpriteComponent Class.

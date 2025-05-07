@@ -103,32 +103,32 @@ inline OStream& operator<<(OStream& os, glm::qua<T, Q> quaternion)
 	return os << glm::to_string(quaternion);
 }
 
-#ifdef NEPTUNE_DEBUG
+/*#ifdef NEPTUNE_DEBUG
 
 // Core log macros
 #define NEPTUNE_CORE_TRACE(...)    { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->trace      (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);											   } else { std::cout << __VA_ARGS__ << std::endl; } }
 #define NEPTUNE_CORE_INFO(...)     { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->info       (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);											   } else { std::cout << __VA_ARGS__ << std::endl; } }
 #define NEPTUNE_CORE_WARN(...)     { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->warn       (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);											   } else { std::cout << __VA_ARGS__ << std::endl; } }
-#define NEPTUNE_CORE_ERROR(...)    { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->error      (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);  /*throw std::runtime_error(__VA_ARGS__)*/    } else { std::cout << __VA_ARGS__ << std::endl; } }
-#define NEPTUNE_CORE_CRITICAL(...) { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->critical   (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);  /*throw std::runtime_error(__VA_ARGS__)*/    } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CORE_ERROR(...)    { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->error      (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);  *//*throw std::runtime_error(__VA_ARGS__)*//*    } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CORE_CRITICAL(...) { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetCoreLogger()->critical   (__VA_ARGS__); Neptune:Log::PostHandle(__VA_ARGS__);  *//*throw std::runtime_error(__VA_ARGS__)*//*    } else { std::cout << __VA_ARGS__ << std::endl; } }
 																															
 // Client log macros																										
 #define NEPTUNE_TRACE(...)         { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->trace    (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);											   } else { std::cout << __VA_ARGS__ << std::endl; } }
 #define NEPTUNE_INFO(...)          { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->info     (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);											   } else { std::cout << __VA_ARGS__ << std::endl; } }
 #define NEPTUNE_WARN(...)          { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->warn     (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);											   } else { std::cout << __VA_ARGS__ << std::endl; } }
-#define NEPTUNE_ERROR(...)         { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->error    (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);  /*throw std::runtime_error(__VA_ARGS__)*/    } else { std::cout << __VA_ARGS__ << std::endl; } }
-#define NEPTUNE_CRITICAL(...)      { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->critical (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);  /*throw std::runtime_error(__VA_ARGS__)*/    } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_ERROR(...)         { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->error    (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);  *//*throw std::runtime_error(__VA_ARGS__)*//*    } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CRITICAL(...)      { if(Neptune::Log::m_IsInitialized) { Neptune::Log::GetClientLogger()->critical (__VA_ARGS__); Neptune::Log::PostHandle(__VA_ARGS__);  *//*throw std::runtime_error(__VA_ARGS__)*//*    } else { std::cout << __VA_ARGS__ << std::endl; } }
 
 #endif // NEPTUNE_DEBUG
 
-#ifdef NEPTUNE_RELEASE
+#ifdef NEPTUNE_RELEASE*/
 
 // Core log macros
-#define SPICES_CORE_TRACE(...)    
-#define SPICES_CORE_INFO(...)     
-#define SPICES_CORE_WARN(...)     
-#define SPICES_CORE_ERROR(...)    
-#define SPICES_CORE_CRITICAL(...) 
+#define NEPTUNE_CORE_TRACE(...)
+#define NEPTUNE_CORE_INFO(...)
+#define NEPTUNE_CORE_WARN(...)
+#define NEPTUNE_CORE_ERROR(...)
+#define NEPTUNE_CORE_CRITICAL(...)
 
 // Client log macros
 #define NEPTUNE_TRACE(...)
@@ -137,4 +137,4 @@ inline OStream& operator<<(OStream& os, glm::qua<T, Q> quaternion)
 #define NEPTUNE_ERROR(...)
 #define NEPTUNE_CRITICAL(...)
 
-#endif // NEPTUNE_RELEASE
+//#endif // NEPTUNE_RELEASE

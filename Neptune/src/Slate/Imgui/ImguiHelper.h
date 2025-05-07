@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Core/Core.h"
-#include "Resources/Material/Material.h"
 
 // imgui header.
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -19,7 +18,7 @@
 #include <ImGuizmo.h>
 #include <IconsMaterialDesign.h>
 
-namespace Spices {
+namespace Neptune {
 
 #define ICON_TEXT(icon, text) std::string(icon).append(" ").append(#text).c_str()
 #define ICON_TEXT_ROW(icon, text) std::string(icon).append(" ").append(text).c_str()
@@ -149,18 +148,6 @@ namespace Spices {
 		);
 
 		/**
-		* @brief Draw a Material.
-		* @param[in] name tree name.
-		* @param[in] width name colume width.
-		* @param[in] material material reference.
-		*/
-		static void DrawMaterial(
-			const std::string&               name    , 
-			float                            width   , 
-			const std::shared_ptr<Material>& material
-		);
-
-		/**
 		* @brief Draw Drag Scale with different p_min p_max.
 		* @param[in] label Name.
 		* @param[in] data_type ImGuiDataType.
@@ -185,24 +172,6 @@ namespace Spices {
 			ImGuiSliderFlags flags   = 0
 		);
 
-		/**
-		* @brief Draw ConstantParams.
-		* @param[in] material .
-		* @param[in] data_type ImGuiDataType.
-		* @param[in] components Determined by ConstantParams Type(float: 1, float2: 2 ...).
-		* @param[in] format float/int.
-		* @param[in] value ConstantParams.
-		* @return Returns true if value moved.
-		*/
-		template<typename T>
-		static bool DrawMaterialConstParams(
-			std::shared_ptr<Material> material   , 
-			ImGuiDataType             data_type  , 
-			int                       components , 
-			const char*               format     ,
-			ConstantParams&           value
-		);
-
 	private:
 
 		/**
@@ -211,55 +180,6 @@ namespace Spices {
 		*/
 		static float GetDPIScale();
 	};
-
-	template<typename T>
-	inline bool ImGuiH::DrawMaterialConstParams(
-		std::shared_ptr<Material> material   , 
-		ImGuiDataType             data_type  , 
-		int                       components ,
-		const char*               format     ,
-		ConstantParams&           value
-	)
-	{
-		SPICES_PROFILE_ZONE;
-
-		T f    = std::any_cast<T>(value.value.paramValue);
-		T df   = std::any_cast<T>(value.defaultValue.paramValue);
-
-		T minf = T();
-		if (value.hasMinValue) minf = std::any_cast<T>(value.min.paramValue);
-		T maxf = T();
-		if (value.hasMaxValue) maxf = std::any_cast<T>(value.max.paramValue);
-
-		bool moved = false;
-		ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
-		if (ImGuiH::S_DragScalarN(
-			"##", 
-			data_type, 
-			&f, 
-			components, 
-			0.01f, 
-			(const void*)&minf,
-			(const void*)&maxf,
-			format
-		))
-		{
-			value.value.paramValue = f;
-			material->UpdateMaterial();
-			moved = true;
-		}
-
-		ImGui::PopItemWidth();
-		ImGui::SameLine();
-		if (ImGuiH::DrawResetIcon(f != df))
-		{
-			value.value.paramValue = df;
-			material->UpdateMaterial();
-			moved = true;
-		}
-
-		return moved;
-	}
 }
 
 namespace ImGui {

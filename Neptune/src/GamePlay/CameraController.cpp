@@ -13,11 +13,11 @@
 #include "Systems/SlateSystem.h"
 #include "Core/Input/KeyCodes.h"
 
-namespace Spices {
+namespace Neptune {
 
 	void CameraController::OnConstruction()
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		Entity entity( m_Owner, FrameInfo::Get().m_World.get());
 		m_CameraTranComp = &entity.GetComponent<TransformComponent>();
@@ -26,7 +26,7 @@ namespace Spices {
 
 	void CameraController::OnTick(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		m_Camera->IncreaseStableFrames();
 
@@ -72,14 +72,14 @@ namespace Spices {
 
 	bool CameraController::OnKeyPressed(KeyPressedEvent& e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		return false;
 	}
 
 	bool CameraController::OnMouseScroll(MouseScrolledEvent& e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		if (!SlateSystem::GetRegister()->GetViewPort()->IsHovered()) return false;
 
@@ -103,7 +103,7 @@ namespace Spices {
 	
 	bool CameraController::OnSlateResized(SlateResizeEvent& e)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		m_ViewportWidth = e.GetWidth();
 		m_ViewportHeight = e.GetHeight();
@@ -125,7 +125,7 @@ namespace Spices {
 
 	void CameraController::MousePan(const glm::vec2& delta)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		auto [xSpeed, ySpeed] = PanSpeed();
 		m_FocalPoint += -GetRightDirection() * delta.x * xSpeed * m_Distance;
@@ -134,7 +134,7 @@ namespace Spices {
 
 	void CameraController::MouseRotate(const glm::vec2& delta) const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		glm::vec3 rot = m_CameraTranComp->GetRotation();
 		const float yawSign = GetUpDirection().y < 0 ? -1.0f : 1.0f;
@@ -147,7 +147,7 @@ namespace Spices {
 
 	void CameraController::MouseZoom(const float& delta)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		m_Distance += delta * ZoomSpeed();
 		if (m_Distance < 1.0f)
@@ -159,7 +159,7 @@ namespace Spices {
 
 	std::pair<float, float> CameraController::PanSpeed() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		const float x = std::min(static_cast<float>(m_ViewportWidth) / 1000.0f, 2.4f); // max = 2.4f
 		float xFactor = 0.0366f * (x * x) - 0.1778f * x + 0.3021f;
@@ -172,14 +172,14 @@ namespace Spices {
 
 	float CameraController::RotationSpeed() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		return 0.8f;
 	}
 
 	float CameraController::ZoomSpeed() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		float distance = m_Distance * 0.2f;
 		distance = std::max(distance, 0.0f);
@@ -190,7 +190,7 @@ namespace Spices {
 
 	void CameraController::UpdateView() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		const glm::vec3 pos = CalculatePosition();
 		m_CameraTranComp->SetPosition(pos);
@@ -199,35 +199,35 @@ namespace Spices {
 
 	glm::vec3 CameraController::CalculatePosition() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		return m_FocalPoint - GetForwardDirection() * m_Distance;
 	}
 
 	glm::vec3 CameraController::GetUpDirection() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		return glm::rotate(GetOrientation(), glm::vec3(0.0f, -1.0f, 0.0f));
 	}
 
 	glm::vec3 CameraController::GetRightDirection() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		return glm::rotate(GetOrientation(), glm::vec3(1.0f, 0.0f, 0.0f));
 	}
 
 	glm::vec3 CameraController::GetForwardDirection() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		return glm::rotate(GetOrientation(), glm::vec3(0.0f, 0.0f, 1.0f));
 	}
 
 	glm::quat CameraController::GetOrientation() const
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		const glm::vec3& rot = m_CameraTranComp->GetRotation();
 		return glm::quat({ glm::radians(rot.x), glm::radians(rot.y), glm::radians(rot.z) });

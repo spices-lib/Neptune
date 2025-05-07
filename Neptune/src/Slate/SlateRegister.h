@@ -26,7 +26,7 @@
 #include <any>
 #include <sstream>
 
-namespace Spices {
+namespace Neptune {
 
 	/**
 	* @brief This Class is the manager of all slate, it keeps all slate handle.
@@ -114,7 +114,7 @@ namespace Spices {
 	template<typename T, typename ...Args>
 	inline std::shared_ptr<T> SlateRegister::Register(bool isPrimary, const std::string& panelName, Args && ...args)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		/**
 		* @brief Not allow registy repeat.
@@ -124,7 +124,7 @@ namespace Spices {
 			std::stringstream ss;
 			ss << panelName << " Slate already register, please check your code again.";
 
-			SPICES_CORE_ERROR(ss.str());
+			NEPTUNE_CORE_ERROR(ss.str());
 		}
 
 		/**

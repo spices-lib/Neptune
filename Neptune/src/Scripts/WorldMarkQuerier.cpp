@@ -15,7 +15,7 @@ namespace Neptune {
 
 	void WorldMarkQuerier::OnTick(TimeStep& ts)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		World::WorldMarkFlags mark = FrameInfo::Get().m_World->GetMarker();
 

@@ -8,18 +8,18 @@
 #include "World.h"
 #include "World/Entity.h"
 
-namespace Spices {
+namespace Neptune {
 
 	Entity World::CreateEntity(const std::string& name)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return CreateEntityWithUUID(UUID(), name);
 	}
 
 	Entity World::CreateEntityWithUUID(UUID uuid, const std::string& name)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		Entity entity = CreateEmptyEntity(uuid);
 		entity.AddComponent<UUIDComponent>(uuid);
@@ -30,7 +30,7 @@ namespace Spices {
 
 	void World::DestroyEntity(Entity& entity)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::shared_mutex> lock(m_Mutex);
 		
@@ -40,14 +40,14 @@ namespace Spices {
 
 	Entity World::QueryEntitybyID(uint32_t id)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return id == -1 ? Entity() : Entity((entt::entity)id, this);
 	}
 
 	void World::ClearMarkerWithBits(WorldMarkFlags flags)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		if (m_Marker & flags)
 		{
@@ -57,7 +57,7 @@ namespace Spices {
 
 	void World::RemoveFromRoot(Entity& entity)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -66,7 +66,7 @@ namespace Spices {
 
 	void World::AddToRoot(Entity& entity)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -75,7 +75,7 @@ namespace Spices {
 
 	bool World::IsRootEntity(Entity& entity)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -84,7 +84,7 @@ namespace Spices {
 
 	Entity World::CreateEmptyEntity(UUID uuid)
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 		
 		std::unique_lock<std::shared_mutex> lock(m_Mutex);
 		

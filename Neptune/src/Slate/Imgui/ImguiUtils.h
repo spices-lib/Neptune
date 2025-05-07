@@ -17,7 +17,7 @@
 // Helper Function Header.
 #include "ImguiHelper.h"
 
-namespace Spices{
+namespace Neptune{
 
 	/**
 	* @brief This Class defines the basic behaves of specific slate.

@@ -14,7 +14,7 @@
 #include "Core/Input/Input.h"
 #include "Core/Thread/ThreadModel.h"
 
-namespace Spices {
+namespace Neptune {
 
     ImguiStage::ImguiStage(
         const std::string& panelName , 
@@ -25,7 +25,7 @@ namespace Spices {
 
     void ImguiStage::OnRender()
     {
-        SPICES_PROFILE_ZONE;
+        NEPTUNE_PROFILE_ZONE;
 
         /**
         * @brief Begin render Stage Slate.
@@ -42,7 +42,7 @@ namespace Spices {
         * @brief Begin render Search Input Text.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiStage::Search");
+            NEPTUNE_PROFILE_ZONEN("ImguiStage::Search");
 
             ImGui::Spacing();
             ImGui::Spacing();
@@ -67,7 +67,7 @@ namespace Spices {
         * @brief Begin render entity (tree)list.
         */
         {
-            SPICES_PROFILE_ZONEN("ImguiStage::Entity (tree)list");
+            NEPTUNE_PROFILE_ZONEN("ImguiStage::Entity (tree)list");
 
             static ImGuiTableFlags flags = ImGuiTableFlags_BordersV | ImGuiTableFlags_BordersOuterH | ImGuiTableFlags_Resizable | ImGuiTableFlags_NoBordersInBody |
                                            ImGuiTableFlags_Sortable | ImGuiTableFlags_Reorderable   | ImGuiTableFlags_SortMulti | ImGuiTableFlags_Hideable |
@@ -283,7 +283,7 @@ namespace Spices {
                 * @brief Begin render add entity panel.
                 */
                 {
-                    SPICES_PROFILE_ZONEN("ImguiStage::Add Entity");
+                    NEPTUNE_PROFILE_ZONEN("ImguiStage::Add Entity");
 
                     if (ImGui::BeginPopupContextWindow(0, ImGuiPopupFlags_MouseButtonRight))
                     {

@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Spices {
+namespace Neptune {
 
 	/**
     * @brief Memory Static Function Library.
@@ -45,7 +45,7 @@ namespace Spices {
 	template<class integral>
 	inline constexpr bool MemoryLibrary::is_aligned(integral x, size_t a) noexcept
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return (x & (integral(a) - 1)) == 0;
 	}
@@ -53,7 +53,7 @@ namespace Spices {
 	template<class integral>
 	inline constexpr integral MemoryLibrary::align_up(integral x, size_t a) noexcept
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return integral((x + (integral(a) - 1)) & ~integral(a - 1));
 	}
@@ -61,7 +61,7 @@ namespace Spices {
 	template<class integral>
 	inline constexpr integral MemoryLibrary::align_down(integral x, size_t a) noexcept
 	{
-		SPICES_PROFILE_ZONE;
+		NEPTUNE_PROFILE_ZONE;
 
 		return integral(x & ~integral(a - 1));
 	}
