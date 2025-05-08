@@ -116,7 +116,7 @@ namespace Neptune {
 			NEPTUNE_CORE_ERROR("Memory alloc failed.")
 		}
 
-		SPICES_PROFILE_ALLOC_N(ptr, kpage << MemoryPool::PAGE_SHIFT, memoryPoolNames[1]);
+		NEPTUNE_PROFILE_ALLOC_N(ptr, kpage << MemoryPool::PAGE_SHIFT, memoryPoolNames[1]);
 
 		return ptr;
 	}
@@ -127,7 +127,7 @@ namespace Neptune {
 	*/
 	inline static void SystemFree(void* ptr)
 	{
-		SPICES_PROFILE_FREE_N(ptr, memoryPoolNames[1]);
+		NEPTUNE_PROFILE_FREE_N(ptr, memoryPoolNames[1]);
 
 		free(ptr);
 

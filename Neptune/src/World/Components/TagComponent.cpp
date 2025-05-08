@@ -83,7 +83,7 @@ namespace Neptune {
 				ImGuiH::DrawPropertyItem(ss.str(), columeWidth, nullptr, [&]() {
 					ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x - ImGuiH::GetLineItemSize().x);
 					char buffer[256] = {};
-					strcpy_s(buffer, sizeof(buffer), tagBuffer[i].c_str());
+
 					if (ImGui::InputText("##", buffer, sizeof(buffer)))
 					{
 						m_Tags.erase(tagBuffer[i]);

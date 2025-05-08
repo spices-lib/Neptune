@@ -9,7 +9,6 @@
 #include "Systems/SlateSystem.h"
 #include "Slate/Imgui/ViewPort/ImguiViewport.h"
 #include "Core/Event/SlateEvent.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
 
 namespace Neptune {
 
@@ -29,7 +28,7 @@ namespace Neptune {
 			/**
 			* @brief Might not needed?
 			*/
-			VK_CHECK(vkQueueWaitIdle(VulkanRenderBackend::GetState().m_GraphicQueue))
+			//VK_CHECK(vkQueueWaitIdle(VulkanRenderBackend::GetState().m_GraphicQueue))
 				
 			SlateResizeEvent event(static_cast<uint32_t>(m_ViewPort.lock()->GetPanelSize().x), static_cast<uint32_t>(m_ViewPort.lock()->GetPanelSize().y));
 

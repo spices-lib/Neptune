@@ -6,43 +6,22 @@
 
 #include "Pchheader.h"
 #include "ResourceSystem.h"
-#include "Resources/ResourcePool/ResourcePool.h"
-#include "Resources/Texture/Transcoder.h"
-
-#include "Resources/Texture/Texture.h"
-#include "Resources/Material/Material.h"
-#include "Resources/Mesh/Mesh.h"
-#include "Resources/Shader/Shader.h"
 
 namespace Neptune {
 
-	std::vector<std::string> ResourceSystem::m_ResourceSearchFolder = { SPICES_ENGINE_ASSETS_PATH };
+	std::vector<std::string> ResourceSystem::m_ResourceSearchFolder = { NEPTUNE_ASSETS_PATH };
 
 	void ResourceSystem::OnSystemInitialize()
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		/**
-		* @brief Create Default Resource in different ResourccePool.
-		*/
-		ResourcePool<Texture>::Load<Texture2D>("default.jpg", "default.jpg");
-
-		ResourcePool<MeshPack>::Load<SpherePack>("Sphere")->OnCreatePack();
-		ResourcePool<MeshPack>::Load<PlanePack>("Plane")->OnCreatePack();
-		ResourcePool<MeshPack>::Load<CubePack>("Cube")->OnCreatePack();
 	}
 
 	void ResourceSystem::OnSystemShutDown()
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		/**
-		* @brief Release all Resources
-		*/
-		ResourcePool<Texture>  ::Destroy();
-		ResourcePool<Shader>   ::Destroy();
-		ResourcePool<Material> ::Destroy();
-		ResourcePool<MeshPack> ::Destroy();
+
 	}
 
 	void ResourceSystem::OnSystemUpdate(TimeStep& ts)
@@ -55,7 +34,6 @@ namespace Neptune {
 
 	void ResourceSystem::RegistryResourceFolder(const std::string& folder)
 	{
-		m_ResourceSearchFolder.push_back(folder);
 	}
 
 }

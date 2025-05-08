@@ -8,7 +8,6 @@
 #include "SlateStyleLayout.h"
 #include "Imgui/ImguiHelper.h"
 #include "Core/Library/FileLibrary.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
 #include "..\Core\Thread\ThreadModel.h"
 
 namespace Neptune {
@@ -36,13 +35,13 @@ namespace Neptune {
 			case StyleLayoutEnum::Default:
 			{
 				std::stringstream ss;
-				ss << SPICES_ENGINE_ASSETS_PATH << "SlateLayout/DefaultLayout.ini";
+				ss << NEPTUNE_ASSETS_PATH << "SlateLayout/DefaultLayout.ini";
 				ImGui::LoadIniSettingsFromDisk(ss.str().c_str());
 			}
 			default:
 			{
 				std::stringstream ss;
-				ss << SPICES_ENGINE_ASSETS_PATH << "SlateLayout/DefaultLayout.ini";
+				ss << NEPTUNE_ASSETS_PATH << "SlateLayout/DefaultLayout.ini";
 				ImGui::LoadIniSettingsFromDisk(ss.str().c_str());
 			}
 		}
@@ -52,36 +51,14 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		std::string filepath = FileLibrary::FileLibrary_OpenInExplore(
-			"Slate Layout (*.ini)\0*.ini\0",
-			glfwGetWin32Window((GLFWwindow*)VulkanRenderBackend::GetState().m_Windows)
-		);
 
-		if (!filepath.empty())
-		{
-			AsyncTask(ThreadPoolEnum::Game, [=]() {
-				ImGui::LoadIniSettingsFromDisk(filepath.c_str());
-			});
-		}
 	}
 
 	void SlateStyleLayout::StoreLayout()
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		std::string filepath = FileLibrary::FileLibrary_SaveInExplore(
-			"Slate Layout (*.ini)\0*.ini\0",
-			glfwGetWin32Window((GLFWwindow*)VulkanRenderBackend::GetState().m_Windows)
-		);
 
-		filepath.append(".ini");
-
-		if (!filepath.empty())
-		{
-			AsyncTask(ThreadPoolEnum::Game, [=]() {
-				ImGui::SaveIniSettingsToDisk(filepath.c_str());
-			});
-		}
 	}
 
 	void SlateStyleLayout::StoreLayoutCache()

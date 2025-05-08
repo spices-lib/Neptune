@@ -6,7 +6,6 @@
 
 #include "Pchheader.h"
 #include "RenderSystem.h"
-#include "Resources/Mesh/Mesh.h"
 
 namespace Neptune {
 
@@ -45,7 +44,7 @@ namespace Neptune {
 		/**
 		* @brief Update frameindex.
 		*/
-		FrameInfo::Get().m_FrameIndex = (FrameInfo::Get().m_FrameIndex + 1) % MaxFrameInFlight;
+		FrameInfo::Get().m_FrameIndex = (FrameInfo::Get().m_FrameIndex + 1) % 2;
 	}
 
 	void RenderSystem::OnEvent(Event& event)

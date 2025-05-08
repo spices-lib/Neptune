@@ -9,7 +9,6 @@
 #include "SystemManager.h"
 #include "Render/FrameInfo.h"
 #include "Render/RenderFrontend.h"
-#include "Render/Renderer/Renderer.h"
 
 #include <unordered_map>
 #include <memory>

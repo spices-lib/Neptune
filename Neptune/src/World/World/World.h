@@ -14,15 +14,12 @@
 #include "World/Components/MeshComponent.h"
 #include "World/Components/TagComponent.h"
 #include "World/Components/UUIDComponent.h"
-#include "World/Components/DirectionalLightComponent.h"
 #include "World/Components/NativeScriptComponent.h"
-#include "World/Components/PointLightComponent.h"
-#include "World/Components/SkyBoxComponent.h"
-#include "World/Components/SpriteComponent.h"
 #include "World/Components/EntityComponent.h"
-#include "World/Components/LandscapeComponent.h"
 #include "World/Components/ParticleComponent.h"
 #include "World/Components/WidgetComponent.h"
+
+#include <shared_mutex>
 
 namespace Neptune {
 
@@ -166,8 +163,7 @@ namespace Neptune {
 		* @brief View all root in this world.
 		* @param fn View function.
 		*/
-		template<typename F>
-		void ViewRoot(F&& fn);
+		void ViewRoot(std::function<void(Entity&)> fn);
 
 		/**
 		* @brief Template Function.
@@ -321,20 +317,6 @@ namespace Neptune {
 			auto& comp = m_Registry.get<T>(e);
 
 			fn(e, comp);
-		}
-	}
-
-	template<typename F>
-	inline void World::ViewRoot(F&& fn)
-	{
-		NEPTUNE_PROFILE_ZONE;
-
-		std::shared_lock<std::shared_mutex> lock(m_Mutex);
-
-		for (auto entity : m_RootEntityMap)
-		{
-			Entity e(entity.second, this);
-			fn(e);
 		}
 	}
 

@@ -8,7 +8,6 @@
 #include "WorldPickIDQuerier.h"
 #include "Systems/SlateSystem.h"
 #include "Slate/Imgui/ViewPort/ImguiViewport.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
 #include "Core/Input/MouseButtonCodes.h"
 #include "Core/Input/Input.h"
 #include "Core/Input/KeyCodes.h"
@@ -56,25 +55,7 @@ namespace Neptune {
 			*/
 			if (Input::IsKeyPressed(Key::LeftShift) || Input::IsKeyPressed(Key::RightShift))
 			{
-				auto pair = m_ViewPort.lock()->GetMousePosInViewport();
 
-				VulkanRenderBackend::GetRendererResourcePool()
-				->AccessRowResource("EntityID")
-				->CopyImageTexelToBuffer(
-					pair.first, 
-					pair.second, 
-					reinterpret_cast<void*>(&m_WorldPickID[0])
-				);
-
-				Entity entity((entt::entity)m_WorldPickID[0], FrameInfo::Get().m_World.get());
-				std::string entityName = *entity.GetComponent<TagComponent>().GetTag().begin();
-				
-				FrameInfo::Get().m_PickEntityID.push_back(static_cast<int>(m_WorldPickID[0]), entityName);
-				
-				std::stringstream ss;
-				ss << "Select entity: " << entityName;
-
-				SPICES_CORE_TRACE(ss.str())
 			}
 
 			/**
@@ -82,26 +63,7 @@ namespace Neptune {
 			*/
 			else if (Input::IsKeyPressed(Key::LeftControl) || Input::IsKeyPressed(Key::RightControl))
 			{
-				auto pair = m_ViewPort.lock()->GetMousePosInViewport();
 
-				VulkanRenderBackend::GetRendererResourcePool()
-				->AccessRowResource("EntityID")
-				->CopyImageTexelToBuffer(
-					pair.first, 
-					pair.second, 
-					reinterpret_cast<void*>(&m_WorldPickID[0])
-				);
-
-				std::string* ptr = FrameInfo::Get().m_PickEntityID.find_value(static_cast<int>(m_WorldPickID[0]));
-				if (ptr)
-				{
-					std::stringstream ss;
-					ss << "Deselect entity: " << *ptr;
-
-					SPICES_CORE_TRACE(ss.str())
-
-					FrameInfo::Get().m_PickEntityID.erase(static_cast<int>(m_WorldPickID[0]));
-				}
 			}
 
 			/**
@@ -109,27 +71,7 @@ namespace Neptune {
 			*/
 			else
 			{
-				FrameInfo::Get().m_PickEntityID.clear();
 
-				auto pair = m_ViewPort.lock()->GetMousePosInViewport();
-
-				VulkanRenderBackend::GetRendererResourcePool()
-				->AccessRowResource("EntityID")
-				->CopyImageTexelToBuffer(
-					pair.first, 
-					pair.second, 
-					reinterpret_cast<void*>(&m_WorldPickID[0])
-				);
-
-				Entity entity((entt::entity)m_WorldPickID[0], FrameInfo::Get().m_World.get());
-				std::string entityName = *entity.GetComponent<TagComponent>().GetTag().begin();
-
-				FrameInfo::Get().m_PickEntityID.push_back(static_cast<int>(m_WorldPickID[0]), entityName);
-
-				std::stringstream ss;
-				ss << "Select entity: " << entityName;
-
-				SPICES_CORE_TRACE(ss.str())
 			}
 		}
 
@@ -140,7 +82,7 @@ namespace Neptune {
 		{
 			FrameInfo::Get().m_PickEntityID.clear();
 
-			SPICES_CORE_TRACE("Cancel all selected entity")
+			NEPTUNE_CORE_TRACE("Cancel all selected entity")
 		}
 
 		return false;

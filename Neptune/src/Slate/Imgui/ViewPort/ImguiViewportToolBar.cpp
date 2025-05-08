@@ -85,9 +85,6 @@ namespace Neptune {
 			case RendererType::Rasterization:
 				buttonName = ICON_TEXT(ICON_MD_LIGHTBULB, Rasterization);
 				break;
-			case RendererType::PathTracing:
-				buttonName = ICON_TEXT(ICON_MD_LIGHTBULB, RTX - Interactive);
-				break;
 			}
 			
 			if (ImGui::Button(buttonName.c_str(), ItemSize))
@@ -293,7 +290,6 @@ namespace Neptune {
 			if (ImGui::MenuItem(ICON_TEXT(ICON_EMPTY, RTX-Interactive(Path Tracing))))
 			{
 				FrameInfo::Get().m_World->Mark(World::FrushStableFrame);
-				FrameInfo::Get().m_RendererType = RendererType::PathTracing;
 			}
 			if (ImGui::MenuItem(ICON_TEXT(ICON_EMPTY, RTX-Accurate(lray)))) {}
 			if (ImGui::MenuItem(ICON_TEXT(ICON_EMPTY, Pixar-Storm))) {}

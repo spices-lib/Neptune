@@ -7,9 +7,6 @@
 #include "Pchheader.h"
 #include "TransformComponent.h"
 
-#include "Render/Vulkan/VulkanBuffer.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
-
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -26,18 +23,7 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		m_ModelBuffer = std::make_shared<VulkanBuffer>(
-			VulkanRenderBackend::GetState(),
-			"ModelBuffer",
-			sizeof(glm::mat4),
-			VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT ,
-			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT   |
-			VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
-		);
 
-		SetPosition({ 0.0f, 0.0f, 0.0f });
-		SetRotation({ 0.0f, 0.0f, 0.0f });
-		SetScale({ 1.0f, 1.0f, 1.0f });
 	}
 
 	void TransformComponent::OnSerialize()
@@ -515,7 +501,7 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		return m_ModelBuffer->GetAddress();
+		return 0;
 	}
 
 	void TransformComponent::CalMatrix()
@@ -523,6 +509,5 @@ namespace Neptune {
 		NEPTUNE_PROFILE_ZONE;
 
 		m_ModelMatrix = m_Transform.ToMatrix();
-		m_ModelBuffer->WriteToBuffer(glm::value_ptr(m_ModelMatrix));
 	}
 }

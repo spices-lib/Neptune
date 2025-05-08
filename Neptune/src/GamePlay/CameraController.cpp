@@ -13,6 +13,8 @@
 #include "Systems/SlateSystem.h"
 #include "Core/Input/KeyCodes.h"
 
+#include <glm/glm.hpp>
+
 namespace Neptune {
 
 	void CameraController::OnConstruction()
@@ -208,21 +210,21 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE;
 		
-		return glm::rotate(GetOrientation(), glm::vec3(0.0f, -1.0f, 0.0f));
+		return glm::vec3(0.0f, -1.0f, 0.0f);
 	}
 
 	glm::vec3 CameraController::GetRightDirection() const
 	{
 		NEPTUNE_PROFILE_ZONE;
 		
-		return glm::rotate(GetOrientation(), glm::vec3(1.0f, 0.0f, 0.0f));
+		return glm::vec3(1.0f, 0.0f, 0.0f);
 	}
 
 	glm::vec3 CameraController::GetForwardDirection() const
 	{
 		NEPTUNE_PROFILE_ZONE;
 		
-		return glm::rotate(GetOrientation(), glm::vec3(0.0f, 0.0f, 1.0f));
+		return glm::vec3(0.0f, 0.0f, 1.0f);
 	}
 
 	glm::quat CameraController::GetOrientation() const

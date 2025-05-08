@@ -7,7 +7,6 @@
 #include "Pchheader.h"
 #include "Application.h"
 #include "Render/FrameInfo.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
 #include "Thread\ThreadModel.h"
 
 // System Header.
@@ -97,37 +96,33 @@ namespace Neptune {
 		* @brief Golbal While Loop.
 		* @todo Multithreading.
 		*/
-		while (!glfwWindowShouldClose(VulkanRenderBackend::GetState().m_Windows))
+		while (1)
 		{
 			NEPTUNE_PROFILE_ZONEN("MainLoop");
 
 			/**
 			* @brief Wait for glfw events.
 			*/
-			glfwPollEvents();
+			//glfwPollEvents();
 
 			/**
 			* @brief Update TimeStep.
 			*/
 			ts.Flush();
-			
-			/**
-			* @brief Update Aftermath frame cut.
-			*/
-			NSIGHTAFTERMATH_GPUCRASHTRACKER_SETFRAMECUT(ts.fs())
+
 
 			/**
 			* @brief Activete Our Specific World.
 			*/
 			FrameInfo::Get().m_World->OnActivate(ts);
 
-			SPICES_PROFILE_FRAME;
+			NEPTUNE_PROFILE_FRAME;
 		}
 
 		/**
 		* @brief Vulkan Device Idle.
 		*/
-		vkDeviceWaitIdle(VulkanRenderBackend::GetState().m_Device);
+		//vkDeviceWaitIdle(VulkanRenderBackend::GetState().m_Device);
 
 		/**
 		* @brief Deactivate Our Specific World.

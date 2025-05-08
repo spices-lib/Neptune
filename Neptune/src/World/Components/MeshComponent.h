@@ -7,7 +7,6 @@
 #pragma once
 #include "Core/Core.h"
 #include "Component.h"
-#include "Resources/Mesh/Mesh.h"
 
 #include <memory>
 
@@ -52,19 +51,19 @@ namespace Neptune {
 		* @brief Set the Mesh this component handled.
 		* @param[in] mesh The Mesh shared pointer.
 		*/
-		void SetMesh(std::shared_ptr<Mesh> mesh);
+		//void SetMesh(std::shared_ptr<Mesh> mesh);
 
 		/**
 		* @brief Get the Mesh variable.
 		* @return Returns the Mesh variable.
 		*/
-		std::shared_ptr<Mesh> GetMesh() { return m_Mesh; }
+		//std::shared_ptr<Mesh> GetMesh() { return m_Mesh; }
 		
 	protected:
 		
 		/**
 		* @brief The Mesh this component handled.
 		*/
-		std::shared_ptr<Mesh> m_Mesh;
+		//std::shared_ptr<Mesh> m_Mesh;
 	};
 }

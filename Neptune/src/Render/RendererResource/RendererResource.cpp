@@ -19,24 +19,7 @@ namespace Neptune {
 		*/
 		m_IsResizeable = info.isResizeable;
 
-		/**
-		* @brief Create the texture with specific info.
-		*/
-		switch (info.type)
-		{
-		case TextureType::Texture2D:
-			m_Texture = std::make_unique<Texture2D>(info);
-			break;
-		case TextureType::Texture2DArray:
-			m_Texture = std::make_unique<Texture2DArray>(info);
-			break;
-		case TextureType::Texture2DCube:
-			m_Texture = std::make_unique<Texture2DCube>(info);
-			break;
-		default:
-			NEPTUNE_CORE_ERROR("Not supported Texture Class Type");
-			break;
-		}
+
 	}
 
 	void RendererResource::OnResized(const uint32_t width, const uint32_t height)
@@ -58,23 +41,6 @@ namespace Neptune {
 		*/
 		m_Info.height = height;
 
-		/**
-		* @brief Recreate the texture with specific info.
-		*/
-		switch (m_Info.type)
-		{
-		case TextureType::Texture2D:
-			m_Texture = std::make_unique<Texture2D>(m_Info);
-			break;
-		case TextureType::Texture2DArray:
-			m_Texture = std::make_unique<Texture2DArray>(m_Info);
-			break;
-		case TextureType::Texture2DCube:
-			m_Texture = std::make_unique<Texture2DCube>(m_Info);
-			break;
-		default:
-			NEPTUNE_CORE_ERROR("Not supported Texture Class Type");
-			break;
-		}
+
 	}
 }

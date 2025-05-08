@@ -5,13 +5,12 @@
 */
 
 #include "Pchheader.h"
-#include "Renderer.h"
 #include "RendererManager.h"
 
 namespace Neptune {
 
 	std::unique_ptr<RendererManager>                                  RendererManager::m_RendererManager;
-	scl::linked_unordered_map<std::string, std::shared_ptr<Renderer>> RendererManager::m_Identities;
+	scl::linked_unordered_map<std::string, void*> RendererManager::m_Identities;
 
 	RendererManager& RendererManager::Get()
 	{
@@ -44,8 +43,6 @@ namespace Neptune {
 			v->ResetRendererState();
 			return false;
 		});
-
-		RENDERPASS_STATISTICS_ENDFRAME
 	}
 
 	void RendererManager::OnWindowResizeOver()
@@ -87,13 +84,13 @@ namespace Neptune {
 		});
 	}
 
-	std::shared_ptr<Renderer> RendererManager::GetRenderer(const std::string& name)
+	std::shared_ptr<void*> RendererManager::GetRenderer(const std::string& name)
 	{
 		NEPTUNE_PROFILE_ZONE;
 
 		if (m_Identities.has_key(name))
 		{
-			return *m_Identities.find_value(name);
+			return nullptr;
 		}
 
 		std::stringstream ss;

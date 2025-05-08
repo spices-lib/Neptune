@@ -7,16 +7,16 @@
 #include "Pchheader.h"
 #include "FileLibrary.h"
 
-#include <commdlg.h>
-
 namespace Neptune {
 
 	bool FileLibrary::FileLibrary_Exists(const char* path)
 	{
         NEPTUNE_PROFILE_ZONE;
 
-		struct _stat buffer {};
-		return _stat (path, &buffer) == 0;
+		/*struct _stat buffer {};
+		return _stat (path, &buffer) == 0;*/
+
+        return true;
 	}
 
 	bool FileLibrary::FileLibrary_Open(const char* path, FileModes mode, bool binary, FileHandle* out_handle)
@@ -46,7 +46,7 @@ namespace Neptune {
 		}
 
 		FILE* file;
-		auto state = fopen_s(&file, path, mode_str);
+		//auto state = fopen(&file, path, mode_str);
 
 		if (!file) 
 		{
@@ -175,7 +175,7 @@ namespace Neptune {
 		return false;
 	}
 
-	std::string FileLibrary::FileLibrary_OpenInExplore(const char* filter, HWND hwnd)
+	/*std::string FileLibrary::FileLibrary_OpenInExplore(const char* filter, HWND hwnd)
 	{
         NEPTUNE_PROFILE_ZONE;
 
@@ -195,9 +195,9 @@ namespace Neptune {
 			return ofn.lpstrFile;
 		}
 		return "";
-	}
+	}*/
 
-	std::string FileLibrary::FileLibrary_SaveInExplore(const char* filter, HWND hwnd)
+	/*std::string FileLibrary::FileLibrary_SaveInExplore(const char* filter, HWND hwnd)
 	{
         NEPTUNE_PROFILE_ZONE;
 
@@ -217,7 +217,7 @@ namespace Neptune {
 			return ofn.lpstrFile;
 		}
 		return "";
-	}
+	}*/
 
 	bool FileLibrary::FileLibrary_CopyFile(std::string srcFilePath, std::string dstFilePath)
 	{

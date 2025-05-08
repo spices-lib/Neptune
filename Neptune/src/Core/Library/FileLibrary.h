@@ -153,7 +153,7 @@ namespace Neptune {
         * @param[in] hwnd The Windows Needs.
         * @return Returns the file path of selected file.
         */
-        static std::string FileLibrary_OpenInExplore(const char* filter, HWND hwnd);
+        //static std::string FileLibrary_OpenInExplore(const char* filter, HWND hwnd);
 
         /**
         * @brief Select a file to save in explore.
@@ -161,7 +161,7 @@ namespace Neptune {
         * @param[in] hwnd The Windows Needs.
         * @return Returns the file path of selected file.
         */
-        static std::string FileLibrary_SaveInExplore(const char* filter, HWND hwnd);
+        //static std::string FileLibrary_SaveInExplore(const char* filter, HWND hwnd);
 
         /**
         * @brief Copy a file to dst path.

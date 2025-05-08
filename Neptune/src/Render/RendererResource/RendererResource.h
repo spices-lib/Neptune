@@ -6,9 +6,6 @@
 
 #pragma once
 #include "Core/Core.h"
-#include "Resources/Texture/Texture2D.h"
-#include "Resources/Texture/Texture2DArray.h"
-#include "Resources/Texture/Texture2DCube.h"
 
 namespace Neptune{
 
@@ -38,21 +35,11 @@ namespace Neptune{
 		* @brief Destructor Function.
 		*/
 		virtual ~RendererResourceCreateInfo() = default;
-
-		/**
-		* @brief Texture's description info.
-		*/
-		VkAttachmentDescription description {};
 		
 		/**
 		* @brief Texture's name.
 		*/
 		std::string name;
-
-		/**
-		* @brief Texture's Class Type.
-		*/
-		TextureType type = TextureType::Texture2D;
 
 		/**
 		* @brief Texture' width.
@@ -78,11 +65,6 @@ namespace Neptune{
 		* @brief Texture's mipmap level.
 		*/
 		uint32_t mipLevel = 1;
-
-		/**
-		* @brief Image Usage.
-		*/
-		VkImageUsageFlagBits usage {};
 
 		/**
 		* @brief True if this resource is a DepthResource.
@@ -127,7 +109,7 @@ namespace Neptune{
 		* @brief Get Texture this class wrapped.
 		* @return Returns the reference of unique pointer  of the Texture.
 		*/
-		std::unique_ptr<Texture2D>& GetTexture() { return m_Texture; }
+		std::unique_ptr<void>& GetTexture() { return m_Texture; }
 
 		/**
 		* @brief Get isResizeable variable.
@@ -150,6 +132,6 @@ namespace Neptune{
 		/**
 		* @brief The texture this class Wrapped.
 		*/
-		std::unique_ptr<Texture2D> m_Texture;
+		std::unique_ptr<void> m_Texture;
 	};
 }

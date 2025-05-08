@@ -16,10 +16,6 @@
 
 namespace Neptune {
 
-	/**
-	* @brief Forward Declare.
-	*/
-	class VulkanBuffer;
 
 	/**
 	* @brief TransformComponent Class.
@@ -186,10 +182,5 @@ namespace Neptune {
 		* @brief World State this frame.
 		*/
 		TransformComponentFlags m_Marker = TransformComponentBits::Clean;
-
-		/**
-		* @brief Model Buffer.
-		*/
-		std::shared_ptr<VulkanBuffer> m_ModelBuffer;
 	};
 }

@@ -7,7 +7,6 @@
 #include "Pchheader.h"
 #include "ImguiViewport.h"
 
-#include "Render/Vulkan/VulkanRenderBackend.h"
 #include "Systems/SlateSystem.h"
 #include "ImguiFloatingInfo.h"
 #include "ImGuizmo.h"
@@ -30,7 +29,6 @@ namespace Neptune {
         {
             NEPTUNE_PROFILE_ZONEN("Create SceneColor ImTextureID");
 
-            m_ViewportContext = std::make_shared<SlateImage>("SceneColor", "SlateRenderer.Slate.Default");
         }
 
         /**
@@ -127,7 +125,6 @@ namespace Neptune {
         {
             NEPTUNE_PROFILE_ZONEN("Render Viewport Image");
 
-            ImGuiH::CustomMaterialImage(m_ViewportContext.get(), m_PanelSize);
         }
 
         /**
@@ -217,10 +214,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE;
 
-        /**
-        * @brief Recreate SceneColor SlateImage.
-        */
-        m_ViewportContext->ReBuildTextureID();
+
 
         /**
         * @brief Do not block the event.
@@ -232,10 +226,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE;
 
-        /**
-        * @brief Recreate SceneColor SlateImage.
-        */
-        m_ViewportContext->ReBuildTextureID();
+
 
         /**
         * @brief Do not block the event.
@@ -247,10 +238,7 @@ namespace Neptune {
     {
 		NEPTUNE_PROFILE_ZONE;
 
-		if (event.GetKeyCode() == Key::F11)
-		{
-            Toggle();
-		}
+
 
 		return false;
 	}

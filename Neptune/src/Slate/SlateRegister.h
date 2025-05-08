@@ -9,16 +9,9 @@
 
 // Slate Specific Class Header.
 #include "Slate/Imgui/ImguiConsole.h"
-#include "Slate/Imgui/ImguiContentBrowser.h"
-#include "Slate/Imgui/ImguiProperty.h"
-#include "Slate/Imgui/ImguiStage.h"
 #include "Slate/Imgui/ViewPort/ImguiViewport.h"
 #include "Slate/Imgui/MainMenu/ImguiMainMenu.h"
-#include "Imgui\ViewPort\ImguiFloatingInfo.h"
 #include "Slate/Imgui/ViewPort/ImguiGizmos.h"
-#include "Slate/Imgui/ImguiOperation.h"
-#include "Slate/Imgui/ImguiInfoBar.h"
-#include "Slate/Imgui/ImguiMaterialPanel.h"
 
 // STL Header
 #include <memory>

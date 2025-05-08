@@ -51,22 +51,6 @@ namespace Neptune {
 		*/
 		void OnSlateResize(uint32_t width, uint32_t height) const;
 
-		/**
-		* @brief Get Resource with specific name, create it if it have not been created.
-		* @param[in] info The info used for create resource.
-		* @param[in] mipLevel Which mipmap needs to be access.
-		* @return Returns the view of the resource.
-		*/
-		VkDescriptorImageInfo* AccessResource(
-			const RendererResourceCreateInfo& info = RendererResourceCreateInfo{},
-			uint32_t                          mipLevel = 0
-		);
-
-		/**
-		* @brief Get Row Resource with specific name.
-		* @param[in] name The name of Resource/
-		*/
-		std::shared_ptr<VulkanImage> AccessRowResource(const std::string& name);
 
 	private:
 

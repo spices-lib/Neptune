@@ -9,14 +9,12 @@
 #include "Core/Library/FileLibrary.h"
 #include "Render/FrameInfo.h"
 #include "World/World/World.h"
-#include "Slate/SlateImage.h"
-#include "Render/Renderer/SpecificRenderer/SlateRenderer.h"
 
 // This file Only Can include once.
 #include <imgui.cpp>
 #include <imgui_internal.h>
 #include <imgui_widgets.cpp>
-#include <backends/imgui_impl_vulkan.cpp>
+#include <backends/imgui_impl_opengl3.cpp>
 
 namespace Neptune {
 

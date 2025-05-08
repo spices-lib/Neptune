@@ -49,7 +49,7 @@ namespace Neptune {
         {
             void* ptr = Neptune::MemoryPool::Alloc(size);
 
-            SPICES_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[2]);
+            NEPTUNE_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[2]);
 
             return std::move(ptr);
         }
@@ -63,7 +63,7 @@ namespace Neptune {
         {
             void* ptr = malloc(size);
 
-            SPICES_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[0]);
+            NEPTUNE_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[0]);
 
             return std::move(ptr);
         }
@@ -78,7 +78,7 @@ namespace Neptune {
         {
             void* ptr = _aligned_malloc(size, static_cast<size_t>(align));
 
-            SPICES_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[0]);
+            NEPTUNE_PROFILE_ALLOC_N(ptr, size, Neptune::memoryPoolNames[0]);
 
             return std::move(ptr);
         }
@@ -89,7 +89,7 @@ namespace Neptune {
         */
         static void freeToPool(void* ptr)
         {
-            SPICES_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[2]);
+            NEPTUNE_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[2]);
 
             Neptune::MemoryPool::Free(ptr);
         }
@@ -100,7 +100,7 @@ namespace Neptune {
         */
         static void freeToOS(void* ptr)
         {
-            SPICES_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[0]);
+            NEPTUNE_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[0]);
 
             free(ptr);
         }
@@ -112,7 +112,7 @@ namespace Neptune {
         */
         static void freeToOS_Aligned(void* ptr, std::align_val_t align)
         {
-            SPICES_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[0]);
+            NEPTUNE_PROFILE_FREE_N(ptr, Neptune::memoryPoolNames[0]);
 
             _aligned_free(ptr);
         }

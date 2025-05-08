@@ -8,7 +8,6 @@
 #include "Camera.h"
 #include "Core/Math/Math.h"
 #include "Render/FrameInfo.h"
-#include "Slate/SlateInfoBar.h"
 
 namespace Neptune {
 
@@ -54,11 +53,6 @@ namespace Neptune {
 		
 		if (m_StableFrames > 100)
 		{
-			SlateInfoBar::Create<float>("Refrush frame", [=]() -> float { 
-				return static_cast<float>(this->m_StableFrames) / 100.0f; 
-			}, [=](SlateInfoBar* that) {
-				return std::any_cast<float>(that->GetRate()) >= 1.0f;
-			});
 		}
 
 		m_StableFrames = 0;

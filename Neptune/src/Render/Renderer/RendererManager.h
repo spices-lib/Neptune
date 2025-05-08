@@ -12,10 +12,6 @@
 
 namespace Neptune {
 
-	/**
-	* @brief Forward declare
-	*/
-	class Renderer;
 
 	/**
 	* @brief RendererManager Class.
@@ -95,9 +91,9 @@ namespace Neptune {
 				NEPTUNE_CORE_ERROR(ss.str());
 			}
 
-			m_Identities.push_back(rendererName, std::make_shared<T>(rendererName, std::forward<Args>(args)...));
-			const auto ptr = *m_Identities.find_value(rendererName);
-			ptr->OnSystemInitialize();
+			//m_Identities.push_back(rendererName, std::make_shared<T>(rendererName, std::forward<Args>(args)...));
+			//const auto ptr = *m_Identities.find_value(rendererName);
+			//ptr->OnSystemInitialize();
 
 			/**
 			* @brief System init
@@ -141,7 +137,7 @@ namespace Neptune {
 			return *m_RendererManager;
 		}
 
-		static std::shared_ptr<Renderer> GetRenderer(const std::string& name);
+		static std::shared_ptr<void*> GetRenderer(const std::string& name);
 
 	private:
 
@@ -153,7 +149,7 @@ namespace Neptune {
 		/**
 		* @brief A container contains all renderer.
 		*/
-		static scl::linked_unordered_map<std::string, std::shared_ptr<Renderer>> m_Identities;
+		static scl::linked_unordered_map<std::string, void*> m_Identities;
 	};
 
 	template<typename T>

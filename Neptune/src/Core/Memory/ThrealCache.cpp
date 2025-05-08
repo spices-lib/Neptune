@@ -136,7 +136,7 @@ namespace Neptune {
 		/**
 		* @brief Thread Unique TCWapper.
 		*/
-		static _declspec(thread) ThreadCacheThreadWapper pTLSThreadCache;
+		static  ThreadCacheThreadWapper pTLSThreadCache;
 
 		if (!pTLSThreadCache.instance)
 		{

@@ -6,7 +6,6 @@
 
 #include "Pchheader.h"
 #include "TracyProfilerWrapper.h"
-#include "Render/Vulkan/VulkanUtils.h"
 
 namespace Neptune {
 
@@ -14,7 +13,6 @@ namespace Neptune {
 
 	TracyGPUContext::TracyGPUContext(VulkanState& state)
 		: m_VulkanState(state)
-		, m_Context(nullptr)
 	{
 		NEPTUNE_PROFILE_ZONE;
 

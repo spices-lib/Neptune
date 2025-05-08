@@ -8,7 +8,6 @@
 #include "Core/Core.h"
 #include "Slate/Imgui/ImguiUtils.h"
 #include "Core/Container/BehaveStateList.h"
-#include "Slate/SlateImage.h"
 
 namespace Neptune {
 
@@ -120,11 +119,6 @@ namespace Neptune {
 		bool OnToggleSlate(KeyPressedEvent& event) const;
 
 	private:
-
-		/**
-		* @brief SlateImage of SceneColor.
-		*/
-		std::shared_ptr<SlateImage> m_ViewportContext;
 
 		/**
 		* @brief This viewport index.

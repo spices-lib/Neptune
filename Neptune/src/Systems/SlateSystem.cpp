@@ -34,13 +34,6 @@ namespace Neptune {
 		m_SlateRegister->Register<ImguiMainMenu>      (true, "MainMenu");
 		m_SlateRegister->Register<ImguiViewport>      (true, "ViewPort");
 		//m_SlateRegister->Register<ImguiViewport>(true, "ViewPort_1", 1);
-		m_SlateRegister->Register<ImguiConsole>       (true, "Console"  , Console::Registry("Console"));
-		m_SlateRegister->Register<ImguiContentBrowser>(true, "Content" );
-		m_SlateRegister->Register<ImguiProperty>      (true, "Property");
-		m_SlateRegister->Register<ImguiStage>         (true, "Stage"   );
-		m_SlateRegister->Register<ImguiOperation>     (true, "Operation");
-		m_SlateRegister->Register<ImguiInfoBar>       (true, "InfoBar" );
-		m_SlateRegister->Register<ImguiMaterialPanel> (true, "Material");
 	}
 
 	void SlateSystem::OnSystemShutDown()

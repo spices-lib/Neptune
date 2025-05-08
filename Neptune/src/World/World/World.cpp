@@ -73,6 +73,19 @@ namespace Neptune {
 		m_RootEntityMap[entity.GetUUID()] = entity;
 	}
 
+    void World::ViewRoot(std::function<void(Entity&)> fn)
+    {
+        NEPTUNE_PROFILE_ZONE;
+
+        std::shared_lock<std::shared_mutex> lock(m_Mutex);
+
+        for (auto entity : m_RootEntityMap)
+        {
+            Entity e(entity.second, this);
+            fn(e);
+        }
+    }
+
 	bool World::IsRootEntity(Entity& entity)
 	{
 		NEPTUNE_PROFILE_ZONE;

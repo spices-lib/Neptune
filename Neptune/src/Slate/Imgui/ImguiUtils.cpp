@@ -7,8 +7,6 @@
 #include "Pchheader.h"
 #include "ImguiUtils.h"
 
-#include "Render/Vulkan/VulkanImage.h"
-
 namespace Neptune {
 
     void ImguiSlate::Begin(float alpha, ImGuiWindowFlags flags)
@@ -66,10 +64,6 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE;
 
-        auto rowPtr = ResourcePool<Texture>::Load<Texture2D>(iconFile, iconFile);
-        auto info = rowPtr->GetResource<VulkanImage>()->GetImageInfo();
-
-        id = reinterpret_cast<ImTextureID>(ImGui_ImplVulkan_AddTexture(info->sampler, info->imageView, info->imageLayout));
     }
 
     void ImguiSlate::QueryIsResizedThisFrame(const ImVec2& thisFrameSize)

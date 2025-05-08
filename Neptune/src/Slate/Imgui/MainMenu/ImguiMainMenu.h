@@ -76,30 +76,7 @@ namespace Neptune {
 
 	private:
 
-		/**
-		* @brief The shared pointer of ImguiFile.
-		*/
-		std::shared_ptr<ImguiFile> m_File;
 
-		/**
-		* @brief The shared pointer of ImguiEdit.
-		*/
-		std::shared_ptr<ImguiEdit> m_Edit;
-
-		/**
-		* @breaf The shared pointer of ImguiCreateEntity.
-		*/
-		std::shared_ptr<ImguiCreateEntity> m_Create;
-
-		/**
-		* @breaf The shared pointer of ImguiWindow.
-		*/
-		std::shared_ptr<ImguiWindow> m_Window;
-
-		/**
-		* @breaf The shared pointer of ImguiHelp.
-		*/
-		std::shared_ptr<ImguiHelp> m_Help;
 	};
 
 }

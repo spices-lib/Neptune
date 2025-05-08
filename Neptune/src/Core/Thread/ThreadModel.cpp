@@ -14,7 +14,6 @@ namespace Neptune {
 	ThreadModel::ThreadModel()
 		: m_CustomThreadPool(nullptr)
 		, m_GameThreadPool(nullptr)
-		, m_RHIThreadPool(nullptr)
 	{}
 
 	std::shared_ptr<ThreadModel> ThreadModel::Get()
@@ -54,16 +53,6 @@ namespace Neptune {
 		}
 	}
 
-	void ThreadModel::InitRHIThreadPool(std::function<void(std::shared_ptr<VulkanCmdThreadPool>& ptr)> fn)
-	{
-		NEPTUNE_PROFILE_ZONE;
-
-		if (!m_RHIThreadPool)
-		{
-			fn(m_RHIThreadPool);
-		}
-	}
-
 	void ThreadModel::ShutDownCustomThreadPool()
 	{
 		NEPTUNE_PROFILE_ZONE;
@@ -78,13 +67,6 @@ namespace Neptune {
 		m_GameThreadPool = nullptr;
 	}
 
-	void ThreadModel::ShutDownRHIThreadPool()
-	{
-		NEPTUNE_PROFILE_ZONE;
-
-		m_RHIThreadPool = nullptr;
-	}
-
 	void ThreadModel::ClearMainThreadTaskQueue()
 	{
 		NEPTUNE_PROFILE_ZONE;
@@ -96,7 +78,6 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE;
 
-		ShutDownRHIThreadPool();
 		ShutDownGameThreadPool();
 		ShutDownCustomThreadPool();
 		ClearMainThreadTaskQueue();

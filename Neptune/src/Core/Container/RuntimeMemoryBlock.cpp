@@ -6,7 +6,6 @@
 
 #include "Pchheader.h"
 #include "RuntimeMemoryBlock.h"
-#include "Core/Reflect/TypeReflect.h"
 
 namespace scl {
     
@@ -37,10 +36,6 @@ namespace scl {
         */
         object_[name] = bytes_;
 
-        /**
-        * @brief Add to bytes_ with parameter type.
-        */
-        bytes_ += Neptune::StrType2Size(type);
     }
 
     void runtime_memory_block::build()

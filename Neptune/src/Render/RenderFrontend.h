@@ -2,7 +2,6 @@
 #include "Core/Core.h"
 #include "Render/FrameInfo.h"
 #include "Core/Event/Event.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
 
 namespace Neptune {
 
@@ -15,7 +14,7 @@ namespace Neptune {
 		RenderFrontend(const RenderFrontend&) = delete;
 		RenderFrontend& operator=(const RenderFrontend&) = delete;
 
-		bool isWindowClosed() { return m_RenderBackend->isWindowClosed(); }
+		bool isWindowClosed() { return false; }
 
 		void BeginFrame(FrameInfo& frameInfo);
 		void EndFrame(FrameInfo& frameInfo);
@@ -24,6 +23,5 @@ namespace Neptune {
 		void OnEvent(Event& event);
 
 	private:
-		std::unique_ptr<VulkanRenderBackend> m_RenderBackend;
 	};
 }

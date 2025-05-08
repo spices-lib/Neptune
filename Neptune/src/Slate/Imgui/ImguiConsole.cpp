@@ -9,7 +9,6 @@
 
 #include "Core/Log/Console.h"
 #include "Core/Library/FileLibrary.h"
-#include "Render/Vulkan/VulkanRenderBackend.h"
 #include "Core/Library/ProcessLibrary.h"
 
 namespace Neptune {
@@ -79,7 +78,7 @@ namespace Neptune {
 				/**
 				* @brief Get Selected file in Explore.
 				*/
-				std::string filepath = FileLibrary::FileLibrary_OpenInExplore(
+				/*std::string filepath = FileLibrary::FileLibrary_OpenInExplore(
 					"Spices Log (*.log)\0*.log\0",
 					glfwGetWin32Window((GLFWwindow*)VulkanRenderBackend::GetState().m_Windows)
 				);
@@ -89,11 +88,11 @@ namespace Neptune {
 					std::stringstream ss;
 					ss << "C:/Windows/System32/notepad.exe " << filepath;
 
-					/**
+					*//**
 					* @brief Open Log file that in writtening.
-					*/
+					*//*
 					ProcessLibrary::OpenProcess("C:/Windows/System32/notepad.exe ", ss.str().c_str());
-				}
+				}*/
 			}
 			ImGui::SetItemTooltip("Open Log Folder");
 		}
