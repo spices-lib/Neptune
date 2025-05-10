@@ -5,9 +5,6 @@
 */
 
 #pragma once
-#include "Debugger/Tracy/TracyProfilerWrapper.h"
-#include "Core/Timer/TimeStep.h"
-#include "Log/Log.h"
 
 namespace Neptune {
 
