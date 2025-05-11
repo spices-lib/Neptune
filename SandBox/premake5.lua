@@ -73,14 +73,8 @@ project "SandBox"
 
 	linkoptions
 	{
-		"--use-port=contrib.glfw3"             -- Dependency: emscripten-glfw 
-	}
-
-	-- The Solution PostCommands
-	postbuildcommands {
-
-		-- Copy js and wasm to Nepnep
-		'xcopy /Y /I "%{cfg.targetdir}\\" "..\\Nepnep\\static\\wasm\"',
+		"--use-port=contrib.glfw3",             -- Dependency: emscripten-glfw
+		"-s USE_WEBGPU=1"                       -- Dependency: webgpu
 	}
 
 	-- Platform: Windows

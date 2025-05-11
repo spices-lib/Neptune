@@ -1,31 +1,58 @@
-import { WASI } from '@wasmer/wasi'
+var Module;
 
-const wasi = {
-    fd_write: () => {},
-    fd_read: () => {},
-    fd_close: () => {},
-    fd_seek: () => {},
-    environ_get: () => {},
-    environ_sizes_get: () => {},
-    proc_exit: () => {},
-}
+const main = async () => {
 
-const imports = {
-    wasi_snapshot_preview1: wasi
-}
+    Module = {
+        preRun: [],
+        postRun: [],
+        print: (function () {
+            return function (text) {
+                text = Array.prototype.slice.call(arguments).join(' ');
+                console.log(text);
+            };
+        })(),
 
-async function loadWasmStreaming(url) {
-    try {
-        // 直接流式编译和实例化
-        const { instance } = await WebAssembly.instantiateStreaming(fetch(url), imports);
-        return instance;
-    } catch (err) {
-        console.error('Failed to load wasm:', err);
-        throw err;
+        printErr: function (text) {
+            text = Array.prototype.slice.call(arguments).join(' ');
+            console.error(text);
+        },
+
+        canvas: (function () {
+            var canvas = document.getElementById('canvas');
+            //canvas.addEventListener("webglcontextlost", function(e) { alert('FIXME: WebGL context lost, please reload the page'); e.preventDefault(); }, false);
+            return canvas;
+        })(),
+
+        setStatus: function (text) {
+            console.log("status: " + text);
+        },
+
+        monitorRunDependencies: function (left) {
+            // no run dependencies to log
+        }
+    };
+
+    window.onerror = function () {
+        console.log("onerror: " + event);
+    };
+
+    // Initialize the graphics adapter
+    {
+        if (!navigator.gpu) {
+            throw Error("WebGPU not supported.");
+        }
+
+        const adapter = await navigator.gpu.requestAdapter();
+        const device = await adapter.requestDevice();
+        Module.preinitializedWebGPUDevice = device;
+    }
+
+    {
+        const js = document.createElement('script');
+        js.async = true;
+        js.src = "http://127.0.0.1:8000/Neptune.js";
+        document.body.appendChild(js);
     }
 }
 
-loadWasmStreaming('wasm/SandBox.wasm')
-    .then(obj => {
-        console.log(obj)
-    })
+main()
