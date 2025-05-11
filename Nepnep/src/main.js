@@ -50,7 +50,7 @@ const main = async () => {
     {
         const js = document.createElement('script');
         js.async = true;
-        js.src = "http://127.0.0.1:8000/Neptune.js";
+        js.src = "http://127.0.0.1:8000/SandBox.js";
         document.body.appendChild(js);
     }
 }

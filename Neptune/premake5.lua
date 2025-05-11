@@ -3,7 +3,7 @@
 -- @author Spices.
 
 project "Neptune"
-	kind "ConsoleApp"          -- Use Lib as Dependency.
+	kind "StaticLib"          -- Use Lib as Dependency.
 	language "C++"            -- Use C++.
 	cppdialect "C++17"        -- Use C++17.
 	staticruntime "On"        -- Use Runtime Library: MTD.
@@ -93,19 +93,10 @@ project "Neptune"
 	-- The Solution Dependency
 	links
 	{
-		"imgui",                              -- Dependency: imgui
+      --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
 	}
-
-	linkoptions
-    {
-        "--use-port=contrib.glfw3",             -- Dependency: emscripten-glfw
-        "-s USE_WEBGPU=1",                      -- Dependency: webgpu
-        "-s ALLOW_MEMORY_GROWTH",               -- Allow Memory growth
-        "-s WASM_BIGINT",                       -- Enable BigInt in JS
-        "-s WASM=1"                             -- Output wasm
-    }
 
 	-- Library: std_image is included this solution, do not use PreCompiler Header.
 	filter "files:vendor/stb_image/**.cpp"

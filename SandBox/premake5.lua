@@ -68,13 +68,17 @@ project "SandBox"
 	-- The Solution Dependency
 	links
 	{
+	    "imgui",                               -- Dependency: imgui
 		"Neptune",                             -- Dependency: Neptune
 	}
 
 	linkoptions
 	{
 		"--use-port=contrib.glfw3",             -- Dependency: emscripten-glfw
-		"-s USE_WEBGPU=1"                       -- Dependency: webgpu
+        "-s USE_WEBGPU=1",                      -- Dependency: webgpu
+        "-s ALLOW_MEMORY_GROWTH",               -- Allow Memory growth
+        "-s WASM_BIGINT",                       -- Enable BigInt in JS
+        "-s WASM=1"                             -- Output wasm
 	}
 
 	-- Platform: Windows
