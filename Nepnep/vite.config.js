@@ -1,3 +1,5 @@
+import mkcert from "vite-plugin-mkcert";
+
 const isCodeSandbox = !!process.env.SANDBOX_URL
 
 export default {
@@ -7,12 +9,14 @@ export default {
     server:
     {
         host: true,
-        open: !isCodeSandbox
+        open: !isCodeSandbox,
+        https: true
     },
     build:
     {
         outDir: '../dist',
         emptyOutDir: true,
         sourcemap: true
-    }
+    },
+    plugins: [mkcert()]
 }

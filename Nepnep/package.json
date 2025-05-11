@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "vite": "^5.4.2",
-    "@wasmer/wasi": "^1.2.2"
+    "vite-plugin-mkcert": "^1.17.8"
   }
 }
