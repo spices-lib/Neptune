@@ -5,6 +5,8 @@
 */
 
 #pragma once
+#include <memory.h>
+#include <forward_list>
 
 namespace Neptune {
 
@@ -31,4 +33,25 @@ namespace Neptune {
         "Main MemoryPool Page Allocator",
         "Main MemoryPool Detail Allocator",
     };
+
+    template<typename T>
+    using SP = std::shared_ptr<T>;
+
+    template<typename T, typename ...Args>
+    SP<T> CreateSP(Args&&... args)
+    {
+        return std::move(std::make_shared<T>(std::forward<Args>(args)...));
+    }
+
+    template<typename T>
+    using WP = std::weak_ptr<T>;
+
+    template<typename T>
+    using UP = std::unique_ptr<T>;
+
+    template<typename T, typename ...Args>
+    UP<T> CreateUP(Args&&... args)
+    {
+        return std::move(std::make_unique<T>(std::forward<Args>(args)...));
+    }
 }

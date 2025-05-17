@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "Core/NonCopyable.h"
 
 #include <webgpu/webgpu.h>
 
@@ -18,8 +19,6 @@ namespace Neptune {
 * 2 buffers are enough in this program.
 */
 constexpr uint32_t MaxFrameInFlight = 2;
-
-class GLFWwindow;
 
     /**
     * @brief This struct contains all WebGPU object in used global.
@@ -43,7 +42,6 @@ class GLFWwindow;
         */
         WebGPUState& operator=(const WebGPUState&) = delete;
 
-        GLFWwindow*                                        m_Windows;                    /* @brief from WebGPUWindows, defined by GLFW.                            */
         WGPUInstance                                       m_Instance;                   /* @brief From WebGPUInstance.                                            */
         WGPUSurface                                        m_Surface;                    /* @brief From WebGPUInstance.                                            */
         //WGPUPhysicalDevice                                 m_PhysicalDevice;             /* @brief From WebGPUDevice.                                              */
@@ -77,10 +75,10 @@ class GLFWwindow;
 
     /**
     * @brief WebGPUObject Class.
-    * This class defines the basic behaves of VulkanObject.
-    * When we create an new VulkanObject, we need inherit from this.
+    * This class defines the basic behaves of WebGPUObject.
+    * When we create an new WebGPUObject, we need inherit from this.
     */
-    class WebGPUObject
+    class WebGPUObject : public NonCopyable
     {
     public:
 
@@ -97,19 +95,7 @@ class GLFWwindow;
         * @brief Destructor Function.
         * We destroy pipeline layout here.
         */
-        virtual ~WebGPUObject() = default;
-
-        /**
-        * @brief Copy Constructor Function.
-        * @note This Class not allowed copy behaves.
-        */
-        WebGPUObject(const WebGPUObject&) = delete;
-
-        /**
-        * @brief Copy Assignment Operation.
-        * @note This Class not allowed copy behaves.
-        */
-        WebGPUObject& operator=(const WebGPUObject&) = delete;
+        virtual ~WebGPUObject() override = default;
 
     protected:
 

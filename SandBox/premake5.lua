@@ -31,8 +31,8 @@ project "SandBox"
 		-- Define Game Assets Folder.
 		'SANDBOX_ASSETS_PATH=std::string("%{wks.location}/SandBox/assets/")',
 
-		-- Define Engine Use OpenGL API for Rendering, though we may support multipile Rendering API.
-		"RENDERAPI_OPENGL",
+		-- Define Engine Use WebGPU API for Rendering, though we may support multiple Rendering API.
+		"RENDERAPI_WEBGPU",
 
 		-- Define Platform : Windows.
 		"PLATFORM_WINDOWS"

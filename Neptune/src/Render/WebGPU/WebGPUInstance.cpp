@@ -9,11 +9,7 @@
 
 namespace Neptune {
 
-    WebGPUInstance::WebGPUInstance(
-            WebGPUState&       webGPUState ,
-            const std::string& name        ,
-            const std::string& engineName
-    )
+    WebGPUInstance::WebGPUInstance(WebGPUState& webGPUState)
             : WebGPUObject(webGPUState)
     {
         webGPUState.m_Instance = wgpuCreateInstance(nullptr);

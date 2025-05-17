@@ -23,14 +23,8 @@ namespace Neptune {
         * @brief Constructor Function.
         * Create WGPUInstance and WGPUSurface.
         * @param[in] webGPUState The global VulkanState.
-        * @param[in] name Application name.
-        * @param[in] engineName Engine name.
         */
-        WebGPUInstance(
-                WebGPUState&       webGPUState ,
-                const std::string& name        ,
-                const std::string& engineName
-        );
+        WebGPUInstance(WebGPUState& webGPUState);
 
         /**
         * @brief Destructor Function.

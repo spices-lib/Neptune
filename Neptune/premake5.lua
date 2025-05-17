@@ -63,8 +63,8 @@ project "Neptune"
 		-- Define Engine Extent Processes Folder.
 		'NEPTUNE_EXTENT_PROCESS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/../vendor/")',
 
-		-- Define Engine Use OpenGL API for Rendering, though we may support multipile Rendering API.
-		"RENDERAPI_OPENGL",
+		-- Define Engine Use WebGPU API for Rendering, though we may support multiple Rendering API.
+		"RENDERAPI_WEBGPU",
 
 		-- Define Platform : Windows.
 		"PLATFORM_WINDOWS"

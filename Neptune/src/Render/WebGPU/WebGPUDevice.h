@@ -11,6 +11,16 @@
 namespace Neptune {
 
     /**
+	* @brief SwapChain Utils.
+	* Queried from device.
+	*/
+    struct SwapChainSupportDetails
+    {
+        WGPUTextureFormat format;     // @brief The selected VkSurfaceFormatKHR.
+        WGPUPresentMode presentMode;  // @brief The selected VkPresentModeKHR.
+    };
+
+    /**
     * @brief WebGPUDevice Class.
     * This class defines the WebGPUDevice behaves.
     * This class is just a wrapper of WebGPUDevice.
@@ -23,18 +33,29 @@ namespace Neptune {
         * @brief Constructor Function.
         * Create WebGPUDevice.
         * @param[in] webGPUState The global VulkanState.
-        * @param[in] name Application name.
-        * @param[in] engineName Engine name.
         */
-        WebGPUDevice(
-                WebGPUState&       webGPUState ,
-                const std::string& name        ,
-                const std::string& engineName
-        );
+        WebGPUDevice(WebGPUState& webGPUState);
 
         /**
         * @brief Destructor Function.
         */
         virtual ~WebGPUDevice() override = default;
+
+        /**
+		* @brief Get SwapChain Utils.
+		* @return Returns SwapChain Utils.
+		*/
+        inline const SwapChainSupportDetails& GetSwapChainSupport() { return m_SwapChainSupportDetails; }
+
+    private:
+
+        void CreateDevice();
+        void CreateSurface();
+        void QuerySwapChainSupport();
+
+    private:
+
+        SwapChainSupportDetails m_SwapChainSupportDetails;
+
     };
 }

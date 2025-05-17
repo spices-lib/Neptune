@@ -28,8 +28,8 @@ project "Test"
 	-- Macros Definitions
 	defines
 	{
-		-- Define Engine Use OpenGL API for Rendering, though we may support multipile Rendering API.
-		"RENDERAPI_OPENGL",
+		-- Define Engine Use WebGPU API for Rendering, though we may support multiple Rendering API.
+		"RENDERAPI_WEBGPU",
 
 		-- Define Platform : Windows.
 		"PLATFORM_WINDOWS"
