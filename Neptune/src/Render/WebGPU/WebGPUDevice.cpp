@@ -11,11 +11,30 @@
 
 namespace Neptune {
 
+    static void WebGPUErrorCallback(WGPUErrorType error_type, const char* message, void*)
+    {
+        const char* error_type_lbl = "";
+        switch (error_type)
+        {
+            case WGPUErrorType_Validation:  error_type_lbl = "Validation"; break;
+            case WGPUErrorType_OutOfMemory: error_type_lbl = "Out of memory"; break;
+            case WGPUErrorType_Unknown:     error_type_lbl = "Unknown"; break;
+            case WGPUErrorType_DeviceLost:  error_type_lbl = "Device lost"; break;
+            default:                        error_type_lbl = "Unknown";
+        }
+
+        std::stringstream ss;
+        ss << error_type_lbl << "error: " << message;
+
+        NEPTUNE_CORE_ERROR(ss.str())
+    }
+
     WebGPUDevice::WebGPUDevice(WebGPUState& webGPUState)
             : WebGPUObject(webGPUState)
     {
         CreateSurface();
         CreateDevice();
+        CreateQueue();
     }
 
     void WebGPUDevice::CreateDevice()
@@ -37,6 +56,8 @@ namespace Neptune {
         m_WebGPUState.m_Device = RequestDevice(adapter);
 
 #endif
+
+        wgpuDeviceSetUncapturedErrorCallback(m_WebGPUState.m_Device, WebGPUErrorCallback, nullptr);
 
     }
 
@@ -97,6 +118,11 @@ namespace Neptune {
                 }
             }
         }
+    }
+
+    void WebGPUDevice::CreateQueue()
+    {
+        m_WebGPUState.m_GraphicQueue = wgpuDeviceGetQueue(m_WebGPUState.m_Device);
     }
 
 }

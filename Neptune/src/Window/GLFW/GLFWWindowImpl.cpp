@@ -73,6 +73,10 @@ namespace Neptune {
         // Error event Callback.
         glfwSetErrorCallback([](int error, const char* description){
 
+            std::stringstream ss;
+            ss << "glfwError: " << error << " | " << description;
+
+            NEPTUNE_CORE_ERROR(ss.str())
         });
 
         // Framebuffer resize event Callback, not in use.

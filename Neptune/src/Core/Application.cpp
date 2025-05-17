@@ -55,7 +55,7 @@ namespace Neptune {
 #ifdef __EMSCRIPTEN__
 
         // tell emscripten to use "MainLoop" as the main loop
-        //emscripten_set_main_loop_arg(MainLoop, this, 0, 0);
+        emscripten_set_main_loop_arg(MainLoop, this, 0, 0);
 
 #else
 

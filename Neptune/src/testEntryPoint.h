@@ -56,30 +56,14 @@ static void wgpu_error_callback(WGPUErrorType error_type, const char* message, v
     printf("%s error: %s\n", error_type_lbl, message);
 }
 
-//! jsRenderFrame: for the sake of this example, uses the canvas2D api to change the color of the screen / display a message
-EM_JS(void, jsRenderFrame, (GLFWwindow *glfwWindow, int w, int h, int fw, int fh, double mx, double my, int color, bool isFullscreen), {
-    const ctx = Module.glfwGetCanvas(glfwWindow).getContext('2d');
-    //ctx.fillStyle = `rgb(${color}, ${color}, ${color})`;
-    //ctx.fillRect(0, 0, fw, fh); // using framebuffer width/height
-})
-
-
 static bool InitWGPU(GLFWwindow* window)
 {
     wgpu::Instance instance = wgpuCreateInstance(nullptr);
 
-#ifdef __EMSCRIPTEN__
     wgpu_device = emscripten_webgpu_get_device();
     if (!wgpu_device)
         return false;
-#else
-    WGPUAdapter adapter = RequestAdapter(instance.Get());
-    if (!adapter)
-        return false;
-    wgpu_device = RequestDevice(adapter);
-#endif
 
-#ifdef __EMSCRIPTEN__
     wgpu::SurfaceDescriptorFromCanvasHTMLSelector html_surface_desc = {};
     html_surface_desc.selector = "#Nepnep";
     wgpu::SurfaceDescriptor surface_desc = {};
@@ -88,12 +72,7 @@ static bool InitWGPU(GLFWwindow* window)
 
     wgpu::Adapter adapter = {};
     wgpu_preferred_fmt = (WGPUTextureFormat)surface.GetPreferredFormat(adapter);
-#else
-    wgpu::Surface surface = wgpu::glfw::CreateSurfaceForWindow(instance, window);
-    if (!surface)
-        return false;
-    wgpu_preferred_fmt = WGPUTextureFormat_BGRA8Unorm;
-#endif
+
 
     wgpu_instance = instance.MoveToCHandle();
     wgpu_surface = surface.MoveToCHandle();
@@ -189,10 +168,6 @@ void renderFrame(GLFWwindow *iWindow)
     // Rendering
     ImGui::Render();
 
-#ifndef __EMSCRIPTEN__
-    // Tick needs to be called in Dawn to display validation errors
-        wgpuDeviceTick(wgpu_device);
-#endif
 
     WGPURenderPassColorAttachment color_attachments = {};
     color_attachments.depthSlice = WGPU_DEPTH_SLICE_UNDEFINED;
@@ -218,16 +193,10 @@ void renderFrame(GLFWwindow *iWindow)
     WGPUQueue queue = wgpuDeviceGetQueue(wgpu_device);
     wgpuQueueSubmit(queue, 1, &cmd_buffer);
 
-#ifndef __EMSCRIPTEN__
-    wgpuSwapChainPresent(wgpu_swap_chain);
-#endif
-
     wgpuTextureViewRelease(color_attachments.view);
     wgpuRenderPassEncoderRelease(pass);
     wgpuCommandEncoderRelease(encoder);
     wgpuCommandBufferRelease(cmd_buffer);
-
-    jsRenderFrame(iWindow, w, h, fw, fh, mx, my, 127, emscripten_glfw_is_window_fullscreen(iWindow));
 }
 
 //! The main loop (called by emscripten for each frame)
@@ -333,25 +302,7 @@ int main()
     init_info.DepthStencilFormat = WGPUTextureFormat_Undefined;
     ImGui_ImplWGPU_Init(&init_info);
 
-    // Load Fonts
-    // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
-    // - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
-    // - If the file cannot be loaded, the function will return a nullptr. Please handle those errors in your application (e.g. use an assertion, or display an error and quit).
-    // - The fonts will be rasterized at a given size (w/ oversampling) and stored into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame below will call.
-    // - Use '#define IMGUI_ENABLE_FREETYPE' in your imconfig file to use Freetype for higher quality font rendering.
-    // - Read 'docs/FONTS.md' for more instructions and details.
-    // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
-    // - Emscripten allows preloading a file or folder to be accessible at runtime. See Makefile for details.
-    //io.Fonts->AddFontDefault();
-#ifndef IMGUI_DISABLE_FILE_FUNCTIONS
-    //io.Fonts->AddFontFromFileTTF("fonts/segoeui.ttf", 18.0f);
-    //io.Fonts->AddFontFromFileTTF("fonts/DroidSans.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("fonts/Roboto-Medium.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("fonts/Cousine-Regular.ttf", 15.0f);
-    //io.Fonts->AddFontFromFileTTF("fonts/ProggyTiny.ttf", 10.0f);
-    //ImFont* font = io.Fonts->AddFontFromFileTTF("fonts/ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
-    //IM_ASSERT(font != nullptr);
-#endif
+
 
     // tell emscripten to use "main_loop" as the main loop (window is user data)
     emscripten_set_main_loop_arg(main_loop, window, 0, GLFW_FALSE);

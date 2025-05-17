@@ -49,11 +49,11 @@ constexpr uint32_t MaxFrameInFlight = 2;
         //VmaAllocator                                     m_VmaAllocator;               /* @brief From WebGPUMemoryAllocator.                                     */
         //VulkanFunctions                                  m_VkFunc;                     /* @brief From WebGPUFunctions.                                           */
         WGPUQueue									       m_GraphicQueue;               /* @brief From WebGPUDevice, Queue for graphic compute.                   */
-        uint32_t                                           m_GraphicQueueFamily;         /* @brief From WebGPUDevice, ID for graphic queue.                        */
-        WGPUQueue									       m_PresentQueue;               /* @brief From WebGPUDevice, Queue for present windows.                   */
-        WGPUQueue										   m_TransferQueue;              /* @brief From WebGPUDevice, Queue for transfer buffer.                   */
-        WGPUQueue								  	       m_ComputeQueue;               /* @brief From WebGPUDevice, Queue for compute shader.                    */
-        uint32_t                                           m_ComputeQueueFamily;         /* @brief From WebGPUDevice, ID for compute queue.                        */
+        //uint32_t                                           m_GraphicQueueFamily;         /* @brief From WebGPUDevice, ID for graphic queue.                        */
+        //WGPUQueue									       m_PresentQueue;               /* @brief From WebGPUDevice, Queue for present windows.                   */
+        //WGPUQueue										   m_TransferQueue;              /* @brief From WebGPUDevice, Queue for transfer buffer.                   */
+        //WGPUQueue								  	       m_ComputeQueue;               /* @brief From WebGPUDevice, Queue for compute shader.                    */
+        //uint32_t                                           m_ComputeQueueFamily;         /* @brief From WebGPUDevice, ID for compute queue.                        */
         WGPUSwapChain                                      m_SwapChain;                  /* @brief From WebGPUSwapChain.                                           */
         std::array<WGPUTexture,           MaxFrameInFlight>  m_SwapChainImages;            /* @brief The SwapChain's image, used for present.                        */
         std::array<WGPUTextureView,       MaxFrameInFlight>  m_SwapChainImageViews;        /* @brief The SwapChain's imageView.                                      */
@@ -61,14 +61,14 @@ constexpr uint32_t MaxFrameInFlight = 2;
 
         // Used for Graphic Queue
         //WGPUCommandPool                                    m_GraphicCommandPool;         /* @brief From WebGPUCommandBuffer                                        */
-        std::array<WGPUCommandBuffer,   MaxFrameInFlight>  m_GraphicCommandBuffer;       /* @brief From WebGPUCommandBuffer, Array num equals to MaxFrameInFlight. */
+        WGPUCommandEncoder  m_GraphicCommandEncoder;                                       /* @brief From WebGPUCommandBuffer, Array num equals to MaxFrameInFlight. */
         //std::array<WGPUSemaphore,       MaxFrameInFlight>  m_GraphicImageSemaphore;      /* @brief From WebGPUSwapChain, Array num equals to MaxFrameInFlight.     */
         //std::array<WGPUSemaphore,       MaxFrameInFlight>  m_GraphicQueueSemaphore;      /* @brief From WebGPUSwapChain, Array num equals to MaxFrameInFlight.     */
         //std::array<WGPUFence,           MaxFrameInFlight>  m_GraphicFence;               /* @brief From WebGPUSwapChain, Array num equals to MaxFrameInFlight.     */
 
         // Use for Compute Queue.
         //WGPUCommandPool                                    m_ComputeCommandPool;         /* @brief From WebGPUCommandBuffer                                        */
-        std::array<WGPUCommandBuffer,   MaxFrameInFlight>  m_ComputeCommandBuffer;       /* @brief From WebGPUCommandBuffer, Array num equals to MaxFrameInFlight. */
+        //std::array<WGPUCommandBuffer,   MaxFrameInFlight>  m_ComputeCommandBuffer;       /* @brief From WebGPUCommandBuffer, Array num equals to MaxFrameInFlight. */
         //std::array<WGPUSemaphore,       MaxFrameInFlight>  m_ComputeQueueSemaphore;      /* @brief From WebGPUSwapChain, Array num equals to MaxFrameInFlight.     */
         //std::array<WGPUFence,           MaxFrameInFlight>  m_ComputeFence;               /* @brief From WebGPUSwapChain, Array num equals to MaxFrameInFlight.     */
     };

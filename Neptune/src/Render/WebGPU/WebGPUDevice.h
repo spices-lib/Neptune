@@ -51,6 +51,7 @@ namespace Neptune {
 
         void CreateDevice();
         void CreateSurface();
+        void CreateQueue();
         void QuerySwapChainSupport();
 
     private:
