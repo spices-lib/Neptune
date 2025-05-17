@@ -17,6 +17,6 @@ namespace StringLibrary
     * @param[in] delimiter The char we want to use.
     * @return Returns a string vector container.
     */
-    static std::vector<std::string> SplitString(const std::string& input, char delimiter);
+    std::vector<std::string> SplitString(const std::string& input, char delimiter);
 }
 }

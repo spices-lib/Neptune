@@ -5,6 +5,8 @@
 */
 
 #pragma once
+#include "Log/Log.h"
+
 #include <memory.h>
 #include <forward_list>
 
@@ -21,7 +23,7 @@ namespace Neptune {
         {                                                                                                     \
             std::stringstream ss;                                                                             \
             ss << "Assert Failed \n    At File: " << __FILE__ << " \n   At Line: " << __LINE__ << "\n   ";    \
-            NEPTUNE_CORE_ERROR(ss.str())                                                                       \
+            NEPTUNE_CORE_ERROR(ss.str())                                                                      \
         }                                                                                                     \
     }                                                                                                         \
 
