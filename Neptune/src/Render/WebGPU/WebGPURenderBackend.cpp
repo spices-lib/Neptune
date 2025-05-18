@@ -8,7 +8,6 @@
 #include "WebGPURenderBackend.h"
 #include "WebGPUInstance.h"
 #include "WebGPUDevice.h"
-#include "WebGPUCommandEncoder.h"
 #include "WebGPUSwapChain.h"
 
 #include <emscripten.h>
@@ -35,17 +34,9 @@ namespace Neptune {
         m_State     = CreateSP<WebGPUState>();
         m_Instance  = CreateSP<WebGPUInstance>(*m_State);
         m_Device    = CreateSP<WebGPUDevice>(*m_State);
-
         m_SwapChain = CreateSP<WebGPUSwapChain>(*m_State, m_Device);
 
         GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
-        if(window)
-        {
-            printf("Has value\n");
-        }
-        else {
-            printf("Not value\n");
-        }
 
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();

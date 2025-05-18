@@ -10,6 +10,8 @@
 
 namespace Neptune {
 
+    class Event;
+
     /**
     * @brief System Class.
     * This class defines the System behaves.
@@ -21,7 +23,7 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        SystemManager() = default;
+        SystemManager();
 
         /**
         * @brief Destructor Function.
@@ -51,6 +53,14 @@ namespace Neptune {
 		* @brief Update all system that pushed to this manager.
 		*/
         void Run();
+
+    private:
+
+        /**
+		* @brief The root event function pointer.
+		* @param[in] event Event.
+		*/
+        void OnEvent(Event& event);
 
     private:
 

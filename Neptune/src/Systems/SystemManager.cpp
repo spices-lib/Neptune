@@ -6,8 +6,15 @@
 
 #include "Pchheader.h"
 #include "SystemManager.h"
+#include "Core/Event/Event.h"
 
 namespace Neptune {
+
+    SystemManager::SystemManager()
+    {
+        // Set Global EventCallBack
+        Event::SetEventCallbackFn(BIND_EVENT_FN(SystemManager::OnEvent));
+    }
 
     SystemManager* SystemManager::PopSystem()
     {
@@ -31,5 +38,10 @@ namespace Neptune {
         {
             m_Systems[i]->Tick();
         }
+    }
+
+    void SystemManager::OnEvent(Event& event)
+    {
+        NEPTUNE_CORE_TRACE(event.ToString())
     }
 }

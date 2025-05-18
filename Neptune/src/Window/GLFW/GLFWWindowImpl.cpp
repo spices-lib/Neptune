@@ -6,6 +6,9 @@
 
 #include "Pchheader.h"
 #include "GLFWWindowImpl.h"
+#include "Core/Event/WindowEvent.h"
+#include "Core/Event/KeyEvent.h"
+#include "Core/Event/MouseEvent.h"
 
 #include <GLFW/glfw3.h>
 #include <GLFW/emscripten_glfw3.h>
@@ -45,6 +48,9 @@ namespace Neptune {
 
         // makes the canvas resizable and match the full window size
         emscripten_glfw_make_canvas_resizable(m_Windows, "window", nullptr);
+
+        // Set gltf event call back.
+        SetInternalCallBack();
     }
 
     GLFWWindowImpl::~GLFWWindowImpl()
@@ -98,15 +104,15 @@ namespace Neptune {
             thisWindows->m_WindowInfo.width  = width;
             thisWindows->m_WindowInfo.height = height;
 
-            //WindowResizeEvent event(width, height);
-            //Event::GetEventCallbackFn()(event);
+            WindowResizeEvent event(width, height);
+            Event::GetEventCallbackFn()(event);
         });
 
         // Window close event Callback.
         glfwSetWindowCloseCallback(m_Windows, [](GLFWwindow* window)
         {
-            //WindowCloseEvent event;
-            //Event::GetEventCallbackFn()(event);
+            WindowCloseEvent event;
+            Event::GetEventCallbackFn()(event);
         });
 
         // Key event Callback.
@@ -116,22 +122,22 @@ namespace Neptune {
             {
                 case GLFW_PRESS:
                 {
-                    //KeyPressedEvent event(key, 0);
-                    //Event::GetEventCallbackFn()(event);
+                    KeyPressedEvent event(key, 0);
+                    Event::GetEventCallbackFn()(event);
 
                     break;
                 }
                 case GLFW_RELEASE:
                 {
-                    //KeyReleasedEvent event(key);
-                    //Event::GetEventCallbackFn()(event);
+                    KeyReleasedEvent event(key);
+                    Event::GetEventCallbackFn()(event);
 
                     break;
                 }
                 case GLFW_REPEAT:
                 {
-                    //KeyPressedEvent event(key, 1);
-                    //Event::GetEventCallbackFn()(event);
+                    KeyPressedEvent event(key, 1);
+                    Event::GetEventCallbackFn()(event);
 
                     break;
                 }
@@ -141,8 +147,8 @@ namespace Neptune {
         // Key Input event Callback.
         glfwSetCharCallback(m_Windows, [](GLFWwindow* window, unsigned int keycode)
         {
-            //KeyTypedEvent event(static_cast<int>(keycode));
-            //Event::GetEventCallbackFn()(event);
+            KeyTypedEvent event(static_cast<int>(keycode));
+            Event::GetEventCallbackFn()(event);
         });
 
         // Mouse Button event Callback.
@@ -152,15 +158,15 @@ namespace Neptune {
             {
                 case GLFW_PRESS:
                 {
-                    //MouseButtonPressedEvent event(button);
-                    //Event::GetEventCallbackFn()(event);
+                    MouseButtonPressedEvent event(button);
+                    Event::GetEventCallbackFn()(event);
 
                     break;
                 }
                 case GLFW_RELEASE:
                 {
-                    //MouseButtonReleasedEvent event(button);
-                    //Event::GetEventCallbackFn()(event);
+                    MouseButtonReleasedEvent event(button);
+                    Event::GetEventCallbackFn()(event);
 
                     break;
                 }
@@ -170,15 +176,15 @@ namespace Neptune {
         // Mouse Scroll event Callback.
         glfwSetScrollCallback(m_Windows, [](GLFWwindow* window, double xOffset, double yOffset)
         {
-            //MouseScrolledEvent event(static_cast<float>(xOffset), static_cast<float>(yOffset));
-            //Event::GetEventCallbackFn()(event);
+            MouseScrolledEvent event(static_cast<float>(xOffset), static_cast<float>(yOffset));
+            Event::GetEventCallbackFn()(event);
         });
 
         // Mouse Move event Callback.
         glfwSetCursorPosCallback(m_Windows, [](GLFWwindow* window, double xPos, double yPos)
         {
-            //MouseMovedEvent event(static_cast<float>(xPos), static_cast<float>(yPos));
-            //Event::GetEventCallbackFn()(event);
+            MouseMovedEvent event(static_cast<float>(xPos), static_cast<float>(yPos));
+            Event::GetEventCallbackFn()(event);
         });
     }
 

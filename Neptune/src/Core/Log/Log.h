@@ -51,12 +51,12 @@ namespace Neptune {
         */
         bool IsInitialized() const { return m_IsInitialized; }
 
-    private:
+    protected:
 
         /**
         * @brief Boolean of Initialize state.
         */
-        bool m_IsInitialized;
+        bool m_IsInitialized = false;
     };
 }
 

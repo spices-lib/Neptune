@@ -61,10 +61,5 @@ namespace Neptune {
         * @brief Game Stage Logger.
         */
         std::shared_ptr<spdlog::logger> m_ClientLogger;
-
-        /**
-        * @brief Boolean of Initialize state.
-        */
-        bool m_IsInitialized;
     };
 }

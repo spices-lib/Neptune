@@ -14,7 +14,6 @@ namespace Neptune {
     class WebGPUInstance;
     class WebGPUDevice;
     class WebGPUSwapChain;
-    class WebGPUCommandEncoder;
 
     /**
     * @brief WebGPURenderBackend Class.
@@ -55,8 +54,6 @@ namespace Neptune {
         SP<WebGPUState>     m_State;
         SP<WebGPUInstance>  m_Instance;
         SP<WebGPUDevice>    m_Device;
-
-        SP<WebGPUCommandEncoder> m_CommandEncoder;
         SP<WebGPUSwapChain> m_SwapChain;
     };
 }

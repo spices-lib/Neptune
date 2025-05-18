@@ -75,85 +75,15 @@ namespace Neptune {
         spdlog::drop_all();
     }
 
-    void LogImpl::CoreTrace   (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
+    void LogImpl::CoreTrace     (const std::string& msg) { m_CoreLogger->trace   (msg); }
+    void LogImpl::CoreInfo      (const std::string& msg) { m_CoreLogger->info    (msg); }
+    void LogImpl::CoreWarn      (const std::string& msg) { m_CoreLogger->warn    (msg); }
+    void LogImpl::CoreError     (const std::string& msg) { m_CoreLogger->error   (msg); }
+    void LogImpl::CoreCritical  (const std::string& msg) { m_CoreLogger->critical(msg); }
 
-        m_CoreLogger->trace(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::CoreInfo    (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->info(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::CoreWarn    (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->warn(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::CoreError   (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->error(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::CoreCritical(const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->critical(ss.str());
-        printf(ss.str().c_str());
-    }
-
-    void LogImpl::ClientTrace   (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->trace(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::ClientInfo    (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->info(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::ClientWarn    (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->warn(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::ClientError   (const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->error(ss.str());
-        printf(ss.str().c_str());
-    }
-    void LogImpl::ClientCritical(const std::string& msg)
-    {
-        std::stringstream ss;
-        ss << msg << "\n";
-
-        m_CoreLogger->critical(ss.str());
-        printf(ss.str().c_str());
-    }
+    void LogImpl::ClientTrace   (const std::string& msg) { m_CoreLogger->trace   (msg); }
+    void LogImpl::ClientInfo    (const std::string& msg) { m_CoreLogger->info    (msg); }
+    void LogImpl::ClientWarn    (const std::string& msg) { m_CoreLogger->warn    (msg); }
+    void LogImpl::ClientError   (const std::string& msg) { m_CoreLogger->error   (msg); }
+    void LogImpl::ClientCritical(const std::string& msg) { m_CoreLogger->critical(msg); }
 }
