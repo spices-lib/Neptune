@@ -23,24 +23,14 @@ constexpr uint32_t MaxFrameInFlight = 2;
     /**
     * @brief This struct contains all WebGPU object in used global.
     */
-    struct WebGPUState
+    class WebGPUState : public NonCopyable
     {
+    public:
+
         /**
         * @brief Constructor Function.
         */
         WebGPUState() = default;
-
-        /**
-        * @brief Copy Constructor Function.
-        * @note This Class not allowed copy behaves.
-        */
-        WebGPUState(const WebGPUState&) = delete;
-
-        /**
-        * @brief Copy Assignment Operation.
-        * @note This Class not allowed copy behaves.
-        */
-        WebGPUState& operator=(const WebGPUState&) = delete;
 
         WGPUInstance                                       m_Instance;                   /* @brief From WebGPUInstance.                                            */
         WGPUSurface                                        m_Surface;                    /* @brief From WebGPUInstance.                                            */

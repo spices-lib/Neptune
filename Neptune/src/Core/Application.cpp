@@ -19,14 +19,29 @@
 
 namespace Neptune {
 
-    UP<Application> Application::Create()
+    static UP<Application> S_Instance = nullptr;
+
+    Application& Application::Instance()
     {
-        return std::move(CreateUP<Application>());
+        if(!S_Instance)
+        {
+            S_Instance = CreateUP<Application>();
+        }
+
+        return *S_Instance;
+    }
+
+    void Application::Destroy()
+    {
+#ifndef __EMSCRIPTEN__
+        S_Instance.reset();
+        S_Instance = nullptr;
+#endif
     }
 
     Application::Application()
     {
-        m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw);
+        m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw).get();
 
         m_SystemManager = CreateUP<SystemManager>();
         m_SystemManager
@@ -41,7 +56,7 @@ namespace Neptune {
     {
         m_DocumentContext.reset();
         m_SystemManager->PopAllSystems();
-        m_Window.reset();
+        Window::Destroy();
     }
 
     void Application::Run()

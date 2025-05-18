@@ -49,13 +49,31 @@ namespace Neptune {
 
     private:
 
+        /**
+        * @brief Create logical device.
+        */
         void CreateDevice();
+
+        /**
+        * @brief Create surface.
+        */
         void CreateSurface();
+
+        /**
+        * @brief Create queue.
+        */
         void CreateQueue();
+
+        /**
+        * @brief Fetch SwapChain device support.
+        */
         void QuerySwapChainSupport();
 
     private:
 
+        /**
+        * @brief SwapChainSupportDetails.
+        */
         SwapChainSupportDetails m_SwapChainSupportDetails;
 
     };

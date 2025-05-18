@@ -78,7 +78,9 @@ project "SandBox"
         "-s USE_WEBGPU=1",                      -- Dependency: webgpu
         "-s ALLOW_MEMORY_GROWTH",               -- Allow Memory growth
         "-s WASM_BIGINT",                       -- Enable BigInt in JS
-        "-s WASM=1"                             -- Output wasm
+        "-s WASM=1",                            -- Output wasm
+        "-s STACK_SIZE=4194304",                -- Expand stack size to 4M
+        "-s TOTAL_MEMORY=64MB"                  -- Wasm total memory to 64M
 	}
 
 	-- Platform: Windows

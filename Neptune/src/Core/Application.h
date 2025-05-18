@@ -23,7 +23,8 @@ namespace Neptune {
     {
     public:
 
-        static UP<Application> Create();
+        static Application& Instance();
+        static void Destroy();
 
     public:
 
@@ -37,17 +38,25 @@ namespace Neptune {
         */
         virtual ~Application() override;
 
+        /**
+        * @brief MainLoop entry.
+        */
         void Run();
 
     private:
 
+        /**
+        * @brief MainLoop provided for emscripten.
+        *
+        * @param[in] iUserData this pointer.
+        */
         static void MainLoop(void* iUserData);
 
-    private:
+    public:
 
-        UP<SystemManager> m_SystemManager;
-        UP<DocumentContext> m_DocumentContext;
-        SP<Window> m_Window;
+        UP<SystemManager> m_SystemManager;        // @brief SystemManager
+        UP<DocumentContext> m_DocumentContext;    // @brief DocumentContext
+        Window* m_Window;                         // @brief Window
     };
 
     /**

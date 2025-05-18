@@ -7,27 +7,16 @@
 
 #include "Core/Core.h"
 #include "Core/Application.h"
-#include "testEntryPoint.h"
+//#include "testEntryPoint.h"
 
 /**
 * @brief Main Function.
 */
-/*
 int main() {
 
-    NEPTUNE_CORE_TRACE("Neptune Entry");
-    auto engine = Neptune::Application::Create();
-    if(engine)
-    {
-        NEPTUNE_CORE_TRACE("Neptune Application Created succeed.")
-    }
-    else
-    {
-        NEPTUNE_CORE_CRITICAL("Neptune Application Created failed.")
-        return -1;
-    }
-
-    engine->Run();
+    auto& engine = Neptune::Application::Instance();
+    engine.Run();
+    Neptune::Application::Destroy();
 
     return 0;
-}*/
+}

@@ -35,8 +35,19 @@ namespace Neptune {
         */
         virtual ~WebGPURenderBackend();
 
+        /**
+        * @brief Interface of Begin a frame.
+        */
         virtual void BeginFrame() override;
+
+        /**
+        * @brief Interface of End a frame.
+        */
         virtual void EndFrame() override;
+
+        /**
+        * @brief Interface of Render a frame.
+        */
         virtual void RenderFrame() override;
 
     private:

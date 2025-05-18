@@ -6,12 +6,9 @@
 
 #pragma once
 #include "Core/Core.h"
-#include "Core/Library/ClassLibrary.h"
 #include "System.h"
 
 namespace Neptune {
-
-    using namespace ClassLibrary;
 
     /**
     * @brief System Class.
@@ -57,6 +54,9 @@ namespace Neptune {
 
     private:
 
+        /**
+        * @brief Systems queue.
+        */
         std::vector<UP<System>> m_Systems;
     };
 

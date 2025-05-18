@@ -12,8 +12,19 @@ namespace Neptune {
     WebGPUCommandEncoder::WebGPUCommandEncoder(WebGPUState& webGPUState)
             : WebGPUObject(webGPUState)
     {
-        WGPUCommandEncoderDescriptor desc = {};
-        webGPUState.m_GraphicCommandEncoder = wgpuDeviceCreateCommandEncoder(webGPUState.m_Device, &desc);
+        if(!webGPUState.m_GraphicCommandEncoder)
+        {
+            WGPUCommandEncoderDescriptor desc = {};
+            webGPUState.m_GraphicCommandEncoder = wgpuDeviceCreateCommandEncoder(webGPUState.m_Device, &desc);
+        }
     }
 
+    WebGPUCommandEncoder::~WebGPUCommandEncoder()
+    {
+        if(m_WebGPUState.m_GraphicCommandEncoder)
+        {
+            wgpuCommandEncoderRelease(m_WebGPUState.m_GraphicCommandEncoder);
+            m_WebGPUState.m_GraphicCommandEncoder = nullptr;
+        }
+    }
 }

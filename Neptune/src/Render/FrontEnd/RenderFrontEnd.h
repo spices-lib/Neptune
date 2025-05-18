@@ -33,6 +33,13 @@ namespace Neptune {
     {
     public:
 
+        /**
+        * @brief Create Render Frontend.
+        *
+        * @param[in] backend RenderBackendEnum.
+        *
+        * @return Returns Render Frontend pointer.
+        */
         static SP<RenderFrontEnd> Create(RenderBackendEnum backend);
 
     public:
@@ -65,6 +72,9 @@ namespace Neptune {
 
     protected:
 
+        /**
+        * @brief RenderBackendEnum.
+        */
         RenderBackendEnum m_RenderBackendEnum;
     };
 }

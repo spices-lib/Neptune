@@ -57,12 +57,17 @@ namespace Neptune {
 
     bool GLFWWindowImpl::IsWindowActive()
     {
-        return glfwWindowShouldClose(m_Windows);
+        return !glfwWindowShouldClose(m_Windows);
     }
 
     void GLFWWindowImpl::PollEvents()
     {
         glfwPollEvents();
+    }
+
+    void* GLFWWindowImpl::NativeWindow()
+    {
+        return m_Windows;
     }
 
     void GLFWWindowImpl::SetInternalCallBack()

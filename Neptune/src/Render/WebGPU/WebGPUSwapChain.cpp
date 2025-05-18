@@ -11,8 +11,8 @@
 namespace Neptune {
 
     WebGPUSwapChain::WebGPUSwapChain(
-            WebGPUState&                  webGPUState ,
-            std::shared_ptr<WebGPUDevice> webGPUDevice
+            WebGPUState&     webGPUState ,
+            SP<WebGPUDevice> webGPUDevice
     )
             : WebGPUObject(webGPUState)
     {

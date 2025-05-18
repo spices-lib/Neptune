@@ -28,8 +28,19 @@ namespace Neptune {
         */
         virtual ~System() override = default;
 
+        /**
+        * @brief Interface of system initialize.
+        */
         virtual void OnSystemInitialize() = 0;
+
+        /**
+        * @brief Interface of system shutdown.
+        */
         virtual void OnSystemShutDown() = 0;
+
+        /**
+        * @brief Interface of system tick run.
+        */
         virtual void Tick() = 0;
 
     };

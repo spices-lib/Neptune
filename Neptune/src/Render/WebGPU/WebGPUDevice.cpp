@@ -34,6 +34,7 @@ namespace Neptune {
     {
         CreateSurface();
         CreateDevice();
+        QuerySwapChainSupport();
         CreateQueue();
     }
 

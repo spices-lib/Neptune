@@ -10,6 +10,8 @@
 
 namespace Neptune {
 
+    class RenderFrontEnd;
+
     /**
     * @brief RHISystem Class.
     * This class defines the RHISystem behaves.
@@ -28,8 +30,26 @@ namespace Neptune {
         */
         virtual ~RHISystem() override = default;
 
-        virtual void OnSystemInitialize() override {}
-        virtual void OnSystemShutDown() override {}
-        virtual void Tick() override {}
+        /**
+        * @brief Interface of system initialize.
+        */
+        virtual void OnSystemInitialize() override;
+
+        /**
+        * @brief Interface of system shutdown.
+        */
+        virtual void OnSystemShutDown() override;
+
+        /**
+        * @brief Interface of system tick run.
+        */
+        virtual void Tick() override;
+
+    private:
+
+        /**
+        * @brief Render Frontend.
+        */
+        SP<RenderFrontEnd> m_RenderFrontEnd;
     };
 }

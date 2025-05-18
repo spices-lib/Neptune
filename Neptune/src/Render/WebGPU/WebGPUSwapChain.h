@@ -28,8 +28,8 @@ namespace Neptune {
         * @param[in] WebGPUDevice The shared pointer of WebGPUDevice.
         */
         WebGPUSwapChain(
-                WebGPUState&                  webGPUState ,
-                std::shared_ptr<WebGPUDevice> webGPUDevice
+                WebGPUState&     webGPUState ,
+                SP<WebGPUDevice> webGPUDevice
         );
 
         /**
@@ -42,6 +42,6 @@ namespace Neptune {
         /**
 		* @brief The shared pointer of WebGPUDevice.
 		*/
-        std::shared_ptr<WebGPUDevice> m_WebGPUDevice;
+        SP<WebGPUDevice> m_WebGPUDevice;
     };
 }

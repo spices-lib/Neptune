@@ -42,7 +42,27 @@ namespace Neptune {
     {
     public:
 
+        /**
+        * @brief Create Window with specific implement.
+        *
+        * @param[in] initInfo WindowInfo.
+        * @param[in] implement WindowImplement.
+        *
+        * @return Returns Window pointer.
+        */
         static SP<Window> Create(const WindowInfo& initInfo, WindowImplement implement);
+
+        /**
+        * @brief Get Window Instance.
+        *
+        * @return Returns Window reference.
+        */
+        static Window& Instance();
+
+        /**
+        * @brief Destroy Window Instance.
+        */
+        static void Destroy();
 
     public:
 
@@ -58,8 +78,24 @@ namespace Neptune {
         */
         virtual ~Window() = default;
 
+        /**
+        * @brief Interface of determine if window is still active.
+        *
+        * @return Returns true if window is active.
+        */
         virtual bool IsWindowActive() = 0;
+
+        /**
+        * @brief Interface of window poll events.
+        */
         virtual void PollEvents() = 0;
+
+        /**
+        * @brief Interface of get native window pointer.
+        *
+        * @return Returns native window pointer.
+        */
+        virtual void* NativeWindow() = 0;
 
     protected:
 

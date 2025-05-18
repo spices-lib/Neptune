@@ -28,6 +28,6 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~WebGPUCommandEncoder() override = default;
+        virtual ~WebGPUCommandEncoder() override;
     };
 }
