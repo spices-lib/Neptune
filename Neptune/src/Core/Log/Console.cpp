@@ -14,16 +14,15 @@ namespace Neptune {
     */
     static std::unordered_map<std::string, SP<Console>> m_GlobalConsolePool;
 
-    Console::Console(const std::string& filePath, uint32_t maxInfos)
-            : m_FilePath(filePath)
-            , m_MaxInfos(maxInfos)
+    Console::Console(uint32_t maxInfos)
+            : m_MaxInfos(maxInfos)
     {}
 
-    std::shared_ptr<Console> Console::Registry(const std::string& name, const std::string& filePath)
+    std::shared_ptr<Console> Console::Registry(const std::string& name)
     {
         if (m_GlobalConsolePool.find(name) == m_GlobalConsolePool.end())
         {
-            m_GlobalConsolePool[name] = CreateSP<Console>(filePath);
+            m_GlobalConsolePool[name] = CreateSP<Console>();
         }
 
         return m_GlobalConsolePool[name];

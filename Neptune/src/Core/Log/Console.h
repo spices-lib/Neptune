@@ -51,27 +51,24 @@ namespace Neptune {
     public:
 
         /**
+        * @brief Registry a console to ConsolePool.
+        * @param[in] name ConsoleName.
+        * @return Returns Registered Console form Pool.
+        */
+        static std::shared_ptr<Console> Registry(const std::string& name);
+
+    public:
+
+        /**
         * @brief Constructor Function.
-        * @param[in] filePath Console output file.
         * @param[in] maxInfos Maximum Num of Information.
         */
-        Console(const std::string& filePath, uint32_t maxInfos = 50);
+        Console(uint32_t maxInfos = 50);
 
         /**
         * @brief Destructor Function.
         */
         virtual ~Console() override = default;
-
-        /**
-        * @brief Registry a console to ConsolePool.
-        * @param[in] name ConsoleName.
-        * @param[in] filePath Console output file.
-        * @return Returns Registered Console form Pool.
-        */
-        static std::shared_ptr<Console> Registry(
-                const std::string& name,
-                const std::string& filePath = ""
-        );
 
         /**
         * @brief Get Console Infos.
@@ -91,12 +88,6 @@ namespace Neptune {
         */
         void Push(const std::string& cmd);
 
-        /**
-        * @brief Get Console output file.
-        * @return Returns Console output file.
-        */
-        const std::string& GetFilePath() { return m_FilePath; }
-
     protected:
 
         /**
@@ -112,7 +103,6 @@ namespace Neptune {
 
     protected:
 
-        std::string m_FilePath;  // @brief Console File Path.
         uint32_t m_MaxInfos;     // @brief Maximum Num of Information's.
         InfoData m_InfoData;     // @brief Console Information.
     };
