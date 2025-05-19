@@ -15,7 +15,7 @@ namespace Neptune {
     /**
     * @brief Instance a WindowsInput single instance.
     */
-    std::unique_ptr<Input> Input::s_Instance = std::make_unique<WindowsInput>();
+    std::unique_ptr<Input> Input::s_Instance = std::make_unique<GLFWInput>();
 
     bool GLFWInput::IsKeyPressedImpl(const int& keycode)
     {
