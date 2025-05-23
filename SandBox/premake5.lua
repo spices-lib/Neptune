@@ -6,7 +6,7 @@ project "SandBox"
 	kind "ConsoleApp"           -- Use exe.
 	language "C++"				-- Use C++.
 	cppdialect "C++17"			-- Use C++17.
-	staticruntime "On"			-- Use Runtime Linrary: MTD.
+	staticruntime "On"			-- Use Runtime Library: MTD.
 
 	-- Building Output Folder.
 	targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -80,12 +80,20 @@ project "SandBox"
         "-s WASM_BIGINT",                       -- Enable BigInt in JS
         "-s WASM=1",                            -- Output wasm
         "-s STACK_SIZE=4194304",                -- Expand stack size to 4M
-        "-s TOTAL_MEMORY=64MB"                  -- Wasm total memory to 64M
+        "-s TOTAL_MEMORY=64MB",                 -- Wasm total memory to 64M
+        "-o %{cfg.targetdir}/%{prj.name}.js"    -- Generate js file
 	}
+
+    -- The Solution PostCommands
+    postbuildcommands
+    {
+        -- Copy js and wasm to Nepnep
+        'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/static/wasm\\"',
+    }
 
 	-- Platform: Windows
 	filter "system:windows"
-		systemversion "latest"                 -- Use Lastest WindowSDK
+		systemversion "latest"                 -- Use Latest WindowSDK
 		editAndContinue "Off"                  -- Use DebugInfoFormat: Zi (Program Database).
 
 		-- Windows Specific Solution Macro Definitions.
