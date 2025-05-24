@@ -19,6 +19,8 @@ namespace Neptune {
             s_Log = std::make_shared<LogImpl>();
         }
 
+        NEPTUNE_CORE_INFO("Log Module created.")
+
         return s_Log;
     }
 }

@@ -20,8 +20,8 @@ IncludeDir["IconFontCppHeaders"]          = "%{wks.location}/Neptune/vendor/Icon
 IncludeDir["googletest"]                  = "%{wks.location}/Test/vendor/googletest/googletest/include"                       -- Include: googletest
 IncludeDir["googlemock"]                  = "%{wks.location}/Test/vendor/googletest/googlemock/include"                       -- Include: googlemock
 
--- Library Directries Folder
+-- Library Directories Folder
 LibraryDir                                = {}
 
--- Library Directries
+-- Library Directories
 Library                                   = {}

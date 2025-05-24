@@ -18,10 +18,11 @@ namespace Neptune {
         {
             case WindowImplement::emscripten_glfw :
                 S_Instance = CreateSP<GLFWWindowImpl>(initInfo, implement);
+                NEPTUNE_CORE_INFO("GLFW Window created.")
                 break;
             default:
             {
-                printf("Not supported Windows Implement.\n");
+                NEPTUNE_CORE_CRITICAL("Not supported Windows Implement.")
             }
         }
 
@@ -38,6 +39,8 @@ namespace Neptune {
     {
         S_Instance.reset();
         S_Instance = nullptr;
+
+        NEPTUNE_CORE_INFO("GLFW Window destroyed.")
     }
 
     Window::Window(const WindowInfo& initInfo, WindowImplement implement)

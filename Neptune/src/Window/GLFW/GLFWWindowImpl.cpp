@@ -20,7 +20,7 @@ namespace Neptune {
     {
         // initialize the library
         if(!glfwInit()) {
-            return;
+            NEPTUNE_CORE_CRITICAL("glfw init failed.")
         }
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);        // @brief no OpenGL (use canvas2D)
@@ -40,7 +40,7 @@ namespace Neptune {
         // create the only window
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
         if(!m_Windows) {
-            return;
+            NEPTUNE_CORE_CRITICAL("Window create failed.")
         }
 
         // Set glfw call back object pointer.
@@ -79,7 +79,7 @@ namespace Neptune {
     void GLFWWindowImpl::SetInternalCallBack()
     {
         // print the version on the console
-        printf("%s\n", glfwGetVersionString());
+        NEPTUNE_CORE_INFO(glfwGetVersionString())
 
         // Error event Callback.
         glfwSetErrorCallback([](int error, const char* description){

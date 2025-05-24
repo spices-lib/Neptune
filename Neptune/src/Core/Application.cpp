@@ -26,6 +26,7 @@ namespace Neptune {
         if(!S_Instance)
         {
             S_Instance = CreateUP<Application>();
+            NEPTUNE_CORE_INFO("Application created.")
         }
 
         return *S_Instance;
@@ -37,6 +38,7 @@ namespace Neptune {
         S_Instance.reset();
         S_Instance = nullptr;
 #endif
+        NEPTUNE_CORE_INFO("Application destroyed.")
     }
 
     Application::Application()
