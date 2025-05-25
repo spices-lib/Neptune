@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 #include "SystemManager.h"
-#include "Core/Event/Event.h"
+#include "Core/Event/EventListener.h"
 
 namespace Neptune {
 
@@ -43,5 +43,10 @@ namespace Neptune {
     void SystemManager::OnEvent(Event& event)
     {
         NEPTUNE_CORE_TRACE(event.ToString())
+
+        for(int i = 0; i < m_Systems.size(); i++)
+        {
+            EventListener::Dispatch(event, m_Systems[i].get());
+        }
     }
 }

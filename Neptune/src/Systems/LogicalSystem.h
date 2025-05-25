@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "System.h"
+#include "Core/Event/EventListener.h"
 
 namespace Neptune {
 
@@ -14,7 +15,7 @@ namespace Neptune {
     * @brief LogicalSystem Class.
     * This class defines the LogicalSystem behaves.
     */
-    class LogicalSystem : public System
+    class LogicalSystem : public System, public EventListener
     {
     public:
 
@@ -42,5 +43,7 @@ namespace Neptune {
         * @brief Interface of system tick run.
         */
         virtual void Tick() override {}
+
+        virtual void OnEvent(Event& event) override {};
     };
 }

@@ -15,7 +15,7 @@ namespace Neptune {
     /**
     * @brief This enum defines what specific event type is.
     */
-    enum class EventType
+    enum class EventType : uint32_t
     {
         /**
         * @brief None Event.
@@ -51,6 +51,11 @@ namespace Neptune {
         * @brief World Event.
         */
         MeshAdded,
+
+        /**
+        * @brief ALL Event.
+        */
+        ALL = UINT32_MAX
     };
 
     /**

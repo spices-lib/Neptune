@@ -55,13 +55,13 @@ project "Neptune"
 	defines
 	{
 		-- Define Engine Assets Folder.
-		'NEPTUNE_ASSETS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/assets/")',
+		--'NEPTUNE_ASSETS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/assets/")',
 
 		-- Define Engine Logs Folder.
-		'NEPTUNE_CONSOLElOGFILE_PATH=std::string("saved/ConsoleLog/")',
+		--'NEPTUNE_CONSOLElOGFILE_PATH=std::string("saved/ConsoleLog/")',
 
 		-- Define Engine Extent Processes Folder.
-		'NEPTUNE_EXTENT_PROCESS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/../vendor/")',
+		--'NEPTUNE_EXTENT_PROCESS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/../vendor/")',
 
 		-- Define Engine Use WebGPU API for Rendering, though we may support multiple Rendering API.
 		"RENDERAPI_WEBGPU",
