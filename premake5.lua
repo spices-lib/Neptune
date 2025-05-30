@@ -3,7 +3,6 @@
 -- @author Spices.
 
 workspace "Neptune"
-	architecture "wasm64"              -- Platform wasm64
 	startproject "SandBox"             -- Start with SandBox
 
 	-- Configuration: Debug and Release.
@@ -12,6 +11,14 @@ workspace "Neptune"
 		"Debug",
 		"Release",
 	}
+
+	-- Web App
+	filter "system:emscripten"
+		architecture "wasm64"
+
+	-- Windows App
+	filter "system:windows"
+		architecture "x64"
 
 -- Building Output Folder.
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"

@@ -75,7 +75,7 @@ constexpr uint32_t MaxFrameInFlight = 2;
         /**
         * @brief Constructor Function.
         * Init member variables.
-        * @param[in] vulkanState The global VulkanState.
+        * @param[in] webGPUState The global VulkanState.
         */
         WebGPUObject(WebGPUState& webGPUState)
                 : m_WebGPUState(webGPUState)
