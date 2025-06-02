@@ -6,6 +6,7 @@
 
 from BasicObject import BasicObject
 from DependencyGraph import DependencyGraph
+from Scripts.BuildDependencies.GitDependency import GitDependency
 from pathlib import Path
 from abc import ABC, abstractmethod
 
@@ -27,6 +28,7 @@ class BuildSystem(BasicObject, ABC):
         self.platform = platform
         self.toolset = toolset
         self.dependencyGraph = DependencyGraph()
+        self.dependencyGraph.add_node(GitDependency())
 
     def generate(self) -> bool:
         """

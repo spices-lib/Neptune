@@ -8,7 +8,7 @@ import sys
 from BuildSystem import BuildSystem
 from Scripts.BuildDependencies.PremakeDependency import PremakeDependency
 from Scripts.BuildDependencies.EmsdkDependency import EmsdkDependency
-from Scripts.BuildDependencies.MakeDependency import MakeDependency
+from Scripts.BuildDependencies.GCCMakeDependency import GCCMakeDependency
 from Scripts.BuildDependencies.MSVCDependency import MSVCDependency
 from pathlib import Path
 import os
@@ -57,7 +57,7 @@ class PremakeBuildSystem(BuildSystem):
 
         if self.toolset == "GNU":
             args.append("gmake")
-            self.dependencyGraph.add_node(MakeDependency())
+            self.dependencyGraph.add_node(GCCMakeDependency())
         elif self.toolset == "vs":
             args.append("vs2022")
             self.dependencyGraph.add_node(MSVCDependency())

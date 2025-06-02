@@ -35,10 +35,7 @@ class DependencyGraph(BasicObject):
         @brief Find a Dependency from this graph.
         @param[in] name Dependency name.
         """
-        if name in self.nodes:
-            return self.nodes[name]
-        else:
-            return None
+        return self.nodes.get(name)
 
     def execute(self):
         """
@@ -58,6 +55,12 @@ class DependencyGraph(BasicObject):
         """
         visited[dependency.name] = True
         for dep in dependency.dependencies:
+            if dep not in self.nodes:
+                print(f"-------------------------------------------------------")
+                print(f"Error: Missing dependency '{dep}' required by '{dependency.name}'")
+                print(f"-------------------------------------------------------")
+                continue
+
             if dep not in visited:
                 self.__execute_internal(self.nodes[dep], visited)
         print("-------------------------------------------------------")

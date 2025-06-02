@@ -21,14 +21,14 @@ premakeURL = {
 
 class PremakeDependency(Dependency):
     """
-    @brief Base class for solution dependency.
+    @brief Base class for solution premake dependency.
     """
 
     def __init__(self):
         """
         @brief Construct function.
         """
-        super().__init__("premake", None)
+        super().__init__("premake", ["git"])
 
         # Set dependency path
         self.dependencyPath = self.solutionDirectory / "vendor" / "premake" / \

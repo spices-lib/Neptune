@@ -27,7 +27,7 @@ searchPaths = [
 
 class EmsdkDependency(Dependency):
     """
-    @brief Base class for solution dependency.
+    @brief Base class for solution emsdk dependency.
     """
 
     def __init__(self):

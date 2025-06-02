@@ -30,4 +30,9 @@ Makefile
 /Nepnep/node_modules
 /Nepnep/dist
 /Nepnep/static/wasm
-Nepnep/package-lock.json
+/Nepnep/package-lock.json
+
+/Scripts/BuildDependencies/__pycache__
+/Scripts/BuildSystem/__pycache__
+
+/vendor/premake
