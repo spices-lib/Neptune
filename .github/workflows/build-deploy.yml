@@ -1,0 +1,96 @@
+# @file build-deploy.yml
+# @brief This file is the configuration for the build-deploy in GitHub.
+# @author Spices.
+
+# configuration name
+name: build-deploy
+
+# workflow trigger
+on:
+  
+  # On Pushed
+  push:
+    branches: [ "main" ]
+  
+  # On Pull Request
+  pull_request:
+    branches: [ "main" ]
+
+# workflow jobs
+jobs:
+  
+  # Build Job
+  build-wasm:
+    
+    # Platform: Windows
+    runs-on: windows-latest
+
+    # Build Steps
+    steps:
+    - uses: actions/checkout@v3
+
+    # Checkout recursive
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    # Set Emscripten
+    - name: Set up Emscripten
+      uses: mymindstorm/setup-emsdk@v12
+      with:
+        version: 'latest'
+      
+    # Build Solution with Release Configuration
+    - name: Build Release
+      shell: cmd
+      working-directory: .\Scripts\BuildEntry\
+      run: call .\gmake_build_release_wasm.bat
+
+    # Upload wasm and js
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: wasm-artifacts
+        path: Neptune/static/wasm/
+
+  # Deploy Job
+  deploy:
+
+    # Need build-wasm first
+    needs: build-wasm
+
+    # Platform: Windows
+    runs-on: windows-latest
+
+    # Deploy Steps
+    steps:
+      - uses: actions/checkout@v3
+
+      # Download wasm and js
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: wasm-artifacts
+          path: Neptune/static/wasm/
+
+      # Set Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Npm Install
+      - name: Npm Install
+        working-directory: .\Nepnep
+        run: npm install
+
+      # Npm Build
+      - name: Npm Build
+        working-directory: .\Nepnep
+        run: npm run build
+
+      # Deploy to Vercel
+      - name: Deploy to Vercel
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
