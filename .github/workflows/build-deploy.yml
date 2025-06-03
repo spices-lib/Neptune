@@ -57,7 +57,7 @@ jobs:
 
     # Upload wasm and js
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v3
       with:
         name: wasm-artifacts
         path: Neptune/static/wasm/
