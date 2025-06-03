@@ -35,8 +35,8 @@ class BuildSystem(BasicObject, ABC):
         @brief Generate build files.
         @return Returns true if generate succeed.
         """
-        self.clean()
         self.__execute_dependency()
+        self.clean()
         print("Generating Solution........................")
         if self._generate():
             print("Run Over..............................")

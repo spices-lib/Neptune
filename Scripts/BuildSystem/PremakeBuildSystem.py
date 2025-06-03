@@ -9,7 +9,10 @@ from BuildSystem import BuildSystem
 from Scripts.BuildDependencies.PremakeDependency import PremakeDependency
 from Scripts.BuildDependencies.EmsdkDependency import EmsdkDependency
 from Scripts.BuildDependencies.GCCMakeDependency import GCCMakeDependency
-from Scripts.BuildDependencies.MSVCDependency import MSVCDependency
+
+if sys.platform == 'win32':
+    from Scripts.BuildDependencies.MSVCDependency import MSVCDependency
+
 from pathlib import Path
 import os
 import subprocess
@@ -30,6 +33,14 @@ class PremakeBuildSystem(BuildSystem):
         super().__init__(solution_root, platform, toolset)
         self.dependencyGraph.add_node(PremakeDependency())
 
+        if self.platform == "emscripten":
+            self.dependencyGraph.add_node(EmsdkDependency())
+
+        if self.toolset == "GNU":
+            self.dependencyGraph.add_node(GCCMakeDependency())
+        elif self.toolset == "vs" and sys.platform == 'win32':
+            self.dependencyGraph.add_node(MSVCDependency())
+
     def _generate(self) -> bool:
         """
         @brief Internal Generate build files using premake.
@@ -46,7 +57,6 @@ class PremakeBuildSystem(BuildSystem):
         args = [str(premake_path)]
         if self.platform == "emscripten":
             args.append("--os=emscripten")
-            self.dependencyGraph.add_node(EmsdkDependency())
         elif self.platform == "windows":
             args.append("--os=windows")
         elif self.platform == "linux":
@@ -57,10 +67,8 @@ class PremakeBuildSystem(BuildSystem):
 
         if self.toolset == "GNU":
             args.append("gmake")
-            self.dependencyGraph.add_node(GCCMakeDependency())
         elif self.toolset == "vs":
             args.append("vs2022")
-            self.dependencyGraph.add_node(MSVCDependency())
         else:
             print("Not support toolset.")
             sys.exit(1)
