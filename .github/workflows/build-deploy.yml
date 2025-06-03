@@ -22,12 +22,11 @@ jobs:
   # Build Job
   build-wasm:
     
-    # Platform: Windows
-    runs-on: windows-latest
+    # Platform: Ubuntu
+    runs-on: ubuntu-latest
 
     # Build Steps
     steps:
-    - uses: actions/checkout@v3
 
     # Checkout recursive
     - name: Checkout code
@@ -37,22 +36,32 @@ jobs:
 
     # Set Emscripten
     - name: Set up Emscripten
-      uses: mymindstorm/setup-emsdk@v12
+      uses: mymindstorm/setup-emsdk@v13
       with:
         version: 'latest'
-      
+
+    # Cache emsdk
+    - name: Cache Emscripten
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.emsdk
+          ~/.emscripten_cache
+        key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
+
     # Build Solution with Release Configuration
     - name: Build Release
       shell: cmd
-      working-directory: .\Scripts\BuildEntry\
-      run: call .\gmake_build_release_wasm.bat
+      working-directory: ./Scripts/BuildEntry/
+      run: bash ./gmake_build_release_wasm.sh
 
     # Upload wasm and js
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3.1.2
       with:
         name: wasm-artifacts
         path: Neptune/static/wasm/
+        retention-days: 3
 
   # Deploy Job
   deploy:
@@ -60,16 +69,16 @@ jobs:
     # Need build-wasm first
     needs: build-wasm
 
-    # Platform: Windows
-    runs-on: windows-latest
+    # Platform: Ubuntu
+    runs-on: ubuntu-latest
 
     # Deploy Steps
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Download wasm and js
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3.1.2
         with:
           name: wasm-artifacts
           path: Neptune/static/wasm/
@@ -77,16 +86,17 @@ jobs:
       # Set Node.js
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
+          cache: 'npm'
 
       # Npm Install
       - name: Npm Install
-        working-directory: .\Nepnep
-        run: npm install
+        working-directory: ./Nepnep
+        run: npm ci
 
       # Npm Build
       - name: Npm Build
-        working-directory: .\Nepnep
+        working-directory: ./Nepnep
         run: npm run build
 
       # Deploy to Vercel
@@ -94,3 +104,5 @@ jobs:
         run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
