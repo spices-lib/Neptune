@@ -84,21 +84,12 @@ project "SandBox"
         "-o %{cfg.targetdir}/%{prj.name}.js"    -- Generate js file
 	}
 
-    filter "system:windows"
-        -- The Solution PostCommands
-        postbuildcommands
-        {
-            -- Copy js and wasm to Nepnep
-            'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/static/wasm\\"',
-        }
-
-    filter "system:linux or macosx"
-        -- The Solution PostCommands
-        postbuildcommands
-        {
-            -- Copy js and wasm to Nepnep
-            'cp -f "%{cfg.targetdir}/" "%{wks.location}/Nepnep/static/wasm/"',
-        }
+    -- The Solution PostCommands
+    postbuildcommands {
+        -- Copy js and wasm to Nepnep
+        os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/static/wasm\\"'
+            or 'cp -f "%{cfg.targetdir}/" "%{wks.location}/Nepnep/static/wasm/"'
+    }
 
 	-- Platform: Windows
 	filter "system:windows"
