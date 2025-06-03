@@ -88,7 +88,7 @@ project "SandBox"
     postbuildcommands {
         -- Copy js and wasm to Nepnep
         os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/static/wasm\\"'
-            or 'cp -f "%{cfg.targetdir}"/*.js "%{wks.location}/Nepnep/static/wasm/" && cp -f "%{cfg.targetdir}"/*.wasm "%{wks.location}/Nepnep/static/wasm/"
+            or 'cp -rf "%{cfg.targetdir}"/ "%{wks.location}/Nepnep/static/wasm/"'
     }
 
 	-- Platform: Windows
