@@ -88,7 +88,7 @@ project "SandBox"
     postbuildcommands {
 
         -- Create target directory.
-        'mkdir -p "%{wks.location}/Nepnep/static/wasm/"',
+        os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/static/wasm/"',
 
         -- Copy js and wasm to Nepnep.
         os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/static/wasm\\"'
