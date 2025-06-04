@@ -57,14 +57,14 @@ jobs:
 
     # Verify build file
     - name: Verify build output
-      run: ls -la Neptune/static/wasm/
+      run: ls -la ./Neptune/static/wasm/
 
     # Upload wasm and js
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: wasm-artifacts
-        path: Neptune/static/wasm/
+        path: ./Neptune/static/wasm/
         retention-days: 3
 
   # Deploy Job
@@ -88,7 +88,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: wasm-artifacts
-          path: Neptune/static/wasm/
+          path: ./Neptune/static/wasm/
 
       # Set Node.js
       - uses: actions/setup-node@v4
