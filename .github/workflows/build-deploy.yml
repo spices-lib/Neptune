@@ -129,10 +129,22 @@ jobs:
         working-directory: ./Nepnep
         run: npm run build
 
+      # Install Vercel
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
       # Deploy to Vercel
       - name: Deploy to Vercel
-        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        id: deploy-to-vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: './Nepnep'
+
+      # Show deploy detail
+      - name: Show deployment URL
+        run: |
+          echo "Deployment URL: ${{ steps.deploy-to-vercel.outputs.project-url }}"
