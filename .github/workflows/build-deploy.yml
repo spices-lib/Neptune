@@ -78,13 +78,13 @@ jobs:
 
       # Download wasm and js
       - name: Download artifacts
-        uses: actions/download-artifact@v3.1.2
+        uses: actions/download-artifact@v4
         with:
           name: wasm-artifacts
           path: Neptune/static/wasm/
 
       # Set Node.js
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
