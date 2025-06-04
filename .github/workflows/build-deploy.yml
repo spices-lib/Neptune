@@ -51,7 +51,7 @@ jobs:
 
     # Build Solution with Release Configuration
     - name: Build Release
-      shell: cmd
+      shell: bash
       working-directory: ./Scripts/BuildEntry/
       run: bash ./gmake_build_release_wasm.sh
 
