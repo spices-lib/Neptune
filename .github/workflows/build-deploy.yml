@@ -55,9 +55,12 @@ jobs:
       working-directory: ./Scripts/BuildEntry/
       run: bash ./gmake_build_release_wasm.sh
 
-    # Verify build file
-    - name: Verify build output
-      run: ls -la ./Neptune/static/wasm/
+    # Find build file
+    - name: Find build outputs
+      run: |
+        echo "Searching for build outputs..."
+        find . -name "*.wasm" -o -name "*.js"
+        echo "WASM_OUTPUT_PATH=$(find . -name "*.wasm" | head -n 1 | xargs dirname)" >> $GITHUB_ENV
 
     # Upload wasm and js
     - name: Upload artifacts
