@@ -129,10 +129,6 @@ jobs:
         working-directory: ./Nepnep
         run: npm run build
 
-      # Install Vercel
-      - name: Install Vercel CLI
-        run: npm install -g vercel@latest
-
       # Deploy to Vercel
       - name: Deploy to Vercel
         id: deploy-to-vercel
