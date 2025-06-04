@@ -86,11 +86,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Generate lockfile
-      - name: Generate lockfile
+      # check lock file is exist
+      - name: Check lockfile
+        id: check_lockfile
+        working-directory: ./Nepnep
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "lockfile_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "lockfile_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      # Initial npm install
+      - name: Initial npm install
         working-directory: ./Nepnep
         run: npm install
-        if: !exists('./Nepnep/package-lock.json')
+        if: steps.check_lockfile.outputs.lockfile_exists == 'false'
 
       # Download wasm and js
       - name: Download artifacts
@@ -100,22 +111,18 @@ jobs:
           path: ./Nepnep/static/wasm/
 
       # Set Node.js
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
           cache-dependency-path: './Nepnep/package-lock.json'
-        if: exists('./Nepnep/package-lock.json')
 
       # Npm Install
-      - name: Npm Install
+      - name: Npm ci Install
         working-directory: ./Nepnep
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
+        run: npm ci
+        if: steps.check_lockfile.outputs.lockfile_exists == 'true'
 
       # Npm Build
       - name: Npm Build
