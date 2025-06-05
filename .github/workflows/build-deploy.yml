@@ -146,6 +146,12 @@ jobs:
           vercel-args: '--prod'
           working-directory: './Nepnep'
 
+      # Show directory
+      - name: Check Directory Structure
+        run: |
+          echo "Current directory: $(pwd)"
+          ll
+
       # Show deploy detail
       - name: Show deployment URL
         run: |

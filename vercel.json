@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "name": "Neptune",
+    "rootDirectory": "./Nepnep",
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+      }
+    ]
+  }

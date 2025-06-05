@@ -36,3 +36,4 @@ Makefile
 /Scripts/BuildSystem/__pycache__
 
 /vendor/premake
+.vercel
