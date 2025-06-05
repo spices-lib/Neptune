@@ -129,12 +129,6 @@ jobs:
         working-directory: ./Nepnep
         run: npm run build
 
-      # Show Vercel id.
-      - name: Debug Vercel config
-        run: |
-          echo "VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}"
-          echo "VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}"
-
       # Deploy to Vercel
       - name: Deploy to Vercel
         id: deploy-to-vercel
@@ -145,12 +139,6 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
           working-directory: './Nepnep'
-
-      # Show directory
-      - name: Check Directory Structure
-        run: |
-          echo "Current directory: $(pwd)"
-          ll
 
       # Show deploy detail
       - name: Show deployment URL
