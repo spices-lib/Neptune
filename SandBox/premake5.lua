@@ -72,17 +72,29 @@ project "SandBox"
 		"Neptune",                             -- Dependency: Neptune
 	}
 
+    -- The Solution link options
 	linkoptions
 	{
-		"--use-port=contrib.glfw3",             -- Dependency: emscripten-glfw
-        "-s USE_WEBGPU=1",                      -- Dependency: webgpu
-        "-s ALLOW_MEMORY_GROWTH",               -- Allow Memory growth
-        "-s WASM_BIGINT",                       -- Enable BigInt in JS
-        "-s WASM=1",                            -- Output wasm
-        "-s STACK_SIZE=4194304",                -- Expand stack size to 4M
-        "-s TOTAL_MEMORY=64MB",                 -- Wasm total memory to 64M
-        "-o %{cfg.targetdir}/%{prj.name}.js"    -- Generate js file
+		"--use-port=%{IncludeDir.emscripten_glfw}/port/emscripten-glfw3.py",     -- Dependency: emscripten-glfw
+		"-pthread",                                                              -- Enable pthread
+        "-s USE_WEBGPU=1",                                                       -- Dependency: webgpu
+        "-s ALLOW_MEMORY_GROWTH",                                                -- Allow Memory growth
+        "-s WASM_BIGINT",                                                        -- Enable BigInt in JS
+        "-s WASM=1",                                                             -- Output wasm
+        "-s STACK_SIZE=4194304",                                                 -- Expand stack size to 4M
+        "-s TOTAL_MEMORY=64MB",                                                  -- Wasm total memory to 64M
+        "-s PROXY_TO_PTHREAD",
+        "-s PTHREAD_POOL_SIZE=12",
+        "-s USE_PTHREADS=1",
+        "-s SHARED_MEMORY",
+        "-o %{cfg.targetdir}/%{prj.name}.js"                                     -- Generate js file
 	}
+
+    -- The Solution build options
+    buildoptions
+    {
+        "-pthread"       -- Enable pthread
+    }
 
     -- The Solution PostCommands
     postbuildcommands {

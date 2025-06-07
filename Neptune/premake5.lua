@@ -98,6 +98,12 @@ project "Neptune"
 		"implot",                             -- Dependency: implot
 	}
 
+    -- The Solution build options
+    buildoptions
+    {
+        "-pthread"       -- Enable pthread
+    }
+
 	-- Library: std_image is included this solution, do not use PreCompiler Header.
 	filter "files:vendor/stb_image/**.cpp"
 	flags { "NoPCH" }
