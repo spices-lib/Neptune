@@ -18,7 +18,7 @@ const main = async () => {
         },
 
         canvas: (function () {
-            var canvas = document.getElementById('canvas');
+            var canvas = document.getElementById('Nepnep');
             //canvas.addEventListener("webglcontextlost", function(e) { alert('FIXME: WebGL context lost, please reload the page'); e.preventDefault(); }, false);
             return canvas;
         })(),
