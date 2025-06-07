@@ -1,4 +1,5 @@
 import mkcert from "vite-plugin-mkcert";
+import crossOriginIsolation from "vite-plugin-cross-origin-isolation";
 
 const isCodeSandbox = !!process.env.SANDBOX_URL
 
@@ -18,5 +19,8 @@ export default {
         emptyOutDir: true,
         sourcemap: true
     },
-    plugins: [mkcert()]
+    plugins: [
+        mkcert(),               // Enable https
+        crossOriginIsolation()  // Enable shared buffer
+    ]
 }
