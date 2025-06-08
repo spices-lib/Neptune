@@ -24,6 +24,15 @@
             "value": "cross-origin"
           }
         ]
+      },
+      {
+        "source": "/_next-live/feedback/feedback.js",
+        "headers": [
+          {
+            "key": "Cross-Origin-Resource-Policy",
+            "value": "cross-origin"
+          }
+        ]
       }
     ]
 }
