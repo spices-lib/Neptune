@@ -26,13 +26,27 @@
         ]
       },
       {
-        "source": "/_next-live/feedback/feedback.js",
+        "source": "/_next-live/(.*)",
         "headers": [
           {
             "key": "Cross-Origin-Resource-Policy",
             "value": "cross-origin"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://vercel.live"
           }
         ]
+      }
+    ],
+    "routes": [
+      {
+        "src": "/_next-live/feedback/feedback.js",
+        "dest": "https://vercel.live/_next-live/feedback/feedback.js",
+        "headers": {
+          "Cross-Origin-Resource-Policy": "cross-origin",
+          "Access-Control-Allow-Origin": "*"
+        }
       }
     ]
 }
