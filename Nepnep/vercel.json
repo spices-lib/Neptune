@@ -1,52 +1,44 @@
 {
-    "version": 2,
-    "name": "Neptune",
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/static-build"
-      }
-    ],
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          {
-            "key": "Cross-Origin-Opener-Policy",
-            "value": "same-origin"
-          },
-          {
-            "key": "Cross-Origin-Embedder-Policy",
-            "value": "require-corp"
-          },
-          {
-            "key": "Cross-Origin-Resource-Policy",
-            "value": "cross-origin"
-          }
-        ]
-      },
-      {
-        "source": "/_next-live/(.*)",
-        "headers": [
-          {
-            "key": "Cross-Origin-Resource-Policy",
-            "value": "cross-origin"
-          },
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "https://vercel.live"
-          }
-        ]
-      }
-    ],
-    "routes": [
-      {
-        "src": "/_next-live/feedback/feedback.js",
-        "dest": "https://vercel.live/_next-live/feedback/feedback.js",
-        "headers": {
-          "Cross-Origin-Resource-Policy": "cross-origin",
-          "Access-Control-Allow-Origin": "*"
+  "version": 2,
+  "name": "Neptune",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "require-corp"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "cross-origin"
         }
-      }
-    ]
+      ]
+    },
+    {
+      "source": "/_next-live/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://vercel.live"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/_next-live/feedback/feedback.js",
+      "destination": "https://vercel.live/_next-live/feedback/feedback.js"
+    }
+  ]
 }
