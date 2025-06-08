@@ -132,6 +132,14 @@ project "SandBox"
 			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
 		}
 
+        -- The Solution debug link options
+		linkoptions
+		{
+		    "-gsource-map",                                              -- Map Source to c++
+		    "-gseparate-dwarf=%{cfg.targetdir}/%{prj.name}.debug.wasm",  -- Generate debug symbol version wasm
+		  --"--emit-symbol-map",
+		}
+
 		runtime "Debug"
 		symbols "On"
 

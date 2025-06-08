@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-import mkcert from "vite-plugin-mkcert";
-import crossOriginIsolation from "vite-plugin-cross-origin-isolation";
+import mkcert from "vite-plugin-mkcert"
+import crossOriginIsolation from "vite-plugin-cross-origin-isolation"
 
 const isCodeSandbox = !!process.env.SANDBOX_URL
 
