@@ -49,20 +49,18 @@ const initModule = async() => {
     {
         const js = document.createElement('script')
         js.async = true
-        js.src = "./wasm/SandBox.js"
+        js.src = '././wasm/SandBox.js'
         document.body.appendChild(js)
     }
 }
 
-const Neptune = () => {
+export function Neptune () {
 
     useEffect(()=>{ initModule() }, [])
 
     return(
-        <div class="Neptune">
-            <canvas id="Nepnep"></canvas>
-        </div>
+        <>
+            <canvas class="Neptune" id="Nepnep"></canvas>
+        </>
     )
 }
-
-export default Neptune
