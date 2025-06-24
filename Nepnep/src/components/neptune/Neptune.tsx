@@ -56,11 +56,11 @@ const initModule = async() => {
 
 export function Neptune () {
 
-    useEffect(()=>{ initModule() }, [])
+    useEffect(()=>{ initModule().then() }, [])
 
     return(
         <>
-            <canvas class="Neptune" id="Nepnep"></canvas>
+            <canvas className="Neptune" id="Nepnep"></canvas>
         </>
     )
 }

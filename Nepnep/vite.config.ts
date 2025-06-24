@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import mkcert from 'vite-plugin-mkcert'
 // @ts-ignore
 import crossOriginIsolation from 'vite-plugin-cross-origin-isolation'
-import preact from '@preact/preset-vite'
+import react from '@vitejs/plugin-react'
 
 const isCodeSandbox = !!process.env.SANDBOX_URL
 export default defineConfig(({ mode }) => {
@@ -35,12 +35,7 @@ export default defineConfig(({ mode }) => {
         plugins: [
             mkcert(),               // Enable https
             crossOriginIsolation(), // Enable shared buffer
-            preact()                // Use preact rather that react
-        ],
-        resolve: {
-            alias: {
-                'react-reconciler': 'preact-reconciler',
-            },
-        }
+            react()                 // Use React
+        ]
     }
 })

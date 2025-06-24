@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import React from 'react'
 import {
     LiveblocksProvider,
     RoomProvider,
@@ -8,13 +8,15 @@ import {
 } from '@liveblocks/react/suspense'
 import '@liveblocks/react-ui/styles.css'
 
-export function Room({ children }: { children: ReactNode }) {
+interface RoomProps {
+    children: React.JSX.Element;
+}
 
-    console.log(import.meta.env)
+export function Room({ children }: RoomProps) {
 
     return (
         <LiveblocksProvider publicApiKey={ import.meta.env.VITE_LIVEBLOCKS_PUBLIC_KEY! }>
-            <RoomProvider id="my-room">
+            <RoomProvider id="nepnep-room">
                 <ClientSideSuspense fallback={<div>Loading…</div>}>
                     {children}
                 </ClientSideSuspense>
