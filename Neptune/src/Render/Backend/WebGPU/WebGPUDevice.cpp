@@ -40,33 +40,17 @@ namespace Neptune {
 
     void WebGPUDevice::CreateDevice()
     {
-
-#ifdef __EMSCRIPTEN__
-
         m_WebGPUState.m_Device = emscripten_webgpu_get_device();
         if (!m_WebGPUState.m_Device)
         {
             return;
         }
 
-#else
-
-        WGPUAdapter adapter = RequestAdapter(m_WebGPUState.m_Instance);
-        if (!adapter)
-            return false;
-        m_WebGPUState.m_Device = RequestDevice(adapter);
-
-#endif
-
         wgpuDeviceSetUncapturedErrorCallback(m_WebGPUState.m_Device, WebGPUErrorCallback, nullptr);
-
     }
 
     void WebGPUDevice::CreateSurface()
     {
-
-#ifdef __EMSCRIPTEN__
-
         WGPUSurfaceDescriptorFromCanvasHTMLSelector htmlSelector    = {};
         htmlSelector.chain.sType                                    = WGPUSType_SurfaceDescriptorFromCanvasHTMLSelector;
         htmlSelector.chain.next                                     = nullptr;
@@ -76,16 +60,6 @@ namespace Neptune {
         surfaceDesc.nextInChain                                     = &htmlSelector.chain;
 
         m_WebGPUState.m_Surface = wgpuInstanceCreateSurface(m_WebGPUState.m_Instance, &surfaceDesc);
-
-#else
-
-        wgpu::Surface surface = wgpu::glfw::CreateSurfaceForWindow(instance, window);
-        if (!surface)
-            return false;
-        WGPUTextureFormat wgpu_preferred_fmt = WGPUTextureFormat_BGRA8Unorm;
-
-#endif
-
     }
 
     void WebGPUDevice::QuerySwapChainSupport()

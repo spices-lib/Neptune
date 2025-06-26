@@ -1,6 +1,6 @@
 /**
-* @file RenderFrontEnd.h.
-* @brief The RenderFrontEnd Class Definitions.
+* @file RenderFrontend.h.
+* @brief The RenderFrontend Class Definitions.
 * @author Spices.
 */
 
@@ -26,10 +26,10 @@ namespace Neptune {
     };
 
     /**
-    * @brief RenderFrontEnd Class.
+    * @brief RenderFrontend Class.
     * This class defines the RenderFrontEnd behaves.
     */
-    class RenderFrontEnd : public NonCopyable
+    class RenderFrontend : public NonCopyable
     {
     public:
 
@@ -40,20 +40,14 @@ namespace Neptune {
         *
         * @return Returns Render Frontend pointer.
         */
-        static SP<RenderFrontEnd> Create(RenderBackendEnum backend);
+        static SP<RenderFrontend> Create(RenderBackendEnum backend);
 
     public:
 
         /**
-        * @brief Constructor Function.
-        * @param[in] backend RenderBackendEnum.
-        */
-        RenderFrontEnd(RenderBackendEnum backend) : m_RenderBackendEnum(backend) {}
-
-        /**
         * @brief Destructor Function.
         */
-        virtual ~RenderFrontEnd() override = default;
+        virtual ~RenderFrontend() override = default;
 
         /**
         * @brief Interface of Begin a frame.
@@ -69,6 +63,14 @@ namespace Neptune {
         * @brief Interface of Render a frame.
         */
         virtual void RenderFrame() = 0;
+
+    protected:
+
+        /**
+        * @brief Constructor Function.
+        * @param[in] backend RenderBackendEnum.
+        */
+        RenderFrontend(RenderBackendEnum backend) : m_RenderBackendEnum(backend) {}
 
     protected:
 

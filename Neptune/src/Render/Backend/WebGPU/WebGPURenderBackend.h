@@ -6,7 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
-#include "Render/FrontEnd/RenderFrontEnd.h"
+#include "Render/Frontend/RenderFrontend.h"
 
 namespace Neptune {
 
@@ -19,7 +19,7 @@ namespace Neptune {
     * @brief WebGPURenderBackend Class.
     * This class defines the WebGPURenderBackend behaves.
     */
-    class WebGPURenderBackend : public RenderFrontEnd
+    class WebGPURenderBackend : public RenderFrontend
     {
     public:
 

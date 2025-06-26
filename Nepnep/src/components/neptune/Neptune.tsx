@@ -1,5 +1,28 @@
 import { useEffect } from 'react'
 
+interface EmscriptenModule {
+    preRun: any[]
+    postRun: any[]
+    print: (text: string) => void
+    printErr: (text: string) => void
+    canvas: HTMLElement | null
+    setStatus: (text: string) => void
+    monitorRunDependencies: () => void
+    preinitializedWebGPUDevice?: GPUDevice
+}
+
+declare global {
+    interface Window {
+        Module?: EmscriptenModule
+    }
+
+    interface GPUDevice{}
+
+    interface Navigator {
+        gpu?: any
+    }
+}
+
 const initModule = async() => {
     window.Module = {
         preRun: [],

@@ -29,7 +29,7 @@
 namespace Neptune {
 
     WebGPURenderBackend::WebGPURenderBackend(RenderBackendEnum backend)
-        : RenderFrontEnd(backend)
+        : RenderFrontend(backend)
     {
         m_State     = CreateSP<WebGPUState>();
         m_Instance  = CreateSP<WebGPUInstance>(*m_State);

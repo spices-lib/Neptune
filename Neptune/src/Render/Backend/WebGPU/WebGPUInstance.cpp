@@ -15,8 +15,4 @@ namespace Neptune {
         webGPUState.m_Instance = wgpuCreateInstance(nullptr);
     }
 
-
-
-
-
 }

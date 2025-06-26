@@ -137,7 +137,7 @@ project "SandBox"
 		{
 		    "-gsource-map",                                              -- Map Source to c++
 		    "-gseparate-dwarf=%{cfg.targetdir}/%{prj.name}.debug.wasm",  -- Generate debug symbol version wasm
-		  --"--emit-symbol-map",
+		    "--emit-symbol-map",                                         -- Export symbol
 		}
 
 		runtime "Debug"

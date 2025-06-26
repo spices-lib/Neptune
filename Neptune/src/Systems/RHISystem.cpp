@@ -6,13 +6,13 @@
 
 #include "Pchheader.h"
 #include "RHISystem.h"
-#include "Render/FrontEnd/RenderFrontEnd.h"
+#include "Render/Frontend/RenderFrontend.h"
 
 namespace Neptune {
 
     void RHISystem::OnSystemInitialize()
     {
-        m_RenderFrontEnd = RenderFrontEnd::Create(RenderBackendEnum::WebGPU);
+        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::WebGPU);
     }
     void RHISystem::OnSystemShutDown()
     {
@@ -20,9 +20,9 @@ namespace Neptune {
     }
     void RHISystem::Tick()
     {
-        m_RenderFrontEnd->BeginFrame();
-        m_RenderFrontEnd->RenderFrame();
-        m_RenderFrontEnd->EndFrame();
+        m_RenderFrontend->BeginFrame();
+        m_RenderFrontend->RenderFrame();
+        m_RenderFrontend->EndFrame();
     }
 
 

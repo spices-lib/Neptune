@@ -1,16 +1,16 @@
 /**
 * @file RenderFrontEnd.cpp.
-* @brief The RenderFrontEnd Class Implementation.
+* @brief The RenderFrontend Class Implementation.
 * @author Spices.
 */
 
 #include "Pchheader.h"
-#include "RenderFrontEnd.h"
-#include "Render/WebGPU/WebGPURenderBackend.h"
+#include "RenderFrontend.h"
+#include "Render/Backend/WebGPU/WebGPURenderBackend.h"
 
 namespace Neptune {
 
-    SP<RenderFrontEnd> RenderFrontEnd::Create(RenderBackendEnum backend)
+    SP<RenderFrontend> RenderFrontend::Create(RenderBackendEnum backend)
     {
         switch(backend)
         {

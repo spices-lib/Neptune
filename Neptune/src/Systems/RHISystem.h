@@ -10,7 +10,7 @@
 
 namespace Neptune {
 
-    class RenderFrontEnd;
+    class RenderFrontend;
 
     /**
     * @brief RHISystem Class.
@@ -50,6 +50,6 @@ namespace Neptune {
         /**
         * @brief Render Frontend.
         */
-        SP<RenderFrontEnd> m_RenderFrontEnd;
+        SP<RenderFrontend> m_RenderFrontend;
     };
 }
