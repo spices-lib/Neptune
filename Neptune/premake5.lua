@@ -5,7 +5,7 @@
 project "Neptune"
 	kind "StaticLib"          -- Use Lib as Dependency.
 	language "C++"            -- Use C++.
-	cppdialect "C++17"        -- Use C++17.
+	cppdialect "C++20"        -- Use C++20.
 	staticruntime "On"        -- Use Runtime Library: MTD.
 
 	-- Building Output Folder.

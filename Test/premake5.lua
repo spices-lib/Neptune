@@ -5,7 +5,7 @@
 project "Test"
 	kind "ConsoleApp"           -- Use exe.
 	language "C++"			    -- Use C++.
-	cppdialect "C++17"		    -- Use C++17.
+	cppdialect "C++20"		    -- Use C++20.
 	staticruntime "On"		    -- Use Runtime Linrary: MTD.
 
 	-- Building Output Folder.
