@@ -6,7 +6,14 @@
 
 #include "Pchheader.h"
 #include "Window.h"
+
+#ifdef NP_PLATFORM_WINDOWS
 #include "Window/GLFW/GLFWWindowImpl.h"
+#endif
+
+#ifdef NP_PLATFORM_EMSCRIPTEN
+#include "Window/EmscriptenGLFW/EmscriptenGLFWWindowImpl.h"
+#endif
 
 namespace Neptune {
 
@@ -14,19 +21,31 @@ namespace Neptune {
 
     SP<Window> Window::Create(const WindowInfo& initInfo, WindowImplement implement)
     {
-        switch(implement)
+        switch (implement)
         {
+#ifdef NP_PLATFORM_EMSCRIPTEN
             case WindowImplement::emscripten_glfw:
-            case WindowImplement::GLFW:
-                S_Instance = CreateSP<GLFWWindowImpl>(initInfo, implement);
-                NEPTUNE_CORE_INFO("GLFW Window created.")
+            {
+                S_Instance = CreateSP<EmscriptenGLFWWindowImpl>(initInfo, implement);
                 break;
+            }
+#endif
+
+#ifdef NP_PLATFORM_WINDOWS
+            case WindowImplement::GLFW:
+            {
+                S_Instance = CreateSP<GLFWWindowImpl>(initInfo, implement);
+                break;
+            }
+#endif
             default:
             {
                 NEPTUNE_CORE_CRITICAL("Not supported Windows Implement.")
+                return nullptr;
             }
         }
 
+        NEPTUNE_CORE_INFO("GLFW Window created.")
         return S_Instance;
     }
 

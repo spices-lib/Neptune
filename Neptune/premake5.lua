@@ -119,6 +119,12 @@ project "Neptune"
                                               --   #define CONSTEXPR_LINE long(_DBJ_CONCATENATE(__LINE__,U)) 
 		editAndContinue "Off"				  -- 2.Use DebugInfoFormat: Zi (Program Database).
 
+		-- The Solution Additional Include Folder.
+		includedirs
+		{
+			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
+		}
+
 		-- Windows Specific Solution Macro Definitions.
 		defines
 		{
@@ -132,6 +138,7 @@ project "Neptune"
 		-- Windows Specific Solution Dependency.
 		links
 		{
+			"GLFW",                               -- Dependency: GLFW
 			"imgui",                              -- Dependency: imgui
 		}
 

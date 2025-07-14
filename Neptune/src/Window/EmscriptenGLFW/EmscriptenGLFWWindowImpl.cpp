@@ -1,23 +1,24 @@
 /**
-* @file GLFWWindowImpl.cpp.
-* @brief The GLFWWindowImpl Class Implementation.
+* @file EmscriptenGLFWWindowImpl.cpp.
+* @brief The EmscriptenGLFWWindowImpl Class Implementation.
 * @author Spices.
 */
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "GLFWWindowImpl.h"
+#include "EmscriptenGLFWWindowImpl.h"
 #include "Core/Event/WindowEvent.h"
 #include "Core/Event/KeyEvent.h"
 #include "Core/Event/MouseEvent.h"
 
 #include <GLFW/glfw3.h>
+#include <GLFW/emscripten_glfw3.h>
 
 namespace Neptune {
 
-    GLFWWindowImpl::GLFWWindowImpl(const WindowInfo& initInfo, WindowImplement implement)
+    EmscriptenGLFWWindowImpl::EmscriptenGLFWWindowImpl(const WindowInfo& initInfo, WindowImplement implement)
             : Window(initInfo, implement)
     {
         // initialize the library
@@ -26,7 +27,7 @@ namespace Neptune {
         }
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);        // @brief no OpenGL (use canvas2D)
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);           // @brief Set glfw enable resize feature.
+        glfwWindowHint(GLFW_SCALE_FRAMEBUFFER, GLFW_FALSE);  // @brief make it not Hi DPI Aware (simplify rendering code a bit)
         glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);           // @brief Set glfw enable title tab.
 
         const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -35,6 +36,9 @@ namespace Neptune {
         glfwWindowHint(GLFW_GREEN_BITS   , mode->greenBits   );
         glfwWindowHint(GLFW_BLUE_BITS    , mode->blueBits    );
         glfwWindowHint(GLFW_REFRESH_RATE , mode->refreshRate );
+
+        // setting the association window <-> canvas
+        emscripten_glfw_set_next_window_canvas_selector("#Nepnep");
 
         // create the only window
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
@@ -45,11 +49,14 @@ namespace Neptune {
         // Set glfw call back object pointer.
         glfwSetWindowUserPointer(m_Windows, this);
 
+        // makes the canvas resizable and match the full window size
+        emscripten_glfw_make_canvas_resizable(m_Windows, "window", nullptr);
+
         // Set gltf event call back.
         SetInternalCallBack();
     }
 
-    GLFWWindowImpl::~GLFWWindowImpl()
+    EmscriptenGLFWWindowImpl::~EmscriptenGLFWWindowImpl()
     {
         if (m_Windows) {
             glfwDestroyWindow(m_Windows);
@@ -57,22 +64,22 @@ namespace Neptune {
         glfwTerminate();
     }
 
-    bool GLFWWindowImpl::IsWindowActive()
+    bool EmscriptenGLFWWindowImpl::IsWindowActive()
     {
         return !glfwWindowShouldClose(m_Windows);
     }
 
-    void GLFWWindowImpl::PollEvents()
+    void EmscriptenGLFWWindowImpl::PollEvents()
     {
         glfwPollEvents();
     }
 
-    void* GLFWWindowImpl::NativeWindow()
+    void* EmscriptenGLFWWindowImpl::NativeWindow()
     {
         return m_Windows;
     }
 
-    void GLFWWindowImpl::SetInternalCallBack()
+    void EmscriptenGLFWWindowImpl::SetInternalCallBack()
     {
         // print the version on the console
         NEPTUNE_CORE_INFO(glfwGetVersionString())

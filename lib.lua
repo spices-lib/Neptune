@@ -6,6 +6,7 @@
 IncludeDir                                = {}
 IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                             -- Include: emscripten
 IncludeDir["emscripten_glfw"]             = "%{wks.location}/Neptune/vendor/emscripten-glfw/"                                 -- Include: emscripten-glfw
+IncludeDir["GLFW"]                        = "%{wks.location}/Neptune/vendor/GLFW/include"                                     -- Include: GLFW
 IncludeDir["stb_image"]                   = "%{wks.location}/Neptune/vendor/stb_image"                                        -- Include: stb_image
 IncludeDir["glm"]                         = "%{wks.location}/Neptune/vendor/glm"                                              -- Include: glm
 IncludeDir["ImGui"]                       = "%{wks.location}/Neptune/vendor/imgui"                                            -- Include: ImGui

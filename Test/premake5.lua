@@ -67,6 +67,12 @@ project "Test"
 		systemversion "latest"                 -- Use Lastest WindowSDK
 		editAndContinue "Off"				   -- Use DebugInfoFormat: Zi (Program Database).
 		
+		-- The Solution Additional Include Folder.
+		includedirs
+		{
+			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
+		}
+
 		-- Windows Specific Solution Macro Definitions.
 		defines
 		{

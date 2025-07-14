@@ -43,7 +43,13 @@ namespace Neptune {
 
     Application::Application()
     {
+#ifdef NP_PLATFORM_EMSCRIPTEN
         m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw).get();
+#endif
+
+#ifdef NP_PLATFORM_WINDOWS
+        m_Window = Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW).get();
+#endif
 
         m_SystemManager = CreateUP<SystemManager>();
         m_SystemManager

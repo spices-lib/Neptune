@@ -28,3 +28,6 @@
 [submodule "Neptune/vendor/emscripten-glfw"]
 	path = Neptune/vendor/emscripten-glfw
 	url = https://github.com/pongasoft/emscripten-glfw.git
+[submodule "Neptune/vendor/GLFW"]
+	path = Neptune/vendor/GLFW
+	url = https://github.com/spices-lib/glfw.git
