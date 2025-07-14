@@ -118,6 +118,9 @@ namespace Neptune {
                 }
                 m_InfoData.m_CriticalLogInfos.push(helper);
                 break;
+
+            default:
+                break;
         }
     }
 }

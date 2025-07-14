@@ -62,21 +62,12 @@ project "Neptune"
 
 		-- Define Engine Extent Processes Folder.
 		--'NEPTUNE_EXTENT_PROCESS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/../vendor/")',
-
-		-- Define Engine Use WebGPU API for Rendering, though we may support multiple Rendering API.
-		"RENDERAPI_WEBGPU",
-
-		-- Define Platform : Windows.
-		"PLATFORM_WINDOWS"
 	}
 
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
 		"src",                                                -- Engine Source Folder.
-		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
-		"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-		"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
 		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
@@ -132,10 +123,46 @@ project "Neptune"
 		defines
 		{
 			-- Use winsock2.h instead of winsock.h.
-			"WIN32_LEAN_AND_MEAN"
+			"WIN32_LEAN_AND_MEAN",
+
+			-- Define Platform : Windows.
+			"NP_PLATFORM_WINDOWS"
 		}
 
 		-- Windows Specific Solution Dependency.
+		links
+		{
+			"imgui",                              -- Dependency: imgui
+		}
+
+	-- Platform: Emscripten
+	filter "system:emscripten"
+		systemversion   "latest"              -- Use Lastest WindowSDK
+
+											-- tracy use __FILE__ in constexpr, but MSVC do not support it by default.
+											-- There are two way to handle with that:
+											-- 1.Use a complex format of __LINE__:
+											--   #define _DBJ_CONCATENATE_(a, b) a ## b
+											--   #define _DBJ_CONCATENATE(a, b)  _DBJ_CONCATENATE_(a, b)
+											--   #define CONSTEXPR_LINE long(_DBJ_CONCATENATE(__LINE__,U)) 
+		editAndContinue "Off"				  -- 2.Use DebugInfoFormat: Zi (Program Database).
+
+		-- The Solution Additional Include Folder.
+		includedirs
+		{
+			"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
+			"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+			"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+		}
+
+		-- Emscripten Specific Solution Macro Definitions.
+		defines
+		{
+			-- Define Platform : Emscripten.
+			"NP_PLATFORM_EMSCRIPTEN"
+		}
+
+		-- Emscripten Specific Solution Dependency.
 		links
 		{}
 
@@ -166,3 +193,5 @@ project "Neptune"
 
 		runtime "Release"
 		optimize "On"
+
+	

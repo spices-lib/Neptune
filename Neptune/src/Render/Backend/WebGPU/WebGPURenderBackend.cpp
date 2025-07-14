@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
 #include "WebGPURenderBackend.h"
 #include "WebGPUInstance.h"
 #include "WebGPUDevice.h"
@@ -122,3 +125,5 @@ namespace Neptune {
         wgpuRenderPassEncoderRelease(pass);
     }
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
 #include "WebGPUDevice.h"
 
 #include <emscripten/html5_webgpu.h>
@@ -101,3 +104,5 @@ namespace Neptune {
     }
 
 }
+
+#endif

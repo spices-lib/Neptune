@@ -5,6 +5,8 @@
 */
 
 #pragma once
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "WebGPUUtils.h"
 
@@ -78,3 +80,5 @@ namespace Neptune {
 
     };
 }
+
+#endif

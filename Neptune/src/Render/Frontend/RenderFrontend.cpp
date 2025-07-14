@@ -6,7 +6,10 @@
 
 #include "Pchheader.h"
 #include "RenderFrontend.h"
+
+#ifdef NP_PLATFORM_EMSCRIPTEN
 #include "Render/Backend/WebGPU/WebGPURenderBackend.h"
+#endif
 
 namespace Neptune {
 
@@ -14,7 +17,9 @@ namespace Neptune {
     {
         switch(backend)
         {
+#ifdef NP_PLATFORM_EMSCRIPTEN
             case RenderBackendEnum::WebGPU: return CreateSP<WebGPURenderBackend>(backend);
+#endif
             default:
             {
                 printf("Not Supported Render Backend.\n");

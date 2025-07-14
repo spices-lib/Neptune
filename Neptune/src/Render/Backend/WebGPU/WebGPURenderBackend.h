@@ -5,6 +5,8 @@
 */
 
 #pragma once
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
 
@@ -57,3 +59,5 @@ namespace Neptune {
         SP<WebGPUSwapChain> m_SwapChain;
     };
 }
+
+#endif

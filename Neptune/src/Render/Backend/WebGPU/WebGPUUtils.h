@@ -5,6 +5,8 @@
 */
 
 #pragma once
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 
@@ -94,5 +96,6 @@ constexpr uint32_t MaxFrameInFlight = 2;
         */
         WebGPUState& m_WebGPUState;
     };
-
 }
+
+#endif

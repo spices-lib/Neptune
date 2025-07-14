@@ -27,13 +27,7 @@ project "Test"
 
 	-- Macros Definitions
 	defines
-	{
-		-- Define Engine Use WebGPU API for Rendering, though we may support multiple Rendering API.
-		"RENDERAPI_WEBGPU",
-
-		-- Define Platform : Windows.
-		"PLATFORM_WINDOWS"
-	}
+	{}
 
 	-- The Solution Additional Include Folder.
 	includedirs
@@ -42,9 +36,6 @@ project "Test"
 		"%{IncludeDir.googletest}",			                  -- Library: googletest Source Folder.
 		"%{IncludeDir.googlemock}",			                  -- Library: googlemock Source Folder.
 		"src",                                                -- UnitTest Source Folder.
-		"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
-		"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-		"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
 		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
@@ -80,8 +71,35 @@ project "Test"
 		defines
 		{
 			-- Use winsock2.h instead of winsock.h.
-			"WIN32_LEAN_AND_MEAN"
+			"WIN32_LEAN_AND_MEAN",
+
+			-- Define Platform : Windows.
+			"NP_PLATFORM_WINDOWS"
 		}
+
+	-- Platform: Emscripten
+	filter "system:emscripten"
+		systemversion   "latest"              -- Use Lastest WindowSDK
+		editAndContinue "Off"                 -- Use DebugInfoFormat: Zi (Program Database).
+
+		-- The Solution Additional Include Folder.
+		includedirs
+		{
+			"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
+			"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+			"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+		}
+
+		-- Emscripten Specific Solution Macro Definitions.
+		defines
+		{
+			-- Define Platform : Emscripten.
+			"NP_PLATFORM_EMSCRIPTEN"
+		}
+
+		-- Emscripten Specific Solution Dependency.
+		links
+		{}
 
 	-- Configuration: Debug
 	filter "configurations:Debug"

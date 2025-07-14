@@ -16,7 +16,8 @@ namespace Neptune {
     {
         switch(implement)
         {
-            case WindowImplement::emscripten_glfw :
+            case WindowImplement::emscripten_glfw:
+            case WindowImplement::GLFW:
                 S_Instance = CreateSP<GLFWWindowImpl>(initInfo, implement);
                 NEPTUNE_CORE_INFO("GLFW Window created.")
                 break;

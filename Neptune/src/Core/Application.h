@@ -45,12 +45,16 @@ namespace Neptune {
 
     private:
 
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
         /**
         * @brief MainLoop provided for emscripten.
         *
         * @param[in] iUserData this pointer.
         */
         static void MainLoop(void* iUserData);
+
+#endif
 
     public:
 

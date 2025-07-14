@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
 #include "WebGPUSwapChain.h"
 #include "WebGPUDevice.h"
 
@@ -32,7 +35,6 @@ namespace Neptune {
             wgpuSwapChainRelease(m_WebGPUState.m_SwapChain);
         }
     }
-
-
-
 }
+
+#endif

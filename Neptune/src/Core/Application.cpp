@@ -13,7 +13,7 @@
 #include "World/Document/DocumentContext.h"
 #include "Window/Window.h"
 
-#ifdef __EMSCRIPTEN__
+#ifdef NP_PLATFORM_EMSCRIPTEN
 #include <emscripten/emscripten.h>
 #endif
 
@@ -34,7 +34,7 @@ namespace Neptune {
 
     void Application::Destroy()
     {
-#ifndef __EMSCRIPTEN__
+#ifndef NP_PLATFORM_EMSCRIPTEN
         S_Instance.reset();
         S_Instance = nullptr;
 #endif
@@ -69,7 +69,7 @@ namespace Neptune {
         // Document preLoad.
         m_DocumentContext->m_Page->OnPreLoad(m_DocumentContext->m_Document.get());
 
-#ifdef __EMSCRIPTEN__
+#ifdef NP_PLATFORM_EMSCRIPTEN
 
         // tell emscripten to use "MainLoop" as the main loop
         emscripten_set_main_loop_arg(MainLoop, this, 0, 0);
@@ -88,6 +88,8 @@ namespace Neptune {
 
     }
 
+#ifdef NP_PLATFORM_EMSCRIPTEN
+
     void Application::MainLoop(void* iUserData)
     {
         auto p = reinterpret_cast<Application*>(iUserData);
@@ -103,5 +105,7 @@ namespace Neptune {
         p->m_DocumentContext->m_Page->OnDeactivate();
         emscripten_cancel_main_loop();
     }
+
+#endif
 
 }
