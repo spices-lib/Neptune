@@ -100,7 +100,7 @@ namespace Neptune {
         glfwSetWindowSizeCallback(m_Windows, [](GLFWwindow* window, int width, int height)
         {
             // reinterpret the pointer to this class.
-            const auto thisWindows = static_cast<GLFWWindowImpl*>(glfwGetWindowUserPointer(window));
+            const auto thisWindows = static_cast<EmscriptenGLFWWindowImpl*>(glfwGetWindowUserPointer(window));
 
             // Set this class's variable.
             thisWindows->m_WindowsResized    = true;
