@@ -37,10 +37,9 @@ include "Test"
 
 -- Project Dependencies.
 group "Dependencies"
-
-	filter "system:windows"
-		include "Neptune/vendor/GLFW"        -- Dependency GLFW.
-
+if os.target() == "windows" then
+	include "Neptune/vendor/GLFW"            -- Dependency GLFW.
+end
 	include "Neptune/vendor/imgui"           -- Dependency imgui.
 	include "Neptune/vendor/yaml-cpp"        -- Dependency yaml-cpp.
 	include "Neptune/vendor/implot"          -- Dependency implot.
