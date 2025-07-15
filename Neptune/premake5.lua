@@ -89,12 +89,6 @@ project "Neptune"
 		"implot",                             -- Dependency: implot
 	}
 
-    -- The Solution build options
-    buildoptions
-    {
-        "-pthread"       -- Enable pthread
-    }
-
 	-- Library: std_image is included this solution, do not use PreCompiler Header.
 	filter "files:vendor/stb_image/**.cpp"
 	flags { "NoPCH" }
@@ -123,6 +117,7 @@ project "Neptune"
 		includedirs
 		{
 			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
+			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -140,6 +135,7 @@ project "Neptune"
 		{
 			"GLFW",                               -- Dependency: GLFW
 			"imgui",                              -- Dependency: imgui
+			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 		}
 
 	-- Platform: Emscripten
@@ -172,6 +168,12 @@ project "Neptune"
 		-- Emscripten Specific Solution Dependency.
 		links
 		{}
+
+		-- The Solution build options
+		buildoptions
+		{
+			"-pthread"       -- Enable pthread
+		}
 
 	-- Configuration: Debug
 	filter "configurations:Debug"

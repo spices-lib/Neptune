@@ -71,6 +71,7 @@ project "Test"
 		includedirs
 		{
 			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
+			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.

@@ -7,6 +7,7 @@ IncludeDir                                = {}
 IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                             -- Include: emscripten
 IncludeDir["emscripten_glfw"]             = "%{wks.location}/Neptune/vendor/emscripten-glfw/"                                 -- Include: emscripten-glfw
 IncludeDir["GLFW"]                        = "%{wks.location}/Neptune/vendor/GLFW/include"                                     -- Include: GLFW
+IncludeDir["VulkanSDK"]                   = "C:/VulkanSDK/1.3.296.0/Include"                                                  -- Include: VulkanSDK
 IncludeDir["stb_image"]                   = "%{wks.location}/Neptune/vendor/stb_image"                                        -- Include: stb_image
 IncludeDir["glm"]                         = "%{wks.location}/Neptune/vendor/glm"                                              -- Include: glm
 IncludeDir["ImGui"]                       = "%{wks.location}/Neptune/vendor/imgui"                                            -- Include: ImGui
@@ -23,6 +24,9 @@ IncludeDir["googlemock"]                  = "%{wks.location}/Test/vendor/googlet
 
 -- Library Directories Folder
 LibraryDir                                = {}
+LibraryDir["VulkanSDK"]                   = "C:/VulkanSDK/1.3.296.0/Lib"                                                      -- Library Directries: VulkanSDK Folder
+LibraryDir["VulkanSDKDLL"]                = "%{LibraryDir.VulkanSDK}/../Bin"                                                  -- Library Directries: VulkanSDK dll Folder
 
 -- Library Directories
 Library                                   = {}
+Library["VulkanSDK"]                      = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"                                            -- Library Directries: VulkanSDK
