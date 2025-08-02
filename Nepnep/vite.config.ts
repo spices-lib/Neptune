@@ -3,6 +3,8 @@ import mkcert from 'vite-plugin-mkcert'
 // @ts-ignore
 import crossOriginIsolation from 'vite-plugin-cross-origin-isolation'
 import react from '@vitejs/plugin-react'
+// @ts-ignore
+import tailwindcss from '@tailwindcss/vite'
 
 const isCodeSandbox = !!process.env.SANDBOX_URL
 export default defineConfig(({ mode }) => {
@@ -35,7 +37,8 @@ export default defineConfig(({ mode }) => {
         plugins: [
             mkcert(),               // Enable https
             crossOriginIsolation(), // Enable shared buffer
-            react()                 // Use React
+            react(),                // Use React
+            tailwindcss()           // Use Tailwind CSS
         ]
     }
 })

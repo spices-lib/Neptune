@@ -83,7 +83,11 @@ export function Neptune () {
 
     return(
         <>
-            <canvas className="Neptune" id="Nepnep"></canvas>
+            <canvas
+                className='absolute top-0 left-0 m-0 border-0 w-full h-full overflow-hidden block image-rendering-pixelated'
+                id="Nepnep"
+            >
+            </canvas>
         </>
     )
 }

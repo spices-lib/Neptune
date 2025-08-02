@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { register } from '../actions/auth'
+import { register } from '../actions/Auth'
 
 export default function Page() {
 
@@ -11,7 +11,7 @@ export default function Page() {
     )
 
     return (
-        <div className='flex min-h-screen items-center justfify-center bg-white px-4'>
+        <div className='flex min-h-screen items-center justify-center bg-white px-4'>
             <div className='w-full max-w-sm space-y-6'>
                 <h1 className='text-center text-2xl font-semibold text-grap-900'>
                     Sign up
@@ -22,43 +22,43 @@ export default function Page() {
                 >
                     <div className='relative h-fit'>
                         <input
-                            className='w-full round-md border border-grey-300 px-3 pb-1 pt-7 text-sm focus:border-black focus:outline-none'
+                            className='w-full rounded-md border border-gray-300 px-3 pb-1 pt-7 text-sm focus:border-black focus:outline-none'
                             type='email'
                             name='email'
                             required
                         >
                         </input>
-                        <label className='absolute left-3 top-2 text-[12px]'>
+                        <label className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'>
                             EMAIL
                         </label>
                     </div>
                     <div className='relative h-fit'>
                         <input
-                            className='w-full round-md border border-grey-300 px-3 pb-1 pt-7 text-sm focus:border-black focus:outline-none'
+                            className='w-full rounded-md border border-gray-300 px-3 pb-1 pt-7 text-sm focus:border-black focus:outline-none'
                             type='password'
                             name='password'
                             required
                             minLength={8}
                         >
                         </input>
-                        <label className='absolute left-3 top-2 text-[12px]'>
+                        <label className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'>
                             PASSWORD
                         </label>
                     </div>
                     <button
                         disabled={ isPending }
-                        className='w-full rounded-md bg-black py-2 text-sm font-medium text-white hover:bg-grey-900 focus:outline-none disabled:cursor-not-allowed disabled:bg-grey-300'
+                        className='w-full rounded-md bg-black py-2 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-300'
                     >
                         { isPending ? "Registering..." : "Register" }
                     </button>
-                    <p className='text-center text-xs text-grey-600'>
+                    <p className='text-center text-xs text-gray-600'>
                         Have an account?{' '}
-                            {/*<link
+                            <a
                                 className='text-blue-400 hover:text-blue-600'
                                 href='/signin'
                             >
                                 Sign in
-                            </link>*/}
+                            </a>
                     </p>
                     { errorMessage && (
                         <p className='text-center text-sm text-red-500'>
