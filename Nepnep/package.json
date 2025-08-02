@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "db push": "prisma db push",
-    "db studio": "prisma studio"
+    "preview": "vite preview"
   },
   "dependencies": {
     "vite": "^5.4.2",
@@ -25,17 +23,23 @@
 
     "vercel": "^32.3.0",
 
-    "@tailwindcss/postcss": "^4.1.11",
-
     "@prisma/client": "^6.13.0",
+    "next-auth": "^4.24.11",
+    "@auth/prisma-adapter": "^2.10.0",
 
-    "next-auth": "^4.24.11"
+    "zod": "^4.0.14",
+    "bcryptjs": "^3.0.2"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
     "@types/node": "^24.0.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/bcryptjs": "^3.0.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/tailwindcss": "^3.1.0",
+    "tailwindcss": "^4.1.11",
+    "prisma": "^6.13.0",
     "@webgpu/types": "^0.1.61"
   }
 }
