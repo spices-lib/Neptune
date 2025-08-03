@@ -1,14 +1,16 @@
 import { PrismaClient } from '@prisma/client'
 
+const mode = import.meta.env.MODE
+
 const createPrismaClient = () =>
     new PrismaClient({
-        log: ["query", "error", "warn"]
-    });
+        log: mode === "development" ? ["query", "error", "warn"] : ["error"]
+    })
 
 const globalForPrisma = globalThis as unknown as {
-    prisma: ReturnType<typeof createPrismaClient> | undefined;
-};
+    prisma?: PrismaClient
+}
 
-export const db = globalForPrisma.prisma ?? createPrismaClient();
+export const db = globalForPrisma.prisma || createPrismaClient()
 
-globalForPrisma.prisma = db;
+if (mode !== "production") globalForPrisma.prisma = db
