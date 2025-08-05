@@ -3,7 +3,7 @@ import { Room } from '../components/liveblocks/Room'
 
 //import { Inter } from 'next/font/google'
 import { StrictMode } from 'react'
-import Page from './signin/Page'
+import { AppRoutes } from './routes/AppRoutes'
 
 /*const inter = Inter({
     subsets: ['latin'],
@@ -15,8 +15,9 @@ export function App() {
         /*<Room>
             <Neptune></Neptune>
         </Room>*/
-        <StrictMode>
-                <Page></Page>
-        </StrictMode>
+
+            <StrictMode>
+                <AppRoutes></AppRoutes>
+            </StrictMode>
     )
 }

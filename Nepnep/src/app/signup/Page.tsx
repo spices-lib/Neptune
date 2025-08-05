@@ -2,7 +2,8 @@
 
 import { useActionState } from 'react'
 import { register } from '../actions/Auth'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
+import { ROUTE_PATHS } from '../routes/RoutePaths'
 
 export default function Page() {
 
@@ -58,7 +59,7 @@ export default function Page() {
                         Have an account?{' '}
                             <Link
                                 className='text-blue-400 hover:text-blue-600'
-                                href='/signin'
+                                to={ ROUTE_PATHS.SIGN_IN }
                             >
                                 Sign in
                             </Link>

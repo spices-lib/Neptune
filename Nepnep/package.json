@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "prisma init": "npx prisma init --db --output ../node_modules/@prisma-app/client",
+    "prisma dev": "npx prisma migrate dev --name init",
     "prisma reset": "npx prisma migrate reset",
     "prisma studio": "npx prisma studio"
   },
@@ -23,6 +25,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.6.0",
+    "react-router-dom": "^6.9.0",
 
     "vercel": "^32.3.0",
 
