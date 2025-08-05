@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 import { register } from '../actions/Auth'
+import Link from 'next/link'
 
 export default function Page() {
 
@@ -26,6 +27,7 @@ export default function Page() {
                             type='email'
                             name='email'
                             required
+                            autoComplete='email'
                         >
                         </input>
                         <label className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'>
@@ -39,6 +41,7 @@ export default function Page() {
                             name='password'
                             required
                             minLength={8}
+                            autoComplete='current-password'
                         >
                         </input>
                         <label className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'>
@@ -53,12 +56,12 @@ export default function Page() {
                     </button>
                     <p className='text-center text-xs text-gray-600'>
                         Have an account?{' '}
-                            <a
+                            <Link
                                 className='text-blue-400 hover:text-blue-600'
                                 href='/signin'
                             >
                                 Sign in
-                            </a>
+                            </Link>
                     </p>
                     { errorMessage && (
                         <p className='text-center text-sm text-red-500'>
