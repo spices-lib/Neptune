@@ -30,6 +30,7 @@ export default function Page() {
                     </input>
                     <div className='relative h-fit'>
                         <input
+                            id='email'
                             className='w-full rounded-md border border-gray-300 px-3 pb-1 pt-7 text-sm focus:border-black focus:outline-none'
                             type='email'
                             name='email'
@@ -37,12 +38,16 @@ export default function Page() {
                             autoComplete='email'
                         >
                         </input>
-                        <label className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'>
+                        <label
+                            htmlFor='email'
+                            className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'
+                        >
                             EMAIL
                         </label>
                     </div>
                     <div className='relative h-fit'>
                         <input
+                            id='password'
                             className='w-full rounded-md border border-gray-300 px-3 pb-1 pt-7 text-sm focus:border-black focus:outline-none'
                             type='password'
                             name='password'
@@ -51,7 +56,10 @@ export default function Page() {
                             autoComplete='current-password'
                         >
                         </input>
-                        <label className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'>
+                        <label
+                            htmlFor='password'
+                            className='pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] text-gray-500 transition-all peer-focus:top-2 peer-focus:text-[12px]'
+                        >
                             PASSWORD
                         </label>
                     </div>
