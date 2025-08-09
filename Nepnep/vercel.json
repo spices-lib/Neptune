@@ -3,8 +3,8 @@
   "name": "nepnep",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
+      "src": "dist/**/*",
+      "use": "@vercel/static",
       "config": {
         "includeFiles": [
           "node_modules/@prisma-app/client/**"
