@@ -1,17 +1,25 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useEffect } from 'react'
 import { register } from '../actions/Auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ROUTE_PATHS } from '../routes/RoutePaths'
 
 export default function Page() {
 
-    const [ errorMessage, formAction, isPending ] = useActionState(
+    const navigate = useNavigate()
+    
+    const [ message, formAction, isPending ] = useActionState(
         register,
         undefined
     )
 
+    useEffect(() => {
+        if (message === 'success') {
+            navigate(ROUTE_PATHS.SIGN_IN)
+        }
+    }, [message, navigate])
+    
     return (
         <div className='flex min-h-screen items-center justify-center bg-white px-4'>
             <div className='w-full max-w-sm space-y-6'>
@@ -72,9 +80,9 @@ export default function Page() {
                                 Sign in
                             </Link>
                     </p>
-                    { errorMessage && (
+                    { message !== 'success' && (
                         <p className='text-center text-sm text-red-500'>
-                            { errorMessage }
+                            { message }
                         </p>
                     )}
                 </form>

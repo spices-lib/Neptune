@@ -31,6 +31,7 @@ Makefile
 /Nepnep/dist
 /Nepnep/static/wasm
 /Nepnep/package-lock.json
+/Nepnep/prisma/migrations
 
 /Scripts/BuildDependencies/__pycache__
 /Scripts/BuildSystem/__pycache__

@@ -4,7 +4,6 @@ import { signUpSchema } from '../../Schemas'
 import { ZodError } from 'zod'
 import { db } from '../../server/DataBase'
 import bcrypt from 'bcryptjs'
-import { redirect } from 'next/navigation'
 import { signIn, signOut } from '../../server/auth'
 
 export async function signout() {
@@ -60,10 +59,9 @@ export async function register(
         })
 
     } catch (error) {
+        console.log(error)
         if(error instanceof ZodError) {
             return error.message
         }
     }
-
-    redirect('/signup')
 }
