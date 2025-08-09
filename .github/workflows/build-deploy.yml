@@ -127,7 +127,7 @@ jobs:
       # Npm Prisma Generate
       - name: Generate Prisma Client
         working-directory: ./Nepnep
-        run: npm run prisma generate
+        run: npx prisma generate
 
       # Npm Build
       - name: Npm Build
