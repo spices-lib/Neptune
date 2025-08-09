@@ -4,7 +4,12 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": {
+        "includeFiles": [
+          "node_modules/@prisma-app/client/**"
+        ]
+      }
     }
   ],
   "headers": [
