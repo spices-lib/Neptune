@@ -124,6 +124,11 @@ jobs:
         run: npm ci
         if: steps.check_lockfile.outputs.lockfile_exists == 'true'
 
+      # Npm Prisma Generate
+      - name: Generate Prisma Client
+        working-directory: ./Nepnep
+        run: npm run prisma generate
+
       # Npm Build
       - name: Npm Build
         working-directory: ./Nepnep
