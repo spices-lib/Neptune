@@ -4,12 +4,17 @@
   "builds": [
     {
       "src": "dist/**/*",
-      "use": "@vercel/static",
-      "config": {
-        "includeFiles": [
-          "node_modules/@prisma-app/client/**"
-        ]
-      }
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "headers": [
