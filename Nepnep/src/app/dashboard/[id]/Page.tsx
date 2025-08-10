@@ -1,13 +1,18 @@
 import { auth } from '../../../server/auth'
+import { Room } from '../../../components/liveblocks/Room'
+import { Canvas } from '../../../components/canvas/Canvas'
+import { useParams } from 'react-router-dom'
 
-type ParamsType = Promise<{ id: string }>
+export default function Page(){
+    const { id } = useParams<{ id: string }>()
 
-export default async function Page({ params }: { params: ParamsType }){
-    const { id } = await params
-
-    const session = await auth()
+    //const session = auth()
 
     return (
-        <div></div>
+        <Room
+            roomId={ `room:${id}` }
+        >
+            <Canvas></Canvas>
+        </Room>
     )
 }
