@@ -11,7 +11,8 @@
     "prisma:generate": "npx prisma generate",
     "prisma:dev": "npx prisma migrate dev --name init",
     "prisma:reset": "npx prisma migrate reset",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "vercel-build": "npm run prisma:generate && npm run build"
   },
   "dependencies": {
     "vite": "^5.4.2",
