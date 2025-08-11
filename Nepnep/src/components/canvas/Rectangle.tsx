@@ -1,5 +1,4 @@
-﻿import { RectangleLayer } from '../../types/types'
-import {colorToCss} from "../../utils";
+﻿import { colorToCss } from '../../utils'
 
 export default function Rectangle({ id, layer } : { id: string, layer: RectangleLayer }) {
     const { x, y, width, height, fill, stroke, opacity, connerRadius } = layer

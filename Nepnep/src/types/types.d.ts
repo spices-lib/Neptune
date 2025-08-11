@@ -10,6 +10,12 @@ export enum LayerType {
     Text
 }
 
+export enum CanvasMode {
+    None,
+    Dragging,
+    Inserting
+}
+
 declare global {
 
     interface EmscriptenModule {
@@ -100,6 +106,16 @@ declare global {
     type Point = {
         x: number
         y: number
+    }
+    
+    type CanvasState = {
+        mode: CanvasMode.None
+    } | {
+        mode: CanvasMode.Dragging
+        origin: Point | null
+    } | {
+        mode: CanvasMode.Inserting
+        layerType: LayerType.Rectangle | LayerType.Ellipse | LayerType.Text
     }
 }
 
