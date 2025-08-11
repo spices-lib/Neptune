@@ -1,5 +1,3 @@
-'use client'
-
 import { signout } from '../actions/Auth'
 
 export default function Page() {

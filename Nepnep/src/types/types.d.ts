@@ -3,18 +3,6 @@ declare module '*.css' {
     export default content
 }
 
-export type Color = {
-    r: number
-    g: number
-    b: number
-}
-
-export type Camera = {
-    x: number
-    y: number
-    zoom: number
-}
-
 export enum LayerType {
     Rectangle,
     Ellipse,
@@ -22,59 +10,97 @@ export enum LayerType {
     Text
 }
 
-export type RectangleLayer = {
-    type: LayerType.Rectangle
-    x: number
-    y: number
-    height: number
-    width: number
-    fill: Color
-    stroke: Color
-    opacity: number
-    connerRadius: number
+declare global {
+
+    interface EmscriptenModule {
+        preRun: any[]
+        postRun: any[]
+        print: (text: string) => void
+        printErr: (text: string) => void
+        canvas: HTMLElement | null
+        setStatus: (text: string) => void
+        monitorRunDependencies: () => void
+        preinitializedWebGPUDevice?: GPUDevice
+    }
+
+    interface Window {
+        Module?: EmscriptenModule
+    }
+
+    interface GPUDevice{}
+
+    interface Navigator {
+        gpu?: any
+    }
+    
+    type Color = {
+        r: number
+        g: number
+        b: number
+    }
+
+    type Camera = {
+        x: number
+        y: number
+        zoom: number
+    }
+
+    type RectangleLayer = {
+        type: LayerType.Rectangle
+        x: number
+        y: number
+        height: number
+        width: number
+        fill: Color
+        stroke: Color
+        opacity: number
+        connerRadius: number
+    }
+
+    type EllipseLayer = {
+        type: LayerType.Ellipse
+        x: number
+        y: number
+        height: number
+        width: number
+        fill: Color
+        stroke: Color
+        opacity: number
+    }
+
+    type PathLayer = {
+        type: LayerType.Path
+        x: number
+        y: number
+        height: number
+        width: number
+        fill: Color
+        stroke: Color
+        opacity: number
+        points: number[][]
+    }
+
+    type TextLayer = {
+        type: LayerType.Text
+        x: number
+        y: number
+        height: number
+        width: number
+        fill: Color
+        stroke: Color
+        opacity: number
+        text: string
+        fontSize: number
+        fontWidth: number
+        fontFamily: string
+    }
+
+    type Layer = RectangleLayer | EllipseLayer | PathLayer | TextLayer
+
+    type Point = {
+        x: number
+        y: number
+    }
 }
 
-export type EllipseLayer = {
-    type: LayerType.Ellipse
-    x: number
-    y: number
-    height: number
-    width: number
-    fill: Color
-    stroke: Color
-    opacity: number
-}
-
-export type PathLayer = {
-    type: LayerType.Path
-    x: number
-    y: number
-    height: number
-    width: number
-    fill: Color
-    stroke: Color
-    opacity: number
-    points: number[][]
-}
-
-export type TextLayer = {
-    type: LayerType.Text
-    x: number
-    y: number
-    height: number
-    width: number
-    fill: Color
-    stroke: Color
-    opacity: number
-    text: string
-    fontSize: number
-    fontWidth: number
-    fontFamily: string
-}
-
-export type Layer = RectangleLayer | EllipseLayer | PathLayer | TextLayer
-
-export type Point = {
-    x: number
-    y: number
-}
+export {}

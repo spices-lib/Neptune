@@ -1,35 +1,44 @@
 ﻿import { useMutation, useStorage } from '@liveblocks/react'
 import { colorToCss } from '../../utils'
 import LayerComponent from './LayerComponent'
-import { Layer, LayerType, Point, RectangleLayer } from '../../types/types'
 import { nanoid } from 'nanoid'
 import { LiveObject } from '@liveblocks/client'
-import {useEffect} from "react";
+import { useEffect } from 'react'
+import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
+import { LayerType } from '../../types/types.d'
 
 const MAX_LAYERS = 100
 
 export function Canvas() {
-    const roomColor = useStorage((root) => root.roomColor)
-    const layerIds = useStorage((root) => root.layerIds)
+    const roomColor = useStorage((root) => ( root.roomColor)) as Color | undefined
+    const layerIds = useStorage((root) => root.layerIds) as string[] | undefined
 
     const insertLayer = useMutation(
         (
             { storage, setMyPresence }, 
-            layerType: LayerType.Ellipse | LayerType.Path | LayerType.Rectangle | LayerType.Text,
+            layerType: LayerType,
             position: Point
         ) => {
-            const liveLayers = storage.get('layers')
-            if(liveLayers.size >= MAX_LAYERS) {
+            if (!storage) {
                 return
             }
             
-            const liveLayerIds = storage.get('layerIds')
+            const liveLayers = storage.get('layers') as LiveMap<string, LiveObject<Layer>> | undefined
+            if(!liveLayers || liveLayers.size >= MAX_LAYERS) {
+                return
+            }
+            
+            const liveLayerIds = storage.get('layerIds') as LiveList<string> | undefined
+            if (!liveLayerIds) {
+                return
+            }
+            
             const layerId = nanoid()
             let layer: LiveObject<Layer> | null = null
             
             if (layerType === LayerType.Rectangle) {
                 layer = new LiveObject<RectangleLayer>({
-                    type: LayerType.Rectangle,
+                    type: layerType,
                     x: position.x,
                     y: position.y,
                     height: 100,
@@ -50,10 +59,15 @@ export function Canvas() {
         },
         []
     )
+
+    const storageLoaded = useStorage((root) => root.layers !== undefined)
     
     useEffect(()=>{
+        if (!storageLoaded)
+            return
+        
         insertLayer(LayerType.Rectangle, { x: 100, y: 100 })
-    })
+    }, [insertLayer])
     
     return (
         <div className='flex h-screen w-full'>
@@ -64,15 +78,15 @@ export function Canvas() {
                     }}
                     className='h-full w-full touch-none'
                 >
-                    <svg className='w-full height-full'>
+                    <svg className='w-full h-full'>
                         <g>
-                            { layerIds.map((layerId) => { 
+                            { layerIds && layerIds.map((layerId) => (
                                 <LayerComponent
                                     key={ layerId }
                                     id={ layerId }
                                 >
                                 </LayerComponent>
-                            }) }
+                            )) }
                         </g>
                     </svg>
                 </div>

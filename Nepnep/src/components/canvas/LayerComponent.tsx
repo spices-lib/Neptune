@@ -1,10 +1,11 @@
 ﻿import { memo } from 'react'
 import { useStorage } from '@liveblocks/react'
-import { LayerType } from '../../types/types'
 import Rectangle from './Rectangle'
+import { LiveMap, LiveObject } from "@liveblocks/client/dist/index";
+import { LayerType } from '../../types/types.d'
 
 const LayerComponent = memo(({ id }: { id: string}) => {
-    const layer = useStorage((root) => root.layers.get(id))
+    const layer = useStorage((root) => (root.layers as LiveMap<string, LiveObject<Layer>> | undefined)?.get(id)) as Layer | undefined
     if(!layer) {
         return null
     }
