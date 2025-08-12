@@ -1,4 +1,4 @@
-﻿import { useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import IconButton from './IconButton'
 import { BiPointer } from 'react-icons/bi'
 import { RiHand } from 'react-icons/ri'
@@ -15,6 +15,17 @@ export default function SelectionButton({
 }) {
     const [ isOpen, setIsOpen ] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
+    
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
+            }
+        }
+        
+        document.addEventListener('mousedown', handleClickOutside)
+        return ()=> document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
     
     const handleClick = (canvasMode: CanvasMode.None | CanvasMode.Dragging) => {
         onClick(canvasMode)

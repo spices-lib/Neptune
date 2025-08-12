@@ -4,7 +4,7 @@ import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
 import { nanoid } from 'nanoid'
 import { LiveObject } from '@liveblocks/client'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
 import { CanvasMode, LayerType } from '../../types/types.d'
 
@@ -84,14 +84,62 @@ export function Canvas() {
         insertLayer(LayerType.Rectangle, { x: 100, y: 100 })
     }, [insertLayer])
     
+    const onWheel = useCallback((e: WheelEvent) => {
+        setCamera((camera) => ({
+            x: camera.x - e.deltaX,
+            y: camera.y - e.deltaY,
+            zoom: camera.zoom
+        }))
+    }, [])
+    
+    const onPointerDown = useMutation(({}, e: PointerEvent) => {
+        if (!storageLoaded)
+            return
+
+        const point = pointerEventToCanvasPoint(e, camera)
+        
+        if (canvasState.mode === CanvasMode.Dragging) {
+            setState({ mode: CanvasMode.Dragging, origin: point })
+        }
+
+    }, [camera, canvasState.mode, setState])
+
+    const onPointerMove = useMutation(({}, e: PointerEvent) => {
+        if (!storageLoaded)
+            return
+
+        const point = pointerEventToCanvasPoint(e, camera)
+
+        if (canvasState.mode === CanvasMode.Dragging && canvasState.origin !== null) {
+            const deltaX = e.movementX
+            const deltaY = e.movementY
+            
+            setCamera((camera) => ({
+                x: camera.x - deltaX,
+                y: camera.y - deltaY,
+                zoom: camera.zoom
+            }))
+        }
+
+    }, [canvasState, setState, insertLayer])
+    
     const onPointerUp = useMutation(({}, e: PointerEvent) => {
         if (!storageLoaded)
             return
         
         const point = pointerEventToCanvasPoint(e, camera)
         
-        insertLayer(LayerType.Ellipse, point)
-    }, [insertLayer])
+        if (canvasState.mode === CanvasMode.None) {
+            setState({ mode: CanvasMode.None })
+        }
+        else if (canvasState.mode === CanvasMode.Inserting) {
+            insertLayer(canvasState.layerType, point)
+        }
+        else if (canvasState.mode === CanvasMode.Dragging) {
+            setState({ mode: CanvasMode.Dragging, origin: null })
+        }
+        
+    }, [camera, canvasState, setState, insertLayer])
     
     return (
         <div className='flex h-screen w-full'>
@@ -103,10 +151,15 @@ export function Canvas() {
                     className='h-full w-full touch-none'
                 >
                     <svg
+                        onWheel={ onWheel }
                         onPointerUp={ onPointerUp }
+                        onPointerDown={ onPointerDown }
+                        onPointerMove={ onPointerMove }
                         className='w-full h-full'
                     >
-                        <g>
+                        <g
+                            style={{transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`}}
+                        >
                             { layerIds && layerIds.map((layerId) => (
                                 <LayerComponent
                                     key={ layerId }
@@ -121,6 +174,14 @@ export function Canvas() {
             <ToolsBar
                 canvasState={ canvasState }
                 setCanvasState={ (newState) => setState(newState) }
+                zoomIn={ () => {
+                    setCamera((camera) => ({ ...camera, zoom: camera.zoom + 0.1 }))
+                } }
+                zoomOut={ () => {
+                    setCamera((camera) => ({ ...camera, zoom: camera.zoom - 0.1 }))
+                } }
+                canZoomIn={ camera.zoom < 2 }
+                canZoomOut={ camera.zoom > 0.5 }
             >
             </ToolsBar>
         </div>
