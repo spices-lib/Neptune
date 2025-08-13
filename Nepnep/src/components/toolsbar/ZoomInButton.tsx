@@ -11,6 +11,7 @@ export default function ZoomInButton({
     return (
         <IconButton
             onClick={ onClick }
+            isActive = { true }
             disabled={ disabled }
         >
             <AiOutlineZoomIn

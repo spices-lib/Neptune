@@ -13,7 +13,8 @@ export enum LayerType {
 export enum CanvasMode {
     None,
     Dragging,
-    Inserting
+    Inserting,
+    Pencil
 }
 
 declare global {
@@ -116,6 +117,8 @@ declare global {
     } | {
         mode: CanvasMode.Inserting
         layerType: LayerType.Rectangle | LayerType.Ellipse | LayerType.Text
+    } | {
+        mode: CanvasMode.Pencil
     }
 }
 

@@ -40,6 +40,7 @@ export default function SelectionButton({
             <IconButton
                 isActive={ isActive }
                 onClick={ () => onClick(CanvasMode.None) }
+                disabled={ false }
             >
                 { canvasMode !== CanvasMode.None && canvasMode !== CanvasMode.Dragging && (<BiPointer className='h-5 w-5'/>) }
                 { canvasMode === CanvasMode.None && <BiPointer className='h-5 w-5'/> }
@@ -77,7 +78,7 @@ export default function SelectionButton({
                             { canvasMode === CanvasMode.Dragging && '✓' }
                         </span>
                         <RiHand className='mr-2 h-4 w-4'/>
-                        <span className='text-xs'> Hand tool </span>
+                        <span className='text-xs'> Hand </span>
                     </button>
                 </div>
             ) }

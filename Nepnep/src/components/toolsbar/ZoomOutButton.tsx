@@ -11,6 +11,7 @@ export default function ZoomOutButton({
     return (
         <IconButton
             onClick={ onClick }
+            isActive = { true }
             disabled={ disabled }
         >
             <AiOutlineZoomOut

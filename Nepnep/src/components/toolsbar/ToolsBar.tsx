@@ -28,7 +28,7 @@ export default function ToolsBar({
                         canvasState.mode === CanvasMode.Dragging 
                     }
                     canvasMode={ canvasState.mode }
-                    onClick={ (canvasMode) => setCanvasState( canvasMode === CanvasMode.Dragging ? { mode: CanvasMode.None, origin: null } : { mode: canvasMode } )}
+                    onClick={ (canvasMode) => setCanvasState( canvasMode === CanvasMode.Dragging ? { mode: canvasMode, origin: null } : { mode: canvasMode } )}
                 >
                 </SelectionButton>
                 <ShapeSelectionButton

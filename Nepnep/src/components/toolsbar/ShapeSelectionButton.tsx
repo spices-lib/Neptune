@@ -39,6 +39,7 @@ export default function ShapeSelectionButton({
             <IconButton
                 isActive={ isActive }
                 onClick={ () => onClick(LayerType.Rectangle) }
+                disabled={ false }
             >
                 { canvasState.mode !== CanvasMode.Inserting && <IoSquareOutline className='h-5 w-5'/> }
                 { canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Rectangle && <IoSquareOutline className='h-5 w-5'/> }
