@@ -1,8 +1,10 @@
 ﻿import SelectionButton from './SelectionButton'
 import ShapeSelectionButton from './ShapeSelectionButton'
-import { CanvasMode, LayerType } from '../../types/types.d'
+import {CanvasMode, LayerType} from '../../types/types.d'
 import ZoomInButton from './ZoomInButton'
 import ZoomOutButton from './ZoomOutButton'
+import PencilButton from './PencilButton'
+import TextButton from './TextButton'
 
 export default function ToolsBar({ 
     canvasState,
@@ -41,6 +43,16 @@ export default function ToolsBar({
                 >
                 </ShapeSelectionButton>
             </div>
+            <PencilButton
+                isActive={ canvasState.mode === CanvasMode.Pencil }
+                onClick={ () => setCanvasState({ mode: CanvasMode.Pencil })}
+            >
+            </PencilButton>
+            <TextButton
+                isActive={ canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Text }
+                onClick={ () => setCanvasState( { mode: CanvasMode.Inserting, layerType: LayerType.Text } )}
+            >
+            </TextButton>
             <div className='w-1[px] self-streth bg-black/10'></div>
             <div className='flex items-center justify-center'>
                 <ZoomInButton

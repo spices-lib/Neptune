@@ -42,7 +42,7 @@ export default function ShapeSelectionButton({
                 disabled={ false }
             >
                 { canvasState.mode !== CanvasMode.Inserting && <IoSquareOutline className='h-5 w-5'/> }
-                { canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Rectangle && <IoSquareOutline className='h-5 w-5'/> }
+                { canvasState.mode === CanvasMode.Inserting && (canvasState.layerType === LayerType.Rectangle || canvasState.layerType === LayerType.Text) && <IoSquareOutline className='h-5 w-5'/> }
                 { canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Ellipse && <IoEllipseOutline className='h-5 w-5'/> }
             </IconButton>
             <button

@@ -1,4 +1,4 @@
-﻿import { useMutation, useSelf, useStorage } from '@liveblocks/react'
+﻿import { useMutation, useMyPresence, useSelf, useStorage } from '@liveblocks/react'
 import { colorToCss, penPointsToPathLayer, pointerEventToCanvasPoint } from '../../utils'
 import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
@@ -7,6 +7,8 @@ import { LiveObject} from '@liveblocks/client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
 import { CanvasMode, LayerType } from '../../types/types.d'
+import Path from './Path'
+import SelectionBox from './SelectionBox'
 
 const MAX_LAYERS = 100
 
@@ -14,8 +16,21 @@ export function Canvas() {
     const roomColor = useStorage((root) => ( root.roomColor)) as Color | undefined
     const layerIds = useStorage((root) => root.layerIds) as string[] | undefined
     const pencilDraft = useSelf((me) => me.presence.pencilDraft) as number[][]
+    const presence = useMyPresence()
     const [ canvasState, setState ] = useState<CanvasState>({ mode: CanvasMode.None })
     const [ camera, setCamera ] = useState<Camera>({ x: 0, y: 0, zoom:1 })
+    
+    const onLayerPointerDown = useMutation(({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
+        if (canvasState.mode === CanvasMode.Pencil || canvasState.mode === CanvasMode.Inserting) return 
+        
+        e.stopPropagation()
+        
+        if (!(self.presence.selection as string[]).includes(layerId)) {
+            setMyPresence({
+                selection: [layerId]
+            })
+        }
+    }, [ canvasState.mode ])
     
     const insertLayer = useMutation(
         (
@@ -63,6 +78,22 @@ export function Canvas() {
                     fill: { r: 217, g: 217, b: 217 },
                     stroke: { r: 217, g: 217, b: 217 },
                     opacity: 100,
+                })
+            }
+            else if (layerType === LayerType.Text) {
+                layer = new LiveObject<TextLayer>({
+                    type: layerType,
+                    x: position.x,
+                    y: position.y,
+                    height: 100,
+                    width: 100,
+                    fontSize: 16,
+                    text: 'Text',
+                    fontWidth: 400,
+                    fontFamily: 'Inter',
+                    stroke: { r: 217, g: 217, b: 217 },
+                    fill: { r: 217, g: 217, b: 217 },
+                    opacity: 100
                 })
             }
             
@@ -211,15 +242,27 @@ export function Canvas() {
                         <g
                             style={{transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`}}
                         >
-                            { layerIds && layerIds.map((layerId) => (
-                                <LayerComponent
-                                    key={ layerId }
-                                    id={ layerId }
-                                >
-                                </LayerComponent>
-                            )) }
                         </g>
-                        { pencilDraft !== null && pencilDraft.length > 0 }
+                        { layerIds && layerIds.map((layerId) => (
+                            <LayerComponent
+                                key={ layerId }
+                                id={ layerId }
+                                onLayerPointerDown={ onLayerPointerDown }
+                            >
+                            </LayerComponent>
+                        )) }
+                        <SelectionBox></SelectionBox>
+                        { pencilDraft !== null && pencilDraft.length > 0 && 
+                            <Path
+                                x={ 0 }
+                                y={ 0 }
+                                stroke={ colorToCss({r: 217, g: 217, b: 217 })}
+                                fill={ colorToCss({r: 217, g: 217, b: 217 })}
+                                opacity={ 100 }
+                                points={ pencilDraft }
+                            >
+                            </Path> 
+                        }
                     </svg>
                 </div>
             </main>
