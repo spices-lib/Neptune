@@ -14,7 +14,15 @@ export enum CanvasMode {
     None,
     Dragging,
     Inserting,
-    Pencil
+    Pencil,
+    Resizing
+}
+
+export enum Side { 
+    Top= 1,
+    Bottom = 2,
+    Left = 4,
+    Right = 8
 }
 
 declare global {
@@ -109,6 +117,13 @@ declare global {
         y: number
     }
     
+    type XYWH = {
+        x: number
+        y: number
+        width: number
+        height: number
+    }
+    
     type CanvasState = {
         mode: CanvasMode.None
     } | {
@@ -119,6 +134,10 @@ declare global {
         layerType: LayerType.Rectangle | LayerType.Ellipse | LayerType.Text
     } | {
         mode: CanvasMode.Pencil
+    } | {
+        mode: CanvasMode.Resizing
+        initialBounds: XYWH
+        corner: Side
     }
 }
 

@@ -1,12 +1,12 @@
 ﻿import { useMutation, useMyPresence, useSelf, useStorage } from '@liveblocks/react'
-import { colorToCss, penPointsToPathLayer, pointerEventToCanvasPoint } from '../../utils'
+import { colorToCss, penPointsToPathLayer, pointerEventToCanvasPoint, resizeBounds } from '../../utils'
 import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
 import { nanoid } from 'nanoid'
 import { LiveObject} from '@liveblocks/client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
-import { CanvasMode, LayerType } from '../../types/types.d'
+import { CanvasMode, LayerType, Side } from '../../types/types.d'
 import Path from './Path'
 import SelectionBox from './SelectionBox'
 
@@ -31,6 +31,14 @@ export function Canvas() {
             })
         }
     }, [ canvasState.mode ])
+
+    const onResizeHandlePointerDown = useCallback((corner: Side, initialBounds: XYWH) => {
+        setState({
+            mode: CanvasMode.Resizing,
+            initialBounds,
+            corner
+        })
+    }, [])
     
     const insertLayer = useMutation(
         (
@@ -127,6 +135,23 @@ export function Canvas() {
         })
     }, [canvasState.mode])
     
+    const resizeSelectedLayer = useMutation(({storage, self}, point: Point) => {
+        if (canvasState.mode !== CanvasMode.Resizing) {
+            return
+        }
+        
+        const bounds = resizeBounds(canvasState.initialBounds, canvasState.corner, point)
+            
+        const liveLayers = storage.get('layers') as LiveMap<string, LiveObject<Layer>> | undefined
+        const selection = self.presence.selection as string[] | undefined
+        
+        if (selection!.length > 0) {
+            const layer = liveLayers?.get(selection![0]!)
+            layer?.update(bounds)
+        }
+        
+    }, [canvasState])
+    
     const insertPath = useMutation(({ storage, self, setMyPresence }) => {
         const liveLayers = storage.get('layers') as LiveMap<string, LiveObject<Layer>> | undefined
         const liveLayerIds = storage.get('layerIds') as LiveList<string> | undefined
@@ -199,8 +224,11 @@ export function Canvas() {
         else if (canvasState.mode === CanvasMode.Pencil) {
             continueDrawing(point, e)
         }
+        else if (canvasState.mode === CanvasMode.Resizing) {
+            resizeSelectedLayer(point)
+        }
 
-    }, [canvasState, setCamera, continueDrawing])
+    }, [canvasState, setCamera, continueDrawing, resizeSelectedLayer])
     
     const onPointerUp = useMutation(({}, e: React.PointerEvent) => {
         if (!storageLoaded)
@@ -251,7 +279,10 @@ export function Canvas() {
                             >
                             </LayerComponent>
                         )) }
-                        <SelectionBox></SelectionBox>
+                        <SelectionBox
+                            onResizeHandlePointerDown={ onResizeHandlePointerDown }
+                        >
+                        </SelectionBox>
                         { pencilDraft !== null && pencilDraft.length > 0 && 
                             <Path
                                 x={ 0 }
