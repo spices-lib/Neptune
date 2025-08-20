@@ -1,9 +1,23 @@
-﻿import { useCanRedo, useCanUndo, useHistory, useMutation, useMyPresence, useSelf, useStorage } from '@liveblocks/react'
-import { colorToCss, penPointsToPathLayer, pointerEventToCanvasPoint, resizeBounds } from '../../utils'
+﻿import {
+    useCanRedo, 
+    useCanUndo, 
+    useHistory, 
+    useMutation, 
+    useMyPresence, 
+    useSelf, 
+    useStorage
+} from '@liveblocks/react'
+import {
+    colorToCss,
+    findIntersectionLayersWithRectangle,
+    penPointsToPathLayer,
+    pointerEventToCanvasPoint,
+    resizeBounds
+} from '../../utils'
 import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
 import { nanoid } from 'nanoid'
-import { LiveObject} from '@liveblocks/client'
+import { LiveObject } from '@liveblocks/client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
 import { CanvasMode, LayerType, Side } from '../../types/types.d'
@@ -244,16 +258,40 @@ export function Canvas() {
            startDrawing(point, e.pressure)
             return
         }
+        
+        setState({ mode: CanvasMode.Pressing, origin: point })
 
     }, [camera, canvasState, setState, startDrawing])
 
+    const startMultiSelection = useCallback((current: Point, origin: Point) => {
+        if (Math.abs(current.x - origin.x) + Math.abs(current.y - origin.y) > 5) {
+            setState({ mode: CanvasMode.SelectionNet, origin, current })
+        }
+    }, [])
+    
+    const updateSelectionNet = useMutation(({storage, setMyPresence}, current: Point, origin: Point) => {
+        if (layerIds) {
+            const layers = (storage.get('layers') as LiveMap<string, LiveObject<Layer>>).toImmutable()
+            setState({ mode: CanvasMode.SelectionNet, origin, current })
+            
+            const ids = findIntersectionLayersWithRectangle(layerIds, layers, origin, current)
+            setMyPresence({ selection: ids }, { addToHistory: true })
+        }
+    }, [layerIds])
+    
     const onPointerMove = useMutation(({}, e: React.PointerEvent) => {
         if (!storageLoaded)
             return
 
         const point = pointerEventToCanvasPoint(e, camera)
 
-        if (canvasState.mode === CanvasMode.Dragging && canvasState.origin !== null) {
+        if (canvasState.mode === CanvasMode.Pressing) {
+            startMultiSelection(point, canvasState.origin)
+        }
+        else if (canvasState.mode === CanvasMode.SelectionNet) {
+            updateSelectionNet(point, canvasState.origin)
+        }
+        else if (canvasState.mode === CanvasMode.Dragging && canvasState.origin !== null) {
             const deltaX = e.movementX
             const deltaY = e.movementY
             
@@ -273,7 +311,7 @@ export function Canvas() {
             resizeSelectedLayer(point)
         }
 
-    }, [canvasState, setCamera, continueDrawing, resizeSelectedLayer])
+    }, [canvasState, camera, setCamera, continueDrawing, translateSelectedLayers, resizeSelectedLayer, updateSelectionNet, startMultiSelection])
     
     const onPointerUp = useMutation(({}, e: React.PointerEvent) => {
         if (!storageLoaded)
@@ -281,7 +319,7 @@ export function Canvas() {
         
         const point = pointerEventToCanvasPoint(e, camera)
         
-        if (canvasState.mode === CanvasMode.None) {
+        if (canvasState.mode === CanvasMode.None || canvasState.mode === CanvasMode.Pressing) {
             unselectLayers()
             setState({ mode: CanvasMode.None })
         }
@@ -334,6 +372,16 @@ export function Canvas() {
                             onResizeHandlePointerDown={ onResizeHandlePointerDown }
                         >
                         </SelectionBox>
+                        { canvasState.mode === CanvasMode.SelectionNet && canvasState.current !== null && 
+                            <rect
+                                className='fill-blue-600/5 stroke-blue-600 stroke-[0.5]'
+                                x={ Math.min(canvasState.origin.x, canvasState.current.x) }
+                                y={ Math.min(canvasState.origin.y, canvasState.current.y) }
+                                width={ Math.abs(canvasState.origin.x - canvasState.current.x) }
+                                height={ Math.abs(canvasState.origin.y - canvasState.current.y) }
+                            >
+                            </rect>  
+                        }
                         { pencilDraft !== null && pencilDraft.length > 0 && 
                             <Path
                                 x={ 0 }

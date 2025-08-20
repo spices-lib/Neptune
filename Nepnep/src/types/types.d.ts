@@ -16,7 +16,9 @@ export enum CanvasMode {
     Inserting,
     Pencil,
     Resizing,
-    Translating
+    Translating,
+    SelectionNet,
+    Pressing
 }
 
 export enum Side { 
@@ -142,6 +144,13 @@ declare global {
     } | {
         mode: CanvasMode.Translating
         current: Point
+    } | {
+        mode: CanvasMode.SelectionNet
+        origin: Point
+        current?: Point
+    } | {
+        mode: CanvasMode.Pressing
+        origin: Point
     }
 }
 
