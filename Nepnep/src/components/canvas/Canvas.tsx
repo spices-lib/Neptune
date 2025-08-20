@@ -133,14 +133,14 @@ export function Canvas() {
     }, [])
 
     const continueDrawing = useMutation(({ self, setMyPresence }, point: Point, e: React.PointerEvent) => {
-        const { pencilDraft } = self.presence
+        const { pencilDraft } = self.presence as { pencilDraft: number[][] }
         
         if(canvasState.mode !== CanvasMode.Pencil || e.buttons !== 1 || pencilDraft === null) {
             return
         }
         
         setMyPresence({
-            pencilDraft: [...pencilDraft, [point.x, point.y, e]],
+            pencilDraft: [...pencilDraft, [point.x, point.y, e.pressure]],
             penColor: { r: 217, g: 217, b: 217 }
         }, { addToHistory: true })
     }, [canvasState.mode])

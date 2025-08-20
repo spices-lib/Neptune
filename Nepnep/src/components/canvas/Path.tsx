@@ -37,7 +37,7 @@ export default function Path({
                 stroke='#0b99ff'
                 strokeWidth={ 4 }
                 strokeLinecap='round'
-                stroke-linejoin='round'
+                strokeLinejoin='round'
                 className='pointer-events-none opacity-0 group-hover:opacity-100'
             >
             </path>

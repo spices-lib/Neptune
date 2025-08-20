@@ -29,8 +29,6 @@ export default function Rectangle({
             <rect
                 onPointerDown={ (e) => onPointerDown(e, id) }
                 style={{transform: `translate(${x}px, ${y}px)`}}
-                x={x}
-                y={y}
                 width={width}
                 height={height}
                 fill={fill ? colorToCss(fill) : '#CCC'}
