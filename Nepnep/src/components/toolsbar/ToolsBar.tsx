@@ -5,6 +5,8 @@ import ZoomInButton from './ZoomInButton'
 import ZoomOutButton from './ZoomOutButton'
 import PencilButton from './PencilButton'
 import TextButton from './TextButton'
+import UndoButton from './UndoButton'
+import RedoButton from './RedoButton'
 
 export default function ToolsBar({ 
     canvasState,
@@ -12,7 +14,11 @@ export default function ToolsBar({
     zoomIn,
     zoomOut,
     canZoomIn,
-    canZoomOut
+    canZoomOut,
+    undo,
+    redo,
+    canUndo,
+    canRedo
 }: { 
     canvasState: CanvasState
     setCanvasState: (newState: CanvasState) => void
@@ -20,6 +26,10 @@ export default function ToolsBar({
     zoomOut: () => void
     canZoomIn: boolean
     canZoomOut: boolean
+    undo: () => void
+    redo: () => void
+    canUndo: boolean
+    canRedo: boolean
 }) {
     return (
         <div className='fixed bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center justify-center rounded-lg bg-white p-1 shadow-[0_0_3px_rgba(0,0,0,0.18)]'>
@@ -53,6 +63,19 @@ export default function ToolsBar({
                 onClick={ () => setCanvasState( { mode: CanvasMode.Inserting, layerType: LayerType.Text } )}
             >
             </TextButton>
+            <div className='w-1[px] self-streth bg-black/10'></div>
+            <div className='flex items-center justify-center'>
+                <UndoButton
+                    onClick={ undo }
+                    disabled={ !canUndo }
+                >
+                </UndoButton>
+                <RedoButton
+                    onClick={ redo }
+                    disabled={ !canRedo }
+                >
+                </RedoButton>
+            </div>
             <div className='w-1[px] self-streth bg-black/10'></div>
             <div className='flex items-center justify-center'>
                 <ZoomInButton

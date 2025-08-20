@@ -27,14 +27,27 @@ export default function Path({
     }))
     
     return (
-        <g>
+        <g
+            className='group'
+        >
+            <path
+                style={{ transform: `translate(${x}px, ${y}px)` }}
+                d={ pathData }
+                fill='none'
+                stroke='#0b99ff'
+                strokeWidth={ 4 }
+                strokeLinecap='round'
+                stroke-linejoin='round'
+                className='pointer-events-none opacity-0 group-hover:opacity-100'
+            >
+            </path>
             <path
                 onPointerDown={ onPointerDown }
                 style={{transform: `translate(${x}px, ${y}px)`}}
                 d={ pathData }
                 fill={ fill }
                 stroke={ stroke }
-                strokeWidth={1}
+                strokeWidth={ 1 }
                 opacity={ `${opacity ?? 100}%`}
             >
             </path>

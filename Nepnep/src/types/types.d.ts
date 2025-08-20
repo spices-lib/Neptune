@@ -15,7 +15,8 @@ export enum CanvasMode {
     Dragging,
     Inserting,
     Pencil,
-    Resizing
+    Resizing,
+    Translating
 }
 
 export enum Side { 
@@ -138,6 +139,9 @@ declare global {
         mode: CanvasMode.Resizing
         initialBounds: XYWH
         corner: Side
+    } | {
+        mode: CanvasMode.Translating
+        current: Point
     }
 }
 

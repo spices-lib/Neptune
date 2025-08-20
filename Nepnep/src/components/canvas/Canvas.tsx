@@ -1,4 +1,4 @@
-﻿import { useMutation, useMyPresence, useSelf, useStorage } from '@liveblocks/react'
+﻿import { useCanRedo, useCanUndo, useHistory, useMutation, useMyPresence, useSelf, useStorage } from '@liveblocks/react'
 import { colorToCss, penPointsToPathLayer, pointerEventToCanvasPoint, resizeBounds } from '../../utils'
 import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
@@ -19,26 +19,36 @@ export function Canvas() {
     const presence = useMyPresence()
     const [ canvasState, setState ] = useState<CanvasState>({ mode: CanvasMode.None })
     const [ camera, setCamera ] = useState<Camera>({ x: 0, y: 0, zoom:1 })
+    const history = useHistory()
+    const canUndo = useCanUndo()
+    const canRedo = useCanRedo()
     
     const onLayerPointerDown = useMutation(({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
         if (canvasState.mode === CanvasMode.Pencil || canvasState.mode === CanvasMode.Inserting) return 
+        
+        history.pause()
         
         e.stopPropagation()
         
         if (!(self.presence.selection as string[]).includes(layerId)) {
             setMyPresence({
                 selection: [layerId]
-            })
-        }
-    }, [ canvasState.mode ])
+            }, { addToHistory: true })
+        } 
+        
+        const point = pointerEventToCanvasPoint(e, camera)
+        setState({ mode: CanvasMode.Translating, current: point })
+    }, [ canvasState.mode, camera, history ])
 
     const onResizeHandlePointerDown = useCallback((corner: Side, initialBounds: XYWH) => {
+        history.pause()
+        
         setState({
             mode: CanvasMode.Resizing,
             initialBounds,
             corner
         })
-    }, [])
+    }, [history])
     
     const insertLayer = useMutation(
         (
@@ -119,7 +129,7 @@ export function Canvas() {
         setMyPresence({
             pencilDraft: [[point.x, point.y, pressure]],
             penColor: { r: 217, g: 217, b: 217 }
-        })
+        }, { addToHistory: true })
     }, [])
 
     const continueDrawing = useMutation(({ self, setMyPresence }, point: Point, e: React.PointerEvent) => {
@@ -132,8 +142,32 @@ export function Canvas() {
         setMyPresence({
             pencilDraft: [...pencilDraft, [point.x, point.y, e]],
             penColor: { r: 217, g: 217, b: 217 }
-        })
+        }, { addToHistory: true })
     }, [canvasState.mode])
+    
+    const translateSelectedLayers = useMutation(({storage, self}, point: Point) => {
+        if (canvasState.mode !== CanvasMode.Translating) {
+            return
+        }
+        
+        const offset = {
+            x: point.x - canvasState.current.x,
+            y: point.y - canvasState.current.y
+        }
+        
+        const liveLayers = storage.get('layers') as LiveMap<string, LiveObject<Layer>> | undefined
+        for (const id of self.presence.selection as string[]) {
+            const layer = liveLayers?.get(id)
+            if (layer) {
+                layer.update({
+                    x: layer.get('x') + offset.x,
+                    y: layer.get('y') + offset.y,
+                })
+            }
+        }
+        
+        setState({ mode: CanvasMode.Translating, current: point })
+    }, [canvasState])
     
     const resizeSelectedLayer = useMutation(({storage, self}, point: Point) => {
         if (canvasState.mode !== CanvasMode.Resizing) {
@@ -152,13 +186,21 @@ export function Canvas() {
         
     }, [canvasState])
     
+    const unselectLayers = useMutation(({ self, setMyPresence }) => {
+        const selection = self.presence.selection as string[]
+        
+        if (selection.length > 0) {
+            setMyPresence({ selection: [] }, { addToHistory: true })
+        }
+    }, [])
+    
     const insertPath = useMutation(({ storage, self, setMyPresence }) => {
         const liveLayers = storage.get('layers') as LiveMap<string, LiveObject<Layer>> | undefined
         const liveLayerIds = storage.get('layerIds') as LiveList<string> | undefined
         const { pencilDraft } = self.presence as { pencilDraft: number[][] }
         
         if (pencilDraft === null || pencilDraft.length < 2 || liveLayers === undefined || liveLayers.size >= MAX_LAYERS || liveLayerIds === undefined) {
-            setMyPresence({ pencilDraft: null })
+            setMyPresence({ pencilDraft: null }, { addToHistory: true })
             return
         }
         
@@ -166,7 +208,7 @@ export function Canvas() {
         liveLayers.set(id, new LiveObject(penPointsToPathLayer(pencilDraft, { r: 217, g: 217, b: 217 })))
         liveLayerIds.push(id)
 
-        setMyPresence({ pencilDraft: null })
+        setMyPresence({ pencilDraft: null }, { addToHistory: true })
         setState({ mode: CanvasMode.Pencil })
     },[])
     
@@ -221,6 +263,9 @@ export function Canvas() {
                 zoom: camera.zoom
             }))
         }
+        else if (canvasState.mode === CanvasMode.Translating) {
+            translateSelectedLayers(point)
+        }
         else if (canvasState.mode === CanvasMode.Pencil) {
             continueDrawing(point, e)
         }
@@ -237,6 +282,7 @@ export function Canvas() {
         const point = pointerEventToCanvasPoint(e, camera)
         
         if (canvasState.mode === CanvasMode.None) {
+            unselectLayers()
             setState({ mode: CanvasMode.None })
         }
         else if (canvasState.mode === CanvasMode.Inserting) {
@@ -248,8 +294,13 @@ export function Canvas() {
         else if (canvasState.mode === CanvasMode.Pencil) {
             insertPath()
         }
+        else {
+            setState({ mode: CanvasMode.None })
+        }
         
-    }, [camera, canvasState, setState, insertLayer, insertPath])
+        history.resume()
+        
+    }, [camera, canvasState, setState, insertLayer, insertPath, unselectLayers, history])
     
     return (
         <div className='flex h-screen w-full'>
@@ -308,6 +359,10 @@ export function Canvas() {
                 } }
                 canZoomIn={ camera.zoom < 2 }
                 canZoomOut={ camera.zoom > 0.5 }
+                undo={ () => history.undo() }
+                redo={ () => history.redo() }
+                canUndo={ canUndo }
+                canRedo={ canRedo }
             >
             </ToolsBar>
         </div>
