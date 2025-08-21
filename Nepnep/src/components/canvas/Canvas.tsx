@@ -182,6 +182,7 @@ export function Canvas() {
                 liveLayers.set(layerId, layer)
                 
                 setMyPresence({ selection: [layerId] }, { addToHistory: true })
+                setState({ mode: CanvasMode.None })
             }
         },
         []
@@ -416,6 +417,7 @@ export function Canvas() {
                         onPointerDown={ onPointerDown }
                         onPointerMove={ onPointerMove }
                         className='w-full h-full'
+                        onContextMenu={ (e) => e.preventDefault() }
                     >
                         <g
                             style={{transform: `translate(${camera.x}px, ${camera.y}px) scale(${camera.zoom})`}}

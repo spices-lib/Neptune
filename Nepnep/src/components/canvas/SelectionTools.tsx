@@ -3,20 +3,16 @@ import { BsArrowDown, BsArrowUp } from 'react-icons/bs'
 import { CanvasMode } from '../../types/types.d'
 import { useMutation, useSelf } from '@liveblocks/react'
 import { LiveList } from '@liveblocks/client'
+import { memo } from 'react'
 
-export default function SelectionTools({ 
+function SelectionTools({ 
     camera,
     canvasMode
 }: {
     camera: Camera,
     canvasMode: CanvasMode
 }) {
-    const selectionBounds = useSelectionBounds()
-    if (!selectionBounds) {
-        return null
-    }
-    
-    const selection = useSelf((me) => me.presence.selection) as string[]
+    const selection = useSelf((me) => me.presence.selection) as string[] | undefined
     
     const moveToFront = useMutation(({storage}) => {
         const liveLayerIds = storage.get('layerIds') as LiveList<string>
@@ -27,7 +23,7 @@ export default function SelectionTools({
         for (let i = 0; i < arr.length; i++) {
             const element = arr[i]
             
-            if (element !== undefined && selection.includes(element)) {
+            if (element !== undefined && selection?.includes(element)) {
                 indices.push(i)
             }
         }
@@ -50,7 +46,7 @@ export default function SelectionTools({
         for (let i = 0; i < arr.length; i++) {
             const element = arr[i]
 
-            if (element !== undefined && selection.includes(element)) {
+            if (element !== undefined && selection?.includes(element)) {
                 indices.push(i)
             }
         }
@@ -63,6 +59,11 @@ export default function SelectionTools({
         }
 
     }, [selection])
+
+    const selectionBounds = useSelectionBounds()
+    if (!selectionBounds) {
+        return null
+    }
     
     const x = selectionBounds.width / 2 + selectionBounds.x + camera.x
     const y = selectionBounds.y + camera.y
@@ -109,3 +110,5 @@ export default function SelectionTools({
         </div>
     )
 }
+
+export default memo(SelectionTools)
