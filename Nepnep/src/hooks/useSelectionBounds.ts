@@ -32,12 +32,11 @@ export default function useSelectionBounds() {
     const selection = useSelf((me) => me.presence.selection) as string[]
     
     return useStorage((root) => {
-        const layers = root.layers as LiveMap<string, LiveObject<Layer>> | undefined
+        const layers = root.layers as LiveMap<string, Layer> | undefined
         
         const selectedLayers = selection
             ?.map((layerId) => layers?.get(layerId)!)
             .filter(Boolean)
-            //.map(layer => layer.toObject())
         
         return boundingBox(selectedLayers)
     }, shallow)

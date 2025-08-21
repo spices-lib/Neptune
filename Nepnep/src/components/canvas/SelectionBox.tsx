@@ -1,16 +1,16 @@
 ﻿import { useSelf, useStorage } from '@liveblocks/react'
 import { LayerType, Side } from '../../types/types.d'
 import { LiveMap, LiveObject } from '@liveblocks/client/dist/index'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState} from 'react'
 import useSelectionBounds from '../../hooks/useSelectionBounds'
 
 const handleWidth = 8
 
-export default function SelectionBox({
+const SelectionBox = memo(({
     onResizeHandlePointerDown
 } : {
     onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void
-}) {
+}) => {
     const soleLayerId = useSelf((me) => {
         const selection = me.presence.selection as string[]
         return selection?.length === 1 ? selection[0] : null
@@ -179,4 +179,8 @@ export default function SelectionBox({
             )}
         </g>
     )
-}
+})
+
+SelectionBox.displayName = 'SelectionBox'
+
+export default SelectionBox

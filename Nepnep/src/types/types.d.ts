@@ -18,7 +18,8 @@ export enum CanvasMode {
     Resizing,
     Translating,
     SelectionNet,
-    Pressing
+    Pressing,
+    RightClick,
 }
 
 export enum Side { 
@@ -151,6 +152,8 @@ declare global {
     } | {
         mode: CanvasMode.Pressing
         origin: Point
+    } | {
+        mode: CanvasMode.RightClick
     }
 }
 

@@ -23,6 +23,8 @@ import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
 import { CanvasMode, LayerType, Side } from '../../types/types.d'
 import Path from './Path'
 import SelectionBox from './SelectionBox'
+import useDeleteLayers from '../../hooks/useDeleteLayers'
+import SelectionTools from './SelectionTools'
 
 const MAX_LAYERS = 100
 
@@ -30,12 +32,54 @@ export function Canvas() {
     const roomColor = useStorage((root) => ( root.roomColor)) as Color | undefined
     const layerIds = useStorage((root) => root.layerIds) as string[] | undefined
     const pencilDraft = useSelf((me) => me.presence.pencilDraft) as number[][]
+    const deleteLayers = useDeleteLayers()
     const presence = useMyPresence()
     const [ canvasState, setState ] = useState<CanvasState>({ mode: CanvasMode.None })
     const [ camera, setCamera ] = useState<Camera>({ x: 0, y: 0, zoom:1 })
     const history = useHistory()
     const canUndo = useCanUndo()
     const canRedo = useCanRedo()
+    
+    const selectAllLayers = useMutation(({setMyPresence}) => {
+        if (layerIds) {
+            setMyPresence({ selection: [...layerIds]}, { addToHistory: true })
+        }
+    }, [layerIds])
+    
+    useEffect(() => {
+        function onKeyDown (e: KeyboardEvent) {
+            const activeElement = document.activeElement
+            const isInputField = activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')
+            
+            if (isInputField) return
+            
+            switch (e.key) {
+                case 'Backspace':
+                    deleteLayers()
+                    break
+                case 'z':
+                    if (e.ctrlKey || e.metaKey) {
+                        if (e.shiftKey) {
+                            history.redo()
+                        } else {
+                            history.undo()
+                        }
+                    }
+                    break
+                case 'a':
+                    if (e.ctrlKey || e.metaKey) {
+                        selectAllLayers()
+                    }
+                    break
+            }
+        }
+        
+        document.addEventListener('keydown', onKeyDown)
+        
+        return () => {
+            document.removeEventListener('keydown', onKeyDown)
+        }
+    }, [deleteLayers, selectAllLayers])
     
     const onLayerPointerDown = useMutation(({ self, setMyPresence }, e: React.PointerEvent, layerId: string) => {
         if (canvasState.mode === CanvasMode.Pencil || canvasState.mode === CanvasMode.Inserting) return 
@@ -50,8 +94,12 @@ export function Canvas() {
             }, { addToHistory: true })
         } 
         
-        const point = pointerEventToCanvasPoint(e, camera)
-        setState({ mode: CanvasMode.Translating, current: point })
+        if (e.nativeEvent.button === 2) {
+            setState({ mode: CanvasMode.RightClick })
+        } else {
+            const point = pointerEventToCanvasPoint(e, camera)
+            setState({mode: CanvasMode.Translating, current: point})
+        }
     }, [ canvasState.mode, camera, history ])
 
     const onResizeHandlePointerDown = useCallback((corner: Side, initialBounds: XYWH) => {
@@ -254,6 +302,10 @@ export function Canvas() {
             return
         }
         
+        if (canvasState.mode === CanvasMode.Inserting) {
+            return
+        }
+        
         if (canvasState.mode === CanvasMode.Pencil) {
            startDrawing(point, e.pressure)
             return
@@ -316,6 +368,10 @@ export function Canvas() {
     const onPointerUp = useMutation(({}, e: React.PointerEvent) => {
         if (!storageLoaded)
             return
+
+        if (canvasState.mode === CanvasMode.RightClick) {
+            return
+        }
         
         const point = pointerEventToCanvasPoint(e, camera)
         
@@ -349,6 +405,11 @@ export function Canvas() {
                     }}
                     className='h-full w-full touch-none'
                 >
+                    <SelectionTools
+                        camera={ camera }
+                        canvasMode={ canvasState.mode }
+                    >
+                    </SelectionTools>
                     <svg
                         onWheel={ onWheel }
                         onPointerUp={ onPointerUp }
