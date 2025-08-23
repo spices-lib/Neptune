@@ -5,7 +5,6 @@ import {
     ClientSideSuspense,
 } from '@liveblocks/react/suspense'
 import '@liveblocks/react-ui/styles.css'
-import { Layer } from '../../types/types'
 import { LiveList, LiveMap, LiveObject } from '@liveblocks/node'
 
 interface RoomProps {
