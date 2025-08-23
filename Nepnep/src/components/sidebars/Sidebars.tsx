@@ -12,6 +12,7 @@ import NumberInput from './NumberInput'
 import { BsCircleHalf } from 'react-icons/bs'
 import { RiRoundedCorner } from 'react-icons/ri'
 import ColorPicker from './ColorPicker'
+import Dropdown from './Dropdown'
 
 export default function Sidebars({
     leftIsMinimized,
@@ -54,7 +55,7 @@ export default function Sidebars({
         fill?: string
         stroke?: string
         fontSize?: number
-        fontWeight?: string
+        fontWeight?: number
         fontFamily?: string
     }) => {
         if (!selectedLayer) {
@@ -304,6 +305,65 @@ export default function Sidebars({
                                 >
                                 </ColorPicker>
                             </div>
+                            <div className='border-b border-gray-200'/>
+                            <div className='flex flex-col gap-2 p-4'>
+                                <span className='mb-2 text-[11px] font-medium'>Stroke</span>
+                                <ColorPicker
+                                    value={ colorToCss(layer.stroke) }
+                                    onChange={(color) => updateLayer({stroke: color})}
+                                >
+                                </ColorPicker>
+                            </div>
+                            { layer.type === LayerType.Text && 
+                                <>
+                                    <div className='border-b border-gray-200'/>
+                                    <div className='flex flex-col gap-2 p-4'>
+                                        <span className='mb-2 text-[11px] font-medium'>
+                                            Typography
+                                        </span>
+                                        <div className='flex flex-col gap-1'>
+                                            <Dropdown
+                                                value={ layer.fontFamily }
+                                                onChange={(value) => {
+                                                  updateLayer({fontFamily: value})  
+                                                }}
+                                                options={['Inter', 'Arial', 'Times New Roman']}
+                                            >
+                                            </Dropdown>
+                                            <div className='flex w-full gap-2'>
+                                                <div className='flex w-full flex-col gap-1'>
+                                                    <p className='text-[9px] font-medium text-gray-500'>
+                                                        Size
+                                                    </p>
+                                                    <NumberInput
+                                                        value={ layer.fontSize }
+                                                        onChange={ (number) => {
+                                                            updateLayer({fontSize: number})
+                                                        }}
+                                                        classNames='w-full'
+                                                        icon={ <p>W</p> }
+                                                    >
+                                                    </NumberInput>
+                                                </div>
+                                                <div className='flex w-full flex-col gap-1'>
+                                                    <p className='text-[9px] font-medium text-gray-500'>
+                                                        Weight
+                                                    </p>
+                                                    <Dropdown
+                                                        value={ layer.fontWeight.toString() }
+                                                        onChange={ (value) => {
+                                                            updateLayer({fontWeight: Number(value)})
+                                                        }}
+                                                        options={['100', '200', '300', '400', '500', '600', '700', '800','900']}
+                                                    >
+                                                    </Dropdown>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </>
+                            }
                         </>
                         : 
                         <div> 

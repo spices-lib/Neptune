@@ -13,7 +13,7 @@ export default function Text({
     layer: TextLayer,
     onPointerDown: (e: React.PointerEvent, layerId: string) => void
 }) {
-    const { x, y, width, height, text, fontSize, fontFamily, fontWidth, fill, stroke, opacity } = layer
+    const { x, y, width, height, text, fontSize, fontFamily, fontWeight, fill, stroke, opacity } = layer
 
     const [ isEditing, setIsEditing ] = useState(false)
     const [ inputValue, setInputValue ] = useState(text)
@@ -101,7 +101,7 @@ export default function Text({
                         x={ x }
                         y={ y + fontSize }
                         fontSize={ fontSize }
-                        fontWeight={ fontWidth }
+                        fontWeight={ fontWeight }
                         fontFamily={ fontFamily }
                         fill={ fill ? colorToCss(fill) : '#CCC' }
                         stroke={ stroke ? colorToCss(stroke) : '#CCC' }

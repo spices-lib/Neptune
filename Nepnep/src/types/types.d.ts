@@ -110,7 +110,7 @@ declare global {
         opacity: number
         text: string
         fontSize: number
-        fontWidth: number
+        fontWeight: number
         fontFamily: string
     }
 
