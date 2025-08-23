@@ -25,10 +25,12 @@ import Path from './Path'
 import SelectionBox from './SelectionBox'
 import useDeleteLayers from '../../hooks/useDeleteLayers'
 import SelectionTools from './SelectionTools'
+import Sidebars from '../sidebars/Sidebars'
 
 const MAX_LAYERS = 100
 
 export function Canvas() {
+    const [leftIsMinimized, setLeftIsMinimized] = useState(false)
     const roomColor = useStorage((root) => ( root.roomColor)) as Color | undefined
     const layerIds = useStorage((root) => root.layerIds) as string[] | undefined
     const pencilDraft = useSelf((me) => me.presence.pencilDraft) as number[][]
@@ -476,6 +478,11 @@ export function Canvas() {
                 canRedo={ canRedo }
             >
             </ToolsBar>
+            <Sidebars
+                leftIsMinimized={ leftIsMinimized }
+                setLeftIsMinimized={ setLeftIsMinimized }
+            >
+            </Sidebars>
         </div>
     )
 }
