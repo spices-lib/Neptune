@@ -1,6 +1,6 @@
 ﻿import { useMutation, useOthers, useSelf, useStorage } from '@liveblocks/react'
 import { LiveMap, LiveObject } from '@liveblocks/client'
-import { colorToCss, hexToRgb } from '../../utils'
+import { colorToCss, connectionIdToColor, hexToRgb } from '../../utils'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS } from '../../app/routes/RoutePaths'
 import { PiPathLight, PiSidebarSimpleThin } from 'react-icons/pi'
@@ -13,6 +13,7 @@ import { BsCircleHalf } from 'react-icons/bs'
 import { RiRoundedCorner } from 'react-icons/ri'
 import ColorPicker from './ColorPicker'
 import Dropdown from './Dropdown'
+import UserAvatar from './UserAvatar'
 
 export default function Sidebars({
     leftIsMinimized,
@@ -44,6 +45,10 @@ export default function Sidebars({
     const layerIds = useStorage((root) => root.layerIds) as Array<string> | undefined
     const reversedLayerIds = [...layerIds ?? []].reverse() 
     const selection = useSelf((me) => me.presence.selection) as string[] | undefined
+    
+    const setRoomColor = useMutation(({storage}, newColor: Color) => {
+        storage.set('roomColor', newColor)
+    }, [])
     
     const updateLayer = useMutation(({storage}, updates: {
         x?: number
@@ -195,9 +200,27 @@ export default function Sidebars({
                     className={`fixed ${leftIsMinimized && layer ? 'bottom-3 right-3 top-3 rounded-xl' : ''} ${!leftIsMinimized && !layer ? 'h-screen' : ''} 
                         ${!leftIsMinimized && layer ? 'bottom-0 top-0 h-screen' : ''} right-0 flex w-[240px] flex-col border-l border-gray-200 bg-white`}
                 >
-                    <span>
-                        Users ans share here
-                    </span>
+                    <div className='flex items-center justify-between pr-2'>
+                        <div className='max-36 flex w-full gap-2 overflow-x-scroll p-3 text-xs'>
+                            { me && 
+                                <UserAvatar
+                                    key={ me.connectionId }
+                                    color={ connectionIdToColor(me.connectionId) }
+                                    name={ me.info?.name ?? '' }
+                                >
+                                </UserAvatar>
+                            }
+                            { others.map((other) => 
+                                <UserAvatar
+                                    key={ other.connectionId }
+                                    color={ connectionIdToColor(other.connectionId) }
+                                    name={ other.info?.name ?? '' }
+                                >
+                                </UserAvatar>
+                            ) }
+                        </div>
+                        <p>Shader button</p>
+                    </div>
                     <div className='border-b border-gray-200'/>
                     { layer ?
                         <>
@@ -321,7 +344,7 @@ export default function Sidebars({
                                         <span className='mb-2 text-[11px] font-medium'>
                                             Typography
                                         </span>
-                                        <div className='flex flex-col gap-1'>
+                                        <div className='flex flex-col gap-2'>
                                             <Dropdown
                                                 value={ layer.fontFamily }
                                                 onChange={(value) => {
@@ -360,20 +383,47 @@ export default function Sidebars({
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </>
                             }
                         </>
                         : 
-                        <div> 
-                            
+                        <div className='flex flex-col gap-2 p-4'>
+                            <span className='mb-2 text-[11px] font-medium'>
+                                Page
+                            </span>
+                            <ColorPicker
+                                value={ roomColor ? colorToCss(roomColor) : '#1e1e1e' }
+                                onChange={ (color) => {
+                                    const rgbColor = hexToRgb(color)
+                                    setRoomColor(rgbColor)
+                                }}
+                            >
+                            </ColorPicker>
                         </div> 
                     }
                 </div>
                 :
-                <div>
-                    
+                <div className='fixed right-3 top-3 flex h-[48px] w-[250px] items-center justify-between rounded-xl border bg-white pr-2'>
+                    <div className='max-36 flex w-full gap-2 overflow-x-scroll p-3 text-xs'>
+                        { me &&
+                            <UserAvatar
+                                key={ me.connectionId }
+                                color={ connectionIdToColor(me.connectionId) }
+                                name={ me.info?.name }
+                            >
+                            </UserAvatar>
+                        }
+                        { others.map((other) =>
+                            <UserAvatar
+                                key={ other.connectionId }
+                                color={ connectionIdToColor(other.connectionId) }
+                                name={ other.info?.name }
+                            >
+                            </UserAvatar>
+                        ) }
+                    </div>
+                    <p>Shader menu</p>
                 </div>
             }
         </div>

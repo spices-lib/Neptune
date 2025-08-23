@@ -13,6 +13,12 @@ export function hexToRgb(hex: string): Color {
     return { r, g, b }
 }
 
+const COLORS = ['#DC2626', '#D97706', '#059669', '#7C3AED', '#D82777']
+
+export function connectionIdToColor(connectionId: number): string {
+    return COLORS[connectionId % COLORS.length]
+}
+
 export const pointerEventToCanvasPoint = (
     e: React.PointerEvent,
     camera: Camera

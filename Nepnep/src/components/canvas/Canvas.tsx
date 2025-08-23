@@ -26,6 +26,7 @@ import SelectionBox from './SelectionBox'
 import useDeleteLayers from '../../hooks/useDeleteLayers'
 import SelectionTools from './SelectionTools'
 import Sidebars from '../sidebars/Sidebars'
+import MultiplayerGuides from './MultiplayerGuides'
 
 const MAX_LAYERS = 100
 
@@ -171,7 +172,7 @@ export function Canvas() {
                     width: 100,
                     fontSize: 16,
                     text: 'Text',
-                    fontWidth: 400,
+                    fontWeight: 400,
                     fontFamily: 'Inter',
                     stroke: { r: 217, g: 217, b: 217 },
                     fill: { r: 217, g: 217, b: 217 },
@@ -205,6 +206,7 @@ export function Canvas() {
         }
         
         setMyPresence({
+            cursor: point,
             pencilDraft: [...pencilDraft, [point.x, point.y, e.pressure]],
             penColor: { r: 217, g: 217, b: 217 }
         }, { addToHistory: true })
@@ -334,7 +336,7 @@ export function Canvas() {
         }
     }, [layerIds])
     
-    const onPointerMove = useMutation(({}, e: React.PointerEvent) => {
+    const onPointerMove = useMutation(({setMyPresence}, e: React.PointerEvent) => {
         if (!storageLoaded)
             return
 
@@ -366,7 +368,13 @@ export function Canvas() {
             resizeSelectedLayer(point)
         }
 
+        setMyPresence({cursor: point})
+        
     }, [canvasState, camera, setCamera, continueDrawing, translateSelectedLayers, resizeSelectedLayer, updateSelectionNet, startMultiSelection])
+    
+    const onPointerLeave = useMutation(({setMyPresence}) => {
+        setMyPresence({cursor: null})
+    }, [])
     
     const onPointerUp = useMutation(({}, e: React.PointerEvent) => {
         if (!storageLoaded)
@@ -418,6 +426,7 @@ export function Canvas() {
                         onPointerUp={ onPointerUp }
                         onPointerDown={ onPointerDown }
                         onPointerMove={ onPointerMove }
+                        onPointerLeave={ onPointerLeave }
                         className='w-full h-full'
                         onContextMenu={ (e) => e.preventDefault() }
                     >
@@ -447,6 +456,7 @@ export function Canvas() {
                             >
                             </rect>  
                         }
+                        <MultiplayerGuides/>
                         { pencilDraft !== null && pencilDraft.length > 0 && 
                             <Path
                                 x={ 0 }
