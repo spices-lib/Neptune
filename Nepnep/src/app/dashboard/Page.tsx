@@ -3,6 +3,7 @@ import { auth } from '../../server/auth'
 import { db } from '../../server/DataBase'
 import UserMenu from '../../components/dashboard/UserMenu'
 import CreateRoom from '../../components/dashboard/CreateRoom'
+import RoomsView from '../../components/dashboard/RoomsView'
 
 export default function Page() {
     /*const session = await auth()
@@ -20,9 +21,27 @@ export default function Page() {
             }
         }
     })*/
-    
+
     const user = {
-        email: 'spiecs@outlook.com'
+        email: 'spiecs@outlook.com',
+        ownedRooms: [
+            {
+                id: 'id',
+                title: 'title',
+                ownerId: 'ownerId',
+                createdAt: new Date()
+            }
+        ],
+        roomInvites: [
+            {
+                room: {
+                    id: 'id',
+                    title: 'title',
+                    ownerId: 'ownerId',
+                    createdAt: new Date()
+                }
+            }
+        ]
     }
     
     return (
@@ -39,6 +58,10 @@ export default function Page() {
                 </div>
                 <div className='flex h-full flex-col gap-10 p-8'>
                     <CreateRoom></CreateRoom>
+                    <RoomsView
+                        ownedRooms={ user.ownedRooms }
+                        roomInvites={ user.roomInvites.map((x) => x.room) }
+                    ></RoomsView>
                 </div>
             </div>
         </div>
