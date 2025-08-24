@@ -18,6 +18,7 @@ import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
 import { nanoid } from 'nanoid'
 import { LiveObject } from '@liveblocks/client'
+import { User } from '@prisma-app/client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
 import { CanvasMode, LayerType, Side } from '../../types/types.d'
@@ -30,7 +31,15 @@ import MultiplayerGuides from './MultiplayerGuides'
 
 const MAX_LAYERS = 100
 
-export function Canvas() {
+export function Canvas({
+    roomName, 
+    roomId, 
+    otherWithAccessToRoom
+}: {
+    roomName: string
+    roomId: string
+    otherWithAccessToRoom: User[]
+}) {
     const [leftIsMinimized, setLeftIsMinimized] = useState(false)
     const roomColor = useStorage((root) => ( root.roomColor)) as Color | undefined
     const layerIds = useStorage((root) => root.layerIds) as string[] | undefined
@@ -489,6 +498,9 @@ export function Canvas() {
             >
             </ToolsBar>
             <Sidebars
+                roomName={ roomName }
+                roomId={ roomId }
+                otherWithAccessToRoom={ otherWithAccessToRoom }
                 leftIsMinimized={ leftIsMinimized }
                 setLeftIsMinimized={ setLeftIsMinimized }
             >

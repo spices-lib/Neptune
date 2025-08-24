@@ -1,6 +1,7 @@
 ﻿import { useMutation, useOthers, useSelf, useStorage } from '@liveblocks/react'
 import { LiveMap, LiveObject } from '@liveblocks/client'
 import { colorToCss, connectionIdToColor, hexToRgb } from '../../utils'
+import { User } from '@prisma-app/client'
 import { Link } from 'react-router-dom'
 import { ROUTE_PATHS } from '../../app/routes/RoutePaths'
 import { PiPathLight, PiSidebarSimpleThin } from 'react-icons/pi'
@@ -14,11 +15,18 @@ import { RiRoundedCorner } from 'react-icons/ri'
 import ColorPicker from './ColorPicker'
 import Dropdown from './Dropdown'
 import UserAvatar from './UserAvatar'
+import ShareMenu from './ShareMenu'
 
 export default function Sidebars({
+    roomName,
+    roomId,
+    otherWithAccessToRoom,
     leftIsMinimized,
     setLeftIsMinimized
 }: {
+    roomName: string
+    roomId: string
+    otherWithAccessToRoom: User[]
     leftIsMinimized: boolean
     setLeftIsMinimized: (value: boolean) => void
 }) {
@@ -110,7 +118,7 @@ export default function Sidebars({
                             </PiSidebarSimpleThin>
                         </div>
                         <h2 className='mt-2 scroll-m-20 text-[13px] font-medium'>
-                            RoomName
+                            { roomName }
                         </h2>
                     </div>
                     <div className='border-b border-gray-200'/>
@@ -185,7 +193,7 @@ export default function Sidebars({
                         </img>
                     </Link>
                     <h2 className='scroll-m-20 text-[13px] font-medium'>
-                        RoomName
+                        { roomName }
                     </h2>
                     <PiSidebarSimpleThin
                         onClick={ () => setLeftIsMinimized(false) }
@@ -219,7 +227,11 @@ export default function Sidebars({
                                 </UserAvatar>
                             ) }
                         </div>
-                        <p>Shader button</p>
+                        <ShareMenu
+                            roomId={ roomId }
+                            otherWithAccessToRoom={ otherWithAccessToRoom }
+                        >
+                        </ShareMenu>
                     </div>
                     <div className='border-b border-gray-200'/>
                     { layer ?
@@ -423,7 +435,11 @@ export default function Sidebars({
                             </UserAvatar>
                         ) }
                     </div>
-                    <p>Shader menu</p>
+                    <ShareMenu
+                        roomId={ roomId }
+                        otherWithAccessToRoom={ otherWithAccessToRoom }
+                    >
+                    </ShareMenu>
                 </div>
             }
         </div>

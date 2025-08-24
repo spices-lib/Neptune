@@ -1,6 +1,7 @@
 ﻿import { Room } from '@prisma-app/client'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModal from './ConfirmationModal'
+import { updateRoomTitle, deleteRoom } from '../../app/actions/Rooms'
 
 const PASTEL_COLORS = [
     'rgb(255, 182, 193)', // pink
@@ -39,7 +40,8 @@ function SingleRoom({
     color, 
     selected,
     select, 
-    navigateTo
+    navigateTo,
+    canEdit
 }: {
     id: string
     title: string
@@ -48,6 +50,7 @@ function SingleRoom({
     selected: boolean
     select: () => void
     navigateTo: () => void
+    canEdit: boolean
 }) {
     const [isEditing, setIsEditing] = useState(false)
     const [editedTitle, setEditedTitle] = useState(title)
@@ -98,7 +101,7 @@ function SingleRoom({
                     { title }
                 </p>
             </div>
-            { isEditing ? 
+            { isEditing && canEdit ? 
                 <input
                     type='text'
                     value={ editedTitle }
@@ -206,6 +209,7 @@ export default function RoomsView({
                                 selected={ selected === room.id }
                                 select={ () => setSelected(room.id) }
                                 navigateTo={ () => {} }
+                                canEdit={ viewMode === 'owns' }
                             >
                             </SingleRoom>
                         </React.Fragment>

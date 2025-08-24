@@ -7,13 +7,13 @@ import {
 import '@liveblocks/react-ui/styles.css'
 import { LiveList, LiveMap, LiveObject } from '@liveblocks/node'
 
-interface RoomProps {
+export function Room({ 
+    children, 
+    roomId 
+}: {
     children: ReactNode
     roomId: string
-}
-
-export function Room({ children, roomId }: RoomProps) {
-
+}) {
     return (
         <LiveblocksProvider
             /*authEndpoint='/api/liveblocks-auth'*/
