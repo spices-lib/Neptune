@@ -1,6 +1,7 @@
 ﻿import { useOther } from '@liveblocks/react'
 import { memo } from 'react'
 import { connectionIdToColor } from '../../utils'
+import { Point } from '../../types/types'
 
 function Cursor({
     connectionId

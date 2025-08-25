@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { SlPencil } from 'react-icons/sl'
-import { createRoom } from '../../app/actions/Rooms'
+import { createRoom } from '../../app/actions/rooms'
 
 export default function CreateRoom() {
     const [hover, setHover] = useState(false)

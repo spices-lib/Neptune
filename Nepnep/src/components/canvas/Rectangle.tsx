@@ -1,5 +1,6 @@
 ﻿import { colorToCss } from '../../utils'
-import React from "react";
+import React from 'react'
+import { RectangleLayer } from '../../types/types'
 
 export default function Rectangle({ 
     id, 

@@ -1,4 +1,4 @@
-﻿import '../styles/Style.css'
+﻿import '../styles/style.css'
 
 import { Inter } from 'next/font/google'
 import { type Metadata } from 'next'

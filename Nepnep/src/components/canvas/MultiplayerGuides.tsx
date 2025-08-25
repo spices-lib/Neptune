@@ -4,6 +4,7 @@ import { useOthersConnectionIds, useOthersMapped } from '@liveblocks/react'
 import { shallow } from '@liveblocks/client'
 import Path from './Path'
 import { colorToCss } from '../../utils'
+import { Color } from '../../types/types'
 
 function Cursors() {
     const ids = useOthersConnectionIds()

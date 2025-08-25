@@ -1,9 +1,9 @@
 ﻿import { Liveblocks } from '@liveblocks/node'
-import { auth } from '../../auth'
-import { db } from '../../DataBase'
+import { auth } from '../../../server/auth'
+import { db } from '../../../server/db'
 
 const liveblocks = new Liveblocks({
-    secret: import.meta.env.VITE_LIVEBLOCKS_PUBLIC_KEY
+    secret: process.env.LIVEBLOCKS_SECRET_KEY as string
 })
 
 export async function POST(req: Request) {

@@ -4,8 +4,7 @@ import {
     useCanRedo, 
     useCanUndo, 
     useHistory, 
-    useMutation, 
-    useMyPresence, 
+    useMutation,
     useSelf, 
     useStorage
 } from '@liveblocks/react'
@@ -20,34 +19,46 @@ import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
 import { nanoid } from 'nanoid'
 import { LiveObject } from '@liveblocks/client'
-import { User } from '@prisma-app/client'
+import { User } from '@prisma/client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { LiveList, LiveMap } from '@liveblocks/client/dist/index'
-import { CanvasMode, LayerType, Side } from '../../types/types.d'
 import Path from './Path'
 import SelectionBox from './SelectionBox'
 import useDeleteLayers from '../../hooks/useDeleteLayers'
 import SelectionTools from './SelectionTools'
 import Sidebars from '../sidebars/Sidebars'
 import MultiplayerGuides from './MultiplayerGuides'
+import { 
+    XYWH, 
+    Side, 
+    Point, 
+    Color, 
+    Camera, 
+    LayerType, 
+    CanvasMode, 
+    CanvasState,
+    EllipseLayer,
+    Layer,
+    RectangleLayer,
+    TextLayer
+} from '../../types/types'
 
 const MAX_LAYERS = 100
 
 export function Canvas({
     roomName, 
     roomId, 
-    otherWithAccessToRoom
+    othersWithAccessToRoom
 }: {
     roomName: string
     roomId: string
-    otherWithAccessToRoom: User[]
+    othersWithAccessToRoom: User[]
 }) {
     const [leftIsMinimized, setLeftIsMinimized] = useState(false)
     const roomColor = useStorage((root) => ( root.roomColor)) as Color | undefined
     const layerIds = useStorage((root) => root.layerIds) as string[] | undefined
     const pencilDraft = useSelf((me) => me.presence.pencilDraft) as number[][]
     const deleteLayers = useDeleteLayers()
-    const presence = useMyPresence()
     const [ canvasState, setState ] = useState<CanvasState>({ mode: CanvasMode.None })
     const [ camera, setCamera ] = useState<Camera>({ x: 0, y: 0, zoom:1 })
     const history = useHistory()
@@ -460,10 +471,10 @@ export function Canvas({
                         { canvasState.mode === CanvasMode.SelectionNet && canvasState.current !== null && 
                             <rect
                                 className='fill-blue-600/5 stroke-blue-600 stroke-[0.5]'
-                                x={ Math.min(canvasState.origin.x, canvasState.current.x) }
-                                y={ Math.min(canvasState.origin.y, canvasState.current.y) }
-                                width={ Math.abs(canvasState.origin.x - canvasState.current.x) }
-                                height={ Math.abs(canvasState.origin.y - canvasState.current.y) }
+                                x={ Math.min(canvasState.origin.x, canvasState.current!.x) }
+                                y={ Math.min(canvasState.origin.y, canvasState.current!.y) }
+                                width={ Math.abs(canvasState.origin.x - canvasState.current!.x) }
+                                height={ Math.abs(canvasState.origin.y - canvasState.current!.y) }
                             >
                             </rect>  
                         }
@@ -502,7 +513,7 @@ export function Canvas({
             <Sidebars
                 roomName={ roomName }
                 roomId={ roomId }
-                otherWithAccessToRoom={ otherWithAccessToRoom }
+                othersWithAccessToRoom={ othersWithAccessToRoom }
                 leftIsMinimized={ leftIsMinimized }
                 setLeftIsMinimized={ setLeftIsMinimized }
             >

@@ -71,7 +71,7 @@ export default function NumberInput({
                 :
                 React.cloneElement(icon as React.ReactElement, {
                     className: 'absolute left-1.5 top-[50%] h-3 w-3 -translate-y-1/2 text-gray-400'
-                })
+                } as React.Attributes & { className?: string })
             }
         </div>
     )

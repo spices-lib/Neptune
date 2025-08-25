@@ -8,6 +8,7 @@ import {
 } from '@liveblocks/react/suspense'
 import '@liveblocks/react-ui/styles.css'
 import { LiveList, LiveMap, LiveObject } from '@liveblocks/node'
+import { Layer } from '../../types/types'
 
 export function Room({ 
     children, 
@@ -18,8 +19,7 @@ export function Room({
 }) {
     return (
         <LiveblocksProvider
-            /*authEndpoint='/api/liveblocks-auth'*/
-            publicApiKey={ import.meta.env.VITE_LIVEBLOCKS_PUBLIC_KEY! }
+            authEndpoint='/api/liveblocks-auth'
         >
             <RoomProvider 
                 id={ roomId }

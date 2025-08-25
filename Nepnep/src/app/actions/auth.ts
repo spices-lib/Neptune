@@ -1,10 +1,12 @@
 'use server'
 
-import { signUpSchema } from '../../Schemas'
+import { signUpSchema } from '../../schemas'
 import { ZodError } from 'zod'
-import { db } from '../../server/DataBase'
+import { db } from '../../server/db'
 import bcrypt from 'bcryptjs'
 import { signIn, signOut } from '../../server/auth'
+import { redirect } from 'next/navigation'
+import { AuthError } from 'next-auth'
 
 export async function signout() {
     await signOut()
@@ -17,8 +19,8 @@ export async function authenticate(
     try {
         await signIn('credentials', formData)
     } catch (error) {
-        if (error instanceof Error) {
-            switch (error.name) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
                 case 'CredentialsSignin':
                     return 'Invalid credentials'
                 default:
@@ -64,4 +66,6 @@ export async function register(
             return error.message
         }
     }
+
+    redirect('/signin')
 }

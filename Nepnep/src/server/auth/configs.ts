@@ -1,9 +1,9 @@
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import Credentials from 'next-auth/providers/credentials'
-import { signInSchema } from '../../Schemas'
+import { signInSchema } from '../../schemas'
 import bcrypt from 'bcryptjs'
-import { db } from '../DataBase'
-import { DefaultSession, NextAuthOptions } from 'next-auth'
+import { db } from '../db'
+import { DefaultSession, NextAuthConfig } from 'next-auth'
 
 declare module 'next-auth' {
     interface Session extends DefaultSession {
@@ -13,7 +13,7 @@ declare module 'next-auth' {
     }
 }
 
-export const authOptions : NextAuthOptions = {
+export const authConfig = {
     providers: [
         Credentials({
             credentials: {
@@ -53,8 +53,8 @@ export const authOptions : NextAuthOptions = {
             ...session,
             user: {
                 ...session.user,
-                id: token.id
+                id: token.sub
             }
         })
     }
-} satisfies NextAuthOptions
+} satisfies NextAuthConfig

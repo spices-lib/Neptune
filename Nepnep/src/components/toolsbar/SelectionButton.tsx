@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import IconButton from './IconButton'
 import { BiPointer } from 'react-icons/bi'
 import { RiHand } from 'react-icons/ri'
-import { CanvasMode } from '../../types/types.d'
+import { CanvasMode } from '../../types/types'
 
 export default function SelectionButton({ 
     isActive, 

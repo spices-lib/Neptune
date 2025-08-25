@@ -1,9 +1,9 @@
 ﻿import useSelectionBounds from '../../hooks/useSelectionBounds'
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs'
-import { CanvasMode } from '../../types/types.d'
 import { useMutation, useSelf } from '@liveblocks/react'
 import { LiveList } from '@liveblocks/client'
 import { memo } from 'react'
+import { Camera, CanvasMode } from '../../types/types'
 
 function SelectionTools({ 
     camera,

@@ -1,9 +1,9 @@
 ﻿'use client'
 
-import { Room } from '@prisma-app/client'
+import { Room } from '@prisma/client'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ConfirmationModal from './ConfirmationModal'
-import { updateRoomTitle, deleteRoom } from '../../app/actions/Rooms'
+import { updateRoomTitle, deleteRoom } from '../../app/actions/rooms'
 
 const PASTEL_COLORS = [
     'rgb(255, 182, 193)', // pink
@@ -62,17 +62,17 @@ function SingleRoom({
         if (event.key === 'Enter') {
             event.preventDefault()
             setIsEditing(false)
-            //await updateRoomTitle(editedTitle, id)
+            await updateRoomTitle(editedTitle, id)
         }
     }
     
     const handleBlur = async () => {
         setIsEditing(false)
-        //await updateRoomTitle(editedTitle, id)
+        await updateRoomTitle(editedTitle, id)
     }
     
     const confirmDelete = async () => {
-        //await deleteRoom(id)
+        await deleteRoom(id)
         setShowConfirmationModal(false)
     }
     
@@ -109,7 +109,7 @@ function SingleRoom({
                     value={ editedTitle }
                     onChange={(e) => setEditedTitle(e.target.value)}
                     onBlur={ handleBlur }
-                    onKeyPress={ handleKeyPress }
+                    onKeyDown={ handleKeyPress }
                     autoFocus
                     className='w-full'
                 >

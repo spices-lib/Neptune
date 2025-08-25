@@ -4,11 +4,10 @@ import { useMutation, useOthers, useSelf, useStorage } from '@liveblocks/react'
 import { LiveMap, LiveObject } from '@liveblocks/client'
 import { colorToCss, connectionIdToColor, hexToRgb } from '../../utils'
 import { User } from '@prisma/client'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { PiPathLight, PiSidebarSimpleThin } from 'react-icons/pi'
-import { LayerType } from '../../types/types.d'
 import { IoEllipseOutline, IoSquareOutline } from 'react-icons/io5'
-import { AiOutlineFontColors } from 'react-icons/ai'
+import { AiOutlineFontSize } from 'react-icons/ai'
 import LayerButton from './LayerButton'
 import NumberInput from './NumberInput'
 import { BsCircleHalf } from 'react-icons/bs'
@@ -17,17 +16,18 @@ import ColorPicker from './ColorPicker'
 import Dropdown from './Dropdown'
 import UserAvatar from './UserAvatar'
 import ShareMenu from './ShareMenu'
+import { Color, LayerType, Layer } from '../../types/types'
 
 export default function Sidebars({
     roomName,
     roomId,
-    otherWithAccessToRoom,
+    othersWithAccessToRoom,
     leftIsMinimized,
     setLeftIsMinimized
 }: {
     roomName: string
     roomId: string
-    otherWithAccessToRoom: User[]
+    othersWithAccessToRoom: User[]
     leftIsMinimized: boolean
     setLeftIsMinimized: (value: boolean) => void
 }) {
@@ -97,13 +97,13 @@ export default function Sidebars({
     }, [selectedLayer])
     
     return (
-        <div>
+        <>
             { !leftIsMinimized ? 
                 <div className='fixed left-0 flex h-screen w-[240px] flex-col border-r border-gray-200 bg-white'>
                     <div className='p-4'>
                         <div className='flex justify-between'>
-                            <Link 
-                                to={ ROUTE_PATHS.DASHBOARD }
+                            <Link
+                                href='/dashboard'
                             >
                                 <img
                                     src='/favicon/favicon-64.ico'
@@ -172,7 +172,7 @@ export default function Sidebars({
                                         key={ id }
                                         layerId={ id }
                                         text='Text'
-                                        icon={ <AiOutlineFontColors className='h-3 w-3 text-gray-500'></AiOutlineFontColors> }
+                                        icon={ <AiOutlineFontSize className='h-3 w-3 text-gray-500'></AiOutlineFontSize> }
                                         isSelected={ isSelected ?? false }
                                     >
                                     </LayerButton>
@@ -182,9 +182,9 @@ export default function Sidebars({
                     </div>
                 </div> 
                 :
-                <div className='fixed left-3 top-3 h-[48px] w-[250px] items-center justify-between flex rounded-xl border bg-white p-4'>
+                <div className='fixed left-3 top-3 flex h-[48px] w-[250px] items-center justify-between rounded-xl border bg-white p-4'>
                     <Link
-                        to={ ROUTE_PATHS.DASHBOARD }
+                        href='/dashboard'
                     >
                         <img
                             src='/favicon/favicon-64.ico'
@@ -230,7 +230,7 @@ export default function Sidebars({
                         </div>
                         <ShareMenu
                             roomId={ roomId }
-                            otherWithAccessToRoom={ otherWithAccessToRoom }
+                            othersWithAccessToRoom={ othersWithAccessToRoom }
                         >
                         </ShareMenu>
                     </div>
@@ -438,11 +438,11 @@ export default function Sidebars({
                     </div>
                     <ShareMenu
                         roomId={ roomId }
-                        otherWithAccessToRoom={ otherWithAccessToRoom }
+                        othersWithAccessToRoom={ othersWithAccessToRoom }
                     >
                     </ShareMenu>
                 </div>
             }
-        </div>
+        </>
     )
 }

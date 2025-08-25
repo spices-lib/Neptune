@@ -1,15 +1,14 @@
 'use server'
 
-import { signout } from '../actions/Auth'
 import { auth } from '../../server/auth'
-import { db } from '../../server/DataBase'
+import { db } from '../../server/db'
 import UserMenu from '../../components/dashboard/UserMenu'
 import CreateRoom from '../../components/dashboard/CreateRoom'
 import RoomsView from '../../components/dashboard/RoomsView'
 
 export default async function Page() {
-    /*const session = await auth()
-    
+    const session = await auth()
+
     const user = await db.user.findUniqueOrThrow({
         where: {
             id: session?.user.id
@@ -22,29 +21,7 @@ export default async function Page() {
                 }
             }
         }
-    })*/
-
-    const user = {
-        email: 'spiecs@outlook.com',
-        ownedRooms: [
-            {
-                id: 'id',
-                title: 'title',
-                ownerId: 'ownerId',
-                createdAt: new Date()
-            }
-        ],
-        roomInvites: [
-            {
-                room: {
-                    id: 'id',
-                    title: 'title',
-                    ownerId: 'ownerId',
-                    createdAt: new Date()
-                }
-            }
-        ]
-    }
+    })
     
     return (
         <div className='flex h-screen w-full'>

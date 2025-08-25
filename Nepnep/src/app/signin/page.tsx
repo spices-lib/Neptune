@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
-import { authenticate } from '../actions/Auth'
+import { authenticate } from '../actions/auth'
 import Link from 'next/link'
 
 export default function Page() {

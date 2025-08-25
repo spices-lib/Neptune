@@ -1,5 +1,4 @@
 ﻿import IconButton from './IconButton'
-import { AiOutlineZoomIn } from 'react-icons/ai'
 
 export default function UndoButton({
     onClick,

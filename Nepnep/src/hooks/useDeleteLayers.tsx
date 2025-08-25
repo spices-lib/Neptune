@@ -1,5 +1,6 @@
 ﻿import { useMutation, useSelf } from '@liveblocks/react'
 import { LiveList, LiveMap, LiveObject } from '@liveblocks/client'
+import { Layer } from '../types/types'
 
 export default function useDeleteLayers() {
     const selection = useSelf((me) => me.presence.selection) as string[]

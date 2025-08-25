@@ -1,5 +1,5 @@
 ﻿import { getStroke } from 'perfect-freehand'
-import {colorToCss, getSvgPathFromStroke} from '../../utils'
+import { getSvgPathFromStroke } from '../../utils'
 import React from 'react'
 
 export default function Path({

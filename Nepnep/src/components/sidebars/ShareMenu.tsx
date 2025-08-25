@@ -1,15 +1,15 @@
-﻿import { User } from '@prisma-app/client'
+﻿import { User } from '@prisma/client'
 import { useState } from 'react'
-import { deleteInvitation, shareRoom } from '../../app/actions/Rooms'
+import { deleteInvitation, shareRoom } from '../../app/actions/rooms'
 import { IoClose } from 'react-icons/io5'
 import UserAvatar from './UserAvatar'
 
 export default function ShareMenu({
     roomId,
-    otherWithAccessToRoom
+    othersWithAccessToRoom
 }: {
     roomId: string
-    otherWithAccessToRoom: User[]
+    othersWithAccessToRoom: User[]
 }) {
     const [isOpen, setIsOpen] = useState(false)
     const [email, setEmail] = useState('')
@@ -67,7 +67,7 @@ export default function ShareMenu({
                                 Who has access
                             </p>
                             <ul>
-                                { otherWithAccessToRoom.map((user, index) => (
+                                { othersWithAccessToRoom.map((user, index) => (
                                     <li
                                         className='flex items-center justify-between py-1'
                                         key={ index }

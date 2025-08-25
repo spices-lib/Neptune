@@ -1,7 +1,7 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
-import { register } from '../actions/Auth'
+import { useActionState } from 'react'
+import { register } from '../actions/auth'
 import Link from 'next/link'
 
 export default function Page() {

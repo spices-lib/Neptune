@@ -1,13 +1,17 @@
 import { auth } from '../../../server/auth'
 import { Room } from '../../../components/liveblocks/Room'
 import { Canvas } from '../../../components/canvas/Canvas'
-import { redirect, useParams } from 'react-router-dom'
-import { db } from '../../../server/DataBase'
+import { redirect } from 'next/navigation'
+import { db } from '../../../server/db'
 
-export default function Page(){
-    const { id } = useParams<{ id: string }>()
+export default async function Page({ 
+    params 
+}: { 
+    params: Promise<{ id: string }> 
+}){
+    const { id } = await params
 
-    /*const session = await auth()
+    const session = await auth()
     
     const room = await db.room.findUnique({
         where: {
@@ -29,24 +33,10 @@ export default function Page(){
         return null
     }
     
-    const inviteUserIds = room.roomInvites.map((invite) => invite.user,id)
+    const inviteUserIds = room.roomInvites.map((invite) => invite.user.id)
     if (!inviteUserIds.includes(session?.user.id ?? '') && session?.user.id !== room.ownerId) {
         redirect('/404')
         return null
-    }*/
-    
-    const room = {
-        title: 'title',
-        roomInvites: [
-            {
-                room: {
-                    id: 'id',
-                    title: 'title',
-                    ownerId: 'ownerId',
-                    createdAt: new Date(),
-                },
-            }
-        ]
     }
     
     return (
@@ -56,8 +46,7 @@ export default function Page(){
             <Canvas
                 roomName={ room.title }
                 roomId={ id! }
-               /* otherWithAccessToRoom={ room.roomInvites.map((x) => x.user) }*/
-                otherWithAccessToRoom={ [] }
+                othersWithAccessToRoom={ room.roomInvites.map((x) => x.user) }
             >
             </Canvas>
         </Room>

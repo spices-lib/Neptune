@@ -1,7 +1,7 @@
 ﻿'use server'
 
 import { auth } from '../../server/auth'
-import { db } from '../../server/DataBase'
+import { db } from '../../server/db'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 

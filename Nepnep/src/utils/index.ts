@@ -1,5 +1,5 @@
 ﻿import React from 'react'
-import { LayerType, Side } from '../types/types.d'
+import { Camera, Color, Layer, LayerType, PathLayer, Point, Side, XYWH } from '../types/types'
 
 export function colorToCss(color: Color) {
     return`#${color.r.toString(16).padStart(2, '0')}${color.g.toString(16).padStart(2, '0')}${color.b.toString(16).padStart(2, '0')}`
