@@ -1,4 +1,6 @@
-﻿import { useState } from 'react'
+﻿'use client'
+
+import { useState } from 'react'
 import { SlPencil } from 'react-icons/sl'
 import { createRoom } from '../../app/actions/Rooms'
 

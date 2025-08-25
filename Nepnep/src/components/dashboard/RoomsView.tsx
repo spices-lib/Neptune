@@ -1,4 +1,6 @@
-﻿import { Room } from '@prisma-app/client'
+﻿'use client'
+
+import { Room } from '@prisma-app/client'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ConfirmationModal from './ConfirmationModal'
 import { updateRoomTitle, deleteRoom } from '../../app/actions/Rooms'

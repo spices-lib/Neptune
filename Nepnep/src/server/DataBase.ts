@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma-app/client'
+import { PrismaClient } from '@prisma/client'
 
-const mode = import.meta.env.MODE
+const mode = process.env.NODE_ENV
 
 const createPrismaClient = () =>
     new PrismaClient({

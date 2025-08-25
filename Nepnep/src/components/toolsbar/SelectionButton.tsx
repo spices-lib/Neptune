@@ -1,4 +1,6 @@
-﻿import { useEffect, useRef, useState } from 'react'
+﻿'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import IconButton from './IconButton'
 import { BiPointer } from 'react-icons/bi'
 import { RiHand } from 'react-icons/ri'

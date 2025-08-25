@@ -1,7 +1,9 @@
-﻿import { auth } from '../../server/auth'
+﻿'use server'
+
+import { auth } from '../../server/auth'
 import { db } from '../../server/DataBase'
-import { redirect } from 'react-router-dom'
-import { ROUTE_PATHS } from '../routes/RoutePaths'
+import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 export async function createRoom() {
     const session = await auth()
@@ -23,7 +25,7 @@ export async function createRoom() {
         }
     })
     
-    redirect(ROUTE_PATHS.USER_DASHBOARD)
+    redirect("/dashboard/" + room.id)
 }
 
 export async function updateRoomTitle(title: string, id: string) {
@@ -49,7 +51,7 @@ export async function updateRoomTitle(title: string, id: string) {
         }
     })
 
-    redirect(ROUTE_PATHS.DASHBOARD)
+    revalidatePath("dashboard")
 }
 
 export async function deleteRoom(id: string) {
@@ -72,7 +74,7 @@ export async function deleteRoom(id: string) {
         }
     })
 
-    redirect(ROUTE_PATHS.DASHBOARD)
+    revalidatePath("dashboard")
 }
 
 export async function shareRoom(id: string, inviteEmail: string) {
@@ -105,7 +107,7 @@ export async function shareRoom(id: string, inviteEmail: string) {
         }
     })
 
-    redirect(ROUTE_PATHS.DASHBOARD)
+    revalidatePath("dashboard")
 }
 
 export async function deleteInvitation(id: string, inviteEmail: string) {
@@ -131,5 +133,5 @@ export async function deleteInvitation(id: string, inviteEmail: string) {
         }
     })
 
-    redirect(ROUTE_PATHS.DASHBOARD)
+    revalidatePath("dashboard")
 }

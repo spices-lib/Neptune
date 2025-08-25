@@ -1,3 +1,5 @@
+'use server'
+
 import { signout } from '../actions/Auth'
 import { auth } from '../../server/auth'
 import { db } from '../../server/DataBase'
@@ -5,7 +7,7 @@ import UserMenu from '../../components/dashboard/UserMenu'
 import CreateRoom from '../../components/dashboard/CreateRoom'
 import RoomsView from '../../components/dashboard/RoomsView'
 
-export default function Page() {
+export default async function Page() {
     /*const session = await auth()
     
     const user = await db.user.findUniqueOrThrow({

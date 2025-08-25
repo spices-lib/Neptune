@@ -1,9 +1,10 @@
-﻿import { useMutation, useOthers, useSelf, useStorage } from '@liveblocks/react'
+﻿'use client'
+
+import { useMutation, useOthers, useSelf, useStorage } from '@liveblocks/react'
 import { LiveMap, LiveObject } from '@liveblocks/client'
 import { colorToCss, connectionIdToColor, hexToRgb } from '../../utils'
-import { User } from '@prisma-app/client'
+import { User } from '@prisma/client'
 import { Link } from 'react-router-dom'
-import { ROUTE_PATHS } from '../../app/routes/RoutePaths'
 import { PiPathLight, PiSidebarSimpleThin } from 'react-icons/pi'
 import { LayerType } from '../../types/types.d'
 import { IoEllipseOutline, IoSquareOutline } from 'react-icons/io5'

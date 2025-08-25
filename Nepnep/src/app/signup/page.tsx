@@ -2,23 +2,14 @@
 
 import { useActionState, useEffect } from 'react'
 import { register } from '../actions/Auth'
-import { Link, useNavigate } from 'react-router-dom'
-import { ROUTE_PATHS } from '../routes/RoutePaths'
+import Link from 'next/link'
 
 export default function Page() {
-
-    const navigate = useNavigate()
     
     const [ message, formAction, isPending ] = useActionState(
         register,
         undefined
     )
-
-    useEffect(() => {
-        if (message === 'success') {
-            navigate(ROUTE_PATHS.SIGN_IN)
-        }
-    }, [message, navigate])
     
     return (
         <div className='flex min-h-screen items-center justify-center bg-white px-4'>
@@ -75,7 +66,7 @@ export default function Page() {
                         Have an account?{' '}
                             <Link
                                 className='text-blue-400 hover:text-blue-600'
-                                to={ ROUTE_PATHS.SIGN_IN }
+                                href='/signin'
                             >
                                 Sign in
                             </Link>

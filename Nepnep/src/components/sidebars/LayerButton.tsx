@@ -1,4 +1,6 @@
-﻿import { ReactNode } from 'react'
+﻿'use client'
+
+import { ReactNode } from 'react'
 import { useMutation } from '@liveblocks/react'
 
 export default function LayerButton ({

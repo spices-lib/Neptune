@@ -1,4 +1,6 @@
-﻿import { useEffect, useRef, useState } from 'react'
+﻿'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import UserAvatar from '../sidebars/UserAvatar'
 import { BiChevronDown } from 'react-icons/bi'
 import { signout } from '../../app/actions/Auth'

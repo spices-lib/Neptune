@@ -27,6 +27,8 @@ Makefile
 /Test/Makefile
 
 /Nepnep/.idea
+/Nepnep/next-env.d.ts
+/Nepnep/.next
 /Nepnep/node_modules
 /Nepnep/dist
 /Nepnep/static/wasm
