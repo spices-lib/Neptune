@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
     
     reactStrictMode: true,
     devIndicators: false,
+    poweredByHeader: false,
+    trailingSlash: false,
 }
 
 export default nextConfig
