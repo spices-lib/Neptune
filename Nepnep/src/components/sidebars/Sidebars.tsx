@@ -210,7 +210,7 @@ export default function Sidebars({
                         ${!leftIsMinimized && layer ? 'bottom-0 top-0 h-screen' : ''} right-0 flex w-[240px] flex-col border-l border-gray-200 bg-white`}
                 >
                     <div className='flex items-center justify-between pr-2'>
-                        <div className='max-36 flex w-full gap-2 overflow-x-scroll p-3 text-xs'>
+                        <div className='max-36 flex w-full gap-2 p-3 text-xs'>
                             { me && 
                                 <UserAvatar
                                     key={ me.connectionId }
@@ -418,7 +418,7 @@ export default function Sidebars({
                 </div>
                 :
                 <div className='fixed right-3 top-3 flex h-[48px] w-[250px] items-center justify-between rounded-xl border bg-white pr-2'>
-                    <div className='max-36 flex w-full gap-2 overflow-x-scroll p-3 text-xs'>
+                    <div className='max-36 flex w-full gap-2 p-3 text-xs'>
                         { me &&
                             <UserAvatar
                                 key={ me.connectionId }

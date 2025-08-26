@@ -59,6 +59,8 @@ model User {
   posts         Post[]
   ownedRooms    Room[]       @relation("RoomOwner")
   roomInvites   RoomInvite[]
+
+  @@index([email])
 }
 
 model VerificationToken {
@@ -71,7 +73,7 @@ model VerificationToken {
 
 model Room {
   id          String       @id @default(cuid())
-  owner       User         @relation("RoomOwner", fields: [ownerId], references: [id])
+  owner       User         @relation("RoomOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId     String
   createdAt   DateTime     @default(now())
   title       String       @default("Untitled")
@@ -80,8 +82,8 @@ model Room {
 
 model RoomInvite {
   id     String @id @default(cuid())
-  room   Room   @relation(fields: [roomId], references: [id])
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 }

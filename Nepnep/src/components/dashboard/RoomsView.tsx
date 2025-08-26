@@ -4,6 +4,7 @@ import { Room } from '@prisma/client'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ConfirmationModal from './ConfirmationModal'
 import { updateRoomTitle, deleteRoom } from '../../app/actions/rooms'
+import { useRouter } from 'next/navigation'
 
 const PASTEL_COLORS = [
     'rgb(255, 182, 193)', // pink
@@ -147,6 +148,7 @@ export default function RoomsView({
 }) {
     const [viewMode, setViewMode] = useState('owns')
     const [selected, setSelected] = useState<string | null>(null)
+    const router = useRouter()
     const outerDivRef = useRef<HTMLDivElement>(null)
     
     const filteredRooms = useMemo(() => {
@@ -210,7 +212,7 @@ export default function RoomsView({
                                 color={ roomColor }
                                 selected={ selected === room.id }
                                 select={ () => setSelected(room.id) }
-                                navigateTo={ () => {} }
+                                navigateTo={ () => router.push("/dashboard/" + room.id) }
                                 canEdit={ viewMode === 'owns' }
                             >
                             </SingleRoom>
