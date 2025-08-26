@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect } from 'react'
 
 const initModule = async() => {
@@ -49,7 +51,7 @@ const initModule = async() => {
     {
         const js = document.createElement('script')
         js.async = true
-        js.src = '././wasm/SandBox.js'
+        js.src = '/wasm/SandBox.js'
         document.body.appendChild(js)
     }
 }

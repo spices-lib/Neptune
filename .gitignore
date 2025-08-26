@@ -32,6 +32,7 @@ Makefile
 /Nepnep/node_modules
 /Nepnep/dist
 /Nepnep/static/wasm
+/Nepnep/public/wasm
 /Nepnep/package-lock.json
 /Nepnep/prisma/migrations
 
