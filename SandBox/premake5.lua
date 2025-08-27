@@ -62,17 +62,6 @@ project "SandBox"
 		"Neptune",                             -- Dependency: Neptune
 	}
 
-    -- The Solution PostCommands
-    postbuildcommands {
-
-        -- Create target directory.
-        os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/"',
-
-        -- Copy js and wasm to Nepnep.
-        os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm\\"'
-            or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/"'
-    }
-
 	-- Platform: Windows
 	filter "system:windows"
 		systemversion "latest"                 -- Use Latest WindowSDK
@@ -170,6 +159,17 @@ project "SandBox"
 		runtime "Debug"
 		symbols "On"
 
+        -- The Solution PostCommands
+        postbuildcommands {
+
+            -- Create target directory.
+            os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Debug/"',
+
+            -- Copy js and wasm to Nepnep.
+            os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Debug\\"'
+                or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Debug/"'
+        }
+
 	-- Configuration: Release.
 	filter "configurations:Release"
 
@@ -183,3 +183,14 @@ project "SandBox"
 
 		runtime "Release"
 		optimize "On"
+
+        -- The Solution PostCommands
+        postbuildcommands {
+
+            -- Create target directory.
+            os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Release/"',
+
+            -- Copy js and wasm to Nepnep.
+            os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Release\\"'
+                or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Release/"'
+        }

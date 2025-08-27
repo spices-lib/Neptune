@@ -51,7 +51,7 @@ const initModule = async() => {
     {
         const js = document.createElement('script')
         js.async = true
-        js.src = '/wasm/SandBox.js'
+        js.src = '/wasm/Release/SandBox.js'
         document.body.appendChild(js)
     }
 }

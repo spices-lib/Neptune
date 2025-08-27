@@ -19,8 +19,8 @@ on:
 # workflow jobs
 jobs:
   
-  # Build Job
-  build-wasm:
+  # Environment Prepare
+  environment-prepare:
     
     # Platform: Ubuntu
     runs-on: ubuntu-latest
@@ -49,6 +49,39 @@ jobs:
           ~/.emscripten_cache
         key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
 
+  # Build Wasm Debug Files
+  build-wasm-debug:
+
+    # Need environment-prepare first
+    - needs: environment-prepare
+
+    # Build Solution with Release Configuration
+    - name: Build Debug
+      shell: bash
+      working-directory: ./Scripts/BuildEntry/
+      run: bash ./gmake_build_debug_wasm.sh
+
+    # Find build file
+    - name: Find build outputs
+      run: |
+        echo "Searching for build outputs..."
+        find . -name "*.wasm" -o -name "*.js"
+        echo "WASM_DEBUG_OUTPUT_PATH=$(find . -name "*.wasm" | head -n 1 | xargs dirname)" >> $GITHUB_ENV
+
+    # Upload wasm and js
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: wasm-debug-artifacts
+        path: ./bin/Debug-emscripten-wasm64/SandBox/
+        retention-days: 3
+
+  # Build Wasm Release Files
+  build-wasm-release:
+
+    # Need environment-prepare first
+    - needs: environment-prepare
+
     # Build Solution with Release Configuration
     - name: Build Release
       shell: bash
@@ -60,24 +93,24 @@ jobs:
       run: |
         echo "Searching for build outputs..."
         find . -name "*.wasm" -o -name "*.js"
-        echo "WASM_OUTPUT_PATH=$(find . -name "*.wasm" | head -n 1 | xargs dirname)" >> $GITHUB_ENV
+        echo "WASM_RELEASE_OUTPUT_PATH=$(find . -name "*.wasm" | head -n 1 | xargs dirname)" >> $GITHUB_ENV
 
     # Upload wasm and js
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: wasm-artifacts
-        path: ./Nepnep/public/wasm/
+        name: wasm-release-artifacts
+        path: ./bin/Release-emscripten-wasm64/SandBox/
         retention-days: 3
 
   # Deploy Job
   deploy:
 
     # Need build-wasm first
-    needs: build-wasm
+    needs: [build-wasm-debug, build-wasm-release]
 
     # build must be success
-    if: needs.build-wasm.result == 'success'
+    if: needs.build-wasm-debug.result == 'success' && needs.build-wasm-release.result == 'success'
 
     # Platform: Ubuntu
     runs-on: ubuntu-latest
@@ -103,12 +136,19 @@ jobs:
         run: npm install
         if: steps.check_lockfile.outputs.lockfile_exists == 'false'
 
-      # Download wasm and js
-      - name: Download artifacts
+      # Download debug wasm and js
+      - name: Download debug artifacts
         uses: actions/download-artifact@v4
         with:
-          name: wasm-artifacts
-          path: ./Nepnep/public/wasm/
+          name: wasm-debug-artifacts
+          path: ./Nepnep/public/wasm/Debug/
+            
+      # Download release wasm and js
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: wasm-debug-artifacts
+          path: ./Nepnep/public/wasm/Release/
 
       # Set Node.js
       - name: Setup Node.js
