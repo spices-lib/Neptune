@@ -41,13 +41,13 @@ jobs:
         version: 'latest'
 
     # Cache emsdk
-    - name: Cache Emscripten
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.emsdk
-          ~/.emscripten_cache
-        key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
+#    - name: Cache Emscripten
+#      uses: actions/cache@v3
+#      with:
+#        path: |
+#          ~/.emsdk
+#          ~/.emscripten_cache
+#        key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
 
   # Build Wasm Debug Files
   build-wasm-debug:
