@@ -53,9 +53,15 @@ jobs:
   build-wasm-debug:
 
     # Need environment-prepare first
-    - needs: environment-prepare
+    needs: environment-prepare
 
-    # Build Solution with Release Configuration
+    # Platform: Ubuntu
+    runs-on: ubuntu-latest
+
+    # Build Steps
+    steps:
+
+    # Build Solution with Debug Configuration
     - name: Build Debug
       shell: bash
       working-directory: ./Scripts/BuildEntry/
@@ -80,7 +86,13 @@ jobs:
   build-wasm-release:
 
     # Need environment-prepare first
-    - needs: environment-prepare
+    needs: environment-prepare
+
+    # Platform: Ubuntu
+    runs-on: ubuntu-latest
+
+    # Build Steps
+    steps:
 
     # Build Solution with Release Configuration
     - name: Build Release
@@ -107,7 +119,9 @@ jobs:
   deploy:
 
     # Need build-wasm first
-    needs: [build-wasm-debug, build-wasm-release]
+    needs:
+      - build-wasm-debug
+      - build-wasm-release
 
     # build must be success
     if: needs.build-wasm-debug.result == 'success' && needs.build-wasm-release.result == 'success'
@@ -147,7 +161,7 @@ jobs:
       - name: Download release artifacts
         uses: actions/download-artifact@v4
         with:
-          name: wasm-debug-artifacts
+          name: wasm-release-artifactswasm-release-artifacts
           path: ./Nepnep/public/wasm/Release/
 
       # Set Node.js
