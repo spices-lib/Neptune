@@ -9,6 +9,7 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 #include "Render/Backend/WebGPU/WebGPURenderBackend.h"
+#include "Render/Backend/WebGL/WebGLRenderBackend.h"
 #endif
 
 namespace Neptune {
@@ -19,6 +20,7 @@ namespace Neptune {
         {
 #ifdef NP_PLATFORM_EMSCRIPTEN
             case RenderBackendEnum::WebGPU: return CreateSP<WebGPURenderBackend>(backend);
+            case RenderBackendEnum::WebGL:  return CreateSP<WebGLRenderBackend>(backend);
 #endif
             default:
             {
