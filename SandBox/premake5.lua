@@ -114,15 +114,18 @@ project "SandBox"
 		linkoptions
 		{
 			"--use-port=%{IncludeDir.emscripten_glfw}/port/emscripten-glfw3.py",     -- Dependency: emscripten-glfw
+			"--use-port=emdawnwebgpu",                                               -- Dependency: WebGPU
 			"-pthread",                                                              -- Compile emscripten-glfw with pthread
 			"-s USE_WEBGL2=1",                                                       -- Dependency: WebGL
-			"-s USE_WEBGPU=1",                                                       -- Dependency: WebGPU
+	      --"-s USE_WEBGPU=1",                                                       -- This flag is deprecated
+	        "--closure=1",                                                           -- Reduce code size
 			"-s ALLOW_MEMORY_GROWTH",                                                -- Allow Memory growth
 			"-s WASM_BIGINT",                                                        -- Enable BigInt in JS
 			"-s WASM=1",                                                             -- Output wasm
 			"-s STACK_SIZE=4194304",                                                 -- Expand stack size to 4M
 			"-s TOTAL_MEMORY=64MB",                                                  -- Wasm total memory to 64M
-		--"-s PROXY_TO_PTHREAD",                                                     -- Run in pthread(not main thread)
+		  --"-s PROXY_TO_PTHREAD",                                                   -- Run in pthread(not main thread)
+		    "-sASYNCIFY=1",                                                          -- Async between Wasm and Js
 			"-s PTHREAD_POOL_SIZE=12",                                               -- Js thread size 12
 			"-s USE_PTHREADS=1",                                                     -- Use pthread
 			"-s SHARED_MEMORY",                                                      -- Shared memory

@@ -11,7 +11,6 @@
 #include "WebGPURenderBackend.h"
 #include "WebGPUInstance.h"
 #include "WebGPUDevice.h"
-#include "WebGPUSwapChain.h"
 
 #include <emscripten.h>
 #include <emscripten/emscripten.h>
@@ -37,7 +36,6 @@ namespace Neptune {
         m_State     = CreateSP<WebGPUState>();
         m_Instance  = CreateSP<WebGPUInstance>(*m_State);
         m_Device    = CreateSP<WebGPUDevice>(*m_State);
-        m_SwapChain = CreateSP<WebGPUSwapChain>(*m_State, m_Device);
 
         GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
 
@@ -90,6 +88,9 @@ namespace Neptune {
         // Release CommandEncoder and CommandBuffer.
         wgpuCommandEncoderRelease(m_State->m_GraphicCommandEncoder);
         wgpuCommandBufferRelease(commandBuffer);
+
+        // Present
+        wgpuSurfacePresent(m_State->m_Surface);
     }
 
     void WebGPURenderBackend::RenderFrame()
@@ -105,12 +106,15 @@ namespace Neptune {
         // Rendering
         ImGui::Render();
 
+        WGPUSurfaceTexture swapChainTexture;
+        wgpuSurfaceGetCurrentTexture(m_State->m_Surface, &swapChainTexture);
+
         WGPURenderPassColorAttachment color_attachments = {};
         color_attachments.depthSlice = WGPU_DEPTH_SLICE_UNDEFINED;
         color_attachments.loadOp = WGPULoadOp_Clear;
         color_attachments.storeOp = WGPUStoreOp_Store;
         color_attachments.clearValue = { 1.0, 0.0, 0.0, 1.0 };
-        color_attachments.view = wgpuSwapChainGetCurrentTextureView(m_State->m_SwapChain);
+        color_attachments.view = wgpuTextureCreateView(swapChainTexture.texture, nullptr);
 
         WGPURenderPassDescriptor render_pass_desc = {};
         render_pass_desc.colorAttachmentCount = 1;

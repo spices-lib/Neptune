@@ -22,6 +22,23 @@ namespace Neptune {
 */
 constexpr uint32_t MaxFrameInFlight = 2;
 
+	/**
+	* @brief Handle WGPUStatus Function.
+	* @param[in] result WGPUStatus.
+	*/
+	/*static void HandleWebGPUResult(WGPUStatus result)
+	{
+		if (result == WGPUStatus::WGPUStatus_Success) return;
+
+        NEPTUNE_CORE_ERROR("Render backend throw error.")
+	}*/
+
+	/**
+	* @brief WebGPU Check macro.
+	* Verify WebGPU API Effectiveness.
+	*/
+	#define WEBGPU_CHECK(expr) // { auto expr_value = expr;  ASSERT(expr_value == WGPUStatus::WGPUStatus_Success);  HandleWebGPUResult(expr_value); }
+
     /**
     * @brief This struct contains all WebGPU object in used global.
     */

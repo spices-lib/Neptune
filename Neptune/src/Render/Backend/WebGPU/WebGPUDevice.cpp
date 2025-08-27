@@ -63,15 +63,24 @@ namespace Neptune {
         surfaceDesc.nextInChain                                     = &htmlSelector.chain;
 
         m_WebGPUState.m_Surface = wgpuInstanceCreateSurface(m_WebGPUState.m_Instance, &surfaceDesc);
+
+        WGPUSurfaceConfiguration configure                          = {};
+        configure.device                                            = m_WebGPUState.m_Device;
+        configure.format                                            = WGPUTextureFormat_RGBA8Unorm;
+        configure.usage                                             = WGPUTextureUsage_RenderAttachment;
+        configure.width                                             = 1920;
+        configure.height                                            = 1080;
+        configure.presentMode                                       = WGPUPresentMode_Mailbox;
+
+        wgpuSurfaceConfigure(m_WebGPUState.m_Surface, &configure);
     }
 
     void WebGPUDevice::QuerySwapChainSupport()
     {
         WGPUAdapter adapter                                         = {};
-        WGPUTextureFormat swapChianFormat = (WGPUTextureFormat)wgpuSurfaceGetPreferredFormat(m_WebGPUState.m_Surface, adapter);
 
         WGPUSurfaceCapabilities capabilities                        = {};
-        wgpuSurfaceGetCapabilities(m_WebGPUState.m_Surface, adapter, &capabilities);
+        WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_WebGPUState.m_Surface, adapter, &capabilities));
 
         if(capabilities.formatCount != 0) {
             m_SwapChainSupportDetails.format = capabilities.formats[0];

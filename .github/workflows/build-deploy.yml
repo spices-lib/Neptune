@@ -161,7 +161,7 @@ jobs:
       - name: Download release artifacts
         uses: actions/download-artifact@v4
         with:
-          name: wasm-release-artifactswasm-release-artifacts
+          name: wasm-release-artifacts
           path: ./Nepnep/public/wasm/Release/
 
       # Set Node.js
