@@ -10,7 +10,7 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 
-#include <webgpu/include/webgpu/webgpu.h>
+#include <webgpu.h>
 
 #include <vector>
 

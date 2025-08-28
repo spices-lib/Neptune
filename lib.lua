@@ -6,7 +6,7 @@
 IncludeDir                                = {}
 IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                             -- Include: emscripten
 IncludeDir["emscripten_glfw"]             = "%{wks.location}/Neptune/vendor/emscripten-glfw/"                                 -- Include: emscripten-glfw
-IncludeDir["emdawnwebgpu"]                = "%{wks.location}/Neptune/vendor/emdawnwebgpu/"                                    -- Include: emdawnwebgpu
+IncludeDir["emdawnwebgpu"]                = "%{wks.location}/Neptune/vendor/emdawnwebgpu/webgpu/include/webgpu"               -- Include: emdawnwebgpu
 IncludeDir["GLFW"]                        = "%{wks.location}/Neptune/vendor/GLFW/include"                                     -- Include: GLFW
 IncludeDir["VulkanSDK"]                   = "C:/VulkanSDK/1.3.296.0/Include"                                                  -- Include: VulkanSDK
 IncludeDir["stb_image"]                   = "%{wks.location}/Neptune/vendor/stb_image"                                        -- Include: stb_image

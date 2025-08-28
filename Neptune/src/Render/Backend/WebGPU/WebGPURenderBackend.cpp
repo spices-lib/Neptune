@@ -37,7 +37,7 @@ namespace Neptune {
         GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
 
         // Setup Dear ImGui context
-        IMGUI_CHECKVERSION();
+        /*IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
@@ -55,7 +55,7 @@ namespace Neptune {
         init_info.NumFramesInFlight = 3;
         init_info.RenderTargetFormat = m_Device->GetSwapChainSupport().format;
         init_info.DepthStencilFormat = WGPUTextureFormat_Undefined;
-        ImGui_ImplWGPU_Init(&init_info);
+        ImGui_ImplWGPU_Init(&init_info);*/
     }
 
     WebGPURenderBackend::~WebGPURenderBackend()
