@@ -36,18 +36,19 @@ jobs:
 
     # Set Emscripten
     - name: Set up Emscripten
+      id: setup-emsdk
       uses: mymindstorm/setup-emsdk@v13
       with:
         version: 'latest'
 
     # Cache emsdk
-#    - name: Cache Emscripten
-#      uses: actions/cache@v3
-#      with:
-#        path: |
-#          ~/.emsdk
-#          ~/.emscripten_cache
-#        key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
+    - name: Cache Emscripten
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.emsdk
+          ~/.emscripten_cache
+        key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
 
   # Build Wasm Debug Files
   build-wasm-debug:
@@ -64,7 +65,7 @@ jobs:
     # Build Solution with Debug Configuration
     - name: Build Debug
       shell: bash
-      working-directory: ./Scripts/BuildEntry/
+      working-directory: Scripts/BuildEntry/
       run: bash ./gmake_build_debug_wasm.sh
 
     # Find build file
@@ -97,7 +98,7 @@ jobs:
     # Build Solution with Release Configuration
     - name: Build Release
       shell: bash
-      working-directory: ./Scripts/BuildEntry/
+      working-directory: Scripts/BuildEntry/
       run: bash ./gmake_build_release_wasm.sh
 
     # Find build file
