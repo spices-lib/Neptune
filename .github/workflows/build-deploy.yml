@@ -65,7 +65,7 @@ jobs:
     # Build Solution with Debug Configuration
     - name: Build Debug
       shell: bash
-      working-directory: Scripts/BuildEntry/
+      working-directory: ${{ github.workspace }}/Scripts/BuildEntry/
       run: bash ./gmake_build_debug_wasm.sh
 
     # Find build file
@@ -98,7 +98,7 @@ jobs:
     # Build Solution with Release Configuration
     - name: Build Release
       shell: bash
-      working-directory: Scripts/BuildEntry/
+      working-directory: ${{ github.workspace }}/Scripts/BuildEntry/
       run: bash ./gmake_build_release_wasm.sh
 
     # Find build file
