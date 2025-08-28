@@ -64,9 +64,9 @@ jobs:
       
     - name:  Debug
       shell: bash
-      run: | echo "当前工作目录: $(pwd)"
-          echo "目录内容:"
-          ls -la
+      run: |        echo "当前工作目录: $(pwd)"
+        echo "目录内容:"
+        ls -la
 
     # Build Solution with Debug Configuration
     - name: Build Debug
