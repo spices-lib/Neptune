@@ -54,7 +54,7 @@ jobs:
     - name: Build Debug
       shell: bash
       working-directory: ./Scripts/BuildEntry/
-      run: bash bash ./gmake_build_debug_wasm.sh
+      run: bash ./gmake_build_debug_wasm.sh
 
     # Find build file
     - name: Find build outputs
