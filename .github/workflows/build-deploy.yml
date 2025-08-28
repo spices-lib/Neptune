@@ -19,8 +19,8 @@ on:
 # workflow jobs
 jobs:
   
-  # Environment Prepare
-  environment-prepare:
+  # Build Job
+  build-wasm:
     
     # Platform: Ubuntu
     runs-on: ubuntu-latest
@@ -50,18 +50,6 @@ jobs:
           ~/.emscripten_cache
         key: ${{ runner.os }}-emsdk-${{ steps.setup-emsdk.outputs.emsdk-version }}
 
-  # Build Wasm Debug Files
-  build-wasm-debug:
-
-    # Need environment-prepare first
-    needs: environment-prepare
-
-    # Platform: Ubuntu
-    runs-on: ubuntu-latest
-
-    # Build Steps
-    steps:
-
     # Build Solution with Debug Configuration
     - name: Build Debug
       shell: bash
@@ -82,18 +70,6 @@ jobs:
         name: wasm-debug-artifacts
         path: ./bin/Debug-emscripten-wasm64/SandBox/
         retention-days: 3
-
-  # Build Wasm Release Files
-  build-wasm-release:
-
-    # Need environment-prepare first
-    needs: environment-prepare
-
-    # Platform: Ubuntu
-    runs-on: ubuntu-latest
-
-    # Build Steps
-    steps:
 
     # Build Solution with Release Configuration
     - name: Build Release
@@ -120,12 +96,10 @@ jobs:
   deploy:
 
     # Need build-wasm first
-    needs:
-      - build-wasm-debug
-      - build-wasm-release
+    needs: build-wasm
 
     # build must be success
-    if: needs.build-wasm-debug.result == 'success' && needs.build-wasm-release.result == 'success'
+    if: needs.build-wasm.result == 'success'
 
     # Platform: Ubuntu
     runs-on: ubuntu-latest
