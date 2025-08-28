@@ -10,7 +10,7 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 
-#include <webgpu/webgpu.h>
+#include <webgpu/include/webgpu/webgpu.h>
 
 #include <vector>
 
@@ -23,21 +23,21 @@ namespace Neptune {
 constexpr uint32_t MaxFrameInFlight = 2;
 
 	/**
-	* @brief Handle WGPUStatus Function.
-	* @param[in] result WGPUStatus.
+	* @brief Handle WebGPUStatus Function.
+	* @param[in] result WebGPUStatus.
 	*/
-	/*static void HandleWebGPUResult(WGPUStatus result)
+	static void HandleWebGPUResult(WGPUStatus result)
 	{
 		if (result == WGPUStatus::WGPUStatus_Success) return;
 
         NEPTUNE_CORE_ERROR("Render backend throw error.")
-	}*/
+	}
 
 	/**
 	* @brief WebGPU Check macro.
 	* Verify WebGPU API Effectiveness.
 	*/
-	#define WEBGPU_CHECK(expr) // { auto expr_value = expr;  ASSERT(expr_value == WGPUStatus::WGPUStatus_Success);  HandleWebGPUResult(expr_value); }
+	#define WEBGPU_CHECK(expr)  { auto expr_value = expr;  ASSERT(expr_value == WGPUStatus::WGPUStatus_Success);  HandleWebGPUResult(expr_value); }
 
     /**
     * @brief This struct contains all WebGPU object in used global.
@@ -63,7 +63,6 @@ constexpr uint32_t MaxFrameInFlight = 2;
         //WGPUQueue										   m_TransferQueue;              /* @brief From WebGPUDevice, Queue for transfer buffer.                   */
         //WGPUQueue								  	       m_ComputeQueue;               /* @brief From WebGPUDevice, Queue for compute shader.                    */
         //uint32_t                                           m_ComputeQueueFamily;         /* @brief From WebGPUDevice, ID for compute queue.                        */
-        WGPUSwapChain                                      m_SwapChain;                  /* @brief From WebGPUSwapChain.                                           */
         std::array<WGPUTexture,           MaxFrameInFlight>  m_SwapChainImages;            /* @brief The SwapChain's image, used for present.                        */
         std::array<WGPUTextureView,       MaxFrameInFlight>  m_SwapChainImageViews;        /* @brief The SwapChain's imageView.                                      */
         std::array<WGPUSampler,         MaxFrameInFlight>  m_SwapChainImageSamplers;     /* @brief The SwapChain's imageSampler.                                   */

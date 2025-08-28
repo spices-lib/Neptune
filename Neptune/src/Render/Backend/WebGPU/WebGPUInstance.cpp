@@ -16,7 +16,6 @@ namespace Neptune {
             : WebGPUObject(webGPUState)
     {
         WGPUInstanceDescriptor descriptor{};
-        descriptor.features.timedWaitAnyEnable = true;
 
         webGPUState.m_Instance = wgpuCreateInstance(&descriptor);
     }

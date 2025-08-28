@@ -15,7 +15,6 @@
 #include <emscripten.h>
 #include <emscripten/emscripten.h>
 #include <emscripten/html5.h>
-#include <emscripten/html5_webgpu.h>
 
 #include <GLFW/glfw3.h>
 #include <GLFW/emscripten_glfw3.h>
@@ -24,8 +23,6 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_wgpu.h>
 
-#include <webgpu/webgpu.h>
-#include <webgpu/webgpu_cpp.h>
 #include "Window/Window.h"
 
 namespace Neptune {
@@ -88,15 +85,12 @@ namespace Neptune {
         // Release CommandEncoder and CommandBuffer.
         wgpuCommandEncoderRelease(m_State->m_GraphicCommandEncoder);
         wgpuCommandBufferRelease(commandBuffer);
-
-        // Present
-        wgpuSurfacePresent(m_State->m_Surface);
     }
 
     void WebGPURenderBackend::RenderFrame()
     {
         // Start the Dear ImGui frame
-        ImGui_ImplWGPU_NewFrame();
+        /*ImGui_ImplWGPU_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
@@ -104,7 +98,7 @@ namespace Neptune {
         ImGui::ShowDemoWindow(&show_demo_window);
 
         // Rendering
-        ImGui::Render();
+        ImGui::Render();*/
 
         WGPUSurfaceTexture swapChainTexture;
         wgpuSurfaceGetCurrentTexture(m_State->m_Surface, &swapChainTexture);
@@ -122,7 +116,7 @@ namespace Neptune {
         render_pass_desc.depthStencilAttachment = nullptr;
 
         WGPURenderPassEncoder pass = wgpuCommandEncoderBeginRenderPass(m_State->m_GraphicCommandEncoder, &render_pass_desc);
-        ImGui_ImplWGPU_RenderDrawData(ImGui::GetDrawData(), pass);
+        //ImGui_ImplWGPU_RenderDrawData(ImGui::GetDrawData(), pass);
         wgpuRenderPassEncoderEnd(pass);
 
         wgpuTextureViewRelease(color_attachments.view);

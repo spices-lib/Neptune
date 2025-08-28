@@ -15,7 +15,7 @@ namespace Neptune {
     /**
     * @brief WebGPUInstance Class.
     * This class defines the WebGPUInstance behaves.
-    * This class is just a wrapper of WGPUInstance and WGPUSurface.
+    * This class is just a wrapper of WecGPUInstance and WecGPUSurface.
     */
     class WebGPUInstance : public WebGPUObject
     {
@@ -23,7 +23,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
-        * Create WGPUInstance and WGPUSurface.
+        * Create WecGPUInstance and WecGPUSurface.
         * @param[in] webGPUState The global VulkanState.
         */
         WebGPUInstance(WebGPUState& webGPUState);

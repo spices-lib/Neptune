@@ -10,8 +10,6 @@
 
 #include "WebGPUDevice.h"
 
-#include <emscripten/html5_webgpu.h>
-
 namespace Neptune {
 
     static void WebGPUErrorCallback(WGPUErrorType error_type, const char* message, void*)
@@ -22,7 +20,8 @@ namespace Neptune {
             case WGPUErrorType_Validation:  error_type_lbl = "Validation"; break;
             case WGPUErrorType_OutOfMemory: error_type_lbl = "Out of memory"; break;
             case WGPUErrorType_Unknown:     error_type_lbl = "Unknown"; break;
-            case WGPUErrorType_DeviceLost:  error_type_lbl = "Device lost"; break;
+            case WGPUErrorType_Internal:    error_type_lbl = "Internal"; break;
+            case WGPUErrorType_Force32:     error_type_lbl = "Force32"; break;
             default:                        error_type_lbl = "Unknown";
         }
 
@@ -35,8 +34,8 @@ namespace Neptune {
     WebGPUDevice::WebGPUDevice(WebGPUState& webGPUState)
             : WebGPUObject(webGPUState)
     {
-        CreateSurface();
         CreateDevice();
+        CreateSurface();
         QuerySwapChainSupport();
         CreateQueue();
     }
@@ -48,30 +47,37 @@ namespace Neptune {
         {
             return;
         }
-
-        wgpuDeviceSetUncapturedErrorCallback(m_WebGPUState.m_Device, WebGPUErrorCallback, nullptr);
     }
 
     void WebGPUDevice::CreateSurface()
     {
-        WGPUSurfaceDescriptorFromCanvasHTMLSelector htmlSelector    = {};
-        htmlSelector.chain.sType                                    = WGPUSType_SurfaceDescriptorFromCanvasHTMLSelector;
+        WGPUStringView selector{};
+        selector.data = "#Nepnep";
+        selector.length = strlen(selector.data);
+        
+        WGPUEmscriptenSurfaceSourceCanvasHTMLSelector htmlSelector  = {};
+        htmlSelector.chain.sType                                    = WGPUSType_EmscriptenSurfaceSourceCanvasHTMLSelector;
         htmlSelector.chain.next                                     = nullptr;
-        htmlSelector.selector                                       = "#Nepnep";
+        htmlSelector.selector                                       = selector;
 
         WGPUSurfaceDescriptor surfaceDesc                           = {};
         surfaceDesc.nextInChain                                     = &htmlSelector.chain;
 
         m_WebGPUState.m_Surface = wgpuInstanceCreateSurface(m_WebGPUState.m_Instance, &surfaceDesc);
 
+        WGPUTextureFormat viewFormats[] = { WGPUTextureFormat_RGBA8Unorm };
+        
         WGPUSurfaceConfiguration configure                          = {};
         configure.device                                            = m_WebGPUState.m_Device;
         configure.format                                            = WGPUTextureFormat_RGBA8Unorm;
         configure.usage                                             = WGPUTextureUsage_RenderAttachment;
         configure.width                                             = 1920;
         configure.height                                            = 1080;
-        configure.presentMode                                       = WGPUPresentMode_Mailbox;
-
+        configure.viewFormatCount                                   = 1;
+        configure.viewFormats                                       = viewFormats;
+        configure.alphaMode                                         = WGPUCompositeAlphaMode_Premultiplied;
+        configure.presentMode                                       = WGPUPresentMode_Fifo;
+        
         wgpuSurfaceConfigure(m_WebGPUState.m_Surface, &configure);
     }
 

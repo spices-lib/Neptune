@@ -156,6 +156,7 @@ project "Neptune"
 			"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
 			"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
 			"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+			"%{IncludeDir.emdawnwebgpu}",                         -- Library: emdawnwebgpu Header Folder.
 		}
 
 		-- Emscripten Specific Solution Macro Definitions.
