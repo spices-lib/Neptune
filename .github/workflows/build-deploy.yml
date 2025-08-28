@@ -61,18 +61,12 @@ jobs:
 
     # Build Steps
     steps:
-      
-    - name:  Debug
-      shell: bash
-      run: |        echo "当前工作目录: $(pwd)"
-        echo "目录内容:"
-        ls -la
 
     # Build Solution with Debug Configuration
     - name: Build Debug
       shell: bash
-      working-directory: ./Scripts/BuildEntry/
-      run: bash ./gmake_build_debug_wasm.sh
+      #working-directory: ./Scripts/BuildEntry/
+      run: ls -la
 
     # Find build file
     - name: Find build outputs
