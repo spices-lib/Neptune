@@ -1,5 +1,5 @@
 import { Point, Color, Layer } from './src/types/types'
-import { LiveList, LiveMap, LiveObject} from '@liveblocks/client'
+import { LiveList, LiveMap, LiveObject } from '@liveblocks/client'
 
 declare global {
     interface Liveblocks {

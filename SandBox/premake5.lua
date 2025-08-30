@@ -86,7 +86,7 @@ project "SandBox"
 
 	-- Platform: Emscripten
 	filter "system:emscripten"
-		systemversion   "latest"              -- Use Lastest WindowSDK
+		systemversion   "latest"              -- Use Latest WindowSDK
 		editAndContinue "Off"                 -- Use DebugInfoFormat: Zi (Program Database).
 
 		-- The Solution Additional Include Folder.
@@ -126,7 +126,7 @@ project "SandBox"
 			"-s STACK_SIZE=4194304",                                                 -- Expand stack size to 4M
 			"-s TOTAL_MEMORY=64MB",                                                  -- Wasm total memory to 64M
 		  --"-s PROXY_TO_PTHREAD",                                                   -- Run in pthread(not main thread)
-		    "-sASYNCIFY=1",                                                          -- Async between Wasm and Js
+		    "-s ASYNCIFY=1",                                                         -- Async between Wasm and Js
 			"-s PTHREAD_POOL_SIZE=12",                                               -- Js thread size 12
 			"-s USE_PTHREADS=1",                                                     -- Use pthread
 			"-s SHARED_MEMORY",                                                      -- Shared memory

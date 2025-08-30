@@ -25,7 +25,7 @@ export async function createRoom() {
         }
     })
     
-    redirect("/dashboard/" + room.id)
+    redirect('/dashboard/' + room.id)
 }
 
 export async function updateRoomTitle(title: string, id: string) {
@@ -51,7 +51,7 @@ export async function updateRoomTitle(title: string, id: string) {
         }
     })
 
-    revalidatePath("dashboard")
+    revalidatePath('dashboard')
 }
 
 export async function deleteRoom(id: string) {
@@ -74,7 +74,7 @@ export async function deleteRoom(id: string) {
         }
     })
 
-    revalidatePath("dashboard")
+    revalidatePath('dashboard')
 }
 
 export async function shareRoom(id: string, inviteEmail: string) {
@@ -107,7 +107,7 @@ export async function shareRoom(id: string, inviteEmail: string) {
         }
     })
 
-    revalidatePath("dashboard")
+    revalidatePath('dashboard')
 }
 
 export async function deleteInvitation(id: string, inviteEmail: string) {
@@ -133,5 +133,5 @@ export async function deleteInvitation(id: string, inviteEmail: string) {
         }
     })
 
-    revalidatePath("dashboard")
+    revalidatePath('dashboard')
 }
