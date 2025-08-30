@@ -1,7 +1,7 @@
 import { auth } from '../../../server/auth'
 import { Room } from '../../../components/liveblocks/Room'
 import { Canvas } from '../../../components/canvas/Canvas'
-import { Neptune } from '../../../components/neptune/Neptune'
+import Neptune from '../../../components/neptune/Neptune'
 import { redirect } from 'next/navigation'
 import { db } from '../../../server/db'
 
