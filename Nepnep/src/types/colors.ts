@@ -1,12 +1,14 @@
 ﻿export const COLORS = {
-    bgColor: '#454545',
-    menuBgColor: '#383b3d',
-    hover: '#333',
-    text: '#CCC',
-    separatorBg: '#25282A',
-    separatorText_gray: '#353637',
-    separatorText_white: '#6f6f6f',
-    shortcut: '#6F6F6F'
+    bg_gray: 'bg-[#454545]',
+    menu_bg_gray: 'bg-[#383b3d]',
+    hover: 'hover:bg-[#333]',
+    text: 'text-[#CCC]',
+    separator_bg_black: 'bg-[#25282A]',
+    separator_bg_gray: 'bg-[#353637]',
+    separator_bg_white: 'bg-[#6f6f6f]',
+    separator_text_white: 'text-[#6f6f6f]',
+    shortcut_gray: 'text-[#6F6F6F]',
+    border_gray: 'border-[#454545]'
 }
 
 export default COLORS

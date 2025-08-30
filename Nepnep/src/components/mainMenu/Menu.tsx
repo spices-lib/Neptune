@@ -1,57 +1,30 @@
-﻿'use client'
-
-import COLORS from '../../types/colors'
-import { ReactNode, useEffect, useRef, useState } from 'react'
-import MenuItem from './MenuItem'
+﻿import COLORS from '../../types/colors'
 import Separator from './Separator'
+import { ReactNode } from 'react'
 
 export default function Menu({
-    name,
+    isLeft,
     children
 }: {
-    name: string
-    children: ReactNode[]
+    isLeft?: boolean
+    children?: ReactNode
 }) {
-    const [isOpen, setIsOpen] = useState(false)
-    const menuRef = useRef<HTMLDivElement>(null)
-    
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                setIsOpen(false)
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickOutside)
-        
-        return document.removeEventListener('mousedown', handleClickOutside)
-    }, [])
-    
     return (
-        <div 
-            className='relative flex'
-            ref={ menuRef }
+        <div
+            className={`absolute ${ isLeft ? 'left-full top-[-17px]' : 'top-full left-0' } border rounded-md ${COLORS.border_gray} mt-1 whitespace-nowrap ${COLORS.menu_bg_gray}`}
         >
-            <button
-                className={`px-1 py-0 text-xs h-full hover:bg-[${COLORS.hover}] text-[${COLORS.text}] flex items-center`}
-                onClick={ () => setIsOpen(!isOpen) }
-            >
-                { name }
-            </button>
-            { isOpen && 
-                <div
-                    className={`absolute top-full left-0 mt-1 min-w-[310px] bg-[${COLORS.menuBgColor}]`}
-                >
-                    <div className={`flex w-full flex-col bg-[${COLORS.separatorBg}] p-1.25`}>
-                        <Separator color={COLORS.separatorText_gray}></Separator>
+            <div className={`flex w-full flex-col ${COLORS.separator_bg_black} p-1.25`}>
+                <Separator color={COLORS.separator_bg_gray}></Separator>
+            </div>
+            { children ?
+                <div className='py-0.25'>
+                    { children }
+                </div>
+                :
+                <div className='py-0.25'>
+                    <div className={`flex items-center justify-center w-full px-2 gap-2 py-1 ${COLORS.shortcut_gray} text-[11px] ml-auto`}>
+                        None
                     </div>
-                    { children && 
-                        <div className='py-0.25'>
-                            {
-                                children.map((child) => child)
-                            }
-                        </div>
-                    }
                 </div>
             }
         </div>
