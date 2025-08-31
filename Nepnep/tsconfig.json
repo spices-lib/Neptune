@@ -1,36 +1,40 @@
 {
     "compilerOptions": {
-    "target": "es2022",
-    "lib": [
-      "es2022",
-      "dom"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "jsx": "preserve",
-    "jsxImportSource": "react",
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ],
-    "allowJs": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "incremental": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "plugins": [
-      {
-        "name": "next"
+      "target": "es2022",
+      "lib": [
+        "es2022",
+        "dom"
+      ],
+      "module": "esnext",
+      "moduleResolution": "node",
+      "jsx": "preserve",
+      "jsxImportSource": "react",
+      "typeRoots": [
+        "./node_modules/@types"
+      ],
+      "types": [
+        "node"
+      ],
+      "allowJs": true,
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "noImplicitAny": true,
+      "skipLibCheck": true,
+      "noEmit": true,
+      "incremental": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "plugins": [
+        {
+          "name": "next"
+        }
+      ],
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./src/*"]
       }
-    ]
     },
     "include": ["src", ".next/types/**/*.ts"],
     "exclude": ["node_modules"]
