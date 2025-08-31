@@ -1,4 +1,4 @@
-﻿import COLORS from '../../types/colors'
+﻿import COLORS from '../../../types/colors'
 import Separator from './Separator'
 import { ReactNode } from 'react'
 
@@ -11,9 +11,13 @@ export default function Menu({
 }) {
     return (
         <div
-            className={`absolute ${ isLeft ? 'left-full top-[-17px]' : 'top-full left-0' } border rounded-md ${COLORS.border_gray} mt-1 whitespace-nowrap ${COLORS.menu_bg_gray}`}
+            className={`absolute flex flex-col ${ isLeft ? 'left-full top-[-17px]' : 'top-full left-0' } border ${COLORS.border_gray} mt-1 whitespace-nowrap ${COLORS.menu_bg_gray}`}
+            style={{
+                borderBottomLeftRadius: '6px',
+                borderBottomRightRadius: '6px',
+            }}
         >
-            <div className={`flex w-full flex-col ${COLORS.separator_bg_black} p-1.25`}>
+            <div className={`flex w-full ${COLORS.separator_bg_black} p-1.25`}>
                 <Separator color={COLORS.separator_bg_gray}></Separator>
             </div>
             { children ?
@@ -22,7 +26,7 @@ export default function Menu({
                 </div>
                 :
                 <div className='py-0.25'>
-                    <div className={`flex items-center justify-center w-full px-2 gap-2 py-1 ${COLORS.shortcut_gray} text-[11px] ml-auto`}>
+                    <div className={`flex w-full px-2 py-1 ${COLORS.shortcut_gray} text-[11px] ml-auto`}>
                         None
                     </div>
                 </div>

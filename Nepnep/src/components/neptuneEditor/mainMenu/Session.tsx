@@ -3,7 +3,7 @@
 import { BsFillLightningFill } from 'react-icons/bs'
 import { FaAngleDown } from 'react-icons/fa'
 import { useEffect, useRef, useState } from 'react'
-import COLORS from '../../types/colors'
+import COLORS from '../../../types/colors'
 
 export default function Session() {
     const [isOpen, setIsOpen] = useState(false)

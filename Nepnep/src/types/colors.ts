@@ -8,7 +8,10 @@
     separator_bg_white: 'bg-[#6f6f6f]',
     separator_text_white: 'text-[#6f6f6f]',
     shortcut_gray: 'text-[#6F6F6F]',
-    border_gray: 'border-[#454545]'
+    border_gray: 'border-[#454545]',
+    text_warn: 'text-[#dfcb4a]',
+    bg_black: 'bg-[#1f2123]',
+    progress_blue: 'bg-[#4F7DA0]'
 }
 
 export default COLORS

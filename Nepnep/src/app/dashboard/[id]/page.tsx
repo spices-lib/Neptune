@@ -1,7 +1,7 @@
 import { auth } from '../../../server/auth'
 import { Room } from '../../../components/liveblocks/Room'
 import { Canvas } from '../../../components/canvas/Canvas'
-import Neptune from '../../../components/neptune/Neptune'
+import NeptuneEditor from '../../../components/neptuneEditor/NeptuneEditor'
 import { redirect } from 'next/navigation'
 import { db } from '../../../server/db'
 
@@ -50,7 +50,7 @@ export default async function Page({
                 othersWithAccessToRoom={ room.roomInvites.map((x) => x.user) }
             >
             </Canvas>*/}
-            <Neptune></Neptune>
+            <NeptuneEditor></NeptuneEditor>
         </Room>
     )
 }

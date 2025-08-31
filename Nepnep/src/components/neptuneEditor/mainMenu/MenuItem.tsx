@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import { ReactNode, useRef, useState} from 'react'
-import COLORS from '../../types/colors'
+import COLORS from '../../../types/colors'
 
 export default function MenuItem({
     name,

@@ -1,4 +1,4 @@
-﻿import COLORS from '../../types/colors'
+﻿import COLORS from '../../../types/colors'
 import MainMenuItem from './MainMenuItem'
 import Menu from './Menu'
 import MenuItem from './MenuItem'
@@ -22,8 +22,8 @@ import { SiMaterialdesignicons } from 'react-icons/si'
 export default function MainMenu() {
     
     return (
-        <div className={`fixed h-[22px] flex items-center justify-between w-screen ${COLORS.bg_gray}`}>
-            <div className='flex items-center justify-center px-2'>
+        <div className={`relative flex w-full h-full items-center justify-between ${COLORS.bg_gray}`}>
+            <div className='flex justify-center px-2'>
                 <MainMenuItem name='File'>
                     <MenuItem name='New' shortcut='Ctrl + N' icon={ <FaFile className='w-3 h-3'/> }/>
                     <MenuItem name='Open' shortcut='Ctrl + O' icon={ <FaFolderOpen className='w-3 h-3'/> }/>
@@ -353,7 +353,7 @@ export default function MainMenu() {
                     <MenuItem name='Developers Manual'/>
                 </MainMenuItem>
             </div>
-            <div className='flex px-0 items-center justify-center'>
+            <div className='flex justify-center'>
                 <Session></Session>
             </div>
         </div>

@@ -1,6 +1,6 @@
 ﻿'use client'
 
-import COLORS from '../../types/colors'
+import COLORS from '../../../types/colors'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import Menu from './Menu'
 
