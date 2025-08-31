@@ -61,12 +61,12 @@ export default function Canvas () {
     useEffect(()=>{ initModule().then() }, [])
 
     return(
-        <>
+        <div className={`relative flex items-center justify-center w-full h-full`}>
             <canvas
-                className='absolute top-0 left-0 m-0 border-0 w-full h-full overflow-hidden block image-rendering-pixelated'
-                id="Nepnep"
+                className={`w-full h-full`}
+                id='Nepnep'
             >
             </canvas>
-        </>
+        </div>
     )
 }
