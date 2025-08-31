@@ -1,6 +1,6 @@
 ﻿import { User } from '@prisma/client'
 import { useState } from 'react'
-import { deleteInvitation, shareRoom } from '../../app/actions/rooms'
+import { deleteInvitation, shareRoom } from '@/app/actions/rooms'
 import { IoClose } from 'react-icons/io5'
 import UserAvatar from './UserAvatar'
 

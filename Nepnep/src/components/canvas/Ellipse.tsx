@@ -1,6 +1,6 @@
-﻿import { colorToCss } from '../../utils'
-import React from "react";
-import { EllipseLayer } from '../../types/types'
+﻿import { colorToCss } from '@/utils'
+import React from 'react'
+import { EllipseLayer } from '@/types/types'
 
 export default function Ellipse({ 
     id, 

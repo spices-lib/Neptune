@@ -1,7 +1,7 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import IconButton from './IconButton'
 import { IoEllipseOutline, IoSquareOutline } from 'react-icons/io5'
-import { LayerType, CanvasMode, CanvasState } from '../../types/types'
+import { LayerType, CanvasMode, CanvasState } from '@/types/types'
 
 export default function ShapeSelectionButton({
     isActive,

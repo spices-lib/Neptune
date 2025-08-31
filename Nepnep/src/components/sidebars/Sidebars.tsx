@@ -2,7 +2,7 @@
 
 import { useMutation, useOthers, useSelf, useStorage } from '@liveblocks/react'
 import { LiveMap, LiveObject } from '@liveblocks/client'
-import { colorToCss, connectionIdToColor, hexToRgb } from '../../utils'
+import { colorToCss, connectionIdToColor, hexToRgb } from '@/utils'
 import { User } from '@prisma/client'
 import Link from 'next/link'
 import { PiPathLight, PiSidebarSimpleThin } from 'react-icons/pi'
@@ -16,7 +16,7 @@ import ColorPicker from './ColorPicker'
 import Dropdown from './Dropdown'
 import UserAvatar from './UserAvatar'
 import ShareMenu from './ShareMenu'
-import { Color, LayerType, Layer } from '../../types/types'
+import { Color, LayerType, Layer } from '@/types/types'
 
 export default function Sidebars({
     roomName,

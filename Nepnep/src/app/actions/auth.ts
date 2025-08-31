@@ -1,10 +1,10 @@
 'use server'
 
-import { signUpSchema } from '../../schemas'
+import { signUpSchema } from '@/schemas'
 import { ZodError } from 'zod'
-import { db } from '../../server/db'
+import { db } from '@/server/db'
 import bcrypt from 'bcryptjs'
-import { signIn, signOut } from '../../server/auth'
+import { signIn, signOut } from '@/server/auth'
 import { redirect } from 'next/navigation'
 import { AuthError } from 'next-auth'
 

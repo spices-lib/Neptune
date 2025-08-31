@@ -3,7 +3,7 @@
 import { Room } from '@prisma/client'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ConfirmationModal from './ConfirmationModal'
-import { updateRoomTitle, deleteRoom } from '../../app/actions/rooms'
+import { updateRoomTitle, deleteRoom } from '@/app/actions/rooms'
 import { useRouter } from 'next/navigation'
 
 const PASTEL_COLORS = [

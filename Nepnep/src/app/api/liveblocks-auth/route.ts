@@ -1,6 +1,6 @@
 ﻿import { Liveblocks } from '@liveblocks/node'
-import { auth } from '../../../server/auth'
-import { db } from '../../../server/db'
+import { auth } from '@/server/auth'
+import { db } from '@/server/db'
 
 const liveblocks = new Liveblocks({
     secret: process.env.LIVEBLOCKS_SECRET_KEY as string

@@ -8,7 +8,7 @@ import {
 } from '@liveblocks/react/suspense'
 import '@liveblocks/react-ui/styles.css'
 import { LiveList, LiveMap, LiveObject } from '@liveblocks/node'
-import { Layer } from '../../types/types'
+import { Layer } from '@/types/types'
 
 export function Room({ 
     children, 

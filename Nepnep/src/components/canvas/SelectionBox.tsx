@@ -2,7 +2,7 @@
 import { LiveMap, LiveObject } from '@liveblocks/client/dist/index'
 import { memo, useEffect, useRef, useState} from 'react'
 import useSelectionBounds from '../../hooks/useSelectionBounds'
-import { Side, XYWH, Layer, LayerType,  } from '../../types/types'
+import { Side, XYWH, Layer, LayerType,  } from '@/types/types'
 
 const handleWidth = 8
 

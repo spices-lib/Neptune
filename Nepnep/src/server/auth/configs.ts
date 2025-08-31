@@ -1,6 +1,6 @@
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import Credentials from 'next-auth/providers/credentials'
-import { signInSchema } from '../../schemas'
+import { signInSchema } from '@/schemas'
 import bcrypt from 'bcryptjs'
 import { db } from '../db'
 import { DefaultSession, NextAuthConfig } from 'next-auth'

@@ -12,115 +12,194 @@ import {
     ResizablePanel,
     ResizablePanelGroup,
 } from '@/components/ui/resizable'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import useWindowSize from '../../hooks/useWindowSize'
 
 export default function NeptuneEditor() {
 
-    const [mainLayout, setMainLayout] = useState<number[]>([30, 70])
-    const [leftLayout, setLeftLayout] = useState<number[]>([70, 30])
-    const [verticalLayout, setVerticalLayout] = useState<number[]>([80, 20])
-    const [horizontalLayout, setHorizontalLayout] = useState<number[]>([20, 80])
+    const windowSize = useWindowSize()
 
-    // 组件挂载时从 localStorage 加载保存的布局
-    useEffect(() => {
-        const savedMainLayout = localStorage.getItem('neptune-main-layout')
-        const savedLeftLayout = localStorage.getItem('neptune-left-layout')
-        const savedVerticalLayout = localStorage.getItem('neptune-vertical-layout')
-        const savedHorizontalLayout = localStorage.getItem('neptune-horizontal-layout')
+    const [section0, setSection0] = useState({
+        top: 22,
+        middle: 0,
+        bottom: 30
+    })
 
-        if (savedMainLayout) setMainLayout(JSON.parse(savedMainLayout))
-        if (savedLeftLayout) setLeftLayout(JSON.parse(savedLeftLayout))
-        if (savedVerticalLayout) setVerticalLayout(JSON.parse(savedVerticalLayout))
-        if (savedHorizontalLayout) setHorizontalLayout(JSON.parse(savedHorizontalLayout))
-    }, [])
+    const [section1, setSection1] = useState({
+        left: 0,
+        right: 300
+    })
+
+    const [section2, setSection2] = useState({
+        top: 0,
+        bottom: 150
+    })
+
+    const [section3, setSection3] = useState({
+        left: 50,
+        right: 0
+    })
+
+    const calculateSectionSizes = useCallback(() => {
+        if (!windowSize)
+            return {}
+        
+        const section0Middle = Math.min(Math.max(windowSize.height - section0.top - section0.bottom, 0), 100)
+        const section1Left = Math.min(Math.max(windowSize.width - section1.right, 0), 100)
+        const section2Top = Math.min(Math.max(section0Middle - section2.bottom, 0), 100)
+        const rightWidth = Math.min(Math.max(section1Left - section3.left, 0), 100)
+
+        setSection0({top: section0.top, middle: section0Middle, bottom: section0.bottom});
+        setSection1({left: section1Left, right: section1.right});
+        setSection2({top: section2Top, bottom: section2.bottom});
+        setSection3({left: section3.left, right: rightWidth});
+        
+    }, [section0, section1, section2, section3, windowSize])
 
     const saveLayout = () => {
-        localStorage.setItem('neptune-main-layout', JSON.stringify(mainLayout))
-        localStorage.setItem('neptune-left-layout', JSON.stringify(leftLayout))
-        localStorage.setItem('neptune-vertical-layout', JSON.stringify(verticalLayout))
-        localStorage.setItem('neptune-horizontal-layout', JSON.stringify(horizontalLayout))
+        localStorage.setItem('neptune-editor-section0', JSON.stringify(section0))
+        localStorage.setItem('neptune-editor-section1', JSON.stringify(section1))
+        localStorage.setItem('neptune-editor-section2', JSON.stringify(section2))
+        localStorage.setItem('neptune-editor-section3', JSON.stringify(section3))
     }
 
-    const resetLayout = () => {
-        const defaultMainLayout = [30, 70]
-        const defaultLeftLayout = [70, 30]
-        const defaultVerticalLayout = [80, 20]
-        const defaultHorizontalLayout = [20, 80]
+    const loadLayout = useCallback(() => {
 
-        setMainLayout([...defaultMainLayout])
-        setLeftLayout([...defaultLeftLayout])
-        setVerticalLayout([...defaultVerticalLayout])
-        setHorizontalLayout([...defaultHorizontalLayout])
+        const savedSection0 = localStorage.getItem('neptune-editor-section0')
+        const savedSection1 = localStorage.getItem('neptune-editor-section1')
+        const savedSection2 = localStorage.getItem('neptune-editor-section2')
+        const savedSection3 = localStorage.getItem('neptune-editor-section3')
+        
+        if (!savedSection0 || !savedSection1 || !savedSection2 || !savedSection3) {
+            calculateSectionSizes()
+            return
+        }
+        
+        setSection0(JSON.parse(savedSection0))
+        setSection1(JSON.parse(savedSection1))
+        setSection2(JSON.parse(savedSection2))
+        setSection3(JSON.parse(savedSection3))
+        
+    }, [calculateSectionSizes])
 
-        // 保存默认布局
-        localStorage.setItem('neptune-main-layout', JSON.stringify(defaultMainLayout))
-        localStorage.setItem('neptune-left-layout', JSON.stringify(defaultLeftLayout))
-        localStorage.setItem('neptune-vertical-layout', JSON.stringify(defaultVerticalLayout))
-        localStorage.setItem('neptune-horizontal-layout', JSON.stringify(defaultHorizontalLayout))
+    useEffect(() => {
+        loadLayout()
+    }, [])
+
+    const handleSection0Change = (sizes: number[]) => {
+        if (!windowSize)
+            return
+        
+        const height = windowSize.height
+
+        setSection0({
+            top: Math.round(sizes[0] * height / 100),
+            middle: Math.round(sizes[1] * height / 100),
+            bottom: Math.round(sizes[2] * height / 100)
+        })
     }
 
+    const handleSection1Change = (sizes: number[]) => {
+        if (!windowSize)
+            return
+        
+        const width = windowSize.width
+
+        setSection1({
+            left: Math.round(sizes[0] * width / 100),
+            right: Math.round(sizes[1] * width / 100)
+        })
+    }
+
+    const handleSection2Change = (sizes: number[]) => {
+        const height = section0.middle
+
+        setSection2({
+            top: Math.round(sizes[0] * height / 100),
+            bottom: Math.round(sizes[1] * height / 100)
+        })
+    }
+
+    const handleSection3Change = (sizes: number[]) => {
+        const width = section1.left
+        
+        setSection3({
+            left: Math.round(sizes[0] * width / 100),
+            right: Math.round(sizes[1] * width / 100)
+        })
+    }
+    
+    if (!windowSize)
+        return null
+    
     return (
         <div className={`flex h-screen w-screen ${COLORS.bg_black}`}>
             <ResizablePanelGroup
                 direction='vertical'
-                onLayout={(sizes) => setMainLayout(sizes)}
+                onLayout={ handleSection0Change }
             >
-                <ResizablePanel defaultSize={mainLayout[0] || 30}><MainMenu/></ResizablePanel>
-                <ResizableHandle />
-                <ResizablePanel defaultSize={mainLayout[1] || 70}>
+                <ResizablePanel
+                    defaultSize={ section0.top / windowSize.height * 100 }
+                >
+                    <MainMenu/>
+                </ResizablePanel>
+                <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
+                <ResizablePanel 
+                    defaultSize={ section0.middle / windowSize.height * 100 }
+                >
                     <ResizablePanelGroup
                         direction='horizontal'
-                        onLayout={(sizes) => setLeftLayout(sizes)}
+                        onLayout={ handleSection1Change }
                     >
-                        <ResizablePanel defaultSize={leftLayout[0] || 70}>
+                        <ResizablePanel 
+                            defaultSize={ section1.left / windowSize.width * 100 }
+                        >
                             <ResizablePanelGroup
                                 direction="vertical"
-                                onLayout={(sizes) => setVerticalLayout(sizes)}
+                                onLayout={ handleSection2Change }
                             >
-                                <ResizablePanel defaultSize={verticalLayout[0] || 80}>
+                                <ResizablePanel 
+                                    defaultSize={ section2.top / section0.middle * 100 }
+                                >
                                     <ResizablePanelGroup
                                         direction="horizontal"
-                                        onLayout={(sizes) => setHorizontalLayout(sizes)}
+                                        onLayout={ handleSection3Change }
                                     >
-                                        <ResizablePanel defaultSize={horizontalLayout[0] || 20}><OperatorPanel/></ResizablePanel>
-                                        <ResizableHandle />
-                                        <ResizablePanel defaultSize={horizontalLayout[1] || 80}><Viewport/></ResizablePanel>
+                                        <ResizablePanel 
+                                            defaultSize={ section3.left / section1.left * 100 }
+                                        >
+                                            <OperatorPanel/>
+                                        </ResizablePanel>
+                                        <ResizableHandle className= {`data-[panel-group-direction=horizontal]:w-[2px] ${COLORS.bg_black}`}/>
+                                        <ResizablePanel 
+                                            defaultSize={ section3.right / section1.left * 100 }
+                                        >
+                                            <Viewport/>
+                                        </ResizablePanel>
                                     </ResizablePanelGroup>
                                 </ResizablePanel>
-                                <ResizableHandle />
-                                <ResizablePanel defaultSize={verticalLayout[1] || 20}><Console/></ResizablePanel>
-                            </ResizablePanelGroup>
-                        </ResizablePanel>
-                        <ResizableHandle />
-                        <ResizablePanel defaultSize={leftLayout[1] || 30}>
-                            <ResizablePanelGroup
-                                direction="vertical"
-                                onLayout={(sizes) => setHorizontalLayout(sizes)}
-                            >
-                                <ResizablePanel defaultSize={horizontalLayout[0] || 70}><Property/></ResizablePanel>
-                                <ResizableHandle />
-                                <ResizablePanel defaultSize={horizontalLayout[1] || 30}>
-                                    <div className="flex items-center justify-center p-2">
-                                        <button
-                                            onClick={saveLayout}
-                                            className="mr-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                        >
-                                            保存布局
-                                        </button>
-                                        <button
-                                            onClick={resetLayout}
-                                            className="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600"
-                                        >
-                                            重置布局
-                                        </button>
-                                    </div>
+                                <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
+                                <ResizablePanel 
+                                    defaultSize={ section2.bottom / section0.middle * 100 }
+                                >
+                                    <Console/>
                                 </ResizablePanel>
                             </ResizablePanelGroup>
+                        </ResizablePanel>
+                        <ResizableHandle className= {`data-[panel-group-direction=horizontal]:w-[2px] ${COLORS.bg_black}`}/>
+                        <ResizablePanel 
+                            defaultSize={ section1.right / windowSize.width * 100 }
+                        >
+                            <Property/>
                         </ResizablePanel>
                     </ResizablePanelGroup>
                 </ResizablePanel>
-                <ResizableHandle />
-                <ResizablePanel defaultSize={mainLayout[2] || 10}><InfoBar/></ResizablePanel>
+                <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
+                <ResizablePanel 
+                    defaultSize={ section0.bottom / windowSize.height * 100 }
+                >
+                    <InfoBar/>
+                </ResizablePanel>
             </ResizablePanelGroup>
         </div>
     )

@@ -6,7 +6,7 @@ import PencilButton from './PencilButton'
 import TextButton from './TextButton'
 import UndoButton from './UndoButton'
 import RedoButton from './RedoButton'
-import { LayerType, CanvasMode, CanvasState } from '../../types/types'
+import { LayerType, CanvasMode, CanvasState } from '@/types/types'
 
 export default function ToolsBar({ 
     canvasState,

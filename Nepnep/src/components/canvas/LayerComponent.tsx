@@ -5,8 +5,8 @@ import Ellipse from './Ellipse'
 import { LiveMap, LiveObject } from '@liveblocks/client/dist/index'
 import Path from './Path'
 import Text from './Text'
-import { colorToCss } from '../../utils'
-import { Layer, LayerType } from '../../types/types'
+import { colorToCss } from '@/utils'
+import { Layer, LayerType } from '@/types/types'
 
 const LayerComponent = memo(({ 
     id,

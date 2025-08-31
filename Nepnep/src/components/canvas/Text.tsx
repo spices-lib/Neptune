@@ -1,9 +1,9 @@
-﻿import { colorToCss } from '../../utils'
+﻿import { colorToCss } from '@/utils'
 import React, { useEffect, useRef, useState } from 'react'
 import { useMutation } from '@liveblocks/react'
 import { LiveMap } from '@liveblocks/client/dist/index'
 import { LiveObject } from '@liveblocks/client'
-import { TextLayer, Layer } from '../../types/types'
+import { TextLayer, Layer } from '@/types/types'
 
 export default function Text({ 
     id, 

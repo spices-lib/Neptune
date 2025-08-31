@@ -1,10 +1,10 @@
 'use server'
 
-import { auth } from '../../server/auth'
-import { db } from '../../server/db'
-import UserMenu from '../../components/dashboard/UserMenu'
-import CreateRoom from '../../components/dashboard/CreateRoom'
-import RoomsView from '../../components/dashboard/RoomsView'
+import { auth } from '@/server/auth'
+import { db } from '@/server/db'
+import UserMenu from '@/components/dashboard/UserMenu'
+import CreateRoom from '@/components/dashboard/CreateRoom'
+import RoomsView from '@/components/dashboard/RoomsView'
 
 export default async function Page() {
     const session = await auth()

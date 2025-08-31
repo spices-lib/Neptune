@@ -14,7 +14,7 @@ import {
     penPointsToPathLayer,
     pointerEventToCanvasPoint,
     resizeBounds
-} from '../../utils'
+} from '@/utils'
 import LayerComponent from './LayerComponent'
 import ToolsBar from '../toolsbar/ToolsBar'
 import { nanoid } from 'nanoid'
@@ -41,7 +41,7 @@ import {
     Layer,
     RectangleLayer,
     TextLayer
-} from '../../types/types'
+} from '@/types/types'
 
 const MAX_LAYERS = 100
 

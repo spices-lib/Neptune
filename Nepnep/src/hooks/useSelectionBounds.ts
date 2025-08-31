@@ -1,7 +1,7 @@
 ﻿import { useSelf, useStorage } from '@liveblocks/react'
 import { LiveMap} from '@liveblocks/client/dist/index'
 import { shallow } from '@liveblocks/client'
-import { XYWH, Layer } from '../types/types'
+import { XYWH, Layer } from '@/types/types'
 
 function boundingBox(layers: Layer[]): XYWH | null {
     const first = layers[0]
