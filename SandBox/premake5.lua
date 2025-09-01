@@ -131,7 +131,7 @@ project "SandBox"
 			"-s USE_PTHREADS=1",                                                     -- Use pthread
 			"-s SHARED_MEMORY",                                                      -- Shared memory
 			"-s OFFSCREENCANVAS_SUPPORT",                                            -- Transform canvas to pthread
-			"-s OFFSCREENCANVASES_TO_PTHREAD='Nepnep'",                              -- Agent canvas to pthread
+			"-s OFFSCREENCANVASES_TO_PTHREAD='nepnep'",                              -- Agent canvas to pthread
 			"-o %{cfg.targetdir}/%{prj.name}.js"                                     -- Generate js file
 		}
 

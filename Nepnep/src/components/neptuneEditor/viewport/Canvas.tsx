@@ -19,7 +19,7 @@ const initModule = async() => {
         },
 
         canvas: (function () {
-            const canvas = document.getElementById('Nepnep')
+            const canvas = document.getElementById('nepnep')
             //canvas.addEventListener("webglcontextlost", function(e) { alert('FIXME: WebGL context lost, please reload the page'); e.preventDefault(); }, false)
             return canvas
         })(),
@@ -61,10 +61,13 @@ export default function Canvas () {
     useEffect(()=>{ initModule().then() }, [])
 
     return(
-        <div className={`relative flex items-center justify-center w-full h-full`}>
+        <div 
+            className={`relative flex items-center justify-center w-full h-full`}
+            id="nepnep-div"
+        >
             <canvas
                 className={`w-full h-full`}
-                id='Nepnep'
+                id='nepnep'
             >
             </canvas>
         </div>

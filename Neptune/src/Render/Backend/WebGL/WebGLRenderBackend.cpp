@@ -33,7 +33,7 @@ namespace Neptune {
     {
         EmscriptenWebGLContextAttributes attrs;
         emscripten_webgl_init_context_attributes(&attrs);
-        EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx = emscripten_webgl_create_context("#Nepnep", &attrs);
+        EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx = emscripten_webgl_create_context("#nepnep", &attrs);
         emscripten_webgl_make_context_current(ctx);
     }
 

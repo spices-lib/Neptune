@@ -28,7 +28,6 @@ namespace Neptune {
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);        // @brief no OpenGL (use canvas2D)
         glfwWindowHint(GLFW_SCALE_FRAMEBUFFER, GLFW_FALSE);  // @brief make it not Hi DPI Aware (simplify rendering code a bit)
-        glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);           // @brief Set glfw enable title tab.
 
         const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
@@ -38,7 +37,7 @@ namespace Neptune {
         glfwWindowHint(GLFW_REFRESH_RATE , mode->refreshRate );
 
         // setting the association window <-> canvas
-        emscripten_glfw_set_next_window_canvas_selector("#Nepnep");
+        emscripten_glfw_set_next_window_canvas_selector("#nepnep");
 
         // create the only window
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
@@ -50,7 +49,7 @@ namespace Neptune {
         glfwSetWindowUserPointer(m_Windows, this);
 
         // makes the canvas resizable and match the full window size
-        emscripten_glfw_make_canvas_resizable(m_Windows, "window", nullptr);
+        emscripten_glfw_make_canvas_resizable(m_Windows, "#nepnep-div", nullptr);
 
         // Set gltf event call back.
         SetInternalCallBack();

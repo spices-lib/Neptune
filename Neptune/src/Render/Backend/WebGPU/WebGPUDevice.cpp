@@ -52,7 +52,7 @@ namespace Neptune {
     void WebGPUDevice::CreateSurface()
     {
         WGPUStringView selector{};
-        selector.data = "#Nepnep";
+        selector.data = "#nepnep";
         selector.length = strlen(selector.data);
         
         WGPUEmscriptenSurfaceSourceCanvasHTMLSelector htmlSelector  = {};
