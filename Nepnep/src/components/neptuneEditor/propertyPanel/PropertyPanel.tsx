@@ -19,7 +19,7 @@ export default function PropertyPanel({
             >
                 <span> { name } </span>
             </button>
-            <div className={`relative w-full h-full flex items-start justify-center ${COLORS.bg_gray}`}>
+            <div className={`relative w-full h-full flex flex-col items-center justify-start ${COLORS.bg_gray}`}>
                 { children }
             </div>
         </div>

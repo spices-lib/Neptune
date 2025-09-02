@@ -56,7 +56,7 @@ const initModule = async() => {
     }
 }
 
-export default function Canvas () {
+export default function NeptuneCanvas () {
 
     useEffect(()=>{ initModule().then() }, [])
 
