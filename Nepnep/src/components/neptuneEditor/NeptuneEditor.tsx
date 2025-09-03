@@ -134,74 +134,72 @@ export default function NeptuneEditor() {
     
     return (
         <div className={`flex h-screen w-screen ${COLORS.bg_black}`}>
-            <ResizablePanelGroup
-                direction='vertical'
-                onLayout={ handleSection0Change }
-            >
-                <ResizablePanel
-                    defaultSize={ section0.top / windowSize.height * 100 }
-                    style={{ overflow: 'visible' }}
+            <div className='fixed top-[24px] bottom-[0px] w-screen flex'>
+                <ResizablePanelGroup
+                    direction='vertical'
+                    onLayout={ handleSection0Change }
                 >
-                    <MainMenu/>
-                </ResizablePanel>
-                <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
-                <ResizablePanel 
-                    defaultSize={ section0.middle / windowSize.height * 100 }
-                >
-                    <ResizablePanelGroup
-                        direction='horizontal'
-                        onLayout={ handleSection1Change }
+                    <ResizablePanel 
+                        defaultSize={ section0.middle / windowSize.height * 100 }
                     >
-                        <ResizablePanel 
-                            defaultSize={ section1.left / windowSize.width * 100 }
+                        <ResizablePanelGroup
+                            direction='horizontal'
+                            onLayout={ handleSection1Change }
                         >
-                            <ResizablePanelGroup
-                                direction="vertical"
-                                onLayout={ handleSection2Change }
+                            <ResizablePanel 
+                                defaultSize={ section1.left / windowSize.width * 100 }
                             >
-                                <ResizablePanel 
-                                    defaultSize={ section2.top / section0.middle * 100 }
+                                <ResizablePanelGroup
+                                    direction="vertical"
+                                    onLayout={ handleSection2Change }
                                 >
-                                    <ResizablePanelGroup
-                                        direction="horizontal"
-                                        onLayout={ handleSection3Change }
+                                    <ResizablePanel 
+                                        defaultSize={ section2.top / section0.middle * 100 }
                                     >
-                                        <ResizablePanel 
-                                            defaultSize={ section3.left / section1.left * 100 }
+                                        <ResizablePanelGroup
+                                            direction="horizontal"
+                                            onLayout={ handleSection3Change }
                                         >
-                                            <OperatorPanel/>
-                                        </ResizablePanel>
-                                        <ResizableHandle className= {`data-[panel-group-direction=horizontal]:w-[2px] ${COLORS.bg_black}`}/>
-                                        <ResizablePanel 
-                                            defaultSize={ section3.right / section1.left * 100 }
-                                        >
-                                            <Viewport/>
-                                        </ResizablePanel>
-                                    </ResizablePanelGroup>
-                                </ResizablePanel>
-                                <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
-                                <ResizablePanel 
-                                    defaultSize={ section2.bottom / section0.middle * 100 }
-                                >
-                                    <Console/>
-                                </ResizablePanel>
-                            </ResizablePanelGroup>
-                        </ResizablePanel>
-                        <ResizableHandle className= {`data-[panel-group-direction=horizontal]:w-[2px] ${COLORS.bg_black}`}/>
-                        <ResizablePanel 
-                            defaultSize={ section1.right / windowSize.width * 100 }
-                        >
-                            <Property/>
-                        </ResizablePanel>
-                    </ResizablePanelGroup>
-                </ResizablePanel>
-                <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
-                <ResizablePanel 
-                    defaultSize={ section0.bottom / windowSize.height * 100 }
-                >
-                    <InfoBar/>
-                </ResizablePanel>
-            </ResizablePanelGroup>
+                                            <ResizablePanel 
+                                                defaultSize={ section3.left / section1.left * 100 }
+                                            >
+                                                <OperatorPanel/>
+                                            </ResizablePanel>
+                                            <ResizableHandle className= {`data-[panel-group-direction=horizontal]:w-[2px] ${COLORS.bg_black}`}/>
+                                            <ResizablePanel 
+                                                defaultSize={ section3.right / section1.left * 100 }
+                                            >
+                                                <Viewport/>
+                                            </ResizablePanel>
+                                        </ResizablePanelGroup>
+                                    </ResizablePanel>
+                                    <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
+                                    <ResizablePanel 
+                                        defaultSize={ section2.bottom / section0.middle * 100 }
+                                    >
+                                        <Console/>
+                                    </ResizablePanel>
+                                </ResizablePanelGroup>
+                            </ResizablePanel>
+                            <ResizableHandle className= {`data-[panel-group-direction=horizontal]:w-[2px] ${COLORS.bg_black}`}/>
+                            <ResizablePanel 
+                                defaultSize={ section1.right / windowSize.width * 100 }
+                            >
+                                <Property/>
+                            </ResizablePanel>
+                        </ResizablePanelGroup>
+                    </ResizablePanel>
+                    <ResizableHandle className= {`data-[panel-group-direction=vertical]:h-[2px] ${COLORS.bg_black}`}/>
+                    <ResizablePanel 
+                        defaultSize={ section0.bottom / windowSize.height * 100 }
+                    >
+                        <InfoBar/>
+                    </ResizablePanel>
+                </ResizablePanelGroup>
+            </div>
+            <div className='fixed h-[22px] top-0 w-screen'>
+                <MainMenu/>
+            </div>
         </div>
     )
 }
