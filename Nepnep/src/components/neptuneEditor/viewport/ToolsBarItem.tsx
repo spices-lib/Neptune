@@ -24,7 +24,6 @@ export default function ToolsBarItem({
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
     
-    
     return (
         <div 
             className='relative flex'

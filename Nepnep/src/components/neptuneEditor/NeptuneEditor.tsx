@@ -21,23 +21,23 @@ export default function NeptuneEditor() {
 
     const [section0, setSection0] = useState({
         top: 22,
-        middle: 0,
+        middle: 1000,
         bottom: 30
     })
 
     const [section1, setSection1] = useState({
-        left: 0,
+        left: 1100,
         right: 300
     })
 
     const [section2, setSection2] = useState({
-        top: 0,
+        top: 500,
         bottom: 150
     })
 
     const [section3, setSection3] = useState({
         left: 50,
-        right: 0
+        right: 1200
     })
 
     const calculateSectionSizes = useCallback(() => {
@@ -140,6 +140,7 @@ export default function NeptuneEditor() {
             >
                 <ResizablePanel
                     defaultSize={ section0.top / windowSize.height * 100 }
+                    style={{ overflow: 'visible' }}
                 >
                     <MainMenu/>
                 </ResizablePanel>

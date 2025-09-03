@@ -11,7 +11,7 @@ export default function Menu({
 }) {
     return (
         <div
-            className={`absolute flex flex-col ${ isLeft ? 'left-full top-[-17px]' : 'top-full left-0' } border ${COLORS.border_gray} mt-1 whitespace-nowrap ${COLORS.menu_bg_gray}`}
+            className={`absolute flex flex-col ${ isLeft ? 'left-full top-[-17px]' : 'top-full left-0' } border ${COLORS.border_gray} mt-1 z-10 whitespace-nowrap ${COLORS.menu_bg_gray}`}
             style={{
                 borderBottomLeftRadius: '6px',
                 borderBottomRightRadius: '6px',
