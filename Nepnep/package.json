@@ -12,6 +12,7 @@
     "prisma:dev": "npx prisma migrate dev --name init",
     "prisma:reset": "npx prisma migrate reset",
     "prisma:studio": "npx prisma studio",
+    "lint": "next lint",
     "vercel-build": "npm run prisma:generate && npm run build"
   },
   "dependencies": {
@@ -47,6 +48,10 @@
     "prisma": "^6.13.0",
     "tailwindcss": "^4.1.11",
     "tw-animate-css": "^1.3.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "eslint": "^8.9.0",
+    "eslint-config-next": "^15.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.1.0",
+    "@typescript-eslint/parser": "^8.1.0"
   }
 }
