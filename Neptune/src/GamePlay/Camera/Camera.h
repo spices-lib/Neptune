@@ -15,7 +15,7 @@ namespace Neptune {
     /**
     * @brief This Struct defines camera projection type.
     */
-    enum ProjectionType
+    enum class ProjectionType
     {
         Perspective  = 0,
         Orthographic = 1,
@@ -52,7 +52,22 @@ namespace Neptune {
     {
     public:
 
+        /**
+        * @brief Create Perspective Camera.
+        * 
+        * @param[in] param PerspectiveParam
+        * 
+        * @return Returns Perspective Camera.
+        */
         static SP<Camera> CreatePerspective(const PerspectiveParam& param);
+
+        /**
+        * @brief Create Orthographic Camera.
+        * 
+        * @param[in] param OrthographicParam
+        * 
+        * @return Returns Orthographic Camera.
+        */
         static SP<Camera> CreateOrthographic(const OrthographicParam& param);
 
     public:
@@ -64,6 +79,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] type ProjectionType.
         */
         Camera(ProjectionType type)
@@ -77,19 +93,23 @@ namespace Neptune {
 
         /**
         * @brief Get camera reverse z projection matrix.
+        * 
         * @return Returns the camera projection matrix.
         */
         const glm::mat4& GetPMatrixReverseZ();
 
         /**
         * @brief Get camera projection matrix.
+        * 
         * @return Returns the camera projection matrix.
+        * 
         * @note only use in ImguiGizmos.
         */
         virtual glm::mat4 GetPMatrix() = 0;
 
         /**
         * @brief Get camera projection type.
+        * 
         * @return Returns the camera projection type.
         */
         const ProjectionType& GetProjectionType() const { return m_ProjectionType; }
@@ -113,6 +133,6 @@ namespace Neptune {
         * @breif ProjectionType.
         * Init with Perspective.
         */
-        ProjectionType m_ProjectionType = Perspective;
+        ProjectionType m_ProjectionType = ProjectionType::Perspective;
     };
 }

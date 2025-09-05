@@ -33,40 +33,37 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~GLFWWindowImpl() override;
+        ~GLFWWindowImpl() override;
 
         /**
         * @brief Interface of determine if window is still active.
         *
         * @return Returns true if window is active.
         */
-        virtual bool IsWindowActive() override;
+        bool IsWindowActive() override;
 
         /**
         * @brief Interface of window poll events.
         */
-        virtual void PollEvents() override;
+        void PollEvents() override;
 
         /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.
         */
-        virtual void* NativeWindow() override;
+        void* NativeWindow() override;
 
     private:
 
         /**
         * @brief Set event/error/input callback.
         */
-        void SetInternalCallBack();
+        void SetInternalCallBack() const;
 
     private:
-
-        /**
-        * @brief native window.
-        */
-        GLFWwindow* m_Windows;
+        
+        GLFWwindow* m_Windows;  // @brief native window.
     };
 }
 

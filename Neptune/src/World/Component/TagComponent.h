@@ -31,16 +31,18 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~TagComponent() override = default;
+        ~TagComponent() override = default;
 
         /**
         * @brief Rename first element in tags.
+        * 
         * @param[in] tag new name.
         */
         void Rename(const std::string& tag);
 
         /**
         * @brief Get the tags variable.
+        * 
         * @return Returns the tags variable.
         */
         const std::string& GetTag() { return m_Tags; }

@@ -28,7 +28,7 @@ namespace Neptune {
         std::stringstream ss;
         ss << error_type_lbl << "error: " << message;
 
-        NEPTUNE_CORE_ERROR(ss.str())
+        NEPTUNE_CORE_CRITICAL(ss.str())
     }
 
     WebGPUDevice::WebGPUDevice(WebGPUState& webGPUState)

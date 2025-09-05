@@ -60,7 +60,7 @@ namespace Neptune {
 		* @brief The root event function pointer.
 		* @param[in] event Event.
 		*/
-        void OnEvent(Event& event);
+        void OnEvent(Event& event) const;
 
     private:
 

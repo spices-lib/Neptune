@@ -21,6 +21,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] width New Viewport Size.
         * @param[in] height New Viewport Size.
         */
@@ -36,21 +37,24 @@ namespace Neptune {
 
         /**
         * @brief Get New Windows Width.
+        * 
         * @return Returns New Windows Width.
         */
-        const uint32_t& GetWidth() const { return m_Width; }
+        [[nodiscard]] const uint32_t& GetWidth() const { return m_Width; }
 
         /**
         * @brief Get New Windows Height.
+        * 
         * @return Returns New Windows Height.
         */
-        const uint32_t& GetHeight() const { return m_Height; }
+        [[nodiscard]] const uint32_t& GetHeight() const { return m_Height; }
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
@@ -120,6 +124,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] width New Viewport Size.
         * @param[in] height New Viewport Size.
         */
@@ -135,21 +140,24 @@ namespace Neptune {
 
         /**
         * @brief Get New Windows Width.
+        * 
         * @return Returns New Windows Width.
         */
-        const uint32_t& GetWidth() const { return m_Width; }
+        [[nodiscard]] const uint32_t& GetWidth() const { return m_Width; }
 
         /**
         * @brief Get New Windows Height.
+        * 
         * @return Returns New Windows Height.
         */
-        const uint32_t& GetHeight() const { return m_Height; }
+        [[nodiscard]] const uint32_t& GetHeight() const { return m_Height; }
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "WindowResizeOverEvent: " << m_Width << ", " << m_Height;

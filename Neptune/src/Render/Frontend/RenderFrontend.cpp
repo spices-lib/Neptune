@@ -24,7 +24,8 @@ namespace Neptune {
 #endif
             default:
             {
-                printf("Not Supported Render Backend.\n");
+                NEPTUNE_CORE_CRITICAL("Not Supported Render Backend.")
+                break;
             }
         }
 

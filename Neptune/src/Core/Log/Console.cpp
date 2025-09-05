@@ -49,8 +49,8 @@ namespace Neptune {
         * @brief Get Log time.
         */
         time_t t = std::chrono::system_clock::to_time_t(msg.time);
-        std::string times = ctime(&t);
-        times.pop_back();
+        char times[128];
+        ctime_s(times, sizeof(times), &t);
 
         /**
         * @brief Get Log level.

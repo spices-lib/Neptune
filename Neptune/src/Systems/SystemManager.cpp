@@ -26,7 +26,7 @@ namespace Neptune {
 
     void SystemManager::PopAllSystems()
     {
-        for(int i = 0; i < m_Systems.size(); i++)
+        for(auto& system : m_Systems.size())
         {
             PopSystem();
         }
@@ -34,19 +34,19 @@ namespace Neptune {
 
     void SystemManager::Run()
     {
-        for(int i = 0; i < m_Systems.size(); i++)
+        for(auto& system : m_Systems.size())
         {
-            m_Systems[i]->Tick();
+            system->Tick();
         }
     }
 
-    void SystemManager::OnEvent(Event& event)
+    void SystemManager::OnEvent(Event& event) const
     {
         NEPTUNE_CORE_TRACE(event.ToString())
 
-        for(int i = 0; i < m_Systems.size(); i++)
+        for(auto& system : m_Systems.size())
         {
-            EventListener::Dispatch(event, m_Systems[i].get());
+            EventListener::Dispatch(event, system.get());
         }
     }
 }

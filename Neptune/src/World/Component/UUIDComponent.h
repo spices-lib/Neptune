@@ -21,6 +21,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] uuid UUID.
         */
         UUIDComponent(UUID uuid) : m_uuid(uuid) {}
@@ -28,15 +29,16 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        UUIDComponent() : m_uuid(UUID()) {};
+        UUIDComponent() : m_uuid(UUID()) {}
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~UUIDComponent() override = default;
+        ~UUIDComponent() override = default;
 
         /**
         * @brief Get the uuid variable.
+        * 
         * @return Returns the uuid variable.
         */
         const UUID& GetUUID() const { return m_uuid; }

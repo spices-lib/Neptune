@@ -10,7 +10,7 @@
 
 namespace Neptune {
 
-    NativeScriptComponent::NativeScriptComponent(std::shared_ptr<NativeScript> script)
+    NativeScriptComponent::NativeScriptComponent(const SP<NativeScript>& script)
         : m_Script(script)
     {}
 

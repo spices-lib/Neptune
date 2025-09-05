@@ -48,16 +48,18 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~Scene() = default;
+        ~Scene() override = default;
 
         /**
         * @brief Create a new empty entity in this world.
+        * 
         * @param[in] name Entity name.
         */
         Entity CreateEntity(const std::string& name = "None");
 
         /**
         * @brief Create a new empty entity with a uuid in this world.
+        * 
         * @param[in] uuid UUID.
         * @param[in] name Entity name.
         */
@@ -65,25 +67,30 @@ namespace Neptune {
 
         /**
         * @brief Destroy a entity from this world.
+        * 
         * @param[in] entity Entity.
         */
         void DestroyEntity(Entity& entity);
 
         /**
         * @brief Get World Entity by id(entt::entity).
+        * 
         * @param[in] id Id(entt::entity)
+        * 
         * @return Returns valid Entity if fined.
         */
         Entity QueryEntityByID(uint32_t id);
 
         /**
         * @brief Get WorldMarkFlags this frame.
+        * 
         * @return Returns the WorldMarkFlags this frame.
         */
         SceneMarkFlags GetMarker() const { return m_Marker; }
 
         /**
         * @brief Mark WorldMarkFlags with flags.
+        * 
         * @param[in] flags In flags.
         */
         void Mark(SceneMarkFlags flags) { m_Marker |= flags; }
@@ -95,40 +102,45 @@ namespace Neptune {
 
         /**
         * @brief Clear WorldMarkFlags with flags.
+        * 
         * @param[in] flags In flags.
         */
         void ClearMarkerWithBits(SceneMarkFlags flags);
 
         /**
         * @brief View all component in this world.
+        * 
         * @tparam T Component.
-        * @param fn View function.
+        * @param[in] fn View function.
         */
         template<typename T, typename F>
         void ViewComponent(F&& fn);
 
         /**
         * @brief View all component in this world in ranges.
+        * 
         * @tparam T Component.
         * @param[in] ranges view ranges.
-        * @param fn View function.
+        * @param[in] fn View function.
         */
         template<typename T, typename F>
         void ViewComponent(const std::vector<uint32_t>& ranges, F&& fn);
 
         /**
         * @brief View all component in this world in ranges.
+        * 
         * @tparam T Component.
         * @param[in] ranges view ranges.
         * @param[in] floor ranges floor.
         * @param[in] ceil ranges ceil.
-        * @param fn View function.
+        * @param[in] fn View function.
         */
         template<typename T, typename F>
         void ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn);
 
         /**
         * @brief View all root in this world.
+        * 
         * @param fn View function.
         */
         template<typename F>
@@ -137,9 +149,11 @@ namespace Neptune {
         /**
         * @brief Template Function.
         * Used for add specific component to entity.
+        * 
         * @tparam T Specific component.
         * @param[in] e entt::entity.
         * @param[in] args Component construct parameters.
+        * 
         * @return Returns The specific component reference that added.
         */
         template<typename T, typename... Args>
@@ -147,8 +161,10 @@ namespace Neptune {
 
         /**
         * @brief Get Component owned by this entity.
+        * 
         * @tparam T Which Component we will get.
         * @param[in] e entt::entity.
+        * 
         * @return Returns the specific Component.
         */
         template<typename T>
@@ -156,6 +172,7 @@ namespace Neptune {
 
         /**
         * @brief Remove Component owned from this entity.
+        * 
         * @tparam T Which Component we will remove.
         * @param[in] e entt::entity.
         */
@@ -164,8 +181,10 @@ namespace Neptune {
 
         /**
         * @brief If Component is owned by this entity or not.
+        * 
         * @tparam T Which Component we will search.
         * @param[in] e entt::entity.
+        * 
         * @return Returns true if found.
         */
         template<typename T>
@@ -173,18 +192,21 @@ namespace Neptune {
 
         /**
         * @brief Remove a entity from this world root.
+        * 
         * @param[in] entity Entity.
         */
         void RemoveFromRoot(Entity& entity);
 
         /**
         * @brief Add a entity to this world root.
+        * 
         * @param[in] entity Entity.
         */
         void AddToRoot(Entity& entity);
 
         /**
         * @brief Determine if a entity is in root.
+        * 
         * @param[in] entity Entity.
         */
         bool IsRootEntity(Entity& entity);
@@ -193,12 +215,14 @@ namespace Neptune {
 
         /**
         * @brief Create empty entity with uuid.
+        * 
         * @param[in] uuid UUID.
         */
         Entity CreateEmptyEntity(UUID uuid);
 
         /**
         * @brief Called On any Component Added to this world.
+        * 
         * @param[in] entity Entity row pointer.
         * @param[in] component Specific Component reference.
         */
@@ -219,7 +243,9 @@ namespace Neptune {
 
         /**
         * @brief This variable is a cache.
+        * 
         * @noto Not in use now.
+        * 
         * @todo use it.
         */
         std::unordered_map<UUID, uint32_t> m_RootEntityMap;
@@ -236,7 +262,7 @@ namespace Neptune {
     };
 
     template <typename T, typename F>
-    inline void Scene::ViewComponent(F&& fn)
+    void Scene::ViewComponent(F&& fn)
     {
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -251,7 +277,7 @@ namespace Neptune {
     }
 
     template <typename T, typename F>
-    inline void Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn)
+    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn)
     {
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -265,7 +291,7 @@ namespace Neptune {
     }
 
     template<typename T, typename F>
-    inline void Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn)
+    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn)
     {
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -283,7 +309,7 @@ namespace Neptune {
     }
 
     template<typename F>
-    inline void Scene::ViewRoot(F&& fn)
+    void Scene::ViewRoot(F&& fn)
     {
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -294,7 +320,7 @@ namespace Neptune {
     }
 
     template <typename T, typename ... Args>
-    inline T& Scene::AddComponent(uint32_t e, Args&&... args)
+    T& Scene::AddComponent(uint32_t e, Args&&... args)
     {
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -302,7 +328,7 @@ namespace Neptune {
     }
 
     template <typename T>
-    inline T& Scene::GetComponent(uint32_t e)
+    T& Scene::GetComponent(uint32_t e)
     {
         /**
         * @note lock cause bug here.
@@ -313,7 +339,7 @@ namespace Neptune {
     }
 
     template <typename T>
-    inline void Scene::RemoveComponent(uint32_t e)
+    void Scene::RemoveComponent(uint32_t e)
     {
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -321,7 +347,7 @@ namespace Neptune {
     }
 
     template <typename T>
-    inline bool Scene::HasComponent(uint32_t e)
+    bool Scene::HasComponent(uint32_t e)
     {
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
@@ -329,7 +355,7 @@ namespace Neptune {
     }
 
     template<typename T>
-    inline void Scene::OnComponentAdded(Entity* entity, T& component)
+    void Scene::OnComponentAdded(Entity* entity, T& component)
     {
         component.OnComponentAdded(*entity);
     }

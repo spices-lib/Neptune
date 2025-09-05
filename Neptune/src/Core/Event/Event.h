@@ -126,23 +126,28 @@ namespace Neptune {
 
         /**
         * @brief Judgement if a given category is contained by this event class.
+        * 
         * @param[in] category In category.
+        * 
         * @return Returns true if given category is contained by this event class.
         */
-        bool IsInCategory(EventCategory category) const
+        [[nodiscard]] bool IsInCategory(EventCategory category) const
         {
             return GetCategoryFlags() & category;
         }
 
         /**
         * @brief Get Global Root Event Function Pointer.
+        * 
         * @return Returns the Global Root Event Function Pointer.
         */
         static EventCallbackFn GetEventCallbackFn();
 
         /**
         * @brief Set Global Root Event Function Pointer.
+        * 
         * @param[in] callback The Global Root Event Function Pointer.
+        * 
         * @note Usually call it once in whole Application lifetime.
         */
         static void SetEventCallbackFn(const EventCallbackFn& callback);
@@ -162,7 +167,9 @@ namespace Neptune {
 
         /**
         * @brief Helper type of the function pointer to handle specific event.
+        * 
         * @tparam T Specific Event Class.
+        * 
         * @return Returns true if needs block event chain.
         */
         template<typename T>
@@ -172,6 +179,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] event Specific Event reference.
         */
         EventDispatcher(Event& event)
@@ -180,7 +188,9 @@ namespace Neptune {
 
         /**
         * @brief Dispatch the specific Event handle function pointer to Event Class.
+        * 
         * @param[in] func Specific Event handle function.
+        * 
         * @return Returns true if execute function pointer.
         */
         template<typename T>

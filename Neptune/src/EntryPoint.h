@@ -4,17 +4,14 @@
 * @author Spices.
 */
 #pragma once
-
-#include "Core/Core.h"
 #include "Core/Application.h"
-//#include "testEntryPoint.h"
 
 /**
 * @brief Main Function.
 */
-int main() {
+inline int main() {
 
-    auto& engine = Neptune::Application::Instance();
+    const auto& engine = Neptune::Application::Instance();
     engine.Run();
     Neptune::Application::Destroy();
 

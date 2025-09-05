@@ -27,14 +27,15 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] script NativeScript.
         */
-        NativeScriptComponent(std::shared_ptr<NativeScript> script);
+        NativeScriptComponent(const SP<NativeScript>& script);
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~NativeScriptComponent() override = default;
+        ~NativeScriptComponent() override = default;
 
         /**
         * @brief This interface defines the behaves on specific component tick every frame.
@@ -43,6 +44,7 @@ namespace Neptune {
 
         /**
         * @brief This interface defines the behaves on specific component event happened.
+        * 
         * @param[in] e Event.
         */
         virtual void OnEvent(Event& e);
@@ -52,6 +54,6 @@ namespace Neptune {
         /**
         * @brief NativeScript
         */
-        std::shared_ptr<NativeScript> m_Script;
+        SP<NativeScript> m_Script;
     };
 }

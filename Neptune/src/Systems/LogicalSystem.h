@@ -27,23 +27,23 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~LogicalSystem() override = default;
+        ~LogicalSystem() override = default;
 
         /**
         * @brief Interface of system initialize.
         */
-        virtual void OnSystemInitialize() override {}
+        void OnSystemInitialize() override {}
 
         /**
         * @brief Interface of system shutdown.
         */
-        virtual void OnSystemShutDown() override {}
+        void OnSystemShutDown() override {}
 
         /**
         * @brief Interface of system tick run.
         */
-        virtual void Tick() override {}
+        void Tick() override {}
 
-        virtual void OnEvent(Event& event) override {};
+        void OnEvent(Event& event) override {}
     };
 }

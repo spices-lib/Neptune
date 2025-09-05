@@ -22,13 +22,14 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~KeyEvent() override = default;
+        ~KeyEvent() override = default;
 
         /**
         * @brief Get Key Input Code.
+        * 
         * @return Returns the Key Input Code.
         */
-        const int& GetKeyCode() const { return m_KeyCode; }
+        [[nodiscard]] const KeyCode& GetKeyCode() const { return m_KeyCode; }
 
         /**
         * @brief Specific this Class Category with EventCategoryKeyboard and EventCategoryInput.
@@ -39,16 +40,17 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] keycode Input KeyCode.
         */
-        KeyEvent(int keycode)
+        KeyEvent(KeyCode keycode)
                 :m_KeyCode(keycode)
         {}
 
         /**
         * @brief Input KeyCode.
         */
-        int m_KeyCode;
+        KeyCode m_KeyCode;
     };
 
     /**
@@ -60,10 +62,11 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] keycode Input KeyCode.
         * @param[in] repeatCount Input Key repeat count.
         */
-        KeyPressedEvent(int keycode, int repeatCount)
+        KeyPressedEvent(KeyCode keycode, int repeatCount)
                 : KeyEvent(keycode)
                 , m_RepeatCount(repeatCount)
         {}
@@ -75,12 +78,14 @@ namespace Neptune {
 
         /**
         * @brief Get Input Key repeat count.
+        * 
         * @return Returns the Input Key repeat count.
         */
         const int& GetRepeatCount() const { return m_RepeatCount; }
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
         virtual std::string ToString() const override
@@ -113,9 +118,10 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] keycode Input KeyCode.
         */
-        KeyReleasedEvent(int keycode)
+        KeyReleasedEvent(KeyCode keycode)
                 : KeyEvent(keycode)
         {}
 
@@ -126,9 +132,10 @@ namespace Neptune {
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "KeyReleasedEvent: " << Key::ToString(m_KeyCode);
@@ -151,22 +158,24 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] keycode Input KeyCode.
         */
-        KeyTypedEvent(int keycode)
+        KeyTypedEvent(KeyCode keycode)
                 : KeyEvent(keycode)
         {}
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~KeyTypedEvent() override = default;
+        ~KeyTypedEvent() override = default;
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "KeyTypedEvent: " << Key::ToString(m_KeyCode);

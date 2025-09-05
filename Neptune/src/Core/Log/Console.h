@@ -33,6 +33,9 @@ namespace Neptune {
         std::queue<InfoLevelHelper> m_ErrorLogInfos;    // @brief error    queue.
         std::queue<InfoLevelHelper> m_CriticalLogInfos; // @brief critical queue.
 
+        /**
+         * @brief clear console buffer. 
+         */
         void Clear()
         {
             std::queue<InfoLevelHelper>().swap(m_TraceLogInfos);
@@ -52,7 +55,9 @@ namespace Neptune {
 
         /**
         * @brief Registry a console to ConsolePool.
+        * 
         * @param[in] name ConsoleName.
+        * 
         * @return Returns Registered Console form Pool.
         */
         static std::shared_ptr<Console> Registry(const std::string& name);
@@ -61,6 +66,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] maxInfos Maximum Num of Information.
         */
         Console(uint32_t maxInfos = 50);
@@ -68,10 +74,11 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~Console() override = default;
+        ~Console() override = default;
 
         /**
         * @brief Get Console Infos.
+        * 
         * @return Returns Console Infos.
         */
         const InfoData& GetInfos() const { return m_InfoData; }
@@ -83,6 +90,7 @@ namespace Neptune {
 
         /**
         * @brief Push a Command to Console.
+        * 
         * @param[in] cmd Command.
         * @todo Implemented it.
         */
@@ -92,6 +100,7 @@ namespace Neptune {
 
         /**
         * @brief Inherited from spdlog, run when a message pushed.
+        * 
         * @param[in] msg spdlog message.
         */
         void sink_it_(const spdlog::details::log_msg& msg) override;
@@ -99,7 +108,7 @@ namespace Neptune {
         /**
         * @brief Inherited from spdlog, run when spdlog flush.
         */
-        virtual void flush_() override { Clear(); }
+        void flush_() override { Clear(); }
 
     protected:
 

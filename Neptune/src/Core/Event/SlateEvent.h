@@ -20,6 +20,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] width New Viewport Size.
         * @param[in] height New Viewport Size.
         */
@@ -31,25 +32,28 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~SlateResizeEvent() override = default;
+        ~SlateResizeEvent() override = default;
 
         /**
         * @brief Get New Viewport Width.
+        * 
         * @return Returns the New Viewport Width.
         */
-        const uint32_t& GetWidth() const { return m_Width; }
+        [[nodiscard]] const uint32_t& GetWidth() const { return m_Width; }
 
         /**
         * @brief Get New Viewport Height.
+        * 
         * @return Returns the New Viewport Width.
         */
-        const uint32_t& GetHeight() const { return m_Height; }
+        [[nodiscard]] const uint32_t& GetHeight() const { return m_Height; }
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "SlateResizeEvent: " << m_Width << ", " << m_Height;

@@ -20,6 +20,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] x Mouse Position X.
         * @param[in] y Mouse Position Y.
         */
@@ -31,25 +32,28 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~MouseMovedEvent() override = default;
+        ~MouseMovedEvent() override = default;
 
         /**
         * @brief Get Mouse Position X.
+        * 
         * @return Returns Mouse Position X.
         */
-        const float& GetX() const { return m_MouseX; }
+        [[nodiscard]] const float& GetX() const { return m_MouseX; }
 
         /**
         * @brief Get Mouse Position Y.
+        * 
         * @return Returns Mouse Position Y.
         */
-        const float& GetY() const { return m_MouseY; }
+        [[nodiscard]] const float& GetY() const { return m_MouseY; }
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "MouseMovedEvent: " << m_MouseX << " ," << m_MouseY;
@@ -89,6 +93,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] xOffset Mouse offset in X.
         * @param[in] yOffset Mouse offset in Y.
         */
@@ -100,25 +105,28 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~MouseScrolledEvent() override = default;
+        ~MouseScrolledEvent() override = default;
 
         /**
         * @brief Get Mouse offset in X.
+        * 
         * @return Returns Mouse offset in X.
         */
-        const float& GetXOffset() const { return m_XOffset; }
+        [[nodiscard]] const float& GetXOffset() const { return m_XOffset; }
 
         /**
         * @brief Get Mouse offset in Y.
+        * 
         * @return Returns Mouse offset in Y.
         */
-        const float& GetYOffset() const { return m_YOffset; }
+        [[nodiscard]] const float& GetYOffset() const { return m_YOffset; }
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
@@ -163,9 +171,11 @@ namespace Neptune {
         virtual ~MouseButtonEvent() override = default;
 
         /**
-        * @brief Destructor Function.
+        * @brief Get Mouse Button.
+        *
+        * @return Returns Mouse Button.
         */
-        const int& GetMouseButton() const { return m_Button; }
+        [[nodiscard]] const MouseCode& GetMouseButton() const { return m_Button; }
 
         /**
         * @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
@@ -178,14 +188,14 @@ namespace Neptune {
         * @brief Constructor Function.
         * @param[in] button Input Mouse Button.
         */
-        MouseButtonEvent(int button)
+        MouseButtonEvent(MouseCode button)
                 : m_Button(button)
         {}
 
         /**
         * @brief Input Mouse Button.
         */
-        int m_Button;
+        MouseCode m_Button;
     };
 
     /**
@@ -197,22 +207,24 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] button Input Mouse Button.
         */
-        MouseButtonPressedEvent(int button)
+        MouseButtonPressedEvent(MouseCode button)
                 : MouseButtonEvent(button)
         {}
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~MouseButtonPressedEvent() override = default;
+        ~MouseButtonPressedEvent() override = default;
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "MouseButtonPressedEvent: " << Mouse::ToString(m_Button);
@@ -235,22 +247,24 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] button Input Mouse Button.
         */
-        MouseButtonReleasedEvent(int button)
+        MouseButtonReleasedEvent(MouseCode button)
                 : MouseButtonEvent(button)
         {}
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~MouseButtonReleasedEvent() override = default;
+        ~MouseButtonReleasedEvent() override = default;
 
         /**
         * @brief Serialize this Event Class to string.
+        * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             std::stringstream ss;
             ss << "MouseButtonReleasedEvent: " << Mouse::ToString(m_Button);

@@ -38,7 +38,7 @@ namespace Neptune
 
         };
 
-        std::string ToString(MouseCode code)
+        inline std::string ToString(MouseCode code)
         {
             switch (code)
             {
@@ -50,9 +50,8 @@ namespace Neptune
                 case Button5           : return "Button5";
                 case Button6           : return "Button6";
                 case Button7           : return "ButtonLast";
+                default                : return "Unknown Mouse Code";
             }
-
-            return "Unknown Mouse Code";
         }
     }
 

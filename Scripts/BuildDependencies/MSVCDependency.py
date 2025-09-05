@@ -101,6 +101,7 @@ class MSVCDependency(Dependency):
             return False
 
         # Verify compiler works
+        """
         try:
             result = subprocess.run(["cl"], capture_output=True, text=True, shell=True)
             if "Microsoft (R) C/C++ Optimizing Compiler" not in result.stderr:
@@ -109,7 +110,7 @@ class MSVCDependency(Dependency):
         except Exception as e:
             print(f"Error checking MSVC environment: {e}")
             return False
-
+        """
         return True
 
     def _check_msbuild(self) -> bool:

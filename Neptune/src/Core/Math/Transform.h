@@ -24,20 +24,25 @@ namespace Neptune {
 
         /**
         * @brief Get Model Matrix from this Transform.
+        * 
         * @reutrn Returns this transform Matrix.
         */
-        glm::mat4 ToMatrix();
+        glm::mat4 ToMatrix() const;
 
         /**
         * @brief Get Rotation Matrix.
+        * 
         * @param[in] rotation Rotation Component.
+        * 
         * @return Returns Rotation Matrix.
         */
         static glm::mat4 GetRotationMatrix(const glm::vec3& rotation);
 
         /**
         * @brief Get Model Matrix from specific Transform.
+        * 
         * @param[in] transform Specific transform.
+        * 
         * @reutrn Returns specific transform Matrix.
         */
         static glm::mat4 ToMatrix(const Transform& transform);

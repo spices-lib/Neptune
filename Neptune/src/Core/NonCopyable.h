@@ -24,12 +24,14 @@ public:
 
     /**
     * @brief Copy Constructor Function.
+    * 
     * @note This Class not allowed copy behaves.
     */
     NonCopyable(const NonCopyable&) = delete;
 
     /**
     * @brief Copy Assignment Operation.
+    * 
     * @note This Class not allowed copy behaves.
     */
     NonCopyable& operator=(const NonCopyable&) = delete;

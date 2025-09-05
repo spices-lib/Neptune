@@ -21,12 +21,12 @@ namespace Neptune {
 
     glm::mat4 PerspectiveCamera::GetPMatrix()
     {
-        return std::move(PerspectiveMatrix(
+        return PerspectiveMatrix(
                 m_PerspectiveParam.fov        ,
                 m_PerspectiveParam.nearPlane  ,
                 100000000.0f,
                 m_PerspectiveParam.aspectRatio
-        ));
+        );
     }
 
     void PerspectiveCamera::CalculatePMatrixReverseZ()

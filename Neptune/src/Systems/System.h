@@ -26,7 +26,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~System() override = default;
+        ~System() override = default;
 
         /**
         * @brief Interface of system initialize.

@@ -155,7 +155,7 @@ namespace Neptune
 
         };
 
-        std::string ToString(KeyCode code)
+        inline std::string ToString(KeyCode code)
         {
             switch (code)
             {
@@ -215,7 +215,7 @@ namespace Neptune
                 case World1        : return "non-US #1";   /* non-US #1 */
                 case World2        : return "non-US #2";   /* non-US #2 */
 
-                        /* Functionkeys */
+                        /* Function keys */
                 case Escape        : return "Escape";
                 case Enter         : return "Enter";
                 case Tab           : return "Tab";
@@ -289,9 +289,8 @@ namespace Neptune
                 case RightAlt      : return "RightAlt";
                 case RightSuper    : return "RightSuper";
                 case Menu          : return "Menu";
+                default            : return "Unknown Key Code";
             }
-
-            return "Unknown Key Code";
         }
 
     }

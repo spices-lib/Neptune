@@ -22,8 +22,17 @@ namespace Neptune {
     class Application : public NonCopyable
     {
     public:
-
+        
+        /**
+         * @brief Get this instance.
+         * 
+         * @return Returns this instance.
+         */
         static Application& Instance();
+
+        /**
+         * @brief Destroy this instance.
+         */
         static void Destroy();
 
     public:
@@ -36,12 +45,12 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~Application() override;
+        ~Application() override;
 
         /**
         * @brief MainLoop entry.
         */
-        void Run();
+        void Run() const;
 
     private:
 
@@ -71,6 +80,7 @@ namespace Neptune {
 
 /**
 * @brief extern DocumentCreation definition in Entry.
+* 
 * @return Returns Document Pointer.
 */
 extern Neptune::SP<Neptune::Document> Neptune::CreateDocument();

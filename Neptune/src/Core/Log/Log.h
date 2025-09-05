@@ -18,7 +18,12 @@ namespace Neptune {
     class Log : public NonCopyable
     {
     public:
-
+        
+        /**
+         * @brief Get this instance.
+         * 
+         * @return Returns this instance.
+         */
         static std::shared_ptr<Log> Get();
 
     public:
@@ -31,7 +36,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~Log() override = default;
+        ~Log() override = default;
 
         virtual void CoreTrace   (const std::string& msg) = 0;
         virtual void CoreInfo    (const std::string& msg) = 0;
@@ -47,6 +52,7 @@ namespace Neptune {
 
         /**
         * @brief Get Initialized state.
+        * 
         * @return Returns Initialized state.
         */
         bool IsInitialized() const { return m_IsInitialized; }
@@ -69,7 +75,7 @@ namespace Neptune {
 #define NEPTUNE_CORE_ERROR(...)    { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreError      (__VA_ARGS__); }}
 #define NEPTUNE_CORE_CRITICAL(...) { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreCritical   (__VA_ARGS__); }}
 
-// Client log macrolog
+// Client log macro
 #define NEPTUNE_TRACE(...)         { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientTrace    (__VA_ARGS__);  }}
 #define NEPTUNE_INFO(...)          { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientInfo     (__VA_ARGS__);  }}
 #define NEPTUNE_WARN(...)          { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientWarn     (__VA_ARGS__);  }}

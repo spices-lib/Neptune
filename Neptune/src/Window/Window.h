@@ -68,6 +68,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
         */
@@ -76,7 +77,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~Window() = default;
+        ~Window() override = default;
 
         /**
         * @brief Interface of determine if window is still active.
@@ -99,8 +100,8 @@ namespace Neptune {
 
     protected:
 
-        WindowInfo m_WindowInfo;
-        WindowImplement m_WindowImplement;
-        bool m_WindowsResized;
+        WindowInfo m_WindowInfo;              // @brief Window init config.
+        WindowImplement m_WindowImplement;    // @brief Window implement.
+        bool m_WindowsResized;                // @brief Window resized.
     };
 }

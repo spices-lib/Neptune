@@ -1,6 +1,6 @@
 /**
-* @file System.cpp.
-* @brief The System Class Implementation.
+* @file ClassLibrary.cpp.
+* @brief The ClassLibrary Namespace Implementation.
 * @author Spices.
 */
 

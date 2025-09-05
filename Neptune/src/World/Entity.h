@@ -24,6 +24,7 @@ namespace Neptune {
         * @brief Constructor Function.
         * Init class variable.
         * Usually call it.
+        * 
         * @param[in] handle entity handle.
         * @param[in] scene Scene pointer.
         */
@@ -40,8 +41,10 @@ namespace Neptune {
         /**
         * @brief Template Function.
         * Used for add specific component to entity.
+        * 
         * @tparam T Specific component.
         * @param[in] args Component construct parameters.
+        * 
         * @return Returns The specific component reference that added.
         */
         template<typename T, typename... Args>
@@ -63,7 +66,9 @@ namespace Neptune {
 
         /**
         * @brief Get Component owned by this entity.
+        * 
         * @tparam T Which Component we will get.
+        * 
         * @return Returns the specific Component.
         */
         template<typename T>
@@ -74,6 +79,7 @@ namespace Neptune {
 
         /**
         * @brief Remove Component owned from this entity.
+        * 
         * @tparam T Which Component we will remove.
         */
         template<typename T>
@@ -100,7 +106,9 @@ namespace Neptune {
 
         /**
         * @brief If Component is owned by this entity or not.
+        * 
         * @tparam T Which Component we will search.
+        * 
         * @return Returns true if found.
         */
         template<typename T>
@@ -111,19 +119,23 @@ namespace Neptune {
 
         /**
         * @brief Get UUID form UUIDComponent.
+        * 
         * @return Returns UUID.
         */
         const UUID GetUUID() { return GetComponent<UUIDComponent>().GetUUID(); }
 
         /**
         * @brief Empty Operation.
+        * 
         * @return Returns m_EntityHandle's value.
         */
         operator uint32_t() const { return m_EntityHandle; }
 
         /**
         * @brief Equal Operation.
+        * 
         * @param[in] other Another Entity.
+        * 
         * @return Returns true if equal.
         */
         bool operator ==(const Entity& other) const
@@ -133,7 +145,9 @@ namespace Neptune {
 
         /**
         * @brief Not equal Operation.
+        * 
         * @param[in] other Another Entity.
+        * 
         * @return Returns true if not equal.
         */
         bool operator !=(const Entity& other) const

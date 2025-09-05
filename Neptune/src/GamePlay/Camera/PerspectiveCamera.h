@@ -25,6 +25,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] param PerspectiveParam.
         */
         PerspectiveCamera(const PerspectiveParam& param);
@@ -32,23 +33,27 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~PerspectiveCamera() = default;
+        ~PerspectiveCamera() override = default;
 
         /**
         * @brief Get camera projection matrix.
+        * 
         * @return Returns the camera projection matrix.
+        * 
         * @note only use in ImguiGizmos.
         */
-        virtual glm::mat4 GetPMatrix() override;
+        glm::mat4 GetPMatrix() override;
 
         /**
         * @brief Get this camera parameter.
+        * 
         * @return Returns this camera parameter.
         */
         PerspectiveParam& GetParam() { return m_PerspectiveParam; }
 
         /**
         * @brief Get this camera parameter.
+        * 
         * @return Returns this camera parameter.
         */
         const PerspectiveParam& GetParam() const { return m_PerspectiveParam; }
@@ -58,7 +63,7 @@ namespace Neptune {
         /**
         * @brief Calculate Projection Matrix by parameter.
         */
-        virtual void CalculatePMatrixReverseZ() override;
+        void CalculatePMatrixReverseZ() override;
 
     private:
 

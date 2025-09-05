@@ -11,7 +11,6 @@ namespace Neptune {
 
     void Component::OnComponentAdded(uint32_t entity)
     {
-        // Set m_Owner Variable.
         m_Owner = entity;
     }
 }

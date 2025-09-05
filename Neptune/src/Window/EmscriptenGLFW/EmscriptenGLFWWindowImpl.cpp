@@ -78,7 +78,7 @@ namespace Neptune {
         return m_Windows;
     }
 
-    void EmscriptenGLFWWindowImpl::SetInternalCallBack()
+    void EmscriptenGLFWWindowImpl::SetInternalCallBack() const
     {
         // print the version on the console
         NEPTUNE_CORE_INFO(glfwGetVersionString())
@@ -124,32 +124,34 @@ namespace Neptune {
             {
                 case GLFW_PRESS:
                 {
-                    KeyPressedEvent event(key, 0);
+                    KeyPressedEvent event(static_cast<KeyCode>(key), 0);
                     Event::GetEventCallbackFn()(event);
 
                     break;
                 }
                 case GLFW_RELEASE:
                 {
-                    KeyReleasedEvent event(key);
+                    KeyReleasedEvent event(static_cast<KeyCode>(key));
                     Event::GetEventCallbackFn()(event);
 
                     break;
                 }
                 case GLFW_REPEAT:
                 {
-                    KeyPressedEvent event(key, 1);
+                    KeyPressedEvent event(static_cast<KeyCode>(key), 1);
                     Event::GetEventCallbackFn()(event);
 
                     break;
                 }
+                default:
+                    break;
             }
         });
 
         // Key Input event Callback.
         glfwSetCharCallback(m_Windows, [](GLFWwindow* window, unsigned int keycode)
         {
-            KeyTypedEvent event(static_cast<int>(keycode));
+            KeyTypedEvent event(static_cast<KeyCode>(keycode));
             Event::GetEventCallbackFn()(event);
         });
 
@@ -160,18 +162,20 @@ namespace Neptune {
             {
                 case GLFW_PRESS:
                 {
-                    MouseButtonPressedEvent event(button);
+                    MouseButtonPressedEvent event(static_cast<MouseCode>(button));
                     Event::GetEventCallbackFn()(event);
 
                     break;
                 }
                 case GLFW_RELEASE:
                 {
-                    MouseButtonReleasedEvent event(button);
+                    MouseButtonReleasedEvent event(static_cast<MouseCode>(button));
                     Event::GetEventCallbackFn()(event);
 
                     break;
                 }
+                default:
+                    break;
             }
         });
 

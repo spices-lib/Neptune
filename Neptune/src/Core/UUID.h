@@ -23,6 +23,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] uuid Use given uuid as UUID.
         */
         UUID(uint64_t uuid);
@@ -34,15 +35,17 @@ namespace Neptune {
 
         /**
         * @brief Operator Function.
+        * 
         * @return UUID.
         */
         operator uint64_t() const { return m_UUID; }
 
         /**
         * @brief Transform UUID to String.
+        * 
         * @return Returns this UUID String.
         */
-        std::string ToString();
+        std::string ToString() const;
 
     private:
 

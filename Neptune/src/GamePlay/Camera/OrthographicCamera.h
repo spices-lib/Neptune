@@ -32,23 +32,27 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~OrthographicCamera() = default;
+        ~OrthographicCamera() override = default;
 
         /**
         * @brief Get camera projection matrix.
+        * 
         * @return Returns the camera projection matrix.
+        * 
         * @note only use in ImguiGizmos.
         */
-        virtual glm::mat4 GetPMatrix() override;
+        glm::mat4 GetPMatrix() override;
 
         /**
         * @brief Get this camera parameter.
+        * 
         * @return Returns this camera parameter.
         */
         OrthographicParam& GetParam() { return m_OrthographicParam; }
 
         /**
         * @brief Get this camera parameter.
+        * 
         * @return Returns this camera parameter.
         */
         const OrthographicParam& GetParam() const { return m_OrthographicParam; }
@@ -58,7 +62,7 @@ namespace Neptune {
         /**
         * @brief Calculate Projection Matrix by parameter.
         */
-        virtual void CalculatePMatrixReverseZ() override;
+        void CalculatePMatrixReverseZ() override;
 
     private:
 

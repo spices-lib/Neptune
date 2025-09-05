@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "Core/Event/Event.h"
 
 namespace Neptune {
 
@@ -19,6 +20,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] panelName The Slate's name.
         */
         Slate(const std::string& panelName)
@@ -37,6 +39,7 @@ namespace Neptune {
 
         /**
         * @brief This interface is called on global event function pointer execute.
+        * 
         * @param[in] event Event.
         */
         virtual void OnEvent(Event& event) = 0;

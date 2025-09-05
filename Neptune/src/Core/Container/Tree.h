@@ -23,7 +23,7 @@ namespace Neptune {
         /**
         * @brief Children node.
         */
-        std::vector<std::unique_ptr<Tree>> m_Child;
+        std::vector<std::unique_ptr<Tree>> m_Child {};
 
         /**
         * @brief This node stored data.
@@ -34,11 +34,12 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        *
+        * @param[in] args T construct params.
         */
         template<typename ...Args>
         Tree(Args&&... args)
-                : m_Data{ std::forward<Args>(args)... }
-                , m_Childs{}
+            : m_Data{ std::forward<Args>(args)... }
         {}
 
         /**
@@ -53,16 +54,16 @@ namespace Neptune {
         template<typename ...Args>
         Tree* AddChild(Args&&... args)
         {
-            m_Childs.push_back(std::make_unique<tree>(std::forward<Args>(args)...));
+            m_Child.push_back(std::make_unique<Tree>(std::forward<Args>(args)...));
 
-            return m_Childs.back().get();
+            return m_Child.back().get();
         }
 
         /**
         * @brief Get all this node children.
         * @return Returns all this node children.
         */
-        const std::vector<std::unique_ptr<Tree>>& GetChild() const { return m_Child; }
+        [[nodiscard]] const std::vector<std::unique_ptr<Tree>>& GetChild() const { return m_Child; }
 
         /**
         * @breif Get this node data.

@@ -10,8 +10,6 @@
 
 namespace Neptune {
 
-    class Entity;
-
     /**
     * @brief Component Class.
     * This class defines the basic behaves of component.
@@ -33,7 +31,7 @@ namespace Neptune {
 
         /**
         * @brief This interface defines the behaves on specific component added.
-        * Init with variable.
+        * 
         * @param[in] entity this component's Owner entity.
         */
         virtual void OnComponentAdded(uint32_t entity);
@@ -43,7 +41,7 @@ namespace Neptune {
         /**
         * @brief This component's Owner entity.
         */
-        uint32_t m_Owner;
+        uint32_t m_Owner = 0;
     };
 
 }

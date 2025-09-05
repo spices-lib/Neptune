@@ -21,14 +21,14 @@ namespace Neptune {
 
     glm::mat4 OrthographicCamera::GetPMatrix()
     {
-        return std::move(OrthographicMatrix(
+        return OrthographicMatrix(
                 m_OrthographicParam.left      ,
                 m_OrthographicParam.right     ,
                 m_OrthographicParam.top       ,
                 m_OrthographicParam.bottom    ,
                 m_OrthographicParam.nearPlane ,
                 m_OrthographicParam.farPlane
-        ));
+        );
     }
 
     void OrthographicCamera::CalculatePMatrixReverseZ()

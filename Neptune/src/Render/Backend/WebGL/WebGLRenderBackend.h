@@ -29,22 +29,22 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~WebGLRenderBackend();
+        ~WebGLRenderBackend() override;
 
         /**
         * @brief Interface of Begin a frame.
         */
-        virtual void BeginFrame() override;
+        void BeginFrame() override;
 
         /**
         * @brief Interface of End a frame.
         */
-        virtual void EndFrame() override;
+        void EndFrame() override;
 
         /**
         * @brief Interface of Render a frame.
         */
-        virtual void RenderFrame() override;
+        void RenderFrame() override;
 
     private:
 

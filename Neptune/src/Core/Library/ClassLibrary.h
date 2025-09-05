@@ -18,7 +18,9 @@ namespace ClassLibrary
 {
     /**
     * @brief Get Class Name as string.
+    * 
     * @param[in] t ClassType.
+    * 
     * @return Returns Class Name.
     */
     std::string GetClassString(ClassType t);

@@ -47,7 +47,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~RenderFrontend() override = default;
+        ~RenderFrontend() override = default;
 
         /**
         * @brief Interface of Begin a frame.
@@ -68,6 +68,7 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] backend RenderBackendEnum.
         */
         RenderFrontend(RenderBackendEnum backend) : m_RenderBackendEnum(backend) {}

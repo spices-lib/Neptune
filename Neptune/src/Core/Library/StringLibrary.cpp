@@ -1,6 +1,6 @@
 /**
-* @file System.cpp.
-* @brief The System Class Implementation.
+* @file StringLibrary.cpp.
+* @brief The StringLibrary Namespace Implementation.
 * @author Spices.
 */
 
@@ -25,7 +25,7 @@ namespace StringLibrary
 
         result.push_back(input.substr(start));
 
-        return std::move(result);
+        return result;
     }
 }
 }

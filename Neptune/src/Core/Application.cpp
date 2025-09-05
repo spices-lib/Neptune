@@ -67,7 +67,7 @@ namespace Neptune {
         Window::Destroy();
     }
 
-    void Application::Run()
+    void Application::Run() const
     {
         // Specify the current Document, which created from Entry.
         m_DocumentContext->m_Document = CreateDocument();

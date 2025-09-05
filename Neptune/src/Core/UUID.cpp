@@ -23,7 +23,7 @@ namespace Neptune {
             : m_UUID(uuid)
     {}
 
-    std::string UUID::ToString()
+    std::string UUID::ToString() const
     {
         std::stringstream ss;
         ss << m_UUID;

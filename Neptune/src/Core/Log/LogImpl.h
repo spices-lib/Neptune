@@ -36,19 +36,19 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~LogImpl() override;
+        ~LogImpl() override;
 
-        virtual void CoreTrace   (const std::string& msg) override;
-        virtual void CoreInfo    (const std::string& msg) override;
-        virtual void CoreWarn    (const std::string& msg) override;
-        virtual void CoreError   (const std::string& msg) override;
-        virtual void CoreCritical(const std::string& msg) override;
+        void CoreTrace   (const std::string& msg) override;
+        void CoreInfo    (const std::string& msg) override;
+        void CoreWarn    (const std::string& msg) override;
+        void CoreError   (const std::string& msg) override;
+        void CoreCritical(const std::string& msg) override;
 
-        virtual void ClientTrace   (const std::string& msg) override;
-        virtual void ClientInfo    (const std::string& msg) override;
-        virtual void ClientWarn    (const std::string& msg) override;
-        virtual void ClientError   (const std::string& msg) override;
-        virtual void ClientCritical(const std::string& msg) override;
+        void ClientTrace   (const std::string& msg) override;
+        void ClientInfo    (const std::string& msg) override;
+        void ClientWarn    (const std::string& msg) override;
+        void ClientError   (const std::string& msg) override;
+        void ClientCritical(const std::string& msg) override;
 
     private:
 
