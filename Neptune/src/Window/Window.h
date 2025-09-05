@@ -18,10 +18,10 @@ namespace Neptune {
         None            = 0,
         GLFW            = 1,
         emscripten_glfw = 2,
-        SDL             = 3,
-        WindowsOriginal = 4,
-        MacOSOriginal   = 5,
-        LinuxOriginal   = 6
+        SDL2            = 3,
+        WindowsNative   = 4,
+        MacOSNative     = 5,
+        LinuxNative     = 6
     };
 
     /**
