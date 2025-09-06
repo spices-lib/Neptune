@@ -42,7 +42,7 @@ constexpr uint32_t MaxFrameInFlight = 2;
     /**
     * @brief This struct contains all WebGPU object in used global.
     */
-    class WebGPUState : public NonCopyable
+    class WebGPUState : NonCopyable
     {
     public:
 
@@ -103,7 +103,7 @@ constexpr uint32_t MaxFrameInFlight = 2;
         * @brief Destructor Function.
         * We destroy pipeline layout here.
         */
-        virtual ~WebGPUObject() override = default;
+    	~WebGPUObject() override = default;
 
     protected:
 

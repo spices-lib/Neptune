@@ -72,6 +72,7 @@ project "SandBox"
 		{
 			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
 			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
+			"%{IncludeDir.VulkanMemoryAllocator}",           -- Library: VulkanMemoryAllocator Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -82,6 +83,12 @@ project "SandBox"
 
 			-- Define Platform : Windows.
 			"NP_PLATFORM_WINDOWS"
+		}
+
+		-- The Solution build options
+		buildoptions 
+		{ 
+			"/utf-8",                             -- Using utf-8 encode
 		}
 
 	-- Platform: Emscripten
@@ -108,7 +115,7 @@ project "SandBox"
 		-- Emscripten Specific Solution Dependency.
 		links
 		{
-			"imgui",                               -- Dependency: imgui
+			"ImGui_WebGPU",                               -- Dependency: imgui
 		}
 
 		-- The Solution link options

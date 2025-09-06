@@ -10,7 +10,7 @@
 #include "Core/Core.h"
 #include "Window/Window.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 
 namespace Neptune {
 

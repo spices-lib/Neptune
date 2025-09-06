@@ -118,6 +118,7 @@ project "Neptune"
 		{
 			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
 			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
+			"%{IncludeDir.VulkanMemoryAllocator}",           -- Library: VulkanMemoryAllocator Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -134,8 +135,14 @@ project "Neptune"
 		links
 		{
 			"GLFW",                               -- Dependency: GLFW
-			"imgui",                              -- Dependency: imgui
+			"ImGui_Vulkan",                       -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
+		}
+
+		-- The Solution build options
+		buildoptions 
+		{ 
+			"/utf-8",                             -- Using utf-8 encode
 		}
 
 	-- Platform: Emscripten

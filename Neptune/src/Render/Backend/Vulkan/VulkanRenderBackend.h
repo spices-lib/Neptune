@@ -1,11 +1,11 @@
 /**
-* @file WebGLRenderBackend.h.
-* @brief The WebGLRenderBackend Class Definitions.
+* @file VulkanRenderBackend.h.
+* @brief The VulkanRenderBackend Class Definitions.
 * @author Spices.
 */
 
 #pragma once
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
@@ -13,10 +13,10 @@
 namespace Neptune {
 
     /**
-    * @brief WebGLRenderBackend Class.
-    * This class defines the WebGLRenderBackend behaves.
+    * @brief VulkanRenderBackend Class.
+    * This class defines the VulkanRenderBackend behaves.
     */
-    class WebGLRenderBackend : public RenderFrontend
+    class VulkanRenderBackend : public RenderFrontend
     {
     public:
 
@@ -24,12 +24,12 @@ namespace Neptune {
         * @brief Constructor Function.
         * @param[in] backend RenderBackendEnum.
         */
-        WebGLRenderBackend(RenderBackendEnum backend);
+        VulkanRenderBackend(RenderBackendEnum backend);
 
         /**
         * @brief Destructor Function.
         */
-        ~WebGLRenderBackend() override;
+        ~VulkanRenderBackend() override;
 
         /**
         * @brief Interface of Begin a frame.

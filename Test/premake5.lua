@@ -84,6 +84,12 @@ project "Test"
 			"NP_PLATFORM_WINDOWS"
 		}
 
+		-- The Solution build options
+		buildoptions 
+		{ 
+			"/utf-8",                             -- Using utf-8 encode
+		}
+
 	-- Platform: Emscripten
 	filter "system:emscripten"
 		systemversion   "latest"              -- Use Lastest WindowSDK

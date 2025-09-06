@@ -31,3 +31,6 @@
 [submodule "Neptune/vendor/GLFW"]
 	path = Neptune/vendor/GLFW
 	url = https://github.com/spices-lib/glfw.git
+[submodule "Neptune/vendor/VulkanMemoryAllocator"]
+	path = Neptune/vendor/VulkanMemoryAllocator
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git

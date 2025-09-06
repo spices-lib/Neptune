@@ -9,6 +9,7 @@ IncludeDir["emscripten_glfw"]             = "%{wks.location}/Neptune/vendor/emsc
 IncludeDir["emdawnwebgpu"]                = "%{wks.location}/Neptune/vendor/emdawnwebgpu/webgpu/include/webgpu"               -- Include: emdawnwebgpu
 IncludeDir["GLFW"]                        = "%{wks.location}/Neptune/vendor/GLFW/include"                                     -- Include: GLFW
 IncludeDir["VulkanSDK"]                   = "C:/VulkanSDK/1.3.296.0/Include"                                                  -- Include: VulkanSDK
+IncludeDir["VulkanMemoryAllocator"]       = "%{wks.location}/Neptune/vendor/VulkanMemoryAllocator/include"                    -- Include: VulkanMemoryAllocator
 IncludeDir["stb_image"]                   = "%{wks.location}/Neptune/vendor/stb_image"                                        -- Include: stb_image
 IncludeDir["glm"]                         = "%{wks.location}/Neptune/vendor/glm"                                              -- Include: glm
 IncludeDir["ImGui"]                       = "%{wks.location}/Neptune/vendor/imgui"                                            -- Include: ImGui

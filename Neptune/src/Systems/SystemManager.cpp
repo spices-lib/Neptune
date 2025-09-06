@@ -26,7 +26,7 @@ namespace Neptune {
 
     void SystemManager::PopAllSystems()
     {
-        for(auto& system : m_Systems.size())
+        for(auto& system : m_Systems)
         {
             PopSystem();
         }
@@ -34,7 +34,7 @@ namespace Neptune {
 
     void SystemManager::Run()
     {
-        for(auto& system : m_Systems.size())
+        for(auto& system : m_Systems)
         {
             system->Tick();
         }
@@ -44,7 +44,7 @@ namespace Neptune {
     {
         NEPTUNE_CORE_TRACE(event.ToString())
 
-        for(auto& system : m_Systems.size())
+        for(auto& system : m_Systems)
         {
             EventListener::Dispatch(event, system.get());
         }
