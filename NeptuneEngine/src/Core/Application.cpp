@@ -97,7 +97,6 @@ namespace Neptune {
             return;
         }
 
-        p->m_DocumentContext->m_Page->OnDeactivate();
         emscripten_cancel_main_loop();
     }
 

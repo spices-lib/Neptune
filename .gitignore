@@ -3,8 +3,8 @@
 /bin-int
 /bin
 
-/SandBox/saved
-/SandBox/DefaultLayout.ini
+/NeptuneEditor/saved
+/NeptuneEditor/DefaultLayout.ini
 
 /Document/html
 /node_modules
@@ -16,15 +16,17 @@
 *.vcxproj.filters
 *package-lock.json
 
-/Neptune/*.json
-/SandBox/*.json
-/Test/*.json
+/NeptuneEngine/*.json
+/NeptuneEditor/*.json
+/NeptuneRuntime/*.json
+/NeptuneUnitTest/*.json
 *.log
 
 Makefile
-/Neptune/Makefile
-/SandBox/Makefile
-/Test/Makefile
+/NeptuneEngine/Makefile
+/NeptuneEditor/Makefile
+/NeptuneRuntime/Makefile
+/NeptuneUnitTest/Makefile
 
 /Nepnep/.idea
 /Nepnep/next-env.d.ts
@@ -40,6 +42,7 @@ Makefile
 /NeptuneEngine/vendor/Glad/bin-int
 /NeptuneEngine/vendor/Glad/*.vcxproj
 /NeptuneEngine/vendor/Glad/*.vcxproj.filters
+/NeptuneEngine/vendor/emdawnwebgpu/__pycache__
 
 /Scripts/BuildDependencies/__pycache__
 /Scripts/BuildSystem/__pycache__
