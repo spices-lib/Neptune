@@ -63,7 +63,7 @@ namespace Neptune {
         Window::Destroy();
     }
 
-    void Application::Run() const
+    void Application::Run()
     {
         
 #ifdef NP_PLATFORM_EMSCRIPTEN
