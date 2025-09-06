@@ -7,12 +7,12 @@
 #include "Pchheader.h"
 #include "Window.h"
 
-#ifdef NP_PLATFORM_WINDOWS
-#include "Window/GLFW/GLFWWindowImpl.h"
-#endif
-
 #ifdef NP_PLATFORM_EMSCRIPTEN
 #include "Window/EmscriptenGLFW/EmscriptenGLFWWindowImpl.h"
+#endif
+
+#ifdef NP_PLATFORM_WINDOWS
+#include "Window/GLFW/GLFWWindowImpl.h"
 #endif
 
 namespace Neptune {

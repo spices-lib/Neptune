@@ -39,6 +39,7 @@ include "Test"
 group "Dependencies"
 if os.target() == "windows" then
 	include "Neptune/vendor/GLFW"            -- Dependency GLFW.
+	include "Neptune/vendor/Glad"            -- Dependency GLFW.
 end
 	include "Neptune/vendor/imgui"           -- Dependency imgui.
 	include "Neptune/vendor/yaml-cpp"        -- Dependency yaml-cpp.

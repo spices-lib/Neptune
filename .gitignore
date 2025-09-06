@@ -36,6 +36,11 @@ Makefile
 /Nepnep/package-lock.json
 /Nepnep/prisma/migrations
 
+/Neptune/vendor/Glad/bin
+/Neptune/vendor/Glad/bin-int
+/Neptune/vendor/Glad/*.vcxproj
+/Neptune/vendor/Glad/*.vcxproj.filters
+
 /Scripts/BuildDependencies/__pycache__
 /Scripts/BuildSystem/__pycache__
 

@@ -9,7 +9,7 @@
 /**
 * @brief Main Function.
 */
-inline int main() {
+int main() {
 
     const auto& engine = Neptune::Application::Instance();
     engine.Run();

@@ -12,6 +12,11 @@
 #include "Render/Backend/WebGL/WebGLRenderBackend.h"
 #endif
 
+#ifdef NP_PLATFORM_WINDOWS
+#include "Render/Backend/Vulkan/VulkanRenderBackend.h"
+#include "Render/Backend/OpenGL/OpenGLRenderBackend.h"
+#endif
+
 namespace Neptune {
 
     SP<RenderFrontend> RenderFrontend::Create(RenderBackendEnum backend)
@@ -22,6 +27,12 @@ namespace Neptune {
             case RenderBackendEnum::WebGPU: return CreateSP<WebGPURenderBackend>(backend);
             case RenderBackendEnum::WebGL:  return CreateSP<WebGLRenderBackend>(backend);
 #endif
+
+#ifdef NP_PLATFORM_WINDOWS
+        case RenderBackendEnum::Vulkan: return CreateSP<VulkanRenderBackend>(backend);
+        case RenderBackendEnum::OpenGL: return CreateSP<OpenGLRenderBackend>(backend);
+#endif
+            
             default:
             {
                 NEPTUNE_CORE_CRITICAL("Not Supported Render Backend.")

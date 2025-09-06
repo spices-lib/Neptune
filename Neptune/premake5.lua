@@ -119,6 +119,7 @@ project "Neptune"
 			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
 			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
 			"%{IncludeDir.VulkanMemoryAllocator}",           -- Library: VulkanMemoryAllocator Source Folder.
+			"%{IncludeDir.Glad}",                            -- Library: Glad Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -136,7 +137,9 @@ project "Neptune"
 		{
 			"GLFW",                               -- Dependency: GLFW
 			"ImGui_Vulkan",                       -- Dependency: imgui
+			"ImGui_OpenGL",                       -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
+			"Glad",                               -- Dependency: Glad
 		}
 
 		-- The Solution build options

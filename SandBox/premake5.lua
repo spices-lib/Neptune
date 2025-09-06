@@ -37,15 +37,11 @@ project "SandBox"
 	{
 		"%{wks.location}/Neptune/src",                        -- Engine Source Folder.
 		"src",                                                -- SandBox Source Folder.
-		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
-		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
 		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
 		"%{IncludeDir.rapidyaml}",                            -- Library: rapidyaml Source Folder.
 		"%{IncludeDir.ImPlot}",                               -- Library: ImPlot Source Folder.
-		"%{IncludeDir.spdlog}",                               -- Library: spdlog Source Folder.
-		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 	}
@@ -69,11 +65,7 @@ project "SandBox"
 
 		-- The Solution Additional Include Folder.
 		includedirs
-		{
-			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
-			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
-			"%{IncludeDir.VulkanMemoryAllocator}",           -- Library: VulkanMemoryAllocator Source Folder.
-		}
+		{}
 
 		-- Windows Specific Solution Macro Definitions.
 		defines
@@ -148,6 +140,17 @@ project "SandBox"
 			"-pthread"       -- Enable pthread
 		}
 
+		-- Configuration: Debug
+		filter "configurations:Debug"
+
+			-- The Solution debug link options
+			linkoptions
+			{
+				"-gsource-map",                                              -- Map Source to c++
+				"-gseparate-dwarf=%{cfg.targetdir}/%{prj.name}.debug.wasm",  -- Generate debug symbol version wasm
+				"--emit-symbol-map",                                         -- Export symbol
+			}
+
 	-- Configuration: Debug
 	filter "configurations:Debug"
 
@@ -157,14 +160,6 @@ project "SandBox"
 			"NEPTUNE_DEBUG",                   -- Debug Symbol.
 			"TRACY_ENABLE",                    -- tracy Feature Enable.
 			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
-		}
-
-        -- The Solution debug link options
-		linkoptions
-		{
-		    "-gsource-map",                                              -- Map Source to c++
-		    "-gseparate-dwarf=%{cfg.targetdir}/%{prj.name}.debug.wasm",  -- Generate debug symbol version wasm
-		    "--emit-symbol-map",                                         -- Export symbol
 		}
 
 		runtime "Debug"
