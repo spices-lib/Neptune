@@ -4,9 +4,9 @@
 
 project "NeptuneRuntime"
 	kind "ConsoleApp"           -- Use executeable program.
-	language "C++"			    -- Use C++.
-	cppdialect "C++20"		    -- Use C++20.
-	staticruntime "On"		    -- Use Runtime Linrary: MTD.
+	language "C++"				-- Use C++.
+	cppdialect "C++20"			-- Use C++20.
+	staticruntime "On"			-- Use Runtime Library: MTD.
 
 	-- Building Output Folder.
 	targetdir("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -20,21 +20,22 @@ project "NeptuneRuntime"
 	-- The Solution Files.
 	files
 	{
-		-- Game Source Files.
+		-- SandBox Source Files.
 		"src/**.h",
 		"src/**.cpp",
 	}
 
 	-- Macros Definitions
 	defines
-	{}
+	{
+		-- Define Game Assets Folder.
+		'NEPTUNEEDITOR_ASSETS_PATH=std::string("%{wks.location}/NeptuneEditor/assets/")'
+	}
 
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
-		"%{wks.location}/NeptuneEditor/src",                  -- Engine Source Folder.
-		"%{IncludeDir.googletest}",			                  -- Library: googletest Source Folder.
-		"%{IncludeDir.googlemock}",			                  -- Library: googlemock Source Folder.
+		"%{IncludeDir.NeptuneEngine}",                        -- Engine Source Folder.
 		"src",                                                -- UnitTest Source Folder.
 		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
@@ -58,21 +59,17 @@ project "NeptuneRuntime"
 	-- The Solution Dependency
 	links
 	{
-		"NeptuneEditor",                       -- Dependency: Neptune
-		"googlemock",                          -- Dependency: googlemock
+		"NeptuneEngine",                       -- Dependency: NeptuneEngine
 	}
 
 	-- Platform: Windows
 	filter "system:windows"
-		systemversion "latest"                 -- Use Lastest WindowSDK
-		editAndContinue "Off"				   -- Use DebugInfoFormat: Zi (Program Database).
-		
+		systemversion "latest"                 -- Use Latest WindowSDK
+		editAndContinue "Off"                  -- Use DebugInfoFormat: Zi (Program Database).
+
 		-- The Solution Additional Include Folder.
 		includedirs
-		{
-			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
-			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
-		}
+		{}
 
 		-- Windows Specific Solution Macro Definitions.
 		defines
@@ -92,7 +89,7 @@ project "NeptuneRuntime"
 
 	-- Platform: Emscripten
 	filter "system:emscripten"
-		systemversion   "latest"              -- Use Lastest WindowSDK
+		systemversion   "latest"              -- Use Latest WindowSDK
 		editAndContinue "Off"                 -- Use DebugInfoFormat: Zi (Program Database).
 
 		-- The Solution Additional Include Folder.
@@ -101,6 +98,7 @@ project "NeptuneRuntime"
 			"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
 			"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
 			"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+			"%{IncludeDir.emdawnwebgpu}",                         -- Library: emdawnwebgpu Header Folder.
 		}
 
 		-- Emscripten Specific Solution Macro Definitions.
@@ -112,7 +110,50 @@ project "NeptuneRuntime"
 
 		-- Emscripten Specific Solution Dependency.
 		links
-		{}
+		{
+			"ImGui_WebGPU",                               -- Dependency: imgui
+		}
+
+		-- The Solution link options
+		linkoptions
+		{
+			"--use-port=%{IncludeDir.emscripten_glfw}/port/emscripten-glfw3.py",     -- Dependency: emscripten-glfw
+			"--use-port=%{IncludeDir.emdawnwebgpu}/../../../emdawnwebgpu.port.py",   -- Dependency: WebGPU
+			"-pthread",                                                              -- Compile emscripten-glfw with pthread
+			"-s USE_WEBGL2=1",                                                       -- Dependency: WebGL
+	      --"-s USE_WEBGPU=1",                                                       -- This flag is deprecated
+	        "--closure=1",                                                           -- Reduce code size
+			"-s ALLOW_MEMORY_GROWTH",                                                -- Allow Memory growth
+			"-s WASM_BIGINT",                                                        -- Enable BigInt in JS
+			"-s WASM=1",                                                             -- Output wasm
+			"-s STACK_SIZE=4194304",                                                 -- Expand stack size to 4M
+			"-s TOTAL_MEMORY=64MB",                                                  -- Wasm total memory to 64M
+		  --"-s PROXY_TO_PTHREAD",                                                   -- Run in pthread(not main thread)
+		    "-s ASYNCIFY=1",                                                         -- Async between Wasm and Js
+			"-s PTHREAD_POOL_SIZE=12",                                               -- Js thread size 12
+			"-s USE_PTHREADS=1",                                                     -- Use pthread
+			"-s SHARED_MEMORY",                                                      -- Shared memory
+			"-s OFFSCREENCANVAS_SUPPORT",                                            -- Transform canvas to pthread
+			"-s OFFSCREENCANVASES_TO_PTHREAD='nepnep'",                              -- Agent canvas to pthread
+			"-o %{cfg.targetdir}/%{prj.name}.js"                                     -- Generate js file
+		}
+
+		-- The Solution build options
+		buildoptions
+		{
+			"-pthread"       -- Enable pthread
+		}
+
+		-- Configuration: Debug
+		filter "configurations:Debug"
+
+			-- The Solution debug link options
+			linkoptions
+			{
+				"-gsource-map",                                              -- Map Source to c++
+				"-gseparate-dwarf=%{cfg.targetdir}/%{prj.name}.debug.wasm",  -- Generate debug symbol version wasm
+				"--emit-symbol-map",                                         -- Export symbol
+			}
 
 	-- Configuration: Debug
 	filter "configurations:Debug"
@@ -127,7 +168,18 @@ project "NeptuneRuntime"
 
 		runtime "Debug"
 		symbols "On"
-		
+
+        -- The Solution PostCommands
+        postbuildcommands {
+
+            -- Create target directory.
+            os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Debug/"',
+
+            -- Copy js and wasm to Nepnep.
+            os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Debug\\"'
+                or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Debug/"'
+        }
+
 	-- Configuration: Release.
 	filter "configurations:Release"
 
@@ -141,4 +193,14 @@ project "NeptuneRuntime"
 
 		runtime "Release"
 		optimize "On"
-		
+
+        -- The Solution PostCommands
+        postbuildcommands {
+
+            -- Create target directory.
+            os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Release/"',
+
+            -- Copy js and wasm to Nepnep.
+            os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Release\\"'
+                or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Release/"'
+        }

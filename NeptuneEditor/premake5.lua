@@ -35,13 +35,17 @@ project "NeptuneEditor"
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
-		"%{wks.location}/NeptuneEngine/src",                  -- Engine Source Folder.
-		"src",                                                -- SandBox Source Folder.
+		"%{IncludeDir.NeptuneEngine}",                        -- Engine Source Folder.
+		"src",                                                -- UnitTest Source Folder.
+		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
+		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
 		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
 		"%{IncludeDir.rapidyaml}",                            -- Library: rapidyaml Source Folder.
 		"%{IncludeDir.ImPlot}",                               -- Library: ImPlot Source Folder.
+		"%{IncludeDir.spdlog}",                               -- Library: spdlog Source Folder.
+		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 	}

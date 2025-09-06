@@ -4,6 +4,7 @@
 
 -- Includes
 IncludeDir                                = {}
+IncludeDir["NeptuneEngine"]               = "%{wks.location}/NeptuneEngine/src"                                               -- Include: NeptuneEngine
 IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                             -- Include: emscripten
 IncludeDir["emscripten_glfw"]             = "%{wks.location}/NeptuneEngine/vendor/emscripten-glfw/"                           -- Include: emscripten-glfw
 IncludeDir["emdawnwebgpu"]                = "%{wks.location}/NeptuneEngine/vendor/emdawnwebgpu/webgpu/include/webgpu"         -- Include: emdawnwebgpu
