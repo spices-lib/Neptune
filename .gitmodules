@@ -1,36 +1,36 @@
-[submodule "Neptune/vendor/spdlog"]
-	path = Neptune/vendor/spdlog
+[submodule "NeptuneEngine/vendor/spdlog"]
+	path = NeptuneEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "Neptune/vendor/ImGuizmo"]
-	path = Neptune/vendor/ImGuizmo
+[submodule "NeptuneEngine/vendor/ImGuizmo"]
+	path = NeptuneEngine/vendor/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo
-[submodule "Neptune/vendor/tracy"]
-	path = Neptune/vendor/tracy
+[submodule "NeptuneEngine/vendor/tracy"]
+	path = NeptuneEngine/vendor/tracy
 	url = https://github.com/wolfpld/tracy
-[submodule "Neptune/vendor/IconFontCppHeaders"]
-	path = Neptune/vendor/IconFontCppHeaders
+[submodule "NeptuneEngine/vendor/IconFontCppHeaders"]
+	path = NeptuneEngine/vendor/IconFontCppHeaders
 	url = https://github.com/juliettef/IconFontCppHeaders
-[submodule "Neptune/vendor/imgui"]
-	path = Neptune/vendor/imgui
+[submodule "NeptuneEngine/vendor/imgui"]
+	path = NeptuneEngine/vendor/imgui
 	url = https://github.com/spices-lib/imgui
-[submodule "Neptune/vendor/yaml-cpp"]
-	path = Neptune/vendor/yaml-cpp
+[submodule "NeptuneEngine/vendor/yaml-cpp"]
+	path = NeptuneEngine/vendor/yaml-cpp
 	url = https://github.com/spices-lib/yaml-cpp
-[submodule "Neptune/vendor/implot"]
-	path = Neptune/vendor/implot
+[submodule "NeptuneEngine/vendor/implot"]
+	path = NeptuneEngine/vendor/implot
 	url = https://github.com/spices-lib/implot
-[submodule "Test/vendor/googletest"]
-	path = Test/vendor/googletest
+[submodule "NeptuneUnitTest/vendor/googletest"]
+	path = NeptuneUnitTest/vendor/googletest
 	url = https://github.com/spices-lib/googletest
-[submodule "Neptune/vendor/glm"]
-	path = Neptune/vendor/glm
+[submodule "NeptuneEngine/vendor/glm"]
+	path = NeptuneEngine/vendor/glm
 	url = https://github.com/spices-lib/glm
-[submodule "Neptune/vendor/emscripten-glfw"]
-	path = Neptune/vendor/emscripten-glfw
+[submodule "NeptuneEngine/vendor/emscripten-glfw"]
+	path = NeptuneEngine/vendor/emscripten-glfw
 	url = https://github.com/pongasoft/emscripten-glfw.git
-[submodule "Neptune/vendor/GLFW"]
-	path = Neptune/vendor/GLFW
+[submodule "NeptuneEngine/vendor/GLFW"]
+	path = NeptuneEngine/vendor/GLFW
 	url = https://github.com/spices-lib/glfw.git
-[submodule "Neptune/vendor/VulkanMemoryAllocator"]
-	path = Neptune/vendor/VulkanMemoryAllocator
+[submodule "NeptuneEngine/vendor/VulkanMemoryAllocator"]
+	path = NeptuneEngine/vendor/VulkanMemoryAllocator
 	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git

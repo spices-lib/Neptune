@@ -1,0 +1,12 @@
+﻿{
+    "RHIBackendConfigMap": {
+        "OpenGL": "",
+        "Vulkan": "./VulkanRHIConfig.json",
+        "Direct3D11": "",
+        "Direct3D12": "",
+        "Metal": "",
+        "WebGL": "",
+        "WebGPU": ""
+    },
+    "SelectedRHI": "Vulkan"
+}

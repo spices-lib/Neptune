@@ -3,7 +3,7 @@
 -- @author Spices.
 
 workspace "Neptune"
-	startproject "SandBox"             -- Start with SandBox
+	startproject "NeptuneEditor"             -- Start with NeptuneEditor
 
 	-- Configuration: Debug and Release.
 	configurations
@@ -26,23 +26,26 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Libraries of this Solution.
 include "lib.lua"
 
--- Project: Neptune.
-include "Neptune"
+-- Project: NeptuneEngine.
+include "NeptuneEngine"
 
--- Project: SandBox.
-include "SandBox"
+-- Project: NeptuneEditor.
+include "NeptuneEditor"
 
--- Project: Test.
-include "Test"
+-- Project: NeptuneRuntime.
+include "NeptuneRuntime"
+
+-- Project: NeptuneUnitTest.
+include "NeptuneUnitTest"
 
 -- Project Dependencies.
 group "Dependencies"
 if os.target() == "windows" then
-	include "Neptune/vendor/GLFW"            -- Dependency GLFW.
-	include "Neptune/vendor/Glad"            -- Dependency GLFW.
+	include "NeptuneEngine/vendor/GLFW"                 -- Dependency GLFW.
+	include "NeptuneEngine/vendor/Glad"                 -- Dependency GLFW.
 end
-	include "Neptune/vendor/imgui"           -- Dependency imgui.
-	include "Neptune/vendor/yaml-cpp"        -- Dependency yaml-cpp.
-	include "Neptune/vendor/implot"          -- Dependency implot.
-	include "Test/vendor/googletest"         -- Dependency googletest.
+	include "NeptuneEngine/vendor/imgui"                -- Dependency imgui.
+	include "NeptuneEngine/vendor/yaml-cpp"             -- Dependency yaml-cpp.
+	include "NeptuneEngine/vendor/implot"               -- Dependency implot.
+	include "NeptuneUnitTest/vendor/googletest"         -- Dependency googletest.
 group ""
