@@ -105,6 +105,14 @@ namespace Neptune {
         }
 
         /**
+        * @brief Destroy this entity from Scene.
+        */
+        void Destroy()
+        {
+            m_Scene->DestroyEntity(*this);
+        }
+
+        /**
         * @brief If Component is owned by this entity or not.
         * 
         * @tparam T Which Component we will search.

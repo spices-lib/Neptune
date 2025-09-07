@@ -79,6 +79,7 @@ project "NeptuneEngine"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
+		"%{IncludeDir.sol2}",                                 -- Library: sol2 Source Folder.
 	}
 
 	-- The Solution Dependency

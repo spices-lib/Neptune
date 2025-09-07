@@ -34,3 +34,6 @@
 [submodule "NeptuneEngine/vendor/VulkanMemoryAllocator"]
 	path = NeptuneEngine/vendor/VulkanMemoryAllocator
 	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+[submodule "NeptuneEngine/vendor/sol2"]
+	path = NeptuneEngine/vendor/sol2
+	url = https://github.com/ThePhD/sol2.git

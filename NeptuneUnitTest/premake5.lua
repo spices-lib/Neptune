@@ -32,7 +32,7 @@ project "NeptuneUnitTest"
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
-		"%{wks.location}/NeptuneEditor/src",                  -- Engine Source Folder.
+		"%{IncludeDir.NeptuneEngine}",                        -- Engine Source Folder.
 		"%{IncludeDir.googletest}",			                  -- Library: googletest Source Folder.
 		"%{IncludeDir.googlemock}",			                  -- Library: googlemock Source Folder.
 		"src",                                                -- UnitTest Source Folder.
@@ -47,6 +47,7 @@ project "NeptuneUnitTest"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
+		"%{IncludeDir.sol2}",                                 -- Library: sol2 Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
