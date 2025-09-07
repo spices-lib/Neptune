@@ -48,6 +48,7 @@ project "NeptuneUnitTest"
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 		"%{IncludeDir.sol2}",                                 -- Library: sol2 Source Folder.
+		"%{IncludeDir.Lua}",                                  -- Library: Lua Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.

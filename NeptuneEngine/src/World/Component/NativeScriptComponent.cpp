@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 #include "NativeScriptComponent.h"
-#include "NativeScripts/NativeScript.h"
+#include "Scripts/NativeScripts/NativeScript.h"
 
 namespace Neptune {
 

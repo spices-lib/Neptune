@@ -47,5 +47,6 @@ end
 	include "NeptuneEngine/vendor/imgui"                -- Dependency imgui.
 	include "NeptuneEngine/vendor/yaml-cpp"             -- Dependency yaml-cpp.
 	include "NeptuneEngine/vendor/implot"               -- Dependency implot.
+	include "NeptuneEngine/vendor/Lua"                  -- Dependency Lua.
 	include "NeptuneUnitTest/vendor/googletest"         -- Dependency googletest.
 group ""

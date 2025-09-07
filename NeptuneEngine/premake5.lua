@@ -80,6 +80,7 @@ project "NeptuneEngine"
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 		"%{IncludeDir.sol2}",                                 -- Library: sol2 Source Folder.
+		"%{IncludeDir.Lua}",                                  -- Library: Lua Source Folder.
 	}
 
 	-- The Solution Dependency
@@ -88,6 +89,7 @@ project "NeptuneEngine"
       --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
+		"LuaLibrary",                         -- Dependency: LuaLibrary
 	}
 
 	-- Library: std_image is included this solution, do not use PreCompiler Header.

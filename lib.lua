@@ -24,6 +24,7 @@ IncludeDir["ImGuizmo"]                    = "%{wks.location}/NeptuneEngine/vendo
 IncludeDir["tracy"]                       = "%{wks.location}/NeptuneEngine/vendor/tracy/public"                               -- Include: tracy
 IncludeDir["IconFontCppHeaders"]          = "%{wks.location}/NeptuneEngine/vendor/IconFontCppHeaders"                         -- Include: IconFontCppHeaders
 IncludeDir["sol2"]                        = "%{wks.location}/NeptuneEngine/vendor/sol2/include"                               -- Include: sol2
+IncludeDir["Lua"]                         = "%{wks.location}/NeptuneEngine/vendor/Lua/src"                                    -- Include: Lua
 IncludeDir["googletest"]                  = "%{wks.location}/NeptuneUnitTest/vendor/googletest/googletest/include"            -- Include: googletest
 IncludeDir["googlemock"]                  = "%{wks.location}/NeptuneUnitTest/vendor/googletest/googlemock/include"            -- Include: googlemock
 
