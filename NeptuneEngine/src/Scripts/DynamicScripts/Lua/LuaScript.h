@@ -1,6 +1,6 @@
 ﻿/**
-* @file NativeScript.h.
-* @brief The NativeScript Class Definitions.
+* @file LuaScript.h.
+* @brief The LuaScript Class Definitions.
 * @author Spices.
 */
 
@@ -11,46 +11,42 @@
 namespace Neptune {
 
     /**
-    * @brief Native C++ Script Class.
+    * @brief Lua Script Class.
     */
-    class NativeScript : public ScriptInterface
+    class LuaScript : public ScriptInterface
     {
     public:
 
         /**
         * @brief Constructor Function.
         */
-        NativeScript() = default;
+        LuaScript() = default;
 
         /**
         * @brief Destructor Function.
         */
-        ~NativeScript() override = default;
+        ~LuaScript() override = default;
 
         /**
         * @brief This interface defines the behave on specific component on construct.
-        * Do nothing here.
         */
-        void OnConstruct() override {}
+        void OnConstruct() override;
         
         /**
         * @brief This interface defines the behave on specific component tick every frame.
-        * Do nothing here.
         */
-        void OnTick() override {}
+        void OnTick() override;
 
         /**
         * @brief This interface defines the behave on specific component on destroy.
-        * Do nothing here.
         */
-        void OnDestroy() override {}
+        void OnDestroy() override;
         
         /**
         * @brief This interface defines the behave on specific component event happened.
-        * Do nothing here.
         * 
         * @param[in] e Event.
         */
-        void OnEvent(Event& e) override {}
+        void OnEvent(Event& e) override;
     };
 }

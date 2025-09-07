@@ -152,7 +152,7 @@ namespace Neptune {
         * Used for add specific component to entity.
         * 
         * @tparam T Specific component.
-        * @param[in] e entt::entity.
+        * @param[in] e entity handle.
         * @param[in] args Component construct parameters.
         * 
         * @return Returns The specific component reference that added.
@@ -161,10 +161,23 @@ namespace Neptune {
         T& AddComponent(uint32_t e, Args&&... args);
 
         /**
+        * @brief Template Function.
+        * Used for replace specific component to entity.
+        * 
+        * @tparam T Specific component.
+        * @param[in] e entity handle.
+        * @param[in] args Component construct parameters.
+        * 
+        * @return Returns The specific component reference that replaced.
+        */
+        template<typename T, typename... Args>
+        T& ReplaceComponent(uint32_t e, Args&&... args);
+        
+        /**
         * @brief Get Component owned by this entity.
         * 
         * @tparam T Which Component we will get.
-        * @param[in] e entt::entity.
+        * @param[in] e entity handle.
         * 
         * @return Returns the specific Component.
         */
@@ -175,7 +188,7 @@ namespace Neptune {
         * @brief Remove Component owned from this entity.
         * 
         * @tparam T Which Component we will remove.
-        * @param[in] e entt::entity.
+        * @param[in] e entity handle.
         */
         template<typename T>
         void RemoveComponent(uint32_t e);
@@ -184,7 +197,7 @@ namespace Neptune {
         * @brief If Component is owned by this entity or not.
         * 
         * @tparam T Which Component we will search.
-        * @param[in] e entt::entity.
+        * @param[in] e entity handle.
         * 
         * @return Returns true if found.
         */
@@ -325,6 +338,14 @@ namespace Neptune {
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
         return m_Registry.emplace<T>(static_cast<entt::entity>(e), std::forward<Args>(args)...);
+    }
+
+    template <typename T, typename ... Args>
+    T& Scene::ReplaceComponent(uint32_t e, Args&&... args)
+    {
+        std::unique_lock<std::shared_mutex> lock(m_Mutex);
+
+        return m_Registry.replace<T>(static_cast<entt::entity>(e), std::forward<Args>(args)...);
     }
 
     template <typename T>

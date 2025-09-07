@@ -1,56 +1,52 @@
-﻿/**
-* @file NativeScript.h.
-* @brief The NativeScript Class Definitions.
+/**
+* @file ScriptInterface.h.
+* @brief The ScriptInterface Class Definitions.
 * @author Spices.
 */
 
 #pragma once
 #include "Core/Core.h"
-#include "Scripts/ScriptInterface.h"
+#include "Core/Event/Event.h"
 
 namespace Neptune {
 
     /**
-    * @brief Native C++ Script Class.
+    * @brief Script interface Class.
     */
-    class NativeScript : public ScriptInterface
+    class ScriptInterface
     {
     public:
 
         /**
         * @brief Constructor Function.
         */
-        NativeScript() = default;
+        ScriptInterface() = default;
 
         /**
         * @brief Destructor Function.
         */
-        ~NativeScript() override = default;
+        virtual ~ScriptInterface() = default;
 
         /**
         * @brief This interface defines the behave on specific component on construct.
-        * Do nothing here.
         */
-        void OnConstruct() override {}
+        virtual void OnConstruct() = 0;
         
         /**
         * @brief This interface defines the behave on specific component tick every frame.
-        * Do nothing here.
         */
-        void OnTick() override {}
+        virtual void OnTick() = 0;
 
         /**
         * @brief This interface defines the behave on specific component on destroy.
-        * Do nothing here.
         */
-        void OnDestroy() override {}
+        virtual void OnDestroy() = 0;
         
         /**
         * @brief This interface defines the behave on specific component event happened.
-        * Do nothing here.
         * 
         * @param[in] e Event.
         */
-        void OnEvent(Event& e) override {}
+        virtual void OnEvent(Event& e) = 0;
     };
 }

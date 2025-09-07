@@ -65,6 +65,26 @@ namespace Neptune {
         }
 
         /**
+        * @brief Template Function.
+        * Used for replace specific component to entity.
+        * 
+        * @tparam T Specific component.
+        * @param[in] args Component construct parameters.
+        * 
+        * @return Returns The specific component reference that replaced.
+        */
+        template<typename T, typename... Args>
+        T& ReplaceComponent(Args&&... args)
+        {
+            if (!HasComponent<T>())
+            {
+                return AddComponent<T>(std::forward<Args>(args)...);
+            }
+
+            return m_Scene->ReplaceComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
+        }
+        
+        /**
         * @brief Get Component owned by this entity.
         * 
         * @tparam T Which Component we will get.
