@@ -8,8 +8,11 @@
 #include "LogicalSystem.h"
 
 namespace Neptune {
+    
+    void LogicalSystem::Tick()
+    {
+        // receive ui event or interface event.
 
-
-
-
+        
+    }
 }

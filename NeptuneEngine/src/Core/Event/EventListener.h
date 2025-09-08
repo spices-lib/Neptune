@@ -15,53 +15,91 @@ namespace Neptune {
     class EventListener
     {
     public:
-
+        
+        /**
+         * @brief Dispatch event to listener.
+         * 
+         * @param[in] event Event
+         * @param[in] instance any pointer.
+         */
         template<typename T>
-        static bool Dispatch(Event& event, T* instance);
+        static void Dispatch(Event& event, T* instance);
 
     public:
 
-        EventListener() : m_ListenedType(EventType::None) {}
-        EventListener(EventType type) : m_ListenedType(type) {}
+        /**
+        * @brief Constructor Function.
+        */
+        EventListener() : m_Interested(EventType::None) {}
+
+        /**
+        * @brief Constructor Function.
+        *
+        * @param[in] type EventType.
+        */
+        explicit EventListener(EventType type) : m_Interested(type) {}
+
+        /**
+        * @brief Destructor Function.
+        */
         virtual ~EventListener() = default;
 
-        void AddListenEvent(EventType type)
+        /**
+         * @brief Registry interested event type.
+         * 
+         * @param type EventType.
+         */
+        void Registry(EventType type)
         {
-            //m_ListenedType |= type;
+            //m_Interested |= type;
         }
 
-        void RemoveListenEvent(EventType type)
+        /**
+         * @brief UnRegistry interested event type.
+         * 
+         * @param type EventType.
+         */
+        void UnRegistry(EventType type)
         {
-            //m_ListenedType &= ~type;
+            //m_Interested &= ~type;
         }
 
-        bool Dispatch(Event& event)
+        /**
+         * @brief Dispatch interested event.
+         * 
+         * @param event Event
+         */
+        void Dispatch(Event& event)
         {
-            /*if(event.GetEventType() & m_ListenedType == 0) {
-                return false;
+            /*if(event.GetEventType() & m_Interested == 0) {
+                return;
             }*/
 
             OnEvent(event);
-
-            return true;
         }
 
+        /**
+         * @brief Interface of on Event triggered.
+         * 
+         * @param event Event
+         */
         virtual void OnEvent(Event& event) = 0;
 
     private:
 
-        EventType m_ListenedType;
+        /**
+         * @brief Interested event type.
+         */
+        EventType m_Interested;
     };
 
     template<typename T>
-    bool EventListener::Dispatch(Event& event, T* instance)
+    void EventListener::Dispatch(Event& event, T* instance)
     {
-        if(auto p = dynamic_cast<EventListener*>(instance))
+        if(const auto p = dynamic_cast<EventListener*>(instance))
         {
-            return p->Dispatch(event);
+            p->Dispatch(event);
         }
-
-        return false;
     }
 
 }

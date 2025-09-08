@@ -1,11 +1,17 @@
+/**
+* @file EntryPoint.cpp.
+* @brief The EntryPoint Class Implementation.
+* @author Spices.
+*/
+
+#include "EditorWorld.h"
 #include <EntryPoint.h>
-#include <World/Scene/Scene.h>
 
 namespace Neptune {
 
-    SP<Scene> CreateDocument()
+    SP<World> CreateWorld()
     {
-        return CreateSP<Scene>();
+        return CreateSP<EditorWorld>();
     }
 
 }

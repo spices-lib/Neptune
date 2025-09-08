@@ -7,24 +7,37 @@
 #include "Pchheader.h"
 #include "ScriptComponent.h"
 #include "Scripts/ScriptInterface.h"
+#include <ranges>
 
 namespace Neptune {
 
     void ScriptComponent::AddScript(const SP<ScriptInterface>& script)
     {
-        if (m_Scripts.contains(script))
+        if (m_Scripts.contains(script->GetName()))
         {
             NEPTUNE_CORE_WARN("Script is existing on component.")
             return;
         }
 
-        script->OnConstruct();
-        m_Scripts.insert(script);
+        script->OnAttached();
+        m_Scripts[script->GetName()] = script;
     }
 
+    void ScriptComponent::RemoveScript(const std::string& name)
+    {
+        if (!m_Scripts.contains(name))
+        {
+            NEPTUNE_CORE_WARN("Script is not existing on component.")
+            return;
+        }
+
+        m_Scripts[name]->OnDetached();
+        m_Scripts.erase(name);
+    }
+    
     void ScriptComponent::OnTick() const
     {
-        for (const auto& script : m_Scripts)
+        for (const auto& script : m_Scripts | std::views::values)
         {
             script->OnTick();
         }
@@ -32,9 +45,18 @@ namespace Neptune {
 
     void ScriptComponent::OnEvent(Event& e) const
     {
-        for (const auto& script : m_Scripts)
+        for (const auto& script : m_Scripts | std::views::values)
         {
             script->OnEvent(e);
         }
     }
+
+    void ScriptComponent::OnComponentDetached()
+    {
+        for (const auto& script : m_Scripts | std::views::values)
+        {
+            script->OnDestroy();
+        }
+    }
+    
 }

@@ -20,42 +20,54 @@ namespace Neptune {
         /**
         * @brief None Event.
         */
-        None = 0,
+        None                   = 0,
 
         /**
         * @brief Window Event.
         */
-        WindowClose, WindowResize, WindowResizeOver, WindowFocus, WindowLostFocus, WindowMoved,
+        WindowClose            = 1 << 0,
+        WindowResize           = 1 << 1,
+        WindowResizeOver       = 1 << 2,
+        WindowFocus            = 1 << 3,
+        WindowLostFocus        = 1 << 4,
+        WindowMoved            = 1 << 5,
 
         /**
         * @brief Application Event.
         */
-        AppTick, AppUpdate, AppRender,
+        AppTick                = 1 << 6,
+        AppUpdate              = 1 << 7,
+        AppRender              = 1 << 8,
 
         /**
         * @brief Slate Event.
         */
-        SlateResize,
+        SlateResize            = 1 << 9,
 
         /**
         * @brief Key Input Event.
         */
-        KeyPressed, KeyReleased, KeyTyped,
+        KeyPressed             = 1 << 10,
+        KeyReleased            = 1 << 11,
+        KeyTyped               = 1 << 12,
 
         /**
         * @brief Mouse Input Event.
         */
-        MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
+        MouseButtonPressed     = 1 << 13,
+        MouseButtonReleased    = 1 << 14,
+        MouseMoved             = 1 << 15,
+        MouseScrolled          = 1 << 16,
 
         /**
         * @brief World Event.
         */
-        MeshAdded,
+        MeshAdded              = 1 << 17,
 
         /**
         * @brief ALL Event.
         */
-        ALL = UINT32_MAX
+        ALL                    = UINT32_MAX
     };
 
     /**

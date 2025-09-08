@@ -9,8 +9,11 @@
 
 namespace Neptune {
 
-    void Component::OnComponentAdded(uint32_t entity)
+    void Component::OnComponentAttached(uint32_t entity)
     {
         m_Owner = entity;
     }
+
+    void Component::OnComponentDetached()
+    {}
 }

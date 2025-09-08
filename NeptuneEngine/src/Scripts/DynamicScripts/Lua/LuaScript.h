@@ -31,6 +31,11 @@ namespace Neptune {
         * @brief This interface defines the behave on specific component on construct.
         */
         void OnConstruct() override;
+
+        /**
+        * @brief This interface defines the behave on specific component on attached.
+        */
+        void OnAttached() override;
         
         /**
         * @brief This interface defines the behave on specific component tick every frame.
@@ -41,6 +46,11 @@ namespace Neptune {
         * @brief This interface defines the behave on specific component on destroy.
         */
         void OnDestroy() override;
+
+        /**
+        * @brief This interface defines the behave on specific component on detached.
+        */
+        void OnDetached() override;
         
         /**
         * @brief This interface defines the behave on specific component event happened.

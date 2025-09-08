@@ -28,10 +28,11 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~SystemManager() override = default;
+    	~SystemManager() override = default;
 
         /**
 		* @brief Push a system to this manager.
+		* 
 		* @tparam T Specific system Class.
 		* @return Returns the SystemManager.
 		*/
@@ -40,6 +41,7 @@ namespace Neptune {
 
         /**
 		* @brief Pop a system from this manager.
+		* 
 		* @return Returns the SystemManager.
 		*/
         SystemManager* PopSystem();
@@ -58,6 +60,7 @@ namespace Neptune {
 
         /**
 		* @brief The root event function pointer.
+		* 
 		* @param[in] event Event.
 		*/
         void OnEvent(Event& event) const;
@@ -71,7 +74,7 @@ namespace Neptune {
     };
 
     template<typename T, typename ...Args>
-    inline SystemManager* SystemManager::PushSystem(Args&&... args)
+	SystemManager* SystemManager::PushSystem(Args&&... args)
     {
         m_Systems.emplace_back(CreateUP<T>(std::forward<Args>(args)...));
         m_Systems.back()->OnSystemInitialize();

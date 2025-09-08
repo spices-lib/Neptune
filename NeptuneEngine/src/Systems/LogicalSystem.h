@@ -22,7 +22,7 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        LogicalSystem() : System() {}
+        LogicalSystem() = default;
 
         /**
         * @brief Destructor Function.
@@ -42,8 +42,17 @@ namespace Neptune {
         /**
         * @brief Interface of system tick run.
         */
-        void Tick() override {}
+        void Tick() override;
 
+        /**
+        * @brief Interface of EventListener dispatch event.
+        *
+        * @param[in] event Event
+        */
         void OnEvent(Event& event) override {}
+
+    private:
+
+        
     };
 }

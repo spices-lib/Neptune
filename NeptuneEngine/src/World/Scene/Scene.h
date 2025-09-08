@@ -10,7 +10,6 @@
 #include "Core/UUID.h"
 
 #include <entt.hpp>
-#include <ranges>
 #include <shared_mutex>
 
 namespace Neptune {
@@ -44,7 +43,7 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        Scene() = default;
+        Scene();
 
         /**
         * @brief Destructor Function.
@@ -71,7 +70,7 @@ namespace Neptune {
         * 
         * @param[in] entity Entity.
         */
-        void DestroyEntity(Entity& entity);
+        void Destroy(const Entity& entity);
 
         /**
         * @brief Get World Entity by id(entt::entity).
@@ -204,27 +203,6 @@ namespace Neptune {
         template<typename T>
         bool HasComponent(uint32_t e);
 
-        /**
-        * @brief Remove a entity from this world root.
-        * 
-        * @param[in] entity Entity.
-        */
-        void RemoveFromRoot(Entity& entity);
-
-        /**
-        * @brief Add a entity to this world root.
-        * 
-        * @param[in] entity Entity.
-        */
-        void AddToRoot(Entity& entity);
-
-        /**
-        * @brief Determine if a entity is in root.
-        * 
-        * @param[in] entity Entity.
-        */
-        bool IsRootEntity(Entity& entity);
-
     private:
 
         /**
@@ -235,13 +213,22 @@ namespace Neptune {
         Entity CreateEmptyEntity(UUID uuid);
 
         /**
-        * @brief Called On any Component Added to this world.
+        * @brief Called On any Component Attached to this scene.
         * 
         * @param[in] entity Entity row pointer.
         * @param[in] component Specific Component reference.
         */
         template<typename T>
-        void OnComponentAdded(Entity* entity, T& component);
+        void OnComponentAttached(Entity* entity, T& component);
+
+        /**
+        * @brief Called On any Component Detached from this scene.
+        * 
+        * @param[in] entity Entity row pointer.
+        * @param[in] component Specific Component reference.
+        */
+        template<typename T>
+        void OnComponentDetached(Entity* entity, T& component);
 
     protected:
 
@@ -251,18 +238,14 @@ namespace Neptune {
         std::shared_mutex m_Mutex;
 
         /**
-        * @brief This variable handles all entity.
+        * @brief This ECS Registry.
         */
         entt::registry m_Registry;
 
         /**
-        * @brief This variable is a cache.
-        * 
-        * @noto Not in use now.
-        * 
-        * @todo use it.
+        * @brief Root entity.
         */
-        std::unordered_map<UUID, uint32_t> m_RootEntityMap;
+        uint32_t m_Root;
 
         /**
         * @brief World State this frame.
@@ -325,11 +308,8 @@ namespace Neptune {
     void Scene::ViewRoot(F&& fn)
     {
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
-
-        for (auto val : m_RootEntityMap | std::views::values)
-        {
-            fn(val);
-        }
+        
+        fn(m_Root);
     }
 
     template <typename T, typename ... Args>
@@ -376,8 +356,14 @@ namespace Neptune {
     }
 
     template<typename T>
-    void Scene::OnComponentAdded(Entity* entity, T& component)
+    void Scene::OnComponentAttached(Entity* entity, T& component)
     {
-        component.OnComponentAdded(*entity);
+        component.OnComponentAttached(*entity);
+    }
+
+    template <typename T>
+    void Scene::OnComponentDetached(Entity* entity, T& component)
+    {
+        component.OnComponentDetached(*entity);
     }
 }

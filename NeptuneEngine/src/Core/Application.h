@@ -12,7 +12,7 @@ namespace Neptune {
 
     class SystemManager;
     class Window;
-    class Scene;
+    class World;
 
     /**
     * @brief Application Class.
@@ -71,14 +71,16 @@ namespace Neptune {
     };
 
     /**
-	* @brief extern SceneCreation definition in Entry.
+	* @brief extern WorldCreation definition in Entry.
+	*
+	* @return Returns World Pointer.
 	*/
-    SP<Scene> CreateScene();
+    SP<World> CreateWorld();
 }
 
 /**
-* @brief extern SceneCreation definition in Entry.
+* @brief extern WorldCreation definition in Entry.
 * 
-* @return Returns Document Pointer.
+* @return Returns World Pointer.
 */
-extern Neptune::SP<Neptune::Scene> Neptune::CreateScene();
+extern Neptune::SP<Neptune::World> Neptune::CreateWorld();

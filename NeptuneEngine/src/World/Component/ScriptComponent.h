@@ -26,11 +26,18 @@ namespace Neptune {
         ScriptComponent() = default;
 
         /**
-        * @brief Constructor Function.
+        * @brief Add a script to this component.
         * 
         * @param[in] script ScriptInterface.
         */
         void AddScript(const SP<ScriptInterface>& script);
+
+        /**
+        * @brief Remove a script to this component.
+        * 
+        * @param[in] name Script Name.
+        */
+        void RemoveScript(const std::string& name);
 
         /**
         * @brief Destructor Function.
@@ -49,11 +56,16 @@ namespace Neptune {
         */
         void OnEvent(Event& e) const;
 
+        /**
+        * @brief This interface defines the behaves on specific component detached.
+        */
+        void OnComponentDetached() override;
+
     private:
 
         /**
-        * @brief Scripts
+        * @brief Scripts map
         */
-        std::set<SP<ScriptInterface>> m_Scripts;
+        std::map<std::string, SP<ScriptInterface>> m_Scripts;
     };
 }

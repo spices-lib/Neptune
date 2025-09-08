@@ -6,13 +6,21 @@
 
 #include "Pchheader.h"
 #include "Scene.h"
-#include "World/Entity.h"
-
+#include "World/Entity/Entity.h"
+#include "World/Component/ScriptComponent.h"
 #include "World/Component/TagComponent.h"
-#include "World/Component/TransformComponent.h"
 #include "World/Component/UUIDComponent.h"
 
 namespace Neptune {
+    
+    Scene::Scene()
+    {
+        auto root = CreateEntity("SceneRoot");
+
+        root.AddComponent<ScriptComponent>();
+
+        m_Root = root;
+    }
 
     Entity Scene::CreateEntity(const std::string& name)
     {
@@ -24,28 +32,25 @@ namespace Neptune {
         Entity entity = CreateEmptyEntity(uuid);
 
         entity.AddComponent<UUIDComponent>(uuid);
-        entity.AddComponent<TransformComponent>();
         entity.AddComponent<TagComponent>(name);
 
         return entity;
     }
 
-    void Scene::DestroyEntity(Entity& entity)
+    void Scene::Destroy(const Entity& entity)
     {
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
-        m_RootEntityMap.erase(entity.GetUUID());
-
         uint32_t e = entity;
-        m_Registry.destroy((entt::entity)e);
+        m_Registry.destroy(static_cast<entt::entity>(e));
     }
 
-    Entity Scene::QueryEntityByID(uint32_t id)
+    Entity Scene::QueryEntityByID(const uint32_t id)
     {
-        return Entity(id, this);
+        return { id, this };
     }
 
-    void Scene::ClearMarkerWithBits(SceneMarkFlags flags)
+    void Scene::ClearMarkerWithBits(const SceneMarkFlags flags)
     {
         if (m_Marker & flags)
         {
@@ -53,34 +58,10 @@ namespace Neptune {
         }
     }
 
-    void Scene::RemoveFromRoot(Entity& entity)
+    Entity Scene::CreateEmptyEntity(const UUID uuid)
     {
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
-        m_RootEntityMap.erase(entity.GetUUID());
-    }
-
-    void Scene::AddToRoot(Entity& entity)
-    {
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
-
-        m_RootEntityMap[entity.GetUUID()] = entity;
-    }
-
-    bool Scene::IsRootEntity(Entity& entity)
-    {
-        std::shared_lock<std::shared_mutex> lock(m_Mutex);
-
-        return m_RootEntityMap.find(entity.GetUUID()) != m_RootEntityMap.end();
-    }
-
-    Entity Scene::CreateEmptyEntity(UUID uuid)
-    {
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
-
-        Entity entity((uint32_t)m_Registry.create(), this);
-        m_RootEntityMap[uuid] = entity;
-
-        return entity;
+        return { static_cast<uint32_t>(m_Registry.create()), this };
     }
 }

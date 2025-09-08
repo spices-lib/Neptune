@@ -13,11 +13,19 @@ namespace Neptune {
     {
     }
 
+    void LuaScript::OnAttached()
+    {
+    }
+
     void LuaScript::OnTick()
     {
     }
 
     void LuaScript::OnDestroy()
+    {
+    }
+
+    void LuaScript::OnDetached()
     {
     }
 

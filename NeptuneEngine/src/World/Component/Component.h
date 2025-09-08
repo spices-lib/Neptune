@@ -30,11 +30,16 @@ namespace Neptune {
         virtual ~Component() = default;
 
         /**
-        * @brief This interface defines the behaves on specific component added.
+        * @brief This interface defines the behaves on specific component attached.
         * 
         * @param[in] entity this component's Owner entity.
         */
-        virtual void OnComponentAdded(uint32_t entity);
+        virtual void OnComponentAttached(uint32_t entity);
+
+        /**
+        * @brief This interface defines the behaves on specific component detached.
+        */
+        virtual void OnComponentDetached();
 
     protected:
 

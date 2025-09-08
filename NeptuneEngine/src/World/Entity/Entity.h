@@ -1,7 +1,7 @@
 /**
 * @file Entity.h.
 * @brief The Entity Class Definitions.
-* @author The Cherno.
+* @author Spices.
 */
 
 #pragma once
@@ -22,14 +22,12 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
-        * Init class variable.
-        * Usually call it.
         * 
         * @param[in] handle entity handle.
         * @param[in] scene Scene pointer.
         */
         Entity(uint32_t handle, Scene* scene)
-                : m_EntityHandle(handle)
+                : m_Handle(handle)
                 , m_Scene(scene)
         {}
 
@@ -39,8 +37,7 @@ namespace Neptune {
         virtual ~Entity() = default;
 
         /**
-        * @brief Template Function.
-        * Used for add specific component to entity.
+        * @brief Used for add specific component to entity.
         * 
         * @tparam T Specific component.
         * @param[in] args Component construct parameters.
@@ -48,25 +45,10 @@ namespace Neptune {
         * @return Returns The specific component reference that added.
         */
         template<typename T, typename... Args>
-        T& AddComponent(Args&&... args)
-        {
-            if (HasComponent<T>())
-            {
-                std::stringstream ss;
-                ss << "Entity: " << m_EntityHandle << " already has such component.";
-
-                NEPTUNE_CORE_WARN(ss.str())
-                return GetComponent<T>();
-            }
-
-            T& component = m_Scene->AddComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
-            m_Scene->OnComponentAdded<T>(this, component);
-            return component;
-        }
+        T& AddComponent(Args&&... args);
 
         /**
-        * @brief Template Function.
-        * Used for replace specific component to entity.
+        * @brief Used for replace specific component to entity.
         * 
         * @tparam T Specific component.
         * @param[in] args Component construct parameters.
@@ -74,15 +56,7 @@ namespace Neptune {
         * @return Returns The specific component reference that replaced.
         */
         template<typename T, typename... Args>
-        T& ReplaceComponent(Args&&... args)
-        {
-            if (!HasComponent<T>())
-            {
-                return AddComponent<T>(std::forward<Args>(args)...);
-            }
-
-            return m_Scene->ReplaceComponent<T>(m_EntityHandle, std::forward<Args>(args)...);
-        }
+        T& ReplaceComponent(Args&&... args);
         
         /**
         * @brief Get Component owned by this entity.
@@ -92,10 +66,7 @@ namespace Neptune {
         * @return Returns the specific Component.
         */
         template<typename T>
-        T& GetComponent() const
-        {
-            return m_Scene->GetComponent<T>(m_EntityHandle);
-        }
+        T& GetComponent() const;
 
         /**
         * @brief Remove Component owned from this entity.
@@ -103,34 +74,12 @@ namespace Neptune {
         * @tparam T Which Component we will remove.
         */
         template<typename T>
-        void RemoveComponent() const
-        {
-            m_Scene->RemoveComponent<T>(m_EntityHandle);
-        }
-
-        /**
-        * @brief Remove a entity from this world root.
-        */
-        void RemoveFromRoot()
-        {
-            m_Scene->RemoveFromRoot(*this);
-        }
-
-        /**
-        * @brief Add a entity to this world root.
-        */
-        void AddToRoot()
-        {
-            m_Scene->AddToRoot(*this);
-        }
+        void RemoveComponent() const;
 
         /**
         * @brief Destroy this entity from Scene.
         */
-        void Destroy()
-        {
-            m_Scene->DestroyEntity(*this);
-        }
+        void Destroy() const;
 
         /**
         * @brief If Component is owned by this entity or not.
@@ -140,24 +89,21 @@ namespace Neptune {
         * @return Returns true if found.
         */
         template<typename T>
-        bool HasComponent() const
-        {
-            return m_Scene->HasComponent<T>(m_EntityHandle);
-        }
+        bool HasComponent() const;
 
         /**
         * @brief Get UUID form UUIDComponent.
         * 
         * @return Returns UUID.
         */
-        const UUID GetUUID() const { return GetComponent<UUIDComponent>().GetUUID(); }
+        const UUID& GetUUID() const;
 
         /**
         * @brief Empty Operation.
         * 
         * @return Returns m_EntityHandle's value.
         */
-        operator uint32_t() const { return m_EntityHandle; }
+        operator uint32_t() const { return m_Handle; }
 
         /**
         * @brief Equal Operation.
@@ -168,7 +114,7 @@ namespace Neptune {
         */
         bool operator ==(const Entity& other) const
         {
-            return m_EntityHandle == other.m_EntityHandle && m_Scene == other.m_Scene;
+            return m_Handle == other.m_Handle && m_Scene == other.m_Scene;
         }
 
         /**
@@ -188,11 +134,71 @@ namespace Neptune {
         /**
         * @brief This entity's identify in ECS.
         */
-        uint32_t m_EntityHandle;
+        uint32_t m_Handle;
 
         /**
         * @brief A specific scene Pointer.
         */
         Scene* m_Scene;
     };
+
+    template <typename T, typename ... Args>
+    T& Entity::AddComponent(Args&&... args)
+    {
+        if (HasComponent<T>())
+        {
+            std::stringstream ss;
+            ss << "Entity: " << m_Handle << " already has such component.";
+
+            NEPTUNE_CORE_WARN(ss.str())
+            return GetComponent<T>();
+        }
+
+        T& component = m_Scene->AddComponent<T>(m_Handle, std::forward<Args>(args)...);
+        m_Scene->OnComponentAttached<T>(this, component);
+        return component;
+    }
+
+    template <typename T, typename ... Args>
+    T& Entity::ReplaceComponent(Args&&... args)
+    {
+        if (!HasComponent<T>())
+        {
+            return AddComponent<T>(std::forward<Args>(args)...);
+        }
+
+        T& component = m_Scene->ReplaceComponent<T>(m_Handle, std::forward<Args>(args)...);
+        m_Scene->OnComponentAttached<T>(this, component);
+        return component;
+    }
+
+    template <typename T>
+    T& Entity::GetComponent() const
+    {
+        return m_Scene->GetComponent<T>(m_Handle);
+    }
+
+    template <typename T>
+    void Entity::RemoveComponent() const
+    {
+        if (!HasComponent<T>())
+        {
+            std::stringstream ss;
+            ss << "Entity: " << m_Handle << " does not have such component.";
+
+            NEPTUNE_CORE_WARN(ss.str())
+            return;
+        }
+
+        T& component = GetComponent<T>();
+            
+        m_Scene->OnComponentDetached<T>(this, component);
+        m_Scene->RemoveComponent<T>(m_Handle);
+    }
+
+    template <typename T>
+    bool Entity::HasComponent() const
+    {
+        return m_Scene->HasComponent<T>(m_Handle);
+    }
 }

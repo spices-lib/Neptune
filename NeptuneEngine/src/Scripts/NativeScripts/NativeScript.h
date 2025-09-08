@@ -26,31 +26,5 @@ namespace Neptune {
         * @brief Destructor Function.
         */
         ~NativeScript() override = default;
-
-        /**
-        * @brief This interface defines the behave on specific component on construct.
-        * Do nothing here.
-        */
-        void OnConstruct() override {}
-        
-        /**
-        * @brief This interface defines the behave on specific component tick every frame.
-        * Do nothing here.
-        */
-        void OnTick() override {}
-
-        /**
-        * @brief This interface defines the behave on specific component on destroy.
-        * Do nothing here.
-        */
-        void OnDestroy() override {}
-        
-        /**
-        * @brief This interface defines the behave on specific component event happened.
-        * Do nothing here.
-        * 
-        * @param[in] e Event.
-        */
-        void OnEvent(Event& e) override {}
     };
 }

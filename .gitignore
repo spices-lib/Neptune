@@ -42,12 +42,14 @@ Makefile
 /NeptuneEngine/vendor/Glad/bin-int
 /NeptuneEngine/vendor/Glad/*.vcxproj
 /NeptuneEngine/vendor/Glad/*.vcxproj.filters
+
 /NeptuneEngine/vendor/emdawnwebgpu/__pycache__
 
 /NeptuneEngine/vendor/Lua/bin
 /NeptuneEngine/vendor/Lua/bin-int
 /NeptuneEngine/vendor/Lua/*.vcxproj
 /NeptuneEngine/vendor/Lua/*.vcxproj.filters
+/NeptuneEngine/vendor/Lua/*.make
 
 /Scripts/BuildDependencies/__pycache__
 /Scripts/BuildSystem/__pycache__
