@@ -8,7 +8,7 @@
 #include <Core/Core.h>
 #include <World/World/World.h>
 
-namespace Neptune {
+namespace Neptune::Editor {
     
     class EditorWorld : public World
     {
@@ -17,7 +17,7 @@ namespace Neptune {
         EditorWorld() = default;
         ~EditorWorld() override = default;
         
-        void Layout() override {}
+        void Layout() override;
     
     };
     

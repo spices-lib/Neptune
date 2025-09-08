@@ -6,6 +6,11 @@
 
 #include "EditorWorld.h"
 
-namespace Neptune
-{
+namespace Neptune::Editor {
+    
+    void EditorWorld::Layout()
+    {
+        
+    }
+    
 }

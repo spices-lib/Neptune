@@ -4,10 +4,10 @@
 * @author Spices.
 */
 
-#include "EditorWorld.h"
+#include "World/EditorWorld.h"
 #include <EntryPoint.h>
 
-namespace Neptune {
+namespace Neptune::Editor {
 
     SP<World> CreateWorld()
     {

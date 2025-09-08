@@ -21,10 +21,10 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         * 
-        * @param[in] panelName The Slate's name.
+        * @param[in] slateName The Slate's name.
         */
-        Slate(const std::string& panelName)
-                : m_PanelName(panelName)
+        Slate(std::string slateName)
+                : m_SlateName(std::move(slateName))
         {}
 
         /**
@@ -33,7 +33,7 @@ namespace Neptune {
         virtual ~Slate() = default;
 
         /**
-        * @brief This interface is called on SlateSystem Update.
+        * @brief This interface is called on Slate Update.
         */
         virtual void OnTick() = 0;
 
@@ -49,6 +49,6 @@ namespace Neptune {
         /**
 		* @brief This slate's name.
 		*/
-        std::string m_PanelName;
+        std::string m_SlateName;
     };
 }
