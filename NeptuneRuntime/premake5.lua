@@ -130,7 +130,7 @@ project "NeptuneRuntime"
 			"-s WASM=1",                                                             -- Output wasm
 			"-s STACK_SIZE=4194304",                                                 -- Expand stack size to 4M
 			"-s TOTAL_MEMORY=64MB",                                                  -- Wasm total memory to 64M
-		  --"-s PROXY_TO_PTHREAD",                                                   -- Run in pthread(not main thread)
+		    "-s PROXY_TO_PTHREAD",                                                   -- Run in pthread(not main thread)
 		    "-s ASYNCIFY=1",                                                         -- Async between Wasm and Js
 			"-s PTHREAD_POOL_SIZE=12",                                               -- Js thread size 12
 			"-s USE_PTHREADS=1",                                                     -- Use pthread

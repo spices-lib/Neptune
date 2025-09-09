@@ -12,6 +12,7 @@
 #include "Systems/RHISystem.h"
 #include "Window/Window.h"
 #include "World/World/World.h"
+#include "World/Scene/Scene.h"
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 #include <emscripten/emscripten.h>
@@ -107,7 +108,7 @@ namespace Neptune {
         }
 
         // on detach world to application.
-        m_World->OnDetached();
+        p->m_World->OnDetached();
         
         emscripten_cancel_main_loop();
     }
