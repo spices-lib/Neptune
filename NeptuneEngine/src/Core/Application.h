@@ -68,6 +68,7 @@ namespace Neptune {
 
         UP<SystemManager> m_SystemManager;        // @brief SystemManager
         Window* m_Window;                         // @brief Window
+        UP<World> m_World;                        // @brief World
     };
 
     /**
@@ -75,7 +76,7 @@ namespace Neptune {
 	*
 	* @return Returns World Pointer.
 	*/
-    SP<World> CreateWorld();
+    UP<World> CreateWorld();
 }
 
 /**
@@ -83,4 +84,4 @@ namespace Neptune {
 * 
 * @return Returns World Pointer.
 */
-extern Neptune::SP<Neptune::World> Neptune::CreateWorld();
+extern Neptune::UP<Neptune::World> Neptune::CreateWorld();

@@ -21,7 +21,7 @@ namespace Neptune {
 
     /**
     * @brief Scene Class.
-    * This class defines the basic behaves of Scene.
+    * Object that needs to be presented on screen must be added to a scene.
     */
     class Scene : public NonCopyable
     {

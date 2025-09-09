@@ -12,22 +12,69 @@
 namespace Neptune {
 
     class Scene;
-    
+    class Level;
+
+    /**
+    * @brief World Class
+    * In program, all elements we see is a world.
+    */
     class World : public NonCopyable
     {
     public:
 
+        /**
+        * @brief Constructor Function.
+        */
         World() = default;
+
+        /**
+        * @brief Destructor Function.
+        */
         ~World() override = default;
 
+        /**
+        * @brief Interface of World attached to Application.
+        */
+        virtual void OnAttached() = 0;
+
+        /**
+        * @brief Interface of World detached to Application.
+        */
+        virtual void OnDetached() = 0;
+        
+    protected:
+        
+        /**
+        * @brief Interface of World UI Layout, as View in MVP.
+        */
         virtual void Layout() = 0;
+
+        /**
+        * @brief Create Scene with a level to World.
+        * Used for deserialize level asset.
+        *
+        * @param[in] level Level
+        *
+        * @return Returns scene pointer.
+        */
+        Scene* CreateScene(const SP<Level>& level);
+
+        /**
+        * @brief Create empty Scene with a name to World.
+        * Used for object view.
+        *
+        * @param[in] name Scene name.
+        *
+        * @return Returns scene pointer.
+        */
+        Scene* CreateScene(const std::string& name);
         
     private:
         
         /**
-         * @brief World activate Scenes.
-         */
-        std::unordered_map<std::string, SP<Scene>> m_Scenes;
+        * @brief World activate Scenes.
+        */
+        std::unordered_map<std::string, UP<Scene>> m_Scenes;
     
     };
     

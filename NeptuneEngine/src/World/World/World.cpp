@@ -7,9 +7,40 @@
 #include "Pchheader.h"
 #include "World.h"
 #include "World/Scene/Scene.h"
+#include "World/Object/Level.h"
 
 namespace Neptune {
+    
+    Scene* World::CreateScene(const SP<Level>& level)
+    {
+        const auto& name = level->GetName();
+        
+        if (m_Scenes.contains(name))
+        {
+            std::stringstream ss;
+            ss << "Scene: [ " << name << " ] already exists in world!";
+            
+            NEPTUNE_CORE_ERROR(ss.str())
+            return nullptr;
+        }
+        
+        m_Scenes.emplace(name, CreateUP<Scene>());
+        return m_Scenes.at(name).get();
+    }
 
+    Scene* World::CreateScene(const std::string& name)
+    {
+        if (m_Scenes.contains(name))
+        {
+            std::stringstream ss;
+            ss << "Scene: [ " << name << " ] already exists in world!";
+            
+            NEPTUNE_CORE_ERROR(ss.str())
+            return nullptr;
+        }
 
+        m_Scenes.emplace(name, CreateUP<Scene>());
+        return m_Scenes.at(name).get();
+    }
     
 }

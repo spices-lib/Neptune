@@ -6,12 +6,12 @@
 
 #include "World/EditorWorld.h"
 #include <EntryPoint.h>
-
+#include <World/Scene/Scene.h>
 namespace Neptune::Editor {
 
-    SP<World> CreateWorld()
+    UP<World> CreateWorld()
     {
-        return CreateSP<EditorWorld>();
+        return CreateUP<EditorWorld>();
     }
 
 }

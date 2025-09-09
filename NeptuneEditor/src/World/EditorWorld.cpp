@@ -5,6 +5,9 @@
 */
 
 #include "EditorWorld.h"
+#include <World/Scene/Scene.h>
+#include <World/Entity/Entity.h>
+#include <World/Component/TransformComponent.h>
 
 namespace Neptune::Editor {
     
@@ -12,5 +15,19 @@ namespace Neptune::Editor {
     {
         
     }
-    
+
+    void EditorWorld::CreateExampleScene()
+    {
+        const auto scene = CreateScene("main_level");
+
+        {
+            auto entity = scene->CreateEntity("cube");
+            entity.AddComponent<TransformComponent>();
+        }
+
+        {
+            auto entity = scene->CreateEntity("plane");
+            entity.AddComponent<TransformComponent>();
+        }
+    }
 }

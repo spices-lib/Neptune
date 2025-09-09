@@ -11,6 +11,7 @@
 #include "Systems/RenderSystem.h"
 #include "Systems/RHISystem.h"
 #include "Window/Window.h"
+#include "World/World/World.h"
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 #include <emscripten/emscripten.h>
@@ -55,16 +56,21 @@ namespace Neptune {
         ->PushSystem<LogicalSystem>()
         ->PushSystem<RenderSystem>()
         ->PushSystem<RHISystem>();
+
+        //m_World = CreateWorld();
     }
 
     Application::~Application()
     {
+        m_World.reset();
         m_SystemManager->PopAllSystems();
         Window::Destroy();
     }
 
     void Application::Run()
     {
+        // on attach world to application.
+        m_World->OnAttached();
         
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
@@ -79,6 +85,9 @@ namespace Neptune {
             m_SystemManager->Run();
         }
 
+        // on detach world to application.
+        m_World->OnDetached();
+        
 #endif
 
     }
@@ -97,6 +106,9 @@ namespace Neptune {
             return;
         }
 
+        // on detach world to application.
+        m_World->OnDetached();
+        
         emscripten_cancel_main_loop();
     }
 
