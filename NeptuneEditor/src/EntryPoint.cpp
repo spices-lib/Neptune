@@ -5,13 +5,14 @@
 */
 
 #include "World/EditorWorld.h"
+#include "World/Scene/Scene.h"
 #include <EntryPoint.h>
-#include <World/Scene/Scene.h>
-namespace Neptune::Editor {
+
+namespace Neptune {
 
     UP<World> CreateWorld()
     {
-        return CreateUP<EditorWorld>();
+        return CreateUP<Editor::EditorWorld>();
     }
 
 }
