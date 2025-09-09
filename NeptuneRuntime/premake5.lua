@@ -134,6 +134,7 @@ project "NeptuneRuntime"
 		    "-s ASYNCIFY=1",                                                         -- Async between Wasm and Js
 			"-s PTHREAD_POOL_SIZE=12",                                               -- Js thread size 12
 			"-s USE_PTHREADS=1",                                                     -- Use pthread
+			"-s EXIT_RUNTIME=1",                                                     -- Allow return in runtime
 			"-s SHARED_MEMORY",                                                      -- Shared memory
 			"-s OFFSCREENCANVAS_SUPPORT",                                            -- Transform canvas to pthread
 			"-s OFFSCREENCANVASES_TO_PTHREAD='nepnep'",                              -- Agent canvas to pthread
@@ -166,6 +167,7 @@ project "NeptuneRuntime"
 			"NEPTUNE_DEBUG",                   -- Debug Symbol.
 			"TRACY_ENABLE",                    -- tracy Feature Enable.
 			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
+			"TRACY_FIBERS",                    -- Enable fiber mode.
 		}
 
 		runtime "Debug"
@@ -191,6 +193,7 @@ project "NeptuneRuntime"
 			"NEPTUNE_RELEASE",                 -- Release Symbol.
 			"TRACY_ENABLE",                    -- tracy Feature Enable.
 			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
+			"TRACY_FIBERS",                    -- Enable fiber mode.
 		}
 
 		runtime "Release"
