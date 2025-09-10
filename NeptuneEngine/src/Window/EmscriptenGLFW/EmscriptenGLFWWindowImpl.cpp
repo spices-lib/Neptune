@@ -110,13 +110,6 @@ namespace Neptune {
             Event::GetEventCallbackFn()(event);
         });
 
-        // Window close event Callback.
-        glfwSetWindowCloseCallback(m_Windows, [](GLFWwindow* window)
-        {
-            WindowCloseEvent event;
-            Event::GetEventCallbackFn()(event);
-        });
-
         // Key event Callback.
         glfwSetKeyCallback(m_Windows, [](GLFWwindow* window, int key, int scancode, int action, int mods)
         {
