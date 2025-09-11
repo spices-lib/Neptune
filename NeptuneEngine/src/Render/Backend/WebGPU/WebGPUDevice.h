@@ -8,24 +8,12 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "WebGPUUtils.h"
+#include "WebGPUObject.h"
 
 namespace Neptune {
 
     /**
-	* @brief SwapChain Utils.
-	* Queried from device.
-	*/
-    struct SwapChainSupportDetails
-    {
-        WGPUTextureFormat format;     // @brief The selected VkSurfaceFormatKHR.
-        WGPUPresentMode presentMode;  // @brief The selected VkPresentModeKHR.
-    };
-
-    /**
     * @brief WebGPUDevice Class.
-    * This class defines the WebGPUDevice behaves.
-    * This class is just a wrapper of WebGPUDevice.
     */
     class WebGPUDevice : public WebGPUObject
     {
@@ -33,50 +21,26 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
-        * Create WebGPUDevice.
-        * @param[in] webGPUState The global VulkanState.
+        * 
+        * @param[in] context The global WebGPUContext.
         */
-        WebGPUDevice(WebGPUState& webGPUState);
+        WebGPUDevice(WebGPUContext& context);
 
         /**
         * @brief Destructor Function.
         */
         virtual ~WebGPUDevice() override = default;
 
-        /**
-		* @brief Get SwapChain Utils.
-		* @return Returns SwapChain Utils.
-		*/
-        inline const SwapChainSupportDetails& GetSwapChainSupport() { return m_SwapChainSupportDetails; }
+
+    private:
+
 
     private:
 
         /**
-        * @brief Create logical device.
+        * @brief WGPUDevice.
         */
-        void CreateDevice();
-
-        /**
-        * @brief Create surface.
-        */
-        void CreateSurface();
-
-        /**
-        * @brief Create queue.
-        */
-        void CreateQueue();
-
-        /**
-        * @brief Fetch SwapChain device support.
-        */
-        void QuerySwapChainSupport();
-
-    private:
-
-        /**
-        * @brief SwapChainSupportDetails.
-        */
-        SwapChainSupportDetails m_SwapChainSupportDetails;
+        WGPUDevice m_Device = nullptr;
 
     };
 }

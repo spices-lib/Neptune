@@ -12,9 +12,7 @@
 
 namespace Neptune {
 
-    class WebGPUState;
-    class WebGPUInstance;
-    class WebGPUDevice;
+    class WebGPUContext;
 
     /**
     * @brief WebGPURenderBackend Class.
@@ -52,9 +50,10 @@ namespace Neptune {
 
     private:
 
-        SP<WebGPUState>     m_State;
-        SP<WebGPUInstance>  m_Instance;
-        SP<WebGPUDevice>    m_Device;
+        /**
+        * @brief WebGPU Context.
+        */
+        SP<WebGPUContext> m_Context;
     };
 }
 

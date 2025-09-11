@@ -12,7 +12,11 @@
 
 namespace Neptune {
 
-    static void WebGPUErrorCallback(WGPUErrorType error_type, const char* message, void*)
+    WebGPUDevice::WebGPUDevice(WebGPUContext& context)
+        : WebGPUObject(context, EWebGPUObject::WebGPUInstance)
+    {}
+
+    /*static void WebGPUErrorCallback(WGPUErrorType error_type, const char* message, void*)
     {
         const char* error_type_lbl = "";
         switch (error_type)
@@ -31,22 +35,15 @@ namespace Neptune {
         NEPTUNE_CORE_CRITICAL(ss.str())
     }
 
-    WebGPUDevice::WebGPUDevice(WebGPUState& webGPUState)
-            : WebGPUObject(webGPUState)
+    WebGPUDevice::WebGPUDevice(WebGPUContext& context)
+            : WebGPUObject(context, EWebGPUObject::WebGPUInstance)
     {
-        CreateDevice();
-        CreateSurface();
-        QuerySwapChainSupport();
-        CreateQueue();
+ 
     }
 
     void WebGPUDevice::CreateDevice()
     {
-        m_WebGPUState.m_Device = emscripten_webgpu_get_device();
-        if (!m_WebGPUState.m_Device)
-        {
-            return;
-        }
+
     }
 
     void WebGPUDevice::CreateSurface()
@@ -116,7 +113,7 @@ namespace Neptune {
     void WebGPUDevice::CreateQueue()
     {
         m_WebGPUState.m_GraphicQueue = wgpuDeviceGetQueue(m_WebGPUState.m_Device);
-    }
+    }*/
 
 }
 
