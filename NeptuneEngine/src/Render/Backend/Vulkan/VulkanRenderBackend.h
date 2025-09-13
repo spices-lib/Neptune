@@ -12,6 +12,8 @@
 
 namespace Neptune {
 
+    class VulkanContext;
+
     /**
     * @brief VulkanRenderBackend Class.
     * This class defines the VulkanRenderBackend behaves.
@@ -48,6 +50,10 @@ namespace Neptune {
 
     private:
 
+        /**
+        * @brief Vulkan Context.
+        */
+        SP<VulkanContext> m_Context;
     };
 }
 

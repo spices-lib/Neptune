@@ -9,7 +9,7 @@ IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/
 IncludeDir["emscripten_glfw"]             = "%{wks.location}/NeptuneEngine/vendor/emscripten-glfw/"                           -- Include: emscripten-glfw
 IncludeDir["emdawnwebgpu"]                = "%{wks.location}/NeptuneEngine/vendor/emdawnwebgpu/webgpu/include/webgpu"         -- Include: emdawnwebgpu
 IncludeDir["GLFW"]                        = "%{wks.location}/NeptuneEngine/vendor/GLFW/include"                               -- Include: GLFW
-IncludeDir["VulkanSDK"]                   = "C:/VulkanSDK/1.3.296.0/Include"                                                  -- Include: VulkanSDK
+IncludeDir["VulkanSDK"]                   = "C:/VulkanSDK/1.4.321.1/Include"                                                  -- Include: VulkanSDK
 IncludeDir["VulkanMemoryAllocator"]       = "%{wks.location}/NeptuneEngine/vendor/VulkanMemoryAllocator/include"              -- Include: VulkanMemoryAllocator
 IncludeDir["Glad"]                        = "%{wks.location}/NeptuneEngine/vendor/Glad/include"                               -- Include: Glad
 IncludeDir["stb_image"]                   = "%{wks.location}/NeptuneEngine/vendor/stb_image"                                  -- Include: stb_image
@@ -30,8 +30,8 @@ IncludeDir["googlemock"]                  = "%{wks.location}/NeptuneUnitTest/ven
 
 -- Library Directories Folder
 LibraryDir                                = {}
-LibraryDir["VulkanSDK"]                   = "C:/VulkanSDK/1.3.296.0/Lib"                                                      -- Library Directries: VulkanSDK Folder
-LibraryDir["VulkanSDKDLL"]                = "%{LibraryDir.VulkanSDK}/../Bin"                                                  -- Library Directries: VulkanSDK dll Folder
+LibraryDir["VulkanSDK"]                   = "%{IncludeDir.VulkanSDK}/../Lib"                                                  -- Library Directries: VulkanSDK Folder
+LibraryDir["VulkanSDKDLL"]                = "%{IncludeDir.VulkanSDK}/../Bin"                                                  -- Library Directries: VulkanSDK dll Folder
 
 -- Library Directories
 Library                                   = {}

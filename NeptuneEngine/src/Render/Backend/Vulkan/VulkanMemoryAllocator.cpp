@@ -5,17 +5,18 @@
 */
 
 #include "Pchheader.h"
+
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "VulkanMemoryAllocator.h"
 
 #define VMA_IMPLEMENTATION
-#include "vk_mem_alloc.h"
+#include <vk_mem_alloc.h>
 
 namespace Neptune {
 
-	VulkanMemoryAllocator::VulkanMemoryAllocator(VulkanState& vulkanState)
-		: VulkanObject(vulkanState)
+	VulkanMemoryAllocator::VulkanMemoryAllocator(VulkanContext& context)
+		: VulkanInfrastructure(context)
 	{
 		/**
 		* @brief Instance a VmaAllocatorCreateInfo.
@@ -44,8 +45,8 @@ namespace Neptune {
 
 	VulkanMemoryAllocator::~VulkanMemoryAllocator()
 	{
-		vmaDestroyAllocator(m_VulkanState.m_VmaAllocator);
-		m_VulkanState.m_VmaAllocator = nullptr;
+		vmaDestroyAllocator(m_VmaAllocator);
+		m_VmaAllocator = nullptr;
 	}
 }
 

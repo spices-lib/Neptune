@@ -8,7 +8,7 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "VulkanUtils.h"
+#include "VulkanInfrastructure.h"
 
 namespace Neptune {
 
@@ -38,21 +38,35 @@ namespace Neptune {
 
 	} VMAMemoryPropertyFlagExtendBits;
 
-	class VulkanMemoryAllocator : public VulkanObject
+	class VulkanMemoryAllocator : public VulkanInfrastructure
 	{
 	public:
 
 		/**
-		* @brief Constructor Function.
-		* Create Specific ThreadPool.
-		* @param[in] vulkanState The global VulkanState.
+		* @brief Mark as VulkanInfrastructure Type.
 		*/
-		VulkanMemoryAllocator(VulkanState& vulkanState);
+		static constexpr EVulkanInfrastructure Type = EVulkanInfrastructure::VulkanMemoryAllocator;
+
+	public:
+
+		/**
+		* @brief Constructor Function.
+		* 
+		* @param[in] context The global VulkanContext.
+		*/
+		VulkanMemoryAllocator(VulkanContext& context);
 
 		/**
 		* @brief Destructor Function.
 		*/
 		~VulkanMemoryAllocator() override;
+
+	private:
+
+		/**
+		* @brief From VulkanMemoryAllocator.
+		*/
+		VmaAllocator m_VmaAllocator;
 	};
 }
 

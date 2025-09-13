@@ -40,7 +40,7 @@ namespace Neptune {
             case WGPUStatus_Error:
             {
                 NEPTUNE_CORE_ERROR("WebGPU Status Error.")
-                    return;
+                return;
             }
             default:
             {

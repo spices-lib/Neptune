@@ -25,7 +25,7 @@ namespace Neptune {
         }
 
         std::stringstream ss;
-        ss << "DeviceLost: [ " << label << " ]: " << message.data;
+        ss << "WebGPU DeviceLost: [ " << label << " ]: " << message.data;
 
         NEPTUNE_CORE_ERROR(ss.str())
 	}
@@ -48,7 +48,7 @@ namespace Neptune {
         }
 
         std::stringstream ss;
-        ss << "UncapturedError: [ " << label << " ]: " << message.data;
+        ss << "WebGPU UncapturedError: [ " << label << " ]: " << message.data;
 
         NEPTUNE_CORE_ERROR(ss.str())
 	}
