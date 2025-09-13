@@ -18,7 +18,7 @@ namespace Neptune {
 
 	VulkanInfrastructure::~VulkanInfrastructure()
 	{
-		Release(this);
+		Destroy(this);
 	}
 
 }

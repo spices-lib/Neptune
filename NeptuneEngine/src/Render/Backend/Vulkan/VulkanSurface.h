@@ -63,7 +63,7 @@ namespace Neptune {
 	};
 
 	template<>
-	void VulkanInfrastructure::Destroy(VulkanSurface* infrastructure)
+	inline void VulkanInfrastructure::Destroy(VulkanSurface* infrastructure)
 	{
 		const auto instance = infrastructure->m_Context.Get<VulkanInstance>()->Row();
 

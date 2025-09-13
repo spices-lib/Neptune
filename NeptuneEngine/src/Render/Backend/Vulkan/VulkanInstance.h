@@ -62,7 +62,7 @@ namespace Neptune {
 	};
 
 	template<>
-	void VulkanInfrastructure::Destroy(VulkanInstance* infrastructure)
+	inline void VulkanInfrastructure::Destroy(VulkanInstance* infrastructure)
 	{
 		vkDestroyInstance(infrastructure->Row(), nullptr);
 		infrastructure->Row() = nullptr;

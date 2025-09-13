@@ -10,6 +10,8 @@
 #include "Core/Core.h"
 #include "VulkanInfrastructure.h"
 
+#include <vk_mem_alloc.h>
+
 namespace Neptune {
 
 	/**
@@ -59,15 +61,37 @@ namespace Neptune {
 		/**
 		* @brief Destructor Function.
 		*/
-		~VulkanMemoryAllocator() override;
+		~VulkanMemoryAllocator() override = default;
+
+		/**
+		* @brief Get Row Vulkan Infrastructure.
+		*
+		* @return Returns Row Vulkan Infrastructure.
+		*/
+		VmaAllocator& Row() { return m_VmaAllocator; }
+
+	private:
+
+		/**
+		* @brief Create VmaAllocator.
+		*/
+		void Create();
 
 	private:
 
 		/**
 		* @brief From VulkanMemoryAllocator.
 		*/
-		VmaAllocator m_VmaAllocator;
+		VmaAllocator m_VmaAllocator = nullptr;
 	};
+
+	template<>
+	inline void VulkanInfrastructure::Destroy(VulkanMemoryAllocator* infrastructure)
+	{
+		vmaDestroyAllocator(infrastructure->Row());
+		infrastructure->Row() = nullptr;
+	}
+
 }
 
 #endif

@@ -8,24 +8,28 @@
 
 #ifdef NP_PLATFORM_WINDOWS
 
-#include "VulkanMemoryAllocator.h"
-
 #define VMA_IMPLEMENTATION
-#include <vk_mem_alloc.h>
+
+#include "VulkanMemoryAllocator.h"
+#include "VulkanInstance.h"
+#include "VulkanPhysicalDevice.h"
+#include "VulkanDevice.h"
 
 namespace Neptune {
 
 	VulkanMemoryAllocator::VulkanMemoryAllocator(VulkanContext& context)
 		: VulkanInfrastructure(context)
 	{
-		/**
-		* @brief Instance a VmaAllocatorCreateInfo.
-		* @see https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/quick_start.html
-		*/
+		Create();
+	}
+
+	void VulkanMemoryAllocator::Create()
+	{
+		// see https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/quick_start.html
 		VmaAllocatorCreateInfo                  createInfo {};
-		createInfo.instance                   = vulkanState.m_Instance;
-		createInfo.physicalDevice             = vulkanState.m_PhysicalDevice;
-		createInfo.device                     = vulkanState.m_Device;
+		createInfo.instance                   = m_Context.Get<VulkanInstance>()->Row();
+		createInfo.physicalDevice             = m_Context.Get<VulkanPhysicalDevice>()->Row();
+		createInfo.device                     = m_Context.Get<VulkanDevice>()->Row();
 		createInfo.vulkanApiVersion           = VK_API_VERSION_1_3;
 		createInfo.flags                      = VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT      | 
 												VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT              |
@@ -37,16 +41,7 @@ namespace Neptune {
 												VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT |
 												VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT           ;
 
-		/**
-		* @brief Create Global Allocator.
-		*/
-		VK_CHECK(vmaCreateAllocator(&createInfo, &vulkanState.m_VmaAllocator))
-	}
-
-	VulkanMemoryAllocator::~VulkanMemoryAllocator()
-	{
-		vmaDestroyAllocator(m_VmaAllocator);
-		m_VmaAllocator = nullptr;
+		VK_CHECK(vmaCreateAllocator(&createInfo, &m_VmaAllocator))
 	}
 }
 

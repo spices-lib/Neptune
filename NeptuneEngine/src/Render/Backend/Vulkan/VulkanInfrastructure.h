@@ -35,15 +35,6 @@ namespace Neptune {
         */
         ~VulkanInfrastructure() override;
 
-    public:
-
-        /**
-        * @brief Get EVulkanInfrastructure.
-        *
-        * @return Returns EVulkanInfrastructure.
-        */
-        virtual const EVulkanInfrastructure& GetType() const = 0;
-
     protected:
 
         /**
