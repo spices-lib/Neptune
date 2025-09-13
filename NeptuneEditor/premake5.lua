@@ -125,6 +125,7 @@ project "NeptuneEditor"
 			"-s USE_WEBGL2=1",                                                       -- Dependency: WebGL
 	      --"-s USE_WEBGPU=1",                                                       -- This flag is deprecated
 	        "--closure=1",                                                           -- Reduce code size
+			"-s DISABLE_EXCEPTION_CATCHING",                                         -- Disable Exception catch
 			"-s ALLOW_MEMORY_GROWTH",                                                -- Allow Memory growth
 			"-s WASM_BIGINT",                                                        -- Enable BigInt in JS
 			"-s WASM=1",                                                             -- Output wasm

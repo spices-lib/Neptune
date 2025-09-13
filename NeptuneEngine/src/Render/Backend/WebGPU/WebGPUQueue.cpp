@@ -17,6 +17,15 @@ namespace Neptune {
         : WebGPUObject(context)
     {
         m_Queue = m_Context.Get<WebGPUDevice>()->GetQueue();
+
+        if (m_Queue)
+        {
+            NEPTUNE_CORE_INFO("WGPUQueue created succeed.")
+        }
+        else
+        {
+            NEPTUNE_CORE_CRITICAL("WGPUQueue created failed.")
+        }
     }
 
     void WebGPUQueue::OnSubmittedWorkDone()

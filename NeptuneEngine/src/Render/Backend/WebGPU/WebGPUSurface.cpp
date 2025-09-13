@@ -45,7 +45,7 @@ namespace Neptune {
         configure.viewFormatCount                                   = 1;
         configure.viewFormats                                       = viewFormats;
         configure.alphaMode                                         = WGPUCompositeAlphaMode_Premultiplied;
-        configure.presentMode                                       = WGPUPresentMode_Mailbox;
+        configure.presentMode                                       = WGPUPresentMode_Fifo;
         
         wgpuSurfaceConfigure(m_Surface, &configure);
     }

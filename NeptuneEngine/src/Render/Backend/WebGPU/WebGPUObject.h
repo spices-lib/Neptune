@@ -19,7 +19,7 @@ namespace Neptune {
     * This class defines the basic behaves of WebGPUObject.
     * When we create an new WebGPUObject, we need inherit from this.
     */
-    class WebGPUObject : public NonCopyable, public std::enable_shared_from_this<WebGPUObject>
+    class WebGPUObject : public NonCopyable
     {
     public:
 

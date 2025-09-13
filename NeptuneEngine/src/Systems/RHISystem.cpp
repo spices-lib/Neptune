@@ -12,7 +12,7 @@ namespace Neptune {
 
     void RHISystem::OnSystemInitialize()
     {
-        //m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::WebGPU);
+        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::WebGPU);
     }
     void RHISystem::OnSystemShutDown()
     {
@@ -20,9 +20,9 @@ namespace Neptune {
     }
     void RHISystem::Tick()
     {
-        //m_RenderFrontend->BeginFrame();
-        //m_RenderFrontend->RenderFrame();
-        //m_RenderFrontend->EndFrame();
+        m_RenderFrontend->BeginFrame();
+        m_RenderFrontend->RenderFrame();
+        m_RenderFrontend->EndFrame();
     }
 
 

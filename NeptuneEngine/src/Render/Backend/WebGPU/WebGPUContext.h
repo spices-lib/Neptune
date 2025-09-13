@@ -47,19 +47,15 @@ namespace Neptune {
 
         /**
         * @brief Registry WebGPUObject to this context.
-        * 
-        * @param[in] object WebGPU Object.
         */
         template<typename T>
-        void Registry(SP<T> object);
+        void Registry();
 
         /**
         * @brief UnRegistry WebGPUObject from this context.
-        * 
-        * @param[in] object WebGPU Object.
         */
         template<typename T>
-        void UnRegistry(SP<T> object);
+        void UnRegistry();
 
         /**
         * @brief Get WebGPUObject from this context.
@@ -80,18 +76,30 @@ namespace Neptune {
     };
 
     template<typename T>
-    void WebGPUContext::Registry(SP<T> object)
+    void WebGPUContext::Registry()
     {
-        const auto position = static_cast<uint8_t>(object->GetType());
+        const auto position = static_cast<uint8_t>(T::Type);
 
-        m_Objects[position] = object;
+        if (m_Objects[position]) 
+        {
+            NEPTUNE_CORE_ERROR("WebGPUObject already registried.")
+        }
+
+        m_Objects[position] = CreateSP<T>(*this);
     }
 
     template <typename T>
-    void WebGPUContext::UnRegistry(SP<T> object)
+    void WebGPUContext::UnRegistry()
     {
-        const auto position = static_cast<uint8_t>(object->GetType());
+        const auto position = static_cast<uint8_t>(T::Type);
 
+        if (!m_Objects[position])
+        {
+            NEPTUNE_CORE_ERROR("WebGPUObject is unregistry.")
+            return;
+        }
+
+        m_Objects[position].reset();
         m_Objects[position] = nullptr;
     }
 
@@ -99,6 +107,12 @@ namespace Neptune {
     T* WebGPUContext::Get()
     {
         const auto position = static_cast<uint8_t>(T::Type);
+
+        if (!m_Objects[position])
+        {
+            NEPTUNE_CORE_ERROR("WebGPUObject is unregistry.")
+            return nullptr;
+        }
 
         return static_cast<T*>(m_Objects[position].get());
     }
