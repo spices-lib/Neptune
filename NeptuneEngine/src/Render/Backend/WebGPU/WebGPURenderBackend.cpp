@@ -10,6 +10,7 @@
 
 #include "WebGPURenderBackend.h"
 #include "WebGPUInstance.h"
+#include "WebGPUSurface.h"
 #include "WebGPUAdapter.h"
 #include "WebGPUDevice.h"
 
@@ -31,11 +32,13 @@ namespace Neptune {
     WebGPURenderBackend::WebGPURenderBackend(RenderBackendEnum backend)
         : RenderFrontend(backend)
     {
-        /*m_State     = CreateSP<WebGPUState>();
-        m_Instance  = CreateSP<WebGPUInstance>(*m_State);
-        m_Device    = CreateSP<WebGPUDevice>(*m_State);
+        m_Context      = CreateSP<WebGPUContext> ();
+        auto instance  = CreateSP<WebGPUInstance>(*m_Context);
+        auto surface   = CreateSP<WebGPUSurface> (*m_Context);
+        auto adapter   = CreateSP<WebGPUAdapter> (*m_Context);
+        auto device    = CreateSP<WebGPUDevice>  (*m_Context);
 
-        GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());*/
+        /*GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());*/
 
         // Setup Dear ImGui context
         /*IMGUI_CHECKVERSION();

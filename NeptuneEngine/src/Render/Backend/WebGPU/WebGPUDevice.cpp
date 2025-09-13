@@ -9,12 +9,25 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "WebGPUDevice.h"
+#include "WebGPUAdapter.h"
+#include "WebGPUInstance.h"
 
 namespace Neptune {
 
     WebGPUDevice::WebGPUDevice(WebGPUContext& context)
-        : WebGPUObject(context, EWebGPUObject::WebGPUInstance)
-    {}
+        : WebGPUObject(context)
+    {
+        m_Device = m_Context.Get<WebGPUAdapter>()->RequestDevice();
+
+        if (m_Device)
+        {
+            NEPTUNE_CORE_INFO("WGPUDevice created succeed.")
+        }
+        else
+        {
+            NEPTUNE_CORE_CRITICAL("WGPUDevice created failed.")
+        }
+    }
 
     /*static void WebGPUErrorCallback(WGPUErrorType error_type, const char* message, void*)
     {
@@ -34,86 +47,192 @@ namespace Neptune {
 
         NEPTUNE_CORE_CRITICAL(ss.str())
     }
+    */
 
-    WebGPUDevice::WebGPUDevice(WebGPUContext& context)
-            : WebGPUObject(context, EWebGPUObject::WebGPUInstance)
+    void WebGPUDevice::CreateBindGroup()
     {
- 
+        WGPUBindGroupDescriptor descriptor{};
+
+        wgpuDeviceCreateBindGroup(m_Device, &descriptor);
     }
 
-    void WebGPUDevice::CreateDevice()
+    void WebGPUDevice::CreateBindGroupLayout()
     {
+        WGPUBindGroupLayoutDescriptor desc{};
 
+        wgpuDeviceCreateBindGroupLayout(m_Device, &desc);
     }
 
-    void WebGPUDevice::CreateSurface()
+    void WebGPUDevice::CreateBuffer()
     {
-        WGPUStringView selector{};
-        selector.data = "#nepnep";
-        selector.length = strlen(selector.data);
+        WGPUBufferDescriptor desc{};
+
+        wgpuDeviceCreateBuffer(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateCommandEncoder()
+    {
+        WGPUCommandEncoderDescriptor desc{};
+
+        wgpuDeviceCreateCommandEncoder(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateComputePipeline()
+    {
+        WGPUComputePipelineDescriptor desc{};
+
+        wgpuDeviceCreateComputePipeline(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateComputePipelineAsync()
+    {
+        WGPUComputePipelineDescriptor desc{};
+
+        static auto request = [](
+            WGPUCreatePipelineAsyncStatus status    , 
+            WGPUComputePipeline           pipeline  , 
+            WGPUStringView                message   , 
+            void*                         userdata1 , 
+            void*
+        ) {
         
-        WGPUEmscriptenSurfaceSourceCanvasHTMLSelector htmlSelector  = {};
-        htmlSelector.chain.sType                                    = WGPUSType_EmscriptenSurfaceSourceCanvasHTMLSelector;
-        htmlSelector.chain.next                                     = nullptr;
-        htmlSelector.selector                                       = selector;
+        };
 
-        WGPUSurfaceDescriptor surfaceDesc                           = {};
-        surfaceDesc.nextInChain                                     = &htmlSelector.chain;
+        WGPUCreateComputePipelineAsyncCallbackInfo   info{};
+        info.mode                                  = WGPUCallbackMode_WaitAnyOnly;
+        info.userdata1                             = nullptr;
+        info.callback                              = request;
 
-        m_WebGPUState.m_Surface = wgpuInstanceCreateSurface(m_WebGPUState.m_Instance, &surfaceDesc);
-
-        WGPUTextureFormat viewFormats[] = { WGPUTextureFormat_RGBA8Unorm };
-        
-        WGPUSurfaceConfiguration configure                          = {};
-        configure.device                                            = m_WebGPUState.m_Device;
-        configure.format                                            = WGPUTextureFormat_RGBA8Unorm;
-        configure.usage                                             = WGPUTextureUsage_RenderAttachment;
-        configure.width                                             = 1920;
-        configure.height                                            = 1080;
-        configure.viewFormatCount                                   = 1;
-        configure.viewFormats                                       = viewFormats;
-        configure.alphaMode                                         = WGPUCompositeAlphaMode_Premultiplied;
-        configure.presentMode                                       = WGPUPresentMode_Fifo;
-        
-        wgpuSurfaceConfigure(m_WebGPUState.m_Surface, &configure);
+        wgpuDeviceCreateComputePipelineAsync(m_Device, &desc, info);
     }
 
-    void WebGPUDevice::QuerySwapChainSupport()
+    void WebGPUDevice::CreatePipelineLayout()
     {
-        WGPUAdapter adapter                                         = {};
+        WGPUPipelineLayoutDescriptor desc{};
 
-        WGPUSurfaceCapabilities capabilities                        = {};
-        WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_WebGPUState.m_Surface, adapter, &capabilities));
-
-        if(capabilities.formatCount != 0) {
-            m_SwapChainSupportDetails.format = capabilities.formats[0];
-
-            for(int i = 0; i < capabilities.formatCount; i++) {
-                auto format = capabilities.formats[i];
-                if(format == WGPUTextureFormat_RGBA8Unorm) {
-                    m_SwapChainSupportDetails.format = format;
-                    break;
-                }
-            }
-        }
-
-        if(capabilities.presentModeCount != 0) {
-            m_SwapChainSupportDetails.presentMode = capabilities.presentModes[0];
-
-            for(int i = 0; i < capabilities.presentModeCount; i++) {
-                auto mode = capabilities.presentModes[i];
-                if(mode == WGPUPresentMode_Mailbox) {
-                    m_SwapChainSupportDetails.presentMode = mode;
-                    break;
-                }
-            }
-        }
+        wgpuDeviceCreatePipelineLayout(m_Device, &desc);
     }
 
-    void WebGPUDevice::CreateQueue()
+    void WebGPUDevice::CreateQuerySet()
     {
-        m_WebGPUState.m_GraphicQueue = wgpuDeviceGetQueue(m_WebGPUState.m_Device);
-    }*/
+        WGPUQuerySetDescriptor desc{};
+
+        wgpuDeviceCreateQuerySet(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateRenderBundleEncoder()
+    {
+        WGPURenderBundleEncoderDescriptor desc{};
+
+        wgpuDeviceCreateRenderBundleEncoder(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateRenderPipeline()
+    {
+        WGPURenderPipelineDescriptor desc{};
+
+        wgpuDeviceCreateRenderPipeline(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateRenderPipelineAsync()
+    {
+        WGPURenderPipelineDescriptor desc{};
+
+        static auto request = [](
+            WGPUCreatePipelineAsyncStatus status    ,
+            WGPURenderPipeline            pipeline  ,
+            WGPUStringView                message   , 
+            void*                         userdata1 , 
+            void*
+        ) {
+        
+        };
+
+        WGPUCreateRenderPipelineAsyncCallbackInfo    info{};
+        info.mode                                  = WGPUCallbackMode_WaitAnyOnly;
+        info.userdata1                             = nullptr;
+        info.callback                              = request;
+
+        Wait(wgpuDeviceCreateRenderPipelineAsync(m_Device, &desc, info));
+    }
+
+    void WebGPUDevice::CreateSampler()
+    {
+        WGPUSamplerDescriptor desc{};
+
+        wgpuDeviceCreateSampler(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateShaderModule()
+    {
+        WGPUShaderModuleDescriptor desc{};
+
+        wgpuDeviceCreateShaderModule(m_Device, &desc);
+    }
+
+    void WebGPUDevice::CreateTexture()
+    {
+        WGPUTextureDescriptor desc{};
+
+        wgpuDeviceCreateTexture(m_Device, &desc);
+    }
+
+    void WebGPUDevice::Destroy()
+    {
+        wgpuDeviceDestroy(m_Device);
+    }
+
+    void WebGPUDevice::GetAdapterInfo()
+    {
+        WGPUAdapterInfo info{};
+
+        wgpuDeviceGetAdapterInfo(m_Device, &info);
+    }
+
+    void WebGPUDevice::GetFeatures()
+    {
+        WGPUSupportedFeatures features{};
+
+        wgpuDeviceGetFeatures(m_Device, &features);
+    }
+
+    void WebGPUDevice::GetLimits()
+    {
+        WGPULimits limits{};
+
+        wgpuDeviceGetLimits(m_Device, &limits);
+    }
+
+    void WebGPUDevice::GetLostFuture()
+    {
+        wgpuDeviceGetLostFuture(m_Device);
+    }
+
+    WGPUQueue WebGPUDevice::GetQueue()
+    {
+        return wgpuDeviceGetQueue(m_Device);
+    }
+
+    void WebGPUDevice::HasFeature()
+    {
+        WGPUFeatureName feature = WGPUFeatureName_CoreFeaturesAndLimits;
+
+        wgpuDeviceHasFeature(m_Device, feature);
+    }
+
+    void WebGPUDevice::PopErrorScope()
+    {
+        WGPUPopErrorScopeCallbackInfo info{};
+
+        wgpuDevicePopErrorScope(m_Device, info);
+    }
+
+    void WebGPUDevice::PushErrorScope()
+    {
+        WGPUErrorFilter filter{};
+
+        wgpuDevicePushErrorScope(m_Device, filter);
+    }
 
 }
 

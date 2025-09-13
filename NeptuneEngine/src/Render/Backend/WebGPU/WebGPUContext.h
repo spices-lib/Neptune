@@ -13,15 +13,19 @@
 namespace Neptune {
 
     class WebGPUObject;
-    class WebGPUInstance;
-    class WebGPUAdapter;
-    class WebGPUDevice;
 
-    enum class EWebGPUObject
+    /**
+    * @brief WebGPU object Type enum.
+    */
+    enum class EWebGPUObject : uint8_t
     {
-        WebGPUInstance,
-        WebGPUAdapter,
-        WebGPUDevice
+        WebGPUInstance = 0,
+        WebGPUSurface  = 1,
+        WebGPUAdapter  = 2,
+        WebGPUDevice   = 3,
+        WebGPUQueue    = 4,
+
+        MAX            = 5
     };
 
     /**
@@ -44,17 +48,60 @@ namespace Neptune {
         /**
         * @brief Registry WebGPUObject to this context.
         * 
-        * @param[in] type EWebGPUObject.
-        * @param[in] object WebGPUObject pointer.
+        * @param[in] object WebGPU Object.
         */
-        void Registry(EWebGPUObject type, SP<WebGPUObject> object);
+        template<typename T>
+        void Registry(SP<T> object);
+
+        /**
+        * @brief UnRegistry WebGPUObject from this context.
+        * 
+        * @param[in] object WebGPU Object.
+        */
+        template<typename T>
+        void UnRegistry(SP<T> object);
+
+        /**
+        * @brief Get WebGPUObject from this context.
+        *
+        * @tparam T WebGPU Object.
+        * 
+        * @return Returns WebGPU Object.
+        */
+        template<typename T>
+        T* Get();
 
     private:
 
-        SP<WebGPUInstance>  m_Instance;  // @brief WebGPUInstance
-        SP<WebGPUAdapter>   m_Adapter;   // @brief WebGPUAdapter
-        SP<WebGPUDevice>    m_Device;    // @brief WebGPUDevice
+        /**
+        * @brief WebGPU Objects
+        */
+        std::array<SP<WebGPUObject>, static_cast<uint8_t>(EWebGPUObject::MAX)>  m_Objects;
     };
+
+    template<typename T>
+    void WebGPUContext::Registry(SP<T> object)
+    {
+        const auto position = static_cast<uint8_t>(object->GetType());
+
+        m_Objects[position] = object;
+    }
+
+    template <typename T>
+    void WebGPUContext::UnRegistry(SP<T> object)
+    {
+        const auto position = static_cast<uint8_t>(object->GetType());
+
+        m_Objects[position] = nullptr;
+    }
+
+    template<typename T>
+    T* WebGPUContext::Get()
+    {
+        const auto position = static_cast<uint8_t>(T::Type);
+
+        return static_cast<T*>(m_Objects[position].get());
+    }
 
 }
 

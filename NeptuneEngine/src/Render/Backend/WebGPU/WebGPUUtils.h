@@ -37,7 +37,7 @@ namespace Neptune {
             {
                 return;
             }
-            case WGPUWaitStatus_Error:
+            case WGPUStatus_Error:
             {
                 NEPTUNE_CORE_ERROR("WebGPU Status Error.")
                     return;
@@ -57,7 +57,7 @@ namespace Neptune {
     {
         switch (statue)
         {
-            case WGPUStatus_Success: 
+            case WGPUWaitStatus_Success:
             {
                 return;
             }

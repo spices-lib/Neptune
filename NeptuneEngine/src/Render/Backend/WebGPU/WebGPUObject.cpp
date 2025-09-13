@@ -9,12 +9,26 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "WebGPUObject.h"
+#include "WebGPUInstance.h"
 
 namespace Neptune {
-
-	void WebGPUObject::Registry()
+	
+	WebGPUObject::WebGPUObject(WebGPUContext& context)
+		: m_Context(context)
 	{
-		m_WebGPUContext.get().Registry(m_EWebGPUObject, shared_from_this());
+		m_Context.Registry(shared_from_this());
+	}
+
+	WebGPUObject::~WebGPUObject()
+	{
+		Release(this);
+		
+		m_Context.UnRegistry(shared_from_this());
+	}
+
+	void WebGPUObject::Wait(const WGPUFuture& future)
+	{
+		m_Context.Get<WebGPUInstance>()->Wait(future);
 	}
 
 }

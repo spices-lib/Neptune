@@ -20,6 +20,13 @@ namespace Neptune {
     public:
 
         /**
+        * @brief Mark as WebGPUInstance Type.
+        */
+        static constexpr EWebGPUObject Type = EWebGPUObject::WebGPUInstance;
+        
+    public:
+
+        /**
         * @brief Constructor Function.
         * 
         * @param[in] context The global WebGPUContext.
@@ -29,44 +36,78 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~WebGPUInstance() override;
+        ~WebGPUInstance() override = default;
+
+        /**
+        * @brief Get Row WebGPU Object.
+        *
+        * @return Returns Row WebGPU Object.
+        */
+        WGPUInstance& Row() { return m_Instance; }
+
+        /**
+        * @brief Execute future and wait for done or timeout.
+        *
+        * @param[in] future WGPUFuture.
+        */
+        void Wait(const WGPUFuture& future);
+
+        /**
+        * @brief Create WebGPU Surface.
+        *
+        * @param[in] htmlCanvas HTML Canvas id.
+        *
+        * @return Returns WGPUSurface.
+        */
+        WGPUSurface CreateSurface(const std::string& htmlCanvas);
+
+        /**
+        * @brief Request WGPUAdapter.
+        *
+        * @return Returns WGPUAdapter.
+        */
+        WGPUAdapter RequestAdapter();
+
+    public:
+
+        /**
+        * @brief Get EWebGPUObject.
+        *
+        * @return Returns EWebGPUObject.
+        */
+        const EWebGPUObject& GetType() const override { return WebGPUInstance::Type; };
 
     private:
 
         /**
         * @brief Create WGPUInstance.
         */
-        void CreateInstance();
+        void Create();
 
         /**
         * @brief Create WebGPU Instance Features.
         */
-        void GetInstanceFeatures();
+        void GetFeatures();
 
         /**
         * @brief Create WebGPU Instance Limits.
         */
-        void GetInstanceLimits();
+        void GetLimits();
 
         /**
         * @brief Is WebGPU Instance has Feature.
         */
-        void HasInstanceFeature();
-
-        /**
-        * @brief Create WebGPU Surface.
-        */
-        void CreateSurface();
+        void HasFeature();
 
         /**
         * @brief Get WebGPU WGSL Features.
         */
-        void GetWGSLLanguageFeatures();
+        void GetWGSLFeatures();
 
         /**
         * @brief Is WebGPU WGSL has Feature.
         */
-        void HasWGSLLanguageFeature();
+        void HasWGSLFeature();
 
         /**
         * @brief Process Events.
@@ -74,26 +115,9 @@ namespace Neptune {
         void ProcessEvents();
 
         /**
-        * @brief Request WGPUAdapter.
-        * 
-        * @return Returns WGPUAdapter.
-        */
-        WGPUAdapter RequestAdapter();
-
-        /**
         * @brief Execute future list and wait for done or timeout.
         */
-        void WaitAny();
-
-        /**
-        * @brief Add Ref.
-        */
-        void AddRef();
-
-        /**
-        * @brief Release WGPUInstance.
-        */
-        void Release();
+        void Wait();
 
         /**
         * @brief Push a future to FutureList.
@@ -112,8 +136,28 @@ namespace Neptune {
         /**
         * @brief Future waited list.
         */
-        std::vector<WGPUFuture> m_Future{};
+        std::vector<WGPUFuture> m_FutureList{};
+
     };
+
+    template<>
+    inline void WebGPUObject::AddRef(WebGPUInstance* object)
+    {
+        wgpuInstanceAddRef(object->Row());
+    }
+    
+    template<>
+    inline void WebGPUObject::Release(WebGPUInstance* object)
+    {
+        if (!object->Row())
+        {
+            return;
+        }
+
+        wgpuInstanceRelease(object->Row());
+        object->Row() = nullptr;
+    }
+    
 }
 
 #endif

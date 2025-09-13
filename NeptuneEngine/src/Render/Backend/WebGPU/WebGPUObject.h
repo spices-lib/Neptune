@@ -27,37 +27,80 @@ namespace Neptune {
         * @brief Constructor Function.
         *
         * @param[in] context The global WebGPUContext.
-        * @param[in] t EWebGPUObject.
         */
-        WebGPUObject(WebGPUContext& context, EWebGPUObject t)
-                : m_WebGPUContext(std::ref(context))
-                , m_EWebGPUObject(t)
-        {}
+        explicit WebGPUObject(WebGPUContext& context);
 
         /**
         * @brief Destructor Function.
         */
-    	~WebGPUObject() override = default;
+    	~WebGPUObject() override;
+
+    public:
+
+        /**
+        * @brief Get EWebGPUObject.
+        * 
+        * @return Returns EWebGPUObject.
+        */
+        virtual const EWebGPUObject& GetType() const = 0;
 
     protected:
 
         /**
-        * @brief Registry this to WebGPUContext.
+        * @brief Template of Add Ref.
+        * 
+        * @tparam T The WebGPUObject.
         */
-        void Registry();
+        template<typename T>
+        static void AddRef(T*);
+
+        /**
+        * @brief Template of Release WebGPU Object.
+        *
+        * @tparam T The WebGPUObject.
+        */
+        template<typename T>
+        static void Release(T*);
+
+        /**
+        * @brief Template of SetLabel WebGPU Object.
+        *
+        * @tparam T The WebGPUObject.
+        * @param[in] label Label.
+        */
+        template<typename T>
+        static void SetLabel(T*, const std::string& label) {}
+
+    protected:
+
+        /**
+        * @brief Wait delegate to be down.
+        *
+        * @param[in] future WGPUFuture.
+        */
+        void Wait(const WGPUFuture& future);
 
     protected:
 
         /**
         * @brief The global WebGPUContext Referenced from WebGPURenderBackend.
         */
-        std::reference_wrapper<WebGPUContext> m_WebGPUContext;
+        WebGPUContext& m_Context;
 
-        /**
-        * @brief EWebGPUObject.
-        */
-        EWebGPUObject m_EWebGPUObject;
     };
+
+    template <typename T>
+    void WebGPUObject::AddRef(T*)
+    {
+        NEPTUNE_CORE_WARN("WebGPUObject Not implement AddRef API.")
+    }
+
+    template <typename T>
+    void WebGPUObject::Release(T*)
+    {
+        NEPTUNE_CORE_WARN("WebGPUObject Not implement Release API.")
+    }
+    
 }
 
 #endif

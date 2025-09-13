@@ -35,11 +35,13 @@ namespace Neptune {
 
     void Application::Destroy()
     {
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifndef NP_PLATFORM_WINDOWS
+
         S_Instance.reset();
         S_Instance = nullptr;
-#endif
+
         NEPTUNE_CORE_INFO("Application destroyed.")
+#endif
     }
 
     Application::Application()

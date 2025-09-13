@@ -13,17 +13,12 @@
 namespace Neptune {
 
     WebGPUInstance::WebGPUInstance(WebGPUContext& context)
-            : WebGPUObject(context, EWebGPUObject::WebGPUInstance)
+            : WebGPUObject(context)
     {
-        CreateInstance();
+        Create();
     }
 
-    WebGPUInstance::~WebGPUInstance()
-    {
-        Release();
-    }
-
-    void WebGPUInstance::CreateInstance()
+    void WebGPUInstance::Create()
     {
         WGPUInstanceFeatureName             feature[1];
         feature[0]                        = WGPUInstanceFeatureName_TimedWaitAny;
@@ -34,48 +29,58 @@ namespace Neptune {
 
         m_Instance = wgpuCreateInstance(&descriptor);
 
-        if (!m_Instance) 
+        if (m_Instance) 
+        {
+            NEPTUNE_CORE_INFO("WGPUInstance created succeed.")
+        }
+        else 
         {
             NEPTUNE_CORE_CRITICAL("WGPUInstance created failed.")
         }
     }
 
-    void WebGPUInstance::GetInstanceFeatures() 
+    void WebGPUInstance::GetFeatures() 
     {
         WGPUSupportedInstanceFeatures features;
 
         wgpuGetInstanceFeatures(&features);
     }
 
-    void WebGPUInstance::GetInstanceLimits() 
+    void WebGPUInstance::GetLimits() 
     {
         WGPUInstanceLimits limit;
 
         WEBGPU_CHECK(wgpuGetInstanceLimits(&limit))
     }
 
-    void WebGPUInstance::HasInstanceFeature() 
+    void WebGPUInstance::HasFeature() 
     {
         WGPUInstanceFeatureName name = WGPUInstanceFeatureName_TimedWaitAny;
 
         wgpuHasInstanceFeature(name);
     }
 
-    void WebGPUInstance::CreateSurface() 
+    WGPUSurface WebGPUInstance::CreateSurface(const std::string& htmlCanvas)
     {
-        WGPUSurfaceDescriptor descriptor{};
+        WGPUEmscriptenSurfaceSourceCanvasHTMLSelector                 htmlSelector  = {};
+        htmlSelector.chain.sType                                    = WGPUSType_EmscriptenSurfaceSourceCanvasHTMLSelector;
+        htmlSelector.chain.next                                     = nullptr;
+        htmlSelector.selector                                       = { htmlCanvas.c_str()};
 
-        wgpuInstanceCreateSurface(m_Instance, &descriptor);
+        WGPUSurfaceDescriptor                                         desc = {};
+        desc.nextInChain                                            = &htmlSelector.chain;
+
+        return wgpuInstanceCreateSurface(m_Instance, &desc);
     }
 
-    void WebGPUInstance::GetWGSLLanguageFeatures() 
+    void WebGPUInstance::GetWGSLFeatures() 
     {
         WGPUSupportedWGSLLanguageFeatures features{};
 
         wgpuInstanceGetWGSLLanguageFeatures(m_Instance, &features);
     }
 
-    void WebGPUInstance::HasWGSLLanguageFeature() 
+    void WebGPUInstance::HasWGSLFeature() 
     {
         WGPUWGSLLanguageFeatureName name = WGPUWGSLLanguageFeatureName_ReadonlyAndReadwriteStorageTextures;
 
@@ -111,49 +116,39 @@ namespace Neptune {
         info.userdata1                  = &adaptor;
         info.callback                   = request;
 
-        PushToFutureList(wgpuInstanceRequestAdapter(m_Instance, &options, info));
-
-        WaitAny();
+        Wait(wgpuInstanceRequestAdapter(m_Instance, &options, info));
 
         return adaptor;
     }
 
-    void WebGPUInstance::WaitAny() 
+    void WebGPUInstance::Wait() 
     {
-        if (m_Future.empty())
+        if (m_FutureList.empty())
         {
             return;
         }
 
-        std::vector<WGPUFutureWaitInfo> infos(m_Future.size());
+        std::vector<WGPUFutureWaitInfo> infos(m_FutureList.size());
 
-        for (int i = 0; i < m_Future.size(); i++)
+        for (int i = 0; i < m_FutureList.size(); i++)
         {
-            infos[i].future = m_Future[i];
+            infos[i].future = m_FutureList[i];
         }
 
         WEBGPU_WAITCHECK(wgpuInstanceWaitAny(m_Instance, infos.size(), infos.data(), WaitTimeoutNS))
     }
 
-    void WebGPUInstance::AddRef() 
+    void WebGPUInstance::Wait(const WGPUFuture& future)
     {
-        wgpuInstanceAddRef(m_Instance);
-    }
+        WGPUFutureWaitInfo info{};
+        info.future = future;
 
-    void WebGPUInstance::Release() 
-    {
-        if (!m_Instance)
-        {
-            return;
-        }
-
-        wgpuInstanceRelease(m_Instance);
-        m_Instance = nullptr;
+        WEBGPU_WAITCHECK(wgpuInstanceWaitAny(m_Instance, 1, &info, WaitTimeoutNS))
     }
 
     void WebGPUInstance::PushToFutureList(const WGPUFuture& future)
     {
-        m_Future.push_back(future);
+        m_FutureList.push_back(future);
     }
 
 }
