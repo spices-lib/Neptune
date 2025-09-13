@@ -10,6 +10,7 @@
 
 #include "WebGPUAdapter.h"
 #include "WebGPUInstance.h"
+#include "WebGPUCallback.h"
 
 namespace Neptune {
 
@@ -58,7 +59,16 @@ namespace Neptune {
 
     WGPUDevice WebGPUAdapter::RequestDevice()
     {
-        WGPUDeviceDescriptor desc{};
+         WGPUDeviceLostCallbackInfo           deviceLostInfo{};
+        deviceLostInfo.mode                = WGPUCallbackMode_WaitAnyOnly;
+        deviceLostInfo.callback            = WebGPUCallback::WebGPUDeviceLostCallback;
+
+        WGPUUncapturedErrorCallbackInfo      errorInfo{};
+        errorInfo.callback                 = WebGPUCallback::WebGPUUncapturedErrorCallback;
+
+        WGPUDeviceDescriptor                 desc{};
+        desc.deviceLostCallbackInfo        = deviceLostInfo;
+        desc.uncapturedErrorCallbackInfo   = errorInfo;
 
         WGPUDevice device = nullptr;
 

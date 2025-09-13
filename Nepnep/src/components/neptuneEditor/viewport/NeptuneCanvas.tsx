@@ -31,21 +31,10 @@ const initModule = async() => {
         monitorRunDependencies: function () {
             // no run dependencies to log
         }
-    };
+    }
 
     window.onerror = function () {
         console.log("onerror: " + event)
-    };
-
-    // Initialize the graphics adapter
-    {
-        if (!navigator.gpu) {
-            throw Error("WebGPU not supported.")
-        }
-
-        const adapter = await navigator.gpu?.requestAdapter()
-        const device = await adapter?.requestDevice()
-        window.Module.preinitializedWebGPUDevice = device
     }
 
     {
