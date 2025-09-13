@@ -9,10 +9,10 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "VulkanRenderBackend.h"
-#include "VulkanInstance.h"
-#include "VulkanSurface.h"
-#include "VulkanPhysicalDevice.h"
-#include "VulkanDevice.h"
+#include "Infrastructure/VulkanInstance.h"
+#include "Infrastructure/VulkanSurface.h"
+#include "Infrastructure/VulkanPhysicalDevice.h"
+#include "Infrastructure/VulkanDevice.h"
 
 namespace Neptune {
 

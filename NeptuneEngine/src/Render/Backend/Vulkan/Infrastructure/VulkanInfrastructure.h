@@ -10,7 +10,7 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 #include "VulkanContext.h"
-#include "VulkanUtils.h"
+#include "Render/Backend/Vulkan/VulkanUtils.h"
 
 namespace Neptune {
 
