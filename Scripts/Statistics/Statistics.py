@@ -40,6 +40,7 @@ extensions: dict = {
     'rmiss':    1,
     'bat':      1,
     'sh':       1,
+    'yml':      1,
 }
 
 '''
@@ -56,6 +57,7 @@ ignoreFolders: dict = {
     'venv':             1,
     'node_modules':     1,
     '.next':            1,
+    'public':           1,
 }
 
 '''
