@@ -10,9 +10,12 @@
 
 #include "VulkanRenderBackend.h"
 #include "Infrastructure/VulkanInstance.h"
-#include "Infrastructure/VulkanSurface.h"
+#include "Infrastructure/KHR/VulkanSurface.h"
 #include "Infrastructure/VulkanPhysicalDevice.h"
 #include "Infrastructure/VulkanDevice.h"
+#include "Infrastructure/VulkanMemoryAllocator.h"
+#include "Infrastructure/VulkanThreadQueue.h"
+#include "Infrastructure/KHR/VulkanSwapChain.h"
 
 namespace Neptune {
 
@@ -25,6 +28,9 @@ namespace Neptune {
         m_Context->Registry<VulkanSurface>();
         m_Context->Registry<VulkanPhysicalDevice>();
         m_Context->Registry<VulkanDevice>();
+        m_Context->Registry<VulkanThreadQueue>();
+        m_Context->Registry<VulkanMemoryAllocator>();
+        m_Context->Registry<VulkanSwapChain>();
     }
 
     VulkanRenderBackend::~VulkanRenderBackend()

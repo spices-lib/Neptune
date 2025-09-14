@@ -10,7 +10,7 @@
 
 #include "VulkanPhysicalDevice.h"
 #include "VulkanInstance.h"
-#include "VulkanSurface.h"
+#include "KHR/VulkanSurface.h"
 
 namespace Neptune {
 

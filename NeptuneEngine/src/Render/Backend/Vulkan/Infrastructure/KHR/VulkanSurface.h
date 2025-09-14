@@ -8,8 +8,8 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "VulkanInfrastructure.h"
-#include "VulkanInstance.h"
+#include "Render/Backend/Vulkan/Infrastructure/VulkanInfrastructure.h"
+#include "Render/Backend/Vulkan/Infrastructure/VulkanInstance.h"
 
 namespace Neptune {
 

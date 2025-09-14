@@ -23,10 +23,13 @@ namespace Neptune {
         VulkanSurface          = 1,
         VulkanPhysicalSurface  = 2,
         VulkanDevice           = 3,
-        VulkanQueue            = 4,
+        VulkanThreadQueue      = 4,
         VulkanMemoryAllocator  = 5,
+        VulkanSwapChain        = 6,
+        VulkanCommandPool      = 7,
+        VulkanDescriptorPool   = 8,
 
-        MAX                    = 6
+        MAX                    = 9
     };
 
     /**
