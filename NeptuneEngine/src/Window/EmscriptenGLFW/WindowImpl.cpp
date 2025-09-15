@@ -1,6 +1,6 @@
 /**
-* @file EmscriptenGLFWWindowImpl.cpp.
-* @brief The EmscriptenGLFWWindowImpl Class Implementation.
+* @file WindowImpl.cpp.
+* @brief The WindowImpl Class Implementation.
 * @author Spices.
 */
 
@@ -8,7 +8,7 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "EmscriptenGLFWWindowImpl.h"
+#include "WindowImpl.h"
 #include "Core/Event/WindowEvent.h"
 #include "Core/Event/KeyEvent.h"
 #include "Core/Event/MouseEvent.h"
@@ -16,9 +16,9 @@
 #include <GLFW/glfw3.h>
 #include <GLFW/emscripten_glfw3.h>
 
-namespace Neptune {
+namespace Neptune::EmscriptenGLFW {
 
-    EmscriptenGLFWWindowImpl::EmscriptenGLFWWindowImpl(const WindowInfo& initInfo, WindowImplement implement)
+    WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement)
             : Window(initInfo, implement)
     {
         // initialize the library
@@ -55,7 +55,7 @@ namespace Neptune {
         SetInternalCallBack();
     }
 
-    EmscriptenGLFWWindowImpl::~EmscriptenGLFWWindowImpl()
+    WindowImpl::~WindowImpl()
     {
         if (m_Windows) {
             glfwDestroyWindow(m_Windows);
@@ -63,22 +63,22 @@ namespace Neptune {
         glfwTerminate();
     }
 
-    bool EmscriptenGLFWWindowImpl::IsWindowActive()
+    bool WindowImpl::IsWindowActive()
     {
         return !glfwWindowShouldClose(m_Windows);
     }
 
-    void EmscriptenGLFWWindowImpl::PollEvents()
+    void WindowImpl::PollEvents()
     {
         glfwPollEvents();
     }
 
-    void* EmscriptenGLFWWindowImpl::NativeWindow()
+    void* WindowImpl::NativeWindow()
     {
         return m_Windows;
     }
 
-    void EmscriptenGLFWWindowImpl::SetInternalCallBack() const
+    void WindowImpl::SetInternalCallBack() const
     {
         // print the version on the console
         NEPTUNE_CORE_INFO(glfwGetVersionString())
@@ -99,7 +99,7 @@ namespace Neptune {
         glfwSetWindowSizeCallback(m_Windows, [](GLFWwindow* window, int width, int height)
         {
             // reinterpret the pointer to this class.
-            const auto thisWindows = static_cast<EmscriptenGLFWWindowImpl*>(glfwGetWindowUserPointer(window));
+            const auto thisWindows = static_cast<WindowImpl*>(glfwGetWindowUserPointer(window));
 
             // Set this class's variable.
             thisWindows->m_WindowsResized    = true;

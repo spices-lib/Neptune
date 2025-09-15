@@ -8,11 +8,11 @@
 #include "Window.h"
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-#include "Window/EmscriptenGLFW/EmscriptenGLFWWindowImpl.h"
+#include "Window/EmscriptenGLFW/WindowImpl.h"
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-#include "Window/GLFW/GLFWWindowImpl.h"
+#include "Window/GLFW/WindowImpl.h"
 #endif
 
 namespace Neptune {
@@ -26,7 +26,7 @@ namespace Neptune {
 #ifdef NP_PLATFORM_EMSCRIPTEN
             case WindowImplement::emscripten_glfw:
             {
-                S_Instance = CreateSP<EmscriptenGLFWWindowImpl>(initInfo, implement);
+                S_Instance = CreateSP<EmscriptenGLFW::WindowImpl>(initInfo, implement);
                 break;
             }
 #endif
@@ -34,7 +34,7 @@ namespace Neptune {
 #ifdef NP_PLATFORM_WINDOWS
             case WindowImplement::GLFW:
             {
-                S_Instance = CreateSP<GLFWWindowImpl>(initInfo, implement);
+                S_Instance = CreateSP<GLFW::WindowImpl>(initInfo, implement);
                 break;
             }
 #endif

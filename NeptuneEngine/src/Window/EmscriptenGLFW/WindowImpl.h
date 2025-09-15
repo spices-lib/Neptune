@@ -1,6 +1,6 @@
 /**
-* @file EmscriptenGLFWWindowImpl.h.
-* @brief The EmscriptenGLFWWindowImpl Class Definitions.
+* @file WWindowImpl.h.
+* @brief The WindowImpl Class Definitions.
 * @author Spices.
 */
 
@@ -12,14 +12,14 @@
 
 struct GLFWwindow;
 
-namespace Neptune {
+namespace Neptune::EmscriptenGLFW {
 
     /**
-    * @brief EmscriptenGLFWWindowImpl Class.
-    * This class defines the EmscriptenGLFWWindowImpl behaves.
+    * @brief WindowImpl Class.
+    * This class defines the WindowImpl behaves.
     * This class is just a wrapper of glfwWindow.
     */
-    class EmscriptenGLFWWindowImpl : public Window
+    class WindowImpl : public Window
     {
     public:
 
@@ -28,12 +28,12 @@ namespace Neptune {
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
         */
-        EmscriptenGLFWWindowImpl(const WindowInfo& initInfo, WindowImplement implement);
+        WindowImpl(const WindowInfo& initInfo, WindowImplement implement);
 
         /**
         * @brief Destructor Function.
         */
-        ~EmscriptenGLFWWindowImpl() override;
+        ~WindowImpl() override;
 
         /**
         * @brief Interface of determine if window is still active.

@@ -1,6 +1,6 @@
 /**
-* @file GLFWWindowImpl.h.
-* @brief The GLFWWindowImpl Class Definitions.
+* @file WindowImpl.h.
+* @brief The WindowImpl Class Definitions.
 * @author Spices.
 */
 
@@ -12,14 +12,14 @@
 
 struct GLFWwindow;
 
-namespace Neptune {
+namespace Neptune::GLFW {
 
     /**
-    * @brief GLFWWindowImpl Class.
-    * This class defines the GLFWWindowImpl behaves.
+    * @brief WindowImpl Class.
+    * This class defines the WindowImpl behaves.
     * This class is just a wrapper of glfwWindow.
     */
-    class GLFWWindowImpl : public Window
+    class WindowImpl : public Window
     {
     public:
 
@@ -28,12 +28,12 @@ namespace Neptune {
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
         */
-        GLFWWindowImpl(const WindowInfo& initInfo, WindowImplement implement);
+        WindowImpl(const WindowInfo& initInfo, WindowImplement implement);
 
         /**
         * @brief Destructor Function.
         */
-        ~GLFWWindowImpl() override;
+        ~WindowImpl() override;
 
         /**
         * @brief Interface of determine if window is still active.
