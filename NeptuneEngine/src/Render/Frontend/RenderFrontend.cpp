@@ -8,8 +8,8 @@
 #include "RenderFrontend.h"
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-#include "Render/Backend/WebGPU/WebGPURenderBackend.h"
-#include "Render/Backend/WebGL/WebGLRenderBackend.h"
+#include "Render/Backend/WebGPU/RenderBackend.h"
+#include "Render/Backend/WebGL/RenderBackend.h"
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
@@ -24,8 +24,8 @@ namespace Neptune {
         switch(backend)
         {
 #ifdef NP_PLATFORM_EMSCRIPTEN
-            case RenderBackendEnum::WebGPU: return CreateSP<WebGPURenderBackend>(backend);
-            case RenderBackendEnum::WebGL:  return CreateSP<WebGLRenderBackend>(backend);
+            case RenderBackendEnum::WebGPU: return CreateSP<WebGPU::RenderBackend>(backend);
+            case RenderBackendEnum::WebGL:  return CreateSP<WebGL::RenderBackend>(backend);
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS

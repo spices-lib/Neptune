@@ -1,6 +1,6 @@
 /**
-* @file WebGPUCallback.cpp.
-* @brief The WebGPUCallback Class Implementation.
+* @file Callback.cpp.
+* @brief The Callback Class Implementation.
 * @author Spices.
 */
 
@@ -8,11 +8,11 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "WebGPUCallback.h"
+#include "Callback.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-	void WebGPUCallback::WebGPUDeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*)
+	void Callback::DeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*)
 	{
         const char* label = "";
         switch (reason)
@@ -30,7 +30,7 @@ namespace Neptune {
         NEPTUNE_CORE_ERROR(ss.str())
 	}
 
-	void WebGPUCallback::WebGPUUncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*)
+	void Callback::UncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*)
 	{
 		if (type == WGPUErrorType_NoError)
         {

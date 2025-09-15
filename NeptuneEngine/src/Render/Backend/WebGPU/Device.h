@@ -1,6 +1,6 @@
 /**
-* @file WebGPUDevice.h.
-* @brief The WebGPUDevice Class Definitions.
+* @file Device.h.
+* @brief The Device Class Definitions.
 * @author Spices.
 */
 
@@ -8,51 +8,35 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "WebGPUObject.h"
+#include "Infrastructure.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
     /**
-    * @brief WebGPUDevice Class.
+    * @brief Device Class.
     */
-    class WebGPUDevice : public WebGPUObject
+    class Device : public Infrastructure<WGPUDevice, EInfrastructure::Device>
     {
     public:
         
         /**
-        * @brief Mark as WebGPUDevice Type.
+        * @brief Mark as Device Infrastructure Type.
         */
-        static constexpr EWebGPUObject Type = EWebGPUObject::WebGPUDevice;
+        static constexpr EInfrastructure Type = Infrastructure<WGPUDevice, EInfrastructure::Device>::Type;
         
     public:
 
         /**
         * @brief Constructor Function.
         * 
-        * @param[in] context The global WebGPUContext.
+        * @param[in] context The global WebGPU Context.
         */
-        explicit WebGPUDevice(WebGPUContext& context);
+        explicit Device(Context& context);
 
         /**
         * @brief Destructor Function.
         */
-        ~WebGPUDevice() override = default;
-
-        /**
-        * @brief Get Row WebGPU Object.
-        * 
-        * @return Returns Row WebGPU Object.
-        */
-        WGPUDevice& Row() { return m_Device; }
-    
-    public:
-
-        /**
-        * @brief Get EWebGPUObject.
-        *
-        * @return Returns EWebGPUObject.
-        */
-        const EWebGPUObject& GetType() const override { return WebGPUDevice::Type; };
+        ~Device() override = default;
 
     public:
 
@@ -172,40 +156,33 @@ namespace Neptune {
         * @brief Push Error Scope to WebGPU Device.
         */
         void PushErrorScope();
-
-    private:
-
-        /**
-        * @brief WGPUDevice.
-        */
-        WGPUDevice m_Device = nullptr;
         
     };
 
     template<>
-    inline void WebGPUObject::AddRef(WebGPUDevice* object)
+    inline void InfrastructureBase::AddRef(Device* object)
     {
-        wgpuDeviceAddRef(object->Row());
+        wgpuDeviceAddRef(object->Handle());
     }
     
     template<>
-    inline void WebGPUObject::Release(WebGPUDevice* object)
+    inline void InfrastructureBase::Release(Device* object)
     {
-        if (!object->Row())
+        if (!object->Handle())
         {
             return;
         }
 
-        wgpuDeviceRelease(object->Row());
-        object->Row() = nullptr;
+        wgpuDeviceRelease(object->Handle());
+        object->SetHandleNullptr();
     }
 
     template<>
-    inline void WebGPUObject::SetLabel(WebGPUDevice* object, const std::string& label)
+    inline void InfrastructureBase::SetLabel(Device* object, const std::string& label)
     {
         WGPUStringView view{ label.c_str() };
 
-        wgpuDeviceSetLabel(object->Row(), view);
+        wgpuDeviceSetLabel(object->Handle(), view);
     }
     
 }

@@ -1,6 +1,6 @@
 /**
-* @file WebGPUAdapter.cpp.
-* @brief The WebGPUAdapter Class Implementation.
+* @file Adapter.cpp.
+* @brief The Adapter Class Implementation.
 * @author Spices.
 */
 
@@ -8,18 +8,18 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "WebGPUAdapter.h"
-#include "WebGPUInstance.h"
-#include "WebGPUCallback.h"
+#include "Adapter.h"
+#include "Instance.h"
+#include "Callback.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-	WebGPUAdapter::WebGPUAdapter(WebGPUContext& context)
-		: WebGPUObject(context)
+    Adapter::Adapter(Context& context)
+		: Infrastructure(context)
 	{
-        m_Adapter = m_Context.Get<WebGPUInstance>()->RequestAdapter();
+        m_Handle = m_Context.Get<Instance>()->RequestAdapter();
 
-        if (m_Adapter)
+        if (m_Handle)
         {
             NEPTUNE_CORE_INFO("WGPUAdapter created succeed.")
         }
@@ -29,42 +29,42 @@ namespace Neptune {
         }
     }
 
-    void WebGPUAdapter::GetFeatures() 
+    void Adapter::GetFeatures()
     {
         WGPUSupportedFeatures features{};
 
-        wgpuAdapterGetFeatures(m_Adapter, &features);
+        wgpuAdapterGetFeatures(m_Handle, &features);
     }
 
-    void WebGPUAdapter::GetInfo() 
+    void Adapter::GetInfo()
     {
         WGPUAdapterInfo info{};
 
-        WEBGPU_CHECK(wgpuAdapterGetInfo(m_Adapter, &info))
+        WEBGPU_CHECK(wgpuAdapterGetInfo(m_Handle, &info))
     }
 
-    void WebGPUAdapter::GetLimits() 
+    void Adapter::GetLimits()
     {
         WGPULimits limits{};
 
-        WEBGPU_CHECK(wgpuAdapterGetLimits(m_Adapter, &limits))
+        WEBGPU_CHECK(wgpuAdapterGetLimits(m_Handle, &limits))
     }
 
-    void WebGPUAdapter::HasFeature() 
+    void Adapter::HasFeature()
     {
         WGPUFeatureName feature = WGPUFeatureName_CoreFeaturesAndLimits;
 
-        wgpuAdapterHasFeature(m_Adapter, feature);
+        wgpuAdapterHasFeature(m_Handle, feature);
     }
 
-    WGPUDevice WebGPUAdapter::RequestDevice()
+    WGPUDevice Adapter::RequestDevice()
     {
          WGPUDeviceLostCallbackInfo           deviceLostInfo{};
         deviceLostInfo.mode                = WGPUCallbackMode_WaitAnyOnly;
-        deviceLostInfo.callback            = WebGPUCallback::WebGPUDeviceLostCallback;
+        deviceLostInfo.callback            = Callback::DeviceLostCallback;
 
         WGPUUncapturedErrorCallbackInfo      errorInfo{};
-        errorInfo.callback                 = WebGPUCallback::WebGPUUncapturedErrorCallback;
+        errorInfo.callback                 = Callback::UncapturedErrorCallback;
 
         WGPUDeviceDescriptor                 desc{};
         desc.deviceLostCallbackInfo        = deviceLostInfo;
@@ -90,7 +90,7 @@ namespace Neptune {
         info.userdata1                  = &device;
         info.callback                   = request;
 
-        Wait(wgpuAdapterRequestDevice(m_Adapter, &desc, info));
+        Wait(wgpuAdapterRequestDevice(m_Handle, &desc, info));
 
         return device;
     }

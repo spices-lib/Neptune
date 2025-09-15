@@ -1,6 +1,6 @@
 /**
-* @file WebGLRenderBackend.cpp.
-* @brief The WebGLRenderBackend Class Implementation.
+* @file RenderBackend.cpp.
+* @brief The RenderBackend Class Implementation.
 * @author Spices.
 */
 
@@ -8,7 +8,7 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "WebGLRenderBackend.h"
+#include "RenderBackend.h"
 
 #include <emscripten.h>
 #include <emscripten/emscripten.h>
@@ -26,9 +26,9 @@
 #include <webgpu/webgpu_cpp.h>
 #include "Window/Window.h"
 
-namespace Neptune {
+namespace Neptune::WebGL {
 
-    WebGLRenderBackend::WebGLRenderBackend(RenderBackendEnum backend)
+    RenderBackend::RenderBackend(RenderBackendEnum backend)
         : RenderFrontend(backend)
     {
         EmscriptenWebGLContextAttributes attrs;
@@ -37,22 +37,22 @@ namespace Neptune {
         emscripten_webgl_make_context_current(ctx);
     }
 
-    WebGLRenderBackend::~WebGLRenderBackend()
+    RenderBackend::~RenderBackend()
     {
 
     }
 
-    void WebGLRenderBackend::BeginFrame()
+    void RenderBackend::BeginFrame()
     {
 
     }
 
-    void WebGLRenderBackend::EndFrame()
+    void RenderBackend::EndFrame()
     {
 
     }
 
-    void WebGLRenderBackend::RenderFrame()
+    void RenderBackend::RenderFrame()
     {
         glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -1,6 +1,6 @@
 /**
-* @file WebGPUCallback.h.
-* @brief The WebGPUCallback Class Definitions.
+* @file Callback.h.
+* @brief The Callback Class Definitions.
 * @author Spices.
 */
 
@@ -8,14 +8,14 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "WebGPUUtils.h"
+#include "Utils.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
     /**
-    * @brief WebGPUCallback Class.
+    * @brief Callback Class.
     */
-    class WebGPUCallback
+    class Callback
     {
     public:
 
@@ -25,7 +25,7 @@ namespace Neptune {
         * @param[in] type WGPUDeviceLostReason.
         * @param[in] message WGPUStringView.
         */
-        static void WebGPUDeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*);
+        static void DeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*);
 
         /**
         * @brief WebGPU Uncaptured Error Callback.
@@ -33,7 +33,7 @@ namespace Neptune {
         * @param[in] type WGPUErrorType.
         * @param[in] message WGPUStringView.
         */
-        static void WebGPUUncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*);
+        static void UncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*);
         
     };
 

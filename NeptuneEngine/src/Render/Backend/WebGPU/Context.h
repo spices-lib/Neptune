@@ -1,6 +1,6 @@
 /**
-* @file WebGPUContext.h.
-* @brief The WebGPUContext Class Definitions.
+* @file Context.h.
+* @brief The Context Class Definitions.
 * @author Spices.
 */
 
@@ -10,59 +10,59 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-    class WebGPUObject;
+    class InfrastructureBase;
 
     /**
-    * @brief WebGPU object Type enum.
+    * @brief WebGPU EInfrastructure Type enum.
     */
-    enum class EWebGPUObject : uint8_t
+    enum class EInfrastructure : uint8_t
     {
-        WebGPUInstance = 0,
-        WebGPUSurface  = 1,
-        WebGPUAdapter  = 2,
-        WebGPUDevice   = 3,
-        WebGPUQueue    = 4,
+        Instance,
+        Surface,
+        Adapter,
+        Device,
+        Queue,
 
-        MAX            = 5
+        MAX
     };
 
     /**
     * @brief This context contains all WebGPU object in used global.
     */
-    class WebGPUContext : NonCopyable
+    class Context : NonCopyable
     {
     public:
 
         /**
         * @brief Constructor Function.
         */
-        WebGPUContext() = default;
+        Context() = default;
 
         /**
         * @brief Destructor Function.
         */
-        ~WebGPUContext() override = default;
+        ~Context() override = default;
 
         /**
-        * @brief Registry WebGPUObject to this context.
+        * @brief Registry Infrastructure to this context.
         */
         template<typename T>
         void Registry();
 
         /**
-        * @brief UnRegistry WebGPUObject from this context.
+        * @brief UnRegistry Infrastructure from this context.
         */
         template<typename T>
         void UnRegistry();
 
         /**
-        * @brief Get WebGPUObject from this context.
+        * @brief Get Infrastructure from this context.
         *
-        * @tparam T WebGPU Object.
+        * @tparam T WebGPU Infrastructure.
         * 
-        * @return Returns WebGPU Object.
+        * @return Returns WebGPU Infrastructure.
         */
         template<typename T>
         T* Get();
@@ -70,51 +70,51 @@ namespace Neptune {
     private:
 
         /**
-        * @brief WebGPU Objects
+        * @brief WebGPU Infrastructure
         */
-        std::array<SP<WebGPUObject>, static_cast<uint8_t>(EWebGPUObject::MAX)>  m_Objects;
+        std::array<SP<InfrastructureBase>, static_cast<uint8_t>(EInfrastructure::MAX)> m_Infrastructures;
     };
 
     template<typename T>
-    void WebGPUContext::Registry()
+    void Context::Registry()
     {
         const auto position = static_cast<uint8_t>(T::Type);
 
-        if (m_Objects[position]) 
+        if (m_Infrastructures[position])
         {
             NEPTUNE_CORE_ERROR("WebGPUObject already registried.")
         }
 
-        m_Objects[position] = CreateSP<T>(*this);
+        m_Infrastructures[position] = CreateSP<T>(*this);
     }
 
     template <typename T>
-    void WebGPUContext::UnRegistry()
+    void Context::UnRegistry()
     {
         const auto position = static_cast<uint8_t>(T::Type);
 
-        if (!m_Objects[position])
+        if (!m_Infrastructures[position])
         {
             NEPTUNE_CORE_ERROR("WebGPUObject is unregistry.")
             return;
         }
 
-        m_Objects[position].reset();
-        m_Objects[position] = nullptr;
+        m_Infrastructures[position].reset();
+        m_Infrastructures[position] = nullptr;
     }
 
     template<typename T>
-    T* WebGPUContext::Get()
+    T* Context::Get()
     {
         const auto position = static_cast<uint8_t>(T::Type);
 
-        if (!m_Objects[position])
+        if (!m_Infrastructures[position])
         {
             NEPTUNE_CORE_ERROR("WebGPUObject is unregistry.")
             return nullptr;
         }
 
-        return static_cast<T*>(m_Objects[position].get());
+        return static_cast<T*>(m_Infrastructures[position].get());
     }
 
 }

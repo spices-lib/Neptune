@@ -1,6 +1,6 @@
 /**
-* @file WebGPUUtils.h.
-* @brief The WebGPUUtils Class Definitions.
+* @file Utils.h.
+* @brief The Utils Class Definitions.
 * @author Spices.
 */
 
@@ -11,7 +11,7 @@
 
 #include <webgpu.h>
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
     /**
     * @brief Max In Flight Frame.

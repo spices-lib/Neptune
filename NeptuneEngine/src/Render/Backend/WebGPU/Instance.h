@@ -1,6 +1,6 @@
 /**
-* @file WebGPUInstance.h.
-* @brief The WebGPUInstance Class Definitions.
+* @file Instance.h.
+* @brief The Instance Class Definitions.
 * @author Spices.
 */
 
@@ -8,42 +8,35 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "WebGPUObject.h"
+#include "Infrastructure.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
     /**
-    * @brief WebGPUInstance Class.
+    * @brief Instance Class.
     */
-    class WebGPUInstance : public WebGPUObject
+    class Instance : public Infrastructure<WGPUInstance, EInfrastructure::Instance>
     {
     public:
 
         /**
-        * @brief Mark as WebGPUInstance Type.
+        * @brief Mark as Instance Infrastructure Type.
         */
-        static constexpr EWebGPUObject Type = EWebGPUObject::WebGPUInstance;
+        static constexpr EInfrastructure Type = Infrastructure<WGPUInstance, EInfrastructure::Instance>::Type;
         
     public:
 
         /**
         * @brief Constructor Function.
         * 
-        * @param[in] context The global WebGPUContext.
+        * @param[in] context The global WebGPU Context.
         */
-        explicit WebGPUInstance(WebGPUContext& context);
+        explicit Instance(Context& context);
 
         /**
         * @brief Destructor Function.
         */
-        ~WebGPUInstance() override = default;
-
-        /**
-        * @brief Get Row WebGPU Object.
-        *
-        * @return Returns Row WebGPU Object.
-        */
-        WGPUInstance& Row() { return m_Instance; }
+        ~Instance() override = default;
 
         /**
         * @brief Execute future and wait for done or timeout.
@@ -67,15 +60,6 @@ namespace Neptune {
         * @return Returns WGPUAdapter.
         */
         WGPUAdapter RequestAdapter();
-
-    public:
-
-        /**
-        * @brief Get EWebGPUObject.
-        *
-        * @return Returns EWebGPUObject.
-        */
-        const EWebGPUObject& GetType() const override { return WebGPUInstance::Type; };
 
     private:
 
@@ -129,11 +113,6 @@ namespace Neptune {
     private:
 
         /**
-        * @brief WGPUInstance.
-        */
-        WGPUInstance m_Instance = nullptr;
-
-        /**
         * @brief Future waited list.
         */
         std::vector<WGPUFuture> m_FutureList{};
@@ -141,21 +120,21 @@ namespace Neptune {
     };
 
     template<>
-    inline void WebGPUObject::AddRef(WebGPUInstance* object)
+    inline void InfrastructureBase::AddRef(Instance* object)
     {
-        wgpuInstanceAddRef(object->Row());
+        wgpuInstanceAddRef(object->Handle());
     }
     
     template<>
-    inline void WebGPUObject::Release(WebGPUInstance* object)
+    inline void InfrastructureBase::Release(Instance* object)
     {
-        if (!object->Row())
+        if (!object->Handle())
         {
             return;
         }
 
-        wgpuInstanceRelease(object->Row());
-        object->Row() = nullptr;
+        wgpuInstanceRelease(object->Handle());
+        object->SetHandleNullptr();
     }
     
 }

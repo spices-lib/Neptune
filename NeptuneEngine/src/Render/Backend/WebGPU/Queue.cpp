@@ -1,6 +1,6 @@
 /**
-* @file WebGPUQueue.cpp.
-* @brief The WebGPUQueue Class Implementation.
+* @file Queue.cpp.
+* @brief The Queue Class Implementation.
 * @author Spices.
 */
 
@@ -8,17 +8,17 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "WebGPUQueue.h"
-#include "WebGPUDevice.h"
+#include "Queue.h"
+#include "Device.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-    WebGPUQueue::WebGPUQueue(WebGPUContext& context)
-        : WebGPUObject(context)
+    Queue::Queue(Context& context)
+        : Infrastructure(context)
     {
-        m_Queue = m_Context.Get<WebGPUDevice>()->GetQueue();
+        m_Handle = m_Context.Get<Device>()->GetQueue();
 
-        if (m_Queue)
+        if (m_Handle)
         {
             NEPTUNE_CORE_INFO("WGPUQueue created succeed.")
         }
@@ -28,7 +28,7 @@ namespace Neptune {
         }
     }
 
-    void WebGPUQueue::OnSubmittedWorkDone()
+    void Queue::OnSubmittedWorkDone()
     {
         static auto callback = [](
             WGPUQueueWorkDoneStatus status   , 
@@ -44,32 +44,32 @@ namespace Neptune {
         info.userdata1                  = nullptr;
         info.callback                   = callback;
 
-        Wait(wgpuQueueOnSubmittedWorkDone(m_Queue, info));
+        Wait(wgpuQueueOnSubmittedWorkDone(m_Handle, info));
     }
 
-    void WebGPUQueue::Submit()
+    void Queue::Submit()
     {
         WGPUCommandBuffer commandBuffer[1];
 
-        wgpuQueueSubmit(m_Queue, 1, commandBuffer);
+        wgpuQueueSubmit(m_Handle, 1, commandBuffer);
     }
 
-    void WebGPUQueue::WriteBuffer()
+    void Queue::WriteBuffer()
     {
         WGPUBuffer buffer{};
         void* data;
 
-        wgpuQueueWriteBuffer(m_Queue, buffer, 0, data, 0);
+        wgpuQueueWriteBuffer(m_Handle, buffer, 0, data, 0);
     }
 
-    void WebGPUQueue::WriteTexture()
+    void Queue::WriteTexture()
     {
         WGPUTexelCopyTextureInfo info{};
         void* data;
         WGPUTexelCopyBufferLayout layout{};
         WGPUExtent3D extent{};
 
-        wgpuQueueWriteTexture(m_Queue, &info, data, 0, &layout, &extent);
+        wgpuQueueWriteTexture(m_Handle, &info, data, 0, &layout, &extent);
     }
 
 

@@ -1,6 +1,6 @@
 /**
-* @file WebGPUSurface.cpp.
-* @brief The WebGPUSurface Class Implementation.
+* @file Surface.cpp.
+* @brief The Surface Class Implementation.
 * @author Spices.
 */
 
@@ -8,19 +8,19 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "WebGPUSurface.h"
-#include "WebGPUInstance.h"
-#include "WebGPUDevice.h"
-#include "WebGPUAdapter.h"
+#include "Surface.h"
+#include "Instance.h"
+#include "Device.h"
+#include "Adapter.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-    WebGPUSurface::WebGPUSurface(WebGPUContext& context)
-        : WebGPUObject(context)
+    Surface::Surface(Context& context)
+        : Infrastructure(context)
     {
-        m_Surface = m_Context.Get<WebGPUInstance>()->CreateSurface("#nepnep");
+        m_Handle = m_Context.Get<Instance>()->CreateSurface("#nepnep");
 
-        if (m_Surface)
+        if (m_Handle)
         {
             NEPTUNE_CORE_INFO("WGPUSurface created succeed.")
         }
@@ -32,12 +32,12 @@ namespace Neptune {
         Configure();
     }
 
-    void WebGPUSurface::Configure()
+    void Surface::Configure()
     {
         WGPUTextureFormat viewFormats[] = { WGPUTextureFormat_RGBA8Unorm };
         
         WGPUSurfaceConfiguration configure                          = {};
-        configure.device                                            = m_Context.Get<WebGPUDevice>()->Row();
+        configure.device                                            = m_Context.Get<Device>()->Handle();
         configure.format                                            = WGPUTextureFormat_RGBA8Unorm;
         configure.usage                                             = WGPUTextureUsage_RenderAttachment;
         configure.width                                             = 1920;
@@ -47,31 +47,31 @@ namespace Neptune {
         configure.alphaMode                                         = WGPUCompositeAlphaMode_Premultiplied;
         configure.presentMode                                       = WGPUPresentMode_Fifo;
         
-        wgpuSurfaceConfigure(m_Surface, &configure);
+        wgpuSurfaceConfigure(m_Handle, &configure);
     }
 
-    void WebGPUSurface::GetCapabilities()
+    void Surface::GetCapabilities()
     {
         WGPUSurfaceCapabilities capabilities{};
 
-        WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_Surface, m_Context.Get<WebGPUAdapter>()->Row(), &capabilities))
+        WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_Handle, m_Context.Get<Adapter>()->Handle(), &capabilities))
     }
 
-    void WebGPUSurface::GetCurrentTexture()
+    void Surface::GetCurrentTexture()
     {
         WGPUSurfaceTexture texture{};
 
-        wgpuSurfaceGetCurrentTexture(m_Surface, &texture);
+        wgpuSurfaceGetCurrentTexture(m_Handle, &texture);
     }
 
-    void WebGPUSurface::Present()
+    void Surface::Present()
     {
-        WEBGPU_CHECK(wgpuSurfacePresent(m_Surface))
+        WEBGPU_CHECK(wgpuSurfacePresent(m_Handle))
     }
 
-    void WebGPUSurface::Unconfigure()
+    void Surface::Unconfigure()
     {
-        wgpuSurfaceUnconfigure(m_Surface);
+        wgpuSurfaceUnconfigure(m_Handle);
     }
 
 }

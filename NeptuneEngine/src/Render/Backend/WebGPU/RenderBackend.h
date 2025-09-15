@@ -1,6 +1,6 @@
 /**
-* @file WebGPURenderBackend.h.
-* @brief The WebGPURenderBackend Class Definitions.
+* @file RenderBackend.h.
+* @brief The RenderBackend Class Definitions.
 * @author Spices.
 */
 
@@ -10,15 +10,15 @@
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-    class WebGPUContext;
+    class Context;
 
     /**
-    * @brief WebGPURenderBackend Class.
-    * This class defines the WebGPURenderBackend behaves.
+    * @brief RenderBackend Class.
+    * This class defines the RenderBackend behaves.
     */
-    class WebGPURenderBackend : public RenderFrontend
+    class RenderBackend : public RenderFrontend
     {
     public:
 
@@ -26,12 +26,12 @@ namespace Neptune {
         * @brief Constructor Function.
         * @param[in] backend RenderBackendEnum.
         */
-        WebGPURenderBackend(RenderBackendEnum backend);
+        RenderBackend(RenderBackendEnum backend);
 
         /**
         * @brief Destructor Function.
         */
-        ~WebGPURenderBackend() override;
+        ~RenderBackend() override;
 
         /**
         * @brief Interface of Begin a frame.
@@ -53,7 +53,7 @@ namespace Neptune {
         /**
         * @brief WebGPU Context.
         */
-        SP<WebGPUContext> m_Context;
+        SP<Context> m_Context;
     };
 }
 

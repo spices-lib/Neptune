@@ -1,6 +1,6 @@
 /**
-* @file WebGPURenderBackend.cpp.
-* @brief The WebGPURenderBackend Class Implementation.
+* @file RenderBackend.cpp.
+* @brief The RenderBackend Class Implementation.
 * @author Spices.
 */
 
@@ -8,12 +8,12 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "WebGPURenderBackend.h"
-#include "WebGPUInstance.h"
-#include "WebGPUAdapter.h"
-#include "WebGPUDevice.h"
-#include "WebGPUSurface.h"
-#include "WebGPUQueue.h"
+#include "RenderBackend.h"
+#include "Instance.h"
+#include "Adapter.h"
+#include "Device.h"
+#include "Surface.h"
+#include "Queue.h"
 
 #include <emscripten.h>
 #include <emscripten/emscripten.h>
@@ -28,18 +28,18 @@
 
 #include "Window/Window.h"
 
-namespace Neptune {
+namespace Neptune::WebGPU {
 
-    WebGPURenderBackend::WebGPURenderBackend(RenderBackendEnum backend)
+    RenderBackend::RenderBackend(RenderBackendEnum backend)
         : RenderFrontend(backend)
     {
-        m_Context = CreateSP<WebGPUContext>();
+        m_Context = CreateSP<Context>();
 
-        m_Context->Registry<WebGPUInstance>();
-        m_Context->Registry<WebGPUAdapter>();
-        m_Context->Registry<WebGPUDevice>();
-        m_Context->Registry<WebGPUSurface>();
-        m_Context->Registry<WebGPUQueue>();
+        m_Context->Registry<Instance>();
+        m_Context->Registry<Adapter>();
+        m_Context->Registry<Device>();
+        m_Context->Registry<Surface>();
+        m_Context->Registry<Queue>();
 
         /*GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());*/
 
@@ -65,7 +65,7 @@ namespace Neptune {
         ImGui_ImplWGPU_Init(&init_info);*/
     }
 
-    WebGPURenderBackend::~WebGPURenderBackend()
+    RenderBackend::~RenderBackend()
     {
         // Cleanup
         /*ImGui_ImplWGPU_Shutdown();
@@ -75,28 +75,28 @@ namespace Neptune {
 
     static WGPUCommandEncoder graphicCommandEncoder = nullptr;
 
-    void WebGPURenderBackend::BeginFrame()
+    void RenderBackend::BeginFrame()
     {
         // Create CommandEncoder.
         WGPUCommandEncoderDescriptor desc = {};
-        graphicCommandEncoder = wgpuDeviceCreateCommandEncoder(m_Context->Get<WebGPUDevice>()->Row(), &desc);
+        graphicCommandEncoder = wgpuDeviceCreateCommandEncoder(m_Context->Get<Device>()->Handle(), &desc);
     }
 
-    void WebGPURenderBackend::EndFrame()
+    void RenderBackend::EndFrame()
     {
         // Get Command Buffer.
         WGPUCommandBufferDescriptor desc     = {};
         WGPUCommandBuffer commandBuffer      = wgpuCommandEncoderFinish(graphicCommandEncoder, &desc);
 
         // Submit CommandBuffer to Queue.
-        wgpuQueueSubmit(m_Context->Get<WebGPUQueue>()->Row(), 1, &commandBuffer);
+        wgpuQueueSubmit(m_Context->Get<Queue>()->Handle(), 1, &commandBuffer);
 
         // Release CommandEncoder and CommandBuffer.
         wgpuCommandEncoderRelease(graphicCommandEncoder);
         wgpuCommandBufferRelease(commandBuffer);
     }
 
-    void WebGPURenderBackend::RenderFrame()
+    void RenderBackend::RenderFrame()
     {
         // Start the Dear ImGui frame
         /*ImGui_ImplWGPU_NewFrame();
@@ -110,7 +110,7 @@ namespace Neptune {
         ImGui::Render();*/
 
         WGPUSurfaceTexture swapChainTexture;
-        wgpuSurfaceGetCurrentTexture(m_Context->Get<WebGPUSurface>()->Row(), &swapChainTexture);
+        wgpuSurfaceGetCurrentTexture(m_Context->Get<Surface>()->Handle(), &swapChainTexture);
 
         WGPURenderPassColorAttachment                 color_attachments = {};
         color_attachments.depthSlice                = WGPU_DEPTH_SLICE_UNDEFINED;
