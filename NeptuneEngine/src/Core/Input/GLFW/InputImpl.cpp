@@ -1,23 +1,18 @@
 /**
-* @file GLFWInput.h.
-* @brief The GLFWInput Class Implementation.
+* @file InputImpl.h.
+* @brief The InputImpl Class Implementation.
 * @author The Cherno.
 */
 
 #include "Pchheader.h"
-#include "GLFWInput.h"
+#include "InputImpl.h"
 #include "Window/Window.h"
 
 #include <GLFW/glfw3.h>
 
-namespace Neptune {
+namespace Neptune::GLFW {
 
-    /**
-    * @brief Instance a WindowsInput single instance.
-    */
-    std::unique_ptr<Input> Input::s_Instance = std::make_unique<GLFWInput>();
-
-    bool GLFWInput::IsKeyPressedImpl(const int& keycode)
+    bool InputImpl::IsKeyPressedImpl(const int& keycode)
     {
         // Get GLFW Window Pointer.
         const auto window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
@@ -28,7 +23,7 @@ namespace Neptune {
         return state == GLFW_PRESS || state == GLFW_REPEAT;
     }
 
-    bool GLFWInput::IsMouseButtonPressedImpl(const int& button)
+    bool InputImpl::IsMouseButtonPressedImpl(const int& button)
     {
         // Get GLFW Window Pointer.
         const auto window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
@@ -39,7 +34,7 @@ namespace Neptune {
         return state == GLFW_PRESS;
     }
 
-    std::pair<float, float> GLFWInput::GetMousePositionImpl()
+    std::pair<float, float> InputImpl::GetMousePositionImpl()
     {
         // Get GLFW Window Pointer.
         const auto window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
@@ -51,13 +46,13 @@ namespace Neptune {
         return { static_cast<float>(xPos), static_cast<float>(yPos) };
     }
 
-    float GLFWInput::GetMouseXImpl()
+    float InputImpl::GetMouseXImpl()
     {
         auto [x, y] = GetMousePositionImpl();
         return x;
     }
 
-    float GLFWInput::GetMouseYImpl()
+    float InputImpl::GetMouseYImpl()
     {
         auto [x, y] = GetMousePositionImpl();
         return y;

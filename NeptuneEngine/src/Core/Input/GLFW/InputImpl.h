@@ -1,6 +1,6 @@
 /**
-* @file GLFWInput.h.
-* @brief The GLFWInput Class Definitions.
+* @file InputImpl.h.
+* @brief The InputImpl Class Definitions.
 * @author The Cherno.
 */
 
@@ -8,12 +8,12 @@
 #include "Core/Core.h"
 #include "Core/Input/Input.h"
 
-namespace Neptune {
+namespace Neptune::GLFW {
 
     /**
     * @brief This Class Is gltf Specific Input Class.
     */
-    class GLFWInput : public Input
+    class InputImpl : public Input
     {
     protected:
 
