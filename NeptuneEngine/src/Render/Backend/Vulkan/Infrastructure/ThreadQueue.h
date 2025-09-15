@@ -1,6 +1,6 @@
 /**
-* @file VulkanThreadQueue.h.
-* @brief The VulkanThreadQueue Class Definitions.
+* @file ThreadQueue.h.
+* @brief The ThreadQueue Class Definitions.
 * @author Spices.
 */
 
@@ -8,42 +8,42 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "VulkanInfrastructure.h"
+#include "Infrastructure.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
 	/**
-	* @brief VulkanThreadQueue Class.
+	* @brief ThreadQueue Class.
 	*/
-	class VulkanThreadQueue : public VulkanInfrastructure
+	class ThreadQueue : public Infrastructure
 	{
 	public:
 
 		/**
-		* @brief Mark as VulkanThreadQueue Type.
+		* @brief Mark as ThreadQueue Infrastructure Type.
 		*/
-		static constexpr EVulkanInfrastructure Type = EVulkanInfrastructure::VulkanThreadQueue;
+		static constexpr EInfrastructure Type = EInfrastructure::ThreadQueue;
 
 	public:
 
 		/**
 		* @brief Constructor Function.
 		*
-		* @param[in] context The global VulkanContext.
+		* @param[in] context The global Vulkan Context.
 		*/
-		VulkanThreadQueue(VulkanContext& context);
+		ThreadQueue(Context& context);
 
 		/**
 		* @brief Destructor Function.
 		*/
-		~VulkanThreadQueue() override = default;
+		~ThreadQueue() override = default;
 
 		/**
 		* @brief Get Row Vulkan Infrastructure.
 		*
 		* @return Returns Row Vulkan Infrastructure.
 		*/
-		VkQueue& Row() { return m_Queue; }
+		VkQueue& Handle() { return m_Handle; }
 
 	public:
 
@@ -71,14 +71,14 @@ namespace Neptune {
 		/**
 		* @brief Thread VkQueue.
 		*/
-		VkQueue m_Queue = nullptr;
+		VkQueue m_Handle = nullptr;
 
 	};
 
 	template<>
-	inline void VulkanInfrastructure::Destroy(VulkanThreadQueue* infrastructure)
+	inline void Infrastructure::Destroy(ThreadQueue* infrastructure)
 	{
-		infrastructure->Row() = nullptr;
+		infrastructure->Handle() = nullptr;
 	}
 
 }

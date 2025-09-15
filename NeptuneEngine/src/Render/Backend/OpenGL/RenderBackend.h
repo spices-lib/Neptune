@@ -1,6 +1,6 @@
 /**
-* @file OpenGLRenderBackend.h.
-* @brief The OpenGLRenderBackend Class Definitions.
+* @file RenderBackend.h.
+* @brief The RenderBackend Class Definitions.
 * @author Spices.
 */
 
@@ -10,13 +10,13 @@
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
 
-namespace Neptune {
+namespace Neptune::OpenGL {
 
     /**
-    * @brief OpenGLRenderBackend Class.
-    * This class defines the OpenGLRenderBackend behaves.
+    * @brief RenderBackend Class.
+    * This class defines the RenderBackend behaves.
     */
-    class OpenGLRenderBackend : public RenderFrontend
+    class RenderBackend : public RenderFrontend
     {
     public:
 
@@ -24,12 +24,12 @@ namespace Neptune {
         * @brief Constructor Function.
         * @param[in] backend RenderBackendEnum.
         */
-        OpenGLRenderBackend(RenderBackendEnum backend);
+        RenderBackend(RenderBackendEnum backend);
 
         /**
         * @brief Destructor Function.
         */
-        ~OpenGLRenderBackend() override;
+        ~RenderBackend() override;
 
         /**
         * @brief Interface of Begin a frame.

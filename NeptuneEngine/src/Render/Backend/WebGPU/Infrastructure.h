@@ -72,7 +72,7 @@ namespace Neptune::WebGPU {
     protected:
 
         /**
-        * @brief The global WebGPU Context Referenced from WebGPURenderBackend.
+        * @brief The global WebGPU Context Referenced from WebGPU RenderBackend.
         */
         Context& m_Context;
 
@@ -135,13 +135,13 @@ namespace Neptune::WebGPU {
     template <typename T>
     void InfrastructureBase::AddRef(T*)
     {
-        NEPTUNE_CORE_WARN("WebGPUObject Not implement AddRef API.")
+        NEPTUNE_CORE_WARN("WebGPU Infrastructure Not implement AddRef API.")
     }
 
     template <typename T>
     void InfrastructureBase::Release(T*)
     {
-        NEPTUNE_CORE_WARN("WebGPUObject Not implement Release API.")
+        NEPTUNE_CORE_WARN("WebGPU Infrastructure Not implement Release API.")
     }
     
 }

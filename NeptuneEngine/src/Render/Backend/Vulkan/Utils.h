@@ -8,11 +8,10 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "VulkanFunctions.h"
 
 #include <vulkan/vulkan.h>
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
 	/**
 	* @brief Max In Flight Frame.

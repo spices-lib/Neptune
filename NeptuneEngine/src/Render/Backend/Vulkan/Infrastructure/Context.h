@@ -1,6 +1,6 @@
 /**
-* @file VulkanContext.h.
-* @brief The VulkanContext Class Definitions.
+* @file Context.h.
+* @brief The Context Class Definitions.
 * @author Spices.
 */
 
@@ -10,49 +10,50 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
-    class VulkanInfrastructure;
+    class Infrastructure;
 
     /**
     * @brief Vulkan Infrastructure Type enum.
     */
-    enum class EVulkanInfrastructure : uint8_t
+    enum class EInfrastructure : uint8_t
     {
-        VulkanInstance         = 0,
-        VulkanSurface          = 1,
-        VulkanPhysicalSurface  = 2,
-        VulkanDevice           = 3,
-        VulkanThreadQueue      = 4,
-        VulkanMemoryAllocator  = 5,
-        VulkanSwapChain        = 6,
-        VulkanCommandPool      = 7,
-        VulkanDescriptorPool   = 8,
+        Instance,
+        Functions,
+        Surface,
+        PhysicalSurface,
+        Device,
+        ThreadQueue,
+        MemoryAllocator,
+        SwapChain,
+        CommandPool,
+        DescriptorPool,
 
-        MAX                    = 9
+        MAX
     };
 
     /**
-    * @brief This context contains all Vulkan object in used global.
+    * @brief This context contains all Vulkan Infrastructure in used global.
     */
-    class VulkanContext : NonCopyable
+    class Context : NonCopyable
     {
     public:
 
         /**
         * @brief Constructor Function.
         */
-        VulkanContext() = default;
+        Context() = default;
 
         /**
         * @brief Destructor Function.
         */
-        ~VulkanContext() override = default;
+        ~Context() override = default;
 
         /**
-        * @brief Registry VulkanInfrastructure to this context.
+        * @brief Registry Vulkan Infrastructure to this context.
         * 
-        * @tparam T VulkanInfrastructure.
+        * @tparam T Vulkan Infrastructure.
         */
         template<typename T>
         void Registry();
@@ -66,7 +67,7 @@ namespace Neptune {
         void UnRegistry();
 
         /**
-        * @brief Get VulkanInfrastructure from this context.
+        * @brief Get Vulkan Infrastructure from this context.
         *
         * @tparam T Vulkan Infrastructure.
         *
@@ -80,30 +81,30 @@ namespace Neptune {
         /**
         * @brief Vulkan Infrastructures
         */
-        std::array<SP<VulkanInfrastructure>, static_cast<uint8_t>(EVulkanInfrastructure::MAX)> m_Infrastructures;
+        std::array<SP<Infrastructure>, static_cast<uint8_t>(EInfrastructure::MAX)> m_Infrastructures;
     };
 
     template<typename T>
-    void VulkanContext::Registry()
+    void Context::Registry()
     {
         const auto position = static_cast<uint8_t>(T::Type);
 
         if (m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("VulkanInfrastructure already registried.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure already registried.")
         }
 
         m_Infrastructures[position] = CreateSP<T>(*this);
     }
 
     template <typename T>
-    void VulkanContext::UnRegistry()
+    void Context::UnRegistry()
     {
         const auto position = static_cast<uint8_t>(T::Type);
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("VulkanInfrastructure is unregistry.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is unregistry.")
             return;
         }
 
@@ -112,13 +113,13 @@ namespace Neptune {
     }
 
     template<typename T>
-    T* VulkanContext::Get()
+    T* Context::Get()
     {
         const auto position = static_cast<uint8_t>(T::Type);
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("VulkanInfrastructure is unregistry.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is unregistry.")
             return nullptr;
         }
 

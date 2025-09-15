@@ -82,7 +82,7 @@ namespace Neptune::WebGPU {
 
         if (m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("WebGPUObject already registried.")
+            NEPTUNE_CORE_ERROR("WebGPU Infrastructure already registried.")
         }
 
         m_Infrastructures[position] = CreateSP<T>(*this);
@@ -95,7 +95,7 @@ namespace Neptune::WebGPU {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("WebGPUObject is unregistry.")
+            NEPTUNE_CORE_ERROR("WebGPU Infrastructure is unregistry.")
             return;
         }
 
@@ -110,7 +110,7 @@ namespace Neptune::WebGPU {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("WebGPUObject is unregistry.")
+            NEPTUNE_CORE_ERROR("WebGPU Infrastructure is unregistry.")
             return nullptr;
         }
 

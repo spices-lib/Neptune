@@ -1,6 +1,6 @@
 /**
-* @file VulkanPhysicalDevice.cpp.
-* @brief The VulkanPhysicalDevice Class Implementation.
+* @file PhysicalDevice.cpp.
+* @brief The PhysicalDevice Class Implementation.
 * @author Spices.
 */
 
@@ -8,21 +8,21 @@
 
 #ifdef NP_PLATFORM_WINDOWS
 
-#include "VulkanPhysicalDevice.h"
-#include "VulkanInstance.h"
-#include "KHR/VulkanSurface.h"
+#include "PhysicalDevice.h"
+#include "Instance.h"
+#include "KHR/Surface.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
-    VulkanPhysicalDevice::VulkanPhysicalDevice(VulkanContext& context)
-        : VulkanInfrastructure(context)
+	PhysicalDevice::PhysicalDevice(Context& context)
+        : Infrastructure(context)
     {
         Create();
     }
 
-    void VulkanPhysicalDevice::Create()
+    void PhysicalDevice::Create()
     {
-        const auto instance = m_Context.Get<VulkanInstance>()->Row();
+        const auto instance = m_Context.Get<Instance>()->Handle();
 
 		// Get all physical device num this computer.
         uint32_t deviceCount = 0;
@@ -44,9 +44,9 @@ namespace Neptune {
 		{
 			// All this condition need satisfied.
 			if (IsExtensionMeetDemand(physicalDevice) && IsPropertyMeetDemand(physicalDevice) && IsFeatureMeetDemand(physicalDevice) &&
-				IsQueueMeetDemand(physicalDevice, m_Context.Get<VulkanSurface>()->Row()))
+				IsQueueMeetDemand(physicalDevice, m_Context.Get<Surface>()->Handle()))
 			{
-				m_PhysicalDevice = physicalDevice;
+				m_Handle = physicalDevice;
 
 				NEPTUNE_CORE_INFO("Vulkan PhysicalDevice Selected.")
 				return;
@@ -56,7 +56,7 @@ namespace Neptune {
 		NEPTUNE_CORE_ERROR("Failed to find GPU Physical Device that satisfied our needs.")
     }
 
-	bool VulkanPhysicalDevice::IsExtensionMeetDemand(const VkPhysicalDevice& device)
+	bool PhysicalDevice::IsExtensionMeetDemand(const VkPhysicalDevice& device)
 	{
 		// Get all physicaldevice extensions nums.
 		uint32_t extensionCount;
@@ -96,7 +96,7 @@ namespace Neptune {
 		}
 	}
 
-	bool VulkanPhysicalDevice::IsPropertyMeetDemand(const VkPhysicalDevice& device)
+	bool PhysicalDevice::IsPropertyMeetDemand(const VkPhysicalDevice& device)
 	{
 		VkPhysicalDeviceProperties2                   prop2 {};
 		prop2.sType                                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
@@ -107,7 +107,7 @@ namespace Neptune {
 		return true;
 	}
 
-	bool VulkanPhysicalDevice::IsFeatureMeetDemand(const VkPhysicalDevice& device)
+	bool PhysicalDevice::IsFeatureMeetDemand(const VkPhysicalDevice& device)
 	{
 		VkPhysicalDeviceFeatures2                             deviceFeatures {};
 		deviceFeatures.sType                                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
@@ -118,7 +118,7 @@ namespace Neptune {
 		return true;
 	}
 
-	bool VulkanPhysicalDevice::IsQueueMeetDemand(const VkPhysicalDevice& device, const VkSurfaceKHR& surface)
+	bool PhysicalDevice::IsQueueMeetDemand(const VkPhysicalDevice& device, const VkSurfaceKHR& surface)
 	{
 		// Get all physicaldevice queue nums.
 		uint32_t queueFamilyCount = 0;

@@ -1,6 +1,6 @@
 /**
-* @file VulkanFunctions.h.
-* @brief The VulkanFunctions Class Definitions.
+* @file Functions.h.
+* @brief The Functions Class Definitions.
 * @author Spices.
 */
 
@@ -8,9 +8,9 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include <vulkan/vulkan.h>
+#include "Infrastructure.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
 /**
 * @brief Macro for declare function pointer variable in VulkanFunctions.
@@ -28,8 +28,17 @@ namespace Neptune {
 	* @brief Vulkan Function Pointers Collection.
 	* It holds all function pointer which need get manually.
 	*/
-	struct VulkanFunctions
+	class Functions : public Infrastructure
 	{
+	public:
+
+		/**
+		* @brief Mark as Functions Infrastructure Type.
+		*/
+		static constexpr EInfrastructure Type = EInfrastructure::Functions;
+
+	public:
+
 		/**
 		* @brief Init All Vulkan Function Pointer.
 		* @param[in] instance VkInstance.

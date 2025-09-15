@@ -1,17 +1,17 @@
 /**
-* @file VulkanFunctions.cpp.
-* @brief The VulkanFunctions Class Implementation.
+* @file Functions.cpp.
+* @brief The Functions Class Implementation.
 * @author Spices.
 */
 
 #include "Pchheader.h"
 #ifdef NP_PLATFORM_WINDOWS
 
-#include "VulkanFunctions.h"
+#include "Functions.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
-	void VulkanFunctions::Init(VkInstance instance)
+	void Functions::Init(VkInstance instance)
 	{
 		EXPLAIN_VK_FUNCTION_POINTER(vkCreateDebugUtilsMessengerEXT                  )
 		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyDebugUtilsMessengerEXT                 )

@@ -1,6 +1,6 @@
 /**
-* @file VulkanInstance.cpp.
-* @brief The VulkanInstance Class Implementation.
+* @file Instance.cpp.
+* @brief The Instance Class Implementation.
 * @author Spices.
 */
 
@@ -8,17 +8,17 @@
 
 #ifdef NP_PLATFORM_WINDOWS
 
-#include "VulkanInstance.h"
+#include "Instance.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
-    VulkanInstance::VulkanInstance(VulkanContext& context)
-        : VulkanInfrastructure(context)
+    Instance::Instance(Context& context)
+        : Infrastructure(context)
     {
         Create();
     }
 
-    void VulkanInstance::Create()
+    void Instance::Create()
     {
         VkApplicationInfo                          appInfo {};
 		appInfo.sType                            = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -39,7 +39,7 @@ namespace Neptune {
         createInfo.enabledLayerCount             = 0;
 		createInfo.ppEnabledLayerNames           = nullptr;
 
-        VK_CHECK(vkCreateInstance(&createInfo, nullptr, &m_Instance))
+        VK_CHECK(vkCreateInstance(&createInfo, nullptr, &m_Handle))
     }
 
 }

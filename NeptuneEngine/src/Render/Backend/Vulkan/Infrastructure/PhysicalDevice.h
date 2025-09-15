@@ -1,6 +1,6 @@
 /**
-* @file VulkanPhysicalDevice.h.
-* @brief The VulkanPhysicalDevice Class Definitions.
+* @file PhysicalDevice.h.
+* @brief The PhysicalDevice Class Definitions.
 * @author Spices.
 */
 
@@ -8,42 +8,42 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "VulkanInfrastructure.h"
+#include "Infrastructure.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 	
 	/**
-	* @brief VulkanPhysicalDevice Class.
+	* @brief PhysicalDevice Class.
 	*/
-	class VulkanPhysicalDevice : public VulkanInfrastructure
+	class PhysicalDevice : public Infrastructure
 	{
 	public:
 
 		/**
-		* @brief Mark as VulkanPhysicalSurface Type.
+		* @brief Mark as PhysicalSurface Infrastructure Type.
 		*/
-		static constexpr EVulkanInfrastructure Type = EVulkanInfrastructure::VulkanPhysicalSurface;
+		static constexpr EInfrastructure Type = EInfrastructure::PhysicalSurface;
 
 	public:
 
 		/**
 		* @brief Constructor Function.
 		*
-		* @param[in] context The global VulkanContext.
+		* @param[in] context The global Vulkan Context.
 		*/
-		VulkanPhysicalDevice(VulkanContext& context);
+		PhysicalDevice(Context& context);
 
 		/**
 		* @brief Destructor Function.
 		*/
-		~VulkanPhysicalDevice() override = default;
+		~PhysicalDevice() override = default;
 
 		/**
 		* @brief Get Row Vulkan Infrastructure.
 		*
 		* @return Returns Row Vulkan Infrastructure.
 		*/
-		VkPhysicalDevice& Row() { return m_PhysicalDevice; }
+		VkPhysicalDevice& Handle() { return m_Handle; }
 
 	private:
 
@@ -96,14 +96,14 @@ namespace Neptune {
 		/**
 		* @brief VkPhysicalDevice.
 		*/
-		VkPhysicalDevice m_PhysicalDevice = nullptr;
+		VkPhysicalDevice m_Handle = nullptr;
 
 	};
 
 	template<>
-	inline void VulkanInfrastructure::Destroy(VulkanPhysicalDevice* infrastructure)
+	inline void Infrastructure::Destroy(PhysicalDevice* infrastructure)
 	{
-		infrastructure->Row() = nullptr;
+		infrastructure->Handle() = nullptr;
 	}
 
 }

@@ -13,8 +13,8 @@
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-#include "Render/Backend/Vulkan/VulkanRenderBackend.h"
-#include "Render/Backend/OpenGL/OpenGLRenderBackend.h"
+#include "Render/Backend/Vulkan/RenderBackend.h"
+#include "Render/Backend/OpenGL/RenderBackend.h"
 #endif
 
 namespace Neptune {
@@ -29,8 +29,8 @@ namespace Neptune {
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-        case RenderBackendEnum::Vulkan: return CreateSP<VulkanRenderBackend>(backend);
-        case RenderBackendEnum::OpenGL: return CreateSP<OpenGLRenderBackend>(backend);
+            case RenderBackendEnum::Vulkan: return CreateSP<Vulkan::RenderBackend>(backend);
+            case RenderBackendEnum::OpenGL: return CreateSP<OpenGL::RenderBackend>(backend);
 #endif
             
             default:

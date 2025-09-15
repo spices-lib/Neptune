@@ -1,6 +1,6 @@
 /**
-* @file WebGPUUtils.h.
-* @brief The WebGPUObject Class Definitions.
+* @file Infrastructure.h.
+* @brief The Infrastructure Class Definitions.
 * @author Spices.
 */
 
@@ -9,17 +9,17 @@
 
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
-#include "VulkanContext.h"
-#include "Render/Backend/Vulkan/VulkanUtils.h"
+#include "Context.h"
+#include "Render/Backend/Vulkan/Utils.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
     /**
-    * @brief VulkanInfrastructure Class.
-    * This class defines the basic behaves of VulkanInfrastructure.
-    * When we create an new VulkanInfrastructure, we need inherit from this.
+    * @brief Infrastructure Class.
+    * This class defines the basic behaves of Infrastructure.
+    * When we create an new Infrastructure, we need inherit from this.
     */
-    class VulkanInfrastructure : public NonCopyable
+    class Infrastructure : public NonCopyable
     {
     public:
 
@@ -28,12 +28,12 @@ namespace Neptune {
         *
         * @param[in] context The global VulkanContext.
         */
-        explicit VulkanInfrastructure(VulkanContext& context);
+        explicit Infrastructure(Context& context);
 
         /**
         * @brief Destructor Function.
         */
-        ~VulkanInfrastructure() override;
+        ~Infrastructure() override;
 
     protected:
 
@@ -57,16 +57,16 @@ namespace Neptune {
     protected:
 
         /**
-        * @brief The global VulkanContext Referenced from VulkanRenderBackend.
+        * @brief The global Vulkan Context Referenced from Vulkan RenderBackend.
         */
-        VulkanContext& m_Context;
+        Context& m_Context;
 
     };
 
     template <typename T>
-    void VulkanInfrastructure::Destroy(T*)
+    void Infrastructure::Destroy(T*)
     {
-        NEPTUNE_CORE_WARN("VulkanInfrastructure Not implement Destroy API.")
+        NEPTUNE_CORE_WARN("Vulkan Infrastructure Not implement Destroy API.")
     }
 
 }

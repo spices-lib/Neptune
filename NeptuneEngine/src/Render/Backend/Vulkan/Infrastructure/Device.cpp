@@ -1,6 +1,6 @@
 /**
-* @file VulkanDevice.cpp.
-* @brief The VulkanDevice Class Implementation.
+* @file Device.cpp.
+* @brief The Device Class Implementation.
 * @author Spices.
 */
 
@@ -8,18 +8,18 @@
 
 #ifdef NP_PLATFORM_WINDOWS
 
-#include "VulkanDevice.h"
-#include "VulkanPhysicalDevice.h"
+#include "Device.h"
+#include "PhysicalDevice.h"
 
-namespace Neptune {
+namespace Neptune::Vulkan {
 
-    VulkanDevice::VulkanDevice(VulkanContext& context)
-        : VulkanInfrastructure(context)
+    Device::Device(Context& context)
+        : Infrastructure(context)
     {
         Create();
     }
 
-    void VulkanDevice::Create()
+    void Device::Create()
     {
         VkDeviceCreateInfo                                        createInfo{};
 		createInfo.sType                                        = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
@@ -31,7 +31,7 @@ namespace Neptune {
 		createInfo.enabledLayerCount                            = 0;
 		createInfo.pNext                                        = nullptr;
 
-		VK_CHECK(vkCreateDevice(m_Context.Get<VulkanPhysicalDevice>()->Row(), &createInfo, nullptr, &m_Device));
+		VK_CHECK(vkCreateDevice(m_Context.Get<PhysicalDevice>()->Handle(), &createInfo, nullptr, &m_Handle));
     }
 
 }
