@@ -38,17 +38,17 @@ namespace Neptune::Vulkan {
     protected:
 
         /**
-        * @brief Template of Destroy WebGPU Object.
+        * @brief Template of Destroy Vulkan Infrastructure.
         *
-        * @tparam T The WebGPUObject.
+        * @tparam T The Vulkan Infrastructure.
         */
         template<typename T>
         static void Destroy(T*);
 
         /**
-        * @brief Template of SetLabel WebGPU Object.
+        * @brief Template of SetLabel Vulkan Infrastructure.
         *
-        * @tparam T The WebGPUObject.
+        * @tparam T The Vulkan Infrastructure.
         * @param[in] label Label.
         */
         template<typename T>
