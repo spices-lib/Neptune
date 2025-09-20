@@ -47,11 +47,11 @@ namespace Neptune {
     Application::Application()
     {
 #ifdef NP_PLATFORM_EMSCRIPTEN
-        m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw).get();
+        m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw, RenderBackendEnum::WebGPU).get();
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-        m_Window = Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW).get();
+        m_Window = Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW, RenderBackendEnum::OpenGL).get();
 #endif
 
         m_SystemManager = CreateUP<SystemManager>();
@@ -66,8 +66,12 @@ namespace Neptune {
     Application::~Application()
     {
         m_World.reset();
+
         m_SystemManager->PopAllSystems();
+
         Window::Destroy();
+
+        Log::Reset();
     }
 
     void Application::Run()
@@ -85,7 +89,10 @@ namespace Neptune {
         while(m_Window->IsWindowActive())
         {
             m_Window->PollEvents();
+
             m_SystemManager->Run();
+
+            m_Window->SwapBuffers();
         }
 
         // on detach world to application.
@@ -104,7 +111,10 @@ namespace Neptune {
         if(p->m_Window->IsWindowActive())
         {
             p->m_Window->PollEvents();
+
             p->m_SystemManager->Run();
+
+            p->m_Window->SwapBuffers();
 
             return;
         }

@@ -31,7 +31,6 @@ namespace Neptune::OpenGL {
 
     void RenderBackend::EndFrame()
     {
-
     }
 
     void RenderBackend::RenderFrame()

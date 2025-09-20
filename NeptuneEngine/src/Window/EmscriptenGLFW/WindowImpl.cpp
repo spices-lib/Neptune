@@ -21,8 +21,9 @@ namespace Neptune::EmscriptenGLFW {
     WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement)
             : Window(initInfo, implement)
     {
-        // initialize the library
-        if(!glfwInit()) {
+        // Initialize the library
+        if(!glfwInit()) 
+        {
             NEPTUNE_CORE_CRITICAL("glfw init failed.")
         }
 
@@ -36,19 +37,20 @@ namespace Neptune::EmscriptenGLFW {
         glfwWindowHint(GLFW_BLUE_BITS    , mode->blueBits    );
         glfwWindowHint(GLFW_REFRESH_RATE , mode->refreshRate );
 
-        // setting the association window <-> canvas
+        // Setting the association window <-> canvas
         emscripten_glfw_set_next_window_canvas_selector("#nepnep");
 
-        // create the only window
+        // Create the only window
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
-        if(!m_Windows) {
+        if(!m_Windows) 
+        {
             NEPTUNE_CORE_CRITICAL("Window create failed.")
         }
 
         // Set glfw call back object pointer.
         glfwSetWindowUserPointer(m_Windows, this);
 
-        // makes the canvas resizable and match the full window size
+        // Makes the canvas resizable and match the full window size
         emscripten_glfw_make_canvas_resizable(m_Windows, "#nepnep-div", nullptr);
 
         // Set gltf event call back.
@@ -57,9 +59,11 @@ namespace Neptune::EmscriptenGLFW {
 
     WindowImpl::~WindowImpl()
     {
-        if (m_Windows) {
+        if (m_Windows) 
+        {
             glfwDestroyWindow(m_Windows);
         }
+
         glfwTerminate();
     }
 

@@ -14,6 +14,8 @@ struct GLFWwindow;
 
 namespace Neptune::GLFW {
 
+    class APIInterface;
+
     /**
     * @brief WindowImpl Class.
     * This class defines the WindowImpl behaves.
@@ -27,8 +29,9 @@ namespace Neptune::GLFW {
         * @brief Constructor Function.
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
+        * @param[in] backend RenderBackendEnum.
         */
-        WindowImpl(const WindowInfo& initInfo, WindowImplement implement);
+        WindowImpl(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend);
 
         /**
         * @brief Destructor Function.
@@ -48,6 +51,11 @@ namespace Neptune::GLFW {
         void PollEvents() override;
 
         /**
+        * @brief Interface of window swap buffers.
+        */
+        void SwapBuffers() override;
+
+        /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.
@@ -63,7 +71,8 @@ namespace Neptune::GLFW {
 
     private:
         
-        GLFWwindow* m_Windows;  // @brief native window.
+        GLFWwindow* m_Windows;             // @brief native window.
+        SP<APIInterface> m_APIInterface;   // @brief render backend interface.
     };
 }
 

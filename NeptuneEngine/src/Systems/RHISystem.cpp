@@ -12,7 +12,7 @@ namespace Neptune {
 
     void RHISystem::OnSystemInitialize()
     {
-        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::WebGPU);
+        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::OpenGL);
     }
     void RHISystem::OnSystemShutDown()
     {

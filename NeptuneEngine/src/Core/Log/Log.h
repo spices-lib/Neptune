@@ -20,11 +20,16 @@ namespace Neptune {
     public:
         
         /**
-         * @brief Get this instance.
-         * 
-         * @return Returns this instance.
-         */
+        * @brief Get this instance.
+        * 
+        * @return Returns this instance.
+        */
         static std::shared_ptr<Log> Get();
+
+        /**
+        * @brief Reset this instance.
+        */
+        static void Reset();
 
     public:
 

@@ -48,6 +48,11 @@ namespace Neptune::EmscriptenGLFW {
         void PollEvents() override;
 
         /**
+        * @brief Interface of window swap buffers.
+        */
+        void SwapBuffers() override {};
+
+        /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.

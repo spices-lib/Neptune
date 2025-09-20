@@ -10,10 +10,10 @@
 
 namespace Neptune {
 
+    static std::shared_ptr<Log> s_Log = nullptr;
+
     std::shared_ptr<Log> Log::Get()
     {
-        static std::shared_ptr<Log> s_Log = nullptr;
-
         if(!s_Log)
         {
             s_Log = std::make_shared<LogImpl>();
@@ -21,4 +21,10 @@ namespace Neptune {
 
         return s_Log;
     }
+
+    void Log::Reset()
+    {
+        s_Log.reset();
+    }
+
 }

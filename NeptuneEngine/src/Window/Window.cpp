@@ -19,7 +19,7 @@ namespace Neptune {
 
     static SP<Window> S_Instance = nullptr;
 
-    SP<Window> Window::Create(const WindowInfo& initInfo, WindowImplement implement)
+    SP<Window> Window::Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
     {
         switch (implement)
         {
@@ -34,7 +34,7 @@ namespace Neptune {
 #ifdef NP_PLATFORM_WINDOWS
             case WindowImplement::GLFW:
             {
-                S_Instance = CreateSP<GLFW::WindowImpl>(initInfo, implement);
+                S_Instance = CreateSP<GLFW::WindowImpl>(initInfo, implement, backend);
                 break;
             }
 #endif

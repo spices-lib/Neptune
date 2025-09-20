@@ -24,10 +24,6 @@ namespace Neptune {
     {
     public:
 
-        static std::shared_ptr<Log> Get();
-
-    public:
-
         /**
         * @brief Constructor Function.
         */

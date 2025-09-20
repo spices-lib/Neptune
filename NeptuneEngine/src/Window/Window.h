@@ -7,22 +7,10 @@
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
+#include "Enum.h"
+#include "Render/Frontend/Enum.h"
 
 namespace Neptune {
-
-    /**
-    * @brief Enum of Window Implement.
-    */
-    enum class WindowImplement
-    {
-        None            = 0,
-        GLFW            = 1,
-        emscripten_glfw = 2,
-        SDL2            = 3,
-        WindowsNative   = 4,
-        MacOSNative     = 5,
-        LinuxNative     = 6
-    };
 
     /**
 	* @brief This struct defines the basic information of window.
@@ -47,10 +35,11 @@ namespace Neptune {
         *
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
+        * @param[in] backend RenderBackendEnum.
         *
         * @return Returns Window pointer.
         */
-        static SP<Window> Create(const WindowInfo& initInfo, WindowImplement implement);
+        static SP<Window> Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend);
 
         /**
         * @brief Get Window Instance.
@@ -90,6 +79,11 @@ namespace Neptune {
         * @brief Interface of window poll events.
         */
         virtual void PollEvents() = 0;
+
+        /**
+        * @brief Interface of window swap buffers.
+        */
+        virtual void SwapBuffers() = 0;
 
         /**
         * @brief Interface of get native window pointer.

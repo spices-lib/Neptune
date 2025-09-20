@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "WindowImpl.h"
+#include "RenderBackendInterface.h"
 #include "Core/Event/WindowEvent.h"
 #include "Core/Event/KeyEvent.h"
 #include "Core/Event/MouseEvent.h"
@@ -17,15 +18,19 @@
 
 namespace Neptune::GLFW {
 
-    WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement)
+    WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
             : Window(initInfo, implement)
+            , m_APIInterface(CreateInterface(backend))
     {
-        // initialize the library
-        if(!glfwInit()) {
+        // Initialize the library
+        if(!glfwInit()) 
+        {
             NEPTUNE_CORE_CRITICAL("glfw init failed.")
         }
 
-        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);        // @brief no OpenGL (use canvas2D)
+        // Set Hint
+        m_APIInterface->Hint();
+
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);           // @brief Set glfw enable resize feature.
         glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);           // @brief Set glfw enable title tab.
 
@@ -36,11 +41,15 @@ namespace Neptune::GLFW {
         glfwWindowHint(GLFW_BLUE_BITS    , mode->blueBits    );
         glfwWindowHint(GLFW_REFRESH_RATE , mode->refreshRate );
 
-        // create the only window
+        // Create the only window
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
-        if(!m_Windows) {
+        if(!m_Windows) 
+        {
             NEPTUNE_CORE_CRITICAL("Window create failed.")
         }
+
+        // Load APIs.
+        m_APIInterface->APILoad(m_Windows);
 
         // Set glfw call back object pointer.
         glfwSetWindowUserPointer(m_Windows, this);
@@ -51,9 +60,11 @@ namespace Neptune::GLFW {
 
     WindowImpl::~WindowImpl()
     {
-        if (m_Windows) {
+        if (m_Windows) 
+        {
             glfwDestroyWindow(m_Windows);
         }
+
         glfwTerminate();
     }
 
@@ -65,6 +76,11 @@ namespace Neptune::GLFW {
     void WindowImpl::PollEvents()
     {
         glfwPollEvents();
+    }
+
+    void WindowImpl::SwapBuffers()
+    {
+        m_APIInterface->SwapBuffers(m_Windows);
     }
 
     void* WindowImpl::NativeWindow()
