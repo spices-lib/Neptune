@@ -20,6 +20,8 @@ namespace Neptune {
 
     std::shared_ptr<Console> Console::Registry(const std::string& name)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_GlobalConsolePool.find(name) == m_GlobalConsolePool.end())
         {
             m_GlobalConsolePool[name] = CreateSP<Console>();
@@ -30,17 +32,23 @@ namespace Neptune {
 
     void Console::Clear()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_InfoData.Clear();
     }
 
     void Console::Push(const std::string& cmd)
     {
+        NEPTUNE_PROFILE_ZONE
+
         // todo: To be completed.
         //m_LogInfos.push_back({ cmd , "info", glm::vec4(1.0f)});
     }
 
     void Console::sink_it_(const spdlog::details::log_msg& msg)
     {
+        NEPTUNE_PROFILE_ZONE
+
         //std::lock_guard<std::mutex> lock(mutex_);
 
         std::stringstream ss;

@@ -20,6 +20,8 @@ namespace Neptune {
     }
     void RHISystem::Tick()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderFrontend->BeginFrame();
         m_RenderFrontend->RenderFrame();
         m_RenderFrontend->EndFrame();

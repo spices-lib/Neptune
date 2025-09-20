@@ -29,7 +29,11 @@ project "NeptuneEditor"
 	defines
 	{
 		-- Define Game Assets Folder.
-		'NEPTUNEEDITOR_ASSETS_PATH=std::string("%{wks.location}/NeptuneEditor/assets/")'
+		'NEPTUNEEDITOR_ASSETS_PATH=std::string("%{wks.location}/NeptuneEditor/assets/")',
+
+		"TRACY_ENABLE",                  -- tracy Feature Enable.
+		"TRACY_ON_DEMAND",               -- Used if want profile on demand.
+		"TRACY_FIBERS",                  -- Enable fiber thread.
 	}
 
 	-- The Solution Additional Include Folder.
@@ -166,9 +170,6 @@ project "NeptuneEditor"
 		defines
 		{
 			"NEPTUNE_DEBUG",                   -- Debug Symbol.
-			"TRACY_ENABLE",                    -- tracy Feature Enable.
-			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
-			"TRACY_FIBERS",                    -- Enable fiber mode.
 		}
 
 		runtime "Debug"
@@ -192,9 +193,6 @@ project "NeptuneEditor"
 		defines
 		{
 			"NEPTUNE_RELEASE",                 -- Release Symbol.
-			"TRACY_ENABLE",                    -- tracy Feature Enable.
-			"TRACY_ON_DEMAND",                 -- Used if want profile on demand.
-			"TRACY_FIBERS",                    -- Enable fiber mode.
 		}
 
 		runtime "Release"

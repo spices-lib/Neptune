@@ -24,6 +24,8 @@ namespace Neptune {
 
     Application& Application::Instance()
     {
+        NEPTUNE_PROFILE_ZONE
+
         if(!S_Instance)
         {
             S_Instance = CreateUP<Application>();
@@ -35,6 +37,8 @@ namespace Neptune {
 
     void Application::Destroy()
     {
+        NEPTUNE_PROFILE_ZONE
+
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
         S_Instance.reset();
@@ -46,6 +50,8 @@ namespace Neptune {
 
     Application::Application()
     {
+        NEPTUNE_PROFILE_ZONE
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
         m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw, RenderBackendEnum::WebGPU).get();
 #endif
@@ -65,6 +71,8 @@ namespace Neptune {
 
     Application::~Application()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_World.reset();
 
         m_SystemManager->PopAllSystems();
@@ -88,11 +96,15 @@ namespace Neptune {
 
         while(m_Window->IsWindowActive())
         {
+            NEPTUNE_PROFILE_ZONEN("MainLoop")
+
             m_Window->PollEvents();
 
             m_SystemManager->Run();
 
             m_Window->SwapBuffers();
+
+            NEPTUNE_PROFILE_FRAME
         }
 
         // on detach world to application.
@@ -106,6 +118,8 @@ namespace Neptune {
 
     void Application::MainLoop(void* iUserData)
     {
+        NEPTUNE_PROFILE_ZONE
+
         auto p = reinterpret_cast<Application*>(iUserData);
 
         if(p->m_Window->IsWindowActive())
@@ -115,6 +129,8 @@ namespace Neptune {
             p->m_SystemManager->Run();
 
             p->m_Window->SwapBuffers();
+
+            NEPTUNE_PROFILE_FRAME
 
             return;
         }

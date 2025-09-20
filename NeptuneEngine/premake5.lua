@@ -62,6 +62,10 @@ project "NeptuneEngine"
 
 		-- Define Engine Extent Processes Folder.
 		--'NEPTUNE_EXTENT_PROCESS_PATH=std::string("' .. path.translate(os.getcwd(), "/") .. '/../vendor/")',
+
+		"TRACY_ENABLE",                  -- tracy Feature Enable.
+		"TRACY_ON_DEMAND",               -- Used if want profile on demand.
+		"TRACY_FIBERS",                  -- Enable fiber thread.
 	}
 
 	-- The Solution Additional Include Folder.
@@ -196,9 +200,6 @@ project "NeptuneEngine"
 		defines 
 		{
 			"NEPTUNE_DEBUG",                 -- Debug Symbol.
-			"TRACY_ENABLE",                  -- tracy Feature Enable.
-			"TRACY_ON_DEMAND",               -- Used if want profile on demand.
-			"TRACY_FIBERS",                  -- Enable fiber mode.
 		}
 
 		runtime "Debug"
@@ -211,9 +212,6 @@ project "NeptuneEngine"
 		defines 
 		{
 			"NEPTUNE_RELEASE",               -- Release Symbol.
-			"TRACY_ENABLE",                  -- tracy Feature Enable.
-			"TRACY_ON_DEMAND",               -- Used if want profile on demand.
-			"TRACY_FIBERS",                  -- Enable fiber mode.
 		}
 
 		runtime "Release"

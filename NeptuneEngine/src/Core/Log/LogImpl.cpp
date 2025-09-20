@@ -16,6 +16,8 @@ namespace Neptune {
 
     LogImpl::LogImpl() : Log()
     {
+        NEPTUNE_PROFILE_ZONE
+
         spdlog::set_pattern("[%Y-%m-%d %H:%M:%S] [%n] [%l] %v");
 
 #ifndef __EMSCRIPTEN__
@@ -47,6 +49,8 @@ namespace Neptune {
 
     LogImpl::~LogImpl ()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_IsInitialized = false;
 
         m_CoreLogger.reset();

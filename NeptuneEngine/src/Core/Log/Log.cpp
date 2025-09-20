@@ -5,6 +5,7 @@
 */
 
 #include "Pchheader.h"
+#include "Core/Core.h"
 #include "Log.h"
 #include "LogImpl.h"
 
@@ -14,6 +15,8 @@ namespace Neptune {
 
     std::shared_ptr<Log> Log::Get()
     {
+        NEPTUNE_PROFILE_ZONE
+
         if(!s_Log)
         {
             s_Log = std::make_shared<LogImpl>();
@@ -24,6 +27,8 @@ namespace Neptune {
 
     void Log::Reset()
     {
+        NEPTUNE_PROFILE_ZONE
+
         s_Log.reset();
     }
 
