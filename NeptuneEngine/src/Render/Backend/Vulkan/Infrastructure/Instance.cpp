@@ -15,11 +15,15 @@ namespace Neptune::Vulkan {
     Instance::Instance(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void Instance::Create()
     {
+        NEPTUNE_PROFILE_ZONE
+
         VkApplicationInfo                          appInfo {};
 		appInfo.sType                            = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		appInfo.pApplicationName                 = "neptune";

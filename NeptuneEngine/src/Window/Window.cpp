@@ -21,6 +21,8 @@ namespace Neptune {
 
     SP<Window> Window::Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
     {
+        NEPTUNE_PROFILE_ZONE
+
         switch (implement)
         {
 #ifdef NP_PLATFORM_EMSCRIPTEN
@@ -51,12 +53,16 @@ namespace Neptune {
 
     Window& Window::Instance()
     {
+        NEPTUNE_PROFILE_ZONE
+
         assert(S_Instance);
         return *S_Instance;
     }
 
     void Window::Destroy()
     {
+        NEPTUNE_PROFILE_ZONE
+
         S_Instance.reset();
         S_Instance = nullptr;
 

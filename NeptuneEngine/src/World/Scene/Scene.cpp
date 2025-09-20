@@ -15,6 +15,8 @@ namespace Neptune {
     
     Scene::Scene()
     {
+        NEPTUNE_PROFILE_ZONE
+
         auto root = CreateEntity("SceneRoot");
 
         root.AddComponent<ScriptComponent>();
@@ -24,11 +26,15 @@ namespace Neptune {
 
     Entity Scene::CreateEntity(const std::string& name)
     {
+        NEPTUNE_PROFILE_ZONE
+
         return CreateEntityWithUUID(UUID(), name);
     }
 
     Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Entity entity = CreateEmptyEntity(uuid);
 
         entity.AddComponent<UUIDComponent>(uuid);
@@ -39,6 +45,8 @@ namespace Neptune {
 
     void Scene::Destroy(const Entity& entity)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
         uint32_t e = entity;
@@ -47,11 +55,15 @@ namespace Neptune {
 
     Entity Scene::QueryEntityByID(const uint32_t id)
     {
+        NEPTUNE_PROFILE_ZONE
+
         return { id, this };
     }
 
     void Scene::ClearMarkerWithBits(const SceneMarkFlags flags)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_Marker & flags)
         {
             m_Marker ^= flags;
@@ -60,6 +72,8 @@ namespace Neptune {
 
     Entity Scene::CreateEmptyEntity(const UUID uuid)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
         return { static_cast<uint32_t>(m_Registry.create()), this };

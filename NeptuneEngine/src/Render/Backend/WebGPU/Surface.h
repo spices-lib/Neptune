@@ -51,12 +51,16 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::AddRef(Surface* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuSurfaceAddRef(object->Handle());
     }
 
     template<>
     inline void InfrastructureBase::Release(Surface* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!object->Handle())
         {
             return;
@@ -69,6 +73,8 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::SetLabel(Surface* object, const std::string& label)
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUStringView view{ label.c_str() };
 
         wgpuSurfaceSetLabel(object->Handle(), view);

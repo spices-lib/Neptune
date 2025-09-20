@@ -20,11 +20,15 @@ namespace Neptune::Vulkan {
 	MemoryAllocator::MemoryAllocator(Context& context)
 		: Infrastructure(context)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		Create();
 	}
 
 	void MemoryAllocator::Create()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		// see https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/quick_start.html
 		VmaAllocatorCreateInfo                  createInfo {};
 		createInfo.instance                   = m_Context.Get<Instance>()->Handle();

@@ -15,11 +15,15 @@ namespace Neptune::Vulkan {
     ThreadQueue::ThreadQueue(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void ThreadQueue::Submit(VkCommandBuffer commandBuffer) const
     {
+        NEPTUNE_PROFILE_ZONE
+
         VkSubmitInfo                     submitInfo{};
 		submitInfo.sType               = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 		submitInfo.commandBufferCount  = 1;
@@ -30,6 +34,8 @@ namespace Neptune::Vulkan {
 
     void ThreadQueue::Wait() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         VK_CHECK(vkQueueWaitIdle(m_Handle))
     }
 

@@ -78,6 +78,8 @@ namespace Neptune::WebGPU {
     template<typename T>
     void Context::Registry()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(T::Type);
 
         if (m_Infrastructures[position])
@@ -91,6 +93,8 @@ namespace Neptune::WebGPU {
     template <typename T>
     void Context::UnRegistry()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(T::Type);
 
         if (!m_Infrastructures[position])
@@ -106,6 +110,8 @@ namespace Neptune::WebGPU {
     template<typename T>
     T* Context::Get()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(T::Type);
 
         if (!m_Infrastructures[position])

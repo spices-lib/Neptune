@@ -11,6 +11,8 @@ namespace Neptune {
 
     void Component::OnComponentAttached(uint32_t entity)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Owner = entity;
     }
 

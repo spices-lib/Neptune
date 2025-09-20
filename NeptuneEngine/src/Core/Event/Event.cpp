@@ -16,11 +16,15 @@ namespace Neptune {
 
     Event::EventCallbackFn Event::GetEventCallbackFn()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return EventCallback;
     }
 
     void Event::SetEventCallbackFn(const EventCallbackFn& callback)
     {
+        NEPTUNE_PROFILE_ZONE
+
         EventCallback = callback;
     }
 }

@@ -13,6 +13,8 @@ namespace Neptune {
     
     Scene* World::CreateScene(const SP<Level>& level)
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto& name = level->GetName();
         
         if (m_Scenes.contains(name))
@@ -30,6 +32,8 @@ namespace Neptune {
 
     Scene* World::CreateScene(const std::string& name)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_Scenes.contains(name))
         {
             std::stringstream ss;

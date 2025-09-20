@@ -162,12 +162,16 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::AddRef(Device* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuDeviceAddRef(object->Handle());
     }
     
     template<>
     inline void InfrastructureBase::Release(Device* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!object->Handle())
         {
             return;
@@ -180,6 +184,8 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::SetLabel(Device* object, const std::string& label)
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUStringView view{ label.c_str() };
 
         wgpuDeviceSetLabel(object->Handle(), view);

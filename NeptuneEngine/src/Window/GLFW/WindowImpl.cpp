@@ -22,6 +22,8 @@ namespace Neptune::GLFW {
             : Window(initInfo, implement)
             , m_APIInterface(CreateInterface(backend))
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Initialize the library
         if(!glfwInit()) 
         {
@@ -60,6 +62,8 @@ namespace Neptune::GLFW {
 
     WindowImpl::~WindowImpl()
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_Windows) 
         {
             glfwDestroyWindow(m_Windows);
@@ -70,26 +74,36 @@ namespace Neptune::GLFW {
 
     bool WindowImpl::IsWindowActive()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return !glfwWindowShouldClose(m_Windows);
     }
 
     void WindowImpl::PollEvents()
     {
+        NEPTUNE_PROFILE_ZONE
+
         glfwPollEvents();
     }
 
     void WindowImpl::SwapBuffers()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_APIInterface->SwapBuffers(m_Windows);
     }
 
     void* WindowImpl::NativeWindow()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return m_Windows;
     }
 
     void WindowImpl::SetInternalCallBack() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         // print the version on the console
         NEPTUNE_CORE_INFO(glfwGetVersionString())
 

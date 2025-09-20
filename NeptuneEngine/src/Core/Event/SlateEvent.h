@@ -55,6 +55,8 @@ namespace Neptune {
         */
         std::string ToString() const override
         {
+            NEPTUNE_PROFILE_ZONE
+
             std::stringstream ss;
             ss << "SlateResizeEvent: " << m_Width << ", " << m_Height;
 

@@ -157,6 +157,8 @@ namespace Neptune
 
         inline std::string ToString(KeyCode code)
         {
+            NEPTUNE_PROFILE_ZONE
+
             switch (code)
             {
                 case Space         : return "Space";

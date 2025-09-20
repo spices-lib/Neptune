@@ -18,6 +18,8 @@ namespace Neptune::Vulkan {
 
 	Infrastructure::~Infrastructure()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		Destroy(this);
 	}
 

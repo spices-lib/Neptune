@@ -21,6 +21,8 @@ namespace Neptune {
 
     glm::mat4 OrthographicCamera::GetPMatrix()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return OrthographicMatrix(
                 m_OrthographicParam.left      ,
                 m_OrthographicParam.right     ,
@@ -33,6 +35,8 @@ namespace Neptune {
 
     void OrthographicCamera::CalculatePMatrixReverseZ()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_ProjectionMatrix = OrthographicMatrix(
                 m_OrthographicParam.left      ,
                 m_OrthographicParam.right     ,

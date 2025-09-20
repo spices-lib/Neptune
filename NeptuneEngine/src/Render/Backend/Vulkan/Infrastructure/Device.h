@@ -64,6 +64,8 @@ namespace Neptune::Vulkan {
 	template<>
 	inline void Infrastructure::Destroy(Device* infrastructure)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		vkDestroyDevice(infrastructure->Handle(), nullptr);
 		infrastructure->Handle() = nullptr;
 	}

@@ -21,6 +21,8 @@ namespace Neptune::EmscriptenGLFW {
     WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement)
             : Window(initInfo, implement)
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Initialize the library
         if(!glfwInit()) 
         {
@@ -59,6 +61,8 @@ namespace Neptune::EmscriptenGLFW {
 
     WindowImpl::~WindowImpl()
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_Windows) 
         {
             glfwDestroyWindow(m_Windows);
@@ -69,21 +73,29 @@ namespace Neptune::EmscriptenGLFW {
 
     bool WindowImpl::IsWindowActive()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return !glfwWindowShouldClose(m_Windows);
     }
 
     void WindowImpl::PollEvents()
     {
+        NEPTUNE_PROFILE_ZONE
+
         glfwPollEvents();
     }
 
     void* WindowImpl::NativeWindow()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return m_Windows;
     }
 
     void WindowImpl::SetInternalCallBack() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         // print the version on the console
         NEPTUNE_CORE_INFO(glfwGetVersionString())
 

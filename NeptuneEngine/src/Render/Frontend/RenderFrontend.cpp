@@ -21,6 +21,8 @@ namespace Neptune {
 
     SP<RenderFrontend> RenderFrontend::Create(RenderBackendEnum backend)
     {
+        NEPTUNE_PROFILE_ZONE
+
         switch(backend)
         {
 #ifdef NP_PLATFORM_EMSCRIPTEN

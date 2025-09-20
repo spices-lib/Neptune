@@ -31,6 +31,8 @@ namespace Neptune::WebGL {
     RenderBackend::RenderBackend(RenderBackendEnum backend)
         : RenderFrontend(backend)
     {
+        NEPTUNE_PROFILE_ZONE
+
         EmscriptenWebGLContextAttributes attrs;
         emscripten_webgl_init_context_attributes(&attrs);
         EMSCRIPTEN_WEBGL_CONTEXT_HANDLE ctx = emscripten_webgl_create_context("#nepnep", &attrs);
@@ -54,6 +56,8 @@ namespace Neptune::WebGL {
 
     void RenderBackend::RenderFrame()
     {
+        NEPTUNE_PROFILE_ZONE
+
         glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
     }

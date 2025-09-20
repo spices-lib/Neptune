@@ -13,6 +13,8 @@ namespace StringLibrary
 {
     std::vector<std::string> SplitString(const std::string& input, char delimiter)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::vector<std::string> result;
         size_t start = 0;
         size_t end   = 0;

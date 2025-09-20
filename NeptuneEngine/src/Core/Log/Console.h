@@ -38,6 +38,8 @@ namespace Neptune {
          */
         void Clear()
         {
+            NEPTUNE_PROFILE_ZONE
+
             std::queue<InfoLevelHelper>().swap(m_TraceLogInfos);
             std::queue<InfoLevelHelper>().swap(m_InfoLogInfos);
             std::queue<InfoLevelHelper>().swap(m_WarnLogInfos);

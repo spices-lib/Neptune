@@ -21,6 +21,8 @@ namespace Neptune {
 
     glm::mat4 PerspectiveCamera::GetPMatrix()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return PerspectiveMatrix(
                 m_PerspectiveParam.fov        ,
                 m_PerspectiveParam.nearPlane  ,
@@ -31,6 +33,8 @@ namespace Neptune {
 
     void PerspectiveCamera::CalculatePMatrixReverseZ()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_ProjectionMatrix = PerspectiveMatrixInverseZ(
                 m_PerspectiveParam.fov        ,
                 m_PerspectiveParam.nearPlane  ,

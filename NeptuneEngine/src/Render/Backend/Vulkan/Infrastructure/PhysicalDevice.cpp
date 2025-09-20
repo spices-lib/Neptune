@@ -17,11 +17,15 @@ namespace Neptune::Vulkan {
 	PhysicalDevice::PhysicalDevice(Context& context)
         : Infrastructure(context)
     {
+		NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void PhysicalDevice::Create()
     {
+		NEPTUNE_PROFILE_ZONE
+
         const auto instance = m_Context.Get<Instance>()->Handle();
 
 		// Get all physical device num this computer.
@@ -58,6 +62,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsExtensionMeetDemand(const VkPhysicalDevice& device)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		// Get all physicaldevice extensions nums.
 		uint32_t extensionCount;
 		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
@@ -98,6 +104,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsPropertyMeetDemand(const VkPhysicalDevice& device)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkPhysicalDeviceProperties2                   prop2 {};
 		prop2.sType                                 = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
 		prop2.pNext                                 = nullptr;
@@ -109,6 +117,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsFeatureMeetDemand(const VkPhysicalDevice& device)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkPhysicalDeviceFeatures2                             deviceFeatures {};
 		deviceFeatures.sType                                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
 		deviceFeatures.pNext                                = nullptr;
@@ -120,6 +130,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsQueueMeetDemand(const VkPhysicalDevice& device, const VkSurfaceKHR& surface)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		// Get all physicaldevice queue nums.
 		uint32_t queueFamilyCount = 0;
 		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);

@@ -64,6 +64,8 @@ namespace Neptune::Vulkan {
 	template<>
 	inline void Infrastructure::Destroy(Instance* infrastructure)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		vkDestroyInstance(infrastructure->Handle(), nullptr);
 		infrastructure->Handle() = nullptr;
 	}

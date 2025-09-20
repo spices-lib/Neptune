@@ -18,6 +18,8 @@ namespace Neptune::WebGPU {
     Surface::Surface(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Handle = m_Context.Get<Instance>()->CreateSurface("#nepnep");
 
         if (m_Handle)
@@ -34,6 +36,8 @@ namespace Neptune::WebGPU {
 
     void Surface::Configure()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUTextureFormat viewFormats[] = { WGPUTextureFormat_RGBA8Unorm };
         
         WGPUSurfaceConfiguration configure                          = {};
@@ -52,6 +56,8 @@ namespace Neptune::WebGPU {
 
     void Surface::GetCapabilities()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSurfaceCapabilities capabilities{};
 
         WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_Handle, m_Context.Get<Adapter>()->Handle(), &capabilities))
@@ -59,6 +65,8 @@ namespace Neptune::WebGPU {
 
     void Surface::GetCurrentTexture()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSurfaceTexture texture{};
 
         wgpuSurfaceGetCurrentTexture(m_Handle, &texture);
@@ -66,11 +74,15 @@ namespace Neptune::WebGPU {
 
     void Surface::Present()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WEBGPU_CHECK(wgpuSurfacePresent(m_Handle))
     }
 
     void Surface::Unconfigure()
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuSurfaceUnconfigure(m_Handle);
     }
 

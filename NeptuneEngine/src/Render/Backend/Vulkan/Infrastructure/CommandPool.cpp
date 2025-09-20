@@ -15,6 +15,8 @@ namespace Neptune::Vulkan {
     CommandPool::CommandPool(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 

@@ -65,6 +65,8 @@ namespace Neptune::Vulkan {
 	template<>
 	inline void Infrastructure::Destroy(SwapChain* infrastructure)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		const auto device = infrastructure->m_Context.Get<Device>()->Handle();
 
 		vkDestroySwapchainKHR(device, infrastructure->Handle(), nullptr);

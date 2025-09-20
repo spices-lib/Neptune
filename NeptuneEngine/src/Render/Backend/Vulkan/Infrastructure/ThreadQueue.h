@@ -78,6 +78,8 @@ namespace Neptune::Vulkan {
 	template<>
 	inline void Infrastructure::Destroy(ThreadQueue* infrastructure)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		infrastructure->Handle() = nullptr;
 	}
 

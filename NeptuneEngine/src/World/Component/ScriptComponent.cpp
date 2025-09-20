@@ -13,6 +13,8 @@ namespace Neptune {
 
     void ScriptComponent::AddScript(const SP<ScriptInterface>& script)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_Scripts.contains(script->GetName()))
         {
             NEPTUNE_CORE_WARN("Script is existing on component.")
@@ -25,6 +27,8 @@ namespace Neptune {
 
     void ScriptComponent::RemoveScript(const std::string& name)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!m_Scripts.contains(name))
         {
             NEPTUNE_CORE_WARN("Script is not existing on component.")
@@ -37,6 +41,8 @@ namespace Neptune {
     
     void ScriptComponent::OnTick() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         for (const auto& script : m_Scripts | std::views::values)
         {
             script->OnTick();
@@ -45,6 +51,8 @@ namespace Neptune {
 
     void ScriptComponent::OnEvent(Event& e) const
     {
+        NEPTUNE_PROFILE_ZONE
+
         for (const auto& script : m_Scripts | std::views::values)
         {
             script->OnEvent(e);
@@ -53,6 +61,8 @@ namespace Neptune {
 
     void ScriptComponent::OnComponentDetached()
     {
+        NEPTUNE_PROFILE_ZONE
+
         for (const auto& script : m_Scripts | std::views::values)
         {
             script->OnDestroy();

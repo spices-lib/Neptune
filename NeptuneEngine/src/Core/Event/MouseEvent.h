@@ -55,6 +55,8 @@ namespace Neptune {
         */
         std::string ToString() const override
         {
+            NEPTUNE_PROFILE_ZONE
+
             std::stringstream ss;
             ss << "MouseMovedEvent: " << m_MouseX << " ," << m_MouseY;
 
@@ -128,6 +130,8 @@ namespace Neptune {
         */
         std::string ToString() const override
         {
+            NEPTUNE_PROFILE_ZONE
+
             std::stringstream ss;
             ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
 
@@ -226,6 +230,8 @@ namespace Neptune {
         */
         std::string ToString() const override
         {
+            NEPTUNE_PROFILE_ZONE
+
             std::stringstream ss;
             ss << "MouseButtonPressedEvent: " << Mouse::ToString(m_Button);
 
@@ -266,6 +272,8 @@ namespace Neptune {
         */
         std::string ToString() const override
         {
+            NEPTUNE_PROFILE_ZONE
+
             std::stringstream ss;
             ss << "MouseButtonReleasedEvent: " << Mouse::ToString(m_Button);
 

@@ -76,6 +76,8 @@ namespace Neptune {
     template<typename T, typename ...Args>
 	SystemManager* SystemManager::PushSystem(Args&&... args)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Systems.emplace_back(CreateUP<T>(std::forward<Args>(args)...));
         m_Systems.back()->OnSystemInitialize();
 

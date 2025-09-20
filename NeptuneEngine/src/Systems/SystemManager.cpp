@@ -12,12 +12,16 @@ namespace Neptune {
 
     SystemManager::SystemManager()
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Set Global EventCallBack
         Event::SetEventCallbackFn(BIND_EVENT_FN(SystemManager::OnEvent));
     }
 
     SystemManager* SystemManager::PopSystem()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Systems.back()->OnSystemShutDown();
         m_Systems.pop_back();
 
@@ -26,6 +30,8 @@ namespace Neptune {
 
     void SystemManager::PopAllSystems()
     {
+        NEPTUNE_PROFILE_ZONE
+
         for(auto& system : m_Systems)
         {
             PopSystem();
@@ -34,6 +40,8 @@ namespace Neptune {
 
     void SystemManager::Run() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         for(auto& system : m_Systems)
         {
             system->Tick();
@@ -42,6 +50,8 @@ namespace Neptune {
 
     void SystemManager::OnEvent(Event& event) const
     {
+        NEPTUNE_PROFILE_ZONE
+
         NEPTUNE_CORE_TRACE(event.ToString())
 
         for(auto& system : m_Systems)

@@ -40,6 +40,8 @@ namespace Neptune
 
         inline std::string ToString(MouseCode code)
         {
+            NEPTUNE_PROFILE_ZONE
+
             switch (code)
             {
                 case Button0           : return "ButtonLeft";

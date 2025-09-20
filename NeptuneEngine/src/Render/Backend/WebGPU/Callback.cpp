@@ -14,6 +14,8 @@ namespace Neptune::WebGPU {
 
 	void Callback::DeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*)
 	{
+        NEPTUNE_PROFILE_ZONE
+
         const char* label = "";
         switch (reason)
         {
@@ -32,6 +34,8 @@ namespace Neptune::WebGPU {
 
 	void Callback::UncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*)
 	{
+        NEPTUNE_PROFILE_ZONE
+
 		if (type == WGPUErrorType_NoError)
         {
             return;

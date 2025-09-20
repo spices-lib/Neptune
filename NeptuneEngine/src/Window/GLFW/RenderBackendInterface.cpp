@@ -17,6 +17,8 @@ namespace Neptune::GLFW {
 
 	SP<APIInterface> CreateInterface(RenderBackendEnum backend)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		switch (backend)
 		{
 			case RenderBackendEnum::OpenGL: return CreateSP<OpenGLInterface>();
@@ -31,6 +33,8 @@ namespace Neptune::GLFW {
 
 	void OpenGLInterface::Hint()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		// Set OpenGL Version 4.6.
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -39,6 +43,8 @@ namespace Neptune::GLFW {
 
 	void OpenGLInterface::APILoad(GLFWwindow* handle)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		glfwMakeContextCurrent(handle);
 
 		// Use glad to load OpenGL APIs.
@@ -50,11 +56,15 @@ namespace Neptune::GLFW {
 
 	void OpenGLInterface::SwapBuffers(GLFWwindow* handle)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		glfwSwapBuffers(handle);
 	}
 
 	void VulkanInterface::Hint()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		// Set no OpenGL (use vulkan)
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	}

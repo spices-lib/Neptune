@@ -145,6 +145,8 @@ namespace Neptune {
         */
         [[nodiscard]] bool IsInCategory(EventCategory category) const
         {
+            NEPTUNE_PROFILE_ZONE
+
             return GetCategoryFlags() & category;
         }
 
@@ -208,6 +210,8 @@ namespace Neptune {
         template<typename T>
         bool Dispatch(EventFn<T> func)
         {
+            NEPTUNE_PROFILE_ZONE
+
             /**
             * @brief If Specific Event handle function takes the same type with Stored Event type,
             * will execute the function pointer.

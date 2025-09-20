@@ -50,12 +50,16 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::AddRef(Queue* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuQueueAddRef(object->Handle());
     }
 
     template<>
     inline void InfrastructureBase::Release(Queue* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!object->Handle())
         {
             return;
@@ -68,6 +72,8 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::SetLabel(Queue* object, const std::string& label)
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUStringView view{ label.c_str() };
 
         wgpuQueueSetLabel(object->Handle(), view);

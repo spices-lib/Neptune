@@ -11,6 +11,8 @@ namespace Neptune {
     
     void LogicalSystem::Tick()
     {
+        NEPTUNE_PROFILE_ZONE
+
         // receive ui event or interface event.
 
         

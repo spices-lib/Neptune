@@ -18,11 +18,15 @@ namespace Neptune::Vulkan {
     Surface::Surface(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void Surface::Create()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto instance = m_Context.Get<Instance>()->Handle();
         const auto window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
 

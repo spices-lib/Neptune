@@ -261,6 +261,8 @@ namespace Neptune {
     template <typename T, typename F>
     void Scene::ViewComponent(F&& fn)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
         auto view = m_Registry.view<T>();
@@ -276,6 +278,8 @@ namespace Neptune {
     template <typename T, typename F>
     void Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
         for(auto range : ranges)
@@ -290,6 +294,8 @@ namespace Neptune {
     template<typename T, typename F>
     void Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
         
         assert(ceil >= floor);
@@ -307,6 +313,8 @@ namespace Neptune {
     template<typename F>
     void Scene::ViewRoot(F&& fn)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
         
         fn(m_Root);
@@ -315,6 +323,8 @@ namespace Neptune {
     template <typename T, typename ... Args>
     T& Scene::AddComponent(uint32_t e, Args&&... args)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
         return m_Registry.emplace<T>(static_cast<entt::entity>(e), std::forward<Args>(args)...);
@@ -323,6 +333,8 @@ namespace Neptune {
     template <typename T, typename ... Args>
     T& Scene::ReplaceComponent(uint32_t e, Args&&... args)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
         return m_Registry.replace<T>(static_cast<entt::entity>(e), std::forward<Args>(args)...);
@@ -331,6 +343,8 @@ namespace Neptune {
     template <typename T>
     T& Scene::GetComponent(uint32_t e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         /**
         * @note lock cause bug here.
         */
@@ -342,6 +356,8 @@ namespace Neptune {
     template <typename T>
     void Scene::RemoveComponent(uint32_t e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::unique_lock<std::shared_mutex> lock(m_Mutex);
 
         m_Registry.remove<T>(static_cast<entt::entity>(e));
@@ -350,6 +366,8 @@ namespace Neptune {
     template <typename T>
     bool Scene::HasComponent(uint32_t e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
         return m_Registry.all_of<T>(static_cast<entt::entity>(e));
@@ -358,12 +376,16 @@ namespace Neptune {
     template<typename T>
     void Scene::OnComponentAttached(Entity* entity, T& component)
     {
+        NEPTUNE_PROFILE_ZONE
+
         component.OnComponentAttached(*entity);
     }
 
     template <typename T>
     void Scene::OnComponentDetached(Entity* entity, T& component)
     {
+        NEPTUNE_PROFILE_ZONE
+
         component.OnComponentDetached(*entity);
     }
 }

@@ -66,6 +66,8 @@ namespace Neptune::Vulkan {
     template <typename T>
     void Infrastructure::Destroy(T*)
     {
+        NEPTUNE_PROFILE_ZONE
+
         NEPTUNE_CORE_WARN("Vulkan Infrastructure Not implement Destroy API.")
     }
 

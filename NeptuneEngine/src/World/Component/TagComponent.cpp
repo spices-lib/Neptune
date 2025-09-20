@@ -11,6 +11,8 @@ namespace Neptune {
 
     void TagComponent::Rename(const std::string& tag)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Tags = tag;
     }
 }

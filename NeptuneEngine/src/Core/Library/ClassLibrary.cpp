@@ -16,7 +16,9 @@ namespace ClassLibrary
 {
     std::string GetClassString(ClassType t)
     {
-        const std::vector<std::string>& outSplit = SplitString(t.get().name(), ':');
+        NEPTUNE_PROFILE_ZONE
+
+        const auto& outSplit = SplitString(t.get().name(), ':');
         return outSplit[outSplit.size() - 1];
     }
 }

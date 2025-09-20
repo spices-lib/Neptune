@@ -145,6 +145,8 @@ namespace Neptune {
     template <typename T, typename ... Args>
     T& Entity::AddComponent(Args&&... args)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (HasComponent<T>())
         {
             std::stringstream ss;
@@ -162,6 +164,8 @@ namespace Neptune {
     template <typename T, typename ... Args>
     T& Entity::ReplaceComponent(Args&&... args)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!HasComponent<T>())
         {
             return AddComponent<T>(std::forward<Args>(args)...);
@@ -175,12 +179,16 @@ namespace Neptune {
     template <typename T>
     T& Entity::GetComponent() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         return m_Scene->GetComponent<T>(m_Handle);
     }
 
     template <typename T>
     void Entity::RemoveComponent() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!HasComponent<T>())
         {
             std::stringstream ss;
@@ -199,6 +207,8 @@ namespace Neptune {
     template <typename T>
     bool Entity::HasComponent() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         return m_Scene->HasComponent<T>(m_Handle);
     }
 }

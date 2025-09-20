@@ -13,6 +13,8 @@ namespace Neptune::Vulkan {
 
 	void Functions::Init(VkInstance instance)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		EXPLAIN_VK_FUNCTION_POINTER(vkCreateDebugUtilsMessengerEXT                  )
 		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyDebugUtilsMessengerEXT                 )
 

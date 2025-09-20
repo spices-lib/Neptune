@@ -65,6 +65,8 @@ namespace Neptune::Vulkan {
 	template<>
 	inline void Infrastructure::Destroy(Surface* infrastructure)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		const auto instance = infrastructure->m_Context.Get<Instance>()->Handle();
 
 		vkDestroySurfaceKHR(instance, infrastructure->Handle(), nullptr);

@@ -15,11 +15,15 @@ namespace Neptune::WebGPU {
     Instance::Instance(Context& context)
             : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void Instance::Create()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUInstanceFeatureName             feature[1];
         feature[0]                        = WGPUInstanceFeatureName_TimedWaitAny;
 
@@ -41,6 +45,8 @@ namespace Neptune::WebGPU {
 
     void Instance::GetFeatures()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSupportedInstanceFeatures features;
 
         wgpuGetInstanceFeatures(&features);
@@ -48,6 +54,8 @@ namespace Neptune::WebGPU {
 
     void Instance::GetLimits()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUInstanceLimits limit;
 
         WEBGPU_CHECK(wgpuGetInstanceLimits(&limit))
@@ -55,6 +63,8 @@ namespace Neptune::WebGPU {
 
     void Instance::HasFeature()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUInstanceFeatureName name = WGPUInstanceFeatureName_TimedWaitAny;
 
         wgpuHasInstanceFeature(name);
@@ -62,6 +72,8 @@ namespace Neptune::WebGPU {
 
     WGPUSurface Instance::CreateSurface(const std::string& htmlCanvas)
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUEmscriptenSurfaceSourceCanvasHTMLSelector                 htmlSelector  = {};
         htmlSelector.chain.sType                                    = WGPUSType_EmscriptenSurfaceSourceCanvasHTMLSelector;
         htmlSelector.chain.next                                     = nullptr;
@@ -75,6 +87,8 @@ namespace Neptune::WebGPU {
 
     void Instance::GetWGSLFeatures()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSupportedWGSLLanguageFeatures features{};
 
         wgpuInstanceGetWGSLLanguageFeatures(m_Handle, &features);
@@ -82,6 +96,8 @@ namespace Neptune::WebGPU {
 
     void Instance::HasWGSLFeature()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUWGSLLanguageFeatureName name = WGPUWGSLLanguageFeatureName_ReadonlyAndReadwriteStorageTextures;
 
         wgpuInstanceHasWGSLLanguageFeature(m_Handle, name);
@@ -89,11 +105,15 @@ namespace Neptune::WebGPU {
 
     void Instance::ProcessEvents()
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuInstanceProcessEvents(m_Handle);
     }
 
     WGPUAdapter Instance::RequestAdapter()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPURequestAdapterOptions options{};
 
         WGPUAdapter adaptor = nullptr;
@@ -123,6 +143,8 @@ namespace Neptune::WebGPU {
 
     void Instance::Wait()
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (m_FutureList.empty())
         {
             return;
@@ -140,6 +162,8 @@ namespace Neptune::WebGPU {
 
     void Instance::Wait(const WGPUFuture& future)
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUFutureWaitInfo info{};
         info.future = future;
 
@@ -148,6 +172,8 @@ namespace Neptune::WebGPU {
 
     void Instance::PushToFutureList(const WGPUFuture& future)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_FutureList.push_back(future);
     }
 

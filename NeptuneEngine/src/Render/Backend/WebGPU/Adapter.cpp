@@ -17,6 +17,8 @@ namespace Neptune::WebGPU {
     Adapter::Adapter(Context& context)
 		: Infrastructure(context)
 	{
+        NEPTUNE_PROFILE_ZONE
+
         m_Handle = m_Context.Get<Instance>()->RequestAdapter();
 
         if (m_Handle)
@@ -31,6 +33,8 @@ namespace Neptune::WebGPU {
 
     void Adapter::GetFeatures()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSupportedFeatures features{};
 
         wgpuAdapterGetFeatures(m_Handle, &features);
@@ -38,6 +42,8 @@ namespace Neptune::WebGPU {
 
     void Adapter::GetInfo()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUAdapterInfo info{};
 
         WEBGPU_CHECK(wgpuAdapterGetInfo(m_Handle, &info))
@@ -45,6 +51,8 @@ namespace Neptune::WebGPU {
 
     void Adapter::GetLimits()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPULimits limits{};
 
         WEBGPU_CHECK(wgpuAdapterGetLimits(m_Handle, &limits))
@@ -52,6 +60,8 @@ namespace Neptune::WebGPU {
 
     void Adapter::HasFeature()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUFeatureName feature = WGPUFeatureName_CoreFeaturesAndLimits;
 
         wgpuAdapterHasFeature(m_Handle, feature);
@@ -59,7 +69,9 @@ namespace Neptune::WebGPU {
 
     WGPUDevice Adapter::RequestDevice()
     {
-         WGPUDeviceLostCallbackInfo           deviceLostInfo{};
+        NEPTUNE_PROFILE_ZONE
+
+        WGPUDeviceLostCallbackInfo           deviceLostInfo{};
         deviceLostInfo.mode                = WGPUCallbackMode_WaitAnyOnly;
         deviceLostInfo.callback            = Callback::DeviceLostCallback;
 

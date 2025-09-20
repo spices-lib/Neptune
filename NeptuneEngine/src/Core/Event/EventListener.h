@@ -51,6 +51,8 @@ namespace Neptune {
          */
         void Registry(EventType type)
         {
+            NEPTUNE_PROFILE_ZONE
+
             //m_Interested |= type;
         }
 
@@ -61,6 +63,8 @@ namespace Neptune {
          */
         void UnRegistry(EventType type)
         {
+            NEPTUNE_PROFILE_ZONE
+
             //m_Interested &= ~type;
         }
 
@@ -71,6 +75,8 @@ namespace Neptune {
          */
         void Dispatch(Event& event)
         {
+            NEPTUNE_PROFILE_ZONE
+
             /*if(event.GetEventType() & m_Interested == 0) {
                 return;
             }*/
@@ -96,6 +102,8 @@ namespace Neptune {
     template<typename T>
     void EventListener::Dispatch(Event& event, T* instance)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if(const auto p = dynamic_cast<EventListener*>(instance))
         {
             p->Dispatch(event);

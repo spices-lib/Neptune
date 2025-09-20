@@ -19,11 +19,15 @@ namespace Neptune::WebGPU {
 
 	InfrastructureBase::~InfrastructureBase()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		Release(this);
 	}
 
 	void InfrastructureBase::Wait(const WGPUFuture& future)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Context.Get<Instance>()->Wait(future);
 	}
 

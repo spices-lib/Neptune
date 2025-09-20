@@ -122,12 +122,16 @@ namespace Neptune::WebGPU {
     template<>
     inline void InfrastructureBase::AddRef(Instance* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuInstanceAddRef(object->Handle());
     }
     
     template<>
     inline void InfrastructureBase::Release(Instance* object)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (!object->Handle())
         {
             return;

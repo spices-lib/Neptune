@@ -33,6 +33,8 @@ namespace Neptune::WebGPU {
     RenderBackend::RenderBackend(RenderBackendEnum backend)
         : RenderFrontend(backend)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Context = CreateSP<Context>();
 
         m_Context->Registry<Instance>();
@@ -67,6 +69,8 @@ namespace Neptune::WebGPU {
 
     RenderBackend::~RenderBackend()
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Cleanup
         /*ImGui_ImplWGPU_Shutdown();
         ImGui_ImplGlfw_Shutdown();
@@ -77,6 +81,8 @@ namespace Neptune::WebGPU {
 
     void RenderBackend::BeginFrame()
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Create CommandEncoder.
         WGPUCommandEncoderDescriptor desc = {};
         graphicCommandEncoder = wgpuDeviceCreateCommandEncoder(m_Context->Get<Device>()->Handle(), &desc);
@@ -84,6 +90,8 @@ namespace Neptune::WebGPU {
 
     void RenderBackend::EndFrame()
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Get Command Buffer.
         WGPUCommandBufferDescriptor desc     = {};
         WGPUCommandBuffer commandBuffer      = wgpuCommandEncoderFinish(graphicCommandEncoder, &desc);
@@ -98,6 +106,8 @@ namespace Neptune::WebGPU {
 
     void RenderBackend::RenderFrame()
     {
+        NEPTUNE_PROFILE_ZONE
+
         // Start the Dear ImGui frame
         /*ImGui_ImplWGPU_NewFrame();
         ImGui_ImplGlfw_NewFrame();

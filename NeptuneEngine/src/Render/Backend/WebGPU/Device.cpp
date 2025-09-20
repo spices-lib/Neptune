@@ -17,6 +17,8 @@ namespace Neptune::WebGPU {
     Device::Device(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Handle = m_Context.Get<Adapter>()->RequestDevice();
 
         if (m_Handle)
@@ -31,6 +33,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateBindGroup()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUBindGroupDescriptor descriptor{};
 
         wgpuDeviceCreateBindGroup(m_Handle, &descriptor);
@@ -38,6 +42,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateBindGroupLayout()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUBindGroupLayoutDescriptor desc{};
 
         wgpuDeviceCreateBindGroupLayout(m_Handle, &desc);
@@ -45,6 +51,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateBuffer()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUBufferDescriptor desc{};
 
         wgpuDeviceCreateBuffer(m_Handle, &desc);
@@ -52,6 +60,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateCommandEncoder()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUCommandEncoderDescriptor desc{};
 
         wgpuDeviceCreateCommandEncoder(m_Handle, &desc);
@@ -59,6 +69,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateComputePipeline()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUComputePipelineDescriptor desc{};
 
         wgpuDeviceCreateComputePipeline(m_Handle, &desc);
@@ -66,6 +78,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateComputePipelineAsync()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUComputePipelineDescriptor desc{};
 
         static auto request = [](
@@ -88,6 +102,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreatePipelineLayout()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUPipelineLayoutDescriptor desc{};
 
         wgpuDeviceCreatePipelineLayout(m_Handle, &desc);
@@ -95,6 +111,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateQuerySet()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUQuerySetDescriptor desc{};
 
         wgpuDeviceCreateQuerySet(m_Handle, &desc);
@@ -102,6 +120,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateRenderBundleEncoder()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPURenderBundleEncoderDescriptor desc{};
 
         wgpuDeviceCreateRenderBundleEncoder(m_Handle, &desc);
@@ -109,6 +129,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateRenderPipeline()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPURenderPipelineDescriptor desc{};
 
         wgpuDeviceCreateRenderPipeline(m_Handle, &desc);
@@ -116,6 +138,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateRenderPipelineAsync()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPURenderPipelineDescriptor desc{};
 
         static auto request = [](
@@ -138,6 +162,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateSampler()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSamplerDescriptor desc{};
 
         wgpuDeviceCreateSampler(m_Handle, &desc);
@@ -145,6 +171,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateShaderModule()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUShaderModuleDescriptor desc{};
 
         wgpuDeviceCreateShaderModule(m_Handle, &desc);
@@ -152,6 +180,8 @@ namespace Neptune::WebGPU {
 
     void Device::CreateTexture()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUTextureDescriptor desc{};
 
         wgpuDeviceCreateTexture(m_Handle, &desc);
@@ -159,11 +189,15 @@ namespace Neptune::WebGPU {
 
     void Device::Destroy()
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuDeviceDestroy(m_Handle);
     }
 
     void Device::GetAdapterInfo()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUAdapterInfo info{};
 
         wgpuDeviceGetAdapterInfo(m_Handle, &info);
@@ -171,6 +205,8 @@ namespace Neptune::WebGPU {
 
     void Device::GetFeatures()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUSupportedFeatures features{};
 
         wgpuDeviceGetFeatures(m_Handle, &features);
@@ -178,6 +214,8 @@ namespace Neptune::WebGPU {
 
     void Device::GetLimits()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPULimits limits{};
 
         wgpuDeviceGetLimits(m_Handle, &limits);
@@ -185,16 +223,22 @@ namespace Neptune::WebGPU {
 
     void Device::GetLostFuture()
     {
+        NEPTUNE_PROFILE_ZONE
+
         wgpuDeviceGetLostFuture(m_Handle);
     }
 
     WGPUQueue Device::GetQueue()
     {
+        NEPTUNE_PROFILE_ZONE
+
         return wgpuDeviceGetQueue(m_Handle);
     }
 
     void Device::HasFeature()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUFeatureName feature = WGPUFeatureName_CoreFeaturesAndLimits;
 
         wgpuDeviceHasFeature(m_Handle, feature);
@@ -202,6 +246,8 @@ namespace Neptune::WebGPU {
 
     void Device::PopErrorScope()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUPopErrorScopeCallbackInfo info{};
 
         wgpuDevicePopErrorScope(m_Handle, info);
@@ -209,6 +255,8 @@ namespace Neptune::WebGPU {
 
     void Device::PushErrorScope()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUErrorFilter filter{};
 
         wgpuDevicePushErrorScope(m_Handle, filter);

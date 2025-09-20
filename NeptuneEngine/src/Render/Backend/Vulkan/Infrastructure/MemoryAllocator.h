@@ -88,6 +88,8 @@ namespace Neptune::Vulkan {
 	template<>
 	inline void Infrastructure::Destroy(MemoryAllocator* infrastructure)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		vmaDestroyAllocator(infrastructure->Row());
 		infrastructure->Row() = nullptr;
 	}

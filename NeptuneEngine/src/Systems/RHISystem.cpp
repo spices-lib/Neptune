@@ -12,12 +12,16 @@ namespace Neptune {
 
     void RHISystem::OnSystemInitialize()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::OpenGL);
     }
+
     void RHISystem::OnSystemShutDown()
     {
 
     }
+
     void RHISystem::Tick()
     {
         NEPTUNE_PROFILE_ZONE

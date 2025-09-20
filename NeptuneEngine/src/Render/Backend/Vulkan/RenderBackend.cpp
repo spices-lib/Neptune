@@ -22,6 +22,8 @@ namespace Neptune::Vulkan {
     RenderBackend::RenderBackend(RenderBackendEnum backend)
         : RenderFrontend(backend)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Context = CreateSP<Context>();
 
         m_Context->Registry<Instance>();

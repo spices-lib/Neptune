@@ -16,11 +16,15 @@ namespace Neptune::Vulkan {
     Device::Device(Context& context)
         : Infrastructure(context)
     {
+		NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void Device::Create()
     {
+		NEPTUNE_PROFILE_ZONE
+
         VkDeviceCreateInfo                                        createInfo{};
 		createInfo.sType                                        = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 		createInfo.pQueueCreateInfos                            = nullptr;

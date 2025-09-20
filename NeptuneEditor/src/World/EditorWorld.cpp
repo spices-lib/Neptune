@@ -18,6 +18,8 @@ namespace Neptune::Editor {
 
     void EditorWorld::CreateExampleScene()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto scene = CreateScene("main_level");
 
         {

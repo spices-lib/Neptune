@@ -16,6 +16,8 @@ namespace Neptune::WebGPU {
     Queue::Queue(Context& context)
         : Infrastructure(context)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Handle = m_Context.Get<Device>()->GetQueue();
 
         if (m_Handle)
@@ -30,6 +32,8 @@ namespace Neptune::WebGPU {
 
     void Queue::OnSubmittedWorkDone()
     {
+        NEPTUNE_PROFILE_ZONE
+
         static auto callback = [](
             WGPUQueueWorkDoneStatus status   , 
             WGPUStringView          message  , 
@@ -49,6 +53,8 @@ namespace Neptune::WebGPU {
 
     void Queue::Submit()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUCommandBuffer commandBuffer[1];
 
         wgpuQueueSubmit(m_Handle, 1, commandBuffer);
@@ -56,6 +62,8 @@ namespace Neptune::WebGPU {
 
     void Queue::WriteBuffer()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUBuffer buffer{};
         void* data;
 
@@ -64,6 +72,8 @@ namespace Neptune::WebGPU {
 
     void Queue::WriteTexture()
     {
+        NEPTUNE_PROFILE_ZONE
+
         WGPUTexelCopyTextureInfo info{};
         void* data;
         WGPUTexelCopyBufferLayout layout{};
