@@ -31,6 +31,7 @@ project "NeptuneUnitTest"
 		"TRACY_ENABLE",                  -- tracy Feature Enable.
 		"TRACY_ON_DEMAND",               -- Used if want profile on demand.
 		"TRACY_FIBERS",                  -- Enable fiber thread.
+		"TRACY_IMPORT",                  -- Multi dll.
 	}
 
 	-- The Solution Additional Include Folder.

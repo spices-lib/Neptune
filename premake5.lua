@@ -43,6 +43,7 @@ group "Dependencies"
 if os.target() == "windows" then
 	include "NeptuneEngine/vendor/GLFW"                 -- Dependency GLFW.
 	include "NeptuneEngine/vendor/Glad"                 -- Dependency GLFW.
+	include "NeptuneEngine/vendor/tracy"                -- Dependency tracy.
 end
 	include "NeptuneEngine/vendor/imgui"                -- Dependency imgui.
 	include "NeptuneEngine/vendor/yaml-cpp"             -- Dependency yaml-cpp.

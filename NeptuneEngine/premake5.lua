@@ -43,10 +43,6 @@ project "NeptuneEngine"
 		"vendor/ImGuizmo/ImGuizmo.cpp",
 		"vendor/ImGuizmo/ImGuizmo.h",
 
-		-- Library: tracy Files.
-		"vendor/tracy/public/TracyClient.cpp",
-		"vendor/tracy/public/tracy/Tracy.hpp",
-
 		-- Library: IconFontCppHeaders Files.
 		"vendor/IconFontCppHeaders/**.h",
 	}
@@ -66,6 +62,7 @@ project "NeptuneEngine"
 		"TRACY_ENABLE",                  -- tracy Feature Enable.
 		"TRACY_ON_DEMAND",               -- Used if want profile on demand.
 		"TRACY_FIBERS",                  -- Enable fiber thread.
+		"TRACY_IMPORT",                  -- Multi dll.
 	}
 
 	-- The Solution Additional Include Folder.
@@ -102,10 +99,6 @@ project "NeptuneEngine"
 
 	-- Library: ImGuizmo is included this solution, do not use PreCompiler Header.
 	filter "files:vendor/ImGuizmo/**.cpp"
-	flags { "NoPCH" }
-
-	-- Library: tracy is included this solution, do not use PreCompiler Header.
-	filter "files:vendor/tracy/public/**.cpp"
 	flags { "NoPCH" }
 
 	-- Platform: Windows
@@ -147,6 +140,7 @@ project "NeptuneEngine"
 			"ImGui_OpenGL",                       -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 			"Glad",                               -- Dependency: Glad
+			"tracy",                              -- Dependency: tracy     
 		}
 
 		-- The Solution build options
