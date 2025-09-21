@@ -30,4 +30,17 @@ namespace Neptune {
             });
         }
     }
+
+    void LogicalSystem::OnEvent(Event& event)
+    {
+        const auto& scenes = World::Instance()->GetScenes();
+
+        for (const auto& scene : scenes | std::views::values)
+        {
+            scene->ViewComponent<ScriptComponent>([&](uint32_t e, ScriptComponent& comp) {
+                comp.OnEvent(event);
+                return false;
+            });
+        }
+    }
 }

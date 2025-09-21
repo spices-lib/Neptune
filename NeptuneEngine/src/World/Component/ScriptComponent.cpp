@@ -65,7 +65,7 @@ namespace Neptune {
 
         for (const auto& script : m_Scripts | std::views::values)
         {
-            script->OnDestroy();
+            script->OnDetached();
         }
     }
     

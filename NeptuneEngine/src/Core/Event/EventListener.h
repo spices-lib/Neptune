@@ -17,11 +17,11 @@ namespace Neptune {
     public:
         
         /**
-         * @brief Dispatch event to listener.
-         * 
-         * @param[in] event Event
-         * @param[in] instance any pointer.
-         */
+        * @brief Dispatch event to listener.
+        * 
+        * @param[in] event Event
+        * @param[in] instance any pointer.
+        */
         template<typename T>
         static void Dispatch(Event& event, T* instance);
 
@@ -45,10 +45,10 @@ namespace Neptune {
         virtual ~EventListener() = default;
 
         /**
-         * @brief Registry interested event type.
-         * 
-         * @param type EventType.
-         */
+        * @brief Registry interested event type.
+        * 
+        * @param[in] type EventType.
+        */
         void Registry(EventType type)
         {
             NEPTUNE_PROFILE_ZONE
@@ -57,10 +57,10 @@ namespace Neptune {
         }
 
         /**
-         * @brief UnRegistry interested event type.
-         * 
-         * @param type EventType.
-         */
+        * @brief UnRegistry interested event type.
+        * 
+        * @param[in] type EventType.
+        */
         void UnRegistry(EventType type)
         {
             NEPTUNE_PROFILE_ZONE
@@ -69,10 +69,10 @@ namespace Neptune {
         }
 
         /**
-         * @brief Dispatch interested event.
-         * 
-         * @param event Event
-         */
+        * @brief Dispatch interested event.
+        * 
+        * @param[in] event Event
+        */
         void Dispatch(Event& event)
         {
             NEPTUNE_PROFILE_ZONE
@@ -85,17 +85,17 @@ namespace Neptune {
         }
 
         /**
-         * @brief Interface of on Event triggered.
-         * 
-         * @param event Event
-         */
+        * @brief Interface of on Event triggered.
+        * 
+        * @param[in] event Event
+        */
         virtual void OnEvent(Event& event) = 0;
 
     private:
 
         /**
-         * @brief Interested event type.
-         */
+        * @brief Interested event type.
+        */
         EventType m_Interested;
     };
 

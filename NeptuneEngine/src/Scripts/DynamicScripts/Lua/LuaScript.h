@@ -65,7 +65,7 @@ namespace Neptune::Lua {
 
     private:
 
-        sol::protected_function GetBindFunction(sol::table& table, uint32_t position, const std::string& name);
+        sol::protected_function GetBindFunction(sol::table& table, const std::string& name);
 
     private:
 

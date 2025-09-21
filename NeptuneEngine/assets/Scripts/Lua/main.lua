@@ -1,34 +1,24 @@
 ﻿-- Main Lua Script
 
 main = {
-    [1] = {
-        OnConstruct = function() 
+    ["ScriptInterface"] = {
+        OnConstruct = function()
             print("OnConstruct")
-        end
-    },
-    [2] = {
+        end,
         OnDestroy = function()
             print("OnDestroy")
-        end
-    },
-    [3] = {
+        end,
         OnAttached = function()
             print("OnAttached")
-        end
-    },
-    [4] = {
+        end,
         OnDetached = function()
             print("OnDetached")
-        end
-    },
-    [5] = {
+        end,
         OnTick = function()
             print("OnTick")
-        end
-    },
-    [6] = {
+        end,
         OnEvent = function()
             print("OnEvent")
         end
-    },
+    }
 }

@@ -22,7 +22,7 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        LogicalSystem() = default;
+        LogicalSystem() : EventListener(EventType::ALL) {}
 
         /**
         * @brief Destructor Function.
@@ -49,7 +49,7 @@ namespace Neptune {
         *
         * @param[in] event Event
         */
-        void OnEvent(Event& event) override {}
+        void OnEvent(Event& event) override;
 
     private:
 

@@ -11,7 +11,7 @@ namespace Neptune::Lua {
 
     LuaScript::LuaScript(const std::string& file)
     {
-        auto lua = std::make_shared<sol::state>();
+        static auto lua = std::make_shared<sol::state>();
 
         if (!lua)
         {
@@ -33,12 +33,12 @@ namespace Neptune::Lua {
 
         sol::table main = (*lua)["main"];
 
-        m_OnConstruct = GetBindFunction(main, 1, "OnConstruct");
-        m_OnDestroy   = GetBindFunction(main, 2, "OnDestroy");
-        m_OnAttached  = GetBindFunction(main, 3, "OnAttached");
-        m_OnDetached  = GetBindFunction(main, 4, "OnDetached");
-        m_OnTick      = GetBindFunction(main, 5, "OnTick");
-        m_OnEvent     = GetBindFunction(main, 6, "OnEvent");
+        m_OnConstruct = GetBindFunction(main, "OnConstruct");
+        m_OnDestroy   = GetBindFunction(main, "OnDestroy");
+        m_OnAttached  = GetBindFunction(main, "OnAttached");
+        m_OnDetached  = GetBindFunction(main, "OnDetached");
+        m_OnTick      = GetBindFunction(main, "OnTick");
+        m_OnEvent     = GetBindFunction(main, "OnEvent");
     }
 
     void LuaScript::OnConstruct()
@@ -113,9 +113,9 @@ namespace Neptune::Lua {
         }
     }
 
-    sol::protected_function LuaScript::GetBindFunction(sol::table& table, uint32_t position, const std::string& name)
+    sol::protected_function LuaScript::GetBindFunction(sol::table& table, const std::string& name)
     {
-        sol::optional<sol::table> bExists = table[position];
+        sol::optional<sol::table> bExists = table["ScriptInterface"];
         if (!bExists.has_value())
         {
             std::stringstream ss;
