@@ -34,3 +34,6 @@
 [submodule "NeptuneEngine/vendor/sol2"]
 	path = NeptuneEngine/vendor/sol2
 	url = https://github.com/ThePhD/sol2.git
+[submodule "NeptuneEngine/vendor/tracy"]
+	path = NeptuneEngine/vendor/tracy
+	url = https://github.com/spices-lib/tracy.git
