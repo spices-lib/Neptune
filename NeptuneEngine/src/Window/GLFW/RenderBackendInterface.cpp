@@ -53,7 +53,7 @@ namespace Neptune::GLFW {
 		// Use glad to load OpenGL APIs.
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
-			NEPTUNE_CORE_CRITICAL("Failed to initialize GLAD");
+			NEPTUNE_CORE_CRITICAL("Failed to initialize GLAD")
 		}
 	}
 

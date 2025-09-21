@@ -8,7 +8,9 @@
 #include "Core/Core.h"
 #include "Scripts/ScriptInterface.h"
 
-namespace Neptune {
+#include <sol/sol.hpp>
+
+namespace Neptune::Lua {
 
     /**
     * @brief Lua Script Class.
@@ -19,8 +21,10 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
+        * @param[in] file Script File. 
         */
-        LuaScript() = default;
+        LuaScript(const std::string& file);
 
         /**
         * @brief Destructor Function.
@@ -58,5 +62,18 @@ namespace Neptune {
         * @param[in] e Event.
         */
         void OnEvent(Event& e) override;
+
+    private:
+
+        sol::protected_function GetBindFunction(sol::table& table, uint32_t position, const std::string& name);
+
+    private:
+
+        sol::protected_function m_OnConstruct{ sol::lua_nil };
+        sol::protected_function m_OnDestroy  { sol::lua_nil };
+        sol::protected_function m_OnAttached { sol::lua_nil };
+        sol::protected_function m_OnDetached { sol::lua_nil };
+        sol::protected_function m_OnTick     { sol::lua_nil };
+        sol::protected_function m_OnEvent    { sol::lua_nil };
     };
 }

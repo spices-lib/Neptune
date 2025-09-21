@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "Core/NonCopyable.h"
 #include "Core/Event/Event.h"
 
 namespace Neptune {
@@ -15,7 +16,7 @@ namespace Neptune {
     * This class defines the basic behaves of component.
     * When we add an new Component, we need inherit from this.
     */
-    class Component
+    class Component : public NonCopyable
     {
     public:
 

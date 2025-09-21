@@ -23,6 +23,15 @@ namespace Neptune {
     public:
 
         /**
+        * @brief Get World Instance.
+        *
+        * @return Returns World Instance.
+        */
+        static SP<World> Instance();
+
+    public:
+
+        /**
         * @brief Constructor Function.
         */
         World() = default;
@@ -42,6 +51,13 @@ namespace Neptune {
         */
         virtual void OnDetached() = 0;
         
+        /**
+        * @brief Get World activate Scenes.
+        * 
+        * @return Returns World activate Scenes.
+        */
+        const std::unordered_map<std::string, UP<Scene>>& GetScenes() const { return m_Scenes; }
+
     protected:
         
         /**
@@ -77,5 +93,19 @@ namespace Neptune {
         std::unordered_map<std::string, UP<Scene>> m_Scenes;
     
     };
+
+    /**
+    * @brief extern WorldCreation definition in Entry.
+    *
+    * @return Returns World Pointer.
+    */
+    SP<World> CreateWorld();
     
 }
+
+/**
+* @brief extern WorldCreation definition in Entry.
+*
+* @return Returns World Pointer.
+*/
+extern Neptune::SP<Neptune::World> Neptune::CreateWorld();

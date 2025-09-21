@@ -10,7 +10,15 @@
 #include "World/Object/Level.h"
 
 namespace Neptune {
-    
+
+    SP<World> World::Instance()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        static auto s_World = CreateWorld();
+        return s_World;
+    }
+
     Scene* World::CreateScene(const SP<Level>& level)
     {
         NEPTUNE_PROFILE_ZONE

@@ -66,7 +66,7 @@ namespace Neptune {
         ->PushSystem<RenderSystem>()
         ->PushSystem<RHISystem>();
 
-        m_World = CreateWorld();
+        m_World = World::Instance();
     }
 
     Application::~Application()

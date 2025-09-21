@@ -10,11 +10,11 @@
 
 namespace Neptune {
 
-    UP<World> CreateWorld()
+    SP<World> CreateWorld()
     {
         NEPTUNE_PROFILE_ZONE
 
-        return CreateUP<Editor::EditorWorld>();
+        return CreateSP<Editor::EditorWorld>();
     }
 
 }

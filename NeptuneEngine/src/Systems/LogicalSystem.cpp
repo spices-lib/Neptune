@@ -6,6 +6,11 @@
 
 #include "Pchheader.h"
 #include "LogicalSystem.h"
+#include "World/World/World.h"
+#include "World/Scene/Scene.h"
+#include "World/Component/ScriptComponent.h"
+
+#include <ranges>
 
 namespace Neptune {
     
@@ -15,6 +20,14 @@ namespace Neptune {
 
         // receive ui event or interface event.
 
+        const auto& scenes = World::Instance()->GetScenes();
         
+        for (const auto& scene : scenes | std::views::values)
+        {
+            scene->ViewComponent<ScriptComponent>([](uint32_t e, ScriptComponent& comp) {
+                comp.OnTick();
+                return false;
+            });
+        }
     }
 }
