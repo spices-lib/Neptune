@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NEPTUNE_DEBUG && NP_PLATFORM_WINDOWS
+#if defined(NEPTUNE_DEBUG) && defined(NP_PLATFORM_WINDOWS)
 #include "Debugger/Profiler/Tracy/ProfilerImpl.h"
 #else
 
