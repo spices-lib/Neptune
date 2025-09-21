@@ -55,4 +55,5 @@ Makefile
 /Scripts/BuildSystem/__pycache__
 
 /vendor/premake
+/vendor/tracy
 .vercel

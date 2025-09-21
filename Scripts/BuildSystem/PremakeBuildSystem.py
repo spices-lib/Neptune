@@ -12,6 +12,7 @@ from Scripts.BuildDependencies.GCCMakeDependency import GCCMakeDependency
 
 if sys.platform == 'win32':
     from Scripts.BuildDependencies.MSVCDependency import MSVCDependency
+    from Scripts.BuildDependencies.TracyDependency import TracyDependency
 
 from pathlib import Path
 import os
@@ -35,6 +36,9 @@ class PremakeBuildSystem(BuildSystem):
 
         if self.platform == "emscripten":
             self.dependencyGraph.add_node(EmsdkDependency())
+
+        if self.platform == "windows":
+            self.dependencyGraph.add_node(TracyDependency())
 
         if self.toolset == "GNU":
             self.dependencyGraph.add_node(GCCMakeDependency())
