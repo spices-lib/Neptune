@@ -54,7 +54,21 @@ project "LuaLibrary"
         defines { "LUA_USE_LINUX" }
         links { "dl" }
         linkoptions { "-Wl,-E" }
-    
+
+    filter "system:emscripten"
+        defines { "LUA_USE_LINUX" }
+        links { "dl" }
+        
+        buildoptions {
+            "-s WASM=1",
+            "-matomics",
+            "-mbulk-memory"
+        }
+        linkoptions { 
+            "-Wl,-E",
+            "-s WASM=1"
+        }
+
     filter "system:macosx"
         defines { "LUA_USE_MACOSX", "LUA_USE_READLINE" }
         links { "readline" }
@@ -111,7 +125,20 @@ project "LuaInterpreter"
         defines { "LUA_USE_LINUX" }
         links { "dl" }
         linkoptions { "-Wl,-E" }
-    
+
+    filter "system:emscripten"
+        defines { "LUA_USE_LINUX" }
+        links { "dl" }
+        buildoptions {
+            "-s WASM=1",
+            "-matomics",
+            "-mbulk-memory"
+        }
+        linkoptions { 
+            "-Wl,-E",
+            "-s WASM=1"
+        }
+        
     filter "system:macosx"
         defines { "LUA_USE_MACOSX", "LUA_USE_READLINE" }
         links { "readline" }
@@ -167,6 +194,19 @@ project "LuaCompiler"
         defines { "LUA_USE_LINUX" }
         links { "dl" }
         linkoptions { "-Wl,-E" }
+
+    filter "system:emscripten"
+        defines { "LUA_USE_LINUX" }
+        links { "dl" }
+        buildoptions {
+            "-s WASM=1",
+            "-matomics",
+            "-mbulk-memory"
+        }
+        linkoptions { 
+            "-Wl,-E",
+            "-s WASM=1"
+        }
     
     filter "system:macosx"
         defines { "LUA_USE_MACOSX", "LUA_USE_READLINE" }

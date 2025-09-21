@@ -119,6 +119,7 @@ project "NeptuneRuntime"
 		links
 		{
 			"ImGui_WebGPU",                               -- Dependency: imgui
+			"LuaLibrary",                                 -- Dependency: LuaLibrary
 		}
 
 		-- The Solution link options

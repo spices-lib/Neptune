@@ -90,7 +90,7 @@ project "NeptuneEngine"
       --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
-		"LuaLibrary",                         -- Dependency: LuaLibrary
+      --"LuaLibrary",                         -- Dependency: LuaLibrary
 	}
 
 	-- Library: std_image is included this solution, do not use PreCompiler Header.
@@ -140,7 +140,8 @@ project "NeptuneEngine"
 			"ImGui_OpenGL",                       -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 			"Glad",                               -- Dependency: Glad
-			"tracy",                              -- Dependency: tracy     
+			"tracy",                              -- Dependency: tracy
+			"LuaLibrary",                         -- Dependency: LuaLibrary     
 		}
 
 		-- The Solution build options
