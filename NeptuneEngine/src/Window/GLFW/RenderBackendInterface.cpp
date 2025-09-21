@@ -47,6 +47,9 @@ namespace Neptune::GLFW {
 
 		glfwMakeContextCurrent(handle);
 
+		// Turn off v-sync.
+		glfwSwapInterval(0);
+
 		// Use glad to load OpenGL APIs.
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
