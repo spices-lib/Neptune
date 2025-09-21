@@ -4,9 +4,6 @@
 [submodule "NeptuneEngine/vendor/ImGuizmo"]
 	path = NeptuneEngine/vendor/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo
-[submodule "NeptuneEngine/vendor/tracy"]
-	path = NeptuneEngine/vendor/tracy
-	url = https://github.com/wolfpld/tracy
 [submodule "NeptuneEngine/vendor/IconFontCppHeaders"]
 	path = NeptuneEngine/vendor/IconFontCppHeaders
 	url = https://github.com/juliettef/IconFontCppHeaders
