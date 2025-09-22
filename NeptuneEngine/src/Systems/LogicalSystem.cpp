@@ -31,7 +31,7 @@ namespace Neptune {
             for (const auto& scene : scenes | std::views::values)
             {
                 scene->ViewComponent<ScriptComponent>([](uint32_t e, ScriptComponent& comp) {
-                    //comp.OnTick();
+                    comp.OnTick();
                     return false;
                 });
             }
