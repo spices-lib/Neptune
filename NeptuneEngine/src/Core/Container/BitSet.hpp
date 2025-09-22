@@ -5,11 +5,11 @@
 */
 
 #pragma once
-#include <bitset>
-
 #include "Core/Core.h"
 
-namespace Neptune::Container {
+#include <bitset>
+
+namespace Neptune {
 
     /**
     * @brief Bit Set.
@@ -31,7 +31,7 @@ namespace Neptune::Container {
         /**
         * @brief Stoted bitset.
         */
-        std::bitset<static_cast<size_t>(T::Count)> m_Bits{};
+        std::bitset<static_cast<size_t>(T::ALL)> m_Bits{};
 
     public:
 
@@ -110,7 +110,7 @@ namespace Neptune::Container {
         *
         * @param[in] other BitSet.
         *
-        * @return Returns this.
+        * @return Returns new BitSet.
         */
         BitSet operator&(const BitSet& other)
         {
@@ -191,7 +191,19 @@ namespace Neptune::Container {
         */
         void Set(T bit, bool value)
         {
-            m_Bits.set(static_cast<size_t>(static_cast<TSize>(bit)), value);
+            if (bit == T::ALL)
+            {
+                Reset();
+
+                if (value)
+                {
+                    Flip();
+                }
+            }
+            else 
+            {
+                m_Bits.set(static_cast<size_t>(static_cast<TSize>(bit)), value);
+            }
         }
 
         /**
@@ -203,7 +215,14 @@ namespace Neptune::Container {
         */
         bool Test(T bit) const
         {
-            return m_Bits.test(static_cast<size_t>(static_cast<TSize>(bit)));
+            if (bit == T::ALL)
+            {
+                return !None();
+            }
+            else
+            {
+                return m_Bits.test(static_cast<size_t>(static_cast<TSize>(bit)));
+            }
         }
 
         /**
@@ -221,7 +240,14 @@ namespace Neptune::Container {
         */
         void Reset(T bit)
         {
-            m_Bits.reset(static_cast<size_t>(static_cast<TSize>(bit)));
+            if (bit == T::ALL)
+            {
+                Reset();
+            }
+            else
+            {
+                m_Bits.reset(static_cast<size_t>(static_cast<TSize>(bit)));
+            }
         }
 
         /**
@@ -239,7 +265,14 @@ namespace Neptune::Container {
         */
         void Flip(T bit)
         {
-            m_Bits.flip(static_cast<size_t>(static_cast<TSize>(bit)));
+            if (bit == T::ALL)
+            {
+                Flip();
+            }
+            else
+            {
+                m_Bits.flip(static_cast<size_t>(static_cast<TSize>(bit)));
+            }
         }
 
         /**
@@ -253,14 +286,15 @@ namespace Neptune::Container {
         }
 
         /**
-        * @brief Is all bits set.
+        * @brief Is all bits not set.
         *
-        * @return Returns true if all bits set.
+        * @return Returns true if all bits not set.
         */
         bool None() const
         {
             return m_Bits.none();
         }
+
     };
 
 }

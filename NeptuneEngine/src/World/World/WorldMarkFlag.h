@@ -12,9 +12,9 @@ namespace Neptune {
     enum class WorldMarkBit : uint32_t
     {
         DynamicScriptTick  = 0,
-        DynamicScriptEvent = 1 << 0,
+        DynamicScriptEvent = 1,
 
-        Count              = 2,
+        ALL                = 2,
     };
 
 }

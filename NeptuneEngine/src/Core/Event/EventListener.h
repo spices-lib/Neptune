@@ -30,14 +30,17 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        EventListener() : m_Interested(EventType::None) {}
+        EventListener() = default;
 
         /**
         * @brief Constructor Function.
         *
-        * @param[in] type EventType.
+        * @param[in] bit EventType.
         */
-        explicit EventListener(EventType type) : m_Interested(type) {}
+        explicit EventListener(EventType bit) 
+        {
+            Registry(bit);
+        }
 
         /**
         * @brief Destructor Function.
@@ -47,25 +50,25 @@ namespace Neptune {
         /**
         * @brief Registry interested event type.
         * 
-        * @param[in] type EventType.
+        * @param[in] bit EventType.
         */
-        void Registry(EventType type)
+        void Registry(EventType bit)
         {
             NEPTUNE_PROFILE_ZONE
 
-            //m_Interested |= type;
+            m_Interested.Set(bit, true);
         }
 
         /**
         * @brief UnRegistry interested event type.
         * 
-        * @param[in] type EventType.
+        * @param[in] bit EventType.
         */
-        void UnRegistry(EventType type)
+        void UnRegistry(EventType bit)
         {
             NEPTUNE_PROFILE_ZONE
 
-            //m_Interested &= ~type;
+            m_Interested.Set(bit, false);
         }
 
         /**
@@ -77,9 +80,10 @@ namespace Neptune {
         {
             NEPTUNE_PROFILE_ZONE
 
-            /*if(event.GetEventType() & m_Interested == 0) {
+            if(!m_Interested.Test(event.GetEventType())) 
+            {
                 return;
-            }*/
+            }
 
             OnEvent(event);
         }
@@ -96,7 +100,7 @@ namespace Neptune {
         /**
         * @brief Interested event type.
         */
-        EventType m_Interested;
+        BitSet<EventType> m_Interested{};
     };
 
     template<typename T>

@@ -9,7 +9,7 @@
 
 #include <memory>
 
-namespace Neptune::Container {
+namespace Neptune {
 
     /**
     * @brief simple tree.

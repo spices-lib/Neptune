@@ -119,7 +119,7 @@ namespace Neptune {
         /**
         * @brief WorldMark Flag.
         */
-        Container::BitSet<WorldMarkBit> m_Flag;
+        BitSet<WorldMarkBit> m_Flag;
     
     };
 

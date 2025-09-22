@@ -34,7 +34,7 @@ namespace Neptune {
         /**
         * @brief Specific this Class Category with EventCategoryKeyboard and EventCategoryInput.
         */
-        EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+        EVENT_CLASS_CATEGORY(EventCategoryKeyboard, EventCategoryInput)
 
     protected:
 

@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "Core/Container/BitSet.hpp"
 
 #include <functional>
 #include <sstream>
@@ -18,91 +19,108 @@ namespace Neptune {
     enum class EventType : uint32_t
     {
         /**
-        * @brief None Event.
-        */
-        None                   = 0,
-
-        /**
         * @brief Window Event.
         */
-        WindowClose            = 1 << 0,
-        WindowResize           = 1 << 1,
-        WindowResizeOver       = 1 << 2,
-        WindowFocus            = 1 << 3,
-        WindowLostFocus        = 1 << 4,
-        WindowMoved            = 1 << 5,
-
-        /**
-        * @brief Application Event.
-        */
-        AppTick                = 1 << 6,
-        AppUpdate              = 1 << 7,
-        AppRender              = 1 << 8,
+        WindowClose            = 0,
+        WindowResize           = 1,
+        WindowResizeOver       = 2,
+        WindowFocus            = 3,
+        WindowLostFocus        = 4,
+        WindowMoved            = 5,
 
         /**
         * @brief Slate Event.
         */
-        SlateResize            = 1 << 9,
+        SlateResize            = 6,
 
         /**
         * @brief Key Input Event.
         */
-        KeyPressed             = 1 << 10,
-        KeyReleased            = 1 << 11,
-        KeyTyped               = 1 << 12,
+        KeyPressed             = 7,
+        KeyReleased            = 8,
+        KeyTyped               = 9,
 
         /**
         * @brief Mouse Input Event.
         */
-        MouseButtonPressed     = 1 << 13,
-        MouseButtonReleased    = 1 << 14,
-        MouseMoved             = 1 << 15,
-        MouseScrolled          = 1 << 16,
+        MouseButtonPressed     = 10,
+        MouseButtonReleased    = 11,
+        MouseMoved             = 12,
+        MouseScrolled          = 13,
 
         /**
         * @brief World Event.
         */
-        MeshAdded              = 1 << 17,
+        MeshAdded              = 14,
 
         /**
         * @brief ALL Event.
         */
-        ALL                    = UINT32_MAX
+        ALL                  = 18,
     };
 
     /**
     * @brief This enum defines what specific event category is.
     */
-    enum EventCategory
+    enum class EventCategory : uint16_t
     {
-        None                      =  0,           /* @brief None         */
-        EventCategoryApplication  =  (1 << 0),    /* @brief Application  */
-        EventCategorySlate        =  (1 << 1),    /* @brief Slate        */
-        EventCategoryInput        =  (1 << 2),    /* @brief Input        */
-        EventCategoryKeyboard     =  (1 << 3),    /* @brief Keyboard     */
-        EventCategoryMouse        =  (1 << 4),    /* @brief Mouse        */
-        EventCategoryMouseButton  =  (1 << 5),    /* @brief MouseButton  */
-        EventCategoryWorld        =  (1 << 6),    /* @brief World        */
+        EventCategoryApplication  = 0,    /* @brief Application  */
+        EventCategorySlate        = 1,    /* @brief Slate        */
+        EventCategoryInput        = 2,    /* @brief Input        */
+        EventCategoryKeyboard     = 3,    /* @brief Keyboard     */
+        EventCategoryMouse        = 4,    /* @brief Mouse        */
+        EventCategoryMouseButton  = 5,    /* @brief MouseButton  */
+        EventCategoryWorld        = 6,    /* @brief World        */
+
+        ALL                       = 7
     };
 
-/**
-* @brief Defines Event type.
-*/
-#define EVENT_CLASS_TYPE(type)                                                  \
-	static EventType GetStaticType() { return EventType::type; }                \
-	virtual EventType GetEventType() const override { return GetStaticType(); } \
-	virtual const char* GetName()    const override { return #type; }
+namespace Detail {
 
-/**
-* @brief Defines Event category.
-*/
-#define EVENT_CLASS_CATEGORY(category)                                          \
-	virtual int GetCategoryFlags() const override { return category; }
+    /**
+    * @brief Set Event Categories.
+    * 
+    * @param[in] flags The Event Categories.
+    * @param[in] categories The Categories.
+    */
+    template<typename... T>
+    void SetEventCategories(BitSet<EventCategory>& flags, T... categories)
+    {
+        (flags.Set(categories, true), ...);
+    }
 
-/**
-* @brief Bind Event.
-*/
-#define BIND_EVENT_FN(x)                                                        \
+}
+    
+    /**
+    * @brief Defines Event type.
+    */
+    #define EVENT_CLASS_TYPE(type)                                                              \
+	static    EventType          GetStaticType()                { return EventType::type; }     \
+	virtual   EventType          GetEventType()  const override { return GetStaticType(); }     \
+	virtual   const std::string  GetName()       const override { return #type; }
+
+    /**
+    * @brief Defines Event category.
+    */
+    #define EVENT_CLASS_CATEGORY(...)                                        \
+	virtual BitSet<EventCategory> GetCategoryFlags() const override          \
+    {                                                                        \
+        using enum EventCategory;                                            \
+                                                                             \
+        static BitSet<EventCategory> s_Category;                             \
+                                                                             \
+        if (s_Category.None())                                               \
+        {                                                                    \
+             Detail::SetEventCategories(s_Category, __VA_ARGS__);            \
+        }                                                                    \
+                                                                             \
+        return s_Category;                                                   \
+    }
+
+    /**
+    * @brief Bind Event.
+    */
+    #define BIND_EVENT_FN(x)                                                 \
 	std::bind(&x, this, std::placeholders::_1)
 
     /**
@@ -131,10 +149,10 @@ namespace Neptune {
         /**
         * @brief Event Information Function, must be implemented by EVENT_CLASS_TYPE and EVENT_CLASS_CATEGORY.
         */
-        virtual EventType      GetEventType()           const = 0;
-        virtual const char*    GetName()                const = 0;
-        virtual int            GetCategoryFlags()       const = 0;
-        virtual std::string    ToString()               const { return GetName(); }
+        virtual EventType               GetEventType()           const = 0;
+        virtual const std::string       GetName()                const = 0;
+        virtual BitSet<EventCategory>   GetCategoryFlags()       const = 0;
+        virtual std::string             ToString()               const { return GetName(); }
 
         /**
         * @brief Judgement if a given category is contained by this event class.
@@ -147,7 +165,7 @@ namespace Neptune {
         {
             NEPTUNE_PROFILE_ZONE
 
-            return GetCategoryFlags() & category;
+            return GetCategoryFlags().Test(category);
         }
 
         /**

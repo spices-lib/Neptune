@@ -71,7 +71,7 @@ namespace Neptune {
         /**
         * @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
         */
-        EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+        EVENT_CLASS_CATEGORY(EventCategoryMouse, EventCategoryInput)
 
     private:
 
@@ -146,7 +146,7 @@ namespace Neptune {
         /**
         * @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
         */
-        EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+        EVENT_CLASS_CATEGORY(EventCategoryMouse, EventCategoryInput)
 
     private:
 
@@ -184,7 +184,7 @@ namespace Neptune {
         /**
         * @brief Specific this Class Category with EventCategoryMouse and EventCategoryInput.
         */
-        EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+        EVENT_CLASS_CATEGORY(EventCategoryMouse, EventCategoryInput)
 
     protected:
 
