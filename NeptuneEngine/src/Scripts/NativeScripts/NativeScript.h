@@ -23,6 +23,13 @@ namespace Neptune {
         NativeScript() = default;
 
         /**
+        * @brief Constructor Function.
+        *
+        * @param[in] path script file path.
+        */
+        NativeScript(const std::filesystem::path& path) : ScriptInterface(path) {};
+
+        /**
         * @brief Destructor Function.
         */
         ~NativeScript() override = default;

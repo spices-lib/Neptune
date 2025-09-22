@@ -9,10 +9,11 @@
 
 namespace Neptune::Lua {
 
-    LuaScript::LuaScript(const std::string& file)
-    {
-        static auto lua = std::make_shared<sol::state>();
+    static auto lua = std::make_shared<sol::state>();
 
+    LuaScript::LuaScript(const std::filesystem::path& path)
+        : ScriptInterface(path)
+    {
         if (!lua)
         {
             NEPTUNE_CORE_ERROR("Failed to Create Lua State.")
@@ -23,7 +24,7 @@ namespace Neptune::Lua {
 
         try
         {
-            auto result = lua->safe_script_file(file);
+            auto result = lua->safe_script_file(m_ScriptPath.generic_string());
         }
         catch (const sol::error& err)
         {

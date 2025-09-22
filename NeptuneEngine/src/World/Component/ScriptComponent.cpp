@@ -15,14 +15,14 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        if (m_Scripts.contains(script->GetName()))
+        if (m_Scripts.contains(script->GetFileString()))
         {
             NEPTUNE_CORE_WARN("Script is existing on component.")
             return;
         }
 
         script->OnAttached();
-        m_Scripts[script->GetName()] = script;
+        m_Scripts[script->GetFileString()] = script;
     }
 
     void ScriptComponent::RemoveScript(const std::string& name)

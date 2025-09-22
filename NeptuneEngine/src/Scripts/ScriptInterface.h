@@ -8,6 +8,8 @@
 #include "Core/Core.h"
 #include "Core/Event/Event.h"
 
+#include <filesystem>
+
 namespace Neptune {
 
     /**
@@ -21,6 +23,13 @@ namespace Neptune {
         * @brief Constructor Function.
         */
         ScriptInterface() = default;
+
+        /**
+        * @brief Constructor Function.
+        * 
+        * @param[in] path script file path.
+        */
+        ScriptInterface(const std::filesystem::path& path) : m_ScriptPath(path) {};
 
         /**
         * @brief Destructor Function.
@@ -60,17 +69,17 @@ namespace Neptune {
         virtual void OnEvent(Event& e) = 0;
 
         /**
-        * @brief Get script name.
+        * @brief Get script file string.
         * 
-        * @return Script name.
+        * @return Script file string.
         */
-        const std::string& GetName() const { return m_ScriptName; }
+        std::string GetFileString() const { return m_ScriptPath.generic_string(); }
 
     protected:
 
         /**
-        * @brief Script name.
+        * @brief Script file path.
         */
-        std::string m_ScriptName;
+        std::filesystem::path m_ScriptPath;
     };
 }

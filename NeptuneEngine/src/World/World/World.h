@@ -6,6 +6,8 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "WorldMarkFlag.h"
+#include "Core/Container/BitSet.hpp"
 
 #include <unordered_map>
 
@@ -58,6 +60,15 @@ namespace Neptune {
         */
         const std::unordered_map<std::string, UP<Scene>>& GetScenes() const { return m_Scenes; }
 
+        /**
+        * @brief Is WorldMark Flag has bit.
+        *
+        * @param[in] bit In WorldMarkBit.
+        * 
+        * @return Returns bit value.
+        */
+        bool TestFlag(WorldMarkBit bit) const { return m_Flag.Test(bit); }
+
     protected:
         
         /**
@@ -85,12 +96,30 @@ namespace Neptune {
         */
         Scene* CreateScene(const std::string& name);
         
+        /**
+        * @brief Set WorldMarkBit with value.
+        *
+        * @param[in] bit WorldMarkBit item.
+        * @param[in] value WorldMarkBit value.
+        */
+        void SetFlag(WorldMarkBit bit, bool value) { m_Flag.Set(bit, value); }
+
+        /**
+        * @brief Reset WorldMark Flag to None.
+        */
+        void ResetFlag() { m_Flag.Reset(); }
+
     private:
         
         /**
         * @brief World activate Scenes.
         */
         std::unordered_map<std::string, UP<Scene>> m_Scenes;
+
+        /**
+        * @brief WorldMark Flag.
+        */
+        Container::BitSet<WorldMarkBit> m_Flag;
     
     };
 

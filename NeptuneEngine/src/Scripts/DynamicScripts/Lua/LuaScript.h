@@ -21,10 +21,15 @@ namespace Neptune::Lua {
 
         /**
         * @brief Constructor Function.
-        * 
-        * @param[in] file Script File. 
         */
-        LuaScript(const std::string& file);
+        LuaScript() = default;
+
+        /**
+        * @brief Constructor Function.
+        *
+        * @param[in] path script file path.
+        */
+        LuaScript(const std::filesystem::path& path);
 
         /**
         * @brief Destructor Function.

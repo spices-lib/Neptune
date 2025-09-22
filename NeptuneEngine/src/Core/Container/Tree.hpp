@@ -1,5 +1,5 @@
 /**
-* @file Tree.h.
+* @file Tree.hpp.
 * @brief The Tree Class Definitions and Implementation.
 * @author Spices.
 */
@@ -9,10 +9,11 @@
 
 #include <memory>
 
-namespace Neptune {
+namespace Neptune::Container {
 
     /**
     * @brief simple tree.
+    * 
     * @tparam T specific stored type.
     */
     template<typename T>

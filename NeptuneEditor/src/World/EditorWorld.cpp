@@ -16,6 +16,9 @@ namespace Neptune::Editor {
     void EditorWorld::OnAttached()
     {
         CreateExampleScene();
+
+        SetFlag(WorldMarkBit::DynamicScriptTick, true);
+        SetFlag(WorldMarkBit::DynamicScriptEvent, true);
     }
 
     void EditorWorld::Layout()
