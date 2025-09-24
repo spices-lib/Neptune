@@ -74,18 +74,18 @@ namespace Neptune {
 #ifdef NEPTUNE_DEBUG
 
 // Core log macros
-#define NEPTUNE_CORE_TRACE(...)    { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreTrace      (__VA_ARGS__); }}
-#define NEPTUNE_CORE_INFO(...)     { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreInfo       (__VA_ARGS__); }}
-#define NEPTUNE_CORE_WARN(...)     { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreWarn       (__VA_ARGS__); }}
-#define NEPTUNE_CORE_ERROR(...)    { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreError      (__VA_ARGS__); }}
-#define NEPTUNE_CORE_CRITICAL(...) { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreCritical   (__VA_ARGS__); }}
+#define NEPTUNE_CORE_TRACE(...)    { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreTrace      (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CORE_INFO(...)     { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreInfo       (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CORE_WARN(...)     { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreWarn       (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CORE_ERROR(...)    { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreError      (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CORE_CRITICAL(...) { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->CoreCritical   (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
 
 // Client log macro
-#define NEPTUNE_TRACE(...)         { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientTrace    (__VA_ARGS__);  }}
-#define NEPTUNE_INFO(...)          { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientInfo     (__VA_ARGS__);  }}
-#define NEPTUNE_WARN(...)          { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientWarn     (__VA_ARGS__);  }}
-#define NEPTUNE_ERROR(...)         { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientError    (__VA_ARGS__);  }}
-#define NEPTUNE_CRITICAL(...)      { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientCritical (__VA_ARGS__);  }}
+#define NEPTUNE_TRACE(...)         { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientTrace    (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_INFO(...)          { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientInfo     (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_WARN(...)          { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientWarn     (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_ERROR(...)         { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientError    (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
+#define NEPTUNE_CRITICAL(...)      { if(auto logPtr = Neptune::Log::Get(); logPtr->IsInitialized()) { logPtr->ClientCritical (__VA_ARGS__); } else { std::cout << __VA_ARGS__ << std::endl; } }
 
 #endif // NEPTUNE_DEBUG
 

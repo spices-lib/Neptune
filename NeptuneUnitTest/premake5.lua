@@ -65,7 +65,7 @@ project "NeptuneUnitTest"
 	-- The Solution Dependency
 	links
 	{
-		"NeptuneEditor",                       -- Dependency: Neptune
+		"NeptuneEngine",                       -- Dependency: Neptune
 		"googlemock",                          -- Dependency: googlemock
 	}
 
