@@ -254,19 +254,19 @@ namespace Neptune::Test {
 #define NEPTUEN_FUNC_SIG "NEPTUEN_FUNC_SIG unknown!"
 #endif
 
-#define NEPTUNE_TEST_PROFILE_BEGIN_SESSION(name, filepath)   ::Neptune::Test::Instrumentor::Get().BeginSession(name, filepath)
-#define NEPTUNE_TEST_PROFILE_END_SESSION()                   ::Neptune::Test::Instrumentor::Get().EndSession()
+#define NEPTUNE_TEST_PROFILE_BEGIN_SESSION(name, filepath)   ::Neptune::Test::Instrumentor::Get().BeginSession(name, filepath);
+#define NEPTUNE_TEST_PROFILE_END_SESSION                     ::Neptune::Test::Instrumentor::Get().EndSession();
 #define NEPTUNE_TEST_PROFILE_SCOPE_LINE2(name, line)         constexpr auto fixedName##line = ::Neptune::Test::InstrumentorUtils::CleanupOutputString(name, "__cdecl ");\
-				  							                 ::Neptune::Test::InstrumentationTimer timer##line(fixedName##line.Data)
+				  							                 ::Neptune::Test::InstrumentationTimer timer##line(fixedName##line.Data);
 #define NEPTUNE_TEST_PROFILE_SCOPE_LINE(name, line)          NEPTUNE_TEST_PROFILE_SCOPE_LINE2(name, line)
 #define NEPTUNE_TEST_PROFILE_SCOPE(name)                     NEPTUNE_TEST_PROFILE_SCOPE_LINE(name, __LINE__)
-#define NEPTUNE_TEST_PROFILE_FUNCTION()                      NEPTUNE_TEST_PROFILE_SCOPE(NEPTUEN_FUNC_SIG)
+#define NEPTUNE_TEST_PROFILE_FUNCTION                        NEPTUNE_TEST_PROFILE_SCOPE(NEPTUEN_FUNC_SIG)
 			  
 #else		  
 			  
 #define NEPTUNE_TEST_PROFILE_BEGIN_SESSION(name, filepath)
-#define NEPTUNE_TEST_PROFILE_END_SESSION()
+#define NEPTUNE_TEST_PROFILE_END_SESSION
 #define NEPTUNE_TEST_PROFILE_SCOPE(name)
-#define NEPTUNE_TEST_PROFILE_FUNCTION()
+#define NEPTUNE_TEST_PROFILE_FUNCTION
 
 #endif
