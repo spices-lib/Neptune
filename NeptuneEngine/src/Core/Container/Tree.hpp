@@ -8,6 +8,7 @@
 #include "Core/Core.h"
 
 #include <memory>
+#include <queue>
 
 namespace Neptune {
 
@@ -35,6 +36,13 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        */
+        Tree()
+            : m_Data{}
+        {}
+        
+        /**
+        * @brief Constructor Function.
         *
         * @param[in] args T construct params.
         */
@@ -50,7 +58,10 @@ namespace Neptune {
 
         /**
         * @brief Add a child to this tree.
+        * 
         * @param[in] args T construct params.
+        * 
+        * @return Returns child.
         */
         template<typename ...Args>
         Tree* AddChild(Args&&... args)
@@ -61,15 +72,134 @@ namespace Neptune {
         }
 
         /**
-        * @brief Get all this node children.
-        * @return Returns all this node children.
+        * @breif Visit this data.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] args Visitor params.
         */
-        [[nodiscard]] const std::vector<std::unique_ptr<Tree>>& GetChild() const { return m_Child; }
+        template<typename F, typename ...Args>
+        void View(F&& fn, Args&&...  args)
+        {
+            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::forward<Args>(args)...);
+            
+            std::invoke(visitor, m_Data);
+        }
+        
+        /**
+        * @breif Visit child with DSF.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] args Visitor params.
+        */
+        template<typename F, typename ...Args>
+        void ViewDSF(F&& fn, Args&&...  args)
+        {
+            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
+            
+            ViewDSFImpl(visitor, 0);
+        }
+
+        /**
+        * @breif Visit child with WSF.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] args Visitor params.
+        */
+        template<typename F, typename ...Args>
+        void ViewWSF(F&& fn, Args&&...  args)
+        {
+            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
+            
+            ViewWSFImpl(visitor);
+        }
+
+        /**
+        * @breif Set this node data.
+        * 
+        * @param[in] data The data.
+        */
+        void SetData(const T& data) { m_Data = data; }
 
         /**
         * @breif Get this node data.
+        *
         * @return Returns this node data.
         */
-        T& GetData() { return m_Data; }
+        [[nodiscard]] const T& GetData() const { return m_Data; }
+
+    private:
+
+        /**
+        * @breif Visit child with DSF Implementation.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] depth Visitor depth.
+        *
+        * @return Returns true if needs to continue.
+        */
+        template<typename F>
+        requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
+        bool ViewDSFImpl(F&& fn, uint32_t depth);
+
+        /**
+        * @breif Visit child with WSF Implementation.
+        *
+        * @param[in] fn Visitor.
+        *
+        * @return Returns true if needs to continue.
+        */
+        template<typename F>
+        requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
+        bool ViewWSFImpl(F&& fn);
+        
     };
+
+    template <typename T>
+    template <typename F>
+    requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
+    bool Tree<T>::ViewDSFImpl(F&& fn, uint32_t depth)
+    {
+        if (!std::invoke(std::forward<F>(fn), m_Data, depth))
+        {
+            return false;
+        }
+        
+        for (auto& child : m_Child)
+        {
+            if (!child->ViewDSFImpl(std::forward<F>(fn), depth + 1))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    template <typename T>
+    template <typename F>
+    requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
+    bool Tree<T>::ViewWSFImpl(F&& fn)
+    {
+        std::queue<std::pair<Tree*, uint32_t>> queue;
+
+        queue.push({ this, 0 });
+
+        while (!queue.empty())
+        {
+            auto [ node, depth ] = queue.front();
+            queue.pop();      
+            
+            if (!std::invoke(std::forward<F>(fn), node->m_Data, depth))
+            {
+                return false;
+            }
+            
+            for (auto& child : node->m_Child)
+            {
+                queue.push({ child.get(), depth + 1 });
+            }
+        }
+        
+        return true;
+    }
 }
