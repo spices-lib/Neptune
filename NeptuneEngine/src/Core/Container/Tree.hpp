@@ -32,6 +32,11 @@ namespace Neptune {
         */
         T m_Data;
 
+        /**
+        * @brief Mutex.
+        */
+        std::mutex m_Mutex {};
+
     public:
 
         /**
@@ -66,6 +71,8 @@ namespace Neptune {
         template<typename ...Args>
         Tree* AddChild(Args&&... args)
         {
+            std::unique_lock lock(m_Mutex);
+            
             m_Child.push_back(std::make_unique<Tree>(std::forward<Args>(args)...));
 
             return m_Child.back().get();
@@ -78,8 +85,26 @@ namespace Neptune {
         * @param[in] args Visitor params.
         */
         template<typename F, typename ...Args>
+        void View(F&& fn, Args&&...  args) const
+        {
+            std::shared_lock lock(m_Mutex);
+            
+            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::forward<Args>(args)...);
+            
+            std::invoke(visitor, m_Data);
+        }
+
+        /**
+        * @breif Visit this data.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] args Visitor params.
+        */
+        template<typename F, typename ...Args>
         void View(F&& fn, Args&&...  args)
         {
+            std::unique_lock lock(m_Mutex);
+            
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::forward<Args>(args)...);
             
             std::invoke(visitor, m_Data);
@@ -92,8 +117,26 @@ namespace Neptune {
         * @param[in] args Visitor params.
         */
         template<typename F, typename ...Args>
+        void ViewDSF(F&& fn, Args&&...  args) const
+        {
+            std::shared_lock lock(m_Mutex);
+            
+            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
+            
+            ViewDSFImpl(visitor, 0);
+        }
+
+        /**
+        * @breif Visit child with DSF.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] args Visitor params.
+        */
+        template<typename F, typename ...Args>
         void ViewDSF(F&& fn, Args&&...  args)
         {
+            std::unique_lock lock(m_Mutex);
+            
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
             
             ViewDSFImpl(visitor, 0);
@@ -106,8 +149,26 @@ namespace Neptune {
         * @param[in] args Visitor params.
         */
         template<typename F, typename ...Args>
+        void ViewWSF(F&& fn, Args&&...  args) const
+        {
+            std::shared_lock lock(m_Mutex);
+            
+            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
+            
+            ViewWSFImpl(visitor);
+        }
+
+        /**
+        * @breif Visit child with WSF.
+        *
+        * @param[in] fn Visitor.
+        * @param[in] args Visitor params.
+        */
+        template<typename F, typename ...Args>
         void ViewWSF(F&& fn, Args&&...  args)
         {
+            std::unique_lock lock(m_Mutex);
+            
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
             
             ViewWSFImpl(visitor);
@@ -118,7 +179,12 @@ namespace Neptune {
         * 
         * @param[in] data The data.
         */
-        void SetData(const T& data) { m_Data = data; }
+        void SetData(const T& data)
+        {
+            std::unique_lock lock(m_Mutex);
+            
+            m_Data = data;
+        }
 
         /**
         * @breif Get this node data.
