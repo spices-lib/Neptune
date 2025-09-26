@@ -17,25 +17,25 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        auto root = CreateEntity("SceneRoot");
+        auto root = Create("SceneRoot");
 
         root.AddComponent<ScriptComponent>();
 
         m_Root = root;
     }
 
-    Entity Scene::CreateEntity(const std::string& name)
+    Entity Scene::Create(const std::string& name)
     {
         NEPTUNE_PROFILE_ZONE
 
-        return CreateEntityWithUUID(UUID(), name);
+        return Create(UUID(), name);
     }
 
-    Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name)
+    Entity Scene::Create(UUID uuid, const std::string& name)
     {
         NEPTUNE_PROFILE_ZONE
 
-        Entity entity = CreateEmptyEntity(uuid);
+        Entity entity = CreateEmpty(uuid);
 
         entity.AddComponent<UUIDComponent>(uuid);
         entity.AddComponent<TagComponent>(name);
@@ -53,14 +53,14 @@ namespace Neptune {
         m_Registry.destroy(static_cast<entt::entity>(e));
     }
 
-    Entity Scene::QueryEntityByID(const uint32_t id)
+    Entity Scene::Query(const uint32_t id)
     {
         NEPTUNE_PROFILE_ZONE
 
         return { id, this };
     }
 
-    Entity Scene::CreateEmptyEntity(const UUID uuid)
+    Entity Scene::CreateEmpty(const UUID uuid)
     {
         NEPTUNE_PROFILE_ZONE
 

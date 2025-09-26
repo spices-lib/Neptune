@@ -42,7 +42,7 @@ namespace Neptune {
         * 
         * @param[in] name Entity name.
         */
-        Entity CreateEntity(const std::string& name = "None");
+        Entity Create(const std::string& name = "None");
 
         /**
         * @brief Create a new empty entity with a uuid in this world.
@@ -50,7 +50,7 @@ namespace Neptune {
         * @param[in] uuid UUID.
         * @param[in] name Entity name.
         */
-        Entity CreateEntityWithUUID(UUID uuid, const std::string& name = "None");
+        Entity Create(UUID uuid, const std::string& name = "None");
 
         /**
         * @brief Destroy a entity from this world.
@@ -66,7 +66,7 @@ namespace Neptune {
         * 
         * @return Returns valid Entity if fined.
         */
-        Entity QueryEntityByID(uint32_t id);
+        Entity Query(uint32_t id);
 
         /**
         * @brief View all component in this world.
@@ -171,7 +171,7 @@ namespace Neptune {
         * 
         * @param[in] uuid UUID.
         */
-        Entity CreateEmptyEntity(UUID uuid);
+        Entity CreateEmpty(UUID uuid);
 
         /**
         * @brief Called On any Component Attached to this scene.

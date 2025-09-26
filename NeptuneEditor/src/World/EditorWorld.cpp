@@ -33,7 +33,7 @@ namespace Neptune::Editor {
         const auto scene = CreateScene("main_level");
 
         {
-            auto entity = scene->CreateEntity("cube");
+            auto entity = scene->Create("cube");
             entity.AddComponent<TransformComponent>();
             auto& comp = entity.AddComponent<ScriptComponent>();
 
@@ -42,7 +42,7 @@ namespace Neptune::Editor {
         }
 
         {
-            auto entity = scene->CreateEntity("plane");
+            auto entity = scene->Create("plane");
             entity.AddComponent<TransformComponent>();
         }
     }
