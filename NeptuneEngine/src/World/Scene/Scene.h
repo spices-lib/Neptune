@@ -27,19 +27,6 @@ namespace Neptune {
     {
     public:
 
-        enum SceneMarkBits
-        {
-            Clean            = 0x00000001,
-            MeshAddedToScene = 0x00000002,
-            FlushStableFrame = 0x00000004,
-            NeedUpdateTLAS   = 0x00000008,
-            MAX              = 0x7FFFFFFF
-        };
-
-        typedef uint32_t SceneMarkFlags;
-
-    public:
-
         /**
         * @brief Constructor Function.
         */
@@ -82,39 +69,13 @@ namespace Neptune {
         Entity QueryEntityByID(uint32_t id);
 
         /**
-        * @brief Get WorldMarkFlags this frame.
-        * 
-        * @return Returns the WorldMarkFlags this frame.
-        */
-        SceneMarkFlags GetMarker() const { return m_Marker; }
-
-        /**
-        * @brief Mark WorldMarkFlags with flags.
-        * 
-        * @param[in] flags In flags.
-        */
-        void Mark(SceneMarkFlags flags) { m_Marker |= flags; }
-
-        /**
-        * @brief Reset WorldMarkFlags to Clean.
-        */
-        void ResetMark() { m_Marker = SceneMarkBits::Clean; }
-
-        /**
-        * @brief Clear WorldMarkFlags with flags.
-        * 
-        * @param[in] flags In flags.
-        */
-        void ClearMarkerWithBits(SceneMarkFlags flags);
-
-        /**
         * @brief View all component in this world.
         * 
         * @tparam T Component.
         * @param[in] fn View function.
         */
         template<typename T, typename F>
-        void ViewComponent(F&& fn);
+        void ViewComponent(F&& fn) const;
 
         /**
         * @brief View all component in this world in ranges.
@@ -124,7 +85,7 @@ namespace Neptune {
         * @param[in] fn View function.
         */
         template<typename T, typename F>
-        void ViewComponent(const std::vector<uint32_t>& ranges, F&& fn);
+        void ViewComponent(const std::vector<uint32_t>& ranges, F&& fn) const;
 
         /**
         * @brief View all component in this world in ranges.
@@ -136,7 +97,7 @@ namespace Neptune {
         * @param[in] fn View function.
         */
         template<typename T, typename F>
-        void ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn);
+        void ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn) const;
 
         /**
         * @brief View all root in this world.
@@ -144,7 +105,7 @@ namespace Neptune {
         * @param fn View function.
         */
         template<typename F>
-        void ViewRoot(F&& fn);
+        void ViewRoot(F&& fn) const;
 
         /**
         * @brief Template Function.
@@ -201,7 +162,7 @@ namespace Neptune {
         * @return Returns true if found.
         */
         template<typename T>
-        bool HasComponent(uint32_t e);
+        bool HasComponent(uint32_t e) const;
 
     private:
 
@@ -219,7 +180,7 @@ namespace Neptune {
         * @param[in] component Specific Component reference.
         */
         template<typename T>
-        void OnComponentAttached(Entity* entity, T& component);
+        void OnComponentAttached(Entity* entity, T& component) const;
 
         /**
         * @brief Called On any Component Detached from this scene.
@@ -228,14 +189,14 @@ namespace Neptune {
         * @param[in] component Specific Component reference.
         */
         template<typename T>
-        void OnComponentDetached(Entity* entity, T& component);
+        void OnComponentDetached(Entity* entity, T& component) const;
 
     protected:
 
         /**
         * @brief Mutex for world.
         */
-        std::shared_mutex m_Mutex;
+        mutable std::shared_mutex m_Mutex;
 
         /**
         * @brief This ECS Registry.
@@ -248,51 +209,46 @@ namespace Neptune {
         uint32_t m_Root;
 
         /**
-        * @brief World State this frame.
-        */
-        SceneMarkFlags m_Marker = SceneMarkBits::Clean;
-
-        /**
         * Allow Entity access all data.
         */
         friend class Entity;
     };
 
     template <typename T, typename F>
-    void Scene::ViewComponent(F&& fn)
+    void Scene::ViewComponent(F&& fn) const
     {
         NEPTUNE_PROFILE_ZONE
 
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
-        auto view = m_Registry.view<T>();
+        const auto view = m_Registry.view<T>();
 
-        for(auto e : view)
+        for(const auto e : view)
         {
-            auto& comp = m_Registry.get<T>(e);
+            const auto& comp = m_Registry.get<T>(e);
 
-            if(fn(static_cast<uint32_t>(e), comp)) break;
+            if(!std::invoke(fn, static_cast<uint32_t>(e), comp)) break;
         }
     }
 
     template <typename T, typename F>
-    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn)
+    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn) const
     {
         NEPTUNE_PROFILE_ZONE
 
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
 
-        for(auto range : ranges)
+        for(const auto range : ranges)
         {
-            auto e = static_cast<entt::entity>(range);
-            auto& comp = m_Registry.get<T>(e);
+            const auto e = static_cast<entt::entity>(range);
+            const auto& comp = m_Registry.get<T>(e);
 
-            fn(range, comp);
+            if (!std::invoke(fn, range, comp)) break;
         }
     }
 
     template<typename T, typename F>
-    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn)
+    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn) const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -303,21 +259,21 @@ namespace Neptune {
 
         for(int32_t i = floor; i < ceil; i++)
         {
-            auto e = static_cast<entt::entity>(ranges[i]);
-            auto& comp = m_Registry.get<T>(e);
+            const auto e = static_cast<entt::entity>(ranges[i]);
+            const auto& comp = m_Registry.get<T>(e);
 
-            fn(ranges[i], comp);
+            if (!std::invoke(fn, ranges[i], comp)) break;
         }
     }
 
     template<typename F>
-    void Scene::ViewRoot(F&& fn)
+    void Scene::ViewRoot(F&& fn) const
     {
         NEPTUNE_PROFILE_ZONE
 
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
         
-        fn(m_Root);
+        if (!std::invoke(fn, m_Root)) break;
     }
 
     template <typename T, typename ... Args>
@@ -364,7 +320,7 @@ namespace Neptune {
     }
 
     template <typename T>
-    bool Scene::HasComponent(uint32_t e)
+    bool Scene::HasComponent(uint32_t e) const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -374,7 +330,7 @@ namespace Neptune {
     }
 
     template<typename T>
-    void Scene::OnComponentAttached(Entity* entity, T& component)
+    void Scene::OnComponentAttached(Entity* entity, T& component) const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -382,7 +338,7 @@ namespace Neptune {
     }
 
     template <typename T>
-    void Scene::OnComponentDetached(Entity* entity, T& component)
+    void Scene::OnComponentDetached(Entity* entity, T& component) const
     {
         NEPTUNE_PROFILE_ZONE
 

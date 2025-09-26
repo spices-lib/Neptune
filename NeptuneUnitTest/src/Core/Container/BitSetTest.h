@@ -13,6 +13,29 @@
 namespace Neptune::Test {
 
 	/**
+	* @brief Unit Test for BitSet
+	*/
+	class BitSetTest : public testing::Test
+	{
+	protected:
+
+		/**
+		* @brief The interface is inherited from testing::Test.
+		* Registry on Initialize.
+		*/
+		void SetUp() override {}
+
+		/**
+		* @brief Testing class TearDown function.
+		*/
+		void TearDown() override {}
+
+	protected:
+
+		//BitSet<int> m_BitSet;
+	};
+
+	/**
 	* @brief Testing BitSetTest Class.
 	*/
 	TEST(BitSetTest, All) {

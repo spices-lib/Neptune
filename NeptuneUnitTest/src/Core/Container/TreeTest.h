@@ -13,7 +13,7 @@
 namespace Neptune::Test {
 
 	/**
-	* @brief Unit Test for TreeTest
+	* @brief Unit Test for Tree
 	*/
 	class TreeTest : public testing::Test
 	{
@@ -95,16 +95,13 @@ namespace Neptune::Test {
 	TEST_F(TreeTest, View) {
 
 		NEPTUNE_TEST_PROFILE_FUNCTION
-		
+
 		m_Tree.View([](const auto& data) {
 
 			EXPECT_EQ(data, 0);
 		});
 
-		m_Tree.View([](auto& data) {
-
-			data = 1;
-		});
+		m_Tree.SetData(1);
 
 		m_Tree.View([](const auto& data) {
 			

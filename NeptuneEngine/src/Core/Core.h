@@ -8,7 +8,6 @@
 #include "Log/Log.h"
 #include "Debugger/Profiler/Profiler.h"
 
-#include <memory.h>
 #include <forward_list>
 
 namespace Neptune {

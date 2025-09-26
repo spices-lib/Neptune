@@ -60,16 +60,6 @@ namespace Neptune {
         return { id, this };
     }
 
-    void Scene::ClearMarkerWithBits(const SceneMarkFlags flags)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        if (m_Marker & flags)
-        {
-            m_Marker ^= flags;
-        }
-    }
-
     Entity Scene::CreateEmptyEntity(const UUID uuid)
     {
         NEPTUNE_PROFILE_ZONE

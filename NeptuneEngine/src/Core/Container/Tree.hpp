@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <queue>
+#include <shared_mutex>
 
 namespace Neptune {
 
@@ -35,7 +36,7 @@ namespace Neptune {
         /**
         * @brief Mutex.
         */
-        std::mutex m_Mutex {};
+        mutable std::shared_mutex m_Mutex;
 
     public:
 
@@ -71,7 +72,7 @@ namespace Neptune {
         template<typename ...Args>
         Tree* AddChild(Args&&... args)
         {
-            std::unique_lock lock(m_Mutex);
+            std::unique_lock<std::shared_mutex> lock(m_Mutex);
             
             m_Child.push_back(std::make_unique<Tree>(std::forward<Args>(args)...));
 
@@ -87,27 +88,9 @@ namespace Neptune {
         template<typename F, typename ...Args>
         void View(F&& fn, Args&&...  args) const
         {
-            std::shared_lock lock(m_Mutex);
+            std::shared_lock<std::shared_mutex> lock(m_Mutex);
             
-            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::forward<Args>(args)...);
-            
-            std::invoke(visitor, m_Data);
-        }
-
-        /**
-        * @breif Visit this data.
-        *
-        * @param[in] fn Visitor.
-        * @param[in] args Visitor params.
-        */
-        template<typename F, typename ...Args>
-        void View(F&& fn, Args&&...  args)
-        {
-            std::unique_lock lock(m_Mutex);
-            
-            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::forward<Args>(args)...);
-            
-            std::invoke(visitor, m_Data);
+            std::invoke(std::forward<F>(fn), m_Data, std::forward<Args>(args)...);
         }
         
         /**
@@ -119,23 +102,7 @@ namespace Neptune {
         template<typename F, typename ...Args>
         void ViewDSF(F&& fn, Args&&...  args) const
         {
-            std::shared_lock lock(m_Mutex);
-            
-            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
-            
-            ViewDSFImpl(visitor, 0);
-        }
-
-        /**
-        * @breif Visit child with DSF.
-        *
-        * @param[in] fn Visitor.
-        * @param[in] args Visitor params.
-        */
-        template<typename F, typename ...Args>
-        void ViewDSF(F&& fn, Args&&...  args)
-        {
-            std::unique_lock lock(m_Mutex);
+            std::shared_lock<std::shared_mutex> lock(m_Mutex);
             
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
             
@@ -151,23 +118,7 @@ namespace Neptune {
         template<typename F, typename ...Args>
         void ViewWSF(F&& fn, Args&&...  args) const
         {
-            std::shared_lock lock(m_Mutex);
-            
-            auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
-            
-            ViewWSFImpl(visitor);
-        }
-
-        /**
-        * @breif Visit child with WSF.
-        *
-        * @param[in] fn Visitor.
-        * @param[in] args Visitor params.
-        */
-        template<typename F, typename ...Args>
-        void ViewWSF(F&& fn, Args&&...  args)
-        {
-            std::unique_lock lock(m_Mutex);
+            std::shared_lock<std::shared_mutex> lock(m_Mutex);
             
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
             
@@ -181,7 +132,7 @@ namespace Neptune {
         */
         void SetData(const T& data)
         {
-            std::unique_lock lock(m_Mutex);
+            std::unique_lock<std::shared_mutex> lock(m_Mutex);
             
             m_Data = data;
         }
@@ -205,7 +156,7 @@ namespace Neptune {
         */
         template<typename F>
         requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
-        bool ViewDSFImpl(F&& fn, uint32_t depth);
+        bool ViewDSFImpl(F&& fn, uint32_t depth) const;
 
         /**
         * @breif Visit child with WSF Implementation.
@@ -216,14 +167,14 @@ namespace Neptune {
         */
         template<typename F>
         requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
-        bool ViewWSFImpl(F&& fn);
+        bool ViewWSFImpl(F&& fn) const;
         
     };
 
     template <typename T>
     template <typename F>
     requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
-    bool Tree<T>::ViewDSFImpl(F&& fn, uint32_t depth)
+    bool Tree<T>::ViewDSFImpl(F&& fn, uint32_t depth) const
     {
         if (!std::invoke(std::forward<F>(fn), m_Data, depth))
         {
@@ -244,9 +195,9 @@ namespace Neptune {
     template <typename T>
     template <typename F>
     requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
-    bool Tree<T>::ViewWSFImpl(F&& fn)
+    bool Tree<T>::ViewWSFImpl(F&& fn) const
     {
-        std::queue<std::pair<Tree*, uint32_t>> queue;
+        std::queue<std::pair<const Tree*, uint32_t>> queue;
 
         queue.push({ this, 0 });
 

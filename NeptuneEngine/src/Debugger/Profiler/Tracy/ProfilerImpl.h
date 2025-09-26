@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "Core/Core.h"
 #ifdef NP_PLATFORM_WINDOWS
 
 #include <tracy/Tracy.hpp>

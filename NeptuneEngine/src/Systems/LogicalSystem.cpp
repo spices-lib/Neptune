@@ -30,9 +30,10 @@ namespace Neptune {
 
             for (const auto& scene : scenes | std::views::values)
             {
-                scene->ViewComponent<ScriptComponent>([](uint32_t e, ScriptComponent& comp) {
+                scene->ViewComponent<ScriptComponent>([](uint32_t e, const ScriptComponent& comp) {
+
                     comp.OnTick();
-                    return false;
+                    return true;
                 });
             }
         }
@@ -52,9 +53,10 @@ namespace Neptune {
 
             for (const auto& scene : scenes | std::views::values)
             {
-                scene->ViewComponent<ScriptComponent>([&](uint32_t e, ScriptComponent& comp) {
+                scene->ViewComponent<ScriptComponent>([&](uint32_t e, const ScriptComponent& comp) {
+
                     comp.OnEvent(event);
-                    return false;
+                    return true;
                 });
             }
         }
