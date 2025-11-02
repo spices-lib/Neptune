@@ -42,7 +42,6 @@ namespace Neptune {
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
         S_Instance.reset();
-        S_Instance = nullptr;
 
         NEPTUNE_CORE_INFO("Application destroyed.")
 #endif

@@ -20,7 +20,7 @@ namespace Neptune {
 
         spdlog::set_pattern("[%Y-%m-%d %H:%M:%S] [%n] [%l] %v");
 
-#ifndef __EMSCRIPTEN__
+#ifndef NP_PLATFORM_EMSCRIPTEN
         spdlog::flush_every(std::chrono::seconds(5));
 #endif
 
