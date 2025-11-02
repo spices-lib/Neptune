@@ -7,10 +7,8 @@
 #include "Pchheader.h"
 #include "StringLibrary.h"
 
-namespace Neptune {
+namespace Neptune::StringLibrary {
 
-namespace StringLibrary
-{
     std::vector<std::string> SplitString(const std::string& input, char delimiter)
     {
         NEPTUNE_PROFILE_ZONE
@@ -29,5 +27,4 @@ namespace StringLibrary
 
         return result;
     }
-}
 }

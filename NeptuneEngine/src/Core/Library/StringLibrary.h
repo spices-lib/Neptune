@@ -7,10 +7,8 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Neptune {
+namespace Neptune::StringLibrary {
 
-namespace StringLibrary
-{
     /**
     * @brief Split a string to a string vector container use a char.
     * 
@@ -20,5 +18,4 @@ namespace StringLibrary
     * @return Returns a string vector container.
     */
     std::vector<std::string> SplitString(const std::string& input, char delimiter);
-}
 }

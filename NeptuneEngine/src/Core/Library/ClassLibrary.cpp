@@ -8,12 +8,10 @@
 #include "ClassLibrary.h"
 #include "StringLibrary.h"
 
-namespace Neptune {
+namespace Neptune::ClassLibrary {
 
 using namespace StringLibrary;
 
-namespace ClassLibrary
-{
     std::string GetClassString(ClassType t)
     {
         NEPTUNE_PROFILE_ZONE
@@ -21,5 +19,4 @@ namespace ClassLibrary
         const auto& outSplit = SplitString(t.get().name(), ':');
         return outSplit[outSplit.size() - 1];
     }
-}
 }
