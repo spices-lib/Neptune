@@ -18,11 +18,6 @@
 #include <GLFW/glfw3.h>
 #include <GLFW/emscripten_glfw3.h>
 
-#include <imgui.h>
-#include <backends/imgui_impl_glfw.h>
-
-#include <webgpu/webgpu.h>
-#include <webgpu/webgpu_cpp.h>
 #include "Window/Window.h"
 
 namespace Neptune::WebGL {
