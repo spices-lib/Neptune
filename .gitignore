@@ -1,4 +1,6 @@
-﻿/.vs
+﻿.DS_Store
+
+/.vs
 /.idea
 /bin-int
 /bin

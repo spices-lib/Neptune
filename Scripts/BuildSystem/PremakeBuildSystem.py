@@ -65,6 +65,8 @@ class PremakeBuildSystem(BuildSystem):
             args.append("--os=windows")
         elif self.platform == "linux":
             args.append("--os=linux")
+        elif self.platform == "macos":
+            args.append("--os=macosx")
         else:
             print("Not support platform.")
             sys.exit(1)

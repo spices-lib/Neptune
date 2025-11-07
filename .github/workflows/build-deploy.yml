@@ -53,8 +53,8 @@ jobs:
     # Build Solution with Debug Configuration
     - name: Build Debug
       shell: bash
-      working-directory: ./Scripts/BuildEntry/
-      run: bash ./gmake_build_debug_wasm.sh
+      working-directory: ./Scripts/BuildEntry/Wasm/
+      run: bash ./build_debug.sh
 
     # Find build file
     - name: Find build outputs
@@ -74,8 +74,8 @@ jobs:
     # Build Solution with Release Configuration
     - name: Build Release
       shell: bash
-      working-directory: ./Scripts/BuildEntry/
-      run: bash ./gmake_build_release_wasm.sh
+      working-directory: ./Scripts/BuildEntry/Wasm/
+      run: bash ./build_release.sh
 
     # Find build file
     - name: Find build outputs
