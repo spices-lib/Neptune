@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # To build system directory
-cd "..//BuildSystem"
+cd "../../BuildSystem"
 
 # Build with configure
 python3 SolutionBuilder.py --build_system=premake --platform=linux --toolset=GNU --behave=build-debug

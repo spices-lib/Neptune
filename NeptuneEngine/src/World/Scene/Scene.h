@@ -273,7 +273,7 @@ namespace Neptune {
 
         std::shared_lock<std::shared_mutex> lock(m_Mutex);
         
-        if (!std::invoke(fn, m_Root)) break;
+        std::invoke(fn, m_Root);
     }
 
     template <typename T, typename ... Args>
