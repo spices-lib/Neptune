@@ -24,7 +24,6 @@
 
 #include <imgui.h>
 #include <backends/imgui_impl_glfw.h>
-#include <backends/imgui_impl_wgpu.h>
 
 #include "Window/Window.h"
 
