@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit on error
+set -e
+
 # To build system directory
 cd "../../BuildSystem"
 
