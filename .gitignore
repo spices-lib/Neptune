@@ -1,4 +1,4 @@
-﻿.DS_Store
+.DS_Store
 
 /.vs
 /.idea
@@ -30,6 +30,12 @@ Makefile
 /NeptuneRuntime/Makefile
 /NeptuneUnitTest/Makefile
 
+*.xcworkspace
+/NeptuneEngine/*.xcodeproj
+/NeptuneEditor/*.xcodeproj
+/NeptuneRuntime/*.xcodeproj
+/NeptuneUnitTest/*.xcodeproj
+
 /Nepnep/.idea
 /Nepnep/next-env.d.ts
 /Nepnep/.next
@@ -44,6 +50,7 @@ Makefile
 /NeptuneEngine/vendor/Glad/bin-int
 /NeptuneEngine/vendor/Glad/*.vcxproj
 /NeptuneEngine/vendor/Glad/*.vcxproj.filters
+/NeptuneEngine/vendor/Glad/*.xcodeproj
 
 /NeptuneEngine/vendor/emdawnwebgpu/__pycache__
 
@@ -52,6 +59,7 @@ Makefile
 /NeptuneEngine/vendor/Lua/*.vcxproj
 /NeptuneEngine/vendor/Lua/*.vcxproj.filters
 /NeptuneEngine/vendor/Lua/*.make
+/NeptuneEngine/vendor/Lua/*.xcodeproj
 
 /Scripts/BuildDependencies/__pycache__
 /Scripts/BuildSystem/__pycache__

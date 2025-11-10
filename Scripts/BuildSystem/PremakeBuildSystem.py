@@ -75,6 +75,8 @@ class PremakeBuildSystem(BuildSystem):
             args.append("gmake")
         elif self.toolset == "vs":
             args.append("vs2022")
+        elif self.toolset == "xcode":
+            args.append("xcode4")
         else:
             print("Not support toolset.")
             sys.exit(1)
