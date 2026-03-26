@@ -65,6 +65,7 @@ project "Neptune"
 	includedirs
 	{
 		"src",                                                -- Neptune Source Folder.
+		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
 		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
@@ -83,7 +84,6 @@ project "Neptune"
       --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
-      --"LuaLibrary",                         -- Dependency: LuaLibrary
 	}
 
 	-- Library: std_image is included this solution, do not use PreCompiler Header.

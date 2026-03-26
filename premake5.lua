@@ -42,12 +42,11 @@ include "UnitTest"
 group "Dependencies"
 if os.target() == "windows" then
 	include "Neptune/vendor/GLFW"                 -- Dependency GLFW.
-	include "Neptune/vendor/Glad"                 -- Dependency GLFW.
+	include "Neptune/vendor/Glad"                 -- Dependency Glad.
 	include "Neptune/vendor/tracy"                -- Dependency tracy.
 end
 	include "Neptune/vendor/imgui"                -- Dependency imgui.
 	include "Neptune/vendor/yaml-cpp"             -- Dependency yaml-cpp.
 	include "Neptune/vendor/implot"               -- Dependency implot.
-  --include "Neptune/vendor/Lua"                  -- Dependency Lua.
 	include "UnitTest/vendor/googletest"          -- Dependency googletest.
 group ""

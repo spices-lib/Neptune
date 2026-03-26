@@ -28,8 +28,8 @@ project "Editor"
 	-- Macros Definitions
 	defines
 	{
-		-- Define Game Assets Folder.
-		'NEPTUNEEDITOR_ASSETS_PATH=std::string("%{wks.location}/NeptuneEditor/assets/")',
+		-- Define Editor Assets Folder.
+		'EDITOR_ASSETS_PATH=std::string("%{wks.location}/Editor/assets/")',
 
 		"TRACY_ENABLE",                  -- tracy Feature Enable.
 		"TRACY_ON_DEMAND",               -- Used if want profile on demand.
@@ -42,8 +42,8 @@ project "Editor"
 	{
 		"%{IncludeDir.Neptune}",                              -- Engine Source Folder.
 		"src",                                                -- UnitTest Source Folder.
-		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
+		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
 		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
 		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
@@ -53,8 +53,6 @@ project "Editor"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
-		"%{IncludeDir.sol2}",                                 -- Library: sol2 Source Folder.
-		"%{IncludeDir.Lua}",                                  -- Library: Lua Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
@@ -119,7 +117,6 @@ project "Editor"
 		links
 		{
 		  --"ImGui_WebGPU",                               -- Dependency: imgui
-		  --"LuaLibrary",                                 -- Dependency: LuaLibrary
 		}
 
 		-- The Solution link options
