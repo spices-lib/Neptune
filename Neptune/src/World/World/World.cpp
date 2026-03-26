@@ -8,6 +8,9 @@
 #include "World.h"
 #include "World/Scene/Scene.h"
 #include "World/Object/Level.h"
+#include "Core/Event/EngineEvent.h"
+#include "Slate/SlateScope.h"
+#include "Slate/Slate.h"
 
 namespace Neptune {
 
@@ -18,6 +21,40 @@ namespace Neptune {
         static auto s_World = CreateWorld();
         
         return s_World;
+    }
+
+    void World::OnAttached()
+    {
+        EngineEvent event(EngineEventBit::InitSlateModule);
+
+        Event::GetEventCallbackFn()(event);
+    }
+
+    void World::OnDetached()
+    {
+        DestroyScene();
+
+        EngineEvent event(EngineEventBit::ShutdownSlateModule);
+
+        Event::GetEventCallbackFn()(event);
+    }
+
+    void World::OnLayout()
+    {
+        Slate::SlateScope::BeginScope();
+
+        std::for_each(m_Slates.begin(), m_Slates.end(), [](const auto& slate) {
+            slate->OnTick();
+        });
+
+        Slate::SlateScope::EndScope();
+    }
+
+    void World::OnEvent(Event& e)
+    {
+        std::for_each(m_Slates.begin(), m_Slates.end(), [&](const auto& slate) {
+            slate->OnEvent(e);
+        });
     }
 
     Scene* World::CreateScene(const SP<Level>& level)
@@ -56,4 +93,8 @@ namespace Neptune {
         return m_Scenes.at(name).get();
     }
     
+    void World::DestroyScene()
+    {
+        m_Scenes.clear();
+    }
 }

@@ -1,88 +1,36 @@
-/**
-* @file ThreadQueue.h.
-* @brief The ThreadQueue Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/Vulkan/Unit/Queue.h"
+#include "Core/Container/ThreadQueue.hpp"
 
 namespace Neptune::Vulkan {
 
-	/**
-	* @brief ThreadQueue Class.
-	*/
+	using IGraphicThreadQueue     = InfrastructureClass<class ThreadQueue, EInfrastructure::GraphicThreadQueue>;
+	using IComputeThreadQueue     = InfrastructureClass<class ThreadQueue, EInfrastructure::ComputeThreadQueue>;
+	using ITransferThreadQueue    = InfrastructureClass<class ThreadQueue, EInfrastructure::TransferThreadQueue>;
+	using IVideoEncodeThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::VideoEncodeThreadQueue>;
+	using IVideoDecodeThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::VideoDecodeThreadQueue>;
+	using IOpticalFlowThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::OpticalFlowThreadQueue>;
+
 	class ThreadQueue : public Infrastructure
 	{
 	public:
 
-		/**
-		* @brief Mark as ThreadQueue Infrastructure Type.
-		*/
-		static constexpr EInfrastructure Type = EInfrastructure::ThreadQueue;
+		ThreadQueue(Context& context, EInfrastructure e);
 
-	public:
-
-		/**
-		* @brief Constructor Function.
-		*
-		* @param[in] context The global Vulkan Context.
-		*/
-		ThreadQueue(Context& context);
-
-		/**
-		* @brief Destructor Function.
-		*/
 		~ThreadQueue() override = default;
 
-		/**
-		* @brief Get Row Vulkan Infrastructure.
-		*
-		* @return Returns Row Vulkan Infrastructure.
-		*/
-		VkQueue& Handle() { return m_Handle; }
+		SP<Unit::Queue> Pop() { return m_Queues.Pop(); }
 
-	public:
+		void Push(SP<Unit::Queue> queue) { m_Queues.Push(queue); }
 
-		/**
-		* @brief Submit the CommandBuffer in this Queue.
-* 
-		* @param[in] commandBuffer VkCommandBuffer.
-		*/
-		void Submit(VkCommandBuffer commandBuffer) const;
-
-		/**
-		* @brief Wait for queue execute.
-		*/
-		void Wait() const;
+		void Add(VkQueue handle);
 
 	private:
 
-		/**
-		* @brief Create VkInstance.
-		*/
-		void Create();
-
-	private:
-
-		/**
-		* @brief Thread VkQueue.
-		*/
-		VkQueue m_Handle = nullptr;
+		Container::ThreadQueue<SP<Unit::Queue>> m_Queues;
 
 	};
-
-	template<>
-	inline void Infrastructure::Destroy(ThreadQueue* infrastructure)
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		infrastructure->Handle() = nullptr;
-	}
-
+	
 }
-
-#endif

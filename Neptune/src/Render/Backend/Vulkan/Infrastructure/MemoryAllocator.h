@@ -1,12 +1,4 @@
-/**
-* @file MemoryAllocator.h.
-* @brief The MemoryAllocator Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Infrastructure.h"
 
@@ -14,9 +6,6 @@
 
 namespace Neptune::Vulkan {
 
-	/**
-	* @brief Map to VmaAllocationCreateFlagBits while use VMA for memory create.
-	*/
 	typedef enum VMAMemoryPropertyFlagExtendBits {
 
 		/**
@@ -40,60 +29,25 @@ namespace Neptune::Vulkan {
 
 	} VMAMemoryPropertyFlagExtendBits;
 
+	using IMemoryAllocator = InfrastructureClass<class MemoryAllocator, EInfrastructure::MemoryAllocator>;
+
 	class MemoryAllocator : public Infrastructure
 	{
 	public:
 
-		/**
-		* @brief Mark as VMA Infrastructure Type.
-		*/
-		static constexpr EInfrastructure Type = EInfrastructure::MemoryAllocator;
+		MemoryAllocator(Context& context, EInfrastructure e);
 
-	public:
+		~MemoryAllocator() override;
 
-		/**
-		* @brief Constructor Function.
-		* 
-		* @param[in] context The global Vulkan Context.
-		*/
-		MemoryAllocator(Context& context);
-
-		/**
-		* @brief Destructor Function.
-		*/
-		~MemoryAllocator() override = default;
-
-		/**
-		* @brief Get Row Vulkan Infrastructure.
-		*
-		* @return Returns Row Vulkan Infrastructure.
-		*/
-		VmaAllocator& Row() { return m_Handle; }
+		VmaAllocator& Handle() { return m_Handle; }
 
 	private:
 
-		/**
-		* @brief Create VmaAllocator.
-		*/
 		void Create();
 
 	private:
 
-		/**
-		* @brief From VulkanMemoryAllocator.
-		*/
 		VmaAllocator m_Handle = nullptr;
 	};
 
-	template<>
-	inline void Infrastructure::Destroy(MemoryAllocator* infrastructure)
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		vmaDestroyAllocator(infrastructure->Row());
-		infrastructure->Row() = nullptr;
-	}
-
 }
-
-#endif

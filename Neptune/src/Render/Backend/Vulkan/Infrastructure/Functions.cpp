@@ -1,22 +1,18 @@
-/**
-* @file Functions.cpp.
-* @brief The Functions Class Implementation.
-* @author Spices.
-*/
-
 #include "Pchheader.h"
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Functions.h"
+#include "Instance.h"
 
 namespace Neptune::Vulkan {
 
+	Functions::Functions(Context& context, EInfrastructure e)
+		: Infrastructure(context, e)
+	{}
+
 	void Functions::Init(VkInstance instance)
 	{
-		NEPTUNE_PROFILE_ZONE
-
 		EXPLAIN_VK_FUNCTION_POINTER(vkCreateDebugUtilsMessengerEXT                  )
 		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyDebugUtilsMessengerEXT                 )
+		EXPLAIN_VK_FUNCTION_POINTER(vkGetDeviceFaultInfoEXT                         )
 
 		EXPLAIN_VK_FUNCTION_POINTER(vkCmdBeginDebugUtilsLabelEXT                    )
 		EXPLAIN_VK_FUNCTION_POINTER(vkCmdEndDebugUtilsLabelEXT                      )
@@ -57,7 +53,25 @@ namespace Neptune::Vulkan {
 
 		EXPLAIN_VK_FUNCTION_POINTER(vkCopyMemoryToImageEXT                          )
 		EXPLAIN_VK_FUNCTION_POINTER(vkCopyImageToMemoryEXT                          )
+
+		EXPLAIN_VK_FUNCTION_POINTER(vkGetPhysicalDeviceVideoCapabilitiesKHR         )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCreateVideoSessionParametersKHR               )
+		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyVideoSessionParametersKHR              )
+		EXPLAIN_VK_FUNCTION_POINTER(vkUpdateVideoSessionParametersKHR               )
+		EXPLAIN_VK_FUNCTION_POINTER(vkGetPhysicalDeviceVideoFormatPropertiesKHR     )
+		EXPLAIN_VK_FUNCTION_POINTER(vkGetVideoSessionMemoryRequirementsKHR          )
+		EXPLAIN_VK_FUNCTION_POINTER(vkBindVideoSessionMemoryKHR                     )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCreateVideoSessionKHR                         )
+		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyVideoSessionKHR                        )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCmdBeginVideoCodingKHR                        )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCmdControlVideoCodingKHR                      )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCmdDecodeVideoKHR                             )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCmdEndVideoCodingKHR                          )
+
+		EXPLAIN_VK_FUNCTION_POINTER(vkCreateOpticalFlowSessionNV                    )
+		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyOpticalFlowSessionNV                   )
+		EXPLAIN_VK_FUNCTION_POINTER(vkCmdOpticalFlowExecuteNV                       )
+		EXPLAIN_VK_FUNCTION_POINTER(vkGetPhysicalDeviceOpticalFlowImageFormatsNV    )
+		EXPLAIN_VK_FUNCTION_POINTER(vkBindOpticalFlowSessionImageNV                 )
 	}
 }
-
-#endif

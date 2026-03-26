@@ -18,4 +18,12 @@ namespace Neptune::StringLibrary {
     * @return Returns a string vector container.
     */
     std::vector<std::string> SplitString(const std::string& input, char delimiter);
+
+    static std::vector<std::string> SplitKeepString(const std::string& input, char delimiter);
+
+    static bool StringsEqual(const char* str0, const char* str1);
+
+    static std::wstring CharToWChar(const char* c);
+
+    static std::string WCharToChar(const wchar_t* wc);
 }

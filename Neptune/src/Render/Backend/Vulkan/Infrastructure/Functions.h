@@ -1,48 +1,29 @@
-/**
-* @file Functions.h.
-* @brief The Functions Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Infrastructure.h"
 
 namespace Neptune::Vulkan {
 
-/**
-* @brief Macro for declare function pointer variable in VulkanFunctions.
-*/
 #define VK_FUNCTION_POINTER(function)          \
-	PFN_##function function;
+	PFN_##function function = nullptr;
 
-/**
-* @brief Macro for explain function pointer variable in VulkanFunctions::Init.
-*/
 #define EXPLAIN_VK_FUNCTION_POINTER(function)  \
-	function = reinterpret_cast<PFN_##function>(vkGetInstanceProcAddr(instance, #function));
+	function = reinterpret_cast<PFN_##function>(vkGetInstanceProcAddr(instance, #function));  \
+	if(!function){                                                                            \
+		std::stringstream ss;                                                                 \
+		ss << "Vulkan Function: " << #function << " Not found.";                              \
+		CORE_ERROR(ss.str())                                                                  \
+	}
 
-	/**
-	* @brief Vulkan Function Pointers Collection.
-	* It holds all function pointer which need get manually.
-	*/
+	using IFunctions = InfrastructureClass<class Functions, EInfrastructure::Functions>;
+
 	class Functions : public Infrastructure
 	{
 	public:
 
-		/**
-		* @brief Mark as Functions Infrastructure Type.
-		*/
-		static constexpr EInfrastructure Type = EInfrastructure::Functions;
+		Functions(Context& context, EInfrastructure e);
+		~Functions() override = default;
 
-	public:
-
-		/**
-		* @brief Init All Vulkan Function Pointer.
-		* @param[in] instance VkInstance.
-		*/
 		void Init(VkInstance instance);
 
 		/** 
@@ -50,6 +31,7 @@ namespace Neptune::Vulkan {
 		*/
 		VK_FUNCTION_POINTER(vkCreateDebugUtilsMessengerEXT                  )
 		VK_FUNCTION_POINTER(vkDestroyDebugUtilsMessengerEXT                 )
+		VK_FUNCTION_POINTER(vkGetDeviceFaultInfoEXT                         )
 
 		/**
 		* @brief DebugUtils Function. 
@@ -111,7 +93,32 @@ namespace Neptune::Vulkan {
 		*/
 		VK_FUNCTION_POINTER(vkCopyMemoryToImageEXT                          )
 		VK_FUNCTION_POINTER(vkCopyImageToMemoryEXT                          )
-	};
-}
 
-#endif
+		/**
+		* @brief Video Encode/Decode
+		*/
+		VK_FUNCTION_POINTER(vkGetPhysicalDeviceVideoCapabilitiesKHR         )
+		VK_FUNCTION_POINTER(vkCreateVideoSessionParametersKHR               )
+		VK_FUNCTION_POINTER(vkDestroyVideoSessionParametersKHR              )
+		VK_FUNCTION_POINTER(vkUpdateVideoSessionParametersKHR               )
+		VK_FUNCTION_POINTER(vkGetPhysicalDeviceVideoFormatPropertiesKHR     )
+		VK_FUNCTION_POINTER(vkGetVideoSessionMemoryRequirementsKHR          )
+		VK_FUNCTION_POINTER(vkBindVideoSessionMemoryKHR                     )
+		VK_FUNCTION_POINTER(vkCreateVideoSessionKHR                         )
+		VK_FUNCTION_POINTER(vkDestroyVideoSessionKHR                        )
+		VK_FUNCTION_POINTER(vkCmdBeginVideoCodingKHR                        )
+		VK_FUNCTION_POINTER(vkCmdControlVideoCodingKHR                      )
+		VK_FUNCTION_POINTER(vkCmdDecodeVideoKHR                             )
+		VK_FUNCTION_POINTER(vkCmdEndVideoCodingKHR                          )
+
+		/**
+		* @brief Optical Flow.
+		*/
+		VK_FUNCTION_POINTER(vkCreateOpticalFlowSessionNV                   )
+		VK_FUNCTION_POINTER(vkDestroyOpticalFlowSessionNV                  )
+		VK_FUNCTION_POINTER(vkCmdOpticalFlowExecuteNV                      )
+		VK_FUNCTION_POINTER(vkGetPhysicalDeviceOpticalFlowImageFormatsNV   )
+		VK_FUNCTION_POINTER(vkBindOpticalFlowSessionImageNV                )
+	};
+	
+}

@@ -22,11 +22,11 @@ namespace Neptune {
 
         const auto world = World::Instance();
 
+        const auto& scenes = world->GetScenes();
+
         if (world->TestFlag(WorldMarkBit::DynamicScriptTick))
         {
             NEPTUNE_PROFILE_ZONEN("DynamicScriptTick")
-
-            const auto& scenes = world->GetScenes();
 
             for (const auto& scene : scenes | std::views::values)
             {
@@ -37,6 +37,8 @@ namespace Neptune {
                 });
             }
         }
+
+        world->OnLayout();
     }
 
     void LogicalSystem::OnEvent(Event& event)

@@ -9,7 +9,7 @@
 
 #include <mutex>
 
-namespace Neptune {
+namespace Neptune::Container {
 
     /**
     * @brief Spin Lock.

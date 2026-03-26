@@ -18,9 +18,7 @@ namespace Neptune {
     */
     enum class EventType : uint32_t
     {
-        /**
-        * @brief Window Event.
-        */
+        // @brief Window Event.
         WindowClose            = 0,
         WindowResize           = 1,
         WindowResizeOver       = 2,
@@ -28,35 +26,27 @@ namespace Neptune {
         WindowLostFocus        = 4,
         WindowMoved            = 5,
 
-        /**
-        * @brief Slate Event.
-        */
+        // @brief Slate Event.
         SlateResize            = 6,
 
-        /**
-        * @brief Key Input Event.
-        */
+        // @brief Key Input Event.
         KeyPressed             = 7,
         KeyReleased            = 8,
         KeyTyped               = 9,
 
-        /**
-        * @brief Mouse Input Event.
-        */
+        // @brief Mouse Input Event.
         MouseButtonPressed     = 10,
         MouseButtonReleased    = 11,
         MouseMoved             = 12,
         MouseScrolled          = 13,
 
-        /**
-        * @brief World Event.
-        */
-        MeshAdded              = 14,
+        // @brief Engine Event.
+        Engine                 = 14,
 
         /**
-        * @brief ALL Event.
+        * @brief Event Count.
         */
-        ALL                  = 18,
+        Count                  = 15,
     };
 
     /**
@@ -70,9 +60,9 @@ namespace Neptune {
         EventCategoryKeyboard     = 3,    /* @brief Keyboard     */
         EventCategoryMouse        = 4,    /* @brief Mouse        */
         EventCategoryMouseButton  = 5,    /* @brief MouseButton  */
-        EventCategoryWorld        = 6,    /* @brief World        */
+        EventCategoryEngine       = 6,    /* @brief Engine       */
 
-        ALL                       = 7
+        Count                     = 7
     };
 
 namespace Detail {
@@ -84,7 +74,7 @@ namespace Detail {
     * @param[in] categories The Categories.
     */
     template<typename... T>
-    void SetEventCategories(BitSet<EventCategory>& flags, T... categories)
+    void SetEventCategories(Container::BitSet<EventCategory>& flags, T... categories)
     {
         (flags.Set(categories, true), ...);
     }
@@ -102,19 +92,19 @@ namespace Detail {
     /**
     * @brief Defines Event category.
     */
-    #define EVENT_CLASS_CATEGORY(...)                                        \
-	virtual BitSet<EventCategory> GetCategoryFlags() const override          \
-    {                                                                        \
-        using enum EventCategory;                                            \
-                                                                             \
-        static BitSet<EventCategory> s_Category;                             \
-                                                                             \
-        if (s_Category.None())                                               \
-        {                                                                    \
-             Detail::SetEventCategories(s_Category, __VA_ARGS__);            \
-        }                                                                    \
-                                                                             \
-        return s_Category;                                                   \
+    #define EVENT_CLASS_CATEGORY(...)                                                   \
+	virtual Container::BitSet<EventCategory> GetCategoryFlags() const override          \
+    {                                                                                   \
+        using enum EventCategory;                                                       \
+                                                                                        \
+        static Container::BitSet<EventCategory> s_Category;                             \
+                                                                                        \
+        if (s_Category.None())                                                          \
+        {                                                                               \
+             Detail::SetEventCategories(s_Category, __VA_ARGS__);                       \
+        }                                                                               \
+                                                                                        \
+        return s_Category;                                                              \
     }
 
     /**
@@ -149,10 +139,10 @@ namespace Detail {
         /**
         * @brief Event Information Function, must be implemented by EVENT_CLASS_TYPE and EVENT_CLASS_CATEGORY.
         */
-        virtual EventType               GetEventType()           const = 0;
-        virtual const std::string       GetName()                const = 0;
-        virtual BitSet<EventCategory>   GetCategoryFlags()       const = 0;
-        virtual std::string             ToString()               const { return GetName(); }
+        virtual EventType                          GetEventType()           const = 0;
+        virtual const std::string                  GetName()                const = 0;
+        virtual Container::BitSet<EventCategory>   GetCategoryFlags()       const = 0;
+        virtual std::string                        ToString()               const { return GetName(); }
 
         /**
         * @brief Judgement if a given category is contained by this event class.

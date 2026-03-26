@@ -1,137 +1,158 @@
-/**
-* @file Context.h.
-* @brief The Context Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
+#include <array>
 
 namespace Neptune::Vulkan {
 
     class Infrastructure;
 
-    /**
-    * @brief Vulkan Infrastructure Type enum.
-    */
     enum class EInfrastructure : uint8_t
     {
+        Functions = 0,
         Instance,
-        Functions,
+        DebugUtilsObject,
         Surface,
-        PhysicalSurface,
+        PhysicalDevice,
         Device,
-        ThreadQueue,
+
+        GraphicQueue,
+        PresentQueue,
+        ComputeQueue,
+
+        GraphicThreadQueue,
+        ComputeThreadQueue,
+        TransferThreadQueue,
+        VideoEncodeThreadQueue,
+        VideoDecodeThreadQueue,
+        OpticalFlowThreadQueue,
+
         MemoryAllocator,
         SwapChain,
-        CommandPool,
+
+        GraphicImageSemaphore,
+        GraphicQueueSemaphore,
+        GraphicFence,
+
+        ComputeQueueSemaphore,
+        ComputeFence,
+
+        GraphicCommandPool,
+        GraphicCommandBuffer,
+
+        ComputeCommandPool,
+        ComputeCommandBuffer,
+
+        GraphicThreadCommandPool,
+        ComputeThreadCommandPool,
+        TransferThreadCommandPool,
+        VideoEncodeThreadCommandPool,
+        VideoDecodeThreadCommandPool,
+        OpticalFlowThreadCommandPool,
+
         DescriptorPool,
 
-        MAX
+        Count
     };
 
-    /**
-    * @brief This context contains all Vulkan Infrastructure in used global.
-    */
+    template<typename T_, EInfrastructure E_>
+	struct InfrastructureClass
+	{
+		using T = T_;
+        static constexpr EInfrastructure E = E_;
+	};
+
     class Context : NonCopyable
     {
     public:
 
-        /**
-        * @brief Constructor Function.
-        */
         Context() = default;
 
-        /**
-        * @brief Destructor Function.
-        */
         ~Context() override = default;
 
-        /**
-        * @brief Registry Vulkan Infrastructure to this context.
-        * 
-        * @tparam T Vulkan Infrastructure.
-        */
-        template<typename T>
-        void Registry();
+        template<typename I, typename... Args>
+        void Registry(Args&&... args);
 
-        /**
-        * @brief UnRegistry VulkanInfrastructure from this context.
-        * 
-        * @tparam T VulkanInfrastructure.
-        */
-        template<typename T>
+        template<typename I>
         void UnRegistry();
 
-        /**
-        * @brief Get Vulkan Infrastructure from this context.
-        *
-        * @tparam T Vulkan Infrastructure.
-        *
-        * @return Returns Vulkan Infrastructure.
-        */
-        template<typename T>
-        T* Get();
+        void UnRegistry();
+
+        template<typename I>
+        SP<typename I::T> Get();
+
+        template<typename I>
+        bool Has() const;
 
     private:
 
-        /**
-        * @brief Vulkan Infrastructures
-        */
-        std::array<SP<Infrastructure>, static_cast<uint8_t>(EInfrastructure::MAX)> m_Infrastructures;
+        std::array<SP<Infrastructure>, static_cast<uint8_t>(EInfrastructure::Count)> m_Infrastructures;
     };
 
-    template<typename T>
-    void Context::Registry()
+    template<typename I, typename... Args>
+    void Context::Registry(Args&&... args)
     {
-        NEPTUNE_PROFILE_ZONE
-
-        const auto position = static_cast<uint8_t>(T::Type);
+        const auto position = static_cast<uint8_t>(I::E);
 
         if (m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure already registried.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure already registered.")
         }
 
-        m_Infrastructures[position] = CreateSP<T>(*this);
+        m_Infrastructures[position] = CreateSP<typename I::T>(*this, I::E, std::forward<Args>(args)...);
     }
 
-    template <typename T>
-    void Context::UnRegistry()
+    template <typename I>
+    inline void Context::UnRegistry()
     {
-        NEPTUNE_PROFILE_ZONE
-
-        const auto position = static_cast<uint8_t>(T::Type);
+        const auto position = static_cast<uint8_t>(I::E);
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is unregistry.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered, can not be unregister")
+
             return;
         }
 
         m_Infrastructures[position].reset();
-        m_Infrastructures[position] = nullptr;
     }
 
-    template<typename T>
-    T* Context::Get()
+    inline void Context::UnRegistry()
     {
-        NEPTUNE_PROFILE_ZONE
+        for (int i = static_cast<int>(EInfrastructure::Count) - 1; i >= 0; i--)
+        {
+            if (!m_Infrastructures[i])
+            {
+                NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered, can not be unregister")
 
-        const auto position = static_cast<uint8_t>(T::Type);
+                continue;
+            }
+
+            m_Infrastructures[i].reset();
+        }
+    }
+
+    template<typename I>
+    SP<typename I::T> Context::Get()
+    {
+        const auto position = static_cast<uint8_t>(I::E);
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is unregistry.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered, can not be got")
+
             return nullptr;
         }
 
-        return static_cast<T*>(m_Infrastructures[position].get());
+        return std::dynamic_pointer_cast<typename I::T>(m_Infrastructures[position]);
+    }
+
+    template<typename I>
+    bool Context::Has() const
+    {
+        const auto position = static_cast<uint8_t>(I::E);
+
+        return m_Infrastructures[position] != nullptr;
     }
 
 }
-
-#endif

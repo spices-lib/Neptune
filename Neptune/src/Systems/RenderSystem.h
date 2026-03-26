@@ -45,6 +45,17 @@ namespace Neptune {
         */
         void Tick() override;
         
+        void Wait() override;
+        void OnEvent(Event& event) override;
+
+    private:
+
+        bool OnEngineEvent(class EngineEvent& e);
+
+        bool OnSlateResizeEvent(class SlateResizeEvent& e);
+
+        bool OnWindowResizeOverEvent(class WindowResizeOverEvent& e);
+
     private:
 
         /**

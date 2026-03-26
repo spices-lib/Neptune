@@ -1,75 +1,48 @@
-/**
-* @file Instance.h.
-* @brief The Instance Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/Vulkan/Unit/Instance.h"
+#include "Functions.h"
+#include <vector>
 
 namespace Neptune::Vulkan {
 
-	/**
-	* @brief Instance Class.
-	*/
+	using IInstance = InfrastructureClass<class Instance, EInfrastructure::Instance>;
+
 	class Instance : public Infrastructure
 	{
 	public:
 
-		/**
-		* @brief Mark as Instance Infrastructure Type.
-		*/
-		static constexpr EInfrastructure Type = EInfrastructure::Instance;
+		Instance(Context& context, EInfrastructure e);
 
-	public:
+		~Instance() override;
 
-		/**
-		* @brief Constructor Function.
-		* 
-		* @param[in] context The global Vulkan Context.
-		*/
-		Instance(Context& context);
-
-		/**
-		* @brief Destructor Function.
-		*/
-		~Instance() override = default;
-
-		/**
-		* @brief Get Row Vulkan Infrastructure.
-		* 
-		* @return Returns Row Vulkan Infrastructure.
-		*/
-		VkInstance& Handle() { return m_Handle; }
+		const Unit::Instance::Handle& Handle() { return m_Instance.GetHandle(); }
+		VkDebugUtilsMessengerEXT& DebugMessenger() { return m_DebugMessenger; }
 
 	private:
 
-		/**
-		* @brief Create VkInstance.
-		*/
 		void Create();
 
+		void GetExtensionRequirements();
+
+		bool CheckExtensionRequirementsSatisfied();
+
+		void GetLayerRequirements();
+
+		bool ChecklayerRequirementsSatisfied();
+
+		void SetVulkanDebugCallbackFuncPointer();
+
+		void FillDebugMessengerCreateInfo();
+
 	private:
 
-		/**
-		* @brief VkInstance
-		*/
-		VkInstance m_Handle = nullptr;
-
+		Unit::Instance m_Instance;
+		std::vector<const char*> m_ExtensionProperties;
+		std::vector<const char*> m_LayerProperties;
+		VkDebugUtilsMessengerEXT m_DebugMessenger{};
+		VkDebugUtilsMessengerCreateInfoEXT m_DebugMessengerCreateInfo{};
 	};
 
-	template<>
-	inline void Infrastructure::Destroy(Instance* infrastructure)
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		vkDestroyInstance(infrastructure->Handle(), nullptr);
-		infrastructure->Handle() = nullptr;
-	}
-
 }
-
-#endif

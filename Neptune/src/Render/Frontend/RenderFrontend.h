@@ -7,9 +7,20 @@
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
+#include "Core/Event/Event.h"
+#include "RHI/RHI.h"
 #include "Enum.h"
 
+#include <vector>
+#include <any>
+#include <glm/glm.hpp>
+
 namespace Neptune {
+
+    namespace Render {
+
+        class Pass;
+    }
 
     /**
     * @brief RenderFrontend Class.
@@ -35,6 +46,9 @@ namespace Neptune {
         */
         ~RenderFrontend() override = default;
 
+        virtual void OnInitialize();
+        virtual void OnShutDown();
+
         /**
         * @brief Interface of Begin a frame.
         */
@@ -46,9 +60,18 @@ namespace Neptune {
         virtual void EndFrame() = 0;
 
         /**
-        * @brief Interface of Render a frame.
+        * @brief Render a frame.
         */
-        virtual void RenderFrame() = 0;
+        void RenderFrame();
+
+        virtual void Wait() = 0;
+        virtual void InitSlateModule() = 0;
+        virtual void ShutdownSlateModule() = 0;
+        virtual std::any CreateRHI(RHI::ERHI e, void* payload) = 0;
+
+        void ConstructDefaultPasses(const glm::vec2& rtSize = { 100.0f, 100.0f });
+
+        void ConstructSlatePass();
 
     protected:
 
@@ -59,11 +82,19 @@ namespace Neptune {
         */
         RenderFrontend(RenderBackendEnum backend) : m_RenderBackendEnum(backend) {}
 
+        virtual void RecreateSwapChain();
+
+    private:
+
+        void AddPass(SP<Render::Pass> pass);
+
     protected:
 
         /**
         * @brief RenderBackendEnum.
         */
         RenderBackendEnum m_RenderBackendEnum;
+
+        std::vector<SP<Render::Pass>> m_RenderPasses;
     };
 }

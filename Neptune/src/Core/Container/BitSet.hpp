@@ -10,7 +10,7 @@
 #include <bitset>
 #include <shared_mutex>
 
-namespace Neptune {
+namespace Neptune::Container {
 
     /**
     * @brief Bit Set.
@@ -32,7 +32,7 @@ namespace Neptune {
         /**
         * @brief Stoted bitset.
         */
-        std::bitset<static_cast<size_t>(T::ALL)> m_Bits{};
+        std::bitset<static_cast<size_t>(T::Count)> m_Bits{};
 
         /**
         * @brief Mutex.
@@ -245,7 +245,7 @@ namespace Neptune {
         */
         bool Test(T bit) const
         {
-            if (bit == T::ALL)
+            if (bit == T::Count)
             {
                 return !None();
             }
@@ -274,7 +274,7 @@ namespace Neptune {
         */
         void Reset(T bit)
         {
-            if (bit == T::ALL)
+            if (bit == T::Count)
             {
                 Reset();
             }

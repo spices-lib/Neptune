@@ -1,72 +1,33 @@
-/**
-* @file CommandPool.h.
-* @brief The CommandPool Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/Vulkan/Unit/CommandPool.h"
 
 namespace Neptune::Vulkan {
 
-	/**
-	* @brief CommandPool Class.
-	*/
+	using IGraphicCommandPool     = InfrastructureClass<class CommandPool, EInfrastructure::GraphicCommandPool>;
+	using IComputeCommandPool     = InfrastructureClass<class CommandPool, EInfrastructure::ComputeCommandPool>;
+
 	class CommandPool : public Infrastructure
 	{
 	public:
 
-		/**
-		* @brief Mark as CommandPool Infrastructure Type.
-		*/
-		static constexpr EInfrastructure Type = EInfrastructure::CommandPool;
+		CommandPool(Context& context, EInfrastructure e);
 
-	public:
-
-		/**
-		* @brief Constructor Function.
-		*
-		* @param[in] context The global VulkanContext.
-		*/
-		CommandPool(Context& context);
-
-		/**
-		* @brief Destructor Function.
-		*/
 		~CommandPool() override = default;
 
-		/**
-		* @brief Get Row Vulkan Infrastructure.
-		*
-		* @return Returns Row Vulkan Infrastructure.
-		*/
-		VkCommandPool& Handle() { return m_Handle; }
+		const Unit::CommandPool::Handle& Handle() { return m_CommandPool.GetHandle(); }
 
 	private:
 
-		/**
-		* @brief Create VkInstance.
-		*/
 		void Create();
 
+		uint32_t GetQueueFamily();
+
 	private:
 
-		/**
-		* @brief VkCommandPool.
-		*/
-		VkCommandPool m_Handle = nullptr;
+		Unit::CommandPool m_CommandPool;
 
 	};
 
-	template<>
-	inline void Infrastructure::Destroy(CommandPool* infrastructure)
-	{
-
-	}
-
 }
-
-#endif

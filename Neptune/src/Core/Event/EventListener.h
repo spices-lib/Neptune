@@ -100,7 +100,7 @@ namespace Neptune {
         /**
         * @brief Interested event type.
         */
-        BitSet<EventType> m_Interested{};
+        Container::BitSet<EventType> m_Interested{};
     };
 
     template<typename T>

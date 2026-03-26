@@ -1,113 +1,96 @@
-/**
-* @file PhysicalDevice.h.
-* @brief The PhysicalDevice Class Definitions.
-* @author Spices.
-*/
-
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/Vulkan/Unit/PhysicalDevice.h"
+#include <vector>
+#include <optional>
+#include <GLFW/glfw3.h>
 
 namespace Neptune::Vulkan {
 	
-	/**
-	* @brief PhysicalDevice Class.
-	*/
+	struct QueueFamilies
+	{
+		std::optional<uint32_t> graphic;
+		std::optional<uint32_t> present;
+		std::optional<uint32_t> transfer;
+		std::optional<uint32_t> compute;
+		std::optional<uint32_t> videoEncode;
+		std::optional<uint32_t> videoDecode;
+		std::optional<uint32_t> opticalFlow;
+
+		bool isComplete() const
+		{
+			return graphic && present && transfer && compute && videoEncode && videoDecode && opticalFlow;
+		}
+	};
+
+	struct SwapChainProperty
+	{
+		VkSurfaceCapabilitiesKHR        capabilities;
+		std::vector<VkSurfaceFormatKHR> formats;
+		std::vector<VkPresentModeKHR>   presentModes;
+		VkSurfaceFormatKHR              format;
+		VkPresentModeKHR                presentMode;
+		VkExtent2D                      surfaceSize;
+		VkExtent2D                      viewPortSize = { 1280, 960 };
+	};
+
+	struct VideoSessionProperty
+	{
+		VkVideoCapabilitiesKHR          capabilities;
+		VkFormat                        dpbFormat;
+		VkFormat                        dstFormat;
+	};
+
+	using IPhysicalDevice = InfrastructureClass<class PhysicalDevice, EInfrastructure::PhysicalDevice>;
+
 	class PhysicalDevice : public Infrastructure
 	{
 	public:
 
-		/**
-		* @brief Mark as PhysicalSurface Infrastructure Type.
-		*/
-		static constexpr EInfrastructure Type = EInfrastructure::PhysicalSurface;
+		PhysicalDevice(Context& context, EInfrastructure e);
 
-	public:
-
-		/**
-		* @brief Constructor Function.
-		*
-		* @param[in] context The global Vulkan Context.
-		*/
-		PhysicalDevice(Context& context);
-
-		/**
-		* @brief Destructor Function.
-		*/
 		~PhysicalDevice() override = default;
 
-		/**
-		* @brief Get Row Vulkan Infrastructure.
-		*
-		* @return Returns Row Vulkan Infrastructure.
-		*/
-		VkPhysicalDevice& Handle() { return m_Handle; }
+		const Unit::PhysicalDevice::Handle& Handle() const { return m_PhysicalDevice.GetHandle(); }
+
+		const std::vector<const char*>& GetExtensionRequirements();
+
+		const QueueFamilies& GetQueueFamilies() const { return m_QueueFamilies; }
+
+		const VkPhysicalDeviceProperties& GetProperties() const { return m_Properties; };
+
+		const SwapChainProperty& GetSwapChainProperty() { return m_SwapChainProperty; }
+
+		VideoSessionProperty QueryVideoSessionProperty(const VkVideoProfileInfoKHR& videoProfile);
+
+		bool IsOpticalFlowSessionSupport(VkFormat inputFormat, VkFormat outFormat);
+
+		const SwapChainProperty& QuerySwapChainProperty(GLFWwindow* window);
 
 	private:
 
-		/**
-		* @brief Create VkInstance.
-		*/
 		void Create();
 
-	private:
-
-		/**
-		* @brief Check all Extension we need meet.
-		* 
-		* @param[in] device VkPhysicalDevice.
-		* 
-		* @return Returns true if all Extension we need meet.
-		*/
 		bool IsExtensionMeetDemand(const VkPhysicalDevice& device);
 
-		/**
-		* @brief Check all Property we need meet.
-		* 
-		* @param[in] device VkPhysicalDevice.
-		* 
-		* @return Returns true if all Property we need meet.
-		*/
 		bool IsPropertyMeetDemand(const VkPhysicalDevice& device);
 
-		/**
-		* @brief Check all  Feature we need meet.
-		* 
-		* @param[in] device VkPhysicalDevice.
-		* 
-		* @return Returns true if all Feature we need meet.
-		*/
 		bool IsFeatureMeetDemand(const VkPhysicalDevice& device);
 
-		/**
-		* @brief Check all Queue we need meet.
-		* 
-		* @param[in] device VkPhysicalDevice.
-		* @param[in] surface VkSurfaceKHR.
-		* 
-		* @return Returns true if all Extension we need meet.
-		*/
 		bool IsQueueMeetDemand(const VkPhysicalDevice& device, const VkSurfaceKHR& surface);
+
+		bool IsOpticalFlowSessionSupport(VkFormat inputformat, VkOpticalFlowUsageFlagsNV usage);
+
+		std::vector<VkFormat> GetVideoFormats(VkImageUsageFlags imageUsage, const std::vector<VkVideoProfileInfoKHR>& videoProfile);
 
 	private:
 
-		/**
-		* @brief VkPhysicalDevice.
-		*/
-		VkPhysicalDevice m_Handle = nullptr;
-
+		Unit::PhysicalDevice m_PhysicalDevice;
+		std::vector<const char*> m_ExtensionProperties;
+		QueueFamilies m_QueueFamilies;
+		VkPhysicalDeviceProperties m_Properties;
+		SwapChainProperty m_SwapChainProperty;
 	};
 
-	template<>
-	inline void Infrastructure::Destroy(PhysicalDevice* infrastructure)
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		infrastructure->Handle() = nullptr;
-	}
-
 }
-
-#endif

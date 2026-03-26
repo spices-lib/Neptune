@@ -43,11 +43,6 @@ namespace Neptune::WebGPU {
         */
         void EndFrame() override;
 
-        /**
-        * @brief Interface of Render a frame.
-        */
-        void RenderFrame() override;
-
     private:
 
         /**

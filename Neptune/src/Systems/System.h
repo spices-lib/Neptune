@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
+#include "Core/Event/Event.h"
 
 namespace Neptune {
 
@@ -43,5 +44,8 @@ namespace Neptune {
         */
         virtual void Tick() = 0;
 
+        virtual void Wait() {}
+
+        virtual void OnEvent(Event& event) {}
     };
 }

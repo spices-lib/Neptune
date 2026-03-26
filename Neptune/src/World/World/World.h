@@ -16,6 +16,11 @@ namespace Neptune {
     class Scene;
     class Level;
 
+    namespace Slate {
+
+        class Slate;
+    }
+
     /**
     * @brief World Class
     * In program, all elements we see is a world.
@@ -46,13 +51,17 @@ namespace Neptune {
         /**
         * @brief Interface of World attached to Application.
         */
-        virtual void OnAttached() = 0;
+        virtual void OnAttached();
 
         /**
         * @brief Interface of World detached to Application.
         */
-        virtual void OnDetached() = 0;
+        virtual void OnDetached();
         
+        void OnLayout();
+
+        void OnEvent(Event& e);
+
         /**
         * @brief Get World activate Scenes.
         * 
@@ -69,12 +78,17 @@ namespace Neptune {
         */
         bool TestFlag(WorldMarkBit bit) const { return m_Flag.Test(bit); }
 
+        template<typename T, typename... Args>
+        void RegistrySlate(Args&&... args);
+
     protected:
         
         /**
         * @brief Interface of World UI Layout, as View in MVP.
         */
-        virtual void Layout() = 0;
+        virtual void Layout();
+
+        void OnEvent(Event& e);
 
         /**
         * @brief Create Scene with a level to World.
@@ -96,6 +110,8 @@ namespace Neptune {
         */
         Scene* CreateScene(const std::string& name);
         
+        void DestroyScene();
+
         /**
         * @brief Set WorldMarkBit with value.
         *
@@ -119,8 +135,9 @@ namespace Neptune {
         /**
         * @brief WorldMark Flag.
         */
-        BitSet<WorldMarkBit> m_Flag;
+        Container::BitSet<WorldMarkBit> m_Flag;
     
+        std::vector<SP<Slate::Slate>> m_Slates;
     };
 
     /**
@@ -130,6 +147,11 @@ namespace Neptune {
     */
     SP<World> CreateWorld();
     
+    template<typename T, typename ...Args>
+    inline void World::RegistrySlate(Args && ...args)
+    {
+        m_Slates.emplace_back(CreateSP<T>(std::forward<Args>(args)...));
+    }
 }
 
 /**

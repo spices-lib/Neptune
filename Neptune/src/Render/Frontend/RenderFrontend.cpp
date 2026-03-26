@@ -17,32 +17,132 @@
 #include "Render/Backend/OpenGL/RenderBackend.h"
 #endif
 
+#include "Render/FrontEnd/Pass/BasePass.h"
+#include "Render/FrontEnd/Pass/SlatePass.h"
+#include "Render/FrontEnd/Pass/PrePass.h"
+#include "Render/FrontEnd/Pass/FPSPass.h"
+#include "Window/Window.h"
+#include "Core/Event/WindowEvent.h"
+#include "Render/FrontEnd/Pass/Pass.h"
+#include "Render/Frontend/RHI/RHI.h"
+
+#include <algorithm>
+
 namespace Neptune {
 
     SP<RenderFrontend> RenderFrontend::Create(RenderBackendEnum backend)
     {
         NEPTUNE_PROFILE_ZONE
 
+        SP<RenderFrontend> sp = nullptr;
+
         switch(backend)
         {
 #ifdef NP_PLATFORM_EMSCRIPTEN
-            case RenderBackendEnum::WebGPU: return CreateSP<WebGPU::RenderBackend>(backend);
-            case RenderBackendEnum::WebGL:  return CreateSP<WebGL::RenderBackend>(backend);
+            case RenderBackendEnum::WebGPU: sp = CreateSP<WebGPU::RenderBackend>(backend) break;
+            case RenderBackendEnum::WebGL:  sp = CreateSP<WebGL::RenderBackend>(backend)  break;
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-            case RenderBackendEnum::Vulkan: return CreateSP<Vulkan::RenderBackend>(backend);
-            case RenderBackendEnum::OpenGL: return CreateSP<OpenGL::RenderBackend>(backend);
+            case RenderBackendEnum::Vulkan: sp = CreateSP<Vulkan::RenderBackend>(backend) break;
+            case RenderBackendEnum::OpenGL: sp = CreateSP<OpenGL::RenderBackend>(backend) break;
 #endif
             
             default:
             {
                 NEPTUNE_CORE_CRITICAL("Not Supported Render Backend.")
-                break;
+                return nullptr;
             }
         }
 
-        return nullptr;
+        RHI::RHIDelegate::SetCreator([p = sp.get()](RHI::ERHI e, void* payload) { return p->CreateRHI(e, payload); });
+
+        sp->OnInitialize();
+
+        return sp;
     }
 
+    void RenderFrontend::OnInitialize()
+    {
+        ConstructDefaultPasses();
+    }
+
+    void RenderFrontend::OnShutDown()
+    {
+        RHI::RHIDelegate::SetCreator(nullptr);
+
+        m_RenderPasses = {};
+    }
+
+    void RenderFrontend::RenderFrame(Scene* scene)
+    {
+        std::for_each(m_RenderPasses.begin(), m_RenderPasses.end(), [&](const auto& renderPass) {
+            renderPass->OnRender(scene);
+        });
+    }
+
+    void RenderFrontend::RecreateSwapChain()
+    {
+        auto glfwWindow = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
+
+        int width = 0, height = 0;
+        glfwGetFramebufferSize(glfwWindow, &width, &height);
+
+        while (width == 0 || height == 0)
+        {
+            glfwGetFramebufferSize(glfwWindow, &width, &height);
+            glfwWaitEvents();
+        }
+
+        WindowResizeOverEvent event(width, height);
+
+        Event::GetEventCallbackFn()(event);
+    }
+
+    void RenderFrontend::ConstructDefaultPasses(const glm::vec2& rtSize)
+    {
+        m_RenderPasses = {};
+
+        {
+            auto pass = CreateSP<Render::PrePass>();
+            pass->SetRTSize(rtSize);
+
+            AddPass(pass);
+        }
+
+        {
+            auto pass = CreateSP<Render::BasePass>();
+            pass->SetRTSize(rtSize);
+
+            AddPass(pass);
+        }
+
+        {
+            auto pass = CreateSP<Render::FPSPass>();
+
+            AddPass(pass);
+        }
+
+        {
+            auto pass = CreateSP<Render::SlatePass>();
+
+            AddPass(pass);
+        }
+    }
+
+    void RenderFrontend::ConstructSlatePass()
+    {
+        m_RenderPasses.pop_back();
+
+        auto slatePass = CreateSP<Render::SlatePass>();
+
+        AddPass(slatePass);
+    }
+
+    void RenderFrontend::AddPass(SP<Render::Pass> pass)
+    {
+        pass->OnConstruct();
+
+        m_RenderPasses.emplace_back(pass);
+    }
 }

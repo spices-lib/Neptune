@@ -100,7 +100,7 @@ namespace Neptune::WebGPU {
         wgpuCommandBufferRelease(commandBuffer);
     }
 
-    void RenderBackend::RenderFrame()
+/*    void RenderBackend::RenderFrame()
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -136,7 +136,7 @@ namespace Neptune::WebGPU {
 
         wgpuTextureViewRelease(color_attachments.view);
         wgpuRenderPassEncoderRelease(pass);
-    }
+    }*/
 }
 
 #endif

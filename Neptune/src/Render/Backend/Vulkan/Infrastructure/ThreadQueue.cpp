@@ -1,49 +1,20 @@
-/**
-* @file ThreadQueue.cpp.
-* @brief The ThreadQueue Class Implementation.
-* @author Spices.
-*/
-
 #include "Pchheader.h"
-
-#ifdef NP_PLATFORM_WINDOWS
-
 #include "ThreadQueue.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::Vulkan {
 
-    ThreadQueue::ThreadQueue(Context& context)
-        : Infrastructure(context)
+    ThreadQueue::ThreadQueue(Context& context, EInfrastructure e)
+        : Infrastructure(context, e)
+    {}
+
+    void ThreadQueue::Add(VkQueue handle)
     {
-        NEPTUNE_PROFILE_ZONE
+        auto queue = CreateSP<Unit::Queue>();
+        queue->SetHandle(handle);
 
-        Create();
+        m_Queues.Push(queue);
+
+        DEBUGUTILS_SETOBJECTNAME(*queue, ToString())
     }
-
-    void ThreadQueue::Submit(VkCommandBuffer commandBuffer) const
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        VkSubmitInfo                     submitInfo{};
-		submitInfo.sType               = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-		submitInfo.commandBufferCount  = 1;
-		submitInfo.pCommandBuffers     = &commandBuffer;
-
-		VK_CHECK(vkQueueSubmit(m_Handle, 1, &submitInfo, VK_NULL_HANDLE))
-    }
-
-    void ThreadQueue::Wait() const
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        VK_CHECK(vkQueueWaitIdle(m_Handle))
-    }
-
-    void ThreadQueue::Create()
-    {
-
-    }
-
 }
-
-#endif

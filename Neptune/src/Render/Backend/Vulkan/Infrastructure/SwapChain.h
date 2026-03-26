@@ -1,0 +1,40 @@
+#pragma once
+#include "Core/Core.h"
+#include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
+#include "Render/Backend/Vulkan/Infrastructure/Device.h"
+#include "Render/Backend/Vulkan/Unit/SwapChain.h"
+#include "Render/Backend/Vulkan/Resource/Image.h"
+#include <GLFW/glfw3.h>
+
+namespace Neptune::Vulkan {
+
+	using ISwapChain = InfrastructureClass<class SwapChain, EInfrastructure::SwapChain>;
+
+	class SwapChain : public Infrastructure
+	{
+	public:
+
+		SwapChain(Context& context, EInfrastructure e, GLFWwindow* window, uint32_t count);
+
+		~SwapChain() override = default;
+
+		const Unit::SwapChain::Handle& Handle() const { return m_SwapChain->GetHandle(); }
+
+		bool GetNextImage(VkSemaphore semaphore, uint32_t& imageIndex) const;
+
+		const Unit::ImageView::Handle& GetView(uint32_t index) const { return m_SwapChainImage[index]->GetView(); }
+
+		bool Present(VkPresentInfoKHR& info);
+
+	private:
+
+		void Create(GLFWwindow* window, uint32_t count);
+
+	private:
+
+		SP<Unit::SwapChain> m_SwapChain;
+		std::vector<SP<Image>> m_SwapChainImage;
+
+	};
+
+}
