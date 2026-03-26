@@ -1,0 +1,72 @@
+/**
+* @file Log.cpp.
+* @brief The Log Class Implementation.
+* @author Spices.
+*/
+
+#include "Pchheader.h"
+#include "LogImpl.h"
+#include "Console.h"
+
+#include <spdlog/sinks/stdout_color_sinks.h>
+
+#include <time.h>
+
+namespace Neptune {
+
+    LogImpl::LogImpl() : Log()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        spdlog::set_pattern("[%Y-%m-%d %H:%M:%S] [%n] [%l] %v");
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+        spdlog::flush_every(std::chrono::seconds(5));
+#endif
+
+        auto max_size = 1048576 * 5;
+        auto max_files = 3;
+
+        // console log.
+        const auto ide_console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        ide_console_sink->set_level(spdlog::level::trace);
+
+        const auto console_sink = Console::Registry("Console");
+
+        // console slate log.
+        std::vector<spdlog::sink_ptr> sinks;
+        sinks.push_back(ide_console_sink);
+        sinks.push_back(console_sink);
+
+        m_CoreLogger = std::make_shared<spdlog::logger>("Engine", begin(sinks), end(sinks));
+        m_CoreLogger->set_level(spdlog::level::trace);
+
+        m_ClientLogger = std::make_shared<spdlog::logger>("Game", begin(sinks), end(sinks));
+        m_ClientLogger->set_level(spdlog::level::trace);
+
+        m_IsInitialized = true;
+    }
+
+    LogImpl::~LogImpl ()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        m_IsInitialized = false;
+
+        m_CoreLogger.reset();
+        m_ClientLogger.reset();
+        spdlog::drop_all();
+    }
+
+    void LogImpl::CoreTrace     (const std::string& msg) { m_CoreLogger->trace   (msg); }
+    void LogImpl::CoreInfo      (const std::string& msg) { m_CoreLogger->info    (msg); }
+    void LogImpl::CoreWarn      (const std::string& msg) { m_CoreLogger->warn    (msg); }
+    void LogImpl::CoreError     (const std::string& msg) { m_CoreLogger->error   (msg); }
+    void LogImpl::CoreCritical  (const std::string& msg) { m_CoreLogger->critical(msg); }
+
+    void LogImpl::ClientTrace   (const std::string& msg) { m_CoreLogger->trace   (msg); }
+    void LogImpl::ClientInfo    (const std::string& msg) { m_CoreLogger->info    (msg); }
+    void LogImpl::ClientWarn    (const std::string& msg) { m_CoreLogger->warn    (msg); }
+    void LogImpl::ClientError   (const std::string& msg) { m_CoreLogger->error   (msg); }
+    void LogImpl::ClientCritical(const std::string& msg) { m_CoreLogger->critical(msg); }
+}
