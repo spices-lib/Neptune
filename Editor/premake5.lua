@@ -43,6 +43,7 @@ project "Editor"
 		"%{IncludeDir.Neptune}",                              -- Engine Source Folder.
 		"src",                                                -- UnitTest Source Folder.
 		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
+		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
 		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
 		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.

@@ -132,8 +132,7 @@ project "Neptune"
 			"ImGui_OpenGL",                       -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 			"Glad",                               -- Dependency: Glad
-			"tracy",                              -- Dependency: tracy
-			"LuaLibrary",                         -- Dependency: LuaLibrary     
+			"tracy",                              -- Dependency: tracy  
 		}
 
 		-- The Solution build options

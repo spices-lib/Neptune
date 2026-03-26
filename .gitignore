@@ -19,20 +19,20 @@
 *.vcxproj.filters
 *package-lock.json
 
-/Engine/*.json
+/Neptune/*.json
 /Editor/*.json
 /Runtime/*.json
 /UnitTest/*.json
 *.log
 
 Makefile
-/Engine/Makefile
+/Neptune/Makefile
 /Editor/Makefile
 /Runtime/Makefile
 /UnitTest/Makefile
 
 *.xcworkspace
-/Engine/*.xcodeproj
+/Neptune/*.xcodeproj
 /Editor/*.xcodeproj
 /Runtime/*.xcodeproj
 /UnitTest/*.xcodeproj
@@ -47,20 +47,20 @@ Makefile
 /Nepnep/package-lock.json
 /Nepnep/prisma/migrations
 
-/Engine/vendor/Glad/bin
-/Engine/vendor/Glad/bin-int
-/Engine/vendor/Glad/*.vcxproj
-/Engine/vendor/Glad/*.vcxproj.filters
-/Engine/vendor/Glad/*.xcodeproj
+/Neptune/vendor/Glad/bin
+/Neptune/vendor/Glad/bin-int
+/Neptune/vendor/Glad/*.vcxproj
+/Neptune/vendor/Glad/*.vcxproj.filters
+/Neptune/vendor/Glad/*.xcodeproj
 
-/Engine/vendor/emdawnwebgpu/__pycache__
+/Neptune/vendor/emdawnwebgpu/__pycache__
 
-/Engine/vendor/Lua/bin
-/Engine/vendor/Lua/bin-int
-/Engine/vendor/Lua/*.vcxproj
-/Engine/vendor/Lua/*.vcxproj.filters
-/Engine/vendor/Lua/*.make
-/Engine/vendor/Lua/*.xcodeproj
+/Neptune/vendor/Lua/bin
+/Neptune/vendor/Lua/bin-int
+/Neptune/vendor/Lua/*.vcxproj
+/Neptune/vendor/Lua/*.vcxproj.filters
+/Neptune/vendor/Lua/*.make
+/Neptune/vendor/Lua/*.xcodeproj
 
 /Scripts/BuildDependencies/__pycache__
 /Scripts/BuildSystem/__pycache__

@@ -14,7 +14,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::WebGPU);
+        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::Vulkan);
     }
 
     void RHISystem::OnSystemShutDown()

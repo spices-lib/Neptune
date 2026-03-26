@@ -9,7 +9,6 @@
 #include <World/Entity/Entity.h>
 #include <World/Component/TransformComponent.h>
 #include <World/Component/ScriptComponent.h>
-#include <Scripts/DynamicScripts/Lua/LuaScript.h>
 
 namespace Neptune::Editor {
 
@@ -36,9 +35,6 @@ namespace Neptune::Editor {
             auto entity = scene->Create("cube");
             entity.AddComponent<TransformComponent>();
             auto& comp = entity.AddComponent<ScriptComponent>();
-
-            auto script = CreateSP<Neptune::Lua::LuaScript>("E:/OpenGLProjects/Neptune/NeptuneEngine/assets/Scripts/Lua/main.lua");
-            comp.AddScript(script);
         }
 
         {
