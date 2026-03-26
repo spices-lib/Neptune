@@ -34,6 +34,7 @@ namespace Neptune {
 		* @brief Push a system to this manager.
 		* 
 		* @tparam T Specific system Class.
+		* 
 		* @return Returns the SystemManager.
 		*/
         template<typename T, typename ...Args>

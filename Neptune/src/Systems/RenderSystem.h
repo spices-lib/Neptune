@@ -10,6 +10,8 @@
 
 namespace Neptune {
 
+    class RenderFrontend;
+    
     /**
     * @brief RenderSystem Class.
     * This class defines the RenderSystem behaves.
@@ -31,16 +33,23 @@ namespace Neptune {
         /**
         * @brief Interface of system initialize.
         */
-        void OnSystemInitialize() override {}
+        void OnSystemInitialize() override;
 
         /**
         * @brief Interface of system shutdown.
         */
-        void OnSystemShutDown() override {}
+        void OnSystemShutDown() override;
 
         /**
         * @brief Interface of system tick run.
         */
-        void Tick() override {}
+        void Tick() override;
+        
+    private:
+
+        /**
+        * @brief Render Frontend.
+        */
+        SP<RenderFrontend> m_RenderFrontend;
     };
 }

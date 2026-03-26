@@ -20,8 +20,11 @@
 
 namespace Neptune {
 
-    static UP<Application> S_Instance = nullptr;
-
+    namespace {
+        
+        UP<Application> S_Instance = nullptr;
+    }
+    
     Application& Application::Instance()
     {
         NEPTUNE_PROFILE_ZONE
@@ -56,7 +59,7 @@ namespace Neptune {
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-        m_Window = Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW, RenderBackendEnum::OpenGL).get();
+        m_Window = Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW, RenderBackendEnum::Vulkan).get();
 #endif
 
         m_SystemManager = CreateUP<SystemManager>();
@@ -71,8 +74,6 @@ namespace Neptune {
     Application::~Application()
     {
         NEPTUNE_PROFILE_ZONE
-
-        m_World.reset();
 
         m_SystemManager->PopAllSystems();
 

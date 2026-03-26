@@ -24,6 +24,7 @@ namespace Neptune::Vulkan {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] backend RenderBackendEnum.
         */
         RenderBackend(RenderBackendEnum backend);

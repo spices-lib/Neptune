@@ -138,7 +138,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~WindowResizeOverEvent() override = default;
+        ~WindowResizeOverEvent() override = default;
 
         /**
         * @brief Get New Windows Width.

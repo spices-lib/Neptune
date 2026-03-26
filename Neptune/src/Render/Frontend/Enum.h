@@ -12,16 +12,16 @@ namespace Neptune {
     /**
     * @brief Enum of Render Backend.
     */
-    enum class RenderBackendEnum
+    enum class RenderBackendEnum : uint8_t
     {
-        None = 0,
-        WebGL = 1,
-        WebGPU = 2,
-        OpenGL = 3,
-        Direct3D11 = 4,
-        Direct3D12 = 5,
-        Vulkan = 6,
-        Metal = 7
+        None        = 0,
+        WebGL       = 1,
+        WebGPU      = 2,
+        OpenGL      = 3,
+        Direct3D11  = 4,
+        Direct3D12  = 5,
+        Vulkan      = 6,
+        Metal       = 7
     };
 
 }

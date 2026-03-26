@@ -10,10 +10,12 @@
 /**
 * @brief Main Function.
 */
-int main() {
+inline int main() {
 
     auto& engine = Neptune::Application::Instance();
+    
     engine.Run();
+    
     Neptune::Application::Destroy();
 
     return 0;

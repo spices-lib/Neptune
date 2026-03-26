@@ -6,30 +6,8 @@
 
 #include "Pchheader.h"
 #include "RHISystem.h"
-#include "Render/Frontend/RenderFrontend.h"
 
 namespace Neptune {
-
-    void RHISystem::OnSystemInitialize()
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        m_RenderFrontend = RenderFrontend::Create(RenderBackendEnum::Vulkan);
-    }
-
-    void RHISystem::OnSystemShutDown()
-    {
-
-    }
-
-    void RHISystem::Tick()
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        m_RenderFrontend->BeginFrame();
-        m_RenderFrontend->RenderFrame();
-        m_RenderFrontend->EndFrame();
-    }
 
 
 }

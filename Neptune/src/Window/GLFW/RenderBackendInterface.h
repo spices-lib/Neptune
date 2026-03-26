@@ -101,7 +101,7 @@ namespace Neptune::GLFW {
         * 
         * @param[in] handle GLFWwindow.
         */
-        void SwapBuffers(GLFWwindow* handle) override {};
+        void SwapBuffers(GLFWwindow* handle) override {}
     };
 
 }

@@ -16,6 +16,7 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
         static auto s_World = CreateWorld();
+        
         return s_World;
     }
 
