@@ -1,3 +1,9 @@
+/**
+* @file Sampler.cpp.
+* @brief The Sampler Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Sampler.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	Sampler::~Sampler()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroySampler(m_Device, m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Sampler::CreateSampler(VkDevice device, const VkSamplerCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;

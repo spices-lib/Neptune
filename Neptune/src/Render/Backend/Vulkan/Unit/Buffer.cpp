@@ -1,3 +1,9 @@
+/**
+* @file Buffer.cpp.
+* @brief The Buffer Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Buffer.h"
 #include "Render/Backend/Vulkan/Infrastructure/MemoryAllocator.h"
@@ -6,6 +12,8 @@ namespace Neptune::Vulkan::Unit {
 
 	Buffer::~Buffer()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		if (auto* p = std::get_if<vkAlloc>(&m_Alloc))
@@ -43,6 +51,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void* Buffer::HostMemory() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (auto* p = std::get_if<vkAlloc>(&m_Alloc))
 		{
 			return p->hostMemory;
@@ -59,6 +69,8 @@ namespace Neptune::Vulkan::Unit {
 	
 	void Buffer::CreateBuffer(VkPhysicalDevice physicalDevice, VkDevice device, const VkBufferCreateInfo& info, VkMemoryPropertyFlags properties)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		vkAlloc alloc{};
@@ -127,6 +139,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Buffer::CreateBuffer(VmaAllocator vma, VkDevice device, const VkBufferCreateInfo& info, VkMemoryPropertyFlags properties)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(vma);
 
 		vmaAlloc alloc{};
@@ -167,11 +181,13 @@ namespace Neptune::Vulkan::Unit {
 
 	void Buffer::WriteToBuffer(const void* data, VkDeviceSize size, VkDeviceSize offset)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (auto* p = std::get_if<vkAlloc>(&m_Alloc))
 		{
 			if (!p->hostMemory)
 			{
-				CORE_WARN("Vulkan::Unit::Buffer Property without VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT.");
+				NEPTUNE_CORE_WARN("Vulkan::Unit::Buffer Property without VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT.");
 				return;
 			}
 
@@ -190,7 +206,7 @@ namespace Neptune::Vulkan::Unit {
 		{
 			if (!p->hostMemory)
 			{
-				CORE_WARN("Vulkan::Unit::Buffer Property without VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT.");
+				NEPTUNE_CORE_WARN("Vulkan::Unit::Buffer Property without VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT.");
 				return;
 			}
 
@@ -211,6 +227,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Buffer::Flush(VkDeviceSize size, VkDeviceSize offset)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		size = size == VK_WHOLE_SIZE ? m_Size : size;
 
 		if (auto* p = std::get_if<vkAlloc>(&m_Alloc))

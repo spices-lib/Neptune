@@ -1,3 +1,9 @@
+/**
+* @file CommandPool.cpp.
+* @brief The CommandPool Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "CommandPool.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	CommandPool::~CommandPool()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyCommandPool(m_Device, m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void CommandPool::CreateCommandPool(VkDevice device, const VkCommandPoolCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;

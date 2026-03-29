@@ -1,11 +1,18 @@
+/**
+* @file Shader.cpp.
+* @brief The Shader Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Shader.h"
-#include "..\..\..\..\Resource\Shader\Shader.h"
 
 namespace Neptune::Vulkan::Unit {
 
 	Shader::~Shader()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyShaderModule(m_Device, m_Handle, nullptr);
@@ -13,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Shader::CreateShader(VkDevice device, const VkShaderModuleCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;

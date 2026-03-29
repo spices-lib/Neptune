@@ -1,3 +1,9 @@
+/**
+* @file Image.cpp.
+* @brief The Image Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Image.h"
 #include "Render/Backend/Vulkan/Infrastructure/MemoryAllocator.h"
@@ -6,6 +12,8 @@ namespace Neptune::Vulkan::Unit {
 
 	Image::~Image()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		if (auto* p = std::get_if<vkAlloc>(&m_Alloc))
@@ -29,6 +37,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Image::CreateImage(VkPhysicalDevice physicalDevice, VkDevice device, const VkImageCreateInfo& info, VkMemoryPropertyFlags properties)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		vkAlloc alloc{};
@@ -64,6 +74,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Image::CreateImage(VmaAllocator vma, const VkImageCreateInfo& info, VkMemoryPropertyFlags properties)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(vma);
 
 		vmaAlloc alloc{};

@@ -1,13 +1,23 @@
+/**
+* @file VideoSessionParameters.h.
+* @brief The VideoSessionParameters Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Unit.h"
-#include <array>
+
 #include <vector>
 
 namespace Neptune::Vulkan::Unit {
 
 	constexpr uint32_t MAX_BOUND_MEMORY = 16;
 
+	/**
+	* @brief Vulkan::Unit::VideoSession Class.
+	* This class defines the Vulkan::Unit::VideoSession behaves.
+	*/
 	class VideoSession : public Unit<VkVideoSessionKHR, VkObjectType::VK_OBJECT_TYPE_VIDEO_SESSION_KHR>
 	{
 	public:
@@ -16,24 +26,55 @@ namespace Neptune::Vulkan::Unit {
 
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*/
 		VideoSession() : Unit() {}
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~VideoSession() override;
 
+		/**
+		* @brief Set Functor.
+		* 
+		* @param[in] create PFN_vkCreateVideoSessionKHR.
+		* @param[in] destroy PFN_vkDestroyVideoSessionKHR.
+		* @param[in] bind PFN_vkBindVideoSessionMemoryKHR.
+		*/
 		void SetFunctor(PFN_vkCreateVideoSessionKHR create, PFN_vkDestroyVideoSessionKHR destroy, PFN_vkBindVideoSessionMemoryKHR bind);
 
+		/**
+		* @brief Create VideoSession.
+		*
+		* @param[in] device VkDevice.
+		* @param[in] createInfo VkVideoSessionCreateInfoKHR.
+		*/
 		void CreateVideoSession(VkDevice device, const VkVideoSessionCreateInfoKHR& createInfo);
 
-		const VkDeviceMemory& AllocateMemory(const VkMemoryAllocateInfo& info);
+		/**
+		* @brief Allocate Memory.
+		*
+		* @param[in] info VkMemoryAllocateInfo.
+		* 
+		* @return Returns VkDeviceMemory.
+		*/
+		VkDeviceMemory AllocateMemory(const VkMemoryAllocateInfo& info);
 
+		/**
+		* @brief Bind VideoSession Memory.
+		*
+		* @param[in] infos VkBindVideoSessionMemoryInfoKHR.
+		*/
 		void BindVideoSessionMemory(const std::vector<VkBindVideoSessionMemoryInfoKHR>& infos) const;
 
 	private:
 
-		VkDevice                              m_Device = nullptr;
-		std::vector<VkDeviceMemory>           m_Memories{};
-		PFN_vkCreateVideoSessionKHR           vkCreateVideoSessionKHR = nullptr;
-		PFN_vkDestroyVideoSessionKHR          vkDestroyVideoSessionKHR = nullptr;
-		PFN_vkBindVideoSessionMemoryKHR       vkBindVideoSessionMemoryKHR = nullptr;
+		VkDevice                              m_Device = VK_NULL_HANDLE;                        // @brief VkDevice.
+		std::vector<VkDeviceMemory>           m_Memories{};                                     // @brief VkDeviceMemory.
+		PFN_vkCreateVideoSessionKHR           vkCreateVideoSessionKHR = VK_NULL_HANDLE;         // @brief PFN_vkCreateVideoSessionKHR.
+		PFN_vkDestroyVideoSessionKHR          vkDestroyVideoSessionKHR = VK_NULL_HANDLE;        // @brief PFN_vkDestroyVideoSessionKHR.
+		PFN_vkBindVideoSessionMemoryKHR       vkBindVideoSessionMemoryKHR = VK_NULL_HANDLE;     // @brief PFN_vkBindVideoSessionMemoryKHR.
 	};
 }

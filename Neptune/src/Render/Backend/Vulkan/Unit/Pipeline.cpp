@@ -1,3 +1,9 @@
+/**
+* @file Pipeline.cpp.
+* @brief The Pipeline Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Pipeline.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	Pipeline::~Pipeline()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyPipeline(m_Device, m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Pipeline::CreateGraphicPipeline(VkDevice device, const VkGraphicsPipelineCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;
@@ -21,6 +31,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Pipeline::CreateComputePipeline(VkDevice device, const VkComputePipelineCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;

@@ -1,3 +1,9 @@
+/**
+* @file PipelineLayout.cpp.
+* @brief The PipelineLayout Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "PipelineLayout.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	PipelineLayout::~PipelineLayout()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyPipelineLayout(m_Device, m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void PipelineLayout::CreatePipelineLayout(VkDevice device, const VkPipelineLayoutCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;

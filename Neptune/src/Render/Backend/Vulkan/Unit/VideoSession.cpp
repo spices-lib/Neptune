@@ -1,3 +1,9 @@
+/**
+* @file VideoSession.cpp.
+* @brief The VideoSession Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "VideoSession.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	VideoSession::~VideoSession()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyVideoSessionKHR(m_Device, m_Handle, nullptr);
@@ -17,13 +25,17 @@ namespace Neptune::Vulkan::Unit {
 
 	void VideoSession::SetFunctor(PFN_vkCreateVideoSessionKHR create, PFN_vkDestroyVideoSessionKHR destroy, PFN_vkBindVideoSessionMemoryKHR bind)
 	{
-		vkCreateVideoSessionKHR  = create;
-		vkDestroyVideoSessionKHR = destroy;
-		vkBindVideoSessionMemoryKHR = bind;
+		NEPTUNE_PROFILE_ZONE
+
+		vkCreateVideoSessionKHR      = create;
+		vkDestroyVideoSessionKHR     = destroy;
+		vkBindVideoSessionMemoryKHR  = bind;
 	}
 
 	void VideoSession::CreateVideoSession(VkDevice device, const VkVideoSessionCreateInfoKHR& createInfo)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device && !m_Handle);
 
 		m_Device = device;
@@ -31,8 +43,10 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkCreateVideoSessionKHR(m_Device, &createInfo, nullptr, &m_Handle))
 	}
 
-	const VkDeviceMemory& VideoSession::AllocateMemory(const VkMemoryAllocateInfo& info)
+	VkDeviceMemory VideoSession::AllocateMemory(const VkMemoryAllocateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkDeviceMemory memory = VK_NULL_HANDLE;
 
 		VK_CHECK(vkAllocateMemory(m_Device, &info, nullptr, &memory))
@@ -44,6 +58,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void VideoSession::BindVideoSessionMemory(const std::vector<VkBindVideoSessionMemoryInfoKHR>& infos) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VK_CHECK(vkBindVideoSessionMemoryKHR(m_Device, m_Handle, infos.size(), infos.data()))
 	}
 }

@@ -1,3 +1,9 @@
+/**
+* @file RenderPass.cpp.
+* @brief The RenderPass Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "RenderPass.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	RenderPass::~RenderPass()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyRenderPass(m_Device, m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void RenderPass::CreateRenderPass(VkDevice device, const VkRenderPassCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;

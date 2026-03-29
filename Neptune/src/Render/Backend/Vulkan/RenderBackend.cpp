@@ -103,7 +103,7 @@ namespace Neptune::Vulkan {
 	{
 		return *m_Context;
 	}
-
+	
     void RenderBackend::BeginFrame(Scene* scene)
     {
 		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();

@@ -1,3 +1,9 @@
+/**
+* @file Device.cpp.
+* @brief The Device Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Device.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	Device::~Device()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroyDevice(m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Device::CreateDevice(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo* createInfo)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(physicalDevice && createInfo && !m_Handle);
 
 		VK_CHECK(vkCreateDevice(physicalDevice, createInfo, nullptr, &m_Handle))
@@ -19,6 +29,8 @@ namespace Neptune::Vulkan::Unit {
 
 	VkQueue Device::GetDeviceQueue(uint32_t queueFamilyIndex, uint32_t queueIndex) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkQueue queue{};
 
 		vkGetDeviceQueue(m_Handle, queueFamilyIndex, queueIndex, &queue);
@@ -30,6 +42,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Device::Wait() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VK_CHECK(vkDeviceWaitIdle(m_Handle))
 	}
 }

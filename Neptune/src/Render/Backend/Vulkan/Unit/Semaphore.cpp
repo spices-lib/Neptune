@@ -1,3 +1,9 @@
+/**
+* @file Semaphore.cpp.
+* @brief The Semaphore Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Semaphore.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan::Unit {
 
 	Semaphore::~Semaphore()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (!m_Handle) return;
 
 		vkDestroySemaphore(m_Device, m_Handle, nullptr);
@@ -12,6 +20,8 @@ namespace Neptune::Vulkan::Unit {
 
 	void Semaphore::CreateSemaphore(VkDevice device, const VkSemaphoreCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(device);
 
 		m_Device = device;
