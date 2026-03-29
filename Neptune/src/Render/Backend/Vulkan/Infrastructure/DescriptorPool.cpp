@@ -1,3 +1,9 @@
+/**
+* @file DescriptorPool.cpp.
+* @brief The DescriptorPool Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "DescriptorPool.h"
 #include "Device.h"
@@ -8,11 +14,15 @@ namespace Neptune::Vulkan {
     DescriptorPool::DescriptorPool(Context& context, EInfrastructure e)
         : Infrastructure(context, e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     void DescriptorPool::Create()
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::vector<VkDescriptorPoolSize> poolSizes{};
 
         {
@@ -47,20 +57,13 @@ namespace Neptune::Vulkan {
             poolSizes.emplace_back(poolSize);
         }
 
-        {
-            VkDescriptorPoolSize             poolSize{};
-            poolSize.type                  = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-            poolSize.descriptorCount       = 1000;
-
-            poolSizes.emplace_back(poolSize);
-        }
-
         VkDescriptorPoolCreateInfo           createInfo{};
 		createInfo.sType                   = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
 		createInfo.poolSizeCount           = static_cast<uint32_t>(poolSizes.size());
 		createInfo.pPoolSizes              = poolSizes.data();
 		createInfo.maxSets                 = 1000;
-		createInfo.flags                   = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT | VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT;
+		createInfo.flags                   = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT 
+                                           | VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT;
 
         m_DescriptorPool.CreateDescriptorPool(GetContext().Get<IDevice>()->Handle(), createInfo);
 

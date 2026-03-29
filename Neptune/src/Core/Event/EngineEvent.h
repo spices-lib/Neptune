@@ -47,10 +47,9 @@ namespace Neptune {
             std::stringstream ss;
             ss << "EngineEvent: ";
 
-            if (m_Flag.Test(StopTheEngine))
-            {
-                ss << "StopTheEngine";
-            }
+            if (m_Flag.Test(StopTheEngine))       ss << "StopTheEngine ";
+            if (m_Flag.Test(InitSlateModule))     ss << "InitSlateModule ";
+            if (m_Flag.Test(ShutdownSlateModule)) ss << "ShutdownSlateModule ";
 
             return ss.str();
         }

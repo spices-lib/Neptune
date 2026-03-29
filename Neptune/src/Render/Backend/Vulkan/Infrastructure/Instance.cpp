@@ -1,12 +1,27 @@
+/**
+* @file Instance.cpp.
+* @brief The Instance Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Instance.h"
-#include <set>
-#include <GLFW/glfw3.h>
+#include "Functions.h"
 
 namespace Neptune::Vulkan {
 
 	namespace {
 
+		/**
+		* @brief Debug Callback Functor.
+		* 
+		* @param[in] messageSeverity VkDebugUtilsMessageSeverityFlagBitsEXT.
+		* @param[in] messageType VkDebugUtilsMessageTypeFlagsEXT.
+		* @param[in] pCallbackData VkDebugUtilsMessengerCallbackDataEXT.
+		* @param[in] pUserData Payload.
+		* 
+		* @return Returns resumed.
+		*/
 		VKAPI_ATTR VkBool32 VKAPI_CALL InstanceDebugCallback(
 			VkDebugUtilsMessageSeverityFlagBitsEXT         messageSeverity, 
 			VkDebugUtilsMessageTypeFlagsEXT                messageType, 
@@ -14,6 +29,8 @@ namespace Neptune::Vulkan {
 			void*                                          pUserData
 		)
 		{
+			NEPTUNE_PROFILE_ZONE
+
 			std::stringstream ss;
 
 			ss <<
@@ -36,24 +53,29 @@ namespace Neptune::Vulkan {
 			switch (messageSeverity)
 			{
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
-					CORE_TRACE(ss.str())
+				{
+					NEPTUNE_CORE_TRACE(ss.str())
 					break;
-
+				}
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
-					CORE_INFO(ss.str())
+				{
+					NEPTUNE_CORE_TRACE(ss.str())
 					break;
-
+				}
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
-					CORE_WARN(ss.str())
+				{
+					NEPTUNE_CORE_TRACE(ss.str())
 					break;
-
+				}
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
-					CORE_ERROR(ss.str())
+				{
+					NEPTUNE_CORE_TRACE(ss.str())
 					break;
-			
+				}
 				case VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT:
+				{
 					break;
-			
+				}
 				default:
 					break;
 			}
@@ -66,12 +88,16 @@ namespace Neptune::Vulkan {
     Instance::Instance(Context& context, EInfrastructure e)
         : Infrastructure(context, e)
     {
+		NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
     Instance::~Instance()
     {
-#ifdef PG_DEBUG
+		NEPTUNE_PROFILE_ZONE
+
+#ifdef NEPTUNE_DEBUG
 
 		GetContext().Get<IFunctions>()->vkDestroyDebugUtilsMessengerEXT(Handle(), DebugMessenger(), nullptr);
 
@@ -80,11 +106,13 @@ namespace Neptune::Vulkan {
 
     void Instance::Create()
     {
+		NEPTUNE_PROFILE_ZONE
+
         VkApplicationInfo                          appInfo {};
 		appInfo.sType                            = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-		appInfo.pApplicationName                 = "playground";
+		appInfo.pApplicationName                 = "Neptune";
 		appInfo.applicationVersion               = VK_MAKE_VERSION(1, 0, 0);
-		appInfo.pEngineName                      = "playground";
+		appInfo.pEngineName                      = "Neptune";
 		appInfo.engineVersion                    = VK_MAKE_VERSION(1, 0, 0);
 		appInfo.apiVersion                       = VK_VERSION;
 
@@ -98,7 +126,7 @@ namespace Neptune::Vulkan {
 			std::stringstream ss;
 			ss << "Instance Extension not Satisfied";
 
-			CORE_ERROR(ss.str());
+			NEPTUNE_CORE_ERROR(ss.str());
 			return;
 		}
 
@@ -111,7 +139,7 @@ namespace Neptune::Vulkan {
 			std::stringstream ss;
 			ss << "Instance Layer not Satisfied";
 
-			CORE_ERROR(ss.str());
+			NEPTUNE_CORE_ERROR(ss.str());
 			return;
 		}
 
@@ -135,7 +163,7 @@ namespace Neptune::Vulkan {
 		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT);
 		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT);*/
 
-#ifdef PG_DEBUG
+#ifdef NEPTUNE_DEBUG
 
 		VkValidationFeaturesEXT								  validationFeatures{};
 		validationFeatures.sType						    = VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT;
@@ -156,6 +184,8 @@ namespace Neptune::Vulkan {
 
     void Instance::GetExtensionRequirements()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_ExtensionProperties.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
 		m_ExtensionProperties.push_back(VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME);
 
@@ -168,15 +198,18 @@ namespace Neptune::Vulkan {
 			glfwExtensions++;
 		}
 
-#ifdef PG_DEBUG
+#ifdef NEPTUNE_DEBUG
 
 		m_ExtensionProperties.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 
 #endif
+
 	}
 
 	bool Instance::CheckExtensionRequirementsSatisfied()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint32_t extensionCount = 0;
 		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
 
@@ -197,7 +230,7 @@ namespace Neptune::Vulkan {
 				std::stringstream ss;
 				ss << "Instance Extension Required: " << set << ", Which is not satisfied";
 				
-				CORE_WARN(ss.str())
+				NEPTUNE_CORE_WARN(ss.str())
 			}
 		}
 
@@ -206,8 +239,9 @@ namespace Neptune::Vulkan {
 
 	void Instance::GetLayerRequirements()
 	{
-		
-#ifdef PG_DEBUG
+		NEPTUNE_PROFILE_ZONE
+
+#ifdef NEPTUNE_DEBUG
 
 		m_LayerProperties.push_back("VK_LAYER_KHRONOS_validation");
 
@@ -217,6 +251,8 @@ namespace Neptune::Vulkan {
 
 	bool Instance::ChecklayerRequirementsSatisfied()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint32_t layerCount;
 		vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
 
@@ -237,7 +273,7 @@ namespace Neptune::Vulkan {
 				std::stringstream ss;
 				ss << "Instance Layer Required: " << set << ", Which is not satisfied";
 				
-				CORE_WARN(ss.str())
+				NEPTUNE_CORE_WARN(ss.str())
 			}
 		}
 
@@ -246,8 +282,9 @@ namespace Neptune::Vulkan {
 
 	void Instance::SetVulkanDebugCallbackFuncPointer()
 	{
+		NEPTUNE_PROFILE_ZONE
 
-#ifdef PG_DEBUG
+#ifdef NEPTUNE_DEBUG
 
 		GetContext().Get<IFunctions>()->vkCreateDebugUtilsMessengerEXT(Handle(), &m_DebugMessengerCreateInfo, nullptr, &m_DebugMessenger);
 
@@ -257,22 +294,20 @@ namespace Neptune::Vulkan {
 
 	void Instance::FillDebugMessengerCreateInfo()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_DebugMessengerCreateInfo                     = VkDebugUtilsMessengerCreateInfoEXT {};
 		m_DebugMessengerCreateInfo.sType               = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-		
-		m_DebugMessengerCreateInfo.messageSeverity     = 
-			VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
-			VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
-			VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT   |
-			VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT    ;
-		
-		m_DebugMessengerCreateInfo.messageType         = 
-			VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT      |
-			VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT   | 
-			VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT  ;
-		
+		m_DebugMessengerCreateInfo.messageSeverity     = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT 
+			                                           | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT 
+			                                           | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT   
+			                                           | VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT;
+		m_DebugMessengerCreateInfo.messageType         = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT      
+			                                           | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT   
+			                                           | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 		m_DebugMessengerCreateInfo.pfnUserCallback     = InstanceDebugCallback;
 		m_DebugMessengerCreateInfo.pUserData           = nullptr;
 		m_DebugMessengerCreateInfo.pNext               = nullptr;
+
 	}
 }

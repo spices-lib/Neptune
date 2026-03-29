@@ -1,3 +1,9 @@
+/**
+* @file MemoryAllocator.h.
+* @brief The MemoryAllocator Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Infrastructure.h"
@@ -6,6 +12,9 @@
 
 namespace Neptune::Vulkan {
 
+	/**
+	* @brief Extend of VkMemoryPropertyFlagBits.
+	*/
 	typedef enum VMAMemoryPropertyFlagExtendBits {
 
 		/**
@@ -31,23 +40,45 @@ namespace Neptune::Vulkan {
 
 	using IMemoryAllocator = InfrastructureClass<class MemoryAllocator, EInfrastructure::MemoryAllocator>;
 
+	/**
+	* @brief Vulkan::MemoryAllocator Class.
+	* This class defines the Vulkan::MemoryAllocator behaves.
+	*/
 	class MemoryAllocator : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		*/
 		MemoryAllocator(Context& context, EInfrastructure e);
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~MemoryAllocator() override;
 
-		VmaAllocator& Handle() { return m_Handle; }
+		/**
+		* @brief Get Unit Handle.
+		*
+		* @return Returns Unit Handle.
+		*/
+		const VmaAllocator& Handle() const { return m_Handle; }
 
 	private:
 
+		/**
+		* @brief Create Instance.
+		*/
 		void Create();
 
 	private:
 
-		VmaAllocator m_Handle = nullptr;
+		VmaAllocator m_Handle = nullptr;  // @brief This VmaAllocator.
+
 	};
 
 }

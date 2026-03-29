@@ -1,19 +1,30 @@
+/**
+* @file PhysicalDevice.cpp.
+* @brief The PhysicalDevice Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "PhysicalDevice.h"
 #include "Device.h"
 #include "Instance.h"
 #include "Surface.h"
+#include "Functions.h"
 
 namespace Neptune::Vulkan {
 
 	PhysicalDevice::PhysicalDevice(Context& context, EInfrastructure e)
         : Infrastructure(context, e)
     {
+		NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
 	void PhysicalDevice::Create()
     {
+		NEPTUNE_PROFILE_ZONE
+
         const auto instance = GetContext().Get<IInstance>()->Handle();
 
         uint32_t deviceCount = 0;
@@ -21,7 +32,7 @@ namespace Neptune::Vulkan {
 
         if (deviceCount == 0) 
 		{
-			CORE_ERROR("Failed to find GPUs with Vulkan support.")
+			NEPTUNE_CORE_ERROR("Failed to find GPUs with Vulkan support.")
 			return;
 		}
 
@@ -37,16 +48,18 @@ namespace Neptune::Vulkan {
 			{
 				m_PhysicalDevice.SetHandle(physicalDevice);
 
-				CORE_INFO("Vulkan PhysicalDevice Selected.")
+				NEPTUNE_CORE_INFO("Vulkan PhysicalDevice Selected.")
 				return;
 			}
 		}
 
-		CORE_ERROR("Failed to find GPU Physical Device that satisfied our needs.")
+		NEPTUNE_CORE_ERROR("Failed to find GPU Physical Device that satisfied our needs.")
     }
 
-	bool PhysicalDevice::IsExtensionMeetDemand(const VkPhysicalDevice& device)
+	bool PhysicalDevice::IsExtensionMeetDemand(const VkPhysicalDevice& device) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint32_t extensionCount;
 		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
 
@@ -76,7 +89,7 @@ namespace Neptune::Vulkan {
 				std::stringstream ss;
 				ss << "Device Extension Required: [ " << set << " ], Which is not satisfied with device: " << deviceProperties.deviceName;
 
-				CORE_ERROR(ss.str())
+				NEPTUNE_CORE_ERROR(ss.str())
 			}
 
 			return false;
@@ -85,6 +98,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsPropertyMeetDemand(const VkPhysicalDevice& device)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkPhysicalDeviceOpticalFlowPropertiesNV       flowProps{};
 		flowProps.sType                             = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV;
 		flowProps.pNext                             = nullptr;
@@ -100,8 +115,10 @@ namespace Neptune::Vulkan {
 		return true;
 	}
 
-	bool PhysicalDevice::IsFeatureMeetDemand(const VkPhysicalDevice& device)
+	bool PhysicalDevice::IsFeatureMeetDemand(const VkPhysicalDevice& device) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkPhysicalDeviceFeatures2                             deviceFeatures {};
 		deviceFeatures.sType                                = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
 		deviceFeatures.pNext                                = nullptr;
@@ -113,6 +130,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsQueueMeetDemand(const VkPhysicalDevice& device, const VkSurfaceKHR& surface)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint32_t queueFamilyCount = 0;
 		vkGetPhysicalDeviceQueueFamilyProperties2(device, &queueFamilyCount, nullptr);
 
@@ -176,6 +195,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsOpticalFlowSessionSupport(VkFormat format, VkOpticalFlowUsageFlagsNV usage)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkOpticalFlowImageFormatInfoNV         formatInfo{};
 		formatInfo.sType                     = VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV;
 		formatInfo.usage                     = usage;
@@ -188,7 +209,7 @@ namespace Neptune::Vulkan {
 
 		if (!std::ranges::any_of(formats.begin(), formats.end(), [&](const auto& f) { return f.format == format; }))
 		{
-			CORE_ERROR("Format Not Supported In OpticalFlowSession.")
+			NEPTUNE_CORE_ERROR("Format Not Supported In OpticalFlowSession.")
 			return false;
 		}
 
@@ -202,13 +223,13 @@ namespace Neptune::Vulkan {
 		vkGetPhysicalDeviceFormatProperties2(Handle(), format, &properties2);
 		if (usage & VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV && !(properties3.optimalTilingFeatures & VK_FORMAT_FEATURE_2_OPTICAL_FLOW_IMAGE_BIT_NV))
 		{
-			CORE_ERROR("VK_FORMAT_FEATURE_2_OPTICAL_FLOW_IMAGE_BIT_NV Not Supported OPTICAL_FLOW_IMAGE_BIT.")
+			NEPTUNE_CORE_ERROR("VK_FORMAT_FEATURE_2_OPTICAL_FLOW_IMAGE_BIT_NV Not Supported OPTICAL_FLOW_IMAGE_BIT.")
 			return false;
 		}
 
 		if (usage & VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV && !(properties3.optimalTilingFeatures & VK_FORMAT_FEATURE_2_OPTICAL_FLOW_VECTOR_BIT_NV))
 		{
-			CORE_ERROR("VK_FORMAT_FEATURE_2_OPTICAL_FLOW_IMAGE_BIT_NV Not Supported OPTICAL_FLOW_VECTOR_BIT.")
+			NEPTUNE_CORE_ERROR("VK_FORMAT_FEATURE_2_OPTICAL_FLOW_IMAGE_BIT_NV Not Supported OPTICAL_FLOW_VECTOR_BIT.")
 			return false;
 		}
 
@@ -230,6 +251,8 @@ namespace Neptune::Vulkan {
 
 	VideoSessionProperty PhysicalDevice::QueryVideoSessionProperty(const VkVideoProfileInfoKHR& videoProfile)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		static VkVideoEncodeAV1CapabilitiesKHR       encodeAV1Capabilities { VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_CAPABILITIES_KHR };
 		static VkVideoEncodeH264CapabilitiesKHR      encodeH264Capabilities{ VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR };
 		static VkVideoEncodeH265CapabilitiesKHR      encodeH265Capabilities{ VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_KHR };
@@ -313,7 +336,7 @@ namespace Neptune::Vulkan {
 		}
 		else
 		{
-            CORE_ERROR("Unsupported Decode Capability Flags.");
+			NEPTUNE_CORE_ERROR("Unsupported Decode Capability Flags.");
         }
 
 		// Use One DPB as dst image.
@@ -324,6 +347,8 @@ namespace Neptune::Vulkan {
 
 	bool PhysicalDevice::IsOpticalFlowSessionSupport(VkFormat inputFormat, VkFormat outFormat)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		bool result = true;
 
 		result &= IsOpticalFlowSessionSupport(inputFormat, VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV);
@@ -334,6 +359,8 @@ namespace Neptune::Vulkan {
 
 	const SwapChainProperty& PhysicalDevice::QuerySwapChainProperty(GLFWwindow* window)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto surface = GetContext().Get<ISurface>()->Handle();
 
 		SwapChainProperty property{};
@@ -406,8 +433,10 @@ namespace Neptune::Vulkan {
 		return m_SwapChainProperty;
 	}
 
-	const std::vector<const char*>& PhysicalDevice::GetExtensionRequirements()
+	const std::vector<const char*>& PhysicalDevice::GetExtensionRequirements() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		static std::vector<const char*> m_ExtensionProperties;
 
 		if (m_ExtensionProperties.empty())
@@ -425,25 +454,18 @@ namespace Neptune::Vulkan {
 			m_ExtensionProperties.push_back(VK_EXT_NESTED_COMMAND_BUFFER_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_EXT_MEMORY_BUDGET_EXTENSION_NAME);
 
-			// Video Decode/Encode
+			// @brief Video Decode/Encode
 			m_ExtensionProperties.push_back(VK_KHR_VIDEO_QUEUE_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_KHR_VIDEO_MAINTENANCE_1_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_KHR_VIDEO_DECODE_H265_EXTENSION_NAME);
-			m_ExtensionProperties.push_back(VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME);     // Ycbcr Sampler
+			m_ExtensionProperties.push_back(VK_KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION_NAME);
 
-			// Optical Flow
+			// @brief Optical Flow
 			//m_ExtensionProperties.push_back(VK_NV_OPTICAL_FLOW_EXTENSION_NAME);
-
-			// StreamLine
-			m_ExtensionProperties.push_back(VK_NVX_BINARY_IMPORT_EXTENSION_NAME);
-			m_ExtensionProperties.push_back(VK_NVX_IMAGE_VIEW_HANDLE_EXTENSION_NAME);
-			m_ExtensionProperties.push_back(VK_KHR_BUFFER_DEVICE_ADDRESS_EXTENSION_NAME);
-			m_ExtensionProperties.push_back(VK_KHR_PUSH_DESCRIPTOR_EXTENSION_NAME);
-			m_ExtensionProperties.push_back(VK_KHR_PIPELINE_LIBRARY_EXTENSION_NAME);
 			 
-			// RayTracing
+			// @brief RayTracing
 			m_ExtensionProperties.push_back(VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_KHR_RAY_QUERY_EXTENSION_NAME);
 			m_ExtensionProperties.push_back(VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME);
@@ -454,6 +476,8 @@ namespace Neptune::Vulkan {
 
 	std::vector<VkFormat> PhysicalDevice::GetVideoFormats(VkImageUsageFlags imageUsage, const std::vector<VkVideoProfileInfoKHR>& videoProfile)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkVideoProfileListInfoKHR                videoProfiles{};
 		videoProfiles.sType                    = VK_STRUCTURE_TYPE_VIDEO_PROFILE_LIST_INFO_KHR;
 		videoProfiles.profileCount             = videoProfile.size();

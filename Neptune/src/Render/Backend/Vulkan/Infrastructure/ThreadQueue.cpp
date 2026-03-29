@@ -1,3 +1,9 @@
+/**
+* @file ThreadQueue.h.
+* @brief The ThreadQueue Class Definitions.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "ThreadQueue.h"
 #include "DebugUtilsObject.h"
@@ -8,9 +14,12 @@ namespace Neptune::Vulkan {
         : Infrastructure(context, e)
     {}
 
-    void ThreadQueue::Add(VkQueue handle)
+    void ThreadQueue::Add(Unit::Queue::Handle handle)
     {
+        NEPTUNE_PROFILE_ZONE
+
         auto queue = CreateSP<Unit::Queue>();
+
         queue->SetHandle(handle);
 
         m_Queues.Push(queue);

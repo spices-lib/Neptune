@@ -1,3 +1,9 @@
+/**
+* @file CommandBuffer.h.
+* @brief The CommandBuffer Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Infrastructure.h"
@@ -8,25 +14,51 @@ namespace Neptune::Vulkan {
 	using IGraphicCommandPool     = InfrastructureClass<class CommandPool, EInfrastructure::GraphicCommandPool>;
 	using IComputeCommandPool     = InfrastructureClass<class CommandPool, EInfrastructure::ComputeCommandPool>;
 
+	/**
+	* @brief Vulkan::CommandPool Class.
+	* This class defines the Vulkan::CommandPool behaves.
+	*/
 	class CommandPool : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		*/
 		CommandPool(Context& context, EInfrastructure e);
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~CommandPool() override = default;
 
-		const Unit::CommandPool::Handle& Handle() { return m_CommandPool.GetHandle(); }
+		/**
+		* @brief Get Unit Handle.
+		*
+		* @return Returns Unit Handle.
+		*/
+		const Unit::CommandPool::Handle& Handle() const { return m_CommandPool.GetHandle(); }
 
 	private:
 
+		/**
+		* @brief Create CommandPool.
+		*/
 		void Create();
 
-		uint32_t GetQueueFamily();
+		/**
+		* @brief Get CommandPool QueueFamily.
+		* 
+		* @return Returns CommandPool QueueFamily.
+		*/
+		uint32_t GetQueueFamily() const;
 
 	private:
 
-		Unit::CommandPool m_CommandPool;
+		Unit::CommandPool m_CommandPool; // @brief this CommandPool.
 
 	};
 

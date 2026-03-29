@@ -1,3 +1,9 @@
+/**
+* @file DebugUtilsObject.cpp.
+* @brief The DebugUtilsObject Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "DebugUtilsObject.h"
 #include "Functions.h"
@@ -11,6 +17,8 @@ namespace Neptune::Vulkan {
 
 	void DebugUtilsObject::BeginLabel(VkCommandBuffer cmdBuffer, const std::string& caption, glm::vec4 color) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkDebugUtilsLabelEXT             labelInfo{};
 		labelInfo.sType                = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
 		labelInfo.pLabelName           = caption.c_str();
@@ -22,11 +30,15 @@ namespace Neptune::Vulkan {
 
 	void DebugUtilsObject::EndLabel(VkCommandBuffer cmdBuffer) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		GetContext().Get<IFunctions>()->vkCmdEndDebugUtilsLabelEXT(cmdBuffer);
 	}
 
 	void DebugUtilsObject::InsertLabel(VkCommandBuffer cmdBuffer, const std::string& caption, glm::vec4 color) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkDebugUtilsLabelEXT         labelInfo{};
 		labelInfo.sType            = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
 		labelInfo.pLabelName       = caption.c_str();
@@ -38,6 +50,8 @@ namespace Neptune::Vulkan {
 
 	void DebugUtilsObject::BeginQueueLabel(VkQueue queue, const std::string& caption, glm::vec4 color) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkDebugUtilsLabelEXT        labelInfo{};
 		labelInfo.sType           = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
 		labelInfo.pLabelName      = caption.c_str();
@@ -49,11 +63,15 @@ namespace Neptune::Vulkan {
 
 	void DebugUtilsObject::EndQueueLabel(VkQueue queue) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		GetContext().Get<IFunctions>()->vkQueueEndDebugUtilsLabelEXT(queue);
 	}
 
 	void DebugUtilsObject::InsertQueueLabel(VkQueue queue, const std::string& caption, glm::vec4 color) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkDebugUtilsLabelEXT        labelInfo{};
 		labelInfo.sType           = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
 		labelInfo.pLabelName      = caption.c_str();

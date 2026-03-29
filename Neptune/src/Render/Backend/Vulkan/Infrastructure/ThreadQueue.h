@@ -1,3 +1,9 @@
+/**
+* @file ThreadQueue.h.
+* @brief The ThreadQueue Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Infrastructure.h"
@@ -13,23 +19,51 @@ namespace Neptune::Vulkan {
 	using IVideoDecodeThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::VideoDecodeThreadQueue>;
 	using IOpticalFlowThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::OpticalFlowThreadQueue>;
 
+	/**
+	* @brief Vulkan::ThreadQueue Class.
+	* This class defines the Vulkan::ThreadQueue behaves.
+	*/
 	class ThreadQueue : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		*/
 		ThreadQueue(Context& context, EInfrastructure e);
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~ThreadQueue() override = default;
 
+		/**
+		* @brief Pop a Queue.
+		* 
+		* @return Returns Queue.
+		*/
 		SP<Unit::Queue> Pop() { return m_Queues.Pop(); }
 
+		/**
+		* @brief Push a Queue.
+		*
+		* @param[in] queue Queue.
+		*/
 		void Push(SP<Unit::Queue> queue) { m_Queues.Push(queue); }
 
-		void Add(VkQueue handle);
+		/**
+		* @brief Add a Queue to this.
+		*
+		* @param[in] handle Queue.
+		*/
+		void Add(Unit::Queue::Handle handle);
 
 	private:
 
-		Container::ThreadQueue<SP<Unit::Queue>> m_Queues;
+		Container::ThreadQueue<SP<Unit::Queue>> m_Queues;   // @brief Container of Queue.
 
 	};
 	

@@ -1,21 +1,34 @@
+/**
+* @file ThreadCommandPool.cpp.
+* @brief The ThreadCommandPool Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "ThreadCommandPool.h"
 #include "PhysicalDevice.h"
 #include "Device.h"
 #include "DebugUtilsObject.h"
-#include <optional>
-#include <mutex>
 
 namespace Neptune::Vulkan {
 
 	namespace {
 	
+		/**
+		* @brief Thread CommandPool Thread ID.
+		*/
 		class ThreadID
 		{
 		public:
 
+			/**
+			* @brief Constructor Function.
+			*/
 			ThreadID() = default;
 
+			/**
+			* @brief Destructor Function.
+			*/
 			virtual ~ThreadID()
 			{
 				auto commandPool = m_Guard.lock();
@@ -33,7 +46,14 @@ namespace Neptune::Vulkan {
 				if (m_OpticalFlowId.has_value()) commandPool->Release(m_OpticalFlowId.value());
 			}
 
-			const std::optional<UUID>& Id(EInfrastructure e)
+			/**
+			* @brief Get Thread CommandPool id.
+			* 
+			* @param[in] e EInfrastructure.
+			* 
+			* @return Returns Thread CommandPool id.
+			*/
+			const std::optional<UUID>& Id(EInfrastructure e) const
 			{
 				switch (e)
 				{
@@ -47,6 +67,12 @@ namespace Neptune::Vulkan {
 				}
 			}
 
+			/**
+			* @brief Set Thread CommandPool id.
+			*
+			* @param[in] id Thread CommandPool id.
+			* @param[in] e EInfrastructure.
+			*/
 			void SetId(const UUID& id, EInfrastructure e)
 			{
 				switch (e)
@@ -61,6 +87,11 @@ namespace Neptune::Vulkan {
 				}
 			}
 
+			/**
+			* @brief Set CommandPool Guard.
+			*
+			* @param[in] guard Thread CommandPool.
+			*/
 			void SetGuard(SP<ThreadCommandPool> guard)
 			{
 				m_Guard = guard;
@@ -68,19 +99,19 @@ namespace Neptune::Vulkan {
 
 		public:
 
-			std::optional<UUID> m_GraphicId;
-			std::optional<UUID> m_ComputeId;
-			std::optional<UUID> m_TransferId;
-			std::optional<UUID> m_VideoEncodeId;
-			std::optional<UUID> m_VideoDecodeId;
-			std::optional<UUID> m_OpticalFlowId;
+			std::optional<UUID> m_GraphicId;            // @brief Graphic Sub Thread CommandPool id.
+			std::optional<UUID> m_ComputeId;            // @brief Compute Sub Thread CommandPool id.
+			std::optional<UUID> m_TransferId;           // @brief Transfer Sub Thread CommandPool id.
+			std::optional<UUID> m_VideoEncodeId;        // @brief VideoEncode Sub Thread CommandPool id.
+			std::optional<UUID> m_VideoDecodeId;        // @brief VideoDecode Sub Thread CommandPool id.
+			std::optional<UUID> m_OpticalFlowId;        // @brief OpticalFlow Sub Thread CommandPool id.
 
-			WP<ThreadCommandPool> m_Guard;
+			WP<ThreadCommandPool> m_Guard;              // @brief ThreadCommandPool Guard.
 		};
 
-		_declspec(thread) ThreadID s_TLSThreadID;
+		_declspec(thread) ThreadID s_TLSThreadID;       // @brief Thread id instance.
 
-		std::mutex s_Mutex;
+		std::mutex s_Mutex;                             // @brief CommandPool mutex.
 	}
 
 	ThreadCommandPool::ThreadCommandPool(Context& context, EInfrastructure e)
@@ -89,7 +120,9 @@ namespace Neptune::Vulkan {
 
 	const VkCommandPool& ThreadCommandPool::Handle()
 	{
-		auto id = s_TLSThreadID.Id(GetInfrastructure());
+		NEPTUNE_PROFILE_ZONE
+
+		auto id = s_TLSThreadID.Id(GetEInfrastructure());
 
 		if (id.has_value())
 		{
@@ -98,13 +131,13 @@ namespace Neptune::Vulkan {
 
 		UUID uuid;
 
-		s_TLSThreadID.SetId(uuid, GetInfrastructure());
+		s_TLSThreadID.SetId(uuid, GetEInfrastructure());
 
 		s_TLSThreadID.SetGuard(shared_from_this());
 
 		auto commandPool = Create();
 
-		std::unique_lock<std::mutex> lock(s_Mutex);
+		std::unique_lock lock(s_Mutex);
 
 		m_CommandPools[uuid] = commandPool;
 
@@ -113,13 +146,17 @@ namespace Neptune::Vulkan {
 
 	void ThreadCommandPool::Release(UUID id)
 	{
-		std::unique_lock<std::mutex> lock(s_Mutex);
+		NEPTUNE_PROFILE_ZONE
+
+		std::unique_lock lock(s_Mutex);
 
 		m_CommandPools.erase(id);
 	}
 
-	SP<Unit::CommandPool> ThreadCommandPool::Create()
+	SP<Unit::CommandPool> ThreadCommandPool::Create() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkCommandPoolCreateInfo                   poolInfo{};
 		poolInfo.sType                          = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 		poolInfo.flags                          = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
@@ -134,9 +171,11 @@ namespace Neptune::Vulkan {
 		return commandPool;
 	}
 
-	uint32_t ThreadCommandPool::GetQueueFamily()
+	uint32_t ThreadCommandPool::GetQueueFamily() const
 	{
-		switch (GetInfrastructure())
+		NEPTUNE_PROFILE_ZONE
+
+		switch (GetEInfrastructure())
 		{
 			case EInfrastructure::GraphicThreadCommandPool:		return GetContext().Get<IPhysicalDevice>()->GetQueueFamilies().graphic.value();
 			case EInfrastructure::ComputeThreadCommandPool:     return GetContext().Get<IPhysicalDevice>()->GetQueueFamilies().compute.value();

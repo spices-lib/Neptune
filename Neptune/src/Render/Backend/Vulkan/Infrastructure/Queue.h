@@ -1,3 +1,9 @@
+/**
+* @file Queue.h.
+* @brief The Queue Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Infrastructure.h"
@@ -9,25 +15,60 @@ namespace Neptune::Vulkan {
 	using IPresentQueue     = InfrastructureClass<class Queue, EInfrastructure::PresentQueue>;
 	using IComputeQueue     = InfrastructureClass<class Queue, EInfrastructure::ComputeQueue>;
 
+	/**
+	* @brief Vulkan::Queue Class.
+	* This class defines the Vulkan::Queue behaves.
+	*/
 	class Queue : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		* @param[in] queue VkQueue.
+		*/
 		Queue(Context& context, EInfrastructure e, VkQueue queue);
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~Queue() override = default;
 
-		void Init(Unit::Queue::Handle queue);
-
+		/**
+		* @brief Get Unit Handle.
+		*
+		* @return Returns Unit Handle.
+		*/
 		const Unit::Queue::Handle& Handle() const { return m_Queue.GetHandle(); }
 
-		void Submit(const VkSubmitInfo& info, VkFence fence = VK_NULL_HANDLE);
+		/**
+		* @brief Submit CommandBuffer to Queue.
+		*
+		* @param[in] info VkSubmitInfo.
+		* @param[in] fence VkFence.
+		*/
+		void Submit(const VkSubmitInfo& info, VkFence fence = VK_NULL_HANDLE) const;
 
-		void Wait();
+		/**
+		* @brief Queue Wait idle.
+		*/
+		void Wait() const;
 
 	private:
 
-		Unit::Queue m_Queue;
+		/**
+		* @brief Initialize with queue.
+		*
+		* @param[in] queue Unit Queue Handle.
+		*/
+		void Init(Unit::Queue::Handle queue);
+
+	private:
+
+		Unit::Queue m_Queue;    // @brief This Queue.
 	};
 
 }

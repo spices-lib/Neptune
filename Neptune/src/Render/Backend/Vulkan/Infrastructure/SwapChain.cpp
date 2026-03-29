@@ -1,21 +1,30 @@
+/**
+* @file SwapChain.cpp.
+* @brief The SwapChain Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "SwapChain.h"
 #include "Surface.h"
-#include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
-#include "Render/Backend/Vulkan/Infrastructure/Queue.h"
-#include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
-#include <GLFW/glfw3.h>
+#include "PhysicalDevice.h"
+#include "Queue.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::Vulkan {
 
     SwapChain::SwapChain(Context& context, EInfrastructure e, GLFWwindow* window, uint32_t count)
         : Infrastructure(context, e)
     {
+		NEPTUNE_PROFILE_ZONE
+
         Create(window, count);
     }
 
 	void SwapChain::Create(GLFWwindow* window, uint32_t count)
     {
+		NEPTUNE_PROFILE_ZONE
+
 		auto physicalDevice = GetContext().Get<IPhysicalDevice>();
 		auto& property = physicalDevice->QuerySwapChainProperty(window);
 
@@ -28,7 +37,7 @@ namespace Neptune::Vulkan {
 		createInfo.imageExtent                 = property.surfaceSize;
 		createInfo.imageArrayLayers            = 1;
 		createInfo.imageUsage                  = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | 
-												 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;     // StreamLine Required
+												 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;     // @brief StreamLine Required
 
 		uint32_t queueFamilyIndices[2] = 
 		{ 
@@ -125,6 +134,8 @@ namespace Neptune::Vulkan {
 
 	bool SwapChain::GetNextImage(VkSemaphore semaphore, uint32_t& imageIndex) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		const auto result = m_SwapChain->GetNextImage(semaphore, imageIndex);
 
 		VK_CHECK(result);
@@ -135,14 +146,16 @@ namespace Neptune::Vulkan {
 		}
 		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
 		{
-			CORE_ERROR("Failed to Acquire SwapChain Image.")
+			NEPTUNE_CORE_ERROR("Failed to Acquire SwapChain Image.")
 		}
 
 		return true;
 	}
 
-	bool SwapChain::Present(VkPresentInfoKHR& info)
+	bool SwapChain::Present(VkPresentInfoKHR& info) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		info.pSwapchains = &Handle();
 
 		const auto result = vkQueuePresentKHR(GetContext().Get<IPresentQueue>()->Handle(), &info);
@@ -153,7 +166,7 @@ namespace Neptune::Vulkan {
 		}
 		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
 		{
-			CORE_ERROR("Failed to Present SwapChain Image.")
+			NEPTUNE_CORE_ERROR("Failed to Present SwapChain Image.")
 		}
 
 		return true;

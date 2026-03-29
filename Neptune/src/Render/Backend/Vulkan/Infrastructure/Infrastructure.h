@@ -1,3 +1,9 @@
+/**
+* @file Infrastructure.h.
+* @brief The Infrastructure Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
@@ -7,25 +13,48 @@
 
 namespace Neptune::Vulkan {
 
+    /**
+    * @brief Vulkan::Infrastructure Class.
+    * This class defines the Vulkan::Infrastructure behaves.
+    */
     class Infrastructure : public ContextAccessor, public NonCopyable
     {
     public:
 
+        /**
+        * @brief Constructor Function.
+        *
+        * @param[in] context Context.
+        * @param[in] e EInfrastructure.
+        */
         explicit Infrastructure(Context& context, EInfrastructure e);
 
+        /**
+        * @brief Destructor Function.
+        */
         ~Infrastructure() override = default;
 
     public:
 
+        /**
+        * @brief Turn EInfrastructure to string.
+        * 
+        * @return Returns string EInfrastructure.
+        */
         std::string ToString() const;
 
     protected:
 
-        const EInfrastructure& GetInfrastructure() const { return m_EInfrastructure; }
+        /**
+        * @brief Get EInfrastructure.
+        *
+        * @return Returns EInfrastructure.
+        */
+        const EInfrastructure& GetEInfrastructure() const { return m_EInfrastructure; }
 
     private:
 
-        EInfrastructure m_EInfrastructure;
+        EInfrastructure m_EInfrastructure; // @brief This EInfrastructure.
 
     };
 

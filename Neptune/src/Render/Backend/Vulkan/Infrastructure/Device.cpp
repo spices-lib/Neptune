@@ -1,12 +1,14 @@
+/**
+* @file Device.cpp.
+* @brief The Device Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Device.h"
-
-#include <ranges>
-
 #include "PhysicalDevice.h"
 #include "Queue.h"
 #include "ThreadQueue.h"
-#include <unordered_map>
 #include "DebugUtilsObject.h"
 
 namespace Neptune::Vulkan {
@@ -14,40 +16,47 @@ namespace Neptune::Vulkan {
     Device::Device(Context& context, EInfrastructure e)
         : Infrastructure(context, e)
     {
+		NEPTUNE_PROFILE_ZONE
+
         Create();
     }
 
 	void Device::Wait()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Device.Wait();
 	}
 
 	void Device::Create()
     {
-		const auto physicalDevice = GetContext().Get<IPhysicalDevice>();
+		NEPTUNE_PROFILE_ZONE
+
+		const auto physicalDevice  = GetContext().Get<IPhysicalDevice>();
 		const auto& queueFaimilies = physicalDevice->GetQueueFamilies();
 
 		std::unordered_map<uint32_t, std::unordered_map<uint32_t, std::vector<VkQueue>>> queueFamilies;
 
-		queueFamilies[queueFaimilies.graphic .value()][0]    = std::vector<VkQueue>(1 + NThreadQueue, VK_NULL_HANDLE);
-		queueFamilies[queueFaimilies.present .value()][1]    = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
-		queueFamilies[queueFaimilies.compute .value()][2]    = std::vector<VkQueue>(1 + NThreadQueue, VK_NULL_HANDLE);
-		queueFamilies[queueFaimilies.transfer.value()][3]    = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
+		queueFamilies[queueFaimilies.graphic    .value()][0] = std::vector<VkQueue>(1 + NThreadQueue, VK_NULL_HANDLE);
+		queueFamilies[queueFaimilies.present    .value()][1] = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
+		queueFamilies[queueFaimilies.compute    .value()][2] = std::vector<VkQueue>(1 + NThreadQueue, VK_NULL_HANDLE);
+		queueFamilies[queueFaimilies.transfer   .value()][3] = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
 		queueFamilies[queueFaimilies.videoEncode.value()][4] = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
 		queueFamilies[queueFaimilies.videoDecode.value()][5] = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
-		//queueFamilies[queueFaimilies.opticalFlow.value()][6] = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
+		queueFamilies[queueFaimilies.opticalFlow.value()][6] = std::vector<VkQueue>(1,                VK_NULL_HANDLE);
 
 		std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-		std::vector<std::shared_ptr<std::vector<float>>> QueuePriorities;
+		std::vector<SP<std::vector<float>>> QueuePriorities;
 		for (auto& [family, idItems] : queueFamilies)
 		{
 			uint32_t count = 0;
+
 			for (auto& queues : idItems | std::views::values)
 			{
 				count += queues.size();
 			}
 
-			std::shared_ptr<std::vector<float>> queuePriority = std::make_shared<std::vector<float>>(count, 1.0f);
+			SP<std::vector<float>> queuePriority = std::make_shared<std::vector<float>>(count, 1.0f);
 
 			VkDeviceQueueCreateInfo                               queueCreateInfo{};
 			queueCreateInfo.sType                               = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
@@ -105,7 +114,7 @@ namespace Neptune::Vulkan {
 		for (auto& [family, idItems] : queueFamilies)
 		{
 			int index = 0;
-			for (auto& [id, items] : idItems)
+			for (auto& items : idItems | std::views::values)
 			{
 				for (size_t i = 0; i < items.size(); i++)
 				{
@@ -133,14 +142,13 @@ namespace Neptune::Vulkan {
 		auto transfer    = queueFamilies[queueFaimilies.transfer   .value()][3][0];
 		auto videoEncode = queueFamilies[queueFaimilies.videoEncode.value()][4][0];
 		auto videoDecode = queueFamilies[queueFaimilies.videoDecode.value()][5][0];
-		//auto opticalFlow = queueFamilies[queueFaimilies.opticalFlow.value()][6][0];
-		auto opticalFlow = videoEncode;
+		auto opticalFlow = queueFamilies[queueFaimilies.opticalFlow.value()][6][0];
 
 #endif
 
-		GetContext().Registry<IGraphicQueue>    (graphic);
-		GetContext().Registry<IPresentQueue>    (present);
-		GetContext().Registry<IComputeQueue>    (compute);
+		GetContext().Registry<IGraphicQueue>(graphic);
+		GetContext().Registry<IPresentQueue>(present);
+		GetContext().Registry<IComputeQueue>(compute);
 
 		GetContext().Registry<IGraphicThreadQueue>();
 		GetContext().Registry<IComputeThreadQueue>();

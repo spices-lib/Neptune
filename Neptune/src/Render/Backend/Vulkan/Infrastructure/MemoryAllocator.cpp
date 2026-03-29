@@ -1,3 +1,9 @@
+/**
+* @file MemoryAllocator.cpp.
+* @brief The MemoryAllocator Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 
 #define VMA_IMPLEMENTATION
@@ -12,17 +18,24 @@ namespace Neptune::Vulkan {
 	MemoryAllocator::MemoryAllocator(Context& context, EInfrastructure e)
 		: Infrastructure(context, e)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		Create();
 	}
 
 	MemoryAllocator::~MemoryAllocator()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		vmaDestroyAllocator(Handle());
-		Handle() = nullptr;
+
+		m_Handle = nullptr;
 	}
 
 	void MemoryAllocator::Create()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		// see https://gpuopen-librariesandsdks.github.io/VulkanMemoryAllocator/html/quick_start.html
 		VmaAllocatorCreateInfo                  createInfo {};
 		createInfo.instance                   = GetContext().Get<IInstance>()->Handle();

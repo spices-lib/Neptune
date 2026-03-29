@@ -1,48 +1,99 @@
+/**
+* @file Instance.h.
+* @brief The Instance Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/Instance.h"
-#include "Functions.h"
+
 #include <vector>
 
 namespace Neptune::Vulkan {
 
 	using IInstance = InfrastructureClass<class Instance, EInfrastructure::Instance>;
 
+	/**
+	* @brief Vulkan::Instance Class.
+	* This class defines the Vulkan::Instance behaves.
+	*/
 	class Instance : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		*/
 		Instance(Context& context, EInfrastructure e);
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~Instance() override;
 
-		const Unit::Instance::Handle& Handle() { return m_Instance.GetHandle(); }
-		VkDebugUtilsMessengerEXT& DebugMessenger() { return m_DebugMessenger; }
+		/**
+		* @brief Get Unit Handle.
+		*
+		* @return Returns Unit Handle.
+		*/
+		const Unit::Instance::Handle& Handle() const { return m_Instance.GetHandle(); }
+
+		/**
+		* @brief Get VkDebugUtilsMessengerEXT.
+		*
+		* @return Returns VkDebugUtilsMessengerEXT.
+		*/
+		const VkDebugUtilsMessengerEXT& DebugMessenger() const { return m_DebugMessenger; }
 
 	private:
 
+		/**
+		* @brief Create Instance.
+		*/
 		void Create();
 
+		/**
+		* @brief Get Extension Requirements.
+		*/
 		void GetExtensionRequirements();
 
+		/**
+		* @brief Check Extension Requirements Satisfied.
+		*/
 		bool CheckExtensionRequirementsSatisfied();
 
+		/**
+		* @brief Get Layer Requirements.
+		*/
 		void GetLayerRequirements();
 
+		/**
+		* @brief Check Layer Requirements Satisfied.
+		*/
 		bool ChecklayerRequirementsSatisfied();
 
+		/**
+		* @brief Set DebugCallback.
+		*/
 		void SetVulkanDebugCallbackFuncPointer();
 
+		/**
+		* @brief Fill VkDebugUtilsMessengerCreateInfoEXT.
+		*/
 		void FillDebugMessengerCreateInfo();
 
 	private:
 
-		Unit::Instance m_Instance;
-		std::vector<const char*> m_ExtensionProperties;
-		std::vector<const char*> m_LayerProperties;
-		VkDebugUtilsMessengerEXT m_DebugMessenger{};
-		VkDebugUtilsMessengerCreateInfoEXT m_DebugMessengerCreateInfo{};
+		Unit::Instance m_Instance;                                             // @brief This Instance.
+		std::vector<const char*> m_ExtensionProperties;                        // @brief Extensions.
+		std::vector<const char*> m_LayerProperties;                            // @brief Layers.
+		VkDebugUtilsMessengerEXT m_DebugMessenger{};                           // @brief VkDebugUtilsMessengerEXT.
+		VkDebugUtilsMessengerCreateInfoEXT m_DebugMessengerCreateInfo{};       // @brief VkDebugUtilsMessengerCreateInfoEXT.
 	};
 
 }

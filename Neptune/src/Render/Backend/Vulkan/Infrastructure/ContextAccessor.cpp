@@ -1,3 +1,9 @@
+/**
+* @file ContextAccessor.cpp.
+* @brief The ContextAccessor Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "ContextAccessor.h"
 #include "Context.h"
@@ -7,6 +13,8 @@ namespace Neptune::Vulkan {
 
 	VkDevice ContextAccessor::GetDevice() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (m_Context.Has<IDevice>())
 		{
 			return m_Context.Get<IDevice>()->Handle();

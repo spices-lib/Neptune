@@ -1,39 +1,89 @@
+/**
+* @file SwapChain.h.
+* @brief The SwapChain Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
-#include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
-#include "Render/Backend/Vulkan/Infrastructure/Device.h"
+#include "Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/SwapChain.h"
 #include "Render/Backend/Vulkan/Resource/Image.h"
-#include <GLFW/glfw3.h>
 
 namespace Neptune::Vulkan {
 
 	using ISwapChain = InfrastructureClass<class SwapChain, EInfrastructure::SwapChain>;
 
+	/**
+	* @brief Vulkan::SwapChain Class.
+	* This class defines the Vulkan::SwapChain behaves.
+	*/
 	class SwapChain : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		* @param[in] count SwapChain image Count.
+		*/
 		SwapChain(Context& context, EInfrastructure e, GLFWwindow* window, uint32_t count);
 
+		/**
+		* @brief Destructor Function.
+		*/
 		~SwapChain() override = default;
 
+		/**
+		* @brief Get Unit Handle.
+		*
+		* @return Returns Unit Handle.
+		*/
 		const Unit::SwapChain::Handle& Handle() const { return m_SwapChain->GetHandle(); }
 
+		/**
+		* @brief Get Next SwapChain Image.
+		*
+		* @param[in] semaphore VkSemaphore.
+		* @param[out] imageIndex Next SwapChain Image index.
+		* 
+		* @return Returns true if found.
+		*/
 		bool GetNextImage(VkSemaphore semaphore, uint32_t& imageIndex) const;
 
+		/**
+		* @brief Get ImageView Unit Handle.
+		*
+		* @param[in] index ImageView index.
+		* 
+		* @return Returns ImageView Unit Handle.
+		*/
 		const Unit::ImageView::Handle& GetView(uint32_t index) const { return m_SwapChainImage[index]->GetView(); }
 
-		bool Present(VkPresentInfoKHR& info);
+		/**
+		* @brief Present to surface.
+		*
+		* @param[in] info VkPresentInfoKHR.
+		*
+		* @return Returns true if succeed.
+		*/
+		bool Present(VkPresentInfoKHR& info) const;
 
 	private:
 
+		/**
+		* @brief Create SwapChain.
+		*
+		* @param[in] count SwapChain image count.
+		*/
 		void Create(GLFWwindow* window, uint32_t count);
 
 	private:
 
-		SP<Unit::SwapChain> m_SwapChain;
-		std::vector<SP<Image>> m_SwapChainImage;
+		SP<Unit::SwapChain> m_SwapChain;           // @brief This SwapChain.
+		std::vector<SP<Image>> m_SwapChainImage;   // @brief Conatiner of SwapChainImage.
 
 	};
 

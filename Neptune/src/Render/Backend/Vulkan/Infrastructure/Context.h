@@ -1,3 +1,9 @@
+/**
+* @file CommandBuffer.h.
+* @brief The CommandBuffer Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
@@ -7,54 +13,63 @@ namespace Neptune::Vulkan {
 
     class Infrastructure;
 
+    /**
+    * @brief Enum of Infrastructure.
+    */
     enum class EInfrastructure : uint8_t
     {
-        Functions = 0,
-        Instance,
-        DebugUtilsObject,
-        Surface,
-        PhysicalDevice,
-        Device,
+        Functions = 0,                       // @brief Functors.
+        Instance,                            // @brief Instance.
+        DebugUtilsObject,                    // @brief Label/Name Functors.
+        Surface,                             // @brief Surface.
+        PhysicalDevice,                      // @brief PhysicalDevice.
+        Device,                              // @brief LogicalDevice.
+                                             
+        GraphicQueue,                        // @brief Main Thread Graphic Queue.
+        PresentQueue,                        // @brief Main Thread Present Queue.
+        ComputeQueue,                        // @brief Main Thread Compute Queue.
 
-        GraphicQueue,
-        PresentQueue,
-        ComputeQueue,
+        GraphicThreadQueue,                  // @brief Sub Thread Graphic Queue.
+        ComputeThreadQueue,                  // @brief Sub Thread Compute Queue.
+        TransferThreadQueue,                 // @brief Sub Thread Transfer Queue.
+        VideoEncodeThreadQueue,              // @brief Sub Thread VideoEncode Queue.
+        VideoDecodeThreadQueue,              // @brief Sub Thread VideoDecode Queue.
+        OpticalFlowThreadQueue,              // @brief Sub Thread OpticalFlow Queue.
+                                             
+        MemoryAllocator,                     // @brief VMA.
+        SwapChain,                           // @brief SwapChain.
+                                             
+        GraphicImageSemaphore,               // @brief Main Thread Graphic ImageSemaphore.
+        GraphicQueueSemaphore,               // @brief Main Thread Graphic QueueSemaphore.
+        GraphicFence,                        // @brief Main Thread Graphic Fence.
+                                             
+        ComputeQueueSemaphore,               // @brief Main Thread Compute QueueSemaphore.
+        ComputeFence,                        // @brief Main Thread Compute Fence.
+                                             
+        GraphicCommandPool,                  // @brief Main Thread Graphic CommandPool.
+        GraphicCommandBuffer,                // @brief Main Thread Graphic CommandBuffer.
 
-        GraphicThreadQueue,
-        ComputeThreadQueue,
-        TransferThreadQueue,
-        VideoEncodeThreadQueue,
-        VideoDecodeThreadQueue,
-        OpticalFlowThreadQueue,
+        ComputeCommandPool,                  // @brief Main Thread Compute CommandPool.
+        ComputeCommandBuffer,                // @brief Main Thread Compute CommandBuffer.
 
-        MemoryAllocator,
-        SwapChain,
+        GraphicThreadCommandPool,            // @brief Sub Thread Graphic CommandPool.
+        ComputeThreadCommandPool,            // @brief Sub Thread Compute CommandPool.
+        TransferThreadCommandPool,           // @brief Sub Thread Transfer CommandPool.
+        VideoEncodeThreadCommandPool,        // @brief Sub Thread VideoEncode CommandPool.
+        VideoDecodeThreadCommandPool,        // @brief Sub Thread VideoDecode CommandPool.
+        OpticalFlowThreadCommandPool,        // @brief Sub Thread OpticalFlow CommandPool.
 
-        GraphicImageSemaphore,
-        GraphicQueueSemaphore,
-        GraphicFence,
-
-        ComputeQueueSemaphore,
-        ComputeFence,
-
-        GraphicCommandPool,
-        GraphicCommandBuffer,
-
-        ComputeCommandPool,
-        ComputeCommandBuffer,
-
-        GraphicThreadCommandPool,
-        ComputeThreadCommandPool,
-        TransferThreadCommandPool,
-        VideoEncodeThreadCommandPool,
-        VideoDecodeThreadCommandPool,
-        OpticalFlowThreadCommandPool,
-
-        DescriptorPool,
+        DescriptorPool,                      // @brief DescriptorPool.
 
         Count
     };
 
+    /**
+    * @brief Template of Infrastructure Class Definitions.
+    * 
+    * @tparam T_ Infrastructure Class.
+    * @tparam E_ EInfrastructure.
+    */
     template<typename T_, EInfrastructure E_>
 	struct InfrastructureClass
 	{
@@ -62,41 +77,83 @@ namespace Neptune::Vulkan {
         static constexpr EInfrastructure E = E_;
 	};
 
+    /**
+    * @brief RenderBackend Context.
+    */
     class Context : NonCopyable
     {
     public:
 
+        /**
+        * @brief Constructor Function.
+        */
         Context() = default;
 
+        /**
+        * @brief Destructor Function.
+        */
         ~Context() override = default;
 
+        /**
+        * @brief Registry Infrastructure.
+        *
+        * @tparam I Infrastructure Definitions.
+        * @param[in] args Infrastructure Construct Params.
+        */
         template<typename I, typename... Args>
         void Registry(Args&&... args);
 
+        /**
+        * @brief Unregister Infrastructure.
+        *
+        * @tparam I Infrastructure Definitions.
+        */
         template<typename I>
         void UnRegistry();
 
+        /**
+        * @brief Unregister All Infrastructure.
+        */
         void UnRegistry();
 
+        /**
+        * @brief Get registry Infrastructure.
+        *
+        * @tparam I Infrastructure Definitions.
+        * 
+        * @return Returns registry Infrastructure.
+        */
         template<typename I>
         SP<typename I::T> Get();
 
+        /**
+        * @brief Is Infrastructure registry.
+        *
+        * @tparam I Infrastructure Definitions.
+        *
+        * @return Returns true if registry.
+        */
         template<typename I>
         bool Has() const;
 
     private:
 
-        std::array<SP<Infrastructure>, static_cast<uint8_t>(EInfrastructure::Count)> m_Infrastructures;
+        std::array<SP<Infrastructure>, static_cast<uint8_t>(EInfrastructure::Count)> m_Infrastructures; // @brief Container of Infrastructure.
+
     };
 
     template<typename I, typename... Args>
-    void Context::Registry(Args&&... args)
+    inline void Context::Registry(Args&&... args)
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(I::E);
 
         if (m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure already registered.")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure Already Registered.")
+
+            return;
         }
 
         m_Infrastructures[position] = CreateSP<typename I::T>(*this, I::E, std::forward<Args>(args)...);
@@ -105,11 +162,13 @@ namespace Neptune::Vulkan {
     template <typename I>
     inline void Context::UnRegistry()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(I::E);
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered, can not be unregister")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered yet, can not be unregisted.")
 
             return;
         }
@@ -119,11 +178,13 @@ namespace Neptune::Vulkan {
 
     inline void Context::UnRegistry()
     {
+        NEPTUNE_PROFILE_ZONE
+
         for (int i = static_cast<int>(EInfrastructure::Count) - 1; i >= 0; i--)
         {
             if (!m_Infrastructures[i])
             {
-                NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered, can not be unregister")
+                NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered yet, can not be unregisted.")
 
                 continue;
             }
@@ -135,11 +196,13 @@ namespace Neptune::Vulkan {
     template<typename I>
     SP<typename I::T> Context::Get()
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(I::E);
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered, can not be got")
+            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered yet, can not be got.")
 
             return nullptr;
         }
@@ -150,6 +213,8 @@ namespace Neptune::Vulkan {
     template<typename I>
     bool Context::Has() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         const auto position = static_cast<uint8_t>(I::E);
 
         return m_Infrastructures[position] != nullptr;

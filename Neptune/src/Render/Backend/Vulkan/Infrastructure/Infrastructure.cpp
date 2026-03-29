@@ -1,7 +1,12 @@
+/**
+* @file Infrastructure.cpp.
+* @brief The Infrastructure Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Infrastructure.h"
 #include "Instance.h"
-#include "Functions.h"
 
 namespace Neptune::Vulkan {
 
@@ -12,6 +17,8 @@ namespace Neptune::Vulkan {
 
 	std::string Infrastructure::ToString() const
     {
+        NEPTUNE_PROFILE_ZONE
+
         switch (m_EInfrastructure)
         {
             case EInfrastructure::Instance:                           return "Instance";

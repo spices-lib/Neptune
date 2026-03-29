@@ -1,3 +1,9 @@
+/**
+* @file Functions.h.
+* @brief The Functions Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Infrastructure.h"
@@ -12,18 +18,37 @@ namespace Neptune::Vulkan {
 	if(!function){                                                                            \
 		std::stringstream ss;                                                                 \
 		ss << "Vulkan Function: " << #function << " Not found.";                              \
-		CORE_ERROR(ss.str())                                                                  \
+		NEPTUNE_CORE_ERROR(ss.str())                                                          \
 	}
 
 	using IFunctions = InfrastructureClass<class Functions, EInfrastructure::Functions>;
 
+	/**
+	* @brief Vulkan::Functions Class.
+	* This class defines the Vulkan::Functions behaves.
+	*/
 	class Functions : public Infrastructure
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		*/
 		Functions(Context& context, EInfrastructure e);
+
+		/**
+		* @brief Destructor Function.
+		*/
 		~Functions() override = default;
 
+		/**
+		* @brief Initialize.
+		* 
+		* @param[in] instance VkInstance
+		*/
 		void Init(VkInstance instance);
 
 		/** 

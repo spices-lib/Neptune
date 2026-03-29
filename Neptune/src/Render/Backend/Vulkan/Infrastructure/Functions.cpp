@@ -1,3 +1,9 @@
+/**
+* @file Functions.cpp.
+* @brief The Functions Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Functions.h"
 #include "Instance.h"
@@ -10,6 +16,8 @@ namespace Neptune::Vulkan {
 
 	void Functions::Init(VkInstance instance)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		EXPLAIN_VK_FUNCTION_POINTER(vkCreateDebugUtilsMessengerEXT                  )
 		EXPLAIN_VK_FUNCTION_POINTER(vkDestroyDebugUtilsMessengerEXT                 )
 		EXPLAIN_VK_FUNCTION_POINTER(vkGetDeviceFaultInfoEXT                         )
