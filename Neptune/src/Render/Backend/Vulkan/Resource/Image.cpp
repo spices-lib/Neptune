@@ -1,3 +1,9 @@
+/**
+* @file Image.cpp.
+* @brief The Image Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Image.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
@@ -8,8 +14,10 @@
 
 namespace Neptune::Vulkan {
 
-	void Image::SetImage(VkImage image)
+	void Image::SetImage(Unit::Image::Handle image)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Image.SetHandle(image);
 
 		DEBUGUTILS_SETOBJECTNAME(m_Image, "Image")
@@ -17,26 +25,25 @@ namespace Neptune::Vulkan {
 
 	void Image::CreateImage(const VkImageCreateInfo& info, VkMemoryPropertyFlags properties)
 	{
-		m_Format     = info.format;
-		m_Layout     = info.initialLayout;
-		m_LayerCount = info.arrayLayers;
-		m_Width      = info.extent.width;
-		m_Height     = info.extent.height;
+		NEPTUNE_PROFILE_ZONE
 
-		if (GetContext().Has<IMemoryAllocator>())
-		{
-			m_Image.CreateImage(GetContext().Get<IMemoryAllocator>()->Handle(), info, properties);
-		}
-		else
-		{
-			m_Image.CreateImage(GetContext().Get<IPhysicalDevice>()->Handle(), GetContext().Get<IDevice>()->Handle(), info, properties);
-		}
+		m_Format                     = info.format;
+		m_Layout                     = info.initialLayout;
+		m_LayerCount                 = info.arrayLayers;
+		m_Width                      = info.extent.width;
+		m_Height                     = info.extent.height;
+		 
+		GetContext().Has<IMemoryAllocator>() ? 
+		m_Image.CreateImage(GetContext().Get<IMemoryAllocator>()->Handle(), info, properties) : 
+		m_Image.CreateImage(GetContext().Get<IPhysicalDevice>()->Handle(), GetContext().Get<IDevice>()->Handle(), info, properties);
 
 		DEBUGUTILS_SETOBJECTNAME(m_Image, "Image")
 	}
 
 	void Image::CreateImageView(const VkImageViewCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(m_Image.GetHandle());
 
 		m_ImageView.CreateImageView(GetContext().Get<IDevice>()->Handle(), info);
@@ -46,6 +53,8 @@ namespace Neptune::Vulkan {
 
 	void Image::CreateSampler(VkSamplerCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_ImageSampler.CreateSampler(GetContext().Get<IDevice>()->Handle(), info);
 
 		DEBUGUTILS_SETOBJECTNAME(m_ImageSampler, "ImageSampler")
@@ -53,6 +62,8 @@ namespace Neptune::Vulkan {
 
 	void Image::SetName(const std::string& name) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		DEBUGUTILS_SETOBJECTNAME(m_Image, name + "Image")
 		DEBUGUTILS_SETOBJECTNAME(m_ImageView, name + "ImageView")
 		DEBUGUTILS_SETOBJECTNAME(m_ImageSampler, name + "ImageSampler")
@@ -60,6 +71,8 @@ namespace Neptune::Vulkan {
 
 	void Image::TransitionLayout(VkImageLayout newLayout)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkPipelineStageFlags sourceStage;
 		VkPipelineStageFlags destinationStage;
 
@@ -151,7 +164,7 @@ namespace Neptune::Vulkan {
 		}
 		else 
 		{
-			CORE_WARN("Unsupported Vulkan Image Layout Transition!");
+			NEPTUNE_CORE_WARN("Unsupported Vulkan Image Layout Transition!");
 			return;
 		}
 		if (newLayout == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL) 

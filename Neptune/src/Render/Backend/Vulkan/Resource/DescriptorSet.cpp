@@ -1,3 +1,9 @@
+/**
+* @file DescriptorSet.cpp.
+* @brief The DescriptorSet Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "DescriptorSet.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
@@ -11,6 +17,8 @@ namespace Neptune::Vulkan {
 
 	void DescriptorSet::AddBinding(const VkBufferCreateInfo& info, const VkDescriptorSetLayoutBinding& binding)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto buffer = CreateSP<Buffer>(GetContext());
 		
 		buffer->CreateBuffer(info, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT);
@@ -28,14 +36,18 @@ namespace Neptune::Vulkan {
 
 	void DescriptorSet::AddBinding(const VkDescriptorImageInfo& info, const VkDescriptorSetLayoutBinding& binding)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		ImageBindingData data{};
 		data.imageInfos.emplace_back(info);
 
 		m_Bindings.emplace(binding.binding, BindingData{ binding, data });
 	}
 
-	void DescriptorSet::UpdateBuffer(uint32_t binding, void* data)
+	void DescriptorSet::UpdateBuffer(uint32_t binding, const void* data)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto buffer = std::get<BufferBindingData>(m_Bindings[binding].data).buffer;
 
 		buffer->WriteToBuffer(data);
@@ -43,8 +55,10 @@ namespace Neptune::Vulkan {
 		buffer->Flush();
 	}
 
-	void DescriptorSet::UpdateTexture(uint32_t binding, SP<RenderTarget> renderTarget)
+	void DescriptorSet::UpdateTexture(uint32_t binding, const SP<RenderTarget>& renderTarget)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto& imageInfos = std::get<ImageBindingData>(m_Bindings[binding].data).imageInfos;
 
 		imageInfos[0].imageLayout       = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
@@ -64,6 +78,8 @@ namespace Neptune::Vulkan {
 
 	void DescriptorSet::BuildDescriptorSet()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		CreateDescriptorSetLayout();
 
 		VkDescriptorSetAllocateInfo        allocInfo{};
@@ -79,6 +95,8 @@ namespace Neptune::Vulkan {
 
 	void DescriptorSet::UpdateDescriptorSet()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		for (int i = 0; i < m_Bindings.size(); ++i)
 		{
 			const auto& binding = m_Bindings[i];
@@ -91,20 +109,25 @@ namespace Neptune::Vulkan {
 
 			switch (write.descriptorType)
 			{
-			case VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:
-			case VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER:
-			case VK_DESCRIPTOR_TYPE_STORAGE_IMAGE:
-			{
-				auto& imageInfos            = std::get<ImageBindingData>(binding.data).imageInfos;
-				write.pImageInfo            = imageInfos.data();
-				write.descriptorCount       = imageInfos.size();
-				break;
-			}
-			case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER:
-			case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:
-				write.pBufferInfo           = &std::get<BufferBindingData>(binding.data).bufferInfo;
-				write.descriptorCount       = 1;
-				break;
+				case VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:
+				case VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER:
+				case VK_DESCRIPTOR_TYPE_STORAGE_IMAGE:
+				{
+					auto& imageInfos            = std::get<ImageBindingData>(binding.data).imageInfos;
+					write.pImageInfo            = imageInfos.data();
+					write.descriptorCount       = imageInfos.size();
+					break;
+				}
+				case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER:
+				case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:
+					write.pBufferInfo           = &std::get<BufferBindingData>(binding.data).bufferInfo;
+					write.descriptorCount       = 1;
+					break;
+				default:
+				{
+					NEPTUNE_CORE_WARN("Invalid VkDescriptorType in UpdateDescriptorSet.")
+					break;
+				}
 			}
 
 			m_DescriptorSet.UpdateDescriptorSet(write);
@@ -113,6 +136,8 @@ namespace Neptune::Vulkan {
 
 	void DescriptorSet::CreateDescriptorSetLayout()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		std::vector<VkDescriptorSetLayoutBinding> setBindings{};
 		std::vector<VkDescriptorBindingFlags> setBindingFlags{};
 

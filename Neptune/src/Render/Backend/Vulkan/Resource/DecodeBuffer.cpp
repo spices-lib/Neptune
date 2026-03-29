@@ -1,3 +1,9 @@
+/**
+* @file DecodeBuffer.cpp.
+* @brief The DecodeBuffer Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "DecodeBuffer.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
@@ -12,6 +18,8 @@ namespace Neptune::Vulkan {
 
 	void DecodeBuffer::CreateBuffer(VkDeviceSize size)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto physicalDevice = GetContext().Get<IPhysicalDevice>();
 
 		VkVideoDecodeH265ProfileInfoKHR             decodeH265Profile{};
@@ -47,6 +55,8 @@ namespace Neptune::Vulkan {
 
 	void DecodeBuffer::WriteToBuffer(const void* data, VkDeviceSize size, VkDeviceSize offset)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		/*VkVideoDecodeH265ProfileInfoKHR           decodeH265Profile{};
 		decodeH265Profile.sType                   = VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_INFO_KHR;
 		decodeH265Profile.stdProfileIdc           = STD_VIDEO_H265_PROFILE_IDC_MAIN;
@@ -71,21 +81,25 @@ namespace Neptune::Vulkan {
 		m_Buffer.WriteToBuffer(data, size, offset);
 	}
 
-	VkDeviceSize DecodeBuffer::SetSliceStartCodeAtOffset(VkDeviceSize indx)
+	VkDeviceSize DecodeBuffer::SetSliceStartCodeAtOffset(VkDeviceSize index)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint8_t* data = static_cast<uint8_t*>(m_Buffer.Data());
 
-		assert(data && indx < m_Buffer.Size());
+		assert(data && index < m_Buffer.Size());
 
-		data[indx + 0] = 0x00;
-		data[indx + 1] = 0x00;
-		data[indx + 2] = 0x01;
+		data[index + 0] = 0x00;
+		data[index + 1] = 0x00;
+		data[index + 2] = 0x01;
 
 		return 3;
 	}
 
 	bool DecodeBuffer::HasSliceStartCodeAtOffset(VkDeviceSize indx) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		assert(indx < m_Buffer.Size());
 
 		const uint8_t* data = static_cast<uint8_t*>(m_Buffer.Data());
@@ -95,20 +109,26 @@ namespace Neptune::Vulkan {
 
 	uint8_t* DecodeBuffer::HostData()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		return static_cast<uint8_t*>(m_Buffer.Data());
 	}
 
-	uint8_t DecodeBuffer::Read(VkDeviceSize indx) const
+	uint8_t DecodeBuffer::Read(VkDeviceSize index) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		const uint8_t* data = static_cast<uint8_t*>(m_Buffer.Data());
 
-		assert(data && indx < m_Buffer.Size());
+		assert(data && index < m_Buffer.Size());
 
-		return data[indx];
+		return data[index];
 	}
 
 	uint32_t DecodeBuffer::AddStreamMarker(uint32_t streamOffset)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_StreamMarkers.emplace_back(streamOffset);
 
 		return (uint32_t)(m_StreamMarkers.size() - 1);
@@ -116,6 +136,8 @@ namespace Neptune::Vulkan {
 
 	uint32_t DecodeBuffer::ResetStreamMarkers()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint32_t oldSize = (uint32_t)m_StreamMarkers.size();
 
 		m_StreamMarkers.clear();
@@ -125,7 +147,10 @@ namespace Neptune::Vulkan {
 
 	const uint32_t* DecodeBuffer::GetStreamMarkersPtr(uint32_t startIndex, uint32_t& maxCount) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		maxCount = (uint32_t)m_StreamMarkers.size() - startIndex;
+
 		return m_StreamMarkers.data() + startIndex;
 	}
 }

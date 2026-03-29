@@ -46,7 +46,7 @@ namespace Neptune::Vulkan {
     {
         NEPTUNE_PROFILE_ZONE
 
-        switch (GetInfrastructure())
+        switch (GetEInfrastructure())
 		{
 			case EInfrastructure::GraphicCommandBuffer:		return GetContext().Get<IGraphicCommandPool>()->Handle();
 			case EInfrastructure::ComputeCommandBuffer:     return GetContext().Get<IComputeCommandPool>()->Handle();

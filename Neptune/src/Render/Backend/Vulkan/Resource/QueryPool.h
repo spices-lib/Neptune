@@ -1,3 +1,9 @@
+/**
+* @file QueryPool.h.
+* @brief The QueryPool Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
@@ -5,30 +11,76 @@
 
 namespace Neptune::Vulkan {
 
+	/**
+	* @brief Vulkan::QueryPool Class.
+	* This class defines the Vulkan::QueryPool behaves.
+	*/
 	class QueryPool : public ContextAccessor
 	{
 	public:
 
-		QueryPool(Context& context) : ContextAccessor(context) {}
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		*/
+		explicit QueryPool(Context& context) : ContextAccessor(context) {}
+
+		/**
+		* @brief Destructor Function.
+		*/
 		~QueryPool() override = default;
 
+		/**
+		* @brief Get Unit Handle.
+		*
+		* @return Returns Unit Handle.
+		*/
 		const Unit::QueryPool::Handle& Handle() const { return m_Pool.GetHandle(); }
 
+		/**
+		* @brief Get VkQueryControlFlags.
+		*
+		* @return Returns VkQueryControlFlags.
+		*/
 		VkQueryControlFlags Flag() const { return m_Flag; }
 
+		/**
+		* @brief Get query count.
+		*
+		* @return Returns query count.
+		*/
 		uint32_t Count() const { return m_Count; }
 
+		/**
+		* @brief Create Query Pool.
+		*
+		* @param[in] info VkQueryPoolCreateInfo.
+		* @param[in] stride Query stride.
+		*/
 		void CreateQueryPool(const VkQueryPoolCreateInfo& info, uint32_t stride);
 
+		/**
+		* @brief Get Query Pool Result.
+		*
+		* @return Returns Query Pool Result.
+		*/
 		std::vector<uint64_t> GetQueryPoolResult();
 
+		/**
+		* @brief Get Query Pool Result.
+		*
+		* @param[in] index Query index.
+		* 
+		* @return Returns Query Pool Result.
+		*/
 		uint64_t GetQueryPoolResult(uint32_t index);
 
 	private:
 
-		Unit::QueryPool       m_Pool;
-		VkQueryControlFlags   m_Flag;
-		uint32_t              m_Count;
-		uint32_t              m_Stride;
+		Unit::QueryPool       m_Pool;            // @brief This QueryPool.
+		VkQueryControlFlags   m_Flag{};          // @brief VkQueryControlFlags.
+		uint32_t              m_Count{};         // @brief Count.
+		uint32_t              m_Stride{};        // @brief Stride.
 	};
 }

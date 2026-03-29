@@ -1,3 +1,9 @@
+/**
+* @file DecodeBuffer.cpp.
+* @brief The DecodeBuffer Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "DecodePictureBuffer.h"
 
@@ -5,6 +11,8 @@ namespace Neptune::Vulkan {
 
 	void DecodePictureBuffer::CreateImage(VkImageCreateInfo& info, uint32_t count)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		for (int i = 0; i < count; i++)
 		{
 			auto image = CreateSP<Image>(GetContext());
@@ -26,23 +34,29 @@ namespace Neptune::Vulkan {
 		}
 	}
 
-	void DecodePictureBuffer::CreateImageView(VkImageViewCreateInfo& info, uint32_t index)
+	void DecodePictureBuffer::CreateImageView(VkImageViewCreateInfo& info, uint32_t index) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Image[index]->CreateImageView(info);
 
 		m_Image[index]->SetName("DecodeImageBuffer");
 	}
 
-	void DecodePictureBuffer::TransitionLayout(VkImageLayout newLayout)
+	void DecodePictureBuffer::TransitionLayout(VkImageLayout newLayout) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		for (int i = 0; i < m_Image.size(); i++)
 		{
 			m_Image[i]->TransitionLayout(newLayout);
 		}
 	}
 
-	uint8_t DecodePictureBuffer::PopDecodeSlot()
+	const uint8_t DecodePictureBuffer::PopDecodeSlot()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_DecodeSlot = m_SpareSlots.front();
 
 		m_SpareSlots.pop();
@@ -54,6 +68,8 @@ namespace Neptune::Vulkan {
 
 	void DecodePictureBuffer::PushDecodeSlots(const std::bitset<MaxDPBSlots>& spareSlots)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		for (int i = 0; i < m_MaxDPBSlots; i++)
 		{
 			if (spareSlots.test(i) && !m_SlotState.test(i))

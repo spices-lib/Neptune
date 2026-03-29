@@ -1,3 +1,9 @@
+/**
+* @file QueryPool.cpp.
+* @brief The QueryPool Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "QueryPool.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
@@ -8,9 +14,11 @@ namespace Neptune::Vulkan {
 
 	void QueryPool::CreateQueryPool(const VkQueryPoolCreateInfo& info, uint32_t stride)
 	{
-		m_Count  = info.queryCount;
-		m_Stride = stride;
-		m_Flag   = 0;
+		NEPTUNE_PROFILE_ZONE
+
+		m_Count           = info.queryCount;
+		m_Stride          = stride;
+		m_Flag            = 0;
 
 		if (info.queryType & VK_QUERY_TYPE_OCCLUSION)
 		{
@@ -24,11 +32,15 @@ namespace Neptune::Vulkan {
 
 	std::vector<uint64_t> QueryPool::GetQueryPoolResult()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		return m_Pool.GetQueryPoolResult(0, m_Count, m_Stride);
 	}
 
 	uint64_t QueryPool::GetQueryPoolResult(uint32_t index)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		return m_Pool.GetQueryPoolResult(index, 1, m_Stride)[0];
 	}
 }

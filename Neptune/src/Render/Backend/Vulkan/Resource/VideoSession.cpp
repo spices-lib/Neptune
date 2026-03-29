@@ -1,3 +1,9 @@
+/**
+* @file VideoSession.cpp.
+* @brief The VideoSession Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "VideoSession.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
@@ -5,7 +11,6 @@
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/Resource/DecodeBuffer.h"
 #include "Render/Backend/Vulkan/Resource/QueryPool.h"
-#include "Core/Math/Math.h"
 
 namespace Neptune::Vulkan {
 
@@ -20,6 +25,8 @@ namespace Neptune::Vulkan {
 		: ContextAccessor(context)
 		, m_DPB(context)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Session.SetFunctor(
 			GetContext().Get<IFunctions>()->vkCreateVideoSessionKHR, 
 			GetContext().Get<IFunctions>()->vkDestroyVideoSessionKHR,
@@ -37,6 +44,8 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::CreateBuffer(VkDeviceSize size)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Buffer = CreateSP<DecodeBuffer>(GetContext());
 
 		m_Buffer->CreateBuffer(size);
@@ -44,11 +53,13 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::CreateVideoSession(const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height, uint32_t slots)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto property = GetContext().Get<IPhysicalDevice>()->QueryVideoSessionProperty(profile);
 		m_DstFormat   = property.dstFormat;
 
 		VkVideoSessionCreateFlagsKHR                sessionFlags{};
-	    sessionFlags                             |= VK_VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR;  // Enable if use inline query pool
+	    sessionFlags                             |= VK_VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR;  // Enable if you use inline query pool
 
 		static constexpr VkExtensionProperties h264DecodeStdVersion = { VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_EXTENSION_NAME, VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION };
 		static constexpr VkExtensionProperties h265DecodeStdVersion = { VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_EXTENSION_NAME, VK_STD_VULKAN_VIDEO_CODEC_H265_DECODE_SPEC_VERSION };
@@ -81,7 +92,7 @@ namespace Neptune::Vulkan {
 			case VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR:  info.pStdHeaderVersion = &av1EncodeStdVersion ; break;
 			default:
 			{
-				CORE_ERROR("Invalid VkVideoCodecOperationFlagBitsKHR in Calling CreateVideoSession()");
+				NEPTUNE_CORE_ERROR("Invalid VkVideoCodecOperationFlagBitsKHR in Calling CreateVideoSession()");
 				return;
 			}
 		}
@@ -139,6 +150,8 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::CreateQueryPool(const VkVideoProfileInfoKHR& profile, uint32_t slot)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkQueryPoolCreateInfo             info{};
 		info.sType                      = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
 		info.queryType                  = VK_QUERY_TYPE_RESULT_STATUS_ONLY_KHR;
@@ -153,6 +166,8 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::CreateVideoSessionParameters(VkVideoCodecOperationFlagsKHR op)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkVideoDecodeH264SessionParametersCreateInfoKHR    decodeH264CreateInfo{};
 		VkVideoDecodeH265SessionParametersCreateInfoKHR    decodeH265CreateInfo{};
 		VkVideoDecodeAV1SessionParametersCreateInfoKHR     decodeAV1CreateInfo{};
@@ -198,7 +213,7 @@ namespace Neptune::Vulkan {
 			}
 			default:
 			{
-				CORE_ERROR("Invalid VideoOperation in Calling CreateVideoSessionParameters()");
+				NEPTUNE_CORE_ERROR("Invalid VideoOperation in Calling CreateVideoSessionParameters()");
 				return;
 			}
 		}
@@ -210,6 +225,8 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::CreateDecodePictureBuffer(const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height, uint32_t slot, VkFormat format)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		{
             VkVideoProfileListInfoKHR                          profileList{};
             profileList.sType                                = VK_STRUCTURE_TYPE_VIDEO_PROFILE_LIST_INFO_KHR;
@@ -276,6 +293,8 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::CreateSamplerYcbcrConversion()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkSamplerYcbcrConversionCreateInfo                     info{};
 		info.sType                                           = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
 		info.format                                          = m_DstFormat;
@@ -293,8 +312,10 @@ namespace Neptune::Vulkan {
 		m_Conversion.CreateSamplerYcbcrConversion(GetContext().Get<IDevice>()->Handle(), info);
 	}
 
-	void VideoSession::CreateDecodeRenderTarget(SP<RenderTarget> rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height)
+	void VideoSession::CreateDecodeRenderTarget(SP<RenderTarget> rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto image = CreateSP<Image>(GetContext());
 
 		VkSamplerYcbcrConversionInfo                           conversionInfo{};
@@ -401,8 +422,10 @@ namespace Neptune::Vulkan {
 		rt->SetImage(image);
 	}
 
-	void VideoSession::CreateFlowVectorRenderTarget(SP<class RenderTarget> rt, uint32_t width, uint32_t height)
+	void VideoSession::CreateFlowVectorRenderTarget(SP<class RenderTarget> rt, uint32_t width, uint32_t height) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto image = CreateSP<Image>(GetContext());
 
 		{
@@ -488,8 +511,10 @@ namespace Neptune::Vulkan {
 		rt->SetImage(image);
 	}
 
-	void VideoSession::AddVideoSessionParameters(SP<StdVideoPictureParametersSet> param)
+	void VideoSession::AddVideoSessionParameters(const SP<StdVideoPictureParametersSet>& param)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint8_t set = 0;
 
 		switch (param->GetStdType())
@@ -501,7 +526,7 @@ namespace Neptune::Vulkan {
 			case StdVideoPictureParametersSet::StdType::TYPE_H265_PPS: set = param->GetStdH265Pps()->pps_seq_parameter_set_id;   break;
 			default:
 			{
-				CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()");
+				NEPTUNE_CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()");
 				return;
 			}
 		}
@@ -509,8 +534,10 @@ namespace Neptune::Vulkan {
 		m_ParameterSets[param->GetParameterType()][set] = param;
 	}
 
-	bool VideoSession::GetDecodeResult()
+	bool VideoSession::GetDecodeResult() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto result = m_QueryPool->GetQueryPoolResult(m_DPB.DecodeSlot());
 		
 		return result == VK_QUERY_RESULT_STATUS_COMPLETE_KHR;
@@ -518,11 +545,15 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::PushDisplaySlot(uint8_t slot)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_DisplaySlots.push(slot);
 	}
 
 	uint8_t VideoSession::PopDisplaySlot()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto slot = m_DisplaySlots.front();
 
 		m_DisplaySlots.pop();
@@ -532,6 +563,8 @@ namespace Neptune::Vulkan {
 
 	void VideoSession::UpdateVideoSessionParameters()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		uint32_t count = 0;
 
 		for (auto& paramSets : m_ParameterSets | std::ranges::views::values)
@@ -594,7 +627,7 @@ namespace Neptune::Vulkan {
 					}
 					default:
 					{
-						CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()");
+						NEPTUNE_CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()");
 						return;
 					}
 				}
