@@ -1,19 +1,27 @@
+/**
+* @file OpticalFlowSession.cpp.
+* @brief The OpticalFlowSession Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "OpticalFlowSession.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/Functions.h"
 #include "Render/Backend/Vulkan/Infrastructure/Device.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
-#include "Render/Frontend/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/Resource/Image.h"
 #include "Render/Backend/Vulkan/RHI/CmdList2.h"
+#include "Render/Frontend/RHI/RenderTarget.h"
 
 namespace Neptune::Vulkan {
 
 	OpticalFlowSession::OpticalFlowSession(Context& context)
 		: ContextAccessor(context)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Session.SetFunctor(
 			GetContext().Get<IFunctions>()->vkCreateOpticalFlowSessionNV,
 			GetContext().Get<IFunctions>()->vkDestroyOpticalFlowSessionNV,
@@ -23,6 +31,8 @@ namespace Neptune::Vulkan {
 
 	void OpticalFlowSession::SetInputRenderTarget(SP<RHI::RenderTarget> rt)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto rhi = rt->GetRHIImpl<RenderTarget>();
 
 		m_SessionImages[VK_OPTICAL_FLOW_SESSION_BINDING_POINT_INPUT_NV] = rhi->IHandle().get();
@@ -30,6 +40,8 @@ namespace Neptune::Vulkan {
 
 	void OpticalFlowSession::SetReferenceRenderTarget(SP<RHI::RenderTarget> rt)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto rhi = rt->GetRHIImpl<RenderTarget>();
 
 		m_SessionImages[VK_OPTICAL_FLOW_SESSION_BINDING_POINT_REFERENCE_NV] = rhi->IHandle().get();
@@ -37,6 +49,8 @@ namespace Neptune::Vulkan {
 
 	void OpticalFlowSession::SetFlowVectorRenderTarget(SP<RHI::RenderTarget> rt)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto rhi = rt->GetRHIImpl<RenderTarget>();
 
 		m_SessionImages[VK_OPTICAL_FLOW_SESSION_BINDING_POINT_FLOW_VECTOR_NV] = rhi->IHandle().get();
@@ -44,6 +58,8 @@ namespace Neptune::Vulkan {
 
 	void OpticalFlowSession::OpticalFlowExecute()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		CmdList2 cmdList(GetContext());
 
 		cmdList.SetOpticalFlowCmdList();
@@ -61,6 +77,8 @@ namespace Neptune::Vulkan {
 
 	bool OpticalFlowSession::CreateOpticalFlowSession()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto reference = m_SessionImages[VK_OPTICAL_FLOW_SESSION_BINDING_POINT_REFERENCE_NV];
 		auto output    = m_SessionImages[VK_OPTICAL_FLOW_SESSION_BINDING_POINT_FLOW_VECTOR_NV];
 
@@ -87,8 +105,10 @@ namespace Neptune::Vulkan {
 		return true;
 	}
 
-	void OpticalFlowSession::BindSessionImages()
+	void OpticalFlowSession::BindSessionImages() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		for (const auto& image : m_SessionImages)
 		{
 			m_Session.BindOpticalFlowSessionImage(image.first, image.second->GetView(), image.second->GetLayout());

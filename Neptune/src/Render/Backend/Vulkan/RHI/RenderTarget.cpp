@@ -1,3 +1,9 @@
+/**
+* @file RenderTarget.cpp.
+* @brief The RenderTarget Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "RenderTarget.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
@@ -11,11 +17,15 @@ namespace Neptune::Vulkan {
 
 	void RenderTarget::CreateRenderTarget(const RenderTargetCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		CreateColorRenderTarget(info);
 	}
 
 	void* RenderTarget::CreateBindingID()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkDescriptorImageInfo                               imageInfo{};
 		imageInfo.imageLayout                             = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 		imageInfo.imageView                               = m_Image->GetView();
@@ -38,13 +48,17 @@ namespace Neptune::Vulkan {
 
 	bool RenderTarget::CopyToRenderTarget(SP<RHI::RenderTarget> target)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto rhi = target->GetRHIImpl<RenderTarget>();
 
 		return CopyToRenderTarget(rhi);
 	}
 
-	bool RenderTarget::CopyToRenderTarget(SP<RenderTarget> target)
+	bool RenderTarget::CopyToRenderTarget(SP<RenderTarget> target) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		CmdList2 cmdList(GetContext());
 
 		cmdList.SetGraphicCmdList();
@@ -114,11 +128,15 @@ namespace Neptune::Vulkan {
 
 	TextureFormat RenderTarget::GetFormat() const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		return ToTextureFormat(m_Image->GetFormat());
 	}
 
 	void RenderTarget::CreateColorRenderTarget(const RenderTargetCreateInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Image = CreateSP<Image>(GetContext());
 
 		{

@@ -21,6 +21,8 @@ namespace Neptune::Vulkan {
 
 	void CmdList::SetGraphicCmdList(const Data::Clock& clock)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_FrameIndex = clock.m_FrameIndex;
 		m_ImageIndex = clock.m_ImageIndex;
 
@@ -31,7 +33,9 @@ namespace Neptune::Vulkan {
 
 	void CmdList::CmdDrawSlate() const
 	{
-		const ImGuiIO& io = ImGui::GetIO();
+		NEPTUNE_PROFILE_ZONE
+
+		/*const ImGuiIO& io = ImGui::GetIO();
 
 		ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_CommandBuffer->GetHandle());
 
@@ -39,54 +43,66 @@ namespace Neptune::Vulkan {
 		{
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
-		}
+		}*/
 	}
 
 	void CmdList::CmdBeginRenderPass() const
 	{
-		m_RenderPass->BeginRenderPass(*m_CommandBuffer, m_ImageIndex);
+		NEPTUNE_PROFILE_ZONE
+
+		m_RenderPass.lock()->BeginRenderPass(m_CommandBuffer, m_ImageIndex);
 	}
 
 	void CmdList::CmdEndRenderPass() const
 	{
-		m_CommandBuffer->EndRenderPass();
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->EndRenderPass();
 	}
 
-	void CmdList::CmdBindDescriptor(SP<RHI::DescriptorList> descriptorList) const
+	void CmdList::CmdBindDescriptor(const WP<RHI::DescriptorList>& descriptorList) const
 	{
-		auto sharedRhi = dynamic_cast<DescriptorList*>(descriptorList->GetSharedImpl());
+		NEPTUNE_PROFILE_ZONE
 
-		auto rhi = descriptorList->GetRHIImpl<DescriptorList>();
+		auto sharedRhi = std::dynamic_pointer_cast<DescriptorList>(descriptorList.lock()->GetSharedImpl().lock());
+
+		auto rhi = descriptorList.lock()->GetRHIImpl<DescriptorList>().lock();
 
 		for (const auto& set : sharedRhi->GetSets())
 		{
-			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
+			m_CommandBuffer.lock()->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
 		}
 
 		for (const auto& set : rhi->GetSets())
 		{
-			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
+			m_CommandBuffer.lock()->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
 		}
 	}
 
-	void CmdList::CmdBindPipeline(SP<RHI::Pipeline> pipeline)
+	void CmdList::CmdBindPipeline(const WP<RHI::Pipeline>& pipeline)
 	{
-		auto rhi = pipeline->GetRHIImpl<Pipeline>();
+		NEPTUNE_PROFILE_ZONE
+
+		auto rhi = pipeline.lock()->GetRHIImpl<Pipeline>().lock();
 
 		assert(rhi->GetBindPoint() == m_BindPoint);
 
 		m_PipelineLayout = rhi->GetPipelineLayout();
 
-		m_CommandBuffer->BindPipeline(rhi->GetBindPoint(), rhi->Handle());
+		m_CommandBuffer.lock()->BindPipeline(rhi->GetBindPoint(), rhi->Handle());
 	}
 
 	void CmdList::CmdDrawFullScreenTriangle() const
 	{
-		m_CommandBuffer->Draw(3, 1, 0, 0);
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->Draw(3, 1, 0, 0);
 	}
 
 	void CmdList::CmdSetViewport(const glm::vec2& viewPortSize) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkViewport                     viewport{};
 		viewport.x                  =  0.0f;
 		viewport.y                  =  viewPortSize.y;
@@ -103,35 +119,48 @@ namespace Neptune::Vulkan {
 		scissor.offset              = { 0, 0 };
 		scissor.extent              = extent;
 			
-		m_CommandBuffer->SetViewport(viewport);
+		m_CommandBuffer.lock()->SetViewport(viewport);
 
-		m_CommandBuffer->SetScissor(scissor);
+		m_CommandBuffer.lock()->SetScissor(scissor);
 	}
 
-	void CmdList::SetRenderPass(SP<RHI::RenderPass> renderPass)
+	void CmdList::SetRenderPass(const WP<RHI::RenderPass>& renderPass)
 	{
-		m_RenderPass = renderPass->GetRHIImpl<RenderPass>();
+		NEPTUNE_PROFILE_ZONE
+
+		m_RenderPass = renderPass.lock()->GetRHIImpl<RenderPass>();
 	}
 
-	void CmdList::SetQueryPool(SP<QueryPool> queryPool)
+	void CmdList::SetQueryPool(const WP<QueryPool>& queryPool)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_QueryPool = queryPool;
 	}
 
 	void CmdList::CmdCopyImage(VkImage src, VkImage dst, const VkImageCopy& region) const
 	{
-		m_CommandBuffer->CopyImage(src, dst, region);
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->CopyImage(src, dst, region);
 	}
 
 	void CmdList::CmdPipelineBarrier(VkPipelineStageFlags srcMask, VkPipelineStageFlags dstMask, const VkImageMemoryBarrier& barrier) const
 	{
-		m_CommandBuffer->PipelineBarrier(srcMask, dstMask, barrier);
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->PipelineBarrier(srcMask, dstMask, barrier);
 	}
 
-	void CmdList::CmdTransitionLayout(SP<Image> image, VkImageLayout newLayout) const
+	void CmdList::CmdTransitionLayout(const WP<Image>& imageRef, VkImageLayout newLayout) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
+		auto image = imageRef.lock();
+		
 		VkPipelineStageFlags sourceStage;
 		VkPipelineStageFlags destinationStage;
+
 		auto oldLayout = image->GetLayout();
 
 		VkImageMemoryBarrier                           barrier{};
@@ -244,7 +273,7 @@ namespace Neptune::Vulkan {
 		}
 		else 
 		{
-			CORE_WARN("Unsupported Vulkan Image Layout Transition!");
+			NEPTUNE_CORE_WARN("Unsupported Vulkan Image Layout Transition!");
 			return;
 		}
 		if (newLayout == VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL) 
@@ -268,21 +297,29 @@ namespace Neptune::Vulkan {
 
 	void CmdList::CmdBeginQuery(uint32_t index) const
 	{
-		m_CommandBuffer->BeginQuery(m_QueryPool->Handle(), index, m_QueryPool->Flag());
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->BeginQuery(m_QueryPool.lock()->Handle(), index, m_QueryPool.lock()->Flag());
 	}
 
 	void CmdList::CmdEndQuery(uint32_t index) const
 	{
-		m_CommandBuffer->EndQuery(m_QueryPool->Handle(), index);
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->EndQuery(m_QueryPool.lock()->Handle(), index);
 	}
 
 	void CmdList::CmdWriteTimeStamp(uint32_t index) const
 	{
-		m_CommandBuffer->WriteTimeStamp(m_QueryPool->Handle(), index);
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->WriteTimeStamp(m_QueryPool.lock()->Handle(), index);
 	}
 
 	void CmdList::CmdResetQueryPool() const
 	{
-		m_CommandBuffer->ResetQueryPool(m_QueryPool->Handle(), m_QueryPool->Count());
+		NEPTUNE_PROFILE_ZONE
+
+		m_CommandBuffer.lock()->ResetQueryPool(m_QueryPool.lock()->Handle(), m_QueryPool.lock()->Count());
 	}
 }

@@ -101,8 +101,6 @@ namespace Neptune::RHI {
 		*/
 		void SetSharedLayout() const;
 
-	private:
-
 		/**
 		* @brief Get Shared DescriptorList impl.
 		* 

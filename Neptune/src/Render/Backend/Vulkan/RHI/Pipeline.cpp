@@ -1,3 +1,9 @@
+/**
+* @file Pipeline.cpp.
+* @brief The Pipeline Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Pipeline.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
@@ -10,6 +16,8 @@ namespace Neptune::Vulkan {
 
 	void Pipeline::SetDefault()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		{
 			VkPipelineInputAssemblyStateCreateInfo     info{};
 			info.sType                               = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -110,6 +118,8 @@ namespace Neptune::Vulkan {
 
 	void Pipeline::SetRenderPass(SP<RHI::RenderPass> renderPass)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto& colorBlends = renderPass->GetRHIImpl<RenderPass>()->GetColorBlends();
 
 		m_ColorBlendInfo.attachmentCount = colorBlends.size();
@@ -125,6 +135,8 @@ namespace Neptune::Vulkan {
 
 	void Pipeline::SetDescriptorList(SP<RHI::DescriptorList> descriptorList)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto& layouts = descriptorList->GetRHIImpl<DescriptorList>()->GetLayouts();
 
 		VkPipelineLayoutCreateInfo                      info{};
@@ -141,11 +153,15 @@ namespace Neptune::Vulkan {
 
 	void Pipeline::SetCullMode(CullMode mode)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_RasterizationInfo.cullMode = ToVkCullModeFlags(mode);
 	}
 
 	void Pipeline::AddShader(ShaderStage stage, SP<RHI::Shader> shader)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto p = shader->GetRHIImpl<Shader>();
 
 		VkPipelineShaderStageCreateInfo                       info{};
@@ -162,6 +178,8 @@ namespace Neptune::Vulkan {
 
 	void Pipeline::BuildGraphicPipeline()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkPipelineVertexInputStateCreateInfo                  inputInfo{};
 		inputInfo.sType                                     = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
 		inputInfo.vertexAttributeDescriptionCount           = m_AttributeDescriptions.size();

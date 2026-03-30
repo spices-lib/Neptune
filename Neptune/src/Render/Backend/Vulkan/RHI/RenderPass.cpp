@@ -1,16 +1,23 @@
+/**
+* @file RenderPass.cpp.
+* @brief The RenderPass Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "RenderPass.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 #include "Render/Backend/Vulkan/Infrastructure/SwapChain.h"
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"
-#include "Render/Backend/Vulkan/Unit/ImageView.h"
 #include "Render/Backend/Vulkan/Converter.h"
 
 namespace Neptune::Vulkan {
 
 	void RenderPass::AddSwapChainAttachment()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkAttachmentDescription                       description{};
 		description.format                          = GetContext().Get<IPhysicalDevice>()->GetSwapChainProperty().format.format;
 		description.samples                         = VK_SAMPLE_COUNT_1_BIT;
@@ -49,6 +56,8 @@ namespace Neptune::Vulkan {
 
 	void RenderPass::AddColorAttachment(SP<RHI::RenderTarget> renderTarget, const RenderTargetAttachmentInfo& info)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkAttachmentDescription                       description{};
 		description.format                          = ToVkFormat(renderTarget->GetFormat());
 		description.samples                         = VK_SAMPLE_COUNT_1_BIT;
@@ -102,6 +111,8 @@ namespace Neptune::Vulkan {
 
 	void RenderPass::Build(uint32_t count)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		{
 			VkSubpassDescription                          description{};
 			description.pipelineBindPoint               = VK_PIPELINE_BIND_POINT_GRAPHICS;
@@ -155,8 +166,10 @@ namespace Neptune::Vulkan {
 		}
 	}
 
-	void RenderPass::BeginRenderPass(const Unit::CommandBuffer& commandBuffer, uint32_t frameBufferIndex) const
+	void RenderPass::BeginRenderPass(const WP<Unit::CommandBuffer>& commandBuffer, uint32_t frameBufferIndex) const
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		VkRenderPassBeginInfo                         info{};
 		info.sType                                  = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 		info.renderPass                             = Handle();
@@ -166,11 +179,13 @@ namespace Neptune::Vulkan {
 		info.clearValueCount                        = m_ClearValues.size();
 		info.pClearValues                           = m_ClearValues.data();
 
-		commandBuffer.BeginRenderPass(info, VK_SUBPASS_CONTENTS_INLINE);
+		commandBuffer.lock()->BeginRenderPass(info, VK_SUBPASS_CONTENTS_INLINE);
 	}
 
 	void RenderPass::StoreExtent(const VkExtent2D& extent)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		if (m_Extent.has_value()) return;
 
 		m_Extent = extent;

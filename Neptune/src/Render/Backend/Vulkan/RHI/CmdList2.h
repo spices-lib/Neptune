@@ -1,3 +1,9 @@
+/**
+* @file CmdList2.h.
+* @brief The CmdList2 Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
@@ -11,43 +17,107 @@ namespace Neptune::Vulkan {
 	class VideoSession;
 	class OpticalFlowSession;
 
+	/**
+	* @brief Vulkan::CmdList2 Class.
+	* This class defines the Vulkan::CmdList2 behaves.
+	*/
 	class CmdList2 : public CmdList, public RHI::RHICmdList2::Impl
 	{
 	public:
 
-		CmdList2(Context& context) : CmdList(context) {}
+		/**
+		* @brief Constructor Function.
+		* 
+		* @param[in] context Context.
+		*/
+		explicit CmdList2(Context& context) : CmdList(context) {}
+
+		/**
+		* @brief Destructor Function.
+		*/
 		~CmdList2() override = default;
 
+	public:
+
+		/**
+		* @brief Interface of Begin CommandList.
+		*/
 		void Begin() override;
 
+		/**
+		* @brief Interface of End CommandList.
+		*/
 		void End() override;
 
+		/**
+		* @brief Interface of Submit CommandList and Wait.
+		*/
 		void SubmitWait() override;
 
+		/**
+		* @brief Interface of Set Graphic CommandList Context.
+		*/
 		void SetGraphicCmdList() override;
 
+		/**
+		* @brief Interface of Set VideoDecode CommandList Context.
+		*/
 		void SetVideoDecodeCmdList() override;
 
+		/**
+		* @brief Interface of Set OpticalFlow CommandList Context.
+		*/
 		void SetOpticalFlowCmdList() override;
 
-		void SetVideoSession(SP<VideoSession> videoSession);
+	public:
 
-		void SetOpticalFlowSession(OpticalFlowSession* opticalFlowSession);
+		/**
+		* @brief Set VideoSession.
+		* 
+		* @param[in] videoSession VideoSession.
+		*/
+		void SetVideoSession(const WP<VideoSession>& videoSession);
 
+		/**
+		* @brief Set OpticalFlowSession.
+		*
+		* @param[in] opticalFlowSession OpticalFlowSession.
+		*/
+		void SetOpticalFlowSession(const WP<OpticalFlowSession>& opticalFlowSession);
+
+		/**
+		* @brief Begin VideoCoding.
+		*
+		* @param[in] info VkVideoBeginCodingInfoKHR.
+		*/
 		void CmdBeginVideoCoding(const VkVideoBeginCodingInfoKHR& info) const;
 
+		/**
+		* @brief Control VideoCoding.
+		*/
 		void CmdControlVideoCoding() const;
 
+		/**
+		* @brief DecodeVideo.
+		*
+		* @param[in] info VkVideoDecodeInfoKHR.
+		*/
 		void CmdDecodeVideo(const VkVideoDecodeInfoKHR& info) const;
 
+		/**
+		* @brief End VideoCoding.
+		*/
 		void CmdEndVideoCoding() const;
 
+		/**
+		* @brief OpticalFlow Execute.
+		*/
 		void CmdOpticalFlowExecute() const;
 
 	private:
 
-		SP<ThreadQueue>        m_ThreadQueue        = nullptr;
-		SP<VideoSession>       m_VideoSession       = nullptr;
-		OpticalFlowSession* m_OpticalFlowSession = nullptr;
+		WP<ThreadQueue>        m_ThreadQueue;               // @brief ThreadQueue
+		WP<VideoSession>       m_VideoSession;              // @brief VideoSession
+		WP<OpticalFlowSession> m_OpticalFlowSession;        // @brief OpticalFlowSession
 	};
 }
