@@ -1,14 +1,14 @@
+/**
+* @file CmdList.h.
+* @brief The CmdList Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/CommandBuffer.h"
 #include "Render/Frontend/RHI/CmdList.h"
-
-namespace Neptune::Data {
-
-	struct Clock;
-
-}
 
 namespace Neptune::RHI {
 
@@ -24,13 +24,31 @@ namespace Neptune::Vulkan {
 	class Image;
 	class QueryPool;
 
+	/**
+	* @brief Vulkan::CmdList Class.
+	* This class defines the Vulkan::CmdList behaves.
+	*/
 	class CmdList : public ContextAccessor, public RHI::RHICmdList::Impl
 	{
 	public:
 
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		*/
 		CmdList(Context& context) : ContextAccessor(context) {}
+
+		/**
+		* @brief Destructor Function.
+		*/
 		~CmdList() override = default;
 
+		/**
+		* @brief Set Main Thread Graphic Context.
+		* 
+		* @param[in] clock Clock.
+		*/
 		void SetGraphicCmdList(const Data::Clock& clock) override;
 
 		void SetRenderPass(SP<RHI::RenderPass> renderPass) override;

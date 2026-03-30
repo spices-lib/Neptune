@@ -1,3 +1,9 @@
+/**
+* @file CmdList.cpp.
+* @brief The CmdList Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "CmdList.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
@@ -10,10 +16,6 @@
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Frontend/RHI/RenderPass.h"
 #include "World/Component/ClockComponent.h"
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include <imgui.h>
-#include <backends/imgui_impl_vulkan.h>
-#include <backends/imgui_impl_glfw.h>
 
 namespace Neptune::Vulkan {
 

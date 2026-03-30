@@ -1,3 +1,9 @@
+/**
+* @file DescriptorList.h.
+* @brief The DescriptorList Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "DescriptorList.h"
 
@@ -5,18 +11,15 @@ namespace Neptune::RHI {
 
 	namespace {
 	
-		constexpr uint32_t EngineInputSet = 0;
-		constexpr uint32_t BineLessTextureSet = 1;
-
-		RHIDescriptorList::Impl* s_SharedDescriptorList = nullptr;
+		WP<RHIDescriptorList::Impl> s_SharedDescriptorList;    // @brief Shared DescriptorList.
 	}
 	
-	void DescriptorList::SetSharedLayout()
+	void DescriptorList::SetSharedLayout() const
 	{
-		s_SharedDescriptorList = m_Impl.get();
+		s_SharedDescriptorList = m_Impl;
 	}
 
-	RHIDescriptorList::Impl* DescriptorList::GetSharedImpl()
+	const WP<RHIDescriptorList::Impl>& DescriptorList::GetSharedImpl() const
 	{
 		return s_SharedDescriptorList;
 	}
