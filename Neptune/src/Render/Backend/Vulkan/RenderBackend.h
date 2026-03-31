@@ -14,7 +14,7 @@ namespace Neptune::Vulkan {
     {
     public:
 
-        RenderBackend(Window* window);
+        RenderBackend();
 
         ~RenderBackend() override = default;
 
@@ -43,7 +43,5 @@ namespace Neptune::Vulkan {
         class Context& GetContext() const;
 
         SP<Context> m_Context;
-
-        Window* m_Window;
     };
 }

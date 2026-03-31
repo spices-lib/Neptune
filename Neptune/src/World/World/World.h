@@ -34,7 +34,7 @@ namespace Neptune {
         *
         * @return Returns World Instance.
         */
-        static SP<World> Instance();
+        static World& Instance();
 
     public:
 
@@ -145,7 +145,7 @@ namespace Neptune {
     *
     * @return Returns World Pointer.
     */
-    SP<World> CreateWorld();
+    UP<World> CreateWorld();
     
     template<typename T, typename ...Args>
     inline void World::RegistrySlate(Args && ...args)
@@ -159,4 +159,4 @@ namespace Neptune {
 *
 * @return Returns World Pointer.
 */
-extern Neptune::SP<Neptune::World> Neptune::CreateWorld();
+extern Neptune::UP<Neptune::World> Neptune::CreateWorld();

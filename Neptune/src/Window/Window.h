@@ -36,17 +36,15 @@ namespace Neptune {
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
         * @param[in] backend RenderBackendEnum.
-        *
-        * @return Returns Window pointer.
         */
-        static SP<Window> Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend);
+        static void Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend);
 
         /**
         * @brief Get Window Instance.
         *
         * @return Returns Window reference.
         */
-        static Window& Instance();
+        static const Window& Instance();
 
         /**
         * @brief Destroy Window Instance.
@@ -73,24 +71,24 @@ namespace Neptune {
         *
         * @return Returns true if window is active.
         */
-        virtual bool IsWindowActive() = 0;
+        virtual bool IsWindowActive() const = 0;
 
         /**
         * @brief Interface of window poll events.
         */
-        virtual void PollEvents() = 0;
+        virtual void PollEvents() const = 0;
 
         /**
         * @brief Interface of window swap buffers.
         */
-        virtual void SwapBuffers() = 0;
+        virtual void SwapBuffers() const = 0;
 
         /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.
         */
-        virtual void* NativeWindow() = 0;
+        virtual void* NativeWindow() const = 0;
 
     protected:
 

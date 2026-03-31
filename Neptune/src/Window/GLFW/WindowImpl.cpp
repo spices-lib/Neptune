@@ -72,28 +72,28 @@ namespace Neptune::GLFW {
         glfwTerminate();
     }
 
-    bool WindowImpl::IsWindowActive()
+    bool WindowImpl::IsWindowActive() const
     {
         NEPTUNE_PROFILE_ZONE
 
         return !glfwWindowShouldClose(m_Windows);
     }
 
-    void WindowImpl::PollEvents()
+    void WindowImpl::PollEvents() const
     {
         NEPTUNE_PROFILE_ZONE
 
         glfwPollEvents();
     }
 
-    void WindowImpl::SwapBuffers()
+    void WindowImpl::SwapBuffers() const
     {
         NEPTUNE_PROFILE_ZONE
 
         m_APIInterface->SwapBuffers(m_Windows);
     }
 
-    void* WindowImpl::NativeWindow()
+    void* WindowImpl::NativeWindow() const
     {
         NEPTUNE_PROFILE_ZONE
 

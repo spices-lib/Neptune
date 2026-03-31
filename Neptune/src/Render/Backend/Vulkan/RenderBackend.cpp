@@ -40,10 +40,11 @@
 
 namespace Neptune::Vulkan {
 
-    RenderBackend::RenderBackend(Window* window)
-        : RenderFrontend()
-		, m_Window(window)
+    RenderBackend::RenderBackend()
+        : RenderFrontend(RenderBackendEnum::Vulkan)
     {
+		NEPTUNE_PROFILE_ZONE
+
 		HandleVulkanResultDelegate::SetHandler([&](VkResult result) { 
 			HandleVulkanResult(
 				result, 
@@ -56,6 +57,8 @@ namespace Neptune::Vulkan {
 
 	void RenderBackend::OnInitialize()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Context = CreateSP<Context>();
 
 		m_Context->Registry<IInstance>();
@@ -94,6 +97,8 @@ namespace Neptune::Vulkan {
 
 	void RenderBackend::OnShutDown()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		RenderFrontend::OnShutDown();
 
 		m_Context->UnRegistry();
@@ -106,6 +111,8 @@ namespace Neptune::Vulkan {
 	
     void RenderBackend::BeginFrame(Scene* scene)
     {
+		NEPTUNE_PROFILE_ZONE
+
 		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
 
 		{
@@ -136,6 +143,8 @@ namespace Neptune::Vulkan {
 
     void RenderBackend::EndFrame(Scene* scene)
     {
+		NEPTUNE_PROFILE_ZONE
+
 		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
 
 		{
@@ -210,11 +219,15 @@ namespace Neptune::Vulkan {
 
 	void RenderBackend::Wait()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_Context->Get<IDevice>()->Wait();
 	}
 
 	void RenderBackend::InitSlateModule()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto pass = std::dynamic_pointer_cast<Render::SlatePass>(m_RenderPasses.back());
 
 		ImGui::CreateContext();
@@ -252,6 +265,8 @@ namespace Neptune::Vulkan {
 
 	void RenderBackend::ShutdownSlateModule()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		ImGui_ImplVulkan_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -259,6 +274,8 @@ namespace Neptune::Vulkan {
 
 	std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		switch(e)
 		{
 			case RHI::ERHI::RenderPass:       return std::dynamic_pointer_cast<RHI::RHIRenderPass::Impl>    (CreateSP<RenderPass>           (*m_Context));
@@ -278,6 +295,8 @@ namespace Neptune::Vulkan {
 
 	void RenderBackend::RecreateSwapChain()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		auto glfwWindow = static_cast<GLFWwindow*>(m_Window->NativeWindow());
 
 		GetContext().Get<IGraphicQueue>()->Wait();

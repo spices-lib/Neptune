@@ -20,11 +20,11 @@ namespace Neptune {
 
         // receive ui event or interface event.
 
-        const auto world = World::Instance();
+        const auto& world = World::Instance();
 
-        const auto& scenes = world->GetScenes();
+        const auto& scenes = world.GetScenes();
 
-        if (world->TestFlag(WorldMarkBit::DynamicScriptTick))
+        if (world.TestFlag(WorldMarkBit::DynamicScriptTick))
         {
             NEPTUNE_PROFILE_ZONEN("DynamicScriptTick")
 
@@ -38,20 +38,20 @@ namespace Neptune {
             }
         }
 
-        world->OnLayout();
+        //world.OnLayout();
     }
 
     void LogicalSystem::OnEvent(Event& event)
     {
         NEPTUNE_PROFILE_ZONE
 
-        const auto world = World::Instance();
+        const auto& world = World::Instance();
 
-        if (world->TestFlag(WorldMarkBit::DynamicScriptEvent))
+        if (world.TestFlag(WorldMarkBit::DynamicScriptEvent))
         {
             NEPTUNE_PROFILE_ZONEN("DynamicScriptEvent")
 
-            const auto& scenes = World::Instance()->GetScenes();
+            const auto& scenes = world.GetScenes();
 
             for (const auto& scene : scenes | std::views::values)
             {

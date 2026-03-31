@@ -43,9 +43,5 @@ namespace Neptune {
         * @brief Interface of system tick run.
         */
         virtual void Tick() = 0;
-
-        virtual void Wait() {}
-
-        virtual void OnEvent(Event& event) {}
     };
 }

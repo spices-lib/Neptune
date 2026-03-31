@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "System.h"
+#include "Core/Event/EventListener.h"
 
 namespace Neptune {
 
@@ -16,14 +17,14 @@ namespace Neptune {
     * @brief RenderSystem Class.
     * This class defines the RenderSystem behaves.
     */
-    class RenderSystem : public System
+    class RenderSystem : public System, public EventListener
     {
     public:
 
         /**
         * @brief Constructor Function.
         */
-        RenderSystem() : System() {}
+        RenderSystem() : System(), EventListener(EventType::Count) {}
 
         /**
         * @brief Destructor Function.
@@ -44,16 +45,41 @@ namespace Neptune {
         * @brief Interface of system tick run.
         */
         void Tick() override;
-        
-        void Wait() override;
+
+        /**
+        * @brief Interface of EventListener dispatch event.
+        *
+        * @param[in] event Event
+        */
         void OnEvent(Event& event) override;
 
     private:
 
+        /**
+        * @brief Engine Event.
+        *
+        * @param[in] e EngineEvent.
+        * 
+        * @return Returns true if consumed.
+        */
         bool OnEngineEvent(class EngineEvent& e);
 
+        /**
+        * @brief SlateResizeEvent Event.
+        *
+        * @param[in] e SlateResizeEvent.
+        *
+        * @return Returns true if consumed.
+        */
         bool OnSlateResizeEvent(class SlateResizeEvent& e);
 
+        /**
+        * @brief SlateResizeEvent Event.
+        *
+        * @param[in] e SlateResizeEvent.
+        *
+        * @return Returns true if consumed.
+        */
         bool OnWindowResizeOverEvent(class WindowResizeOverEvent& e);
 
     private:

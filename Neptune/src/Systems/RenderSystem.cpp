@@ -30,31 +30,32 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        auto scene = World::Instance()->GetScenes().at("main_level").get();
+        auto scene = World::Instance().GetScenes().at("main_level").get();
 
         m_RenderFrontend->BeginFrame(scene);
-        m_RenderFrontend->RenderFrame(scene);
-        m_RenderFrontend->EndFrame(scene);
-    }
 
-    void RenderSystem::Wait()
-    {
-        m_RenderFrontend->Wait();
+        m_RenderFrontend->RenderFrame(scene);
+
+        m_RenderFrontend->EndFrame(scene);
     }
 
     void RenderSystem::OnEvent(Event& event)
     {
+        NEPTUNE_PROFILE_ZONE
+
         EventDispatcher dispatcher(event);
 
-        dispatcher.Dispatch<EngineEvent>(BIND_EVENT_FN(RHISystem::OnEngineEvent));
+        dispatcher.Dispatch<EngineEvent>(BIND_EVENT_FN(RenderSystem::OnEngineEvent));
 
-        dispatcher.Dispatch<SlateResizeEvent>(BIND_EVENT_FN(RHISystem::OnSlateResizeEvent));
+        dispatcher.Dispatch<SlateResizeEvent>(BIND_EVENT_FN(RenderSystem::OnSlateResizeEvent));
 
-        dispatcher.Dispatch<WindowResizeOverEvent>(BIND_EVENT_FN(RHISystem::OnWindowResizeOverEvent));
+        dispatcher.Dispatch<WindowResizeOverEvent>(BIND_EVENT_FN(RenderSystem::OnWindowResizeOverEvent));
     }
 
     bool RenderSystem::OnEngineEvent(EngineEvent& e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         if (e.Has(EngineEventBit::StopTheEngine))
         {
             m_RenderFrontend->Wait();
@@ -73,8 +74,10 @@ namespace Neptune {
         return false;
     }
 
-    bool RenderSystem::OnSlateResizeEvent(class SlateResizeEvent& e)
+    bool RenderSystem::OnSlateResizeEvent(SlateResizeEvent& e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderFrontend->ConstructDefaultPasses({ e.GetWidth(), e.GetHeight() });
 
         return false;
@@ -82,6 +85,8 @@ namespace Neptune {
 
     bool RenderSystem::OnWindowResizeOverEvent(WindowResizeOverEvent& e)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderFrontend->ConstructSlatePass();
 
         return false;

@@ -45,7 +45,7 @@ namespace Neptune::Vulkan {
 
         auto& fence = m_Fences[index];
 
-        fence->WaitFence();
+        fence->Wait();
 
         fence->ResetFence();
     }
@@ -56,7 +56,8 @@ namespace Neptune::Vulkan {
 
         std::ranges::for_each(m_Fences, [](const auto& fence) {
             
-            fence->WaitFence();
+            fence->Wait();
+
             fence->ResetFence();
         });
     }

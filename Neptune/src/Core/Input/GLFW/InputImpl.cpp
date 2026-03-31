@@ -57,6 +57,7 @@ namespace Neptune::GLFW {
         NEPTUNE_PROFILE_ZONE
 
         auto [x, y] = GetMousePositionImpl();
+
         return x;
     }
 
@@ -65,6 +66,7 @@ namespace Neptune::GLFW {
         NEPTUNE_PROFILE_ZONE
 
         auto [x, y] = GetMousePositionImpl();
+
         return y;
     }
 }

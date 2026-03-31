@@ -26,8 +26,6 @@
 #include "Render/FrontEnd/Pass/Pass.h"
 #include "Render/Frontend/RHI/RHI.h"
 
-#include <algorithm>
-
 namespace Neptune {
 
     SP<RenderFrontend> RenderFrontend::Create(RenderBackendEnum backend)
@@ -39,13 +37,13 @@ namespace Neptune {
         switch(backend)
         {
 #ifdef NP_PLATFORM_EMSCRIPTEN
-            case RenderBackendEnum::WebGPU: sp = CreateSP<WebGPU::RenderBackend>(backend) break;
-            case RenderBackendEnum::WebGL:  sp = CreateSP<WebGL::RenderBackend>(backend)  break;
+            case RenderBackendEnum::WebGPU: sp = CreateSP<WebGPU::RenderBackend>(); break;
+            case RenderBackendEnum::WebGL:  sp = CreateSP<WebGL::RenderBackend>();  break;
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-            case RenderBackendEnum::Vulkan: sp = CreateSP<Vulkan::RenderBackend>(backend) break;
-            case RenderBackendEnum::OpenGL: sp = CreateSP<OpenGL::RenderBackend>(backend) break;
+            case RenderBackendEnum::Vulkan: sp = CreateSP<Vulkan::RenderBackend>(); break;
+            case RenderBackendEnum::OpenGL: sp = CreateSP<OpenGL::RenderBackend>(); break;
 #endif
             
             default:
@@ -64,18 +62,24 @@ namespace Neptune {
 
     void RenderFrontend::OnInitialize()
     {
+        NEPTUNE_PROFILE_ZONE
+
         ConstructDefaultPasses();
     }
 
     void RenderFrontend::OnShutDown()
     {
+        NEPTUNE_PROFILE_ZONE
+
         RHI::RHIDelegate::SetCreator(nullptr);
 
-        m_RenderPasses = {};
+        m_RenderPasses.clear();
     }
 
     void RenderFrontend::RenderFrame(Scene* scene)
     {
+        NEPTUNE_PROFILE_ZONE
+
         std::for_each(m_RenderPasses.begin(), m_RenderPasses.end(), [&](const auto& renderPass) {
             renderPass->OnRender(scene);
         });
@@ -83,6 +87,8 @@ namespace Neptune {
 
     void RenderFrontend::RecreateSwapChain()
     {
+        NEPTUNE_PROFILE_ZONE
+
         auto glfwWindow = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
 
         int width = 0, height = 0;
@@ -101,6 +107,8 @@ namespace Neptune {
 
     void RenderFrontend::ConstructDefaultPasses(const glm::vec2& rtSize)
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderPasses = {};
 
         {
@@ -132,6 +140,8 @@ namespace Neptune {
 
     void RenderFrontend::ConstructSlatePass()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderPasses.pop_back();
 
         auto slatePass = CreateSP<Render::SlatePass>();
@@ -141,6 +151,8 @@ namespace Neptune {
 
     void RenderFrontend::AddPass(SP<Render::Pass> pass)
     {
+        NEPTUNE_PROFILE_ZONE
+
         pass->OnConstruct();
 
         m_RenderPasses.emplace_back(pass);

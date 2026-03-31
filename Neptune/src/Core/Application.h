@@ -11,8 +11,6 @@
 namespace Neptune {
 
     class SystemManager;
-    class Window;
-    class World;
 
     /**
     * @brief Application Class.
@@ -67,8 +65,6 @@ namespace Neptune {
     public:
 
         UP<SystemManager> m_SystemManager;        // @brief SystemManager
-        Window* m_Window;                         // @brief Window
-        SP<World> m_World;                        // @brief World
     };
 
 }

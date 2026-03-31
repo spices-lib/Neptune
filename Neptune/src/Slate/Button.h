@@ -14,8 +14,8 @@ namespace Neptune {
     {
     public:
 
-        Button(std::string slateName)
-                : Slate(std::move(slateName))
+        Button(const std::string& slateName)
+            : Slate(slateName)
         {}
 
         ~Button() override = default;

@@ -17,9 +17,12 @@
 
 namespace Neptune {
 
-    static SP<Window> S_Instance = nullptr;
+    namespace {
+    
+        UP<Window> S_Instance = nullptr;     // @brief World Instance.
+    }
 
-    SP<Window> Window::Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
+    void Window::Create(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -28,7 +31,7 @@ namespace Neptune {
 #ifdef NP_PLATFORM_EMSCRIPTEN
             case WindowImplement::emscripten_glfw:
             {
-                S_Instance = CreateSP<EmscriptenGLFW::WindowImpl>(initInfo, implement);
+                S_Instance = CreateUP<EmscriptenGLFW::WindowImpl>(initInfo, implement);
                 break;
             }
 #endif
@@ -36,26 +39,26 @@ namespace Neptune {
 #ifdef NP_PLATFORM_WINDOWS
             case WindowImplement::GLFW:
             {
-                S_Instance = CreateSP<GLFW::WindowImpl>(initInfo, implement, backend);
+                S_Instance = CreateUP<GLFW::WindowImpl>(initInfo, implement, backend);
                 break;
             }
 #endif
             default:
             {
                 NEPTUNE_CORE_CRITICAL("Not supported Windows Implement.")
-                return nullptr;
+                return;
             }
         }
 
-        NEPTUNE_CORE_INFO("GLFW Window created.")
-        return S_Instance;
+        NEPTUNE_CORE_INFO("Window Created.")
     }
 
-    Window& Window::Instance()
+    const Window& Window::Instance()
     {
         NEPTUNE_PROFILE_ZONE
 
         assert(S_Instance);
+
         return *S_Instance;
     }
 
@@ -64,9 +67,8 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
         S_Instance.reset();
-        S_Instance = nullptr;
 
-        NEPTUNE_CORE_INFO("GLFW Window destroyed.")
+        NEPTUNE_CORE_INFO("Window destroyed.")
     }
 
     Window::Window(const WindowInfo& initInfo, WindowImplement implement)

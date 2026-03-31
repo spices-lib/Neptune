@@ -219,7 +219,7 @@ namespace Neptune::Container {
         */
         void Set(T bit, bool value)
         {
-            if (bit == T::ALL)
+            if (bit == T::Count)
             {
                 Reset();
 

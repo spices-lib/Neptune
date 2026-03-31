@@ -22,7 +22,7 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        LogicalSystem() : EventListener(EventType::ALL) {}
+        LogicalSystem() : System(), EventListener(EventType::Count) {}
 
         /**
         * @brief Destructor Function.

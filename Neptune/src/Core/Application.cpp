@@ -7,9 +7,6 @@
 #include "Pchheader.h"
 #include "Application.h"
 #include "Systems/SystemManager.h"
-#include "Systems/LogicalSystem.h"
-#include "Systems/RenderSystem.h"
-#include "Systems/RHISystem.h"
 #include "Window/Window.h"
 #include "World/World/World.h"
 #include "World/Scene/Scene.h"
@@ -32,6 +29,7 @@ namespace Neptune {
         if(!S_Instance)
         {
             S_Instance = CreateUP<Application>();
+
             NEPTUNE_CORE_INFO("Application created.")
         }
 
@@ -55,27 +53,22 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-        m_Window = Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw, RenderBackendEnum::WebGPU).get();
+        Window::Create(WindowInfo{1920, 1080, "Neptune"}, WindowImplement::emscripten_glfw, RenderBackendEnum::WebGPU);
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
-        m_Window = Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW, RenderBackendEnum::Vulkan).get();
+        Window::Create(WindowInfo{ 1920, 1080, "Neptune" }, WindowImplement::GLFW, RenderBackendEnum::Vulkan);
 #endif
 
         m_SystemManager = CreateUP<SystemManager>();
-        m_SystemManager
-        ->PushSystem<LogicalSystem>()
-        ->PushSystem<RenderSystem>()
-        ->PushSystem<RHISystem>();
-
-        m_World = World::Instance();
+        m_SystemManager->Initialize();
     }
 
     Application::~Application()
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_SystemManager->PopAllSystems();
+        m_SystemManager->Shutdown();
 
         Window::Destroy();
 
@@ -85,7 +78,9 @@ namespace Neptune {
     void Application::Run()
     {
         // on attach world to application.
-        m_World->OnAttached();
+        auto& world = World::Instance();
+
+        world.OnAttached();
         
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
@@ -94,21 +89,23 @@ namespace Neptune {
 
 #else
 
-        while(m_Window->IsWindowActive())
+        const auto& window = Window::Instance();
+
+        while(window.IsWindowActive())
         {
             NEPTUNE_PROFILE_ZONEN("MainLoop")
 
-            m_Window->PollEvents();
+            window.PollEvents();
 
             m_SystemManager->Run();
 
-            m_Window->SwapBuffers();
+            window.SwapBuffers();
 
             NEPTUNE_PROFILE_FRAME
         }
 
         // on detach world to application.
-        m_World->OnDetached();
+        world.OnDetached();
         
 #endif
 
@@ -122,13 +119,15 @@ namespace Neptune {
 
         auto p = reinterpret_cast<Application*>(iUserData);
 
-        if(p->m_Window->IsWindowActive())
+        const auto& window = Window::Instance();
+
+        if(window.IsWindowActive())
         {
-            p->m_Window->PollEvents();
+            window.PollEvents();
 
             p->m_SystemManager->Run();
 
-            p->m_Window->SwapBuffers();
+            window.SwapBuffers();
 
             NEPTUNE_PROFILE_FRAME
 
@@ -136,7 +135,9 @@ namespace Neptune {
         }
 
         // on detach world to application.
-        p->m_World->OnDetached();
+        auto& world = World::Instance();
+
+        world.OnDetached();
         
         emscripten_cancel_main_loop();
     }

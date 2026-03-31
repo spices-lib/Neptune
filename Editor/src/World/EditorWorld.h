@@ -35,7 +35,7 @@ namespace Neptune::Editor {
         /**
         * @brief Interface of World detached to Application.
         */
-        void OnDetached() override {}
+        void OnDetached() override;
         
     protected:
         

@@ -23,8 +23,8 @@ namespace Neptune {
         * 
         * @param[in] slateName The Slate's name.
         */
-        Slate(std::string slateName)
-                : m_SlateName(std::move(slateName))
+        Slate(const std::string& slateName)
+            : m_SlateName(slateName)
         {}
 
         /**

@@ -1,4 +1,5 @@
 #include "SlateScope.h"
+
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
 #include <backends/imgui_impl_vulkan.h>

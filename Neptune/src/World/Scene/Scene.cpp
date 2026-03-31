@@ -47,7 +47,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
+        std::unique_lock lock(m_Mutex);
 
         uint32_t e = entity;
         m_Registry.destroy(static_cast<entt::entity>(e));
@@ -64,7 +64,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
+        std::unique_lock lock(m_Mutex);
 
         return { static_cast<uint32_t>(m_Registry.create()), this };
     }

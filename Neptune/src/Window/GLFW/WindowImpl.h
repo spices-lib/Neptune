@@ -43,24 +43,24 @@ namespace Neptune::GLFW {
         *
         * @return Returns true if window is active.
         */
-        bool IsWindowActive() override;
+        bool IsWindowActive() const override;
 
         /**
         * @brief Interface of window poll events.
         */
-        void PollEvents() override;
+        void PollEvents() const override;
 
         /**
         * @brief Interface of window swap buffers.
         */
-        void SwapBuffers() override;
+        void SwapBuffers() const override;
 
         /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.
         */
-        void* NativeWindow() override;
+        void* NativeWindow() const override;
 
     private:
 

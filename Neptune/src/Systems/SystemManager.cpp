@@ -7,6 +7,9 @@
 #include "Pchheader.h"
 #include "SystemManager.h"
 #include "Core/Event/EventListener.h"
+#include "Systems/LogicalSystem.h"
+#include "Systems/RenderSystem.h"
+#include "Systems/RHISystem.h"
 
 namespace Neptune {
 
@@ -18,24 +21,31 @@ namespace Neptune {
         Event::SetEventCallbackFn(BIND_EVENT_FN(SystemManager::OnEvent));
     }
 
-    SystemManager* SystemManager::PopSystem()
+    void SystemManager::Initialize()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        PushSystem<LogicalSystem>();
+        PushSystem<RenderSystem>();
+        PushSystem<RHISystem>();
+    }
+
+    void SystemManager::Shutdown()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        while(!m_Systems.empty())
+        {
+            PopSystem();
+        }
+    }
+
+    void SystemManager::PopSystem()
     {
         NEPTUNE_PROFILE_ZONE
 
         m_Systems.back()->OnSystemShutDown();
         m_Systems.pop_back();
-
-        return this;
-    }
-
-    void SystemManager::PopAllSystems()
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        for(auto& system : m_Systems)
-        {
-            PopSystem();
-        }
     }
 
     void SystemManager::Run() const

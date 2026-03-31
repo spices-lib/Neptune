@@ -63,7 +63,7 @@ namespace Neptune::Vulkan {
             VkResult result = vkGetDeviceFaultInfoEXT(device, &faultCounts, nullptr);
             if (result != VK_SUCCESS) 
             {
-                CORE_ERROR("Device Lost: Failed to query fault counts.")
+                NEPTUNE_CORE_ERROR("Device Lost: Failed to Query Fault Counts.")
                 return;
             }
 
@@ -80,7 +80,7 @@ namespace Neptune::Vulkan {
             result = vkGetDeviceFaultInfoEXT(device, &faultCounts, &faultInfo);
             if (result != VK_SUCCESS && result != VK_INCOMPLETE) 
             {
-                CORE_ERROR("Device Lost: Failed to query fault info.")
+                NEPTUNE_CORE_ERROR("Device Lost: Failed to Query Fault Info.")
                 return;
             }
 
@@ -118,10 +118,10 @@ namespace Neptune::Vulkan {
                 fwrite(vendorBinary.data(), 1, faultCounts.vendorBinarySize, fp);
                 fclose(fp);
 
-                CORE_INFO("Device Lost Vendor binary crash dump saved to DeviceLostDump.bin")
+                NEPTUNE_CORE_ERROR("Device Lost Vendor binary crash dump saved to DeviceLostDump.bin")
             }
 
-            CORE_ERROR(ss.str())
+            NEPTUNE_CORE_ERROR(ss.str())
             return;
 		}
 
@@ -144,10 +144,10 @@ namespace Neptune::Vulkan {
                 ss << "                        Heap: [ " << ToString(memoryProperties.memoryProperties.memoryHeaps[i].flags) << " ] Budget: [ " << memoryBudgetProperties.heapBudget[i] << " ] Usage: [ " << memoryBudgetProperties.heapUsage[i] << " ]\n";
             }
 
-            CORE_ERROR(ss.str())
+            NEPTUNE_CORE_ERROR(ss.str())
             return;
         }
 
-		CORE_ERROR(ss.str())
+        NEPTUNE_CORE_ERROR(ss.str())
 	}
 }

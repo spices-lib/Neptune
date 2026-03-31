@@ -64,9 +64,16 @@ namespace Neptune {
         * 
         * @param[in] id Id(entt::entity)
         * 
-        * @return Returns valid Entity if fined.
+        * @return Returns valid Entity if found.
         */
         Entity Query(uint32_t id);
+
+        /**
+        * @brief Get World Root Entity.
+        *
+        * @return Returns World Root Entity.
+        */
+        uint32_t GetRoot() const { return m_Root; }
 
         /**
         * @brief View all component in this world.
@@ -219,7 +226,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::shared_lock<std::shared_mutex> lock(m_Mutex);
+        std::shared_lock lock(m_Mutex);
 
         const auto view = m_Registry.view<T>();
 
@@ -236,7 +243,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::shared_lock<std::shared_mutex> lock(m_Mutex);
+        std::shared_lock lock(m_Mutex);
 
         for(const auto range : ranges)
         {
@@ -252,7 +259,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::shared_lock<std::shared_mutex> lock(m_Mutex);
+        std::shared_lock lock(m_Mutex);
         
         assert(ceil >= floor);
         assert(ceil <= ranges.size() - 1);
@@ -271,7 +278,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::shared_lock<std::shared_mutex> lock(m_Mutex);
+        std::shared_lock lock(m_Mutex);
         
         std::invoke(fn, m_Root);
     }
@@ -281,7 +288,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
+        std::unique_lock lock(m_Mutex);
 
         return m_Registry.emplace<T>(static_cast<entt::entity>(e), std::forward<Args>(args)...);
     }
@@ -291,7 +298,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
+        std::unique_lock lock(m_Mutex);
 
         return m_Registry.replace<T>(static_cast<entt::entity>(e), std::forward<Args>(args)...);
     }
@@ -314,7 +321,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::unique_lock<std::shared_mutex> lock(m_Mutex);
+        std::unique_lock lock(m_Mutex);
 
         m_Registry.remove<T>(static_cast<entt::entity>(e));
     }
@@ -324,7 +331,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::shared_lock<std::shared_mutex> lock(m_Mutex);
+        std::shared_lock lock(m_Mutex);
 
         return m_Registry.all_of<T>(static_cast<entt::entity>(e));
     }

@@ -46,31 +46,72 @@ namespace Neptune {
         */
         ~RenderFrontend() override = default;
 
+        /**
+        * @brief Interface of Initialize.
+        */
         virtual void OnInitialize();
+
+        /**
+        * @brief Interface of ShutDown.
+        */
         virtual void OnShutDown();
 
         /**
         * @brief Interface of Begin a frame.
+        * 
+        * @param[in] scene Scene.
         */
-        virtual void BeginFrame() = 0;
+        virtual void BeginFrame(class Scene* scene) = 0;
 
         /**
         * @brief Interface of End a frame.
+        * 
+        * @param[in] scene Scene.
         */
-        virtual void EndFrame() = 0;
+        virtual void EndFrame(class Scene* scene) = 0;
+
+        /**
+        * @brief Interface of Wait RenderBackend idle.
+        */
+        virtual void Wait() = 0;
+
+        /**
+        * @brief Interface of InitSlateModule.
+        */
+        virtual void InitSlateModule() = 0;
+
+        /**
+        * @brief Interface of ShutdownSlateModule.
+        */
+        virtual void ShutdownSlateModule() = 0;
+
+        /**
+        * @brief Interface of CreateRHI.
+        * 
+        * @param[in] e ERHI.
+        * @param[in] payload RHI Payload.
+        * 
+        * @return Returns RHI::Impl
+        */
+        virtual std::any CreateRHI(RHI::ERHI e, void* payload) = 0;
 
         /**
         * @brief Render a frame.
+        *
+        * @param[in] scene Scene.
         */
-        void RenderFrame();
+        void RenderFrame(class Scene* scene);
 
-        virtual void Wait() = 0;
-        virtual void InitSlateModule() = 0;
-        virtual void ShutdownSlateModule() = 0;
-        virtual std::any CreateRHI(RHI::ERHI e, void* payload) = 0;
-
+        /**
+        * @brief Construct Default Passes.
+        *
+        * @param[in] rtSize Passes RT Size.
+        */
         void ConstructDefaultPasses(const glm::vec2& rtSize = { 100.0f, 100.0f });
 
+        /**
+        * @brief Construct Slate Pass.
+        */
         void ConstructSlatePass();
 
     protected:
@@ -82,19 +123,23 @@ namespace Neptune {
         */
         RenderFrontend(RenderBackendEnum backend) : m_RenderBackendEnum(backend) {}
 
+        /**
+        * @brief Recreate SwapChain.
+        */
         virtual void RecreateSwapChain();
 
     private:
 
+        /**
+        * @brief Add Pass.
+        * 
+        * @param[in] pass Pass.
+        */
         void AddPass(SP<Render::Pass> pass);
 
     protected:
 
-        /**
-        * @brief RenderBackendEnum.
-        */
-        RenderBackendEnum m_RenderBackendEnum;
-
-        std::vector<SP<Render::Pass>> m_RenderPasses;
+        RenderBackendEnum m_RenderBackendEnum;                 // @brief RenderBackendEnum.
+        std::vector<SP<Render::Pass>> m_RenderPasses;          // @brief Container of Passes.
     };
 }

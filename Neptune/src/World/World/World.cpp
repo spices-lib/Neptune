@@ -14,13 +14,21 @@
 
 namespace Neptune {
 
-    SP<World> World::Instance()
+    namespace {
+        
+        UP<World> S_Instance = nullptr;     // @brief World Instance.
+    }
+
+    World& World::Instance()
     {
         NEPTUNE_PROFILE_ZONE
 
-        static auto s_World = CreateWorld();
-        
-        return s_World;
+        if (!S_Instance) 
+        {
+            S_Instance = CreateWorld();
+        }
+
+        return *S_Instance;
     }
 
     void World::OnAttached()
@@ -37,6 +45,8 @@ namespace Neptune {
         EngineEvent event(EngineEventBit::ShutdownSlateModule);
 
         Event::GetEventCallbackFn()(event);
+
+        S_Instance.reset();
     }
 
     void World::OnLayout()

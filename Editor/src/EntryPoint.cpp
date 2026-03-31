@@ -5,16 +5,17 @@
 */
 
 #include "World/EditorWorld.h"
-#include "World/Scene/Scene.h"
+
+#include <World/Scene/Scene.h>
 #include <EntryPoint.h>
 
 namespace Neptune {
 
-    SP<World> CreateWorld()
+    UP<World> CreateWorld()
     {
         NEPTUNE_PROFILE_ZONE
 
-        return CreateSP<Editor::EditorWorld>();
+        return CreateUP<Editor::EditorWorld>();
     }
 
 }

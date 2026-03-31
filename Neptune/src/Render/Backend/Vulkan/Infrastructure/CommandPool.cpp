@@ -38,7 +38,7 @@ namespace Neptune::Vulkan {
     {
         NEPTUNE_PROFILE_ZONE
 
-        switch (GetInfrastructure())
+        switch (GetEInfrastructure())
 		{
 			case EInfrastructure::GraphicCommandPool:	return GetContext().Get<IPhysicalDevice>()->GetQueueFamilies().graphic.value();
 			case EInfrastructure::ComputeCommandPool:   return GetContext().Get<IPhysicalDevice>()->GetQueueFamilies().compute.value();
