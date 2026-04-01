@@ -57,10 +57,6 @@ namespace Neptune {
         * @brief Interface of World detached to Application.
         */
         virtual void OnDetached();
-        
-        void OnLayout();
-
-        void OnEvent(Event& e);
 
         /**
         * @brief Get World activate Scenes.
@@ -78,17 +74,7 @@ namespace Neptune {
         */
         bool TestFlag(WorldMarkBit bit) const { return m_Flag.Test(bit); }
 
-        template<typename T, typename... Args>
-        void RegistrySlate(Args&&... args);
-
     protected:
-        
-        /**
-        * @brief Interface of World UI Layout, as View in MVP.
-        */
-        virtual void Layout();
-
-        void OnEvent(Event& e);
 
         /**
         * @brief Create Scene with a level to World.
@@ -110,6 +96,16 @@ namespace Neptune {
         */
         Scene* CreateScene(const std::string& name);
         
+        /**
+        * @brief Destroy Scene.
+        *
+        * @param[in] name Scene name.
+        */
+        void DestroyScene(const std::string& name);
+
+        /**
+        * @brief Destroy all Scenes.
+        */
         void DestroyScene();
 
         /**
@@ -127,17 +123,8 @@ namespace Neptune {
 
     private:
         
-        /**
-        * @brief World activate Scenes.
-        */
-        std::unordered_map<std::string, UP<Scene>> m_Scenes;
-
-        /**
-        * @brief WorldMark Flag.
-        */
-        Container::BitSet<WorldMarkBit> m_Flag;
-    
-        std::vector<SP<Slate::Slate>> m_Slates;
+        std::unordered_map<std::string, UP<Scene>> m_Scenes;      // @brief World activate Scenes.
+        Container::BitSet<WorldMarkBit> m_Flag;                   // @brief WorldMark Flag.
     };
 
     /**
@@ -146,12 +133,7 @@ namespace Neptune {
     * @return Returns World Pointer.
     */
     UP<World> CreateWorld();
-    
-    template<typename T, typename ...Args>
-    inline void World::RegistrySlate(Args && ...args)
-    {
-        m_Slates.emplace_back(CreateSP<T>(std::forward<Args>(args)...));
-    }
+
 }
 
 /**

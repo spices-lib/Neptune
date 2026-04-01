@@ -59,16 +59,18 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
 
+    	const auto& window = Window::Instance();
+    	
 		m_Context = CreateSP<Context>();
 
-		m_Context->Registry<IInstance>();
+		m_Context->Registry<IInstance>(window.Extension());
 		m_Context->Registry<IDebugUtilsObject>();
-		m_Context->Registry<ISurface>();
+		m_Context->Registry<ISurface>(window.Implement(), window.NativeWindow());
 		m_Context->Registry<IPhysicalDevice>();
 		m_Context->Registry<IDevice>();
 
 		m_Context->Registry<IMemoryAllocator>();
-		m_Context->Registry<ISwapChain>(static_cast<GLFWwindow*>(m_Window->NativeWindow()), MaxFrameInFlight);
+		m_Context->Registry<ISwapChain>(MaxFrameInFlight);
 					  
 		m_Context->Registry<IGraphicImageSemaphore>(MaxFrameInFlight);
 		m_Context->Registry<IGraphicQueueSemaphore>(MaxFrameInFlight);
@@ -297,13 +299,11 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		auto glfwWindow = static_cast<GLFWwindow*>(m_Window->NativeWindow());
-
 		GetContext().Get<IGraphicQueue>()->Wait();
 
 		GetContext().UnRegistry<ISwapChain>();
 
-		GetContext().Registry<ISwapChain>(glfwWindow, MaxFrameInFlight);
+		GetContext().Registry<ISwapChain>(MaxFrameInFlight);
 
 		RenderFrontend::RecreateSwapChain();
 	}

@@ -29,7 +29,7 @@ namespace Neptune::Vulkan {
 		* @param[in] e EInfrastructure.
 		* @param[in] count SwapChain image Count.
 		*/
-		SwapChain(Context& context, EInfrastructure e, GLFWwindow* window, uint32_t count);
+		SwapChain(Context& context, EInfrastructure e, uint32_t count);
 
 		/**
 		* @brief Destructor Function.
@@ -78,7 +78,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] count SwapChain image count.
 		*/
-		void Create(GLFWwindow* window, uint32_t count);
+		void Create(uint32_t count);
 
 	private:
 

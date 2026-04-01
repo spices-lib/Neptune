@@ -18,7 +18,7 @@ namespace Neptune {
         
         UP<World> S_Instance = nullptr;     // @brief World Instance.
     }
-
+    
     World& World::Instance()
     {
         NEPTUNE_PROFILE_ZONE
@@ -33,6 +33,8 @@ namespace Neptune {
 
     void World::OnAttached()
     {
+        NEPTUNE_PROFILE_ZONE
+
         EngineEvent event(EngineEventBit::InitSlateModule);
 
         Event::GetEventCallbackFn()(event);
@@ -40,6 +42,8 @@ namespace Neptune {
 
     void World::OnDetached()
     {
+        NEPTUNE_PROFILE_ZONE
+
         DestroyScene();
 
         EngineEvent event(EngineEventBit::ShutdownSlateModule);
@@ -47,24 +51,6 @@ namespace Neptune {
         Event::GetEventCallbackFn()(event);
 
         S_Instance.reset();
-    }
-
-    void World::OnLayout()
-    {
-        Slate::SlateScope::BeginScope();
-
-        std::for_each(m_Slates.begin(), m_Slates.end(), [](const auto& slate) {
-            slate->OnTick();
-        });
-
-        Slate::SlateScope::EndScope();
-    }
-
-    void World::OnEvent(Event& e)
-    {
-        std::for_each(m_Slates.begin(), m_Slates.end(), [&](const auto& slate) {
-            slate->OnEvent(e);
-        });
     }
 
     Scene* World::CreateScene(const SP<Level>& level)
@@ -103,8 +89,26 @@ namespace Neptune {
         return m_Scenes.at(name).get();
     }
     
+    void World::DestroyScene(const std::string& name)
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        if (!m_Scenes.contains(name))
+        {
+            std::stringstream ss;
+            ss << "Scene: [ " << name << " ] do not exists in world!";
+
+            NEPTUNE_CORE_INFO(ss.str())
+            return;
+        }
+
+        m_Scenes.erase(name);
+    }
+
     void World::DestroyScene()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_Scenes.clear();
     }
 }

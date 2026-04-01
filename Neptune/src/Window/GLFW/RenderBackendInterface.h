@@ -24,21 +24,28 @@ namespace Neptune::GLFW {
         /**
         * @brief Interface of GLFW Hint Configuration with RenderBackend.
         */
-        virtual void Hint() = 0;
+        virtual void Hint() const = 0;
 
         /**
         * @brief Interface of GLFW API Load Configuration with RenderBackend.
         * 
         * @param[in] handle GLFWwindow.
         */
-        virtual void APILoad(GLFWwindow* handle) = 0;
+        virtual void APILoad(GLFWwindow* handle) const = 0;
 
         /**
         * @brief Interface of GLFW SwapBuffers with RenderBackend.
         * 
         * @param[in] handle GLFWwindow.
         */
-        virtual void SwapBuffers(GLFWwindow* handle) = 0;
+        virtual void SwapBuffers(GLFWwindow* handle) const = 0;
+        
+        /**
+        * @brief Interface of Get GLFW Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        virtual std::vector<const char*> Extension() const = 0;
     };
 
     /**
@@ -60,21 +67,28 @@ namespace Neptune::GLFW {
         /**
         * @brief Interface of GLFW Hint Configuration with RenderBackend.
         */
-        void Hint() override;
+        void Hint() const override;
 
         /**
         * @brief Interface of GLFW API Load Configuration with RenderBackend.
         * 
         * @param[in] handle GLFWwindow.
         */
-        void APILoad(GLFWwindow* handle) override;
+        void APILoad(GLFWwindow* handle) const override;
 
         /**
         * @brief Interface of GLFW SwapBuffers with RenderBackend.
         * 
         * @param[in] handle GLFWwindow.
         */
-        void SwapBuffers(GLFWwindow* handle) override;
+        void SwapBuffers(GLFWwindow* handle) const override;
+        
+        /**
+        * @brief Interface of Get GLFW Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        std::vector<const char*> Extension() const override { return {}; }
     };
 
     /**
@@ -87,21 +101,28 @@ namespace Neptune::GLFW {
         /**
         * @brief Interface of GLFW Hint Configuration with RenderBackend.
         */
-        void Hint() override;
+        void Hint() const override;
 
         /**
         * @brief Interface of GLFW API Load Configuration with RenderBackend.
         * 
         * @param[in] handle GLFWwindow.
         */
-        void APILoad(GLFWwindow* handle) override {}
+        void APILoad(GLFWwindow* handle) const override {}
 
         /**
         * @brief Interface of GLFW SwapBuffers with RenderBackend.
         * 
         * @param[in] handle GLFWwindow.
         */
-        void SwapBuffers(GLFWwindow* handle) override {}
+        void SwapBuffers(GLFWwindow* handle) const override {}
+        
+        /**
+        * @brief Interface of Get GLFW Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        std::vector<const char*> Extension() const override;
     };
 
 }

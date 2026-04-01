@@ -71,10 +71,8 @@ namespace Neptune {
         NEPTUNE_CORE_INFO("Window destroyed.")
     }
 
-    Window::Window(const WindowInfo& initInfo, WindowImplement implement)
-        : m_WindowInfo(initInfo)
-        , m_WindowImplement(implement)
-        , m_WindowsResized(false)
+    Window::Window(WindowImplement implement)
+        : m_WindowImplement(implement)
     {}
 
 }

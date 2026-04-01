@@ -78,6 +78,33 @@ namespace Neptune::Vulkan {
 	};
 
     /**
+    * @brief Infrastructure Factory.
+    *
+    * @tparam T Specification of Infrastructure.
+    * @param[in] args Infrastructure Params.
+    * 
+    * @return Returns Infrastructure.
+    */
+    template<typename T, typename... Args>
+    static SP<T> InfrastructureFactory(Args&&... args)
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        if constexpr (requires(Args... args) {
+            { T::Create(std::forward<Args>(args)...) } -> std::same_as<SP<T>>;
+        })
+        {
+            // Factory Version
+            return T::Create(std::forward<Args>(args)...);
+        }
+        else
+        {
+            // Directory Version
+            return CreateSP<T>(std::forward<Args>(args)...);
+        }
+    }
+    
+    /**
     * @brief RenderBackend Context.
     */
     class Context : NonCopyable
@@ -124,7 +151,7 @@ namespace Neptune::Vulkan {
         * @return Returns registry Infrastructure.
         */
         template<typename I>
-        SP<typename I::T> Get();
+        I::T* Get();
 
         /**
         * @brief Is Infrastructure registry.
@@ -156,7 +183,7 @@ namespace Neptune::Vulkan {
             return;
         }
 
-        m_Infrastructures[position] = CreateSP<typename I::T>(*this, I::E, std::forward<Args>(args)...);
+        m_Infrastructures[position] = InfrastructureFactory<typename I::T>(*this, I::E, std::forward<Args>(args)...);
     }
 
     template <typename I>
@@ -194,7 +221,7 @@ namespace Neptune::Vulkan {
     }
 
     template<typename I>
-    SP<typename I::T> Context::Get()
+    I::T* Context::Get()
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -207,7 +234,7 @@ namespace Neptune::Vulkan {
             return nullptr;
         }
 
-        return std::dynamic_pointer_cast<typename I::T>(m_Infrastructures[position]);
+        return std::dynamic_pointer_cast<typename I::T>(m_Infrastructures[position]).get();
     }
 
     template<typename I>

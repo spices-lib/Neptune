@@ -85,8 +85,9 @@ namespace Neptune::Vulkan {
 
 	}
 
-    Instance::Instance(Context& context, EInfrastructure e)
+    Instance::Instance(Context& context, EInfrastructure e, const std::vector<const char*>&  windodExtensions)
         : Infrastructure(context, e)
+		, m_ExtensionProperties(windodExtensions)
     {
 		NEPTUNE_PROFILE_ZONE
 
@@ -188,15 +189,6 @@ namespace Neptune::Vulkan {
 
 		m_ExtensionProperties.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
 		m_ExtensionProperties.push_back(VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME);
-
-		uint32_t glfwExtensionCount = 0;
-		const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-
-		for (uint32_t i = 0; i < glfwExtensionCount; i++) 
-		{
-			m_ExtensionProperties.push_back(*glfwExtensions);
-			glfwExtensions++;
-		}
 
 #ifdef NEPTUNE_DEBUG
 

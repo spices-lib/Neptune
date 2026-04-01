@@ -6,7 +6,6 @@
 
 #include "Pchheader.h"
 #include "Surface.h"
-#include <GLFW/glfw3.h>
 
 namespace Neptune::Vulkan::Unit {
 
@@ -19,14 +18,10 @@ namespace Neptune::Vulkan::Unit {
 		vkDestroySurfaceKHR(m_Instance, m_Handle, nullptr);
 	}
 
-	void Surface::CreateSurface(VkInstance instance, GLFWwindow* window)
+	void Surface::SetInstance(VkInstance instance)
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		assert(instance && window && !m_Handle);
-
 		m_Instance = instance;
-
-		VK_CHECK(glfwCreateWindowSurface(instance, window, nullptr, &m_Handle))
 	}
 }

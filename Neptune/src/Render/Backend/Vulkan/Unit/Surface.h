@@ -8,8 +8,6 @@
 #include "Core/Core.h"
 #include "Unit.h"
 
-struct GLFWwindow;
-
 namespace Neptune::Vulkan::Unit {
 
 	/**
@@ -39,7 +37,7 @@ namespace Neptune::Vulkan::Unit {
 		*
 		* @param[in] instance VkInstance.
 		*/
-		void CreateSurface(VkInstance instance, GLFWwindow* window);
+		void SetInstance(VkInstance instance);
 
 	private:
 

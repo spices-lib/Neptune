@@ -142,7 +142,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns SwapChain Property.
 		*/
-		const SwapChainProperty& QuerySwapChainProperty(GLFWwindow* window);
+		const SwapChainProperty& QuerySwapChainProperty();
 
 	private:
 

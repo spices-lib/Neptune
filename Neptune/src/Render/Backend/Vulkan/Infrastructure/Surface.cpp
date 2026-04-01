@@ -7,25 +7,23 @@
 #include "Pchheader.h"
 #include "Surface.h"
 #include "Window/Window.h"
+#include "Surface/GLFW/Surface.h"
 
 namespace Neptune::Vulkan {
 
-    Surface::Surface(Context& context, EInfrastructure e)
-        : Infrastructure(context, e)
+    SP<Surface> Surface::Create(Context& context, EInfrastructure e, WindowImplement implement, void* window)
     {
         NEPTUNE_PROFILE_ZONE
 
-        Create();
-    }
-
-    void Surface::Create()
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        const auto instance = GetContext().Get<IInstance>()->Handle();
-        const auto window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
-
-        m_Surface.CreateSurface(instance, window);
+        switch (implement)
+        {
+            case Neptune::WindowImplement::GLFW:            return CreateSP<GLFW::Surface>(context, e, window);
+            default:
+            {
+                NEPTUNE_CORE_ERROR("Surface Create with WindowImplement that not supported.")
+                return nullptr;
+            }
+        }
     }
 
 }

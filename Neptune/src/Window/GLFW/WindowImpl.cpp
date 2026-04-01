@@ -19,7 +19,7 @@
 namespace Neptune::GLFW {
 
     WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
-            : Window(initInfo, implement)
+            : Window(implement)
             , m_APIInterface(CreateInterface(backend))
     {
         NEPTUNE_PROFILE_ZONE
@@ -93,6 +93,30 @@ namespace Neptune::GLFW {
         m_APIInterface->SwapBuffers(m_Windows);
     }
 
+    glm::ivec2 WindowImpl::Extent() const
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        int width = 0, height = 0;
+        glfwGetFramebufferSize(m_Windows, &width, &height);
+
+        while (width == 0 || height == 0)
+        {
+            glfwGetFramebufferSize(m_Windows, &width, &height);
+
+            glfwWaitEvents();
+        }
+
+        return { width , height };
+    }
+
+    std::vector<const char*> WindowImpl::Extension() const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        return m_APIInterface->Extension();
+    }
+    
     void* WindowImpl::NativeWindow() const
     {
         NEPTUNE_PROFILE_ZONE
@@ -124,11 +148,6 @@ namespace Neptune::GLFW {
         {
             // reinterpret the pointer to this class.
             const auto thisWindows = static_cast<WindowImpl*>(glfwGetWindowUserPointer(window));
-
-            // Set this class's variable.
-            thisWindows->m_WindowsResized    = true;
-            thisWindows->m_WindowInfo.width  = width;
-            thisWindows->m_WindowInfo.height = height;
 
             WindowResizeEvent event(width, height);
             Event::GetEventCallbackFn()(event);

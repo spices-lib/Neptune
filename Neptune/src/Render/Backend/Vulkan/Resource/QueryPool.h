@@ -65,7 +65,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns Query Pool Result.
 		*/
-		std::vector<uint64_t> GetQueryPoolResult();
+		std::vector<uint64_t> GetQueryPoolResult() const;
 
 		/**
 		* @brief Get Query Pool Result.
@@ -74,7 +74,7 @@ namespace Neptune::Vulkan {
 		* 
 		* @return Returns Query Pool Result.
 		*/
-		uint64_t GetQueryPoolResult(uint32_t index);
+		uint64_t GetQueryPoolResult(uint32_t index) const;
 
 	private:
 

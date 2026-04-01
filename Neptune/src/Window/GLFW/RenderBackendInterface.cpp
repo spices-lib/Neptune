@@ -31,7 +31,7 @@ namespace Neptune::GLFW {
 		}
 	}
 
-	void OpenGLInterface::Hint()
+	void OpenGLInterface::Hint() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -41,7 +41,7 @@ namespace Neptune::GLFW {
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	}
 
-	void OpenGLInterface::APILoad(GLFWwindow* handle)
+	void OpenGLInterface::APILoad(GLFWwindow* handle) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -57,19 +57,29 @@ namespace Neptune::GLFW {
 		}
 	}
 
-	void OpenGLInterface::SwapBuffers(GLFWwindow* handle)
+	void OpenGLInterface::SwapBuffers(GLFWwindow* handle) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		glfwSwapBuffers(handle);
 	}
 
-	void VulkanInterface::Hint()
+	void VulkanInterface::Hint() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		// Set no OpenGL (use vulkan)
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	}
+	
+	std::vector<const char*> VulkanInterface::Extension() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		uint32_t glfwExtensionCount = 0;
+		const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+		
+		return std::vector(glfwExtensions, glfwExtensions + glfwExtensionCount);
 	}
 
 }

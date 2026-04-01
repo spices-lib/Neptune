@@ -118,11 +118,11 @@ namespace Neptune::RHI {
 		* @return Returns RHI Implement.
 		*/
 		template<typename T>
-		WP<T> GetRHIImpl()
+		T* GetRHIImpl()
 		{
 			NEPTUNE_PROFILE_ZONE
 
-			return std::dynamic_pointer_cast<T>(m_Impl);
+			return std::dynamic_pointer_cast<T>(m_Impl).get();
 		}
 
 	protected:

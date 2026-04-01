@@ -7,7 +7,6 @@
 #include "Pchheader.h"
 #include "Queue.h"
 #include "CommandBuffer.h"
-#include <algorithm>
 
 namespace Neptune::Vulkan::Unit {
 

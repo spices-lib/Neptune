@@ -20,7 +20,6 @@
 #include "Render/FrontEnd/Pass/BasePass.h"
 #include "Render/FrontEnd/Pass/SlatePass.h"
 #include "Render/FrontEnd/Pass/PrePass.h"
-#include "Render/FrontEnd/Pass/FPSPass.h"
 #include "Window/Window.h"
 #include "Core/Event/WindowEvent.h"
 #include "Render/FrontEnd/Pass/Pass.h"
@@ -80,7 +79,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        std::for_each(m_RenderPasses.begin(), m_RenderPasses.end(), [&](const auto& renderPass) {
+        std::ranges::for_each(m_RenderPasses, [&](const auto& renderPass) {
             renderPass->OnRender(scene);
         });
     }
@@ -89,18 +88,9 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        auto glfwWindow = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());
+        const auto extent = Window::Instance().Extent();
 
-        int width = 0, height = 0;
-        glfwGetFramebufferSize(glfwWindow, &width, &height);
-
-        while (width == 0 || height == 0)
-        {
-            glfwGetFramebufferSize(glfwWindow, &width, &height);
-            glfwWaitEvents();
-        }
-
-        WindowResizeOverEvent event(width, height);
+        WindowResizeOverEvent event(extent.x, extent.y);
 
         Event::GetEventCallbackFn()(event);
     }
@@ -121,12 +111,6 @@ namespace Neptune {
         {
             auto pass = CreateSP<Render::BasePass>();
             pass->SetRTSize(rtSize);
-
-            AddPass(pass);
-        }
-
-        {
-            auto pass = CreateSP<Render::FPSPass>();
 
             AddPass(pass);
         }

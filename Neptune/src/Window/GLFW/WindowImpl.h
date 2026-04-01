@@ -56,6 +56,18 @@ namespace Neptune::GLFW {
         void SwapBuffers() const override;
 
         /**
+        * @brief Interface of window get extent.
+        */
+        glm::ivec2 Extent() const override;
+
+        /**
+        * @brief Get Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        std::vector<const char*> Extension() const override;
+        
+        /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.

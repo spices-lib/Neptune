@@ -117,8 +117,8 @@ namespace Neptune {
 
     /**
     * @breif This Class is inherited from Event Class.
-    * Called when window resized over.
-    * This Event register by VkSwapchain.
+    * Called when window resized.
+    * This Event register by Swapchain.
     */
     class WindowResizeOverEvent : public Event
     {

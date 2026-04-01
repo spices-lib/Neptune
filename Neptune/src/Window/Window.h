@@ -10,6 +10,8 @@
 #include "Enum.h"
 #include "Render/Frontend/Enum.h"
 
+#include <glm/glm.hpp>
+
 namespace Neptune {
 
     /**
@@ -55,11 +57,10 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
-        * 
-        * @param[in] initInfo WindowInfo.
+        *
         * @param[in] implement WindowImplement.
         */
-        Window(const WindowInfo& initInfo, WindowImplement implement);
+        Window(WindowImplement implement);
 
         /**
         * @brief Destructor Function.
@@ -84,16 +85,35 @@ namespace Neptune {
         virtual void SwapBuffers() const = 0;
 
         /**
+        * @brief Interface of window get extent.
+        */
+        virtual glm::ivec2 Extent() const = 0;
+
+        /**
+        * @brief Get Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        virtual std::vector<const char*> Extension() const = 0;
+        
+        /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.
         */
         virtual void* NativeWindow() const = 0;
 
+    public:
+
+        /**
+        * @brief Get WindowImplement.
+        *
+        * @return Returns WindowImplement.
+        */
+        WindowImplement Implement() const { return m_WindowImplement; }
+        
     protected:
 
-        WindowInfo m_WindowInfo;              // @brief Window init config.
         WindowImplement m_WindowImplement;    // @brief Window implement.
-        bool m_WindowsResized;                // @brief Window resized.
     };
 }

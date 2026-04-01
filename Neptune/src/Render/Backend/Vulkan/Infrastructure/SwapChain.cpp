@@ -13,20 +13,20 @@
 
 namespace Neptune::Vulkan {
 
-    SwapChain::SwapChain(Context& context, EInfrastructure e, GLFWwindow* window, uint32_t count)
+    SwapChain::SwapChain(Context& context, EInfrastructure e, uint32_t count)
         : Infrastructure(context, e)
     {
 		NEPTUNE_PROFILE_ZONE
 
-        Create(window, count);
+        Create(count);
     }
 
-	void SwapChain::Create(GLFWwindow* window, uint32_t count)
+	void SwapChain::Create(uint32_t count)
     {
 		NEPTUNE_PROFILE_ZONE
 
 		auto physicalDevice = GetContext().Get<IPhysicalDevice>();
-		auto& property = physicalDevice->QuerySwapChainProperty(window);
+		auto& property = physicalDevice->QuerySwapChainProperty();
 
         VkSwapchainCreateInfoKHR                 createInfo{};
 		createInfo.sType                       = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;

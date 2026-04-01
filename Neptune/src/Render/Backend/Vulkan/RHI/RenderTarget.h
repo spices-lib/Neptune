@@ -36,7 +36,7 @@ namespace Neptune::Vulkan {
 		/**
 		* @brief Destructor Function.
 		*/
-		~RenderTarget() = default;
+		~RenderTarget() override = default;
 
 	public:
 

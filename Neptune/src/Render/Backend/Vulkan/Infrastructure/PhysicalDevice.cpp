@@ -357,7 +357,7 @@ namespace Neptune::Vulkan {
 		return result;
 	}
 
-	const SwapChainProperty& PhysicalDevice::QuerySwapChainProperty(GLFWwindow* window)
+	const SwapChainProperty& PhysicalDevice::QuerySwapChainProperty()
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -372,19 +372,7 @@ namespace Neptune::Vulkan {
 		}
 		else
 		{
-			int width, height;
-			glfwGetFramebufferSize(window, &width, &height);
-
-			VkExtent2D actualExtent =
-			{
-				static_cast<uint32_t>(width),
-				static_cast<uint32_t>(height)
-			};
-
-			actualExtent.width = std::clamp(actualExtent.width, property.capabilities.minImageExtent.width, property.capabilities.maxImageExtent.width);
-			actualExtent.height = std::clamp(actualExtent.height, property.capabilities.minImageExtent.height, property.capabilities.maxImageExtent.height);
-
-			property.surfaceSize = actualExtent;
+			NEPTUNE_CORE_ERROR("Surface Extent is infinality.")
 		}
 
 		uint32_t formatCount;

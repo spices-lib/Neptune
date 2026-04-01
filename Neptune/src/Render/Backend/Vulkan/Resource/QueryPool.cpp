@@ -30,14 +30,14 @@ namespace Neptune::Vulkan {
 		DEBUGUTILS_SETOBJECTNAME(m_Pool, "QueryPool")
 	}
 
-	std::vector<uint64_t> QueryPool::GetQueryPoolResult()
+	std::vector<uint64_t> QueryPool::GetQueryPoolResult() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		return m_Pool.GetQueryPoolResult(0, m_Count, m_Stride);
 	}
 
-	uint64_t QueryPool::GetQueryPoolResult(uint32_t index)
+	uint64_t QueryPool::GetQueryPoolResult(uint32_t index) const
 	{
 		NEPTUNE_PROFILE_ZONE
 

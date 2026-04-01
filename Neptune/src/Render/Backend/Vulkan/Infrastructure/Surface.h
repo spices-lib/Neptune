@@ -21,15 +21,18 @@ namespace Neptune::Vulkan {
 	{
 	public:
 
+		static SP<Surface> Create(Context& context, EInfrastructure e, enum WindowImplement implement, void* window);
+
+	public:
+
 		/**
 		* @brief Constructor Function.
 		*
 		* @param[in] context Context.
 		* @param[in] e EInfrastructure.
-		* @param[in] count Semaphore Count.
 		*/
-		Surface(Context& context, EInfrastructure e);
-
+		Surface(Context& context, EInfrastructure e) : Infrastructure(context, e) {}
+		
 		/**
 		* @brief Destructor Function.
 		*/
@@ -42,14 +45,7 @@ namespace Neptune::Vulkan {
 		*/
 		const Unit::Surface::Handle& Handle() const { return m_Surface.GetHandle(); }
 
-	private:
-
-		/**
-		* @brief Create Surface.
-		*/
-		void Create();
-
-	private:
+	protected:
 
 		Unit::Surface m_Surface;         // @brief This Surface.
 

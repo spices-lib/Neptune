@@ -22,14 +22,6 @@ namespace Neptune::Vulkan {
     public:
 
         /**
-        * @brief Constructor Function.
-        *
-        * @param[in] context Context.
-        * @param[in] e EInfrastructure.
-        */
-        explicit Infrastructure(Context& context, EInfrastructure e);
-
-        /**
         * @brief Destructor Function.
         */
         ~Infrastructure() override = default;
@@ -44,6 +36,14 @@ namespace Neptune::Vulkan {
         std::string ToString() const;
 
     protected:
+
+        /**
+        * @brief Constructor Function.
+        *
+        * @param[in] context Context.
+        * @param[in] e EInfrastructure.
+        */
+        explicit Infrastructure(Context& context, EInfrastructure e);
 
         /**
         * @brief Get EInfrastructure.
