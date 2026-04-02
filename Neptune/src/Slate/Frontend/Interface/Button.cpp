@@ -7,7 +7,7 @@
 #include "Pchheader.h"
 #include "Button.h"
 
-namespace Neptune {
+namespace Neptune::Slate {
 
 
     

@@ -1,47 +1,104 @@
+/**
+* @file RenderBackend.h.
+* @brief The RenderBackend Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
-#include <any>
 
 namespace Neptune {
 
     class Window;
+    class Scene;
 }
 
 namespace Neptune::Vulkan {
 
+    /**
+    * @brief Vulkan::RenderBackend Class.
+    * This class defines the Vulkan::RenderBackend behaves.
+    */
     class RenderBackend : public RenderFrontend
     {
     public:
 
+        /**
+        * @brief Constructor Function.
+        */
         RenderBackend();
 
+        /**
+        * @brief Destructor Function.
+        */
         ~RenderBackend() override = default;
 
+        /**
+        * @brief Interface of Initialize.
+        */
         void OnInitialize() override;
 
+        /**
+        * @brief Interface of ShutDown.
+        */
         void OnShutDown() override;
 
-        void BeginFrame(class Scene* scene) override;
+        /**
+        * @brief Interface of Begin a frame.
+        *
+        * @param[in] scene Scene.
+        */
+        void BeginFrame(Scene* scene) override;
 
-        void EndFrame(class Scene* scene) override;
+        /**
+        * @brief Interface of End a frame.
+        *
+        * @param[in] scene Scene.
+        */
+        void EndFrame(Scene* scene) override;
 
+        /**
+        * @brief Interface of Wait RenderBackend idle.
+        */
         void Wait() override;
 
+        /**
+        * @brief Interface of InitSlateModule.
+        */
         void InitSlateModule() override;
 
+        /**
+        * @brief Interface of ShutdownSlateModule.
+        */
         void ShutdownSlateModule() override;
 
+        /**
+        * @brief Interface of CreateRHI.
+        *
+        * @param[in] e ERHI.
+        * @param[in] payload RHI Payload.
+        *
+        * @return Returns RHI::Impl
+        */
         std::any CreateRHI(RHI::ERHI e, void* payload) override;
 
     private:
 
+        /**
+        * @brief Recreate SwapChain.
+        */
         void RecreateSwapChain() override;
+
+        /**
+        * @brief Get Context.
+        * 
+        * @return Returns Context.
+        */
+        class Context& GetContext() const;
 
     private:
 
-        class Context& GetContext() const;
-
-        SP<Context> m_Context;
+        SP<Context> m_Context;                        // @brief This Context.
     };
 }

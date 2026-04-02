@@ -1,42 +1,19 @@
 #include "Pchheader.h"
 #include "RenderBackend.h"
-#include "Infrastructure/Instance.h"
-#include "Infrastructure/Functions.h"
-#include "Infrastructure/Surface.h"
-#include "Infrastructure/PhysicalDevice.h"
-#include "Infrastructure/Device.h"
-#include "Infrastructure/MemoryAllocator.h"
-#include "Infrastructure/ThreadQueue.h"
-#include "Infrastructure/SwapChain.h"
-#include "Infrastructure/Semaphore.h"
-#include "Infrastructure/Fence.h"
-#include "Infrastructure/DebugUtilsObject.h"
-#include "Infrastructure/CommandPool.h"
-#include "Infrastructure/CommandBuffer.h"
-#include "Infrastructure/DescriptorPool.h"
-#include "Infrastructure/ThreadCommandPool.h"
-#include "Infrastructure/Queue.h"
+#include "Infrastructure/InfrastructureHeader.h"
+#include "RHI/RHIHeader.h"
+#include "Render/Backend/Vulkan/Converter.h"
+#include "Render/Frontend/RHI/RenderPass.h"
+#include "Render/Frontend/Pass/SlatePass.h"
+
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/ClockComponent.h"
-#include "Render/Frontend/Pass/SlatePass.h"
+
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
 #include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_glfw.h>
-#include "Render/Frontend/RHI/RenderPass.h"
-#include "Render/Backend/Vulkan/RHI/RenderPass.h"
-#include "Render/Backend/Vulkan/RHI/DescriptorList.h"
-#include "Render/Backend/Vulkan/RHI/Pipeline.h"
-#include "Render/Backend/Vulkan/RHI/Shader.h"
-#include "Render/Backend/Vulkan/RHI/RenderTarget.h"
-#include "Render/Backend/Vulkan/RHI/VertexBuffer.h"
-#include "Render/Backend/Vulkan/RHI/IndexBuffer.h"
-#include "Render/Backend/Vulkan/RHI/CmdList.h"
-#include "Render/Backend/Vulkan/RHI/CmdList2.h"
-#include "Render/Backend/Vulkan/RHI/Video/Decode/Decoder.h"
-#include "Render/Backend/Vulkan/RHI/OpticalFlowSession.h"
-#include "Render/Backend/Vulkan/Converter.h"
 
 namespace Neptune::Vulkan {
 

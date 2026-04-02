@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Slate.h"
 
-namespace Neptune {
+namespace Neptune::Slate {
     
     class Button : public Slate
     {

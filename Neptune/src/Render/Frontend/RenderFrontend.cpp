@@ -1,5 +1,5 @@
 /**
-* @file RenderFrontEnd.cpp.
+* @file RenderFrontend.cpp.
 * @brief The RenderFrontend Class Implementation.
 * @author Spices.
 */

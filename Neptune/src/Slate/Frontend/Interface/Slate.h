@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Core/Event/Event.h"
 
-namespace Neptune {
+namespace Neptune::Slate {
 
     /**
     * @brief This Class defines the basic behaves of specific slate.
