@@ -71,7 +71,7 @@ namespace Neptune::RHI {
 		*
 		* @param[in] shared RHIDescriptorList::Impl.
 		*/
-		virtual void CombineSharedLayout(const WP<Impl>& shared) = 0;
+		virtual void CombineSharedLayout(const Impl* shared) = 0;
 
 		/**
 		* @brief Interface of Build DescriptorList.
@@ -106,7 +106,7 @@ namespace Neptune::RHI {
 		* 
 		* @return Returns RHIDescriptorList::Impl.
 		*/
-		const WP<Impl>& GetSharedImpl() const;
+		const Impl* GetSharedImpl() const;
 
 	public:
 

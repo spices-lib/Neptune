@@ -9,16 +9,26 @@
 #include "World/World/World.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/ScriptComponent.h"
+#include "Core/Event/EngineEvent.h"
+#include "Slate/Frontend/SlateFrontend.h"
 
 #include <ranges>
 
 namespace Neptune {
     
-    void LogicalSystem::Tick()
+    void LogicalSystem::OnSystemInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
-        // receive ui event or interface event.
+        m_SlateFrontend = SlateFrontend::Create(SlateBackendEnum::ImGui, RenderBackendEnum::Vulkan, WindowImplement::GLFW);
+    }
+
+    void LogicalSystem::OnSystemShutDown()
+    {}
+
+    void LogicalSystem::Tick()
+    {
+        NEPTUNE_PROFILE_ZONE
 
         const auto& world = World::Instance();
 
@@ -37,13 +47,15 @@ namespace Neptune {
                 });
             }
         }
-
-        //world.OnLayout();
     }
 
     void LogicalSystem::OnEvent(Event& event)
     {
         NEPTUNE_PROFILE_ZONE
+
+        EventDispatcher dispatcher(event);
+
+        dispatcher.Dispatch<EngineEvent>(BIND_EVENT_FN(LogicalSystem::OnEngineEvent));
 
         const auto& world = World::Instance();
 
@@ -62,5 +74,22 @@ namespace Neptune {
                 });
             }
         }
+    }
+
+    bool LogicalSystem::OnEngineEvent(class EngineEvent& e)
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        if (e.Has(EngineEventBit::InitSlateFrontend))
+        {
+            m_SlateFrontend->OnInitialize();
+        }
+
+        if (e.Has(EngineEventBit::ShutdownSlateFrontend))
+        {
+            m_SlateFrontend->OnShutDown();
+        }
+
+        return false;
     }
 }

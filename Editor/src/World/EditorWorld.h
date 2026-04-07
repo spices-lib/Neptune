@@ -36,14 +36,6 @@ namespace Neptune::Editor {
         * @brief Interface of World detached to Application.
         */
         void OnDetached() override;
-        
-    protected:
-        
-        /**
-        * @brief Interface of World UI Layout, as View in MVP.
-        * Create Editor Layout here.
-        */
-        void Layout() override;
 
     private:
 

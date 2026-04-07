@@ -312,7 +312,7 @@ namespace Neptune::Vulkan {
 		m_Conversion.CreateSamplerYcbcrConversion(GetContext().Get<IDevice>()->Handle(), info);
 	}
 
-	void VideoSession::CreateDecodeRenderTarget(SP<RenderTarget> rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const
+	void VideoSession::CreateDecodeRenderTarget(RenderTarget* rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -422,7 +422,7 @@ namespace Neptune::Vulkan {
 		rt->SetImage(image);
 	}
 
-	void VideoSession::CreateFlowVectorRenderTarget(SP<class RenderTarget> rt, uint32_t width, uint32_t height) const
+	void VideoSession::CreateFlowVectorRenderTarget(class RenderTarget* rt, uint32_t width, uint32_t height) const
 	{
 		NEPTUNE_PROFILE_ZONE
 

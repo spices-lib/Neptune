@@ -73,7 +73,7 @@ namespace Neptune::Vulkan {
 		* @param[in] binding .
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void UpdateTexture(uint32_t binding, const SP<class RenderTarget>& renderTarget);
+		void UpdateTexture(uint32_t binding, const class RenderTarget* renderTarget);
 
 		/**
 		* @brief Build DescriptorSet.

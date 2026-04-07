@@ -50,7 +50,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns Unit Handle Interface.
 		*/
-		const WP<Image> IHandle(uint32_t index) const { return m_Image[index]; }
+		const SP<Image> IHandle(uint32_t index) const { return m_Image[index]; }
 
 		/**
 		* @brief Get ImageView Unit Handle.

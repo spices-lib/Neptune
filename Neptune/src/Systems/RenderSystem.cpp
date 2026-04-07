@@ -23,6 +23,8 @@ namespace Neptune {
 
     void RenderSystem::OnSystemShutDown()
     {
+        NEPTUNE_PROFILE_ZONE
+
         m_RenderFrontend->OnShutDown();
     }
 
@@ -59,16 +61,6 @@ namespace Neptune {
         if (e.Has(EngineEventBit::StopTheEngine))
         {
             m_RenderFrontend->Wait();
-        }
-
-        if (e.Has(EngineEventBit::InitSlateModule))
-        {
-            m_RenderFrontend->InitSlateModule();
-        }
-
-        if (e.Has(EngineEventBit::ShutdownSlateModule))
-        {
-            m_RenderFrontend->ShutdownSlateModule();
         }
 
         return false;

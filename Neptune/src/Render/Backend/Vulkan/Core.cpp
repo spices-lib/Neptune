@@ -1,3 +1,9 @@
+/**
+* @file Core.cpp.
+* @brief The Core Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "Core.h"
 #include "Converter.h"
@@ -6,21 +12,27 @@ namespace Neptune::Vulkan {
 
 	namespace {
 	
-		HandleVulkanResultDelegate::Handler s_Handler;
+		HandleVulkanResultDelegate::Handler s_Handler;   // @brief HandleVulkanResultDelegate::Handler instance.
 	}
 
 	void HandleVulkanResultDelegate::SetHandler(const Handler& fn)
 	{
+        NEPTUNE_PROFILE_ZONE
+
 		s_Handler = fn;
 	}
 
 	const HandleVulkanResultDelegate::Handler& HandleVulkanResultDelegate::GetHandler()
 	{
+        NEPTUNE_PROFILE_ZONE
+
 		return s_Handler;
 	}
 
 	void HandleVulkanResult(VkResult result, VkPhysicalDevice physicalDevice, VkDevice device, PFN_vkGetDeviceFaultInfoEXT vkGetDeviceFaultInfoEXT)
 	{
+        NEPTUNE_PROFILE_ZONE
+
 		if (result == VK_SUCCESS) return;
 
 		const char* label = "";

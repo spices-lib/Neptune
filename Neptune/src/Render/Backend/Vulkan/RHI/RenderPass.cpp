@@ -166,7 +166,7 @@ namespace Neptune::Vulkan {
 		}
 	}
 
-	void RenderPass::BeginRenderPass(const WP<Unit::CommandBuffer>& commandBuffer, uint32_t frameBufferIndex) const
+	void RenderPass::BeginRenderPass(const Unit::CommandBuffer* commandBuffer, uint32_t frameBufferIndex) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -179,7 +179,7 @@ namespace Neptune::Vulkan {
 		info.clearValueCount                        = m_ClearValues.size();
 		info.pClearValues                           = m_ClearValues.data();
 
-		commandBuffer.lock()->BeginRenderPass(info, VK_SUBPASS_CONTENTS_INLINE);
+		commandBuffer->BeginRenderPass(info, VK_SUBPASS_CONTENTS_INLINE);
 	}
 
 	void RenderPass::StoreExtent(const VkExtent2D& extent)

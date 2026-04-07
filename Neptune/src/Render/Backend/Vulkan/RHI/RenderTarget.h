@@ -61,7 +61,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns true if succeeded.
 		*/
-		bool CopyToRenderTarget(SP<RHI::RenderTarget> target) override;
+		bool CopyToRenderTarget(const RHI::RenderTarget* target) override;
 
 		/**
 		* @brief Interface of Get Format.
@@ -126,7 +126,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] target RenderTarget.
 		*/
-		bool CopyToRenderTarget(SP<RenderTarget> target) const;
+		bool CopyToRenderTarget(RenderTarget* target) const;
 
 	private:
 

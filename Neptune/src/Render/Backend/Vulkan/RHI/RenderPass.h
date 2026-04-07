@@ -79,7 +79,7 @@ namespace Neptune::Vulkan {
 		* @param[in] commandBuffer CommandBuffer.
 		* @param[in] frameBufferIndex .
 		*/
-		void BeginRenderPass(const WP<Unit::CommandBuffer>& commandBuffer, uint32_t frameBufferIndex) const;
+		void BeginRenderPass(const Unit::CommandBuffer* commandBuffer, uint32_t frameBufferIndex) const;
 
 		/**
 		* @brief Get ColorBlends.

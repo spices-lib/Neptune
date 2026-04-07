@@ -50,53 +50,53 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_RenderPass.lock()->BeginRenderPass(m_CommandBuffer, m_ImageIndex);
+		m_RenderPass->BeginRenderPass(m_CommandBuffer.get(), m_ImageIndex);
 	}
 
 	void CmdList::CmdEndRenderPass() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->EndRenderPass();
+		m_CommandBuffer->EndRenderPass();
 	}
 
-	void CmdList::CmdBindDescriptor(const WP<RHI::DescriptorList>& descriptorList) const
+	void CmdList::CmdBindDescriptor(const SP<RHI::DescriptorList>& descriptorList) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		auto sharedRhi = std::dynamic_pointer_cast<DescriptorList>(descriptorList.lock()->GetSharedImpl().lock());
+		auto sharedRhi = dynamic_cast<const DescriptorList*>(descriptorList->GetSharedImpl());
 
-		auto rhi = descriptorList.lock()->GetRHIImpl<DescriptorList>().lock();
+		auto rhi = descriptorList->GetRHIImpl<DescriptorList>();
 
 		for (const auto& set : sharedRhi->GetSets())
 		{
-			m_CommandBuffer.lock()->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
+			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
 		}
 
 		for (const auto& set : rhi->GetSets())
 		{
-			m_CommandBuffer.lock()->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
+			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
 		}
 	}
 
-	void CmdList::CmdBindPipeline(const WP<RHI::Pipeline>& pipeline)
+	void CmdList::CmdBindPipeline(const SP<RHI::Pipeline>& pipeline)
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		auto rhi = pipeline.lock()->GetRHIImpl<Pipeline>().lock();
+		auto rhi = pipeline->GetRHIImpl<Pipeline>();
 
 		assert(rhi->GetBindPoint() == m_BindPoint);
 
 		m_PipelineLayout = rhi->GetPipelineLayout();
 
-		m_CommandBuffer.lock()->BindPipeline(rhi->GetBindPoint(), rhi->Handle());
+		m_CommandBuffer->BindPipeline(rhi->GetBindPoint(), rhi->Handle());
 	}
 
 	void CmdList::CmdDrawFullScreenTriangle() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->Draw(3, 1, 0, 0);
+		m_CommandBuffer->Draw(3, 1, 0, 0);
 	}
 
 	void CmdList::CmdSetViewport(const glm::vec2& viewPortSize) const
@@ -119,44 +119,42 @@ namespace Neptune::Vulkan {
 		scissor.offset              = { 0, 0 };
 		scissor.extent              = extent;
 			
-		m_CommandBuffer.lock()->SetViewport(viewport);
+		m_CommandBuffer->SetViewport(viewport);
 
-		m_CommandBuffer.lock()->SetScissor(scissor);
+		m_CommandBuffer->SetScissor(scissor);
 	}
 
-	void CmdList::SetRenderPass(const WP<RHI::RenderPass>& renderPass)
+	void CmdList::SetRenderPass(const SP<RHI::RenderPass>& renderPass)
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_RenderPass = renderPass.lock()->GetRHIImpl<RenderPass>();
+		m_RenderPass = renderPass->GetRHIImpl<RenderPass>();
 	}
 
-	void CmdList::SetQueryPool(const WP<QueryPool>& queryPool)
+	void CmdList::SetQueryPool(const SP<QueryPool>& queryPool)
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_QueryPool = queryPool;
+		m_QueryPool = queryPool.get();
 	}
 
 	void CmdList::CmdCopyImage(VkImage src, VkImage dst, const VkImageCopy& region) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->CopyImage(src, dst, region);
+		m_CommandBuffer->CopyImage(src, dst, region);
 	}
 
 	void CmdList::CmdPipelineBarrier(VkPipelineStageFlags srcMask, VkPipelineStageFlags dstMask, const VkImageMemoryBarrier& barrier) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->PipelineBarrier(srcMask, dstMask, barrier);
+		m_CommandBuffer->PipelineBarrier(srcMask, dstMask, barrier);
 	}
 
-	void CmdList::CmdTransitionLayout(const WP<Image>& imageRef, VkImageLayout newLayout) const
+	void CmdList::CmdTransitionLayout(SP<Image> image, VkImageLayout newLayout) const
 	{
 		NEPTUNE_PROFILE_ZONE
-
-		auto image = imageRef.lock();
 		
 		VkPipelineStageFlags sourceStage;
 		VkPipelineStageFlags destinationStage;
@@ -299,27 +297,27 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->BeginQuery(m_QueryPool.lock()->Handle(), index, m_QueryPool.lock()->Flag());
+		m_CommandBuffer->BeginQuery(m_QueryPool->Handle(), index, m_QueryPool->Flag());
 	}
 
 	void CmdList::CmdEndQuery(uint32_t index) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->EndQuery(m_QueryPool.lock()->Handle(), index);
+		m_CommandBuffer->EndQuery(m_QueryPool->Handle(), index);
 	}
 
 	void CmdList::CmdWriteTimeStamp(uint32_t index) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->WriteTimeStamp(m_QueryPool.lock()->Handle(), index);
+		m_CommandBuffer->WriteTimeStamp(m_QueryPool->Handle(), index);
 	}
 
 	void CmdList::CmdResetQueryPool() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->ResetQueryPool(m_QueryPool.lock()->Handle(), m_QueryPool.lock()->Count());
+		m_CommandBuffer->ResetQueryPool(m_QueryPool->Handle(), m_QueryPool->Count());
 	}
 }

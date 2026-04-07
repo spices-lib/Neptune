@@ -10,7 +10,7 @@
 /**
 * @brief Main Function.
 */
-inline int main() {
+int main() {
 
     auto& engine = Neptune::Application::Instance();
     

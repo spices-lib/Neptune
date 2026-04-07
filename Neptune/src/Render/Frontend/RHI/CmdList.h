@@ -58,7 +58,7 @@ namespace Neptune::RHI {
 		*
 		* @param[in] renderPass RenderPass.
 		*/
-		virtual void SetRenderPass(const WP<class RenderPass>& renderPass) = 0;
+		virtual void SetRenderPass(const SP<class RenderPass>& renderPass) = 0;
 
 		/***********************************************************************************/
 
@@ -84,14 +84,14 @@ namespace Neptune::RHI {
 		* 
 		* @param[in] descriptorList DescriptorList.
 		*/
-		virtual void CmdBindDescriptor(const WP<class DescriptorList>& descriptorList) const = 0;
+		virtual void CmdBindDescriptor(const SP<class DescriptorList>& descriptorList) const = 0;
 
 		/**
 		* @brief Interface of BindPipeline.
 		* 
 		* @param[in] pipeline Pipeline.
 		*/
-		virtual void CmdBindPipeline(const WP<class Pipeline>& pipeline) = 0;
+		virtual void CmdBindPipeline(const SP<class Pipeline>& pipeline) = 0;
 
 		/**
 		* @brief Interface of DrawFullScreenTriangle.
@@ -137,7 +137,7 @@ namespace Neptune::RHI {
 		*
 		* @param[in] renderPass RenderPass.
 		*/
-		void SetRenderPass(const WP<class RenderPass>& renderPass) const { RHICmdList::m_Impl->SetRenderPass(renderPass); }
+		void SetRenderPass(const SP<class RenderPass>& renderPass) const { RHICmdList::m_Impl->SetRenderPass(renderPass); }
 
 		/**
 		* @brief Interface of DrawSlate.
@@ -159,14 +159,14 @@ namespace Neptune::RHI {
 		*
 		* @param[in] descriptorList DescriptorList.
 		*/
-		void CmdBindDescriptor(const WP<class DescriptorList>& descriptorList) const { RHICmdList::m_Impl->CmdBindDescriptor(descriptorList); }
+		void CmdBindDescriptor(const SP<class DescriptorList>& descriptorList) const { RHICmdList::m_Impl->CmdBindDescriptor(descriptorList); }
 
 		/**
 		* @brief Interface of BindPipeline.
 		*
 		* @param[in] pipeline Pipeline.
 		*/
-		void CmdBindPipeline(const WP<class Pipeline>& pipeline) const { RHICmdList::m_Impl->CmdBindPipeline(pipeline); }
+		void CmdBindPipeline(const SP<class Pipeline>& pipeline) const { RHICmdList::m_Impl->CmdBindPipeline(pipeline); }
 
 		/**
 		* @brief Interface of DrawFullScreenTriangle.

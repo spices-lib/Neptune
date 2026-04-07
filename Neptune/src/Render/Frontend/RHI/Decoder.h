@@ -52,21 +52,21 @@ namespace Neptune::RHI {
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		virtual void SetDecodeRenderTarget(SP<RenderTarget> renderTarget) = 0;
+		virtual void SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget) = 0;
 
 		/**
 		* @brief Interface of Set Reference RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		virtual void SetReferenceRenderTarget(SP<RenderTarget> renderTarget) = 0;
+		virtual void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) = 0;
 
 		/**
 		* @brief Interface of Set FlowVector RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		virtual void SetFlowVectorRenderTarget(SP<RenderTarget> renderTarget) = 0;
+		virtual void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) = 0;
 
 		/**
 		* @brief Interface of Push NextFrame to RenderTarget.
@@ -111,21 +111,21 @@ namespace Neptune::RHI {
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetDecodeRenderTarget(SP<RenderTarget> renderTarget) const { return RHIDecoder::m_Impl->SetDecodeRenderTarget(renderTarget); }
+		void SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget) const { return RHIDecoder::m_Impl->SetDecodeRenderTarget(renderTarget); }
 
 		/**
 		* @brief Interface of Set Reference RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetReferenceRenderTarget(SP<RenderTarget> renderTarget) const { return RHIDecoder::m_Impl->SetReferenceRenderTarget(renderTarget); }
+		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const { return RHIDecoder::m_Impl->SetReferenceRenderTarget(renderTarget); }
 
 		/**
 		* @brief Interface of Set FlowVector RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetFlowVectorRenderTarget(SP<RenderTarget> renderTarget) const { return RHIDecoder::m_Impl->SetFlowVectorRenderTarget(renderTarget); }
+		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const { return RHIDecoder::m_Impl->SetFlowVectorRenderTarget(renderTarget); }
 
 		/**
 		* @brief Interface of Push NextFrame to RenderTarget.

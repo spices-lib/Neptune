@@ -57,7 +57,7 @@ namespace Neptune::RHI {
 		* 
 		* @return Returns true if succeeded.
 		*/
-		virtual bool CopyToRenderTarget(SP<class RenderTarget> target) = 0;
+		virtual bool CopyToRenderTarget(const class RenderTarget* target) = 0;
 
 		/**
 		* @brief Interface of Get Format.
@@ -119,7 +119,7 @@ namespace Neptune::RHI {
 		*
 		* @return Returns true if succeeded.
 		*/
-		bool CopyToRenderTarget(SP<RenderTarget> target) const { return RHIRenderTarget::m_Impl->CopyToRenderTarget(target); }
+		bool CopyToRenderTarget(const RenderTarget* target) const { return RHIRenderTarget::m_Impl->CopyToRenderTarget(target); }
 
 		/**
 		* @brief Interface of Get Format.

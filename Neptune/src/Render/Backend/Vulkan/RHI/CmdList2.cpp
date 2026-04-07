@@ -19,7 +19,7 @@
 
 namespace Neptune::Vulkan {
 
-	void CmdList2::Begin()
+	void CmdList2::Begin() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -28,14 +28,14 @@ namespace Neptune::Vulkan {
 		beginInfo.flags                      = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
 		beginInfo.pInheritanceInfo           = nullptr;
 
-		m_CommandBuffer.lock()->Begin(beginInfo);
+		m_CommandBuffer->Begin(beginInfo);
 	}
 
-	void CmdList2::End()
+	void CmdList2::End() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_CommandBuffer.lock()->End();
+		m_CommandBuffer->End();
 	}
 
 	void CmdList2::SubmitWait()
@@ -45,11 +45,11 @@ namespace Neptune::Vulkan {
 		VkSubmitInfo                           submitInfo{};
 		submitInfo.sType                     = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 		submitInfo.commandBufferCount        = 1;
-		submitInfo.pCommandBuffers           = &m_CommandBuffer.lock()->GetHandle();
+		submitInfo.pCommandBuffers           = &m_CommandBuffer->GetHandle();
 
-		auto queue = m_ThreadQueue.lock()->Pop();
+		auto queue = m_ThreadQueue->Pop();
 
-		DEBUGUTILS_BEGINQUEUELABEL(queue->GetHandle(), m_ThreadQueue.lock()->ToString())
+		DEBUGUTILS_BEGINQUEUELABEL(queue->GetHandle(), m_ThreadQueue->ToString())
 
 		queue->Submit(submitInfo);
 
@@ -57,7 +57,7 @@ namespace Neptune::Vulkan {
 
 		DEBUGUTILS_ENDQUEUELABEL(queue->GetHandle())
 
-		m_ThreadQueue.lock()->Push(queue);
+		m_ThreadQueue->Push(queue);
 
 		m_CommandBuffer.reset();
 	}
@@ -122,7 +122,7 @@ namespace Neptune::Vulkan {
 		m_VideoSession = videoSession;
 	}
 
-	void CmdList2::SetOpticalFlowSession(const WP<OpticalFlowSession>& opticalFlowSession)
+	void CmdList2::SetOpticalFlowSession(const OpticalFlowSession* opticalFlowSession)
 	{
 		NEPTUNE_PROFILE_ZONE
 

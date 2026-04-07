@@ -118,7 +118,7 @@ namespace Neptune::RHI {
 		* @return Returns RHI Implement.
 		*/
 		template<typename T>
-		T* GetRHIImpl()
+		T* GetRHIImpl() const
 		{
 			NEPTUNE_PROFILE_ZONE
 

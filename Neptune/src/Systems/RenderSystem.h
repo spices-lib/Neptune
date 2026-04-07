@@ -84,9 +84,6 @@ namespace Neptune {
 
     private:
 
-        /**
-        * @brief Render Frontend.
-        */
-        SP<RenderFrontend> m_RenderFrontend;
+        SP<RenderFrontend> m_RenderFrontend;    // @brief Render Frontend.
     };
 }

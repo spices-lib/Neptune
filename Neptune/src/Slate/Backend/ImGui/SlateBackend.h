@@ -8,16 +8,26 @@
 #include "Core/Core.h"
 #include "Slate/Frontend/SlateFrontend.h"
 
-namespace Neptune::ImGui {
+namespace Neptune::imgui {
 
+    class RenderAPIInterface;
+    class WindowAPIInterface;
+
+    /**
+    * @brief imgui::SlateBackend Class.
+    * This class defines the imgui::SlateBackend behaves.
+    */
 	class SlateBackend : public SlateFrontend
 	{
 	public:
 
         /**
         * @brief Constructor Function.
+        * 
+        * @param[in] renderBackend RenderBackendEnum.
+        * @param[in] windowImpl WindowImplement.
         */
-        SlateBackend() = default;
+        SlateBackend(RenderBackendEnum renderBackend, WindowImplement windowImpl);
 
         /**
         * @brief Destructor Function.
@@ -46,7 +56,8 @@ namespace Neptune::ImGui {
 
 	private:
 
-
+        SP<RenderAPIInterface> m_RenderAPIInterface;         // @brief render backend interface.
+        SP<WindowAPIInterface> m_WindowAPIInterface;         // @brief window backend interface.
 	};
 
 }

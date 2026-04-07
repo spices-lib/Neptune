@@ -9,8 +9,6 @@
 #include "World/Scene/Scene.h"
 #include "World/Object/Level.h"
 #include "Core/Event/EngineEvent.h"
-#include "Slate/SlateScope.h"
-#include "Slate/Slate.h"
 
 namespace Neptune {
 
@@ -35,7 +33,7 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        EngineEvent event(EngineEventBit::InitSlateModule);
+        EngineEvent event(EngineEventBit::InitSlateFrontend);
 
         Event::GetEventCallbackFn()(event);
     }
@@ -46,7 +44,7 @@ namespace Neptune {
 
         DestroyScene();
 
-        EngineEvent event(EngineEventBit::ShutdownSlateModule);
+        EngineEvent event(EngineEventBit::ShutdownSlateFrontend);
 
         Event::GetEventCallbackFn()(event);
 

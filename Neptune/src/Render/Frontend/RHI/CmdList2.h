@@ -38,12 +38,12 @@ namespace Neptune::RHI {
 		/**
 		* @brief Interface of Begin CommandList.
 		*/
-		virtual void Begin() = 0;
+		virtual void Begin() const = 0;
 
 		/**
 		* @brief Interface of End CommandList.
 		*/
-		virtual void End() = 0;
+		virtual void End() const = 0;
 
 		/**
 		* @brief Interface of Submit CommandList and Wait.

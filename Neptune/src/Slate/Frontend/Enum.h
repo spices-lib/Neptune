@@ -10,17 +10,12 @@
 namespace Neptune {
 
     /**
-    * @brief Enum of Window Implement.
+    * @brief Enum of Slate Backend.
     */
-    enum class WindowImplement
+    enum class SlateBackendEnum : uint8_t
     {
         None = 0,
-        GLFW,
-        emscripten_glfw,
-        SDL2,
-        WindowsNative,
-        MacOSNative,
-        LinuxNative,
+        ImGui,
 
         Count
     };

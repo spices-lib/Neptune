@@ -58,7 +58,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] renderPass RenderPass.
 		*/
-		void SetRenderPass(const WP<RHI::RenderPass>& renderPass) override;
+		void SetRenderPass(const SP<RHI::RenderPass>& renderPass) override;
 
 		/**
 		* @brief Interface of DrawSlate.
@@ -80,14 +80,14 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] descriptorList DescriptorList.
 		*/
-		void CmdBindDescriptor(const WP<RHI::DescriptorList>& descriptorList) const override;
+		void CmdBindDescriptor(const SP<RHI::DescriptorList>& descriptorList) const override;
 
 		/**
 		* @brief Interface of BindPipeline.
 		*
 		* @param[in] pipeline Pipeline.
 		*/
-		void CmdBindPipeline(const WP<RHI::Pipeline>& pipeline) override;
+		void CmdBindPipeline(const SP<RHI::Pipeline>& pipeline) override;
 
 		/**
 		* @brief Interface of DrawFullScreenTriangle.
@@ -108,7 +108,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] queryPool QueryPool.
 		*/
-		void SetQueryPool(const WP<QueryPool>& queryPool);
+		void SetQueryPool(const SP<QueryPool>& queryPool);
 
 		/**
 		* @brief Copy Image.
@@ -131,10 +131,10 @@ namespace Neptune::Vulkan {
 		/**
 		* @brief Transition Layout.
 		*
-		* @param[in] imageRef Image.
+		* @param[in] image Image.
 		* @param[in] newLayout VkImageLayout.
 		*/
-		void CmdTransitionLayout(const WP<Image>& imageRef, VkImageLayout newLayout) const;
+		void CmdTransitionLayout(SP<Image> image, VkImageLayout newLayout) const;
 
 		/**
 		* @brief Begin Query.
@@ -164,13 +164,13 @@ namespace Neptune::Vulkan {
 
 	protected:
 
-		uint32_t                   m_FrameIndex     = 0;                                     // @brief Frame index.
-		uint32_t                   m_ImageIndex     = 0;                                     // @brief Image index.
+		uint32_t                      m_FrameIndex     = 0;                                     // @brief Frame index.
+		uint32_t                      m_ImageIndex     = 0;                                     // @brief Image index.
 
-		WP<Unit::CommandBuffer>    m_CommandBuffer;                                          // @brief CommandBuffer reference.
-		WP<RenderPass>             m_RenderPass;                                             // @brief RenderPass reference.
-		WP<QueryPool>              m_QueryPool;                                              // @brief QueryPool reference.
-		VkPipelineBindPoint        m_BindPoint      = VK_PIPELINE_BIND_POINT_MAX_ENUM;       // @brief VkPipelineBindPoint.
-		VkPipelineLayout           m_PipelineLayout = VK_NULL_HANDLE;                        // @brief VkPipelineLayout.
+		SP<Unit::CommandBuffer>       m_CommandBuffer  = nullptr;                               // @brief CommandBuffer reference.
+		const RenderPass*             m_RenderPass     = nullptr;                               // @brief RenderPass reference.
+		const QueryPool*              m_QueryPool      = nullptr;                               // @brief QueryPool reference.
+		VkPipelineBindPoint           m_BindPoint      = VK_PIPELINE_BIND_POINT_MAX_ENUM;       // @brief VkPipelineBindPoint.
+		VkPipelineLayout              m_PipelineLayout = VK_NULL_HANDLE;                        // @brief VkPipelineLayout.
 	};
 }

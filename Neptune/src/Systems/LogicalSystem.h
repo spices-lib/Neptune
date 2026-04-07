@@ -11,6 +11,8 @@
 
 namespace Neptune {
 
+    class SlateFrontend;
+
     /**
     * @brief LogicalSystem Class.
     * This class defines the LogicalSystem behaves.
@@ -32,12 +34,12 @@ namespace Neptune {
         /**
         * @brief Interface of system initialize.
         */
-        void OnSystemInitialize() override {}
+        void OnSystemInitialize() override;
 
         /**
         * @brief Interface of system shutdown.
         */
-        void OnSystemShutDown() override {}
+        void OnSystemShutDown() override;
 
         /**
         * @brief Interface of system tick run.
@@ -53,6 +55,18 @@ namespace Neptune {
 
     private:
 
+        /**
+        * @brief Engine Event.
+        *
+        * @param[in] e EngineEvent.
+        *
+        * @return Returns true if consumed.
+        */
+        bool OnEngineEvent(class EngineEvent& e);
         
+    private:
+
+        SP<SlateFrontend> m_SlateFrontend;    // @brief Slate Frontend.
+
     };
 }

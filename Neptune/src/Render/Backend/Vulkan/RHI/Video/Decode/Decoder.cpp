@@ -31,7 +31,7 @@ namespace Neptune::Vulkan {
 		    case VideoOperation::DecodeAV1:  return CreateSP<AV1Decoder>(context);
 		    default:
 		    {
-			    CORE_ERROR("Vulkan::Decoder::Create: Unsupported VideoOperation")
+			    NEPTUNE_CORE_ERROR("Vulkan::Decoder::Create: Unsupported VideoOperation")
 			    return nullptr;
 		    }
 		}
@@ -212,19 +212,19 @@ namespace Neptune::Vulkan {
 
         m_VideoSession->CreateVideoSession(*videoProfile.GetProfile(), pVideoFormat->coded_width, pVideoFormat->coded_height, pVideoFormat->maxNumDpbSlots);
 
-        if (auto rt = m_DecodeRT.lock())
+        if (m_DecodeRT)
         {
-            m_VideoSession->CreateDecodeRenderTarget(rt, *videoProfile.GetProfile(), pVideoFormat->coded_width, pVideoFormat->coded_height);
+            m_VideoSession->CreateDecodeRenderTarget(m_DecodeRT, *videoProfile.GetProfile(), pVideoFormat->coded_width, pVideoFormat->coded_height);
         }
 
-        if (auto rt = m_ReferenceRT.lock())
+        if (m_ReferenceRT)
         {
-            m_VideoSession->CreateDecodeRenderTarget(rt, *videoProfile.GetProfile(), pVideoFormat->coded_width, pVideoFormat->coded_height);
+            m_VideoSession->CreateDecodeRenderTarget(m_ReferenceRT, *videoProfile.GetProfile(), pVideoFormat->coded_width, pVideoFormat->coded_height);
         }
 
-        if (auto rt = m_FlowVectorRT.lock())
+        if (m_FlowVectorRT)
         {
-            m_VideoSession->CreateFlowVectorRenderTarget(rt, pVideoFormat->coded_width / 4, pVideoFormat->coded_height / 4);
+            m_VideoSession->CreateFlowVectorRenderTarget(m_FlowVectorRT, pVideoFormat->coded_width / 4, pVideoFormat->coded_height / 4);
         }
 
         m_videoFormat = *pVideoFormat;
@@ -328,7 +328,7 @@ namespace Neptune::Vulkan {
             VkVideoDecodeInfoKHR                                     decodeInfo{};
             decodeInfo.sType                                       = VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR;
             decodeInfo.flags                                       = pCurrFrameDecParams->decodeFrameInfo.flags;
-            decodeInfo.srcBuffer                                   = pCurrFrameDecParams->bitstreamData->GetHandle();
+            decodeInfo.srcBuffer                                   = pCurrFrameDecParams->bitstreamData->Handle();
             decodeInfo.srcBufferOffset                             = pCurrFrameDecParams->bitstreamDataOffset;
             decodeInfo.srcBufferRange                              = range;
             decodeInfo.dstPictureResource                          = pics[refCount];
@@ -358,29 +358,28 @@ namespace Neptune::Vulkan {
         return true;
     }
 
-    void Decoder::SetDecodeRenderTarget(SP<RHI::RenderTarget> renderTarget)
+    void Decoder::SetDecodeRenderTarget(const SP<RHI::RenderTarget>& renderTarget)
     {
         m_DecodeRT = renderTarget->GetRHIImpl<RenderTarget>();
     }
 
-    void Decoder::SetReferenceRenderTarget(SP<RHI::RenderTarget> renderTarget)
+    void Decoder::SetReferenceRenderTarget(const SP<RHI::RenderTarget>& renderTarget)
     {
         m_ReferenceRT = renderTarget->GetRHIImpl<RenderTarget>();
     }
 
-    void Decoder::SetFlowVectorRenderTarget(SP<RHI::RenderTarget> renderTarget)
+    void Decoder::SetFlowVectorRenderTarget(const SP<RHI::RenderTarget>& renderTarget)
     {
         m_FlowVectorRT = renderTarget->GetRHIImpl<RenderTarget>();
     }
 
     void Decoder::PushNextFrameToRenderTarget()
     {
-        auto rt = m_DecodeRT.lock();
-        if (!rt) return;
+        if (!m_DecodeRT) return;
 
-        if (auto prev = m_ReferenceRT.lock())
+        if (m_ReferenceRT)
         {
-            rt->CopyToRenderTarget(prev);
+            m_DecodeRT->CopyToRenderTarget(m_ReferenceRT);
         }
 
         auto slot = m_VideoSession->PopDisplaySlot();
@@ -405,18 +404,18 @@ namespace Neptune::Vulkan {
             region.extent.height                          = m_codedExtent.height;
             region.extent.depth                           = 1;
 
-            cmdList.CmdTransitionLayout(rt->IHandle(),  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+            cmdList.CmdTransitionLayout(m_DecodeRT->IHandle(),  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
-            cmdList.CmdCopyImage(m_VideoSession->DPB().Handle(slot), rt->Handle(), region);
+            cmdList.CmdCopyImage(m_VideoSession->DPB().Handle(slot), m_DecodeRT->Handle(), region);
 
             region.srcSubresource.aspectMask              = VK_IMAGE_ASPECT_PLANE_1_BIT;
             region.dstSubresource.aspectMask              = VK_IMAGE_ASPECT_PLANE_1_BIT;
             region.extent.width                           = m_codedExtent.width  / 2;
             region.extent.height                          = m_codedExtent.height / 2;
 
-            cmdList.CmdCopyImage(m_VideoSession->DPB().Handle(slot), rt->Handle(), region);
+            cmdList.CmdCopyImage(m_VideoSession->DPB().Handle(slot), m_DecodeRT->Handle(), region);
 
-            cmdList.CmdTransitionLayout(rt->IHandle(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            cmdList.CmdTransitionLayout(m_DecodeRT->IHandle(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
             cmdList.End();
 

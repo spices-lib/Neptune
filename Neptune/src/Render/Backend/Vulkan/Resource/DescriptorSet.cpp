@@ -55,7 +55,7 @@ namespace Neptune::Vulkan {
 		buffer->Flush();
 	}
 
-	void DescriptorSet::UpdateTexture(uint32_t binding, const SP<RenderTarget>& renderTarget)
+	void DescriptorSet::UpdateTexture(uint32_t binding, const RenderTarget* renderTarget)
 	{
 		NEPTUNE_PROFILE_ZONE
 

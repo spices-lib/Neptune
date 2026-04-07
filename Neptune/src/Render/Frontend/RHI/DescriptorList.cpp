@@ -11,15 +11,15 @@ namespace Neptune::RHI {
 
 	namespace {
 	
-		WP<RHIDescriptorList::Impl> s_SharedDescriptorList;    // @brief Shared DescriptorList.
+		RHIDescriptorList::Impl* s_SharedDescriptorList = nullptr;    // @brief Shared DescriptorList.
 	}
 	
 	void DescriptorList::SetSharedLayout() const
 	{
-		s_SharedDescriptorList = m_Impl;
+		s_SharedDescriptorList = m_Impl.get();
 	}
 
-	const WP<RHIDescriptorList::Impl>& DescriptorList::GetSharedImpl() const
+	const RHIDescriptorList::Impl* DescriptorList::GetSharedImpl() const
 	{
 		return s_SharedDescriptorList;
 	}

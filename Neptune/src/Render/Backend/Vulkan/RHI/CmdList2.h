@@ -42,12 +42,12 @@ namespace Neptune::Vulkan {
 		/**
 		* @brief Interface of Begin CommandList.
 		*/
-		void Begin() override;
+		void Begin() const override;
 
 		/**
 		* @brief Interface of End CommandList.
 		*/
-		void End() override;
+		void End() const override;
 
 		/**
 		* @brief Interface of Submit CommandList and Wait.
@@ -83,7 +83,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] opticalFlowSession OpticalFlowSession.
 		*/
-		void SetOpticalFlowSession(const WP<OpticalFlowSession>& opticalFlowSession);
+		void SetOpticalFlowSession(const OpticalFlowSession* opticalFlowSession);
 
 		/**
 		* @brief Begin VideoCoding.
@@ -116,8 +116,8 @@ namespace Neptune::Vulkan {
 
 	private:
 
-		WP<ThreadQueue>        m_ThreadQueue;               // @brief ThreadQueue
-		WP<VideoSession>       m_VideoSession;              // @brief VideoSession
-		WP<OpticalFlowSession> m_OpticalFlowSession;        // @brief OpticalFlowSession
+		ThreadQueue*                 m_ThreadQueue;               // @brief ThreadQueue
+		WP<VideoSession>             m_VideoSession;              // @brief VideoSession
+		const OpticalFlowSession*    m_OpticalFlowSession;        // @brief OpticalFlowSession
 	};
 }

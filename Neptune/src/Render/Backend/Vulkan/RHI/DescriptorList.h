@@ -82,7 +82,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] shared RHIDescriptorList::Impl.
 		*/
-		void CombineSharedLayout(RHI::RHIDescriptorList::Impl* shared) override;
+		void CombineSharedLayout(const RHI::RHIDescriptorList::Impl* shared) override;
 
 		/**
 		* @brief Interface of Build DescriptorList.

@@ -1,3 +1,9 @@
+/**
+* @file RenderBackend.cpp.
+* @brief The RenderBackend Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "RenderBackend.h"
 #include "Infrastructure/InfrastructureHeader.h"
@@ -5,15 +11,9 @@
 #include "Render/Backend/Vulkan/Converter.h"
 #include "Render/Frontend/RHI/RenderPass.h"
 #include "Render/Frontend/Pass/SlatePass.h"
-
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/ClockComponent.h"
-
-#define IMGUI_DEFINE_MATH_OPERATORS
-#include <imgui.h>
-#include <backends/imgui_impl_vulkan.h>
-#include <backends/imgui_impl_glfw.h>
 
 namespace Neptune::Vulkan {
 
@@ -201,54 +201,6 @@ namespace Neptune::Vulkan {
 		NEPTUNE_PROFILE_ZONE
 
 		m_Context->Get<IDevice>()->Wait();
-	}
-
-	void RenderBackend::InitSlateModule()
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		auto pass = std::dynamic_pointer_cast<Render::SlatePass>(m_RenderPasses.back());
-
-		ImGui::CreateContext();
-
-		ImGuiIO& io = ImGui::GetIO();
-
-		io.IniFilename  = "Layout.ini";
-		io.LogFilename  = nullptr;
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-
-		ImGui_ImplGlfw_InitForVulkan(static_cast<GLFWwindow*>(m_Window->NativeWindow()), true);
-
-		ImGui_ImplVulkan_InitInfo             init_info{};
-		init_info.Instance                  = m_Context->Get<IInstance>()->Handle();
-		init_info.PhysicalDevice            = m_Context->Get<IPhysicalDevice>()->Handle();
-		init_info.Device                    = m_Context->Get<IDevice>()->Handle();
-		init_info.QueueFamily               = m_Context->Get<IPhysicalDevice>()->GetQueueFamilies().graphic.value();
-		init_info.Queue                     = m_Context->Get<IGraphicQueue>()->Handle();
-		init_info.PipelineCache             = VK_NULL_HANDLE;
-		init_info.DescriptorPool            = m_Context->Get<IDescriptorPool>()->Handle();
-		init_info.RenderPass                = pass->GetRenderPass()->GetRHIImpl<RenderPass>()->Handle();
-		init_info.Subpass                   = 0;
-		init_info.MinImageCount             = MaxFrameInFlight;
-		init_info.ImageCount                = MaxFrameInFlight;
-		init_info.MSAASamples               = VK_SAMPLE_COUNT_1_BIT;
-		init_info.Allocator                 = VK_NULL_HANDLE;
-		init_info.CheckVkResultFn           = [](VkResult result){ std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };
-
-		ImGui_ImplVulkan_Init(&init_info);
-
-		ImGui_ImplVulkan_CreateFontsTexture();
-	}
-
-	void RenderBackend::ShutdownSlateModule()
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		ImGui_ImplVulkan_Shutdown();
-		ImGui_ImplGlfw_Shutdown();
-		ImGui::DestroyContext();
 	}
 
 	std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)

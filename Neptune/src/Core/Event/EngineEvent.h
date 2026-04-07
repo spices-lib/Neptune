@@ -14,8 +14,8 @@ namespace Neptune {
     enum class EngineEventBit : uint32_t
     {
         StopTheEngine           = 0,
-        InitSlateModule         = 1,
-        ShutdownSlateModule     = 2,
+        InitSlateFrontend       = 1,
+        ShutdownSlateFrontend   = 2,
 
         Count                   = 3
     };
@@ -47,9 +47,9 @@ namespace Neptune {
             std::stringstream ss;
             ss << "EngineEvent: ";
 
-            if (m_Flag.Test(StopTheEngine))       ss << "StopTheEngine ";
-            if (m_Flag.Test(InitSlateModule))     ss << "InitSlateModule ";
-            if (m_Flag.Test(ShutdownSlateModule)) ss << "ShutdownSlateModule ";
+            if (m_Flag.Test(StopTheEngine))         ss << "StopTheEngine ";
+            if (m_Flag.Test(InitSlateFrontend))     ss << "InitSlateFrontend ";
+            if (m_Flag.Test(ShutdownSlateFrontend)) ss << "ShutdownSlateFrontend ";
 
             return ss.str();
         }

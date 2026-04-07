@@ -46,7 +46,7 @@ namespace Neptune::Vulkan {
 		return m_DescriptorSet.Handle();
 	}
 
-	bool RenderTarget::CopyToRenderTarget(SP<RHI::RenderTarget> target)
+	bool RenderTarget::CopyToRenderTarget(const RHI::RenderTarget* target)
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -55,7 +55,7 @@ namespace Neptune::Vulkan {
 		return CopyToRenderTarget(rhi);
 	}
 
-	bool RenderTarget::CopyToRenderTarget(SP<RenderTarget> target) const
+	bool RenderTarget::CopyToRenderTarget(RenderTarget* target) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -82,7 +82,7 @@ namespace Neptune::Vulkan {
 
 			cmdList.CmdTransitionLayout(m_Image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
 
-            cmdList.CmdTransitionLayout(target->IHandle(),  VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+            cmdList.CmdTransitionLayout(target->IHandle(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
             cmdList.CmdCopyImage(Handle(), target->Handle(), region);
 

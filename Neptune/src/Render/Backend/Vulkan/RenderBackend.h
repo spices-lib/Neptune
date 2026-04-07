@@ -64,16 +64,6 @@ namespace Neptune::Vulkan {
         void Wait() override;
 
         /**
-        * @brief Interface of InitSlateModule.
-        */
-        void InitSlateModule() override;
-
-        /**
-        * @brief Interface of ShutdownSlateModule.
-        */
-        void ShutdownSlateModule() override;
-
-        /**
         * @brief Interface of CreateRHI.
         *
         * @param[in] e ERHI.

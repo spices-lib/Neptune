@@ -33,11 +33,6 @@ namespace Neptune::Editor {
         World::OnDetached();
     }
 
-    void EditorWorld::Layout()
-    {
-        
-    }
-
     void EditorWorld::CreateExampleScene()
     {
         NEPTUNE_PROFILE_ZONE

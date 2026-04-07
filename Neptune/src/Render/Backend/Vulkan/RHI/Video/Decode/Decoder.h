@@ -591,11 +591,11 @@ namespace Neptune::Vulkan {
 
         uint32_t GetDecodedPictureCount() override { return m_VideoSession->GetDisplaySlotCount(); }
 
-        void SetDecodeRenderTarget(SP<RHI::RenderTarget> renderTarget) override;
+        void SetDecodeRenderTarget(const SP<RHI::RenderTarget>& renderTarget) override;
 
-        void SetReferenceRenderTarget(SP<RHI::RenderTarget> renderTarget) override;
+        void SetReferenceRenderTarget(const SP<RHI::RenderTarget>& renderTarget) override;
 
-        void SetFlowVectorRenderTarget(SP<RHI::RenderTarget> renderTarget) override;
+        void SetFlowVectorRenderTarget(const SP<RHI::RenderTarget>& renderTarget) override;
 
         void PushNextFrameToRenderTarget() override;
 
@@ -638,8 +638,8 @@ namespace Neptune::Vulkan {
         VkExtent2D                  m_codedExtent;
         VkParserDetectedVideoFormat m_videoFormat;
         ImageSpecsIndex             m_imageSpecsIndex;
-        WP<RenderTarget>            m_DecodeRT;
-        WP<RenderTarget>            m_ReferenceRT;
-        WP<RenderTarget>            m_FlowVectorRT;
+        RenderTarget*               m_DecodeRT;
+        RenderTarget*               m_ReferenceRT;
+        RenderTarget*               m_FlowVectorRT;
 	};
 }

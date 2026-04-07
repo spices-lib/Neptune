@@ -147,7 +147,7 @@ namespace Neptune::Vulkan {
 		* @param[in] width .
 		* @param[in] height .
 		*/
-		void CreateDecodeRenderTarget(SP<class RenderTarget> rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const;
+		void CreateDecodeRenderTarget(class RenderTarget* rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const;
 
 		/**
 		* @brief Create FlowVector RenderTarget.
@@ -156,7 +156,7 @@ namespace Neptune::Vulkan {
 		* @param[in] width .
 		* @param[in] height .
 		*/
-		void CreateFlowVectorRenderTarget(SP<class RenderTarget> rt, uint32_t width, uint32_t height) const;
+		void CreateFlowVectorRenderTarget(class RenderTarget* rt, uint32_t width, uint32_t height) const;
 
 	private:
 

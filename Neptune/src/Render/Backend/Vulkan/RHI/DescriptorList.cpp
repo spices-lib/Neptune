@@ -69,11 +69,11 @@ namespace Neptune::Vulkan {
 		m_DescriptorSets[set]->UpdateTexture(binding, renderTarget->GetRHIImpl<RenderTarget>());
 	}
 
-	void DescriptorList::CombineSharedLayout(RHI::RHIDescriptorList::Impl* shared)
+	void DescriptorList::CombineSharedLayout(const RHI::RHIDescriptorList::Impl* shared)
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		auto p = dynamic_cast<DescriptorList*>(shared);
+		auto p = dynamic_cast<const DescriptorList*>(shared);
 
 		m_DescriptorSetLayouts.insert(m_DescriptorSetLayouts.begin(), p->GetLayouts().begin(), p->GetLayouts().end());
 	}

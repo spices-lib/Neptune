@@ -76,16 +76,6 @@ namespace Neptune {
         virtual void Wait() = 0;
 
         /**
-        * @brief Interface of InitSlateModule.
-        */
-        virtual void InitSlateModule() = 0;
-
-        /**
-        * @brief Interface of ShutdownSlateModule.
-        */
-        virtual void ShutdownSlateModule() = 0;
-
-        /**
         * @brief Interface of CreateRHI.
         * 
         * @param[in] e ERHI.
