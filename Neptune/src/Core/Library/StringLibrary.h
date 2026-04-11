@@ -19,11 +19,41 @@ namespace Neptune::StringLibrary {
     */
     std::vector<std::string> SplitString(const std::string& input, char delimiter);
 
+    /**
+    * @brief Split a string to a string vector container use a char, keeps delimiter.
+    * 
+    * @param[in] input The string we want to split.
+    * @param[in] delimiter The char we want to use.
+    * 
+    * @return Returns a string vector container.
+    */
     static std::vector<std::string> SplitKeepString(const std::string& input, char delimiter);
 
+    /**
+    * @brief If string equal.
+    * 
+    * @param[in] str0 First string.
+    * @param[in] str1 Second string.
+    * 
+    * @return Returns true if equal.
+    */
     static bool StringsEqual(const char* str0, const char* str1);
 
+    /**
+    * @brief Convert char to wchar.
+    * 
+    * @param[in] c char.
+    * 
+    * @return Returns wchar.
+    */
     static std::wstring CharToWChar(const char* c);
 
+    /**
+    * @brief Convert wchar to char.
+    * 
+    * @param[in] wc wchar.
+    * 
+    * @return Returns char.
+    */
     static std::string WCharToChar(const wchar_t* wc);
 }

@@ -7,8 +7,6 @@
 #pragma once
 #include "Core/Core.h"
 
-#include <mutex>
-
 namespace Neptune::Container {
 
     /**

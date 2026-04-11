@@ -26,6 +26,11 @@ namespace Neptune {
         ScriptComponent() = default;
 
         /**
+        * @brief Destructor Function.
+        */
+        ~ScriptComponent() override = default;
+        
+        /**
         * @brief Add a script to this component.
         * 
         * @param[in] script ScriptInterface.
@@ -38,11 +43,6 @@ namespace Neptune {
         * @param[in] name Script Name.
         */
         void RemoveScript(const std::string& name);
-
-        /**
-        * @brief Destructor Function.
-        */
-        ~ScriptComponent() override = default;
 
         /**
         * @brief This method defines the behaves on specific component tick every frame.

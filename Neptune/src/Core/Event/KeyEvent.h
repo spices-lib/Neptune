@@ -44,7 +44,7 @@ namespace Neptune {
         * @param[in] keycode Input KeyCode.
         */
         KeyEvent(KeyCode keycode)
-                :m_KeyCode(keycode)
+            : m_KeyCode(keycode)
         {}
 
         /**
@@ -88,7 +88,7 @@ namespace Neptune {
         * 
         * @return Returns Serialized string.
         */
-        virtual std::string ToString() const override
+        std::string ToString() const override
         {
             NEPTUNE_PROFILE_ZONE
 
@@ -124,13 +124,13 @@ namespace Neptune {
         * @param[in] keycode Input KeyCode.
         */
         KeyReleasedEvent(KeyCode keycode)
-                : KeyEvent(keycode)
+            : KeyEvent(keycode)
         {}
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~KeyReleasedEvent() override = default;
+        ~KeyReleasedEvent() override = default;
 
         /**
         * @brief Serialize this Event Class to string.
@@ -166,7 +166,7 @@ namespace Neptune {
         * @param[in] keycode Input KeyCode.
         */
         KeyTypedEvent(KeyCode keycode)
-                : KeyEvent(keycode)
+            : KeyEvent(keycode)
         {}
 
         /**

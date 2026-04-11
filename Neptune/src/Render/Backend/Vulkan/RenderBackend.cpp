@@ -135,14 +135,14 @@ namespace Neptune::Vulkan {
 		{
 			DEBUGUTILS_BEGINQUEUELABEL(m_Context->Get<IComputeQueue>()->Handle(), "MainComputeQueue")
 
-			VkSemaphore waitSemphores[]          = { m_Context->Get<IGraphicImageSemaphore>()->Handle(clock.m_FrameIndex) };
+			VkSemaphore waitSemaphores[]         = { m_Context->Get<IGraphicImageSemaphore>()->Handle(clock.m_FrameIndex) };
 			VkSemaphore signalSemaphores[]       = { m_Context->Get<IComputeQueueSemaphore>()->Handle(clock.m_FrameIndex) };
 			VkPipelineStageFlags waitStages[]    = { VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT };
 
 			VkSubmitInfo                           submitInfo{};
 			submitInfo.sType                     = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 			submitInfo.waitSemaphoreCount        = 1;
-			submitInfo.pWaitSemaphores           = waitSemphores;
+			submitInfo.pWaitSemaphores           = waitSemaphores;
 			submitInfo.pWaitDstStageMask         = waitStages;
 			submitInfo.commandBufferCount        = 1;
 			submitInfo.pCommandBuffers           = &m_Context->Get<IComputeCommandBuffer>()->Handle(clock.m_FrameIndex);
@@ -157,14 +157,14 @@ namespace Neptune::Vulkan {
 		{
 			DEBUGUTILS_BEGINQUEUELABEL(m_Context->Get<IGraphicQueue>()->Handle(), "MainGraphicQueue")
 
-			VkSemaphore waitSemphores[]          = { m_Context->Get<IComputeQueueSemaphore>()->Handle(clock.m_FrameIndex) };
+			VkSemaphore waitSemaphores[]         = { m_Context->Get<IComputeQueueSemaphore>()->Handle(clock.m_FrameIndex) };
 			VkSemaphore signalSemaphores[]       = { m_Context->Get<IGraphicQueueSemaphore>()->Handle(clock.m_FrameIndex) };
 			VkPipelineStageFlags waitStages[]    = { VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
 
 			VkSubmitInfo                           submitInfo{};
 			submitInfo.sType                     = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 			submitInfo.waitSemaphoreCount        = 1;
-			submitInfo.pWaitSemaphores           = waitSemphores;
+			submitInfo.pWaitSemaphores           = waitSemaphores;
 			submitInfo.pWaitDstStageMask         = waitStages;
 			submitInfo.commandBufferCount        = 1;
 			submitInfo.pCommandBuffers           = &m_Context->Get<IGraphicCommandBuffer>()->Handle(clock.m_FrameIndex);

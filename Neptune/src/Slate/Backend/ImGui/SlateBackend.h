@@ -32,7 +32,7 @@ namespace Neptune::imgui {
         /**
         * @brief Destructor Function.
         */
-		~SlateBackend() = default;
+		~SlateBackend() override = default;
 
         /**
         * @brief Interface of Initialize.

@@ -18,6 +18,11 @@ namespace Neptune::imgui {
     public:
 
         /**
+        * @brief Destructor Function.
+        */
+        virtual ~WindowAPIInterface() = default;
+        
+        /**
         * @brief Interface of Initialize.
         */
         virtual void OnInitialize() const = 0;
@@ -49,6 +54,11 @@ namespace Neptune::imgui {
     {
     public:
 
+        /**
+        * @brief Destructor Function.
+        */
+        ~GLFWInterface() override = default;
+        
         /**
         * @brief Interface of Initialize.
         */

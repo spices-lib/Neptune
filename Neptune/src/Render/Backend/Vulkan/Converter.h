@@ -21,7 +21,7 @@ namespace Neptune::Vulkan {
 	* 
 	* @return Returns VkFormat.
 	*/
-	static VkFormat ToVkFormat(TextureFormat f);
+	VkFormat ToVkFormat(TextureFormat f);
 
 	/**
 	* @brief Convert TextureDomain to VkImageType.
@@ -30,7 +30,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VkImageType.
 	*/
-	static VkImageType ToVkImageType(TextureDomain d);
+	VkImageType ToVkImageType(TextureDomain d);
 
 	/**
 	* @brief Convert TextureDomain to VkImageViewType.
@@ -39,7 +39,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns TextureDomain.
 	*/
-	static VkImageViewType ToVkImageViewType(TextureDomain d);
+	VkImageViewType ToVkImageViewType(TextureDomain d);
 
 	/**
 	* @brief Convert RHIMemoryUsage to VkMemoryPropertyFlags.
@@ -48,7 +48,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VkMemoryPropertyFlags.
 	*/
-	static VkMemoryPropertyFlags ToVkMemoryPropertyFlags(RHIMemoryUsage u);
+	VkMemoryPropertyFlags ToVkMemoryPropertyFlags(RHIMemoryUsage u);
 
 	/**
 	* @brief Convert RHIMemoryUsage to VmaMemoryUsage.
@@ -57,7 +57,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VmaMemoryUsage.
 	*/
-	static VmaMemoryUsage ToVmaMemoryUsage(RHIMemoryUsage u);
+	VmaMemoryUsage ToVmaMemoryUsage(RHIMemoryUsage u);
 
 	/**
 	* @brief Convert CullMode to VkCullModeFlags.
@@ -66,7 +66,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VkCullModeFlags.
 	*/
-	static VkCullModeFlags ToVkCullModeFlags(CullMode c);
+	VkCullModeFlags ToVkCullModeFlags(CullMode c);
 
 	/**
 	* @brief Convert ShaderStage to VkShaderStageFlagBits.
@@ -75,7 +75,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VkShaderStageFlagBits.
 	*/
-	static VkShaderStageFlagBits ToVkShaderStageFlagBits(ShaderStage s);
+	VkShaderStageFlagBits ToVkShaderStageFlagBits(ShaderStage s);
 
 	/**
 	* @brief Convert AttachmentOP to VkAttachmentLoadOp.
@@ -84,7 +84,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VkAttachmentLoadOp.
 	*/
-	static VkAttachmentLoadOp ToVkAttachmentLoadOp(AttachmentOP op);
+	VkAttachmentLoadOp ToVkAttachmentLoadOp(AttachmentOP op);
 
 	/**
 	* @brief Convert AttachmentLayout to VkImageLayout.
@@ -93,7 +93,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns VkImageLayout.
 	*/
-	static VkImageLayout ToVkImageLayout(AttachmentLayout l);
+	VkImageLayout ToVkImageLayout(AttachmentLayout l);
 
 	/**
 	* @brief Convert VkFormat to TextureFormat.
@@ -102,7 +102,7 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns TextureFormat.
 	*/
-	static TextureFormat ToTextureFormat(VkFormat f);
+	TextureFormat ToTextureFormat(VkFormat f);
 
 	/**
 	* @brief Convert VkMemoryHeapFlags to std::string.
@@ -111,6 +111,6 @@ namespace Neptune::Vulkan {
 	*
 	* @return Returns std::string.
 	*/
-	static std::string ToString(VkMemoryHeapFlags flag);
+	std::string ToString(VkMemoryHeapFlags flag);
 
 }

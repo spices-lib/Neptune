@@ -8,10 +8,11 @@
 #include "Core/Core.h"
 #include "Event.h"
 
-#include <memory.h>
-
 namespace Neptune {
-
+    
+    /**
+    * @brief The EventListener Class.
+    */
     class EventListener
     {
     public:
@@ -39,6 +40,8 @@ namespace Neptune {
         */
         explicit EventListener(EventType bit) 
         {
+            NEPTUNE_PROFILE_ZONE
+            
             Registry(bit);
         }
 

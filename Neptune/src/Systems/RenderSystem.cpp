@@ -54,7 +54,7 @@ namespace Neptune {
         dispatcher.Dispatch<WindowResizeOverEvent>(BIND_EVENT_FN(RenderSystem::OnWindowResizeOverEvent));
     }
 
-    bool RenderSystem::OnEngineEvent(EngineEvent& e)
+    bool RenderSystem::OnEngineEvent(EngineEvent& e) const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -66,7 +66,7 @@ namespace Neptune {
         return false;
     }
 
-    bool RenderSystem::OnSlateResizeEvent(SlateResizeEvent& e)
+    bool RenderSystem::OnSlateResizeEvent(SlateResizeEvent& e) const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -75,7 +75,7 @@ namespace Neptune {
         return false;
     }
 
-    bool RenderSystem::OnWindowResizeOverEvent(WindowResizeOverEvent& e)
+    bool RenderSystem::OnWindowResizeOverEvent(WindowResizeOverEvent& e) const
     {
         NEPTUNE_PROFILE_ZONE
 

@@ -62,7 +62,7 @@ namespace Neptune {
         * 
         * @return Returns true if consumed.
         */
-        bool OnEngineEvent(class EngineEvent& e);
+        bool OnEngineEvent(class EngineEvent& e) const;
 
         /**
         * @brief SlateResizeEvent Event.
@@ -71,7 +71,7 @@ namespace Neptune {
         *
         * @return Returns true if consumed.
         */
-        bool OnSlateResizeEvent(class SlateResizeEvent& e);
+        bool OnSlateResizeEvent(class SlateResizeEvent& e) const;
 
         /**
         * @brief SlateResizeEvent Event.
@@ -80,7 +80,7 @@ namespace Neptune {
         *
         * @return Returns true if consumed.
         */
-        bool OnWindowResizeOverEvent(class WindowResizeOverEvent& e);
+        bool OnWindowResizeOverEvent(class WindowResizeOverEvent& e) const;
 
     private:
 

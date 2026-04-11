@@ -9,7 +9,6 @@
 #include "Core/Container/BitSet.hpp"
 
 #include <functional>
-#include <sstream>
 
 namespace Neptune {
 
@@ -43,9 +42,7 @@ namespace Neptune {
         // @brief Engine Event.
         Engine                 = 14,
 
-        /**
-        * @brief Event Count.
-        */
+        // @brief Event Count.
         Count                  = 15,
     };
 
@@ -76,6 +73,8 @@ namespace Detail {
     template<typename... T>
     void SetEventCategories(Container::BitSet<EventCategory>& flags, T... categories)
     {
+        NEPTUNE_PROFILE_ZONE
+        
         (flags.Set(categories, true), ...);
     }
 
@@ -110,7 +109,7 @@ namespace Detail {
     /**
     * @brief Bind Event.
     */
-    #define BIND_EVENT_FN(x)                                                 \
+    #define BIND_EVENT_FN(x)                                                           \
 	std::bind(&x, this, std::placeholders::_1)
 
     /**
@@ -145,7 +144,7 @@ namespace Detail {
         virtual std::string                        ToString()               const { return GetName(); }
 
         /**
-        * @brief Judgement if a given category is contained by this event class.
+        * @brief Judgment if a given category is contained by this event class.
         * 
         * @param[in] category In category.
         * 
@@ -192,7 +191,7 @@ namespace Detail {
         * 
         * @tparam T Specific Event Class.
         * 
-        * @return Returns true if needs block event chain.
+        * @return Returns true if it needs block event chain.
         */
         template<typename T>
         using EventFn = std::function<bool(T&)>;
@@ -205,7 +204,7 @@ namespace Detail {
         * @param[in] event Specific Event reference.
         */
         EventDispatcher(Event& event)
-                :m_Event(event)
+            : m_Event(event)
         {}
 
         /**

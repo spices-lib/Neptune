@@ -25,8 +25,8 @@ namespace Neptune {
         * @param[in] y Mouse Position Y.
         */
         MouseMovedEvent(float x, float y)
-                : m_MouseX(x)
-                , m_MouseY(y)
+            : m_MouseX(x)
+            , m_MouseY(y)
         {}
 
         /**
@@ -100,8 +100,8 @@ namespace Neptune {
         * @param[in] yOffset Mouse offset in Y.
         */
         MouseScrolledEvent(float xOffset, float yOffset)
-                : m_XOffset(xOffset)
-                , m_YOffset(yOffset)
+            : m_XOffset(xOffset)
+            , m_YOffset(yOffset)
         {}
 
         /**
@@ -172,7 +172,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~MouseButtonEvent() override = default;
+        ~MouseButtonEvent() override = default;
 
         /**
         * @brief Get Mouse Button.
@@ -190,10 +190,11 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
         * @param[in] button Input Mouse Button.
         */
         MouseButtonEvent(MouseCode button)
-                : m_Button(button)
+            : m_Button(button)
         {}
 
         /**
@@ -215,7 +216,7 @@ namespace Neptune {
         * @param[in] button Input Mouse Button.
         */
         MouseButtonPressedEvent(MouseCode button)
-                : MouseButtonEvent(button)
+            : MouseButtonEvent(button)
         {}
 
         /**
@@ -257,7 +258,7 @@ namespace Neptune {
         * @param[in] button Input Mouse Button.
         */
         MouseButtonReleasedEvent(MouseCode button)
-                : MouseButtonEvent(button)
+            : MouseButtonEvent(button)
         {}
 
         /**

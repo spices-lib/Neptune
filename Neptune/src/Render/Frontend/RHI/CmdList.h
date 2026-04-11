@@ -13,7 +13,6 @@
 namespace Neptune::Data {
 
 	struct Clock;
-
 }
 
 namespace Neptune::RHI {

@@ -12,7 +12,7 @@ namespace Neptune::Slate {
 
     /**
     * @brief This Class defines the basic behaves of specific slate.
-    * When we add an new Slate, we need inherit from this.
+    * When we add a new Slate, we need inherit from this.
     */
     class Slate
     {

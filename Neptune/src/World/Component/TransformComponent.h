@@ -8,6 +8,7 @@
 #include "Core/Core.h"
 #include "Component.h"
 #include "Core/Math/Transform.h"
+#include "Core/Container/BitSet.hpp"
 
 namespace Neptune {
 
@@ -19,14 +20,13 @@ namespace Neptune {
     {
     public:
 
-        enum TransformComponentBits
+        enum TransformComponentBits : uint8_t
         {
             Clean = 0,
-            NeedUpdateTLAS = 1,
-            MAX = 0x7FFFFFFF
+            NeedUpdateTLAS,
+            
+            Count
         };
-
-        typedef uint32_t TransformComponentFlags;
 
     public:
 
@@ -128,21 +128,28 @@ namespace Neptune {
         * 
         * @return Returns the TransformComponentFlags.
         */
-        TransformComponentFlags GetMarker() const { return m_Marker; }
+        const Container::BitSet<TransformComponentBits>& GetMarker() const { return m_Marker; }
 
         /**
         * @brief Mark TransformComponentFlags with flags.
         * 
         * @param[in] flags In flags.
         */
-        void Mark(TransformComponentFlags flags) { m_Marker |= flags; }
+        void Mark(const Container::BitSet<TransformComponentBits>& flags) { m_Marker |= flags; }
+
+        /**
+        * @brief Mark TransformComponentFlags with flags.
+        * 
+        * @param[in] bit In flags.
+        */
+        void Mark(const TransformComponentBits& bit) { m_Marker.Set(bit, true); }
 
         /**
         * @brief Clear TransformComponentFlags with flags.
         * 
         * @param[in] flags In flags.
         */
-        void ClearMarkerWithBits(TransformComponentFlags flags);
+        void ClearMarkerWithBits(const Container::BitSet<TransformComponentBits>& flags) { m_Marker ^= flags; }
 
     private:
 
@@ -166,6 +173,6 @@ namespace Neptune {
         /**
         * @brief World State this frame.
         */
-        TransformComponentFlags m_Marker = TransformComponentBits::Clean;
+        Container::BitSet<TransformComponentBits> m_Marker = Clean;
     };
 }

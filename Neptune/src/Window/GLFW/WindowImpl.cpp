@@ -19,8 +19,8 @@
 namespace Neptune::GLFW {
 
     WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
-            : Window(implement)
-            , m_APIInterface(CreateInterface(backend))
+        : Window(implement)
+        , m_APIInterface(CreateInterface(backend))
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -47,6 +47,7 @@ namespace Neptune::GLFW {
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
         if(!m_Windows) 
         {
+            glfwTerminate();
             NEPTUNE_CORE_CRITICAL("Window create failed.")
         }
 

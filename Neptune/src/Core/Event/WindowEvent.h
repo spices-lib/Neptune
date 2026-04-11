@@ -26,14 +26,14 @@ namespace Neptune {
         * @param[in] height New Viewport Size.
         */
         WindowResizeEvent(uint32_t width, uint32_t height)
-                : m_Width(width)
-                , m_Height(height)
+            : m_Width(width)
+            , m_Height(height)
         {}
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~WindowResizeEvent() override = default;
+        ~WindowResizeEvent() override = default;
 
         /**
         * @brief Get New Windows Width.
@@ -102,7 +102,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~WindowCloseEvent() override = default;
+        ~WindowCloseEvent() override = default;
 
         /**
         * @brief Specific this Class Type with WindowClose.
@@ -131,8 +131,8 @@ namespace Neptune {
         * @param[in] height New Viewport Size.
         */
         WindowResizeOverEvent(uint32_t width, uint32_t height)
-                : m_Width(width)
-                , m_Height(height)
+            : m_Width(width)
+            , m_Height(height)
         {}
 
         /**

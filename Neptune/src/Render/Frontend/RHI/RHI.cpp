@@ -14,7 +14,7 @@ namespace Neptune::RHI {
 		RHIDelegate::Creator s_Creator;    // @brief RHI Creator Functor instance.
 	}
 
-	void RHIDelegate::SetCreator(const RHIDelegate::Creator& fn)
+	void RHIDelegate::SetCreator(const Creator& fn)
 	{
 		NEPTUNE_PROFILE_ZONE
 

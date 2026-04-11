@@ -10,8 +10,6 @@
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-#include <time.h>
-
 namespace Neptune {
 
     LogImpl::LogImpl() : Log()

@@ -9,10 +9,10 @@
 
 namespace Neptune::ClassLibrary {
 
-/**
-* @brief Using ClassType instead std::reference_wrapper<const std::type_info>.
-*/
-using ClassType = std::reference_wrapper<const std::type_info>;
+    /**
+    * @brief Using ClassType instead std::reference_wrapper<const std::type_info>.
+    */
+    using ClassType = std::reference_wrapper<const std::type_info>;
 
     /**
     * @brief Get Class Name as string.

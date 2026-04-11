@@ -1,3 +1,9 @@
+/**
+* @file EngineClock.cpp.
+* @brief The EngineClock Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "EngineClock.h"
 #include "World/Scene/Scene.h"
@@ -13,12 +19,17 @@ namespace Neptune {
 
 	void EngineClock::OnAttached()
 	{
+		NEPTUNE_PROFILE_ZONE
+		
 		auto& comp = m_Scene->AddComponent<ClockComponent>(m_Scene->GetRoot());
+		
 		m_Clock = &comp.GetClock();
 	}
 
 	void EngineClock::OnTick()
 	{
+		NEPTUNE_PROFILE_ZONE
+		
 		if (!m_Timer)
 		{
 			m_Timer = CreateSP<Timer>();
@@ -33,4 +44,5 @@ namespace Neptune {
 		m_Clock->m_EngineTime = m_Timer->DurationTime();
 		m_Clock->m_FrameIndex = (m_Clock->m_FrameIndex + 1) % MaxFrameInFlight;
 	}
+	
 }

@@ -155,6 +155,13 @@ namespace Neptune
 
         };
 
+        /**
+        * @brief Helper Function to convert KeyCode to String.
+        * 
+        * @param code KeyCode.
+        * 
+        * @return Returns String.
+        */
         inline std::string ToString(KeyCode code)
         {
             NEPTUNE_PROFILE_ZONE

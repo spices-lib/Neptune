@@ -37,12 +37,12 @@ namespace Neptune {
         ~ScriptInterface() override = default;
 
         /**
-        * @brief This interface defines the behave on specific component on construct.
+        * @brief This interface defines to behave on specific component on construct.
         */
         virtual void OnConstruct() = 0;
 
         /**
-        * @brief This interface defines the behave on specific component on attached.
+        * @brief This interface defines to behave on specific component on attached.
         */
         virtual void OnAttached() = 0;
         
@@ -52,12 +52,12 @@ namespace Neptune {
         virtual void OnTick() = 0;
 
         /**
-        * @brief This interface defines the behave on specific component on destroy.
+        * @brief This interface defines to behave on specific component on destroy.
         */
         virtual void OnDestroy() = 0;
 
         /**
-        * @brief This interface defines the behave on specific component on detached.
+        * @brief This interface defines to behave on specific component on detached.
         */
         virtual void OnDetached() = 0;
         

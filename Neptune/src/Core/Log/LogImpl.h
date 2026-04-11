@@ -5,7 +5,7 @@
 */
 
 #pragma once
-#include "Core/NonCopyable.h"
+#include "Core/Core.h"
 #include "Log.h"
 
 // This ignores all warnings raised inside External headers

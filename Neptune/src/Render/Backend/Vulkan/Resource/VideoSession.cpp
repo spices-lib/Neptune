@@ -526,7 +526,7 @@ namespace Neptune::Vulkan {
 			case StdVideoPictureParametersSet::StdType::TYPE_H265_PPS: set = param->GetStdH265Pps()->pps_seq_parameter_set_id;   break;
 			default:
 			{
-				NEPTUNE_CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()");
+				NEPTUNE_CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()")
 				return;
 			}
 		}
@@ -627,7 +627,7 @@ namespace Neptune::Vulkan {
 					}
 					default:
 					{
-						NEPTUNE_CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()");
+						NEPTUNE_CORE_ERROR("Invalid StdType in Calling UpdateVideoSessionParameters()")
 						return;
 					}
 				}

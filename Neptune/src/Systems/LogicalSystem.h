@@ -62,7 +62,7 @@ namespace Neptune {
         *
         * @return Returns true if consumed.
         */
-        bool OnEngineEvent(class EngineEvent& e);
+        bool OnEngineEvent(class EngineEvent& e) const;
         
     private:
 

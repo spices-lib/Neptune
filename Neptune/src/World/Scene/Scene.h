@@ -53,7 +53,7 @@ namespace Neptune {
         Entity Create(UUID uuid, const std::string& name = "None");
 
         /**
-        * @brief Destroy a entity from this world.
+        * @brief Destroy an entity from this world.
         * 
         * @param[in] entity Entity.
         */
@@ -222,7 +222,7 @@ namespace Neptune {
     };
 
     template <typename T, typename F>
-    void Scene::ViewComponent(F&& fn) const
+    auto Scene::ViewComponent(F&& fn) const -> void
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -239,7 +239,7 @@ namespace Neptune {
     }
 
     template <typename T, typename F>
-    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn) const
+    auto Scene::ViewComponent(const std::vector<uint32_t>& ranges, F&& fn) const -> void
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -255,7 +255,7 @@ namespace Neptune {
     }
 
     template<typename T, typename F>
-    void Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn) const
+    auto Scene::ViewComponent(const std::vector<uint32_t>& ranges, uint32_t floor, uint32_t ceil, F&& fn) const -> void
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -274,7 +274,7 @@ namespace Neptune {
     }
 
     template<typename F>
-    void Scene::ViewRoot(F&& fn) const
+    auto Scene::ViewRoot(F&& fn) const -> void
     {
         NEPTUNE_PROFILE_ZONE
 

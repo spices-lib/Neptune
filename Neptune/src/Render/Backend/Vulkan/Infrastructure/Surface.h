@@ -8,6 +8,7 @@
 #include "Core/Core.h"
 #include "Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/Surface.h"
+#include "Window/Enum.h"
 
 namespace Neptune::Vulkan {
 
@@ -21,7 +22,7 @@ namespace Neptune::Vulkan {
 	{
 	public:
 
-		static SP<Surface> Create(Context& context, EInfrastructure e, enum WindowImplement implement, void* window);
+		static SP<Surface> Create(Context& context, EInfrastructure e, WindowImplement implement, void* window);
 
 	public:
 

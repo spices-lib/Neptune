@@ -72,7 +72,7 @@ namespace Neptune {
         template<typename ...Args>
         Tree* AddChild(Args&&... args)
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
             
             m_Child.push_back(std::make_unique<Tree>(std::forward<Args>(args)...));
 
@@ -88,7 +88,7 @@ namespace Neptune {
         template<typename F, typename ...Args>
         void View(F&& fn, Args&&...  args) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
             
             std::invoke(std::forward<F>(fn), m_Data, std::forward<Args>(args)...);
         }
@@ -102,7 +102,7 @@ namespace Neptune {
         template<typename F, typename ...Args>
         void ViewDSF(F&& fn, Args&&...  args) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
             
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
             
@@ -118,7 +118,7 @@ namespace Neptune {
         template<typename F, typename ...Args>
         void ViewWSF(F&& fn, Args&&...  args) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
             
             auto visitor = std::bind(std::forward<F>(fn), std::placeholders::_1, std::placeholders::_2, std::forward<Args>(args)...);
             
@@ -132,7 +132,7 @@ namespace Neptune {
         */
         void SetData(const T& data)
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
             
             m_Data = data;
         }

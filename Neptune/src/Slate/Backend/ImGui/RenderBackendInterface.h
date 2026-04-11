@@ -50,6 +50,11 @@ namespace Neptune::imgui {
     public:
 
         /**
+        * @brief Destructor Function.
+        */
+        ~VulkanInterface() = default;
+        
+        /**
         * @brief Interface of Initialize.
         */
         void OnInitialize() const override;

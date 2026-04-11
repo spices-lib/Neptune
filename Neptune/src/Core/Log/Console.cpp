@@ -9,20 +9,20 @@
 
 namespace Neptune {
 
-    /**
-    * @brief Global Console Pool.
-    */
-    static std::unordered_map<std::string, SP<Console>> m_GlobalConsolePool;
+    namespace {
+        
+        std::unordered_map<std::string, SP<Console>> m_GlobalConsolePool;  // @brief Global Console Pool.
+    }
 
     Console::Console(uint32_t maxInfos)
-            : m_MaxInfos(maxInfos)
+        : m_MaxInfos(maxInfos)
     {}
 
     std::shared_ptr<Console> Console::Registry(const std::string& name)
     {
         NEPTUNE_PROFILE_ZONE
 
-        if (m_GlobalConsolePool.find(name) == m_GlobalConsolePool.end())
+        if (!m_GlobalConsolePool.contains(name))
         {
             m_GlobalConsolePool[name] = CreateSP<Console>();
         }

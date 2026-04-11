@@ -82,6 +82,7 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
         m_Systems.emplace_back(CreateUP<T>(std::forward<Args>(args)...));
+        
         m_Systems.back()->OnSystemInitialize();
     }
 }

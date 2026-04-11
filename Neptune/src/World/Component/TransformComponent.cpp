@@ -26,16 +26,6 @@ namespace Neptune {
         return Transform::GetRotationMatrix(m_Transform.rotation);
     }
 
-    void TransformComponent::ClearMarkerWithBits(TransformComponentFlags flags)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        if (m_Marker & flags)
-        {
-            m_Marker ^= flags;
-        }
-    }
-
     void TransformComponent::CalMatrix()
     {
         NEPTUNE_PROFILE_ZONE

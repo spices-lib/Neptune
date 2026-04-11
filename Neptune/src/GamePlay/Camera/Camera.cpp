@@ -30,6 +30,7 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
         CalculatePMatrixReverseZ();
+        
         return m_ProjectionMatrix;
     }
 }

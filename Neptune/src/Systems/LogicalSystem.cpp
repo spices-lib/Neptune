@@ -76,7 +76,7 @@ namespace Neptune {
         }
     }
 
-    bool LogicalSystem::OnEngineEvent(class EngineEvent& e)
+    bool LogicalSystem::OnEngineEvent(class EngineEvent& e) const
     {
         NEPTUNE_PROFILE_ZONE
 

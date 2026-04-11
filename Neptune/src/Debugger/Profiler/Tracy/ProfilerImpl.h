@@ -41,7 +41,7 @@ namespace Neptune::Tracy {
 #define NEPTUNE_PROFILE_THREAD_ENTER(name, group)                         TracyFiberEnterHint(name, group);
 #define NEPTUNE_PROFILE_THREAD_LEAVE(name)                                TracyFiberLeave(name);
 
-/********************************************* Those Macros and enviroment must be defined in preprocesser ******************************************************/
+/********************************************* Those Macros and environment must be defined in preprocessor ******************************************************/
 
 /**
 * @brief tracy Feature Enable.
@@ -51,14 +51,14 @@ namespace Neptune::Tracy {
 
 /**
 * @brief Used profile a short-lived program.
-* Tracy connection won't be finisd even application is quit.
+* Tracy connection won't be finished even application is quit.
 *
 * #define TRACY_NO_EXIT
 */
 
 /**
 * @brief Used if want profile on demand.
-* Enable profiling only when there¡¯s an established connection with the server.
+* Enable profiling only when there's an established connection with the server.
 *
 * #define TRACY_ON_DEMAND
 */
@@ -122,7 +122,7 @@ namespace Neptune::Tracy {
 */
 
 /**
-* @brief Controls whether a system load/save dialog is compiled in. If it¡¯s enabled,
+* @brief Controls whether a system load/save dialog is compiled in. If itï¿½ï¿½s enabled,
 * the saved traces will be named trace.tracy.
 *
 * #define TRACY_NO_FILESELECTOR
@@ -138,7 +138,7 @@ namespace Neptune::Tracy {
 */
 
 /**
-* @brief the main profiler view won¡¯t occupy the whole window if this macro is
+* @brief the main profiler view wonï¿½ï¿½t occupy the whole window if this macro is
 * defined. Additional setup is required for this to work. If you want to embed the server into your
 * application, you probably should enable this option.
 *

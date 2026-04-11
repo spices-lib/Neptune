@@ -38,6 +38,13 @@ namespace Neptune
 
         };
 
+        /**
+        * @brief Helper Function to convert MouseCode to String.
+        * 
+        * @param code MouseCode.
+        * 
+        * @return Returns String.
+        */
         inline std::string ToString(MouseCode code)
         {
             NEPTUNE_PROFILE_ZONE

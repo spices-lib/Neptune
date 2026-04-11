@@ -190,7 +190,7 @@ project "Neptune"
 
 		runtime "Debug"
 		symbols "On"
-
+		
 	-- Configuration: Release.
 	filter "configurations:Release"
 

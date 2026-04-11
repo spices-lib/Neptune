@@ -22,6 +22,11 @@ namespace Neptune::GLFW {
     public:
 
         /**
+        * @brief Destructor Function.
+        */
+        virtual ~APIInterface() = default;
+        
+        /**
         * @brief Interface of GLFW Hint Configuration with RenderBackend.
         */
         virtual void Hint() const = 0;

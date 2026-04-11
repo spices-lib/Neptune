@@ -8,6 +8,8 @@
 #include "Core/Core.h"
 #include "Event.h"
 
+#include <sstream>
+
 namespace Neptune {
 
     /**
@@ -25,8 +27,8 @@ namespace Neptune {
         * @param[in] height New Viewport Size.
         */
         SlateResizeEvent(uint32_t width, uint32_t height)
-                : m_Width(width)
-                , m_Height(height)
+            : m_Width(width)
+            , m_Height(height)
         {}
 
         /**

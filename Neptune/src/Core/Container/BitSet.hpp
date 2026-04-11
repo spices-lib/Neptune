@@ -30,7 +30,7 @@ namespace Neptune::Container {
     private:
 
         /**
-        * @brief Stoted bitset.
+        * @brief Stored bitset.
         */
         std::bitset<static_cast<size_t>(T::Count)> m_Bits{};
 
@@ -47,6 +47,15 @@ namespace Neptune::Container {
         BitSet() = default;
 
         /**
+        * @brief Constructor Function.
+        */
+        template<typename T1>
+        BitSet(T1&& t)
+        {
+            Set(t, true);
+        }
+        
+        /**
         * @brief Destructor Function.
         */
         virtual ~BitSet() = default;
@@ -58,7 +67,7 @@ namespace Neptune::Container {
         */
         BitSet(const BitSet& other)
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits = other.m_Bits;
         }
@@ -70,7 +79,7 @@ namespace Neptune::Container {
         */
         BitSet& operator=(const BitSet& other)
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits = other.m_Bits;
 
@@ -84,7 +93,7 @@ namespace Neptune::Container {
         */
         BitSet(BitSet&& other) noexcept
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits = std::move(other.m_Bits);
         }
@@ -96,7 +105,7 @@ namespace Neptune::Container {
         */
         BitSet& operator=(BitSet&& other) noexcept
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits = std::move(other.m_Bits);
 
@@ -112,7 +121,7 @@ namespace Neptune::Container {
         */
         BitSet operator|(const BitSet& other) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             BitSet result;
 
@@ -130,7 +139,7 @@ namespace Neptune::Container {
         */
         BitSet operator&(const BitSet& other) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             BitSet result;
 
@@ -148,13 +157,29 @@ namespace Neptune::Container {
         */
         BitSet& operator|=(const BitSet& other)
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits |= other.m_Bits;
 
             return *this;
         }
 
+        /**
+        * @brief ^= Bit Operation.
+        *
+        * @param[in] other BitSet.
+        *
+        * @return Returns this.
+        */
+        BitSet& operator^=(const BitSet& other)
+        {
+            std::unique_lock lock(m_Mutex);
+
+            m_Bits ^= other.m_Bits;
+
+            return *this;
+        }
+        
         /**
         * @brief &= Bit Operation.
         *
@@ -164,7 +189,7 @@ namespace Neptune::Container {
         */
         BitSet& operator&=(const BitSet& other)
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits &= other.m_Bits;
 
@@ -180,7 +205,7 @@ namespace Neptune::Container {
         */
         bool operator==(const BitSet& other) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             return m_Bits == other.m_Bits;
         }
@@ -194,7 +219,7 @@ namespace Neptune::Container {
         */
         bool operator!=(const BitSet& other) const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             return m_Bits != other.m_Bits;
         }
@@ -206,7 +231,7 @@ namespace Neptune::Container {
         */
         explicit operator TSize() const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             return static_cast<TSize>(m_Bits.to_ulong());
         }
@@ -230,7 +255,7 @@ namespace Neptune::Container {
             }
             else 
             {
-                std::unique_lock<std::shared_mutex> lock(m_Mutex);
+                std::unique_lock lock(m_Mutex);
 
                 m_Bits.set(static_cast<size_t>(static_cast<TSize>(bit)), value);
             }
@@ -251,7 +276,7 @@ namespace Neptune::Container {
             }
             else
             {
-                std::shared_lock<std::shared_mutex> lock(m_Mutex);
+                std::shared_lock lock(m_Mutex);
 
                 return m_Bits.test(static_cast<size_t>(static_cast<TSize>(bit)));
             }
@@ -262,7 +287,7 @@ namespace Neptune::Container {
         */
         void Reset()
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits.reset();
         }
@@ -280,7 +305,7 @@ namespace Neptune::Container {
             }
             else
             {
-                std::unique_lock<std::shared_mutex> lock(m_Mutex);
+                std::unique_lock lock(m_Mutex);
 
                 m_Bits.reset(static_cast<size_t>(static_cast<TSize>(bit)));
             }
@@ -291,7 +316,7 @@ namespace Neptune::Container {
         */
         void Flip()
         {
-            std::unique_lock<std::shared_mutex> lock(m_Mutex);
+            std::unique_lock lock(m_Mutex);
 
             m_Bits.flip();
         }
@@ -309,7 +334,7 @@ namespace Neptune::Container {
             }
             else
             {
-                std::unique_lock<std::shared_mutex> lock(m_Mutex);
+                std::unique_lock lock(m_Mutex);
 
                 m_Bits.flip(static_cast<size_t>(static_cast<TSize>(bit)));
             }
@@ -322,7 +347,7 @@ namespace Neptune::Container {
         */
         bool Any() const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             return m_Bits.any();
         }
@@ -334,7 +359,7 @@ namespace Neptune::Container {
         */
         bool None() const
         {
-            std::shared_lock<std::shared_mutex> lock(m_Mutex);
+            std::shared_lock lock(m_Mutex);
 
             return m_Bits.none();
         }

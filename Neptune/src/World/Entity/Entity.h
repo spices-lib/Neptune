@@ -27,8 +27,8 @@ namespace Neptune {
         * @param[in] scene Scene pointer.
         */
         Entity(uint32_t handle, Scene* scene)
-                : m_Handle(handle)
-                , m_Scene(scene)
+            : m_Handle(handle)
+            , m_Scene(scene)
         {}
 
         /**

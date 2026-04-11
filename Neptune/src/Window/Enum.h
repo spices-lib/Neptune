@@ -12,7 +12,7 @@ namespace Neptune {
     /**
     * @brief Enum of Window Implement.
     */
-    enum class WindowImplement
+    enum class WindowImplement : uint8_t
     {
         None = 0,
         GLFW,

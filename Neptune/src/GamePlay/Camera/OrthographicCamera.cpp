@@ -11,7 +11,7 @@
 namespace Neptune {
 
     OrthographicCamera::OrthographicCamera()
-            : Camera(ProjectionType::Perspective)
+        : Camera(ProjectionType::Perspective)
     {}
 
     OrthographicCamera::OrthographicCamera(const OrthographicParam& param)

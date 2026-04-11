@@ -14,7 +14,7 @@ namespace Neptune {
     /**
     * @brief Component Class.
     * This class defines the basic behaves of component.
-    * When we add an new Component, we need inherit from this.
+    * When we add a new Component, we need inherit from this.
     */
     class Component : public NonCopyable
     {
@@ -28,7 +28,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        virtual ~Component() = default;
+        ~Component() override = default;
 
         /**
         * @brief This interface defines the behaves on specific component attached.
