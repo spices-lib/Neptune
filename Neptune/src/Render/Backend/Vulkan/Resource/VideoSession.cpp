@@ -11,6 +11,7 @@
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/Resource/DecodeBuffer.h"
 #include "Render/Backend/Vulkan/Resource/QueryPool.h"
+#include "Core/Math/Math.h"
 
 namespace Neptune::Vulkan {
 

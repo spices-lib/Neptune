@@ -14,25 +14,46 @@
 
 namespace Neptune::OpenGL {
 
-    RenderBackend::RenderBackend(RenderBackendEnum backend)
-        : RenderFrontend(backend)
+    RenderBackend::RenderBackend()
+        : RenderFrontend(RenderBackendEnum::OpenGL)
     {
     }
 
-    RenderBackend::~RenderBackend()
+    void RenderBackend::OnInitialize()
     {
+        NEPTUNE_PROFILE_ZONE
 
+        RenderFrontend::OnInitialize();
     }
 
-    void RenderBackend::BeginFrame()
+    void RenderBackend::OnShutDown()
     {
+        NEPTUNE_PROFILE_ZONE
 
+        RenderFrontend::OnShutDown();
     }
 
-    void RenderBackend::EndFrame()
+    void RenderBackend::BeginFrame(Scene* scene)
     {
+        NEPTUNE_PROFILE_ZONE
     }
 
+    void RenderBackend::EndFrame(Scene* scene)
+    {
+        NEPTUNE_PROFILE_ZONE
+    }
+
+    void RenderBackend::Wait()
+    {
+        NEPTUNE_PROFILE_ZONE
+    }
+
+    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
+	{
+        NEPTUNE_PROFILE_ZONE
+
+        return nullptr;
+	}
 }
 
 #endif

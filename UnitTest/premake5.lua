@@ -38,6 +38,7 @@ project "UnitTest"
 	includedirs
 	{
 		"%{IncludeDir.Neptune}",                              -- Neptune Source Folder.
+		"%{IncludeDir.NeptuneShader}",                        -- Neptune Shader Source Folder.
 		"%{IncludeDir.googletest}",			                  -- Library: googletest Source Folder.
 		"%{IncludeDir.googlemock}",			                  -- Library: googlemock Source Folder.
 		"src",                                                -- UnitTest Source Folder.
@@ -52,6 +53,10 @@ project "UnitTest"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
+		"%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
+		"%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
+		"%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
+		"%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.

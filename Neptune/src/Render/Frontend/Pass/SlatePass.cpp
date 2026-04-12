@@ -1,3 +1,9 @@
+/**
+* @file SlatePass.cpp.
+* @brief The SlatePass Class Implementation.
+* @author Spices.
+*/
+
 #include "Pchheader.h"
 #include "SlatePass.h"
 #include "Render/Frontend/RHI/Pipeline.h"
@@ -10,6 +16,8 @@ namespace Neptune::Render {
 
 	void SlatePass::OnConstruct()
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		m_RenderPass = CreateSP<RHI::RenderPass>();
 		m_RenderPass->AddSwapChainAttachment();
 		m_RenderPass->Build();
@@ -17,6 +25,8 @@ namespace Neptune::Render {
 
 	void SlatePass::OnRender(Scene* scene)
 	{
+		NEPTUNE_PROFILE_ZONE
+
 		const auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
 
 		RHI::CmdList cmdList;

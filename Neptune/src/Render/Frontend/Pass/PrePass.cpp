@@ -7,7 +7,7 @@
 #include "Render/Frontend/RHI/RenderTarget.h"
 #include "Resource/Texture/RenderTarget.h"
 #include "Resource/Mesh/Mesh.h"
-#include "Assets/Shader/Header/ShaderCore.h"
+#include "Header/ShaderCommon.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/ClockComponent.h"
 
@@ -17,8 +17,8 @@ namespace Neptune::Render {
 	{
 		m_DescriptorList = CreateSP<RHI::DescriptorList>();
 		m_DescriptorList->SetSharedLayout();
-		m_DescriptorList->AddUniformBuffer(0, 0, sizeof(ShaderCore::View));
-		m_DescriptorList->AddUniformBuffer(0, 1, sizeof(ShaderCore::Input));
+		m_DescriptorList->AddUniformBuffer(0, 0, sizeof(ShaderCommon::View));
+		m_DescriptorList->AddUniformBuffer(0, 1, sizeof(ShaderCommon::Input));
 		m_DescriptorList->Build();
 	}
 
@@ -26,7 +26,7 @@ namespace Neptune::Render {
 	{
 		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
 
-		ShaderCore::View view{};
+		ShaderCommon::View view{};
 
 		view.sceneTextureSize = {
 			m_RTSize.x,
@@ -37,7 +37,7 @@ namespace Neptune::Render {
 
 		m_DescriptorList->UpdateUniformBuffer(0, 0, &view);
 
-		ShaderCore::Input      input{};
+		ShaderCommon::Input    input{};
 		input.engineTime     = clock.m_EngineTime;
 		input.frameTime      = clock.m_FrameTime;
 

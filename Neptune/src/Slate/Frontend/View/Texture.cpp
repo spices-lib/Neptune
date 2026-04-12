@@ -1,12 +1,12 @@
-#include "ViewPort.h"
+#include "Pchheader.h"
+#include "Texture.h"
 #include "Resource/ResourcePool.h"
 #include "Resource/Texture/RenderTarget.h"
 #include "Render/Frontend/RHI/RenderTarget.h"
-#include <glm.hpp>
 
-namespace Neptune::Slate {
+namespace Neptune::View {
 
-	void ViewPort::OnTick()
+	/*void Texture::OnTick()
 	{
 		ImGui::SetNextWindowBgAlpha(0.5f);
 
@@ -18,11 +18,11 @@ namespace Neptune::Slate {
 		ImGui::Image(m_TextureID, m_SlateSize);
 
 		ImGui::End();
-	}
+	}*/
 
-	void ViewPort::ResizeQuery()
+	void Texture::ResizeQuery()
 	{
-		ImVec2 tempSize = ImVec2(glm::max(ImGui::GetContentRegionAvail().x, 1.0f), glm::max(ImGui::GetContentRegionAvail().y, 1.0f));
+		/*ImVec2 tempSize = ImVec2(glm::max(ImGui::GetContentRegionAvail().x, 1.0f), glm::max(ImGui::GetContentRegionAvail().y, 1.0f));
 
 		if (m_SlateSize.x != tempSize.x || m_SlateSize.y != tempSize.y)
 		{
@@ -41,7 +41,7 @@ namespace Neptune::Slate {
 			m_TextureID = (ImTextureID)ResourcePool<RenderTarget>::Instance().GetResource("Scene")->GetRHIResource()->CreateBindingID();
 		}
 
-		m_SlateSize = tempSize;
+		m_SlateSize = tempSize;*/
 	}
 
 }

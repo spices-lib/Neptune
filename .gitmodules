@@ -28,3 +28,6 @@
 [submodule "Neptune/vendor/tracy"]
 	path = Neptune/vendor/tracy
 	url = https://github.com/spices-lib/tracy.git
+[submodule "Neptune/vendor/shaderc"]
+	path = Neptune/vendor/shaderc
+	url = https://github.com/spices-lib/shaderc.git

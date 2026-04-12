@@ -65,6 +65,7 @@ project "Neptune"
 	includedirs
 	{
 		"src",                                                -- Neptune Source Folder.
+		"%{IncludeDir.NeptuneShader}",                        -- Neptune Shader Source Folder.
 		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
 		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
 		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
@@ -76,6 +77,10 @@ project "Neptune"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
+		"%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
+		"%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
+		"%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
+		"%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
 	}
 
 	-- The Solution Dependency
@@ -84,6 +89,7 @@ project "Neptune"
       --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
+		"shaderc",                            -- Dependency：shaderc
 	}
 
 	-- Library: std_image is included this solution, do not use PreCompiler Header.
@@ -188,6 +194,13 @@ project "Neptune"
 			"NEPTUNE_DEBUG",                 -- Debug Symbol.
 		}
 
+		-- Debug Specific Solution Dependency
+		links
+		{
+			"%{Library.shaderc_debug}",               -- Dependency: shaderc_debug
+			"%{Library.shaderc_utils_debug}",         -- Dependency: shaderc_utils_debug
+		}
+
 		runtime "Debug"
 		symbols "On"
 		
@@ -198,6 +211,13 @@ project "Neptune"
 		defines 
 		{
 			"NEPTUNE_RELEASE",               -- Release Symbol.
+		}
+
+		-- Release Specific Solution Dependency
+		links
+		{
+			"%{Library.shaderc_release}",             -- Dependency: shaderc_release
+			"%{Library.shaderc_utils_release}",       -- Dependency: shaderc_utils_release
 		}
 
 		runtime "Release"

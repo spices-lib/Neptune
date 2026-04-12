@@ -39,34 +39,34 @@ namespace Neptune {
         /**
         * @brief This interface defines to behave on specific component on construct.
         */
-        virtual void OnConstruct() = 0;
+        virtual void OnConstruct() {}
 
         /**
         * @brief This interface defines to behave on specific component on attached.
         */
-        virtual void OnAttached() = 0;
+        virtual void OnAttached() {}
         
         /**
         * @brief This interface defines the behave on specific component tick every frame.
         */
-        virtual void OnTick() = 0;
+        virtual void OnTick() {}
 
         /**
         * @brief This interface defines to behave on specific component on destroy.
         */
-        virtual void OnDestroy() = 0;
+        virtual void OnDestroy() {}
 
         /**
         * @brief This interface defines to behave on specific component on detached.
         */
-        virtual void OnDetached() = 0;
+        virtual void OnDetached() {}
         
         /**
         * @brief This interface defines the behave on specific component event happened.
         * 
         * @param[in] e Event.
         */
-        virtual void OnEvent(Event& e) = 0;
+        virtual void OnEvent(Event& e) {}
 
         /**
         * @brief Get script file string.

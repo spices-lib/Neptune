@@ -30,10 +30,10 @@ namespace Neptune::imgui {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		auto pass = std::dynamic_pointer_cast<Render::SlatePass>(m_RenderPasses.back());
+		//auto pass = std::dynamic_pointer_cast<Render::SlatePass>(m_RenderPasses.back());
 
 		ImGui_ImplVulkan_InitInfo             init_info{};
-		init_info.Instance                  = m_Context->Get<IInstance>()->Handle();
+		/*init_info.Instance                  = m_Context->Get<IInstance>()->Handle();
 		init_info.PhysicalDevice            = m_Context->Get<IPhysicalDevice>()->Handle();
 		init_info.Device                    = m_Context->Get<IDevice>()->Handle();
 		init_info.QueueFamily               = m_Context->Get<IPhysicalDevice>()->GetQueueFamilies().graphic.value();
@@ -46,7 +46,7 @@ namespace Neptune::imgui {
 		init_info.ImageCount                = MaxFrameInFlight;
 		init_info.MSAASamples               = VK_SAMPLE_COUNT_1_BIT;
 		init_info.Allocator                 = VK_NULL_HANDLE;
-		init_info.CheckVkResultFn           = [](VkResult result) { std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };
+		init_info.CheckVkResultFn           = [](VkResult result) { std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };*/
 
 		ImGui_ImplVulkan_Init(&init_info);
 	}

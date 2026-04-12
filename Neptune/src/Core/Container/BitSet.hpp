@@ -49,8 +49,7 @@ namespace Neptune::Container {
         /**
         * @brief Constructor Function.
         */
-        template<typename T1>
-        BitSet(T1&& t)
+        BitSet(const T& t)
         {
             Set(t, true);
         }

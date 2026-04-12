@@ -66,4 +66,18 @@ namespace Neptune {
     */
     glm::mat4 PerspectiveMatrixInverseZ(float fov, float nearPlane, float aspectRatio);
 
+    /**
+    * @brief Align Up.
+    * 
+    * @param[in] value .
+    * @param[in] align .
+    * 
+    * @return Returns aligned value.
+    */
+    template<typename T>
+    T AlignUp(T value, T align)
+    {
+        return (value + (align - 1)) & ~(align - 1);
+    }
+
 }

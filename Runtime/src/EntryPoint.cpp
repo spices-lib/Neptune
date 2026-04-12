@@ -10,9 +10,9 @@
 
 namespace Neptune {
     
-    SP<World> CreateWorld()
+    UP<World> CreateWorld()
     {
-        return CreateSP<Runtime::RuntimeWorld>();
+        return CreateUP<Runtime::RuntimeWorld>();
     }
     
 }

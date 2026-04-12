@@ -11,8 +11,5 @@
 
 namespace Neptune::Runtime {
     
-    void RuntimeWorld::Layout()
-    {
-        
-    }
+
 }

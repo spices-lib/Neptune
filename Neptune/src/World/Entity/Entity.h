@@ -7,8 +7,9 @@
 #pragma once
 #include "Core/Core.h"
 #include "World/Scene/Scene.h"
-
 #include "World/Component/UUIDComponent.h"
+
+#include <sstream>
 
 namespace Neptune {
 

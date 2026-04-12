@@ -5,6 +5,7 @@
 -- Includes
 IncludeDir                                = {}
 IncludeDir["Neptune"]                     = "%{wks.location}/Neptune/src"                                               -- Include: Neptune
+IncludeDir["NeptuneShader"]               = "%{wks.location}/Neptune/assets/Shaders/src"                                -- Include: NeptuneShader
 IncludeDir["emscripten"]                  = "C:/emsdk/upstream/emscripten/cache/sysroot/include/"                       -- Include: emscripten
 IncludeDir["emscripten_glfw"]             = "%{wks.location}/Neptune/vendor/emscripten-glfw/"                           -- Include: emscripten-glfw
 IncludeDir["emdawnwebgpu"]                = "%{wks.location}/Neptune/vendor/emdawnwebgpu/webgpu/include/webgpu"         -- Include: emdawnwebgpu
@@ -22,6 +23,8 @@ IncludeDir["spdlog"]                      = "%{wks.location}/Neptune/vendor/spdl
 IncludeDir["ImGuizmo"]                    = "%{wks.location}/Neptune/vendor/ImGuizmo"                                   -- Include: ImGuizmo
 IncludeDir["tracy"]                       = "%{wks.location}/Neptune/vendor/tracy/public"                               -- Include: tracy
 IncludeDir["IconFontCppHeaders"]          = "%{wks.location}/Neptune/vendor/IconFontCppHeaders"                         -- Include: IconFontCppHeaders
+IncludeDir["shaderc"]                     = "%{wks.location}/Neptune/vendor/shaderc"                                    -- Include: shaderc
+IncludeDir["glslang"]                     = "%{IncludeDir.VulkanSDK}/glslang"                                           -- Include: glslang
 IncludeDir["googletest"]                  = "%{wks.location}/UnitTest/vendor/googletest/googletest/include"             -- Include: googletest
 IncludeDir["googlemock"]                  = "%{wks.location}/UnitTest/vendor/googletest/googlemock/include"             -- Include: googlemock
 
@@ -33,3 +36,9 @@ LibraryDir["VulkanSDKDLL"]                = "%{IncludeDir.VulkanSDK}/../Bin"    
 -- Library Directories
 Library                                   = {}
 Library["VulkanSDK"]                      = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"                                      -- Library Directries: VulkanSDK
+
+Library["shaderc_debug"]                  = "%{LibraryDir.VulkanSDK}/shaderc_sharedd.lib"                               -- Library Directries: shaderc_debug
+Library["shaderc_utils_debug"]            = "%{LibraryDir.VulkanSDK}/shaderc_utild.lib"                                 -- Library Directries: shaderc_utils_debug
+
+Library["shaderc_release"]                = "%{LibraryDir.VulkanSDK}/shaderc_shared.lib"                                -- Library Directries: shaderc_release
+Library["shaderc_utils_release"]          = "%{LibraryDir.VulkanSDK}/shaderc_util.lib"                                  -- Library Directries: shaderc_utils_release

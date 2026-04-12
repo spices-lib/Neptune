@@ -10,6 +10,11 @@
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
 
+namespace Neptune {
+
+    class Scene;
+}
+
 namespace Neptune::OpenGL {
 
     /**
@@ -22,24 +27,52 @@ namespace Neptune::OpenGL {
 
         /**
         * @brief Constructor Function.
-        * @param[in] backend RenderBackendEnum.
         */
-        RenderBackend(RenderBackendEnum backend);
+        RenderBackend();
 
         /**
         * @brief Destructor Function.
         */
-        ~RenderBackend() override;
+        ~RenderBackend() override = default;
+
+        /**
+        * @brief Interface of Initialize.
+        */
+        void OnInitialize() override;
+
+        /**
+        * @brief Interface of ShutDown.
+        */
+        void OnShutDown() override;
 
         /**
         * @brief Interface of Begin a frame.
+        *
+        * @param[in] scene Scene.
         */
-        void BeginFrame() override;
+        void BeginFrame(Scene* scene) override;
 
         /**
         * @brief Interface of End a frame.
+        *
+        * @param[in] scene Scene.
         */
-        void EndFrame() override;
+        void EndFrame(Scene* scene) override;
+
+        /**
+        * @brief Interface of Wait RenderBackend idle.
+        */
+        void Wait() override;
+
+        /**
+        * @brief Interface of CreateRHI.
+        *
+        * @param[in] e ERHI.
+        * @param[in] payload RHI Payload.
+        *
+        * @return Returns RHI::Impl
+        */
+        std::any CreateRHI(RHI::ERHI e, void* payload) override;
 
     private:
 

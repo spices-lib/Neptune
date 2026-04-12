@@ -1,6 +1,7 @@
+#include "Pchheader.h"
 #include "Shader.h"
 #include "Render/Frontend/RHI/Shader.h"
-#include <fstream>
+
 #include <glslc/src/file_includer.h>
 #include <libshaderc_util/include/libshaderc_util/file_finder.h>
 
@@ -12,13 +13,13 @@ namespace Neptune {
 		{
 			switch (stage)
 			{
-			case ShaderStage::Vertex:   return shaderc_shader_kind::shaderc_vertex_shader;
-			case ShaderStage::Fragment: return shaderc_shader_kind::shaderc_fragment_shader;
-			default:
-			{
-				CORE_WARN("Unsupported ShaderStage To shaderc_shader_kind.")
-				return shaderc_shader_kind::shaderc_glsl_infer_from_source;
-			}
+				case ShaderStage::Vertex:   return shaderc_shader_kind::shaderc_vertex_shader;
+				case ShaderStage::Fragment: return shaderc_shader_kind::shaderc_fragment_shader;
+				default:
+				{
+					NEPTUNE_CORE_WARN("Unsupported ShaderStage To shaderc_shader_kind.")
+					return shaderc_shader_kind::shaderc_glsl_infer_from_source;
+				}
 			}
 		}
 	
@@ -31,7 +32,7 @@ namespace Neptune {
 			std::stringstream ss;
 			ss << "Shader: [ " << path << " ] is not found";
 
-			CORE_ERROR(ss.str());
+			NEPTUNE_CORE_ERROR(ss.str());
 
 			return;
 		}
@@ -55,7 +56,7 @@ namespace Neptune {
 		shaderc::CompileOptions options;
 
 		shaderc_util::FileFinder fileFinder;
-		fileFinder.search_path().push_back("E:/VideoNeptune/src/Assets/Shader/");
+		fileFinder.search_path().push_back("");
 
 #ifdef PG_DEBUG
 
@@ -74,7 +75,7 @@ namespace Neptune {
 			std::stringstream ss;
 			ss << "Error compiling module: " << module.GetErrorMessage();
 
-			CORE_ERROR(ss.str())
+			NEPTUNE_CORE_ERROR(ss.str())
 			return {};
 		}
 		

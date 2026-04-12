@@ -4,7 +4,7 @@
 #include "H264Decoder.h"
 #include "AV1Decoder.h"
 #include "VP9Decoder.h"
-#include "Video/VideoOperation.h"
+#include "Feature/Video/VideoOperation.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 #include "Render/Backend/Vulkan/VideoParser/STD/nvVulkanVideoUtils.h"
@@ -21,6 +21,8 @@ namespace Neptune::Vulkan {
 
 	SP<Decoder> Decoder::Create(Context& context, void* payload)
 	{
+        NEPTUNE_PROFILE_ZONE
+
 		VideoOperation& op = *static_cast<VideoOperation*>(payload);
 
 		switch(op)

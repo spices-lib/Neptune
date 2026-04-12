@@ -10,7 +10,6 @@
 
 namespace Neptune {
 
-    class Window;
     class Scene;
 }
 
