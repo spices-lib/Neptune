@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "PhysicalDevice.h"
 #include "Device.h"
 #include "Instance.h"
@@ -491,3 +494,5 @@ namespace Neptune::Vulkan {
 		return formats;
 	}
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Converter.h"
 
 namespace Neptune::Vulkan {
@@ -198,3 +201,5 @@ namespace Neptune::Vulkan {
 		}
 	}
 }
+
+#endif

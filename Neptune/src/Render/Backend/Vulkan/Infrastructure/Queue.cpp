@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Queue.h"
 #include "DebugUtilsObject.h"
 
@@ -41,3 +44,5 @@ namespace Neptune::Vulkan {
         m_Queue.Wait();
     }
 }
+
+#endif

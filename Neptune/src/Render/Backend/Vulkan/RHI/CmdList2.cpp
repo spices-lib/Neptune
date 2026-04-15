@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "CmdList2.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/ThreadCommandPool.h"
@@ -176,3 +179,5 @@ namespace Neptune::Vulkan {
 		m_CommandBuffer->OpticalFlowExecute(GetContext().Get<IFunctions>()->vkCmdOpticalFlowExecuteNV, m_OpticalFlowSession->Handle(), info);
 	}
 }
+
+#endif

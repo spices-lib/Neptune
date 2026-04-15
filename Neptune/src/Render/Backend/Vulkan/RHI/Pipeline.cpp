@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Pipeline.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Backend/Vulkan/RHI/RenderPass.h"
@@ -214,3 +217,5 @@ namespace Neptune::Vulkan {
 	}
 	
 }
+
+#endif

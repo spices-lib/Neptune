@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "VideoSession.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -63,3 +66,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkBindVideoSessionMemoryKHR(m_Device, m_Handle, infos.size(), infos.data()))
 	}
 }
+
+#endif

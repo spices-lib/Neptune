@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "PipelineLayout.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -30,3 +33,5 @@ namespace Neptune::Vulkan::Unit {
 	}
 
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/Queue.h"
@@ -121,3 +124,5 @@ namespace Neptune::Vulkan {
 		const OpticalFlowSession*    m_OpticalFlowSession;        // @brief OpticalFlowSession
 	};
 }
+
+#endif

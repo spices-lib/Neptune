@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Device.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -47,3 +50,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkDeviceWaitIdle(m_Handle))
 	}
 }
+
+#endif

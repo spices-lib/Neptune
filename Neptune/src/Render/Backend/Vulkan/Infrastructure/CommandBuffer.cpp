@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "CommandBuffer.h"
 #include "CommandPool.h"
 #include "Device.h"
@@ -68,3 +71,5 @@ namespace Neptune::Vulkan {
         m_CommandBuffers[index]->End();
     }
 }
+
+#endif

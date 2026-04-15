@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Unit.h"
 
@@ -40,3 +43,5 @@ namespace Neptune::Vulkan::Unit {
 		void CreateInstance(const VkInstanceCreateInfo& createInfo);
 	};
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Queue.h"
 #include "CommandBuffer.h"
 
@@ -24,3 +27,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkQueueWaitIdle(m_Handle))
 	}
 }
+
+#endif

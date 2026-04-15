@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/VideoSession.h"
@@ -209,3 +212,5 @@ namespace Neptune::Vulkan {
 		VkFormat                             m_DstFormat;            // @brief DstFormat.
 	};
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/Pipeline.h"
@@ -133,3 +136,5 @@ namespace Neptune::Vulkan {
 		VkRect2D                                         m_Scissor{};                         // @brief VkRect2D.
 	};
 }
+
+#endif

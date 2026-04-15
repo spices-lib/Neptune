@@ -5,11 +5,15 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 
 #include <vulkan/vulkan.h>
 
 namespace Neptune::Vulkan {
+
     class Context;
 }
 
@@ -56,3 +60,5 @@ namespace Neptune::Vulkan {
         Context& m_Context; // @brief This Context.
     };
 }
+
+#endif

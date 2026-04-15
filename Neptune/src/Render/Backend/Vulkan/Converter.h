@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core.h"
 #include "Resource/Texture/RenderTarget.h"
 #include "Resource/Mesh/Mesh.h"
@@ -114,3 +117,5 @@ namespace Neptune::Vulkan {
 	std::string ToString(VkMemoryHeapFlags flag);
 
 }
+
+#endif

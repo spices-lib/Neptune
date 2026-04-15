@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Instance.h"
 #include "Functions.h"
 
@@ -303,3 +306,5 @@ namespace Neptune::Vulkan {
 
 	}
 }
+
+#endif

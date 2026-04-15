@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Resource/Image.h"
@@ -150,3 +153,5 @@ namespace Neptune::Vulkan {
 		DescriptorSet m_DescriptorSet;          // @brief This DescriptorSet.
 	};
 }
+
+#endif

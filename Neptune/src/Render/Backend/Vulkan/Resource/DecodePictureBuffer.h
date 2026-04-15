@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Image.h"
@@ -114,3 +117,5 @@ namespace Neptune::Vulkan {
 		uint8_t m_MaxDPBSlots = MaxDPBSlots;       // @brief Max DPB Slots.
 	};
 }
+
+#endif

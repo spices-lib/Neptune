@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/OpticalFlowSession.h"
@@ -96,3 +99,5 @@ namespace Neptune::Vulkan {
 		std::unordered_map<VkOpticalFlowSessionBindingPointNV, class Image*> m_SessionImages;  // @brief Container of Stage Image.
 	};
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "OpticalFlowSession.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -46,3 +49,5 @@ namespace Neptune::Vulkan::Unit {
 	}
 
 }
+
+#endif

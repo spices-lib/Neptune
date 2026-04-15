@@ -50,7 +50,7 @@ namespace Neptune::OpenGL::Unit {
 		/**
 		* @brief Reset Unit Handle.
 		*/
-		void ResetHandle() { m_Handle = -1; }
+		void ResetHandle() { m_Handle = {}; }
 
 	protected:
 

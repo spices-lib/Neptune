@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "RenderBackend.h"
 #include "Infrastructure/InfrastructureHeader.h"
 #include "RHI/RHIHeader.h"
@@ -237,3 +240,5 @@ namespace Neptune::Vulkan {
 		RenderFrontend::RecreateSwapChain();
 	}
 }
+
+#endif

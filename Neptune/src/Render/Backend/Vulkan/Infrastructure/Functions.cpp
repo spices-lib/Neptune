@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Functions.h"
 #include "Instance.h"
 
@@ -83,3 +86,5 @@ namespace Neptune::Vulkan {
 		EXPLAIN_VK_FUNCTION_POINTER(vkBindOpticalFlowSessionImageNV                 )
 	}
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/Buffer.h"
@@ -37,3 +40,5 @@ namespace Neptune::Vulkan {
 		Unit::Buffer m_Buffer;      // @brief This Buffer.
 	};
 }
+
+#endif

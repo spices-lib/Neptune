@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "DecodePictureBuffer.h"
 
 namespace Neptune::Vulkan {
@@ -80,3 +83,5 @@ namespace Neptune::Vulkan {
 		}
 	}
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Backend/Vulkan/Unit/Shader.h"
@@ -62,3 +65,5 @@ namespace Neptune::Vulkan {
 		Unit::Shader m_Shader;          // @brief This Shader.
 	};
 }
+
+#endif

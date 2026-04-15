@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Surface.h"
 #include "Window/Window.h"
 #include "Surface/GLFW/Surface.h"
@@ -27,3 +30,5 @@ namespace Neptune::Vulkan {
     }
 
 }
+
+#endif

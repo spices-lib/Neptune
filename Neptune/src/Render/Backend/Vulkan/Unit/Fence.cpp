@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Fence.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -43,3 +46,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkResetFences(m_Device, 1, &m_Handle))
 	}
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "DebugUtilsObject.h"
 #include "Functions.h"
 #include "Device.h"
@@ -81,3 +84,5 @@ namespace Neptune::Vulkan {
 		GetContext().Get<IFunctions>()->vkQueueInsertDebugUtilsLabelEXT(queue, &labelInfo);
 	}
 }
+
+#endif

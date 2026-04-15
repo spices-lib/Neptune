@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "ThreadQueue.h"
 #include "DebugUtilsObject.h"
 
@@ -27,3 +30,5 @@ namespace Neptune::Vulkan {
         DEBUGUTILS_SETOBJECTNAME(*queue, ToString())
     }
 }
+
+#endif

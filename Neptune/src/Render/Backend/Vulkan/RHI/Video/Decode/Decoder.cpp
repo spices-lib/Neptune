@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Decoder.h"
 #include "H265Decoder.h"
 #include "H264Decoder.h"
@@ -485,3 +488,5 @@ namespace Neptune::Vulkan {
         m_Decoder->ParseByteStream(&pkt, pParsedBytes);
 	}
 }
+
+#endif

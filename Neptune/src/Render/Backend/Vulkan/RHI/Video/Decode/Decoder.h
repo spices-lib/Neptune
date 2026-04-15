@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Core.h"
 #include "Render/Frontend/RHI/Decoder.h"
@@ -643,3 +646,5 @@ namespace Neptune::Vulkan {
         RenderTarget*               m_FlowVectorRT;
 	};
 }
+
+#endif

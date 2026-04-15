@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "SwapChain.h"
 #include "Surface.h"
 #include "PhysicalDevice.h"
@@ -172,3 +175,5 @@ namespace Neptune::Vulkan {
 		return true;
 	}
 }
+
+#endif

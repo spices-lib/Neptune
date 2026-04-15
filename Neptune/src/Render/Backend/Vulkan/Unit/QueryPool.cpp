@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "QueryPool.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -40,3 +43,5 @@ namespace Neptune::Vulkan::Unit {
 		return result;
 	}
 }
+
+#endif

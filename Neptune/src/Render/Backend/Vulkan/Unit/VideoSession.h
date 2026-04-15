@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Unit.h"
 
@@ -78,3 +81,5 @@ namespace Neptune::Vulkan::Unit {
 		PFN_vkBindVideoSessionMemoryKHR       vkBindVideoSessionMemoryKHR = VK_NULL_HANDLE;     // @brief PFN_vkBindVideoSessionMemoryKHR.
 	};
 }
+
+#endif

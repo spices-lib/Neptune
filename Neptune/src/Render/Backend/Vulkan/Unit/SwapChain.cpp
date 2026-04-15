@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "SwapChain.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -47,3 +50,5 @@ namespace Neptune::Vulkan::Unit {
 		return vkAcquireNextImageKHR(m_Device, m_Handle, UINT64_MAX, semaphore, VK_NULL_HANDLE, &imageIndex);
 	}
 }
+
+#endif

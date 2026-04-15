@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Infrastructure.h"
 #include "Functions.h"
@@ -189,3 +192,5 @@ namespace Neptune::Vulkan {
 		VK_CHECK(GetContext().Get<IFunctions>()->vkSetDebugUtilsObjectTagEXT(m_Device, &tag_info))
 	}
 }
+
+#endif

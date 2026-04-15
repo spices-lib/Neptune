@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
+#include "Core/Core.h"
 #include "Decoder.h"
 
 namespace Neptune::Vulkan {
@@ -20,3 +24,5 @@ namespace Neptune::Vulkan {
 
 	};
 }
+
+#endif

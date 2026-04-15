@@ -41,14 +41,14 @@ namespace Neptune::OpenGL::Unit {
 		void CreateSync();
 
 		/**
-		* @brief Sync wait idle.
+		* @brief Sync client wait idle.
 		*/
 		void ClientWait() const;
 
 		/**
 		* @brief Sync wait idle.
 		*/
-		void ClientWait() const;
+		void Wait() const;
 	};
 }
 

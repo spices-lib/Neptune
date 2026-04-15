@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Shader.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 
@@ -29,3 +32,5 @@ namespace Neptune::Vulkan {
 		DEBUGUTILS_SETOBJECTNAME(m_Shader,name)
 	}
 }
+
+#endif

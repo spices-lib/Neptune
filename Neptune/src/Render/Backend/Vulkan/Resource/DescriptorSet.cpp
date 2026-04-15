@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "DescriptorSet.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Backend/Vulkan/Infrastructure/MemoryAllocator.h"
@@ -177,3 +180,5 @@ namespace Neptune::Vulkan {
 		DEBUGUTILS_SETOBJECTNAME(m_Layout, "DescriptorSetLayout");
 	}
 }
+
+#endif

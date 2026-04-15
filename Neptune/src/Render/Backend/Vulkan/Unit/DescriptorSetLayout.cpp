@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "DescriptorSetLayout.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -29,3 +32,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkCreateDescriptorSetLayout(m_Device, &info, nullptr, &m_Handle))
 	}
 }
+
+#endif

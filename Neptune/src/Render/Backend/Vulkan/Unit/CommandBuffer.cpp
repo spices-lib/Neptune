@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "CommandBuffer.h"
 #include <functional>
 
@@ -171,3 +174,5 @@ namespace Neptune::Vulkan::Unit {
 		vkCmdResetQueryPool(m_Handle, pool, 0, count);
 	}
 }
+
+#endif

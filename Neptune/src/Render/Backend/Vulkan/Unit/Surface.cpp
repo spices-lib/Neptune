@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Surface.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -25,3 +28,5 @@ namespace Neptune::Vulkan::Unit {
 		m_Instance = instance;
 	}
 }
+
+#endif

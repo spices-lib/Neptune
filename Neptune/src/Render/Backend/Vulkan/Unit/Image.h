@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Unit.h"
 
@@ -75,3 +78,5 @@ namespace Neptune::Vulkan::Unit {
 		std::variant<std::monostate, vkAlloc, vmaAlloc> m_Alloc{ std::monostate{} };     // @brief Alloc data.
 	};
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "DescriptorPool.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -29,3 +32,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkCreateDescriptorPool(device, &info, nullptr, &m_Handle))
 	}
 }
+
+#endif

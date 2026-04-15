@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "OpticalFlowSession.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/Functions.h"
@@ -115,3 +118,5 @@ namespace Neptune::Vulkan {
 		}
 	}
 }
+
+#endif

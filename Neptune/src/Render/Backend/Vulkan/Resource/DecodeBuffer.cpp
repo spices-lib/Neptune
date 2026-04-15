@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "DecodeBuffer.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
@@ -154,3 +157,5 @@ namespace Neptune::Vulkan {
 		return m_StreamMarkers.data() + startIndex;
 	}
 }
+
+#endif

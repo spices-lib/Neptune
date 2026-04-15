@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "CommandPool.h"
 #include "Device.h"
 #include "DebugUtilsObject.h"
@@ -46,3 +49,5 @@ namespace Neptune::Vulkan {
 		}
     }
 }
+
+#endif

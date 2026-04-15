@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "AV1Decoder.h"
 #include "Render/Backend/Vulkan/VideoParser/Decoder/VulkanAV1Decoder.h"
 
@@ -178,3 +181,5 @@ namespace Neptune::Vulkan {
         return 1;
     }
 }
+
+#endif

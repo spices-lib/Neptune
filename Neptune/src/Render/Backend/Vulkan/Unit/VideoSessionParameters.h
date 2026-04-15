@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Unit.h"
 
@@ -65,3 +68,5 @@ namespace Neptune::Vulkan::Unit {
 		PFN_vkUpdateVideoSessionParametersKHR  vkUpdateVideoSessionParametersKHR = VK_NULL_HANDLE;        // @brief PFN_vkUpdateVideoSessionParametersKHR.
 	};
 }
+
+#endif

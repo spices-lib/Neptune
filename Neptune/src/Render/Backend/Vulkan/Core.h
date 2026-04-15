@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Infrastructure/ContextAccessor.h"
 #include "Render/Frontend/Utils.h"
@@ -58,3 +61,5 @@ namespace Neptune::Vulkan {
 
 	#define VK_CHECK(expr)  { auto expr_value = expr; if (expr_value != VK_SUCCESS) { std::invoke(HandleVulkanResultDelegate::GetHandler(), expr_value); } }
 }
+
+#endif

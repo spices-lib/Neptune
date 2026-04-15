@@ -6,6 +6,8 @@
 
 #include "Pchheader.h"
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #define VMA_IMPLEMENTATION
 
 #include "MemoryAllocator.h"
@@ -54,3 +56,5 @@ namespace Neptune::Vulkan {
 		VK_CHECK(vmaCreateAllocator(&createInfo, &m_Handle))
 	}
 }
+
+#endif

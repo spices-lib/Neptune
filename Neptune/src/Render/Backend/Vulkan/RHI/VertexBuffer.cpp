@@ -5,5 +5,10 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "VertexBuffer.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Pipeline.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -40,3 +43,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkCreateComputePipelines(device, VK_NULL_HANDLE, 1, &info, nullptr, &m_Handle))
 	}
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/CommandBuffer.h"
@@ -94,3 +97,5 @@ namespace Neptune::Vulkan {
 	};
 
 }
+
+#endif

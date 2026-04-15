@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Buffer.h"
 #include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/MemoryAllocator.h"
@@ -44,3 +47,5 @@ namespace Neptune::Vulkan {
 		DEBUGUTILS_SETOBJECTNAME(m_Buffer, name);
 	}
 }
+
+#endif

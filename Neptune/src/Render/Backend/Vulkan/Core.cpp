@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core.h"
 #include "Converter.h"
 
@@ -163,3 +166,5 @@ namespace Neptune::Vulkan {
         NEPTUNE_CORE_ERROR(ss.str())
 	}
 }
+
+#endif

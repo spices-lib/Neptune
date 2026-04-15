@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Infrastructure.h"
 
@@ -147,3 +150,5 @@ namespace Neptune::Vulkan {
 	};
 	
 }
+
+#endif

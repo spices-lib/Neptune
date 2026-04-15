@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Image.h"
 #include "Render/Backend/Vulkan/Infrastructure/MemoryAllocator.h"
 
@@ -100,3 +103,5 @@ namespace Neptune::Vulkan::Unit {
 	}
 
 }
+
+#endif

@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "VideoSessionParameters.h"
 
 namespace Neptune::Vulkan::Unit {
@@ -45,3 +48,5 @@ namespace Neptune::Vulkan::Unit {
 		VK_CHECK(vkUpdateVideoSessionParametersKHR(m_Device, m_Handle, &updateInfo))
 	}
 }
+
+#endif

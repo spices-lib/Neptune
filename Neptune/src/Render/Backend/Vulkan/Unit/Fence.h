@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Unit.h"
 
@@ -55,3 +58,5 @@ namespace Neptune::Vulkan::Unit {
 		VkDevice m_Device = VK_NULL_HANDLE;        // @brief VkDevice
 	};
 }
+
+#endif

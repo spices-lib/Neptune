@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "ContextAccessor.h"
 #include "Context.h"
 #include "Device.h"
@@ -23,3 +26,5 @@ namespace Neptune::Vulkan {
 		return nullptr;
 	}
 }
+
+#endif
