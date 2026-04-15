@@ -1,6 +1,6 @@
 /**
-* @file Buffer.h.
-* @brief The Buffer Class Definitions.
+* @file FrameBuffer.h.
+* @brief The FrameBuffer Class Definitions.
 * @author Spices.
 */
 
@@ -14,10 +14,10 @@
 namespace Neptune::OpenGL::Unit {
 
 	/**
-	* @brief OpenGL::Unit::Buffer Class.
-	* This class defines the OpenGL::Unit::Buffer behaves.
+	* @brief OpenGL::Unit::FrameBuffer Class.
+	* This class defines the OpenGL::Unit::FrameBuffer behaves.
 	*/
-	class Buffer : public Unit<GLuint>
+	class FrameBuffer : public Unit<GLuint>
 	{
 	public:
 
@@ -28,17 +28,17 @@ namespace Neptune::OpenGL::Unit {
 		/**
 		* @brief Constructor Function.
 		*/
-		Buffer() : Unit() {}
+		FrameBuffer() : Unit() {}
 
 		/**
 		* @brief Destructor Function.
 		*/
-		~Buffer() override;
+		~FrameBuffer() override;
 
 		/**
-		* @brief Create Buffer.
+		* @brief Create FrameBuffer.
 		*/
-		void CreateBuffer();
+		void CreateFrameBuffer();
 
 	};
 }

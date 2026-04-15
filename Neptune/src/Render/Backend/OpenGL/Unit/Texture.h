@@ -1,6 +1,6 @@
 /**
-* @file Buffer.h.
-* @brief The Buffer Class Definitions.
+* @file Texture.h.
+* @brief The Texture Class Definitions.
 * @author Spices.
 */
 
@@ -14,10 +14,10 @@
 namespace Neptune::OpenGL::Unit {
 
 	/**
-	* @brief OpenGL::Unit::Buffer Class.
-	* This class defines the OpenGL::Unit::Buffer behaves.
+	* @brief OpenGL::Unit::Texture Class.
+	* This class defines the OpenGL::Unit::Texture behaves.
 	*/
-	class Buffer : public Unit<GLuint>
+	class Texture : public Unit<GLuint>
 	{
 	public:
 
@@ -28,17 +28,17 @@ namespace Neptune::OpenGL::Unit {
 		/**
 		* @brief Constructor Function.
 		*/
-		Buffer() : Unit() {}
+		Texture() : Unit() {}
 
 		/**
 		* @brief Destructor Function.
 		*/
-		~Buffer() override;
+		~Texture() override;
 
 		/**
-		* @brief Create Buffer.
+		* @brief Create Texture.
 		*/
-		void CreateBuffer();
+		void CreateTexture();
 
 	};
 }

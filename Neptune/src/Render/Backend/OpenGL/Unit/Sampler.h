@@ -1,6 +1,6 @@
 /**
-* @file Buffer.h.
-* @brief The Buffer Class Definitions.
+* @file Sampler.h.
+* @brief The Sampler Class Definitions.
 * @author Spices.
 */
 
@@ -14,10 +14,10 @@
 namespace Neptune::OpenGL::Unit {
 
 	/**
-	* @brief OpenGL::Unit::Buffer Class.
-	* This class defines the OpenGL::Unit::Buffer behaves.
+	* @brief OpenGL::Unit::Sampler Class.
+	* This class defines the OpenGL::Unit::Sampler behaves.
 	*/
-	class Buffer : public Unit<GLuint>
+	class Sampler : public Unit<GLuint>
 	{
 	public:
 
@@ -28,17 +28,17 @@ namespace Neptune::OpenGL::Unit {
 		/**
 		* @brief Constructor Function.
 		*/
-		Buffer() : Unit() {}
+		Sampler() : Unit() {}
 
 		/**
 		* @brief Destructor Function.
 		*/
-		~Buffer() override;
+		~Sampler() override;
 
 		/**
-		* @brief Create Buffer.
+		* @brief Create Sampler.
 		*/
-		void CreateBuffer();
+		void CreateSampler();
 
 	};
 }

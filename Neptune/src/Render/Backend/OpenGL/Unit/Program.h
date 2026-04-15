@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Program Class.
 	* This class defines the OpenGL::Unit::Program behaves.
 	*/
-	class Program : public Unit
+	class Program : public Unit<GLuint>
 	{
 	public:
 

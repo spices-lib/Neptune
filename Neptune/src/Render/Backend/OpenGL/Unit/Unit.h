@@ -14,11 +14,12 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit Class.
 	* This class defines the OpenGL::Unit behaves.
 	*/
+	template<typename H>
 	class Unit
 	{
 	public:
 
-		using Handle = GLuint;
+		using Handle = H;
 
 	public:
 

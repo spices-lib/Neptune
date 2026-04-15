@@ -1,0 +1,55 @@
+/**
+* @file Sampler.h.
+* @brief The Sampler Class Definitions.
+* @author Spices.
+*/
+
+#pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
+#include "Core/Core.h"
+#include "Unit.h"
+
+namespace Neptune::OpenGL::Unit {
+
+	/**
+	* @brief OpenGL::Unit::Sync Class.
+	* This class defines the OpenGL::Unit::Sync behaves.
+	*/
+	class Sync : public Unit<GLsync>
+	{
+	public:
+
+		using Handle = Unit::Handle;
+
+	public:
+
+		/**
+		* @brief Constructor Function.
+		*/
+		Sync() : Unit() {}
+
+		/**
+		* @brief Destructor Function.
+		*/
+		~Sync() override;
+
+		/**
+		* @brief Create Sync.
+		*/
+		void CreateSync();
+
+		/**
+		* @brief Sync wait idle.
+		*/
+		void ClientWait() const;
+
+		/**
+		* @brief Sync wait idle.
+		*/
+		void ClientWait() const;
+	};
+}
+
+#endif

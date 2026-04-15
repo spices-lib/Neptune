@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Shader Class.
 	* This class defines the OpenGL::Unit::Shader behaves.
 	*/
-	class Shader : public Unit
+	class Shader : public Unit<GLuint>
 	{
 	public:
 
