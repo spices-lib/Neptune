@@ -5,7 +5,8 @@
 */
 
 #pragma once
-#ifdef NP_PLATFORM_WINDOWS
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"

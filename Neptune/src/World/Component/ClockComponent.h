@@ -12,9 +12,9 @@
 namespace Neptune {
 
     /**
-   * @brief ClockComponent Class.
-   * This class defines the specific behaves of ClockComponent.
-   */
+    * @brief ClockComponent Class.
+    * This class defines the specific behaves of ClockComponent.
+    */
     class ClockComponent : public Component
     {
     public:

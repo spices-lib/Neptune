@@ -27,11 +27,6 @@ namespace Neptune::Render {
 			info.height             = m_RTSize.y;
 
 			resourcePool.CreateResource("Scene", info);
-
-			if (!resourcePool.HasResource("CurrDecodeRT"))
-			{
-				resourcePool.CreateResource("CurrDecodeRT");
-			}
 		}
 
 		RenderTargetAttachmentInfo                  info{};
@@ -45,8 +40,6 @@ namespace Neptune::Render {
 		m_RenderPass->Build();
 		
 		m_DescriptorList = CreateSP<RHI::DescriptorList>();
-		m_DescriptorList->AddUniformTexture(1, 0, ResourcePool<RenderTarget>::Instance().GetResource("CurrDecodeRT")->GetRHIResource());
-		m_DescriptorList->CombineSharedLayout();
 		m_DescriptorList->Build();
 
 		m_Pipeline = CreateSP<RHI::Pipeline>();
@@ -79,7 +72,7 @@ namespace Neptune::Render {
 				auto s = resourcePool.CreateResource("BasePassFrag");
 
 				s->SetStage(ShaderStage::Fragment);
-				s->SetSource("src/Assets/Shader/BasePass.frag");
+				s->SetSource("assets/Shaders/BasePass.frag");
 			}
 
             auto shader = resourcePool.GetResource("BasePassFrag");

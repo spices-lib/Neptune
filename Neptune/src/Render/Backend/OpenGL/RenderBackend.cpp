@@ -6,17 +6,23 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackend.h"
-
-#include <glad/glad.h>
+#include "RHI/RHIHeader.h"
 
 namespace Neptune::OpenGL {
 
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::OpenGL)
     {
+        NEPTUNE_PROFILE_ZONE
+
+        HandleOpenGLResultDelegate::SetHandler([&](GLenum result) {
+			HandleOpenGLResult(
+				result
+			); 
+		});
     }
 
     void RenderBackend::OnInitialize()
@@ -52,7 +58,12 @@ namespace Neptune::OpenGL {
 	{
         NEPTUNE_PROFILE_ZONE
 
-        return nullptr;
+        switch(e)
+		{
+			case RHI::ERHI::Shader:           return std::dynamic_pointer_cast<RHI::RHIShader::Impl>        (CreateSP<Shader>               ());
+			case RHI::ERHI::VertexBuffer:     return std::dynamic_pointer_cast<RHI::RHIVertexBuffer::Impl>  (CreateSP<VertexBuffer>         ());
+			default: return nullptr;
+		}
 	}
 }
 
