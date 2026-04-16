@@ -9,6 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
+#include "Render/Backend/OpenGL/Infrastructure/ContextAccessor.h"
 #include "Render/Frontend/Utils.h"
 
 #include <functional>
@@ -47,7 +48,7 @@ namespace Neptune::OpenGL {
 	*/
 	void HandleOpenGLResult(GLenum result);
 
-	#define OPENGL_CHECK(expr)  { auto expr_value = expr; if (expr_value != GL_NO_ERROR) { std::invoke(HandleOpenGLResultDelegate::GetHandler(), expr_value); } }
+	#define OPENGL_CHECK()  { auto expr_value = glGetError(); if (expr_value != GL_NO_ERROR) { std::invoke(HandleOpenGLResultDelegate::GetHandler(), expr_value); } }
 }
 
 #endif

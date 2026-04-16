@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Buffer Class.
 	* This class defines the OpenGL::Unit::Buffer behaves.
 	*/
-	class Buffer : public Unit<GLuint>
+	class Buffer : public Unit<GLuint, GL_BUFFER>
 	{
 	public:
 

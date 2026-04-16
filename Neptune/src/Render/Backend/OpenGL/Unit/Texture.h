@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Texture Class.
 	* This class defines the OpenGL::Unit::Texture behaves.
 	*/
-	class Texture : public Unit<GLuint>
+	class Texture : public Unit<GLuint, GL_TEXTURE>
 	{
 	public:
 

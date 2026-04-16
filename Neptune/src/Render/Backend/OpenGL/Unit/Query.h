@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Query Class.
 	* This class defines the OpenGL::Unit::Query behaves.
 	*/
-	class Query : public Unit<GLuint>
+	class Query : public Unit<GLuint, GL_QUERY>
 	{
 	public:
 

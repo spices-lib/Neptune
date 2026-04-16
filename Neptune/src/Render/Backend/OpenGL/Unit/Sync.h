@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Sync Class.
 	* This class defines the OpenGL::Unit::Sync behaves.
 	*/
-	class Sync : public Unit<GLsync>
+	class Sync : public Unit<GLsync, GL_SYNC_FENCE>
 	{
 	public:
 

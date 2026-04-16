@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::TransformFeedback Class.
 	* This class defines the OpenGL::Unit::TransformFeedback behaves.
 	*/
-	class TransformFeedback : public Unit<GLuint>
+	class TransformFeedback : public Unit<GLuint, GL_TRANSFORM_FEEDBACK>
 	{
 	public:
 

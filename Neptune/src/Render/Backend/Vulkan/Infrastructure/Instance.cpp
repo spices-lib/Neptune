@@ -37,7 +37,7 @@ namespace Neptune::Vulkan {
 			std::stringstream ss;
 
 			ss <<
-			"validation layer:\n			" <<
+			"Validation layer:\n			" <<
 			"MessageIdNumber: " <<
 			pCallbackData->messageIdNumber <<
 			"\n			MessageIdName: " <<
@@ -62,25 +62,24 @@ namespace Neptune::Vulkan {
 				}
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
 				{
-					NEPTUNE_CORE_TRACE(ss.str())
+					NEPTUNE_CORE_INFO(ss.str())
 					break;
 				}
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
 				{
-					NEPTUNE_CORE_TRACE(ss.str())
+					NEPTUNE_CORE_WARN(ss.str())
 					break;
 				}
 				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
 				{
-					NEPTUNE_CORE_TRACE(ss.str())
-					break;
-				}
-				case VK_DEBUG_UTILS_MESSAGE_SEVERITY_FLAG_BITS_MAX_ENUM_EXT:
-				{
+					NEPTUNE_CORE_ERROR(ss.str())
 					break;
 				}
 				default:
+				{
+					NEPTUNE_CORE_INFO(ss.str())
 					break;
+				}
 			}
 	
 			return VK_FALSE;

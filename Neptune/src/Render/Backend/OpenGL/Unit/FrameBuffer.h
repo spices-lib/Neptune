@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::FrameBuffer Class.
 	* This class defines the OpenGL::Unit::FrameBuffer behaves.
 	*/
-	class FrameBuffer : public Unit<GLuint>
+	class FrameBuffer : public Unit<GLuint, GL_FRAMEBUFFER>
 	{
 	public:
 

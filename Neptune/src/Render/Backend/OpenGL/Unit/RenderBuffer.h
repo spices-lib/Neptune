@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::RenderBuffer Class.
 	* This class defines the OpenGL::Unit::RenderBuffer behaves.
 	*/
-	class RenderBuffer : public Unit<GLuint>
+	class RenderBuffer : public Unit<GLuint, GL_RENDERBUFFER>
 	{
 	public:
 

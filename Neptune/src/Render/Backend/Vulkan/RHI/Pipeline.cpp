@@ -10,6 +10,7 @@
 
 #include "Pipeline.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
+#include "Render/Backend/Vulkan/Infrastructure/Device.h"
 #include "Render/Backend/Vulkan/RHI/RenderPass.h"
 #include "Render/Backend/Vulkan/RHI/DescriptorList.h"
 #include "Render/Backend/Vulkan/RHI/Shader.h"

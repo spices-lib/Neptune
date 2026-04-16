@@ -19,14 +19,16 @@ namespace Neptune::OpenGL {
 	* @brief Vulkan::VertexBuffer Class.
 	* This class defines the OpenGL::VertexBuffer behaves.
 	*/
-	class VertexBuffer : public RHI::RHIVertexBuffer::Impl
+	class VertexBuffer : public ContextAccessor, public RHI::RHIVertexBuffer::Impl
 	{
 	public:
 
 		/**
 		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
 		*/
-		VertexBuffer() = default;
+		explicit VertexBuffer(Context& context) : ContextAccessor(context) {}
 
 		/**
 		* @brief Destructor Function.

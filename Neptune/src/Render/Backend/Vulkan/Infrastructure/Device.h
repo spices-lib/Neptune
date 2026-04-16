@@ -47,7 +47,7 @@ namespace Neptune::Vulkan {
 		/**
 		* @brief Device wait idle.
 		*/
-		void Wait();
+		void Wait() const;
 
 	private:
 

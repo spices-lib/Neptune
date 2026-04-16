@@ -77,6 +77,16 @@ namespace Neptune::OpenGL {
 
     private:
 
+        /**
+        * @brief Get Context.
+        *
+        * @return Returns Context.
+        */
+        class Context& GetContext() const;
+
+    private:
+
+        SP<Context> m_Context;                        // @brief This Context.
     };
 }
 

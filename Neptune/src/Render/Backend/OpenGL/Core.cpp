@@ -48,7 +48,7 @@ namespace Neptune::OpenGL {
 			case GL_OUT_OF_MEMORY:                                       label = "Out of Memory";                       break;
 			case GL_INVALID_FRAMEBUFFER_OPERATION:                       label = "Invalid Framebuffer Operation";       break;
 			case GL_CONTEXT_LOST:                                        label = "Context Lost";                        break;
-			default:                                                     label = "Unkonwn Error";                       break;
+			default:                                                     label = "Unknown Error";                       break;
 		}
 
 		std::stringstream ss;

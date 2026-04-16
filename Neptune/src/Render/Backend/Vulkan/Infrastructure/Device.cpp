@@ -24,7 +24,7 @@ namespace Neptune::Vulkan {
         Create();
     }
 
-	void Device::Wait()
+	void Device::Wait() const
 	{
 		NEPTUNE_PROFILE_ZONE
 

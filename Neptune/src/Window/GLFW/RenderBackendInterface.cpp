@@ -39,6 +39,13 @@ namespace Neptune::GLFW {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#ifdef NEPTUNE_DEBUG
+
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+
+#endif
+
 	}
 
 	void OpenGLInterface::APILoad(GLFWwindow* handle) const

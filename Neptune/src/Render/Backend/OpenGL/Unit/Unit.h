@@ -14,10 +14,12 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit Class.
 	* This class defines the OpenGL::Unit behaves.
 	*/
-	template<typename H>
+	template<typename H, GLenum E_>
 	class Unit
 	{
 	public:
+
+		static constexpr GLenum E = E_;
 
 		using Handle = H;
 
@@ -32,6 +34,13 @@ namespace Neptune::OpenGL::Unit {
 		* @brief Destructor Function.
 		*/
 		virtual ~Unit() { ResetHandle(); }
+
+		/**
+		* @brief Get Enum of Unit.
+		*
+		* @return Returns Enum of Unit.
+		*/
+		static const GLenum& GetEUnit() { return E; }
 
 		/**
 		* @brief Set Unit Handle.

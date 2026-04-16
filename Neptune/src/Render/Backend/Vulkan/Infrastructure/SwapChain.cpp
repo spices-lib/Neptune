@@ -9,6 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "SwapChain.h"
+#include "Device.h"
 #include "Surface.h"
 #include "PhysicalDevice.h"
 #include "Queue.h"

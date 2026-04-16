@@ -32,7 +32,7 @@ namespace Neptune::OpenGL::Unit {
 
 		GLenum result = glClientWaitSync(m_Handle, GL_SYNC_FLUSH_COMMANDS_BIT, 1000000000);  // ns
 
-		if (!result == GL_CONDITION_SATISFIED) 
+		if (result != GL_CONDITION_SATISFIED || result != GL_ALREADY_SIGNALED) 
 		{
 			NEPTUNE_CORE_ERROR("glClientWaitSync Failed.")
 		}

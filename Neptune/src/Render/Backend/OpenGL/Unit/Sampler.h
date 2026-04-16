@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::Sampler Class.
 	* This class defines the OpenGL::Unit::Sampler behaves.
 	*/
-	class Sampler : public Unit<GLuint>
+	class Sampler : public Unit<GLuint, GL_SAMPLER>
 	{
 	public:
 

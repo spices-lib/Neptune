@@ -19,14 +19,16 @@ namespace Neptune::OpenGL {
 	* @brief OpenGL::Shader Class.
 	* This class defines the OpenGL::Shader behaves.
 	*/
-	class Shader : public RHI::RHIShader::Impl
+	class Shader : public ContextAccessor, public RHI::RHIShader::Impl
 	{
 	public:
 
 		/**
 		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
 		*/
-		Shader() = default;
+		explicit Shader(Context& context) : ContextAccessor(context) {}
 
 		/**
 		* @brief Destructor Function.

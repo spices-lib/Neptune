@@ -64,7 +64,7 @@ namespace Neptune::Vulkan {
 			case VK_ERROR_NATIVE_WINDOW_IN_USE_KHR:                      label = "Native Window In Use";                break;
 			case VK_ERROR_VALIDATION_FAILED_EXT:                         label = "Validation Failed";                   break;
 			case VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR:        label = "Video Profile Format Not Supported";  break;
-			default:                                                     label = "Unkonwn Error";                       break;
+			default:                                                     label = "Unknown Error";                       break;
 		}
 
 		std::stringstream ss;

@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::ProgramPipeline Class.
 	* This class defines the OpenGL::Unit::ProgramPipeline behaves.
 	*/
-	class ProgramPipeline : public Unit<GLuint>
+	class ProgramPipeline : public Unit<GLuint, GL_PROGRAM_PIPELINE>
 	{
 	public:
 

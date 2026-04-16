@@ -10,6 +10,7 @@
 
 #include "RenderPass.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
+#include "Render/Backend/Vulkan/Infrastructure/Device.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 #include "Render/Backend/Vulkan/Infrastructure/SwapChain.h"
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"

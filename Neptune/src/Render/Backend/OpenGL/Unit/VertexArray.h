@@ -17,7 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	* @brief OpenGL::Unit::VertexArray Class.
 	* This class defines the OpenGL::Unit::VertexArray behaves.
 	*/
-	class VertexArray : public Unit<GLuint>
+	class VertexArray : public Unit<GLuint, GL_VERTEX_ARRAY>
 	{
 	public:
 

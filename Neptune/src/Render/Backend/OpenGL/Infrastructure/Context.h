@@ -13,7 +13,7 @@
 
 #include <array>
 
-namespace Neptune::Vulkan {
+namespace Neptune::OpenGL {
 
     class Infrastructure;
 
@@ -22,48 +22,9 @@ namespace Neptune::Vulkan {
     */
     enum class EInfrastructure : uint8_t
     {
-        Functions = 0,                       // @brief Functors.
-        Instance,                            // @brief Instance.
-        DebugUtilsObject,                    // @brief Label/Name Functors.
-        Surface,                             // @brief Surface.
-        PhysicalDevice,                      // @brief PhysicalDevice.
-        Device,                              // @brief LogicalDevice.
-                                             
-        GraphicQueue,                        // @brief Main Thread Graphic Queue.
-        PresentQueue,                        // @brief Main Thread Present Queue.
-        ComputeQueue,                        // @brief Main Thread Compute Queue.
+        DebugUtilsObject = 0,                // @brief Label/Name Functors.
 
-        GraphicThreadQueue,                  // @brief Sub Thread Graphic Queue.
-        ComputeThreadQueue,                  // @brief Sub Thread Compute Queue.
-        TransferThreadQueue,                 // @brief Sub Thread Transfer Queue.
-        VideoEncodeThreadQueue,              // @brief Sub Thread VideoEncode Queue.
-        VideoDecodeThreadQueue,              // @brief Sub Thread VideoDecode Queue.
-        OpticalFlowThreadQueue,              // @brief Sub Thread OpticalFlow Queue.
-                                             
-        MemoryAllocator,                     // @brief VMA.
-        SwapChain,                           // @brief SwapChain.
-                                             
-        GraphicImageSemaphore,               // @brief Main Thread Graphic ImageSemaphore.
-        GraphicQueueSemaphore,               // @brief Main Thread Graphic QueueSemaphore.
         GraphicFence,                        // @brief Main Thread Graphic Fence.
-                                             
-        ComputeQueueSemaphore,               // @brief Main Thread Compute QueueSemaphore.
-        ComputeFence,                        // @brief Main Thread Compute Fence.
-                                             
-        GraphicCommandPool,                  // @brief Main Thread Graphic CommandPool.
-        GraphicCommandBuffer,                // @brief Main Thread Graphic CommandBuffer.
-
-        ComputeCommandPool,                  // @brief Main Thread Compute CommandPool.
-        ComputeCommandBuffer,                // @brief Main Thread Compute CommandBuffer.
-
-        GraphicThreadCommandPool,            // @brief Sub Thread Graphic CommandPool.
-        ComputeThreadCommandPool,            // @brief Sub Thread Compute CommandPool.
-        TransferThreadCommandPool,           // @brief Sub Thread Transfer CommandPool.
-        VideoEncodeThreadCommandPool,        // @brief Sub Thread VideoEncode CommandPool.
-        VideoDecodeThreadCommandPool,        // @brief Sub Thread VideoDecode CommandPool.
-        OpticalFlowThreadCommandPool,        // @brief Sub Thread OpticalFlow CommandPool.
-
-        DescriptorPool,                      // @brief DescriptorPool.
 
         Count
     };
@@ -182,7 +143,7 @@ namespace Neptune::Vulkan {
 
         if (m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure Already Registered.")
+            NEPTUNE_CORE_ERROR("OpenGL Infrastructure Already Registered.")
 
             return;
         }
@@ -199,7 +160,7 @@ namespace Neptune::Vulkan {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered yet, can not be unregisted.")
+            NEPTUNE_CORE_ERROR("OpenGL Infrastructure is not registered yet, can not be unregisted.")
 
             return;
         }
@@ -215,7 +176,7 @@ namespace Neptune::Vulkan {
         {
             if (!m_Infrastructures[i])
             {
-                NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered yet, can not be unregisted.")
+                NEPTUNE_CORE_ERROR("OpenGL Infrastructure is not registered yet, can not be unregisted.")
 
                 continue;
             }
@@ -233,7 +194,7 @@ namespace Neptune::Vulkan {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Vulkan Infrastructure is not registered yet, can not be got.")
+            NEPTUNE_CORE_ERROR("OpenGL Infrastructure is not registered yet, can not be got.")
 
             return nullptr;
         }

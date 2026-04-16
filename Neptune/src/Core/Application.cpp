@@ -99,8 +99,6 @@ namespace Neptune {
 
             m_SystemManager->Run();
 
-            window.SwapBuffers();
-
             NEPTUNE_PROFILE_FRAME
         }
 
@@ -126,8 +124,6 @@ namespace Neptune {
             window.PollEvents();
 
             p->m_SystemManager->Run();
-
-            window.SwapBuffers();
 
             NEPTUNE_PROFILE_FRAME
 
