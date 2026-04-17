@@ -6,6 +6,8 @@
 
 #include "Pchheader.h"
 #include "LogicalSystem.h"
+#include "RenderSystem.h"
+#include "Render/Frontend/RenderFrontend.h"
 #include "World/World/World.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/ScriptComponent.h"
@@ -82,7 +84,9 @@ namespace Neptune {
 
         if (e.Has(EngineEventBit::InitSlateFrontend))
         {
-            m_SlateFrontend->OnInitialize();
+            auto renderSystem = static_cast<RenderSystem*>(GetSystem(ESystem::Render));
+
+            m_SlateFrontend->OnInitialize(renderSystem->GetRenderFrontend()->AccessInfrastructure());
         }
 
         if (e.Has(EngineEventBit::ShutdownSlateFrontend))

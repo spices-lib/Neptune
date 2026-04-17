@@ -23,8 +23,13 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
+        * @param[in] manager SystemManager.
         */
-        LogicalSystem() : System(), EventListener(EventType::Count) {}
+        explicit LogicalSystem(SystemManager* manager) 
+            : System(ESystem::Logical, manager)
+            , EventListener(EventType::Count) 
+        {}
 
         /**
         * @brief Destructor Function.

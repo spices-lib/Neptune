@@ -6,8 +6,8 @@
 
 #include "Pchheader.h"
 #include "SlateBackend.h"
-#include "RenderBackendInterface.h"
-#include "WindowBackendInterface.h"
+#include "RenderInterface.h"
+#include "WindowInterface.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
@@ -19,11 +19,11 @@ namespace Neptune::imgui {
 
     SlateBackend::SlateBackend(RenderBackendEnum renderBackend, WindowImplement windowImpl)
         : SlateFrontend(SlateBackendEnum::ImGui)
-        , m_RenderAPIInterface(CreateRenderInterface(renderBackend))
-        , m_WindowAPIInterface(CreateWindowInterface(windowImpl))
+        , m_RenderInterface(CreateRenderInterface(renderBackend))
+        , m_WindowInterface(CreateWindowInterface(windowImpl))
     {}
 
-    void SlateBackend::OnInitialize()
+    void SlateBackend::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure)
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -37,16 +37,16 @@ namespace Neptune::imgui {
 		io.ConfigFlags    |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags    |= ImGuiConfigFlags_ViewportsEnable;
 
-        m_WindowAPIInterface->OnInitialize();
-        m_RenderAPIInterface->OnInitialize();
+        m_WindowInterface->OnInitialize();
+        m_RenderInterface->OnInitialize(infrastructure);
     }
 
     void SlateBackend::OnShutDown()
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_WindowAPIInterface->OnShutDown();
-        m_RenderAPIInterface->OnShutDown();
+        m_WindowInterface->OnShutDown();
+        m_RenderInterface->OnShutDown();
 
 		ImGui::DestroyContext();
     }
@@ -55,8 +55,8 @@ namespace Neptune::imgui {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_RenderAPIInterface->BeginFrame();
-        m_WindowAPIInterface->BeginFrame();
+        m_RenderInterface->BeginFrame();
+        m_WindowInterface->BeginFrame();
 
 		ImGui::NewFrame();
 

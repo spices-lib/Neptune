@@ -1,26 +1,29 @@
 /**
-* @file RenderBackendInterface.h.
-* @brief The RenderBackendInterface Class Definitions.
+* @file RenderFrontendInterface.h.
+* @brief The RenderFrontendInterface Class Definitions.
 * @author Spices.
 */
 
 #pragma once
 #include "Core/Core.h"
 #include "Render/Frontend/Enum.h"
+#include "Slate/Frontend/SlateFrontend.h"
 
 namespace Neptune::imgui {
 
     /**
-    * @brief RenderAPIInterface Class.
+    * @brief RenderInterface Class.
     */
-    class RenderAPIInterface
+    class RenderInterface
     {
     public:
 
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] infrastructure RenderFrontend Infrastructure.
         */
-        virtual void OnInitialize() const = 0;
+        virtual void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const = 0;
 
         /**
         * @brief Interface of ShutDown.
@@ -34,18 +37,18 @@ namespace Neptune::imgui {
     };
 
     /**
-    * @brief Create APIInterface With RenderBackend.
+    * @brief Create Interface With RenderFrontend.
     * 
     * @param[in] backend RenderBackendEnum.
     * 
-    * @return Returns RenderAPIInterface.
+    * @return Returns RenderInterface.
     */
-    SP<RenderAPIInterface> CreateRenderInterface(RenderBackendEnum backend);
+    SP<RenderInterface> CreateRenderInterface(RenderBackendEnum backend);
 
     /**
     * @brief Vulkan APIInterface.
     */
-    class VulkanInterface : public RenderAPIInterface
+    class VulkanInterface : public RenderInterface
     {
     public:
 
@@ -56,8 +59,10 @@ namespace Neptune::imgui {
         
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] infrastructure RenderFrontend Infrastructure.
         */
-        void OnInitialize() const override;
+        void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const override;
 
         /**
         * @brief Interface of ShutDown.
@@ -68,6 +73,7 @@ namespace Neptune::imgui {
         * @brief Interface of Begin a frame.
         */
         void BeginFrame() const override;
+
     };
 
 }

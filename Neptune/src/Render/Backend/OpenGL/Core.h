@@ -17,7 +17,9 @@
 
 namespace Neptune::OpenGL {
 
-	#define OPENGL_VERSION  4.6                                                // @brief Use OpenGL 4.6.
+	constexpr uint32_t MaxFrameInFlight = Neptune::MaxFrameInFlight;       // @brief Frames In Flight.
+
+	#define OPENGL_VERSION  4.6                                            // @brief Use OpenGL 4.6.
 
 	/**
 	* @brief OpenGLResult Delegate Class.

@@ -42,11 +42,15 @@ namespace Neptune::OpenGL::Unit {
 
 		/**
 		* @brief Sync client wait idle.
+		* Like vkFence.
+		* sync between CPU and GPU.
 		*/
 		void ClientWait() const;
 
 		/**
-		* @brief Sync wait idle.
+		* @brief Sync wait.
+		* Like pipeline barrier or vkCmdWaitEvents.
+		* sync between GPU and GPU.
 		*/
 		void Wait() const;
 	};

@@ -5,7 +5,7 @@
 */
 
 #include "Pchheader.h"
-#include "WindowBackendInterface.h"
+#include "WindowInterface.h"
 #include "Window/Window.h"
 
 #include <backends/imgui_impl_vulkan.h>
@@ -13,7 +13,7 @@
 
 namespace Neptune::imgui {
 
-	SP<WindowAPIInterface> CreateWindowInterface(WindowImplement implement)
+	SP<WindowInterface> CreateWindowInterface(WindowImplement implement)
 	{
 		NEPTUNE_PROFILE_ZONE
 

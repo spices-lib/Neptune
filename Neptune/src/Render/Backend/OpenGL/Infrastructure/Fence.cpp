@@ -41,6 +41,17 @@ namespace Neptune::OpenGL {
     {
         NEPTUNE_PROFILE_ZONE
 
+        m_Fences[index]->ClientWait();
+
+        m_Fences[index] = CreateSP<Unit::Sync>();
+
+        DEBUGUTILS_SETOBJECTNAME(*m_Fences[index], ToString())
+    }
+
+    void Fence::Barrier(uint32_t index)
+    {
+        NEPTUNE_PROFILE_ZONE
+
         m_Fences[index]->Wait();
 
         m_Fences[index] = CreateSP<Unit::Sync>();
@@ -54,7 +65,7 @@ namespace Neptune::OpenGL {
 
         for (int i = 0; i < i < m_Fences.size(); ++i)
         {
-            m_Fences[i]->Wait();
+            m_Fences[i]->ClientWait();
 
             m_Fences[i] = CreateSP<Unit::Sync>();
 

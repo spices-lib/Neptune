@@ -10,8 +10,8 @@
 
 namespace Neptune::imgui {
 
-    class RenderAPIInterface;
-    class WindowAPIInterface;
+    class RenderInterface;
+    class WindowInterface;
 
     /**
     * @brief imgui::SlateBackend Class.
@@ -36,8 +36,10 @@ namespace Neptune::imgui {
 
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] infrastructure RenderFrontend Infrastructure.
         */
-		void OnInitialize() override;
+		void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) override;
 
         /**
         * @brief Interface of ShutDown.
@@ -56,8 +58,8 @@ namespace Neptune::imgui {
 
 	private:
 
-        SP<RenderAPIInterface> m_RenderAPIInterface;         // @brief render backend interface.
-        SP<WindowAPIInterface> m_WindowAPIInterface;         // @brief window backend interface.
+        SP<RenderInterface> m_RenderInterface;         // @brief render backend interface.
+        SP<WindowInterface> m_WindowInterface;         // @brief window backend interface.
 	};
 
 }

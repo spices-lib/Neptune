@@ -37,7 +37,7 @@ namespace Neptune::OpenGL {
 
         m_Context->Registry<IDebugUtilsObject>();
 
-        m_Context->Registry<IGraphicFence>();
+        m_Context->Registry<IGraphicFence>(MaxFrameInFlight);
 
         RenderFrontend::OnInitialize();
     }
@@ -99,6 +99,15 @@ namespace Neptune::OpenGL {
 			case RHI::ERHI::VertexBuffer:     return std::dynamic_pointer_cast<RHI::RHIVertexBuffer::Impl>  (CreateSP<VertexBuffer>         (*m_Context));
 			default: return nullptr;
 		}
+	}
+
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+	{
+        NEPTUNE_PROFILE_ZONE
+
+		std::unordered_map<std::string, std::any> infrastructure;
+
+		return infrastructure;
 	}
 }
 

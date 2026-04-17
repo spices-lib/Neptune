@@ -42,9 +42,9 @@ namespace Neptune::OpenGL::Unit {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		// GLenum result = glWaitSync();
+		glWaitSync(m_Handle, 0, GL_TIMEOUT_IGNORED);
 	}
-
+	 
 }
 
 #endif

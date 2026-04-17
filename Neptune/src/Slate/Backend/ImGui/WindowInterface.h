@@ -1,6 +1,6 @@
 /**
-* @file WindowBackendInterface.h.
-* @brief The WindowBackendInterface Class Definitions.
+* @file WindowInterface.h.
+* @brief The WindowInterface Class Definitions.
 * @author Spices.
 */
 
@@ -11,16 +11,16 @@
 namespace Neptune::imgui {
 
     /**
-    * @brief WindowAPIInterface Class.
+    * @brief WindowInterface Class.
     */
-    class WindowAPIInterface
+    class WindowInterface
     {
     public:
 
         /**
         * @brief Destructor Function.
         */
-        virtual ~WindowAPIInterface() = default;
+        virtual ~WindowInterface() = default;
         
         /**
         * @brief Interface of Initialize.
@@ -39,18 +39,18 @@ namespace Neptune::imgui {
     };
 
     /**
-    * @brief Create APIInterface With RenderBackend.
+    * @brief Create Interface With RenderBackend.
     *
     * @param[in] implement WindowImplement.
     *
-    * @return Returns WindowAPIInterface.
+    * @return Returns WindowInterface.
     */
-    SP<WindowAPIInterface> CreateWindowInterface(WindowImplement implement);
+    SP<WindowInterface> CreateWindowInterface(WindowImplement implement);
 
     /**
     * @brief GLFW APIInterface.
     */
-    class GLFWInterface : public WindowAPIInterface
+    class GLFWInterface : public WindowInterface
     {
     public:
 

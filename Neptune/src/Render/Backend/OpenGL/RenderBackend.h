@@ -75,6 +75,13 @@ namespace Neptune::OpenGL {
         */
         std::any CreateRHI(RHI::ERHI e, void* payload) override;
 
+        /**
+        * @brief Interface of Access Infrastructure.
+        *
+        * @return Returns Infrastructure.
+        */
+        std::unordered_map<std::string, std::any> AccessInfrastructure() override;
+
     private:
 
         /**

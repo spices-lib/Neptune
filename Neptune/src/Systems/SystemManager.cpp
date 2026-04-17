@@ -25,27 +25,20 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        PushSystem<LogicalSystem>();
-        PushSystem<RenderSystem>();
-        PushSystem<RHISystem>();
+        PushSystem<LogicalSystem>(ESystem::Logical, this);
+        PushSystem<RenderSystem>(ESystem::Render, this);
+        PushSystem<RHISystem>(ESystem::RHI, this);
     }
 
     void SystemManager::Shutdown()
     {
         NEPTUNE_PROFILE_ZONE
 
-        while(!m_Systems.empty())
+        for (int i = m_Systems.size() - 1; i >= 0; --i)
         {
-            PopSystem();
+            m_Systems[i]->OnSystemShutDown();
+            m_Systems[i] = nullptr;
         }
-    }
-
-    void SystemManager::PopSystem()
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        m_Systems.back()->OnSystemShutDown();
-        m_Systems.pop_back();
     }
 
     void SystemManager::Run() const
@@ -56,6 +49,13 @@ namespace Neptune {
         {
             system->Tick();
         }
+    }
+
+    System* SystemManager::GetSystem(ESystem system) const
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        return m_Systems[static_cast<uint8_t>(system)].get();
     }
 
     void SystemManager::OnEvent(Event& event) const

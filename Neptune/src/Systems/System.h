@@ -8,6 +8,7 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 #include "Core/Event/Event.h"
+#include "Enum.h"
 
 namespace Neptune {
 
@@ -21,8 +22,13 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
+        * @param[in] system ESystem.
+        * @param[in] manager SystemManager.
         */
-        System() = default;
+        System(ESystem system, class SystemManager* manager) 
+            : m_ESystem(system), m_Manager(manager) 
+        {}
 
         /**
         * @brief Destructor Function.
@@ -43,5 +49,19 @@ namespace Neptune {
         * @brief Interface of system tick run.
         */
         virtual void Tick() = 0;
+
+        /**
+        * @brief Get SystemManager System.
+        * 
+        * @param[in] system ESystem.
+        * 
+        * @return Returns System Pointer.
+        */
+        System* GetSystem(ESystem system) const;
+
+    private:
+
+        ESystem m_ESystem;               // @brief This ESystem.
+        SystemManager* m_Manager;        // @brief SystemManager pointer.
     };
 }

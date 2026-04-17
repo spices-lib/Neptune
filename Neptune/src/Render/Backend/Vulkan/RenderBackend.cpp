@@ -227,6 +227,28 @@ namespace Neptune::Vulkan {
 		}
 	}
 
+	std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		std::unordered_map<std::string, std::any> infrastructure;
+
+		auto pass = std::dynamic_pointer_cast<Render::SlatePass>(m_RenderPasses.back());
+
+		infrastructure["Instance"]              = m_Context->Get<IInstance>()->Handle();
+		infrastructure["PhysicalDevice"]        = m_Context->Get<IPhysicalDevice>()->Handle();
+		infrastructure["Device"]                = m_Context->Get<IDevice>()->Handle();
+		infrastructure["GraphicQueueFamily"]    = m_Context->Get<IPhysicalDevice>()->GetQueueFamilies().graphic.value();
+		infrastructure["GraphicQueue"]          = m_Context->Get<IGraphicQueue>()->Handle();
+		infrastructure["DescriptorPool"]        = m_Context->Get<IDescriptorPool>()->Handle();
+		infrastructure["RenderPass"]            = pass->GetRenderPass()->GetRHIImpl<RenderPass>()->Handle();
+		infrastructure["MSAASamples"]           = VK_SAMPLE_COUNT_1_BIT;
+		infrastructure["Allocator"]             = VK_NULL_HANDLE;
+		infrastructure["CheckVkResultFn"]       = [](VkResult result) { std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };
+
+		return infrastructure;
+	}
+
 	void RenderBackend::RecreateSwapChain()
 	{
 		NEPTUNE_PROFILE_ZONE

@@ -23,8 +23,13 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
+        * @param[in] manager SystemManager.
         */
-        RenderSystem() : System(), EventListener(EventType::Count) {}
+        explicit RenderSystem(SystemManager* manager)
+            : System(ESystem::Render, manager)
+            , EventListener(EventType::Count) 
+        {}
 
         /**
         * @brief Destructor Function.
@@ -52,6 +57,13 @@ namespace Neptune {
         * @param[in] event Event
         */
         void OnEvent(Event& event) override;
+
+        /**
+        * @brief Get RenderFrontend.
+        *
+        * @return Returns RenderFrontend.
+        */
+        SP<RenderFrontend> GetRenderFrontend() const { return m_RenderFrontend; }
 
     private:
 

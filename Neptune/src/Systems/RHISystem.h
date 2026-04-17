@@ -20,8 +20,12 @@ namespace Neptune {
 
         /**
         * @brief Constructor Function.
+        * 
+        * @param[in] manager SystemManager.
         */
-        RHISystem() : System() {}
+        explicit RHISystem(SystemManager* manager) 
+            : System(ESystem::RHI, manager) 
+        {}
 
         /**
         * @brief Destructor Function.

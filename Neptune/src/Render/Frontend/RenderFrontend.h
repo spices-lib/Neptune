@@ -86,6 +86,13 @@ namespace Neptune {
         virtual std::any CreateRHI(RHI::ERHI e, void* payload) = 0;
 
         /**
+        * @brief Interface of Access Infrastructure.
+        *
+        * @return Returns Infrastructure.
+        */
+        virtual std::unordered_map<std::string, std::any> AccessInfrastructure() = 0;
+
+        /**
         * @brief Render a frame.
         *
         * @param[in] scene Scene.
