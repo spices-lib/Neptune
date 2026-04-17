@@ -1,6 +1,6 @@
 /**
-* @file RenderFrontendInterface.cpp.
-* @brief The Interface Class Implementation.
+* @file RenderInterface.cpp.
+* @brief The RenderInterface Class Implementation.
 * @author Spices.
 */
 
@@ -9,6 +9,7 @@
 #include "Render/Frontend/Utils.h"
 
 #include <backends/imgui_impl_vulkan.h>
+#include <backends/imgui_impl_opengl3.h>
 
 namespace Neptune::imgui {
 
@@ -18,6 +19,7 @@ namespace Neptune::imgui {
 
 		switch (backend)
 		{
+			case RenderBackendEnum::OpenGL: return CreateSP<OpenGLInterface>();
 			case RenderBackendEnum::Vulkan: return CreateSP<VulkanInterface>();
 			default:
 			{
@@ -25,6 +27,27 @@ namespace Neptune::imgui {
 				return nullptr;
 			}
 		}
+	}
+
+	void OpenGLInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		ImGui_ImplOpenGL3_Init("#version 460");
+	}
+
+	void OpenGLInterface::OnShutDown() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		ImGui_ImplOpenGL3_Shutdown();
+	}
+
+	void OpenGLInterface::BeginFrame() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		ImGui_ImplOpenGL3_NewFrame();
 	}
 
 	void VulkanInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const

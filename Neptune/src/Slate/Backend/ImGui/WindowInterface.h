@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Window/Enum.h"
+#include "Render/Frontend/Enum.h"
 
 namespace Neptune::imgui {
 
@@ -24,8 +25,10 @@ namespace Neptune::imgui {
         
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] e RenderBackendEnum.
         */
-        virtual void OnInitialize() const = 0;
+        virtual void OnInitialize(RenderBackendEnum e) const = 0;
 
         /**
         * @brief Interface of ShutDown.
@@ -61,8 +64,10 @@ namespace Neptune::imgui {
         
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] e RenderBackendEnum.
         */
-        void OnInitialize() const override;
+        void OnInitialize(RenderBackendEnum e) const override;
 
         /**
         * @brief Interface of ShutDown.

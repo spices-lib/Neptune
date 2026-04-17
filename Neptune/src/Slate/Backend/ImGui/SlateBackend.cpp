@@ -21,6 +21,8 @@ namespace Neptune::imgui {
         : SlateFrontend(SlateBackendEnum::ImGui)
         , m_RenderInterface(CreateRenderInterface(renderBackend))
         , m_WindowInterface(CreateWindowInterface(windowImpl))
+        , m_RenderBackendEnum(renderBackend)
+        , m_WindowImplement(windowImpl)
     {}
 
     void SlateBackend::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure)
@@ -37,7 +39,7 @@ namespace Neptune::imgui {
 		io.ConfigFlags    |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags    |= ImGuiConfigFlags_ViewportsEnable;
 
-        m_WindowInterface->OnInitialize();
+        m_WindowInterface->OnInitialize(m_RenderBackendEnum);
         m_RenderInterface->OnInitialize(infrastructure);
     }
 

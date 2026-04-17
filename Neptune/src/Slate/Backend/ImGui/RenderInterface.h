@@ -1,6 +1,6 @@
 /**
-* @file RenderFrontendInterface.h.
-* @brief The RenderFrontendInterface Class Definitions.
+* @file RenderInterface.h.
+* @brief The RenderInterface Class Definitions.
 * @author Spices.
 */
 
@@ -46,7 +46,38 @@ namespace Neptune::imgui {
     SP<RenderInterface> CreateRenderInterface(RenderBackendEnum backend);
 
     /**
-    * @brief Vulkan APIInterface.
+    * @brief OpenGL Interface.
+    */
+    class OpenGLInterface : public RenderInterface
+    {
+    public:
+
+        /**
+        * @brief Destructor Function.
+        */
+        ~OpenGLInterface() = default;
+
+        /**
+        * @brief Interface of Initialize.
+        *
+        * @param[in] infrastructure RenderFrontend Infrastructure.
+        */
+        void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const override;
+
+        /**
+        * @brief Interface of ShutDown.
+        */
+        void OnShutDown() const override;
+
+        /**
+        * @brief Interface of Begin a frame.
+        */
+        void BeginFrame() const override;
+
+    };
+
+    /**
+    * @brief Vulkan Interface.
     */
     class VulkanInterface : public RenderInterface
     {

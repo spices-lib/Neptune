@@ -1,6 +1,6 @@
 /**
-* @file RenderBackendInterface.cpp.
-* @brief The Interface Class Implementation.
+* @file WindowInterface.cpp.
+* @brief The WindowInterface Class Implementation.
 * @author Spices.
 */
 
@@ -8,7 +8,6 @@
 #include "WindowInterface.h"
 #include "Window/Window.h"
 
-#include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_glfw.h>
 
 namespace Neptune::imgui {
@@ -28,11 +27,29 @@ namespace Neptune::imgui {
 		}
 	}
 
-	void GLFWInterface::OnInitialize() const
+	void GLFWInterface::OnInitialize(RenderBackendEnum e) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		ImGui_ImplGlfw_InitForVulkan(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+		switch (e)
+		{
+			case RenderBackendEnum::OpenGL:
+			{
+				ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+				break;
+			}
+			case RenderBackendEnum::Vulkan:
+			{
+				ImGui_ImplGlfw_InitForVulkan(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+				break;
+			}
+			default:
+			{
+				NEPTUNE_CORE_ERROR("Unsupported RenderBackendEnum in GLFWInterface::OnInitialize.")
+				break;
+			}
+		}
+		
 	}
 
 	void GLFWInterface::OnShutDown() const
