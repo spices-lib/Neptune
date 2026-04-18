@@ -9,6 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Shader.h"
+#include "Render/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
 
 namespace Neptune::OpenGL {
 
@@ -20,6 +21,8 @@ namespace Neptune::OpenGL {
 	void Shader::SetName(const std::string& name)
 	{
 		NEPTUNE_PROFILE_ZONE
+
+		DEBUGUTILS_SETOBJECTNAME(m_Shader, name)
 	}
 }
 

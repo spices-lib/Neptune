@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "RenderBackend.h"
 
@@ -53,6 +53,15 @@ namespace Neptune::Direct3D11 {
 
         return nullptr;
 	}
+
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        std::unordered_map<std::string, std::any> infrastructure;
+
+        return infrastructure;
+    }
 }
 
 #endif

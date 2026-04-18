@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_MACOS
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"

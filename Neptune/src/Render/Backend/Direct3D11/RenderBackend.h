@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
@@ -74,6 +74,13 @@ namespace Neptune::Direct3D11 {
         * @return Returns RHI::Impl
         */
         std::any CreateRHI(RHI::ERHI e, void* payload) override;
+
+        /**
+        * @brief Interface of Access Infrastructure.
+        *
+        * @return Returns Infrastructure.
+        */
+        std::unordered_map<std::string, std::any> AccessInfrastructure() override;
 
     private:
 

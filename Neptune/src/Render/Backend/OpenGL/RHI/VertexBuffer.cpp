@@ -9,6 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "VertexBuffer.h"
-
+#include "Render/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
 
 #endif

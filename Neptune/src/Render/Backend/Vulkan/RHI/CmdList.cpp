@@ -71,14 +71,14 @@ namespace Neptune::Vulkan {
 
 		auto rhi = descriptorList->GetRHIImpl<DescriptorList>();
 
-		for (const auto& set : sharedRhi->GetSets())
+		for (const auto& [fst, snd] : sharedRhi->GetSets())
 		{
-			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
+			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, fst, snd->Handle());
 		}
 
-		for (const auto& set : rhi->GetSets())
+		for (const auto& [fst, snd] : rhi->GetSets())
 		{
-			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, set.first, set.second->Handle());
+			m_CommandBuffer->BindDescriptorSet(m_BindPoint, m_PipelineLayout, fst, snd->Handle());
 		}
 	}
 
