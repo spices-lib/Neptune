@@ -16,7 +16,7 @@ namespace Neptune {
     * @brief ScriptComponent Class.
     * This class defines the specific behaves of ScriptComponent.
     */
-    class ScriptComponent : public Component
+    class ScriptComponent : public Component<std::map<std::string, SP<ScriptInterface>>>
     {
     public:
 
@@ -61,11 +61,5 @@ namespace Neptune {
         */
         void OnComponentDetached() override;
 
-    private:
-
-        /**
-        * @brief Scripts map
-        */
-        std::map<std::string, SP<ScriptInterface>> m_Scripts;
     };
 }

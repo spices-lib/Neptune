@@ -16,7 +16,8 @@
 #include "Render/Frontend/Pass/SlatePass.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
-#include "World/Component/ClockComponent.h"
+#include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::Vulkan {
 
@@ -95,7 +96,7 @@ namespace Neptune::Vulkan {
     {
 		NEPTUNE_PROFILE_ZONE
 
-		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+		auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
 		{
 			m_Context->Get<IComputeFence>()->Wait(clock.m_FrameIndex);
@@ -127,7 +128,7 @@ namespace Neptune::Vulkan {
     {
 		NEPTUNE_PROFILE_ZONE
 
-		const auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+		const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
 		{
 			m_Context->Get<IComputeCommandBuffer>()->End(clock.m_FrameIndex);

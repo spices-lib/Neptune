@@ -18,7 +18,7 @@
 #include "Render/Backend/Vulkan/Resource/QueryPool.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Frontend/RHI/RenderPass.h"
-#include "World/Component/ClockComponent.h"
+#include "Data/Clock.h"
 
 namespace Neptune::Vulkan {
 

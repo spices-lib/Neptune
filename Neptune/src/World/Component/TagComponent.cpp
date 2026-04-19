@@ -13,6 +13,6 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Tags = tag;
+        SetModel(tag);
     }
 }

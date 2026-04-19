@@ -7,7 +7,8 @@
 #include "Pchheader.h"
 #include "EngineClock.h"
 #include "World/Scene/Scene.h"
-#include "World/Component/ClockComponent.h"
+#include "World/Component/Component.h"
+#include "Data/Clock.h"
 #include "Render/Frontend/Utils.h"
 #include "Core/Timer/Timer.h"
 
@@ -21,9 +22,9 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE
 		
-		auto& comp = m_Scene->AddComponent<ClockComponent>(m_Scene->GetRoot());
+		auto& comp = m_Scene->AddComponent<Component<Data::Clock>>(m_Scene->GetRoot());
 		
-		m_Clock = &comp.GetClock();
+		m_Clock = &comp.GetModel();
 	}
 
 	void EngineClock::OnTick()

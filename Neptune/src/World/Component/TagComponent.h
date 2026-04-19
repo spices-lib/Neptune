@@ -14,7 +14,7 @@ namespace Neptune {
     * @brief TagComponent Class.
     * This class defines the specific behaves of TagComponent.
     */
-    class TagComponent : public Component
+    class TagComponent : public Component<std::string>
     {
     public:
 
@@ -26,7 +26,7 @@ namespace Neptune {
         /**
         * @brief Constructor Function.
         */
-        TagComponent(const std::string& tag) : m_Tags(tag) {}
+        TagComponent(const std::string& tag) : Component(tag) {}
 
         /**
         * @brief Destructor Function.
@@ -40,18 +40,5 @@ namespace Neptune {
         */
         void Rename(const std::string& tag);
 
-        /**
-        * @brief Get the tags variable.
-        * 
-        * @return Returns the tags variable.
-        */
-        const std::string& GetTag() { return m_Tags; }
-
-    private:
-
-        /**
-        * @brief The tags this component handled.
-        */
-        std::string m_Tags;
     };
 }

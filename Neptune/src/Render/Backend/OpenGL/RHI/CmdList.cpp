@@ -11,7 +11,7 @@
 #include "CmdList.h"
 #include "Render/Backend/OpenGL/Infrastructure/Context.h"
 #include "Render/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
-#include "World/Component/ClockComponent.h"
+#include "Data/Clock.h"
 
 namespace Neptune::OpenGL {
 

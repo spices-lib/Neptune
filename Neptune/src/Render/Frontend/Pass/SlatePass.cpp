@@ -10,7 +10,8 @@
 #include "Render/Frontend/RHI/RenderPass.h"
 #include "Render/Frontend/RHI/CmdList.h"
 #include "World/Scene/Scene.h"
-#include "World/Component/ClockComponent.h"
+#include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::Render {
 
@@ -27,7 +28,7 @@ namespace Neptune::Render {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		const auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+		const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
 		RHI::CmdList cmdList;
 

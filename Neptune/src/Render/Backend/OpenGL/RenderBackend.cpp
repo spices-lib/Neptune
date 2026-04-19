@@ -13,7 +13,8 @@
 #include "RHI/RHIHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
-#include "World/Component/ClockComponent.h"
+#include "Data/Clock.h"
+#include "World/Component/Component.h"
 
 namespace Neptune::OpenGL {
 
@@ -60,7 +61,7 @@ namespace Neptune::OpenGL {
     {
         NEPTUNE_PROFILE_ZONE
 
-    	auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+        const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
         {
             m_Context->Get<IGraphicFence>()->Wait(clock.m_FrameIndex);

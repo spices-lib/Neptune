@@ -18,7 +18,6 @@
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Backend/Vulkan/Resource/VideoSession.h"
 #include "Render/Backend/Vulkan/RHI/OpticalFlowSession.h"
-#include "World/Component/ClockComponent.h"
 
 namespace Neptune::Vulkan {
 

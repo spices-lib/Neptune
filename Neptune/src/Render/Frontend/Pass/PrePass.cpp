@@ -9,7 +9,8 @@
 #include "Resource/Mesh/Mesh.h"
 #include "Header/ShaderCommon.h"
 #include "World/Scene/Scene.h"
-#include "World/Component/ClockComponent.h"
+#include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::Render {
 
@@ -24,7 +25,7 @@ namespace Neptune::Render {
 
 	void PrePass::OnRender(Scene* scene)
 	{
-		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+		auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
 		ShaderCommon::View view{};
 

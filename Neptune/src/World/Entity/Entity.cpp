@@ -20,6 +20,6 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        return GetComponent<UUIDComponent>().GetUUID();
+        return GetComponent<Component<UUID>>().GetModel();
     }
 }

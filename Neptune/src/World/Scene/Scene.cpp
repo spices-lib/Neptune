@@ -9,7 +9,6 @@
 #include "World/Entity/Entity.h"
 #include "World/Component/ScriptComponent.h"
 #include "World/Component/TagComponent.h"
-#include "World/Component/UUIDComponent.h"
 
 namespace Neptune {
     
@@ -37,7 +36,7 @@ namespace Neptune {
 
         Entity entity = CreateEmpty(uuid);
 
-        entity.AddComponent<UUIDComponent>(uuid);
+        entity.AddComponent<Component<UUID>>(uuid);
         entity.AddComponent<TagComponent>(name);
 
         return entity;

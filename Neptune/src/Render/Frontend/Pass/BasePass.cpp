@@ -11,7 +11,8 @@
 #include "Resource/ResourcePool.h"
 #include "Resource/Mesh/Mesh.h"
 #include "World/Scene/Scene.h"
-#include "World/Component/ClockComponent.h"
+#include "Data/Clock.h"
+#include "World/Component/Component.h"
 
 namespace Neptune::Render {
 
@@ -85,7 +86,7 @@ namespace Neptune::Render {
 
 	void BasePass::OnRender(Scene* scene)
 	{
-		const auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+		const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
 		m_DescriptorList->UpdateUniformTexture(1, 0, ResourcePool<RenderTarget>::Instance().GetResource("CurrDecodeRT")->GetRHIResource());
 

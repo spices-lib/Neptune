@@ -349,6 +349,6 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
-        component.OnComponentDetached(*entity);
+        component.OnComponentDetached();
     }
 }
