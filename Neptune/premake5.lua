@@ -130,6 +130,12 @@ project "Neptune"
 			"NP_PLATFORM_WINDOWS"
 		}
 
+		-- Windows nuget packages.
+		nuget
+		{
+			"%{Nugets.DirectX12AgilitySDK}"       -- Dependency: Direct3D12
+		}
+
 		-- Windows Specific Solution Dependency.
 		links
 		{
@@ -137,6 +143,8 @@ project "Neptune"
 			"ImGui_Vulkan",                       -- Dependency: imgui
 			"ImGui_OpenGL",                       -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
+			"%{Library.dxgi}",                    -- Dependency: dxgi
+			"%{Library.d3d12}",                   -- Dependency: d3d12
 			"Glad",                               -- Dependency: Glad
 			"tracy",                              -- Dependency: tracy  
 		}

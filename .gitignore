@@ -20,10 +20,13 @@
 *package-lock.json
 
 /Neptune/*.json
+/Neptune/packages.config
 /Editor/*.json
 /Runtime/*.json
 /UnitTest/*.json
 *.log
+
+packages
 
 Makefile
 /Neptune/Makefile

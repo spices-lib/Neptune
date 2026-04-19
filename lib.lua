@@ -36,9 +36,15 @@ LibraryDir["VulkanSDKDLL"]                = "%{IncludeDir.VulkanSDK}/../Bin"    
 -- Library Directories
 Library                                   = {}
 Library["VulkanSDK"]                      = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"                                      -- Library Directries: VulkanSDK
+Library["dxgi"]                           = "dxgi.lib"                                                                  -- Library Directries: dxgi
+Library["d3d12"]                          = "d3d12.lib"                                                                 -- Library Directries: d3d12
 
 Library["shaderc_debug"]                  = "%{LibraryDir.VulkanSDK}/shaderc_sharedd.lib"                               -- Library Directries: shaderc_debug
 Library["shaderc_utils_debug"]            = "%{LibraryDir.VulkanSDK}/shaderc_utild.lib"                                 -- Library Directries: shaderc_utils_debug
 
 Library["shaderc_release"]                = "%{LibraryDir.VulkanSDK}/shaderc_shared.lib"                                -- Library Directries: shaderc_release
 Library["shaderc_utils_release"]          = "%{LibraryDir.VulkanSDK}/shaderc_util.lib"                                  -- Library Directries: shaderc_utils_release
+
+
+Nugets                                    = {}
+Nugets["DirectX12AgilitySDK"]             = "Microsoft.Direct3D.D3D12:1.618.5"                                          -- Nugets package: Direct3D12
