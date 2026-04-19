@@ -14,14 +14,21 @@ namespace Neptune {
     */
     enum class RenderBackendEnum : uint8_t
     {
-        None = 0,
-        WebGL,
-        WebGPU,
-        OpenGL,
-        Direct3D11,
-        Direct3D12,
-        Vulkan,
-        Metal,
+        WebGL = 0,            // @brief Web
+        WebGPU,               // @brief Web
+        OpenGL,               // @brief Any
+        OpenGLES,             // @brief Mobile
+        OpenGLSC,             // @brief Safety Critical
+        Direct2D,             // @brief Windows 2D
+        Direct3D11,           // @brief Windows
+        Direct3D12,           // @brief Windows
+        Vulkan,               // @brief Any
+        VulkanSC,             // @brief Safety Critical
+        Metal,                // @brief Ios Macos Ipados
+        GNM,                  // @brief PlayStation
+        GNMX,                 // @brief PlayStation
+        GDKX,                 // @brief Xbox
+        NVN,                  // @brief Nintendo Switch
 
         Count
     };
