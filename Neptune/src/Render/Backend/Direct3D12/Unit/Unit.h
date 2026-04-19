@@ -5,24 +5,19 @@
 */
 
 #pragma once
-
-#ifndef NP_PLATFORM_EMSCRIPTEN
-
 #include "Core/Core.h"
-#include "Render/Backend/OpenGL/Core.h"
+#include "Render/Backend/Direct3D12/Core.h"
 
-namespace Neptune::OpenGL::Unit {
+namespace Neptune::Direct3D12::Unit {
 
 	/**
-	* @brief OpenGL::Unit Class.
-	* This class defines the OpenGL::Unit behaves.
+	* @brief Direct3D12::Unit Class.
+	* This class defines the Direct3D12::Unit behaves.
 	*/
-	template<typename H, GLenum E_>
+	template<typename H>
 	class Unit
 	{
 	public:
-
-		static constexpr GLenum E = E_;
 
 		using Handle = H;
 
@@ -37,13 +32,6 @@ namespace Neptune::OpenGL::Unit {
 		* @brief Destructor Function.
 		*/
 		virtual ~Unit() { ResetHandle(); }
-
-		/**
-		* @brief Get Enum of Unit.
-		*
-		* @return Returns Enum of Unit.
-		*/
-		static const GLenum& GetEUnit() { return E; }
 
 		/**
 		* @brief Set Unit Handle.
@@ -69,5 +57,3 @@ namespace Neptune::OpenGL::Unit {
 		Handle m_Handle{};   // @brief Unit Handle.
 	};
 }
-
-#endif

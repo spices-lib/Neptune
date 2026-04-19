@@ -62,7 +62,7 @@ namespace Neptune::Vulkan::Unit {
 		/**
 		* @brief Reset Unit Handle.
 		*/
-		void ResetHandle() { m_Handle = nullptr; }
+		void ResetHandle() { m_Handle = {}; }
 
 	protected:
 

@@ -6,27 +6,27 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
+#include "Version.h"
 #include "Render/Backend/OpenGL/Infrastructure/ContextAccessor.h"
 #include "Render/Frontend/Utils.h"
 
 #include <functional>
-#include <glad/glad.h>
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
 	constexpr uint32_t MaxFrameInFlight = Neptune::MaxFrameInFlight;       // @brief Frames In Flight.
 
-	#define OPENGL_VERSION  4.6                                            // @brief Use OpenGL 4.6.
+	#define DIRECT3D12_VERSION
 
 	/**
-	* @brief OpenGLResult Delegate Class.
+	* @brief Direct3D12Result Delegate Class.
 	*/
-    struct HandleOpenGLResultDelegate
+    struct HandleDirect3D12ResultDelegate
     {
-        using Handler = std::function<void(GLenum)>;
+        using Handler = std::function<void(HRESULT)>;
 
 		/**
 		* @brief Set Handler.
@@ -44,13 +44,13 @@ namespace Neptune::OpenGL {
     };
 	
 	/**
-	* @brief Handle OpenGL Error Result.
+	* @brief Handle Direct3D12 Error Result.
 	*
-	* @param[in] result GLenum.
+	* @param[in] result HRESULT.
 	*/
-	void HandleOpenGLResult(GLenum result);
+	void HandleDirect3D12Result(HRESULT result);
 
-	#define OPENGL_CHECK  { auto expr_value = glGetError(); if (expr_value != GL_NO_ERROR) { std::invoke(HandleOpenGLResultDelegate::GetHandler(), expr_value); } }
+	#define DIRECT3D12_CHECK(expr)  { auto expr_value = expr; if (FAILED(expr_value)) { std::invoke(HandleDirect3D12ResultDelegate::GetHandler(), expr_value); } }
 }
 
 #endif
