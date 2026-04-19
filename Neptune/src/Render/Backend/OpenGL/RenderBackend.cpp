@@ -81,13 +81,13 @@ namespace Neptune::OpenGL {
         }
 
         {
-            DEBUGUTILS_BEGINLABEL(0, "PresentQueue");
+            DEBUGUTILS_BEGINLABEL(0, "PresentQueue")
 
             const auto& window = Window::Instance();
 
             window.SwapBuffers();
 
-            DEBUGUTILS_ENDLABEL();
+            DEBUGUTILS_ENDLABEL()
         }
     }
 
@@ -115,7 +115,7 @@ namespace Neptune::OpenGL {
 			case RHI::ERHI::CmdList2:         return std::dynamic_pointer_cast<RHI::RHICmdList2::Impl>      (CreateSP<CmdList2>             (*m_Context));
             case RHI::ERHI::Decoder:          NEPTUNE_CORE_ERROR("OpenGL do not support Decoder RHI.")       return nullptr;
             case RHI::ERHI::OpticalFlow:      NEPTUNE_CORE_ERROR("OpenGL do not support OpticalFlow RHI.")   return nullptr;
-			default: return nullptr;
+			default:                          NEPTUNE_CORE_ERROR("OpenGL do not support this RHI.")          return nullptr;
 		}
 	}
 

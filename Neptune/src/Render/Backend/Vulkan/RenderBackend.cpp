@@ -224,7 +224,7 @@ namespace Neptune::Vulkan {
 			case RHI::ERHI::CmdList2:         return std::dynamic_pointer_cast<RHI::RHICmdList2::Impl>      (CreateSP<CmdList2>             (*m_Context));
 			case RHI::ERHI::Decoder:          return std::dynamic_pointer_cast<RHI::RHIDecoder::Impl>       (Decoder::Create                (*m_Context, payload));
 			case RHI::ERHI::OpticalFlow:      return std::dynamic_pointer_cast<RHI::RHIOpticalFlow::Impl>   (CreateSP<OpticalFlowSession>   (*m_Context));
-			default: return nullptr;
+			default:                          NEPTUNE_CORE_ERROR("Vulkan do not support this RHI.")          return nullptr;
 		}
 	}
 

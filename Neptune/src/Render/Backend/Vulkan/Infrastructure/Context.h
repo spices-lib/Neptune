@@ -78,6 +78,7 @@ namespace Neptune::Vulkan {
 	struct InfrastructureClass
 	{
 		using T = T_;
+
         static constexpr EInfrastructure E = E_;
 	};
 

@@ -13,8 +13,8 @@
 namespace Neptune::Direct3D12::Unit {
 
 	namespace {
-
-		const D3D12_HEAP_PROPERTIES s_DefaultHeap
+		
+		constexpr D3D12_HEAP_PROPERTIES s_DefaultHeap
 		{
 			D3D12_HEAP_TYPE_DEFAULT,
 			D3D12_CPU_PAGE_PROPERTY_UNKNOWN,

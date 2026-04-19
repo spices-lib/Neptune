@@ -28,7 +28,7 @@ namespace Neptune::Direct3D12::Unit {
 		DIRECT3D12_CHECK(D3D12GetDebugInterface(IID_PPV_ARGS(&m_Handle)))
 	}
 
-	void Debug::EnableDebugLayer()
+	void Debug::EnableDebugLayer() const
 	{
 		NEPTUNE_PROFILE_ZONE
 

@@ -42,11 +42,19 @@ namespace Neptune {
     {
         NEPTUNE_PROFILE_ZONE
 
+        {
+            EngineEvent event(EngineEventBit::StopTheEngine);
+
+            Event::GetEventCallbackFn()(event);
+        }
+
         DestroyScene();
 
-        EngineEvent event(EngineEventBit::ShutdownSlateFrontend);
+        {
+            EngineEvent event(EngineEventBit::ShutdownSlateFrontend);
 
-        Event::GetEventCallbackFn()(event);
+            Event::GetEventCallbackFn()(event);
+        }
 
         S_Instance.reset();
     }

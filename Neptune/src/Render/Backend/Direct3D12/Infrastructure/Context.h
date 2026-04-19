@@ -6,14 +6,14 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 
 #include <array>
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
     class Infrastructure;
 
@@ -22,9 +22,7 @@ namespace Neptune::OpenGL {
     */
     enum class EInfrastructure : uint8_t
     {
-        DebugUtilsObject = 0,                // @brief Label/Name Functors.
-
-        GraphicFence,                        // @brief Main Thread Graphic Fence.
+        DebugUtilsObject,                    // @brief Label/Name Functors.
 
         Count
     };
@@ -144,7 +142,7 @@ namespace Neptune::OpenGL {
 
         if (m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("OpenGL Infrastructure Already Registered.")
+            NEPTUNE_CORE_ERROR("Direct3D12 Infrastructure Already Registered.")
 
             return;
         }
@@ -161,7 +159,7 @@ namespace Neptune::OpenGL {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("OpenGL Infrastructure is not registered yet, can not be unregisted.")
+            NEPTUNE_CORE_ERROR("Direct3D12 Infrastructure is not registered yet, can not be unregisted.")
 
             return;
         }
@@ -177,7 +175,7 @@ namespace Neptune::OpenGL {
         {
             if (!m_Infrastructures[i])
             {
-                NEPTUNE_CORE_ERROR("OpenGL Infrastructure is not registered yet, can not be unregisted.")
+                NEPTUNE_CORE_ERROR("Direct3D12 Infrastructure is not registered yet, can not be unregisted.")
 
                 continue;
             }
@@ -195,7 +193,7 @@ namespace Neptune::OpenGL {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("OpenGL Infrastructure is not registered yet, can not be got.")
+            NEPTUNE_CORE_ERROR("Direct3D12 Infrastructure is not registered yet, can not be got.")
 
             return nullptr;
         }

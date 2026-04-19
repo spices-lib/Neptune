@@ -43,7 +43,7 @@ namespace Neptune::Direct3D12::Unit {
 		/**
 		* @brief Enable Debug Layer.
 		*/
-		void EnableDebugLayer();
+		void EnableDebugLayer() const;
 
 	};
 }

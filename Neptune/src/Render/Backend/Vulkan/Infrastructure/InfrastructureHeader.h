@@ -1,3 +1,9 @@
+/**
+* @file InfrastructureHeader.h.
+* @brief The InfrastructureHeader Class Definitions.
+* @author Spices.
+*/
+
 #pragma once
 
 #ifndef NP_PLATFORM_EMSCRIPTEN

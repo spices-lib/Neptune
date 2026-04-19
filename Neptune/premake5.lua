@@ -133,7 +133,8 @@ project "Neptune"
 		-- Windows nuget packages.
 		nuget
 		{
-			"%{Nugets.DirectX12AgilitySDK}"       -- Dependency: Direct3D12
+			"%{Nugets.DirectX12AgilitySDK}",      -- Dependency: Direct3D12
+			"%{Nugets.WinPixEventRuntime}",       -- Dependency: WinPixEventRuntime
 		}
 
 		-- Windows Specific Solution Dependency.
@@ -145,6 +146,7 @@ project "Neptune"
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 			"%{Library.dxgi}",                    -- Dependency: dxgi
 			"%{Library.d3d12}",                   -- Dependency: d3d12
+			"%{Library.WinPixEventRuntime}",      -- Dependency: WinPixEventRuntime
 			"Glad",                               -- Dependency: Glad
 			"tracy",                              -- Dependency: tracy  
 		}

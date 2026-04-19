@@ -38,6 +38,7 @@ Library                                   = {}
 Library["VulkanSDK"]                      = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"                                      -- Library Directries: VulkanSDK
 Library["dxgi"]                           = "dxgi.lib"                                                                  -- Library Directries: dxgi
 Library["d3d12"]                          = "d3d12.lib"                                                                 -- Library Directries: d3d12
+Library["WinPixEventRuntime"]             = "WinPixEventRuntime.lib"                                                    -- Library Directries: WinPixEventRuntime
 
 Library["shaderc_debug"]                  = "%{LibraryDir.VulkanSDK}/shaderc_sharedd.lib"                               -- Library Directries: shaderc_debug
 Library["shaderc_utils_debug"]            = "%{LibraryDir.VulkanSDK}/shaderc_utild.lib"                                 -- Library Directries: shaderc_utils_debug
@@ -48,3 +49,4 @@ Library["shaderc_utils_release"]          = "%{LibraryDir.VulkanSDK}/shaderc_uti
 
 Nugets                                    = {}
 Nugets["DirectX12AgilitySDK"]             = "Microsoft.Direct3D.D3D12:1.618.5"                                          -- Nugets package: Direct3D12
+Nugets["WinPixEventRuntime"]              = "WinPixEventRuntime:1.0.240308001"                                          -- Nugets package: WinPixEventRuntime
