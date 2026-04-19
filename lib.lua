@@ -25,6 +25,7 @@ IncludeDir["tracy"]                       = "%{wks.location}/Neptune/vendor/trac
 IncludeDir["IconFontCppHeaders"]          = "%{wks.location}/Neptune/vendor/IconFontCppHeaders"                         -- Include: IconFontCppHeaders
 IncludeDir["shaderc"]                     = "%{wks.location}/Neptune/vendor/shaderc"                                    -- Include: shaderc
 IncludeDir["glslang"]                     = "%{IncludeDir.VulkanSDK}/glslang"                                           -- Include: glslang
+IncludeDir["WinPixEventRuntime"]          = "%{wks.location}/packages/WinPixEventRuntime.1.0.240308001/include"         -- Include: WinPixEventRuntime
 IncludeDir["googletest"]                  = "%{wks.location}/UnitTest/vendor/googletest/googletest/include"             -- Include: googletest
 IncludeDir["googlemock"]                  = "%{wks.location}/UnitTest/vendor/googletest/googlemock/include"             -- Include: googlemock
 
@@ -32,13 +33,14 @@ IncludeDir["googlemock"]                  = "%{wks.location}/UnitTest/vendor/goo
 LibraryDir                                = {}
 LibraryDir["VulkanSDK"]                   = "%{IncludeDir.VulkanSDK}/../Lib"                                            -- Library Directries: VulkanSDK Folder
 LibraryDir["VulkanSDKDLL"]                = "%{IncludeDir.VulkanSDK}/../Bin"                                            -- Library Directries: VulkanSDK dll Folder
+LibraryDir["WinPixEventRuntime"]          = "%{IncludeDir.WinPixEventRuntime}/../bin/x64"                               -- Library Directries: WinPixEventRuntime Folder
 
 -- Library Directories
 Library                                   = {}
 Library["VulkanSDK"]                      = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"                                      -- Library Directries: VulkanSDK
 Library["dxgi"]                           = "dxgi.lib"                                                                  -- Library Directries: dxgi
 Library["d3d12"]                          = "d3d12.lib"                                                                 -- Library Directries: d3d12
-Library["WinPixEventRuntime"]             = "WinPixEventRuntime.lib"                                                    -- Library Directries: WinPixEventRuntime
+Library["WinPixEventRuntime"]             = "%{LibraryDir.WinPixEventRuntime}/WinPixEventRuntime.lib"                   -- Library Directries: WinPixEventRuntime
 
 Library["shaderc_debug"]                  = "%{LibraryDir.VulkanSDK}/shaderc_sharedd.lib"                               -- Library Directries: shaderc_debug
 Library["shaderc_utils_debug"]            = "%{LibraryDir.VulkanSDK}/shaderc_utild.lib"                                 -- Library Directries: shaderc_utils_debug
@@ -46,7 +48,7 @@ Library["shaderc_utils_debug"]            = "%{LibraryDir.VulkanSDK}/shaderc_uti
 Library["shaderc_release"]                = "%{LibraryDir.VulkanSDK}/shaderc_shared.lib"                                -- Library Directries: shaderc_release
 Library["shaderc_utils_release"]          = "%{LibraryDir.VulkanSDK}/shaderc_util.lib"                                  -- Library Directries: shaderc_utils_release
 
-
+-- Nuget Dependencies
 Nugets                                    = {}
 Nugets["DirectX12AgilitySDK"]             = "Microsoft.Direct3D.D3D12:1.618.5"                                          -- Nugets package: Direct3D12
 Nugets["WinPixEventRuntime"]              = "WinPixEventRuntime:1.0.240308001"                                          -- Nugets package: WinPixEventRuntime

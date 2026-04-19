@@ -14,7 +14,7 @@
 #define USE_PIX
 #endif
 
-#include <pix3.h>
+#include <WinPixEventRuntime/pix3.h>
 
 namespace Neptune::Direct3D12 {
 

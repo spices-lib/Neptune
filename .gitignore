@@ -2,6 +2,7 @@
 
 /.vs
 /.idea
+/obj
 /bin-int
 /bin
 

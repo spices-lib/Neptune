@@ -118,6 +118,7 @@ project "Neptune"
 			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
 			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
 			"%{IncludeDir.Glad}",                            -- Library: Glad Source Folder.
+			"%{IncludeDir.WinPixEventRuntime}",              -- Library: WinPixEventRuntime Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
