@@ -58,6 +58,8 @@ namespace Neptune::OpenGL {
 					NEPTUNE_CORE_ERROR(ss.str())
 					break;
 				}
+				case GL_DEBUG_TYPE_PUSH_GROUP: break;
+				case GL_DEBUG_TYPE_POP_GROUP: break;
 				default:
 				{
 					NEPTUNE_CORE_INFO(ss.str())

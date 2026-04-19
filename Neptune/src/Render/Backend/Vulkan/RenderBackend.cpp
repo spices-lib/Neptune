@@ -127,7 +127,7 @@ namespace Neptune::Vulkan {
     {
 		NEPTUNE_PROFILE_ZONE
 
-		auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
+		const auto& clock = scene->GetComponent<ClockComponent>(scene->GetRoot()).GetClock();
 
 		{
 			m_Context->Get<IComputeCommandBuffer>()->End(clock.m_FrameIndex);
@@ -243,8 +243,7 @@ namespace Neptune::Vulkan {
 		infrastructure["DescriptorPool"]        = m_Context->Get<IDescriptorPool>()->Handle();
 		infrastructure["RenderPass"]            = pass->GetRenderPass()->GetRHIImpl<RenderPass>()->Handle();
 		infrastructure["MSAASamples"]           = VK_SAMPLE_COUNT_1_BIT;
-		infrastructure["Allocator"]             = VK_NULL_HANDLE;
-		infrastructure["CheckVkResultFn"]       = [](VkResult result) { std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };
+		infrastructure["CheckVkResultFn"]       = +[](VkResult result) { std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };
 
 		return infrastructure;
 	}

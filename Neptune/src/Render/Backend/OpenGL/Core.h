@@ -50,7 +50,7 @@ namespace Neptune::OpenGL {
 	*/
 	void HandleOpenGLResult(GLenum result);
 
-	#define OPENGL_CHECK()  { auto expr_value = glGetError(); if (expr_value != GL_NO_ERROR) { std::invoke(HandleOpenGLResultDelegate::GetHandler(), expr_value); } }
+	#define OPENGL_CHECK  { auto expr_value = glGetError(); if (expr_value != GL_NO_ERROR) { std::invoke(HandleOpenGLResultDelegate::GetHandler(), expr_value); } }
 }
 
 #endif

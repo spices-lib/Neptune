@@ -65,6 +65,10 @@ namespace Neptune::OpenGL {
         {
             m_Context->Get<IGraphicFence>()->Wait(clock.m_FrameIndex);
         }
+
+        {
+            DEBUGUTILS_BEGINLABEL(0, "MainGraphicQueue")
+        }
     }
 
     void RenderBackend::EndFrame(Scene* scene)
@@ -72,7 +76,11 @@ namespace Neptune::OpenGL {
         NEPTUNE_PROFILE_ZONE
 
         {
-            DEBUGUTILS_BEGINLABEL(0, "Present");
+            DEBUGUTILS_ENDLABEL()
+        }
+
+        {
+            DEBUGUTILS_BEGINLABEL(0, "PresentQueue");
 
             const auto& window = Window::Instance();
 

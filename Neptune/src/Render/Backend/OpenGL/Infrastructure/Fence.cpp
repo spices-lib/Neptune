@@ -45,6 +45,8 @@ namespace Neptune::OpenGL {
 
         m_Fences[index] = CreateSP<Unit::Sync>();
 
+        m_Fences[index]->CreateSync();
+
         DEBUGUTILS_SETOBJECTNAME(*m_Fences[index], ToString())
     }
 
@@ -55,6 +57,8 @@ namespace Neptune::OpenGL {
         m_Fences[index]->Wait();
 
         m_Fences[index] = CreateSP<Unit::Sync>();
+
+        m_Fences[index]->CreateSync();
 
         DEBUGUTILS_SETOBJECTNAME(*m_Fences[index], ToString())
     }

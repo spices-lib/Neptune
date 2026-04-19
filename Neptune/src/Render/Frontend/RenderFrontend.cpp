@@ -126,7 +126,7 @@ namespace Neptune {
             auto pass = CreateSP<Render::BasePass>();
             pass->SetRTSize(rtSize);
 
-            AddPass(pass);
+            //AddPass(pass);
         }
 
         {

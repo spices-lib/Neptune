@@ -12,6 +12,39 @@
 
 namespace Neptune::OpenGL::Unit {
 
+	namespace {
+	
+		void HandleResult(GLenum result)
+		{
+			switch (result) {
+				case GL_ALREADY_SIGNALED:   break;          // Already done.
+				case GL_CONDITION_SATISFIED: break;         // Wait for done.
+				case GL_TIMEOUT_EXPIRED:                    // Timeout
+				{
+					NEPTUNE_CORE_ERROR("glClientWaitSync Timeout.")
+					break;
+				}
+				case GL_WAIT_FAILED:                        // Failed
+				{
+					NEPTUNE_CORE_ERROR("glClientWaitSync Failed.")
+
+					OPENGL_CHECK
+
+					break;
+				}
+				default:
+				{
+					NEPTUNE_CORE_WARN("glClientWaitSync Unkonwn Warnin.")
+
+					OPENGL_CHECK
+
+					break;
+				}
+			}
+		}
+		
+	}
+
 	Sync::~Sync()
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -30,12 +63,7 @@ namespace Neptune::OpenGL::Unit {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		GLenum result = glClientWaitSync(m_Handle, GL_SYNC_FLUSH_COMMANDS_BIT, 1000000000);  // ns
-
-		if (result != GL_CONDITION_SATISFIED || result != GL_ALREADY_SIGNALED) 
-		{
-			NEPTUNE_CORE_ERROR("glClientWaitSync Failed.")
-		}
+		HandleResult(glClientWaitSync(m_Handle, GL_SYNC_FLUSH_COMMANDS_BIT, 1000000000));  // ns
 	}
 
 	void Sync::Wait() const
