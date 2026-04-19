@@ -63,7 +63,7 @@ namespace Neptune::OpenGL {
     {
         NEPTUNE_PROFILE_ZONE
 
-        for (int i = 0; i < i < m_Fences.size(); ++i)
+        for (int i = 0; i < m_Fences.size(); ++i)
         {
             m_Fences[i]->ClientWait();
 

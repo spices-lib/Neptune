@@ -83,7 +83,7 @@ namespace Neptune::OpenGL {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, id, caption.size(), caption.c_str());
+		glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, id, static_cast<GLsizei>(caption.size()), caption.c_str());
 	}
 
 	void DebugUtilsObject::EndLabel() const

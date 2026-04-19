@@ -98,7 +98,7 @@ namespace Neptune::OpenGL {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		glObjectPtrLabel(unit.GetHandle(), caption.size(), caption.c_str());
+		glObjectPtrLabel(unit.GetHandle(), static_cast<GLsizei>(caption.size()), caption.c_str());
 	}
 }
 

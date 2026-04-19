@@ -14,11 +14,6 @@
 #include "Render/Frontend/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/Resource/DescriptorSet.h"
 
-namespace Neptune::RHI {
-
-	class RenderTarget;
-}
-
 namespace Neptune::Vulkan {
 
 	/**

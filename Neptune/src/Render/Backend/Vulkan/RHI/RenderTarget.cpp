@@ -12,7 +12,6 @@
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Backend/Vulkan/Infrastructure/MemoryAllocator.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
-#include "Resource/Texture/RenderTarget.h"
 #include "Render/Backend/Vulkan/Converter.h"
 #include "Render/Backend/Vulkan/RHI/CmdList2.h"
 
