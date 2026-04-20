@@ -27,6 +27,8 @@ namespace Neptune::Direct3D12 {
         m_Context = CreateSP<Context>();
 
         m_Context->Registry<IDebugUtilsObject>();
+        m_Context->Registry<IFactory>();
+        m_Context->Registry<IDevice>();
 
         RenderFrontend::OnInitialize();
     }

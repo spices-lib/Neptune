@@ -37,8 +37,11 @@ namespace Neptune::Direct3D12::Unit {
 
 		/**
 		* @brief Create Device.
+		* 
+		* @param[in] adapter DXGIAdapter.
+		* @param[in] level D3D_FEATURE_LEVEL.
 		*/
-		void CreateDevice();
+		void CreateDevice(DXGIAdapter adapter, D3D_FEATURE_LEVEL level);
 
 	};
 }

@@ -24,6 +24,8 @@ namespace Neptune::Direct3D12 {
         switch (m_EInfrastructure)
         {
             case EInfrastructure::DebugUtilsObject:                   return "DebugUtilsObject";
+            case EInfrastructure::Device:                             return "Device";
+            case EInfrastructure::Factory:                            return "Factory";
 
             default:                                                  return "NonNamed";
         }

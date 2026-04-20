@@ -68,13 +68,6 @@ namespace Neptune::Direct3D12 {
 		template<typename Unit>
 		void SetObjectName(const Unit& unit, const std::string& caption);
 
-	private:
-
-		/**
-		* @brief Set OpenGL Debug Context.
-		*/
-		void SetDebugContext() const;
-
 	};
 	
 
@@ -100,8 +93,13 @@ namespace Neptune::Direct3D12 {
 	inline void DebugUtilsObject::SetObjectName(const Unit& unit, const std::string& caption)
 	{
 		NEPTUNE_PROFILE_ZONE
-
-		unit->SetName(caption.c_str());
+		
+		if constexpr (requires() {
+			{ Unit::Handle::SetName() } -> std::convertible_to<void>;
+		})
+		{
+			unit.GetHandle()->SetName(caption.c_str());
+		}
 	}
 	
 }

@@ -21,11 +21,11 @@ namespace Neptune::Direct3D12::Unit {
 		m_Handle->Release();
 	}
 
-	void Device::CreateDevice()
+	void Device::CreateDevice(DXGIAdapter adapter, D3D_FEATURE_LEVEL level)
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		DIRECT3D12_CHECK(D3D12CreateDevice(nullptr, {}, IID_PPV_ARGS(&m_Handle)))
+		DIRECT3D12_CHECK(D3D12CreateDevice(adapter, level, IID_PPV_ARGS(&m_Handle)))
 	}
 
 }
