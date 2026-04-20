@@ -11,7 +11,7 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 namespace Neptune::Direct3D12 {
-
+	
 	using D3D12Debug               = ID3D12Debug3*;
 	using D3D12Device              = ID3D12Device14*;
 	using DXGIFactory              = IDXGIFactory7*;

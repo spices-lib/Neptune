@@ -35,7 +35,7 @@ namespace Neptune::Direct3D12 {
 		/**
 		* @brief Destructor Function.
 		*/
-		~Device() override = default;
+		~Device() override;
 
 		/**
 		* @brief Get Unit Handle.

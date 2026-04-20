@@ -13,6 +13,7 @@
 #include "Render/Backend/Direct3D12/Unit/Debug.h"
 #include "Render/Backend/Direct3D12/Unit/Adapter.h"
 #include "Render/Backend/Direct3D12/Unit/InfoQueue.h"
+#include "Render/Backend/Direct3D12/Unit/DebugDevice.h"
 #include "Factory.h"
 
 namespace Neptune::Direct3D12 {
@@ -24,6 +25,34 @@ namespace Neptune::Direct3D12 {
 
         Create();
     }
+
+	Device::~Device()
+	{
+		NEPTUNE_PROFILE_ZONE
+
+#ifdef NEPTUNE_DEBUG
+
+		{
+			Unit::InfoQueue infoQueue;
+
+			infoQueue.CreateInfoQueue(m_Device.GetHandle());
+
+			infoQueue.GetHandle()->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, false);
+			infoQueue.GetHandle()->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, false);
+			infoQueue.GetHandle()->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, false);
+		}
+
+		{
+			Unit::DebugDevice debug;
+
+			debug.CreateDebugDevice(m_Device.GetHandle());
+
+			DIRECT3D12_CHECK(debug.GetHandle()->ReportLiveDeviceObjects(D3D12_RLDO_SUMMARY | D3D12_RLDO_DETAIL | D3D12_RLDO_IGNORE_INTERNAL))
+		}
+
+#endif
+
+	}
 
 	void Device::Create()
     {
