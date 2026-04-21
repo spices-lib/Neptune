@@ -12,12 +12,15 @@
 
 namespace Neptune::Direct3D12 {
 	
+	using DXGIFactory              = IDXGIFactory7*;
+	using DXGIAdapter              = IDXGIAdapter4*;
+	using D3DBlob                  = ID3DBlob*;
+	using DXGISwapChain            = IDXGISwapChain4*;
+
 	using D3D12Debug               = ID3D12Debug3*;
 	using D3D12Device              = ID3D12Device14*;
-	using DXGIFactory              = IDXGIFactory7*;
 	using D3D12InfoQueue           = ID3D12InfoQueue1*;
 	using D3D12DebugDevice         = ID3D12DebugDevice2*;
-	using DXGIAdapter              = IDXGIAdapter4*;
 	using D3D12DescriptorHeap      = ID3D12DescriptorHeap*;
 	using D3D12CommandQueue        = ID3D12CommandQueue1*;
 	using D3D12CommandAllocator    = ID3D12CommandAllocator*;
@@ -27,8 +30,6 @@ namespace Neptune::Direct3D12 {
 	using D3D12Heap                = ID3D12Heap1*;
 	using D3D12RootSignature       = ID3D12RootSignature*;
 	using D3D12PipelineState       = ID3D12PipelineState1*;
-	using D3DBlob                  = ID3DBlob*;
-	using DXGISwapChain            = IDXGISwapChain4*;
 
 }
 
