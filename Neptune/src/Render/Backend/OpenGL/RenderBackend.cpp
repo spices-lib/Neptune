@@ -23,8 +23,8 @@ namespace Neptune::OpenGL {
     {
         NEPTUNE_PROFILE_ZONE
 
-        HandleOpenGLResultDelegate::SetHandler([&](GLenum result) {
-			HandleOpenGLResult(
+        HandleResultDelegate::SetHandler([&](GLenum result) {
+			HandleResult(
 				result
 			); 
 		});

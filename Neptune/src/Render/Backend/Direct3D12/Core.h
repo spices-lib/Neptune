@@ -34,9 +34,9 @@ namespace Neptune::Direct3D12 {
 	#define DIRECT3D12_VERSION
 
 	/**
-	* @brief Direct3D12Result Delegate Class.
+	* @brief Result Delegate Class.
 	*/
-    struct HandleDirect3D12ResultDelegate
+    struct HandleResultDelegate
     {
         using Handler = std::function<void(HRESULT)>;
 
@@ -56,13 +56,13 @@ namespace Neptune::Direct3D12 {
     };
 	
 	/**
-	* @brief Handle Direct3D12 Error Result.
+	* @brief Handle Error Result.
 	*
 	* @param[in] result HRESULT.
 	*/
-	void HandleDirect3D12Result(HRESULT result);
+	void HandleResult(HRESULT result);
 
-	#define DIRECT3D12_CHECK(expr)  { auto expr_value = expr; if (FAILED(expr_value)) { std::invoke(HandleDirect3D12ResultDelegate::GetHandler(), expr_value); } }
+	#define DIRECT3D12_CHECK(expr)  { auto expr_value = expr; if (FAILED(expr_value)) { std::invoke(HandleResultDelegate::GetHandler(), expr_value); } }
 }
 
 #endif

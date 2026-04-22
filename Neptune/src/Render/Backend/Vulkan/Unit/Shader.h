@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Shader Class.
 	* This class defines the Vulkan::Unit::Shader behaves.
 	*/
-	class Shader : public Unit<VkShaderModule, VkObjectType::VK_OBJECT_TYPE_SHADER_MODULE>
+	class Shader : public Common::Unit<VkShaderModule, VkObjectType::VK_OBJECT_TYPE_SHADER_MODULE>
 	{
 	public:
 

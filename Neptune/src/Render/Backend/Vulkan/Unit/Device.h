@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Device Class.
 	* This class defines the Vulkan::Unit::Device behaves.
 	*/
-	class Device : public Unit<VkDevice, VkObjectType::VK_OBJECT_TYPE_DEVICE>
+	class Device : public Common::Unit<VkDevice, VkObjectType::VK_OBJECT_TYPE_DEVICE>
 	{
 	public:
 

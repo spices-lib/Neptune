@@ -9,65 +9,12 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
+#include "Render/Backend/Common/Unit/Unit.h"
 #include "Render/Backend/Vulkan/Core.h"
 
 namespace Neptune::Vulkan::Unit {
 
-	/**
-	* @brief Vulkan::Unit Class.
-	* This class defines the Vulkan::Unit behaves.
-	*/
-	template<typename H, VkObjectType E_>
-	class Unit
-	{
-	public:
-
-		static constexpr VkObjectType E = E_;
-
-		using Handle = H;
-
-	public:
-
-		/**
-		* @brief Constructor Function.
-		*/
-		Unit() = default;
-
-		/**
-		* @brief Destructor Function.
-		*/
-		virtual ~Unit() { ResetHandle(); }
-
-		/**
-		* @brief Get Enum of Unit.
-		* 
-		* @return Returns Enum of Unit.
-		*/
-		static const VkObjectType& GetEUnit() { return E; }
-
-		/**
-		* @brief Set Unit Handle.
-		*
-		* @param[in] handle Unit Handle.
-		*/
-		void SetHandle(const Handle& handle) { m_Handle = handle; }
-
-		/**
-		* @brief Get Unit Handle.
-		*
-		* @return Returns Unit Handle.
-		*/
-		const Handle& GetHandle() const { return m_Handle; }
-
-		/**
-		* @brief Reset Unit Handle.
-		*/
-		void ResetHandle() { m_Handle = {}; }
-
-	protected:
-
-		Handle m_Handle = nullptr;   // @brief Unit Handle.
-	};
+	using namespace Common;
 }
 
 #endif

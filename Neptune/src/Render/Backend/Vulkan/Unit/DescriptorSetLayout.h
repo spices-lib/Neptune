@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::DescriptorSetLayout Class.
 	* This class defines the Vulkan::Unit::DescriptorSetLayout behaves.
 	*/
-	class DescriptorSetLayout : public Unit<VkDescriptorSetLayout, VkObjectType::VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT>
+	class DescriptorSetLayout : public Common::Unit<VkDescriptorSetLayout, VkObjectType::VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT>
 	{
 	public:
 

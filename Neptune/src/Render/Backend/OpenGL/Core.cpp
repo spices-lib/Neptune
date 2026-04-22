@@ -14,24 +14,24 @@ namespace Neptune::OpenGL {
 
 	namespace {
 	
-		HandleOpenGLResultDelegate::Handler s_Handler;   // @brief HandleOpenGLResultDelegate::Handler instance.
+		HandleResultDelegate::Handler s_Handler;   // @brief HandleResultDelegate::Handler instance.
 	}
 
-	void HandleOpenGLResultDelegate::SetHandler(const Handler& fn)
+	void HandleResultDelegate::SetHandler(const Handler& fn)
 	{
         NEPTUNE_PROFILE_ZONE
 
 		s_Handler = fn;
 	}
 
-	const HandleOpenGLResultDelegate::Handler& HandleOpenGLResultDelegate::GetHandler()
+	const HandleResultDelegate::Handler& HandleResultDelegate::GetHandler()
 	{
         NEPTUNE_PROFILE_ZONE
 
 		return s_Handler;
 	}
 
-	void HandleOpenGLResult(GLenum result)
+	void HandleResult(GLenum result)
 	{
         NEPTUNE_PROFILE_ZONE
 

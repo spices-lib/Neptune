@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::PhysicalDevice Class.
 	* This class defines the Vulkan::Unit::PhysicalDevice behaves.
 	*/
-	class PhysicalDevice : public Unit<VkPhysicalDevice, VkObjectType::VK_OBJECT_TYPE_PHYSICAL_DEVICE>
+	class PhysicalDevice : public Common::Unit<VkPhysicalDevice, VkObjectType::VK_OBJECT_TYPE_PHYSICAL_DEVICE>
 	{
 	public:
 

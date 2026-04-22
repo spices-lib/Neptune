@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::CommandBuffer Class.
 	* This class defines the Vulkan::Unit::CommandBuffer behaves.
 	*/
-	class CommandBuffer : public Unit<VkCommandBuffer, VkObjectType::VK_OBJECT_TYPE_COMMAND_BUFFER>
+	class CommandBuffer : public Common::Unit<VkCommandBuffer, VkObjectType::VK_OBJECT_TYPE_COMMAND_BUFFER>
 	{
 	public:
 

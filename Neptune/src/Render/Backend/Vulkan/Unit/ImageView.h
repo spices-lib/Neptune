@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::ImageView Class.
 	* This class defines the Vulkan::Unit::ImageView behaves.
 	*/
-	class ImageView : public Unit<VkImageView, VkObjectType::VK_OBJECT_TYPE_IMAGE_VIEW>
+	class ImageView : public Common::Unit<VkImageView, VkObjectType::VK_OBJECT_TYPE_IMAGE_VIEW>
 	{
 	public:
 

@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Semaphore Class.
 	* This class defines the Vulkan::Unit::Semaphore behaves.
 	*/
-	class Semaphore : public Unit<VkSemaphore, VkObjectType::VK_OBJECT_TYPE_SEMAPHORE>
+	class Semaphore : public Common::Unit<VkSemaphore, VkObjectType::VK_OBJECT_TYPE_SEMAPHORE>
 	{
 	public:
 

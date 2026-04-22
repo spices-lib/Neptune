@@ -19,7 +19,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::SwapChain Class.
 	* This class defines the Vulkan::Unit::SwapChain behaves.
 	*/
-	class SwapChain : public Unit<VkSwapchainKHR, VkObjectType::VK_OBJECT_TYPE_SWAPCHAIN_KHR>
+	class SwapChain : public Common::Unit<VkSwapchainKHR, VkObjectType::VK_OBJECT_TYPE_SWAPCHAIN_KHR>
 	{
 	public:
 

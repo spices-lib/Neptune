@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Fence Class.
 	* This class defines the Vulkan::Unit::Fence behaves.
 	*/
-	class Fence : public Unit<VkFence, VkObjectType::VK_OBJECT_TYPE_FENCE>
+	class Fence : public Common::Unit<VkFence, VkObjectType::VK_OBJECT_TYPE_FENCE>
 	{
 	public:
 

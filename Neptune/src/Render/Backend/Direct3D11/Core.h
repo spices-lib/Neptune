@@ -22,9 +22,9 @@ namespace Neptune::Direct3D11 {
 	#define DIRECT3D11_VERSION
 
 	/**
-	* @brief Direct3D11Result Delegate Class.
+	* @brief Result Delegate Class.
 	*/
-    struct HandleDirect3D11ResultDelegate
+    struct HandleResultDelegate
     {
         using Handler = std::function<void(HRESULT)>;
 
@@ -44,13 +44,13 @@ namespace Neptune::Direct3D11 {
     };
 	
 	/**
-	* @brief Handle Direct3D11 Error Result.
+	* @brief Handle Error Result.
 	*
 	* @param[in] result HRESULT.
 	*/
-	void HandleDirect3D11Result(HRESULT result);
+	void HandleResult(HRESULT result);
 
-	#define DIRECT3D11_CHECK(expr)  { auto expr_value = expr; if (FAILED(expr_value)) { std::invoke(HandleDirect3D11ResultDelegate::GetHandler(), expr_value); } }
+	#define DIRECT3D11_CHECK(expr)  { auto expr_value = expr; if (FAILED(expr_value)) { std::invoke(HandleResultDelegate::GetHandler(), expr_value); } }
 }
 
 #endif

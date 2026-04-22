@@ -20,7 +20,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Buffer Class.
 	* This class defines the Vulkan::Unit::Buffer behaves.
 	*/
-	class Buffer : public Unit<VkBuffer, VkObjectType::VK_OBJECT_TYPE_BUFFER>
+	class Buffer : public Common::Unit<VkBuffer, VkObjectType::VK_OBJECT_TYPE_BUFFER>
 	{
 	public:
 

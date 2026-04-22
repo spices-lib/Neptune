@@ -14,17 +14,17 @@ namespace Neptune::Direct3D11 {
 
 	namespace {
 	
-		HandleDirect3D11ResultDelegate::Handler s_Handler;   // @brief HandleDirect3D12ResultDelegate::Handler instance.
+		HandleResultDelegate::Handler s_Handler;   // @brief HandleResultDelegate::Handler instance.
 	}
 
-	void HandleDirect3D11ResultDelegate::SetHandler(const Handler& fn)
+	void HandleResultDelegate::SetHandler(const Handler& fn)
 	{
         NEPTUNE_PROFILE_ZONE
 
 		s_Handler = fn;
 	}
 
-	const HandleDirect3D11ResultDelegate::Handler& HandleDirect3D11ResultDelegate::GetHandler()
+	const HandleResultDelegate::Handler& HandleResultDelegate::GetHandler()
 	{
         NEPTUNE_PROFILE_ZONE
 

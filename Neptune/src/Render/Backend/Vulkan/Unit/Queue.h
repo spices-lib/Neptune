@@ -18,7 +18,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Queue Class.
 	* This class defines the Vulkan::Unit::Queue behaves.
 	*/
-	class Queue : public Unit<VkQueue, VkObjectType::VK_OBJECT_TYPE_QUEUE>
+	class Queue : public Common::Unit<VkQueue, VkObjectType::VK_OBJECT_TYPE_QUEUE>
 	{
 	public:
 

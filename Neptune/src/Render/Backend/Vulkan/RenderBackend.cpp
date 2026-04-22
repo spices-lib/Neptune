@@ -26,8 +26,8 @@ namespace Neptune::Vulkan {
     {
 		NEPTUNE_PROFILE_ZONE
 
-		HandleVulkanResultDelegate::SetHandler([&](VkResult result) { 
-			HandleVulkanResult(
+		HandleResultDelegate::SetHandler([&](VkResult result) { 
+			HandleResult(
 				result, 
 				GetContext().Has<IPhysicalDevice>() ? GetContext().Get<IPhysicalDevice>()->Handle() : nullptr,
 				GetContext().Has<IDevice>() ? GetContext().Get<IDevice>()->Handle() : nullptr, 
@@ -244,7 +244,7 @@ namespace Neptune::Vulkan {
 		infrastructure["DescriptorPool"]        = m_Context->Get<IDescriptorPool>()->Handle();
 		infrastructure["RenderPass"]            = pass->GetRenderPass()->GetRHIImpl<RenderPass>()->Handle();
 		infrastructure["MSAASamples"]           = VK_SAMPLE_COUNT_1_BIT;
-		infrastructure["CheckVkResultFn"]       = +[](VkResult result) { std::invoke(HandleVulkanResultDelegate::GetHandler(), result); };
+		infrastructure["CheckVkResultFn"]       = +[](VkResult result) { std::invoke(HandleResultDelegate::GetHandler(), result); };
 
 		return infrastructure;
 	}

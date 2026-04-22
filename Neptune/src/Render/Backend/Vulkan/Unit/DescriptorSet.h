@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::DescriptorSet Class.
 	* This class defines the Vulkan::Unit::DescriptorSet behaves.
 	*/
-	class DescriptorSet : public Unit<VkDescriptorSet, VkObjectType::VK_OBJECT_TYPE_DESCRIPTOR_SET>
+	class DescriptorSet : public Common::Unit<VkDescriptorSet, VkObjectType::VK_OBJECT_TYPE_DESCRIPTOR_SET>
 	{
 	public:
 

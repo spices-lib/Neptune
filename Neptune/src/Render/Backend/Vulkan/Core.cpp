@@ -15,24 +15,24 @@ namespace Neptune::Vulkan {
 
 	namespace {
 	
-		HandleVulkanResultDelegate::Handler s_Handler;   // @brief HandleVulkanResultDelegate::Handler instance.
+        HandleResultDelegate::Handler s_Handler;   // @brief HandleResultDelegate::Handler instance.
 	}
 
-	void HandleVulkanResultDelegate::SetHandler(const Handler& fn)
+	void HandleResultDelegate::SetHandler(const Handler& fn)
 	{
         NEPTUNE_PROFILE_ZONE
 
 		s_Handler = fn;
 	}
 
-	const HandleVulkanResultDelegate::Handler& HandleVulkanResultDelegate::GetHandler()
+	const HandleResultDelegate::Handler& HandleResultDelegate::GetHandler()
 	{
         NEPTUNE_PROFILE_ZONE
 
 		return s_Handler;
 	}
 
-	void HandleVulkanResult(VkResult result, VkPhysicalDevice physicalDevice, VkDevice device, PFN_vkGetDeviceFaultInfoEXT vkGetDeviceFaultInfoEXT)
+	void HandleResult(VkResult result, VkPhysicalDevice physicalDevice, VkDevice device, PFN_vkGetDeviceFaultInfoEXT vkGetDeviceFaultInfoEXT)
 	{
         NEPTUNE_PROFILE_ZONE
 

@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Instance Class.
 	* This class defines the Vulkan::Unit::Instance behaves.
 	*/
-	class Instance : public Unit<VkInstance, VkObjectType::VK_OBJECT_TYPE_INSTANCE>
+	class Instance : public Common::Unit<VkInstance, VkObjectType::VK_OBJECT_TYPE_INSTANCE>
 	{
 	public:
 

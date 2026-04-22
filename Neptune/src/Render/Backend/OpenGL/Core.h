@@ -22,9 +22,9 @@ namespace Neptune::OpenGL {
 	#define OPENGL_VERSION  4.6                                            // @brief Use OpenGL 4.6.
 
 	/**
-	* @brief OpenGLResult Delegate Class.
+	* @brief Result Delegate Class.
 	*/
-    struct HandleOpenGLResultDelegate
+    struct HandleResultDelegate
     {
         using Handler = std::function<void(GLenum)>;
 
@@ -44,13 +44,13 @@ namespace Neptune::OpenGL {
     };
 	
 	/**
-	* @brief Handle OpenGL Error Result.
+	* @brief Handle Error Result.
 	*
 	* @param[in] result GLenum.
 	*/
-	void HandleOpenGLResult(GLenum result);
+	void HandleResult(GLenum result);
 
-	#define OPENGL_CHECK  { auto expr_value = glGetError(); if (expr_value != GL_NO_ERROR) { std::invoke(HandleOpenGLResultDelegate::GetHandler(), expr_value); } }
+	#define OPENGL_CHECK  { auto expr_value = glGetError(); if (expr_value != GL_NO_ERROR) { std::invoke(HandleResultDelegate::GetHandler(), expr_value); } }
 }
 
 #endif

@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::OpticalFlowSession Class.
 	* This class defines the Vulkan::Unit::OpticalFlowSession behaves.
 	*/
-	class OpticalFlowSession : public Unit<VkOpticalFlowSessionNV, VkObjectType::VK_OBJECT_TYPE_OPTICAL_FLOW_SESSION_NV>
+	class OpticalFlowSession : public Common::Unit<VkOpticalFlowSessionNV, VkObjectType::VK_OBJECT_TYPE_OPTICAL_FLOW_SESSION_NV>
 	{
 	public:
 
