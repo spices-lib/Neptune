@@ -10,7 +10,6 @@
 
 #include "Core/Core.h"
 #include "Version.h"
-#include "Render/Backend/OpenGL/Infrastructure/ContextAccessor.h"
 #include "Render/Frontend/Utils.h"
 
 #include <functional>

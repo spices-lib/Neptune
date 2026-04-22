@@ -10,7 +10,6 @@
 
 #include "Core/Core.h"
 #include "Version.h"
-#include "Render/Backend/Direct3D11/Infrastructure/ContextAccessor.h"
 #include "Render/Frontend/Utils.h"
 
 #include <functional>

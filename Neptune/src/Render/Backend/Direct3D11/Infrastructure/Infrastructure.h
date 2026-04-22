@@ -10,18 +10,29 @@
 
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
-#include "Context.h"
-#include "Render/Backend/Direct3D11/Core.h"
-#include "ContextAccessor.h"
+#include "Enum.h"
+#include "Render/Backend/Common/Infrastructure/Infrastructure.h"
 
 namespace Neptune::Direct3D11 {
+
+    using namespace Common;
+
+    using CommonInfrastructure = Common::Infrastructure<EInfrastructure>;
+
+    using Context = CommonInfrastructure::Context;
+
+    using ContextAccessor = CommonInfrastructure::ContextAccessor;
 
     /**
     * @brief Vulkan::Infrastructure Class.
     * This class defines the Vulkan::Infrastructure behaves.
     */
-    class Infrastructure : public ContextAccessor, public NonCopyable
+    class Infrastructure : public CommonInfrastructure, public NonCopyable
     {
+    public:
+
+        using Super = CommonInfrastructure;
+
     public:
 
         /**
@@ -36,7 +47,7 @@ namespace Neptune::Direct3D11 {
         * 
         * @return Returns string EInfrastructure.
         */
-        std::string ToString() const;
+        std::string ToString() const override;
 
     protected:
 
@@ -47,17 +58,6 @@ namespace Neptune::Direct3D11 {
         * @param[in] e EInfrastructure.
         */
         explicit Infrastructure(Context& context, EInfrastructure e);
-
-        /**
-        * @brief Get EInfrastructure.
-        *
-        * @return Returns EInfrastructure.
-        */
-        const EInfrastructure& GetEInfrastructure() const { return m_EInfrastructure; }
-
-    private:
-
-        EInfrastructure m_EInfrastructure; // @brief This EInfrastructure.
 
     };
 

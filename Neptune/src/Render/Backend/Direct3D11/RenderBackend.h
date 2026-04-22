@@ -10,10 +10,17 @@
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
+#include "Infrastructure/Enum.h"
 
 namespace Neptune {
 
     class Scene;
+}
+
+namespace Neptune::Common {
+
+    template<typename T>
+    class Context;
 }
 
 namespace Neptune::Direct3D11 {
@@ -24,6 +31,10 @@ namespace Neptune::Direct3D11 {
     */
     class RenderBackend : public RenderFrontend
     {
+    public:
+
+        using Context = Common::Context<EInfrastructure>;
+
     public:
 
         /**

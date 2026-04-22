@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::DescriptorPool Class.
 	* This class defines the Vulkan::Unit::DescriptorPool behaves.
 	*/
-	class DescriptorPool : public Common::Unit<VkDescriptorPool, VkObjectType::VK_OBJECT_TYPE_DESCRIPTOR_POOL>
+	class DescriptorPool : public Unit<VkDescriptorPool, VkObjectType::VK_OBJECT_TYPE_DESCRIPTOR_POOL>
 	{
 	public:
 

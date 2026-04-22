@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Pipeline Class.
 	* This class defines the Vulkan::Unit::Pipeline behaves.
 	*/
-	class Pipeline : public Common::Unit<VkPipeline, VkObjectType::VK_OBJECT_TYPE_PIPELINE>
+	class Pipeline : public Unit<VkPipeline, VkObjectType::VK_OBJECT_TYPE_PIPELINE>
 	{
 	public:
 

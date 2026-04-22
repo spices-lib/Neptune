@@ -31,7 +31,7 @@ namespace Neptune::Direct3D12 {
 		return s_Handler;
 	}
 
-	void HandleDirect3D12Result(HRESULT result)
+	void HandleResult(HRESULT result)
 	{
         NEPTUNE_PROFILE_ZONE
 

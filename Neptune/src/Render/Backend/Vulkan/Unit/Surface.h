@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Surface Class.
 	* This class defines the Vulkan::Unit::Surface behaves.
 	*/
-	class Surface : public Common::Unit<VkSurfaceKHR, VkObjectType::VK_OBJECT_TYPE_SURFACE_KHR>
+	class Surface : public Unit<VkSurfaceKHR, VkObjectType::VK_OBJECT_TYPE_SURFACE_KHR>
 	{
 	public:
 

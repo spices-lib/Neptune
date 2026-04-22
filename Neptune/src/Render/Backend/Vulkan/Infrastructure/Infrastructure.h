@@ -17,19 +17,21 @@ namespace Neptune::Vulkan {
 
     using namespace Common;
     
-    using Context = Common::Infrastructure<EInfrastructure>::Context;
+    using CommonInfrastructure = Common::Infrastructure<EInfrastructure>;
+
+    using Context = CommonInfrastructure::Context;
     
-    using ContextAccessor = Common::Infrastructure<EInfrastructure>::ContextAccessor;
+    using ContextAccessor = CommonInfrastructure::ContextAccessor;
     
     /**
     * @brief Vulkan::Infrastructure Class.
     * This class defines the Vulkan::Infrastructure behaves.
     */
-    class Infrastructure : public Common::Infrastructure<EInfrastructure>, public NonCopyable
+    class Infrastructure : public CommonInfrastructure, public NonCopyable
     {
     public:
 
-        using Super = Common::Infrastructure<EInfrastructure>;
+        using Super = CommonInfrastructure;
 
     public:
 

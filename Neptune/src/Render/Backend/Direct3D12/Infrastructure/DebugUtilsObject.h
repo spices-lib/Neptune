@@ -10,6 +10,7 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/Direct3D12/Core.h"
 
 namespace Neptune::Direct3D12 {
 

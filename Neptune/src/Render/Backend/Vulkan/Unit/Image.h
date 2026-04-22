@@ -20,7 +20,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Image Class.
 	* This class defines the Vulkan::Unit::Image behaves.
 	*/
-	class Image : public Common::Unit<VkImage, VkObjectType::VK_OBJECT_TYPE_IMAGE>
+	class Image : public Unit<VkImage, VkObjectType::VK_OBJECT_TYPE_IMAGE>
 	{
 	public:
 

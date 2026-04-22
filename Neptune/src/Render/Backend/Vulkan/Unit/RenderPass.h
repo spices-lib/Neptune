@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::RenderPass Class.
 	* This class defines the Vulkan::Unit::RenderPass behaves.
 	*/
-	class RenderPass : public Common::Unit<VkRenderPass, VkObjectType::VK_OBJECT_TYPE_RENDER_PASS>
+	class RenderPass : public Unit<VkRenderPass, VkObjectType::VK_OBJECT_TYPE_RENDER_PASS>
 	{
 	public:
 

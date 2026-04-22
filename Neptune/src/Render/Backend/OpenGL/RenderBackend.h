@@ -10,10 +10,17 @@
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
+#include "Infrastructure/Enum.h"
 
 namespace Neptune {
 
     class Scene;
+}
+
+namespace Neptune::Common {
+
+    template<typename T>
+    class Context;
 }
 
 namespace Neptune::OpenGL {
@@ -24,6 +31,10 @@ namespace Neptune::OpenGL {
     */
     class RenderBackend : public RenderFrontend
     {
+    public:
+
+        using Context = Common::Context<EInfrastructure>;
+
     public:
 
         /**
@@ -89,7 +100,7 @@ namespace Neptune::OpenGL {
         *
         * @return Returns Context.
         */
-        class Context& GetContext() const;
+        Context& GetContext() const;
 
     private:
 

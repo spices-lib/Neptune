@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::VideoSessionParameters Class.
 	* This class defines the Vulkan::Unit::VideoSessionParameters behaves.
 	*/
-	class VideoSessionParameters : public Common::Unit<VkVideoSessionParametersKHR, VkObjectType::VK_OBJECT_TYPE_VIDEO_SESSION_PARAMETERS_KHR>
+	class VideoSessionParameters : public Unit<VkVideoSessionParametersKHR, VkObjectType::VK_OBJECT_TYPE_VIDEO_SESSION_PARAMETERS_KHR>
 	{
 	public:
 

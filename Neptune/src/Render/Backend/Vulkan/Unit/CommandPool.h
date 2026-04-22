@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::CommandPool Class.
 	* This class defines the Vulkan::Unit::CommandPool behaves.
 	*/
-	class CommandPool : public Common::Unit<VkCommandPool, VkObjectType::VK_OBJECT_TYPE_COMMAND_POOL>
+	class CommandPool : public Unit<VkCommandPool, VkObjectType::VK_OBJECT_TYPE_COMMAND_POOL>
 	{
 	public:
 

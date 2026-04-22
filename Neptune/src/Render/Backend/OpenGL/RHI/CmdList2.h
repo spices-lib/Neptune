@@ -9,7 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/OpenGL/Core.h"
+#include "Render/Backend/OpenGL/Infrastructure/Infrastructure.h"
 #include "Render/Frontend/RHI/CmdList2.h"
 #include "CmdList.h"
 

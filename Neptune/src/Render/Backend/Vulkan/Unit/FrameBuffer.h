@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::FrameBuffer Class.
 	* This class defines the Vulkan::Unit::FrameBuffer behaves.
 	*/
-	class FrameBuffer : public Common::Unit<VkFramebuffer, VkObjectType::VK_OBJECT_TYPE_FRAMEBUFFER>
+	class FrameBuffer : public Unit<VkFramebuffer, VkObjectType::VK_OBJECT_TYPE_FRAMEBUFFER>
 	{
 	public:
 

@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::SamplerYcbcrConversion Class.
 	* This class defines the Vulkan::Unit::SamplerYcbcrConversion behaves.
 	*/
-	class SamplerYcbcrConversion : public Common::Unit<VkSamplerYcbcrConversion, VkObjectType::VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION>
+	class SamplerYcbcrConversion : public Unit<VkSamplerYcbcrConversion, VkObjectType::VK_OBJECT_TYPE_SAMPLER_YCBCR_CONVERSION>
 	{
 	public:
 

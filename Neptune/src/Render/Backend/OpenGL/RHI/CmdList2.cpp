@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "CmdList2.h"
-#include "Render/Backend/OpenGL/Infrastructure/Context.h"
 #include "Render/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
 
 namespace Neptune::OpenGL {

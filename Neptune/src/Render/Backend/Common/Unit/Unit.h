@@ -62,6 +62,6 @@ namespace Neptune::Common {
 
 	protected:
 
-		Handle m_Handle = nullptr;   // @brief Unit Handle.
+		Handle m_Handle{};      // @brief Unit Handle.
 	};
 }

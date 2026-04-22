@@ -18,7 +18,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::QueryPool Class.
 	* This class defines the Vulkan::Unit::QueryPool behaves.
 	*/
-	class QueryPool : public Common::Unit<VkQueryPool, VkObjectType::VK_OBJECT_TYPE_QUERY_POOL>
+	class QueryPool : public Unit<VkQueryPool, VkObjectType::VK_OBJECT_TYPE_QUERY_POOL>
 	{
 	public:
 

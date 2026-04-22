@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::Sampler Class.
 	* This class defines the Vulkan::Unit::Sampler behaves.
 	*/
-	class Sampler : public Common::Unit<VkSampler, VkObjectType::VK_OBJECT_TYPE_SAMPLER>
+	class Sampler : public Unit<VkSampler, VkObjectType::VK_OBJECT_TYPE_SAMPLER>
 	{
 	public:
 

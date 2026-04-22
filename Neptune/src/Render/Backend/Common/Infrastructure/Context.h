@@ -155,7 +155,7 @@ namespace Neptune::Common {
 
         if (!m_Infrastructures[position])
         {
-            NEPTUNE_CORE_ERROR("Infrastructure is not registered yet, can not be unregisted.")
+            NEPTUNE_CORE_ERROR("Infrastructure is not registered yet, can not be unregister.")
 
             return;
         }
@@ -168,11 +168,11 @@ namespace Neptune::Common {
     {
         NEPTUNE_PROFILE_ZONE
 
-        for (int i = static_cast<int>(E::Count) - 1; i >= 0; i--)
+        for (int i = static_cast<int>(E::Count) - 1; i >= 0; --i)
         {
             if (!m_Infrastructures[i])
             {
-                NEPTUNE_CORE_ERROR("Infrastructure is not registered yet, can not be unregisted.")
+                NEPTUNE_CORE_ERROR("Infrastructure is not registered yet, can not be unregister.")
 
                 continue;
             }

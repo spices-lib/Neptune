@@ -13,8 +13,7 @@
 namespace Neptune::Direct3D11 {
 
 	Infrastructure::Infrastructure(Context& context, EInfrastructure e)
-		: ContextAccessor(context)
-		, m_EInfrastructure(e)
+        : Super(context, e)
 	{}
 
 	std::string Infrastructure::ToString() const

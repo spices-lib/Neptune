@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/OpenGL/Infrastructure/ContextAccessor.h"
 #include "Render/Frontend/Utils.h"
 
 #include <functional>

@@ -17,7 +17,7 @@ namespace Neptune::Vulkan::Unit {
 	* @brief Vulkan::Unit::PipelineLayout Class.
 	* This class defines the Vulkan::Unit::PipelineLayout behaves.
 	*/
-	class PipelineLayout : public Common::Unit<VkPipelineLayout, VkObjectType::VK_OBJECT_TYPE_PIPELINE_LAYOUT>
+	class PipelineLayout : public Unit<VkPipelineLayout, VkObjectType::VK_OBJECT_TYPE_PIPELINE_LAYOUT>
 	{
 	public:
 
