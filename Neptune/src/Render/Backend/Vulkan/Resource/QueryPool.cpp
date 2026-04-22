@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "QueryPool.h"
-#include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/Device.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 

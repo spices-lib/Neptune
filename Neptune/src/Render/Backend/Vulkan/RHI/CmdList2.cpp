@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "CmdList2.h"
-#include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/ThreadCommandPool.h"
 #include "Render/Backend/Vulkan/Infrastructure/Functions.h"
 #include "Render/Backend/Vulkan/Infrastructure/Device.h"

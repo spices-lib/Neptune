@@ -23,6 +23,12 @@ namespace Neptune::Common {
     {
     public:
 
+        using ContextAccessor = ContextAccessor<E>;
+
+        using Context = Context<E>;
+
+    public:
+
         /**
         * @brief Destructor Function.
         */
@@ -35,7 +41,7 @@ namespace Neptune::Common {
         * 
         * @return Returns string EInfrastructure.
         */
-        std::string ToString() const;
+        virtual std::string ToString() const = 0;
 
     protected:
 
@@ -57,7 +63,7 @@ namespace Neptune::Common {
         */
         const E& GetEInfrastructure() const { return m_EInfrastructure; }
 
-    private:
+    protected:
 
         E m_EInfrastructure; // @brief This EInfrastructure.
 

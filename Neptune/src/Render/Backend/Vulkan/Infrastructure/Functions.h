@@ -9,6 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
+#include "Render/Backend/Vulkan/Core.h"
 #include "Infrastructure.h"
 
 namespace Neptune::Vulkan {

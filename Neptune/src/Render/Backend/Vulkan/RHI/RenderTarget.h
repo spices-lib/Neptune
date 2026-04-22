@@ -9,7 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/Vulkan/Core.h"
+#include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
 #include "Render/Backend/Vulkan/Resource/Image.h"
 #include "Render/Frontend/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/Resource/DescriptorSet.h"

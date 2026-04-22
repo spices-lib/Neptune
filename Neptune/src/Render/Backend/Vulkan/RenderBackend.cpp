@@ -21,12 +21,14 @@
 
 namespace Neptune::Vulkan {
 
+	using namespace Common;
+	
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::Vulkan)
     {
 		NEPTUNE_PROFILE_ZONE
 
-		HandleResultDelegate::SetHandler([&](VkResult result) { 
+		HandleResultDelegate::SetHandler([&](VkResult result) {
 			HandleResult(
 				result, 
 				GetContext().Has<IPhysicalDevice>() ? GetContext().Get<IPhysicalDevice>()->Handle() : nullptr,

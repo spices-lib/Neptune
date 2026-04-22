@@ -3,12 +3,11 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/Vulkan/Core.h"
 #include "Render/Frontend/RHI/Decoder.h"
 #include "Render/Backend/Vulkan/VideoParser/Decoder/VulkanVideoDecoder.h"
 #include "Render/Backend/Vulkan/Resource/VideoSession.h"
 #include "Render/Backend/Vulkan/VideoParser/Decoder/VulkanVideoParserParams.h"
-#include "Render/Backend/Vulkan/Unit/CommandBuffer.h"
+
 #include <queue>
 
 typedef enum {
@@ -608,13 +607,13 @@ namespace Neptune::Vulkan {
 
         bool AllocPictureBuffer(VkPicIf** picIf);
 
-        bool DisplayPicture(VkPicIf* pPicBuff, int64_t timestamp);
+        bool DisplayPicture(VkPicIf* pPicBuff, int64_t timestamp) const;
 
 	private:
 
 		void ParseVideoStreamData(const uint8_t* pData, size_t size, size_t *pnVideoBytes, bool doPartialParsing, uint32_t flags = 0, int64_t timestamp = 0);
 
-        void ParseVideoData(VkParserSourceDataPacket* pPacket, size_t* pParsedBytes, bool doPartialParsing);
+        void ParseVideoData(VkParserSourceDataPacket* pPacket, size_t* pParsedBytes, bool doPartialParsing) const;
 
         int32_t StartVideoSequence(VkParserDetectedVideoFormat* pVideoFormat);
 
@@ -624,7 +623,7 @@ namespace Neptune::Vulkan {
 
         virtual void DecodePictureWithParameters(VkParserPerFrameDecodeParameters* pCurrFrameDecParams, VkParserDecodePictureInfo* pDecodePictureInfo, const VkParserHevcPictureData* pin, VkPicIf* pic) = 0;
 
-        void CmdDecode(VkParserPerFrameDecodeParameters* pCurrFrameDecParams, VkVideoPictureResourceInfoKHR* pics, VkVideoReferenceSlotInfoKHR* info);
+        void CmdDecode(VkParserPerFrameDecodeParameters* pCurrFrameDecParams, VkVideoPictureResourceInfoKHR* pics, VkVideoReferenceSlotInfoKHR* info) const;
 
     protected:
 

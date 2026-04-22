@@ -8,16 +8,14 @@
 #include "AV1Decoder.h"
 #include "VP9Decoder.h"
 #include "Feature/Video/VideoOperation.h"
-#include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 #include "Render/Backend/Vulkan/VideoParser/STD/nvVulkanVideoUtils.h"
 #include "Render/Backend/Vulkan/VideoParser/STD/VkVideoCoreProfile.h"
-#include "Render/Backend/Vulkan/Infrastructure/CommandPool.h"
 #include "Render/Backend/Vulkan/RHI/CmdList2.h"
 #include "Render/Frontend/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"
 #include "Render/Backend/Vulkan/Resource/QueryPool.h"
-#include "Resource/Texture/RenderTarget.h"
+
 #include <bitset>
 
 namespace Neptune::Vulkan {
@@ -286,7 +284,7 @@ namespace Neptune::Vulkan {
         return DecodePicture(pd, &decodePictureInfo);
     }
 
-    void Decoder::CmdDecode(VkParserPerFrameDecodeParameters* pCurrFrameDecParams, VkVideoPictureResourceInfoKHR* pics, VkVideoReferenceSlotInfoKHR* info)
+    void Decoder::CmdDecode(VkParserPerFrameDecodeParameters* pCurrFrameDecParams, VkVideoPictureResourceInfoKHR* pics, VkVideoReferenceSlotInfoKHR* info) const
     {
         auto refCount = pCurrFrameDecParams->numGopReferenceSlots;
         auto range    = pCurrFrameDecParams->bitstreamDataLen;
@@ -354,7 +352,7 @@ namespace Neptune::Vulkan {
         assert(m_VideoSession->GetDecodeResult());
     }
 
-    bool Decoder::DisplayPicture(VkPicIf* pPicBuff, int64_t timestamp)
+    bool Decoder::DisplayPicture(VkPicIf* pPicBuff, int64_t timestamp) const
     {
         auto pic = static_cast<VkPicIf2*>(pPicBuff);
 
@@ -466,8 +464,8 @@ namespace Neptune::Vulkan {
         return ParseVideoData(&packet, pnVideoBytes, doPartialParsing);
 	}
 
-    void Decoder::ParseVideoData(VkParserSourceDataPacket* pPacket, size_t* pParsedBytes, bool doPartialParsing)
-	{
+    void Decoder::ParseVideoData(VkParserSourceDataPacket* pPacket, size_t* pParsedBytes, bool doPartialParsing) const
+    {
         VkParserBitstreamPacket pkt{};
 
         if (pPacket->flags & VK_PARSER_PKT_DISCONTINUITY)

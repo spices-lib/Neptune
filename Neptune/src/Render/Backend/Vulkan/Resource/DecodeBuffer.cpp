@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "DecodeBuffer.h"
-#include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 
 namespace Neptune::Vulkan {
@@ -84,7 +83,7 @@ namespace Neptune::Vulkan {
 		m_Buffer.WriteToBuffer(data, size, offset);
 	}
 
-	VkDeviceSize DecodeBuffer::SetSliceStartCodeAtOffset(VkDeviceSize index)
+	VkDeviceSize DecodeBuffer::SetSliceStartCodeAtOffset(VkDeviceSize index) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -110,7 +109,7 @@ namespace Neptune::Vulkan {
 		return ((data[indx + 0] == 0x00) && (data[indx + 1] == 0x00) && (data[indx + 2] == 0x01));
 	}
 
-	uint8_t* DecodeBuffer::HostData()
+	uint8_t* DecodeBuffer::HostData() const
 	{
 		NEPTUNE_PROFILE_ZONE
 

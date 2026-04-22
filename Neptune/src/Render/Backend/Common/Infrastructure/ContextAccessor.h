@@ -28,6 +28,8 @@ namespace Neptune::Common {
 
         using Context = Context<E>;
 
+    public:
+
         /**
         * @brief Constructor Function.
         *

@@ -9,7 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/Vulkan/Core.h"
+#include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/VideoSession.h"
 #include "Render/Backend/Vulkan/Unit/VideoSessionParameters.h"
 #include "Render/Backend/Vulkan/VideoParser/STD/StdVideoPictureParametersSet.h"

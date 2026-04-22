@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "CmdList.h"
-#include "Render/Backend/Vulkan/Infrastructure/Context.h"
 #include "Render/Backend/Vulkan/Infrastructure/CommandBuffer.h"
 #include "Render/Backend/Vulkan/RHI/RenderPass.h"
 #include "Render/Backend/Vulkan/RHI/Pipeline.h"

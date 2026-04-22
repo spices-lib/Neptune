@@ -168,7 +168,7 @@ namespace Neptune::Common {
     {
         NEPTUNE_PROFILE_ZONE
 
-        for (int i = static_cast<int>(EInfrastructure::Count) - 1; i >= 0; i--)
+        for (int i = static_cast<int>(E::Count) - 1; i >= 0; i--)
         {
             if (!m_Infrastructures[i])
             {

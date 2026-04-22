@@ -9,7 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/Vulkan/Core.h"
+#include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
 #include "Buffer.h"
 #include <vector>
 
@@ -72,7 +72,7 @@ namespace Neptune::Vulkan {
 		* 
 		* @return Returns 3.
 		*/
-		VkDeviceSize SetSliceStartCodeAtOffset(VkDeviceSize index);
+		VkDeviceSize SetSliceStartCodeAtOffset(VkDeviceSize index) const;
 
 		/**
 		* @brief Is Slice Start Code exist.
@@ -88,7 +88,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns Buffer Host Data.
 		*/
-		uint8_t* HostData();
+		uint8_t* HostData() const;
 
 		/**
 		* @brief Read Buffer Host Data.

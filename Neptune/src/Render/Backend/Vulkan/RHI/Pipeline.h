@@ -9,7 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/Vulkan/Core.h"
+#include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/Pipeline.h"
 #include "Render/Backend/Vulkan/Unit/PipelineLayout.h"
 #include "Render/Frontend/RHI/Pipeline.h"
