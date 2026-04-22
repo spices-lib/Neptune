@@ -14,10 +14,10 @@
 
 namespace Neptune::Vulkan::Unit {
 
-	using namespace Common;
+	using namespace Render::Common;
 	
 	template<typename T, auto E>
-	using Unit = Common::Unit<T, E>;
+	using Unit = Render::Common::Unit<T, E>;
 }
 
 #endif

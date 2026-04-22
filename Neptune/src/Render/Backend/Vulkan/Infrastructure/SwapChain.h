@@ -15,7 +15,7 @@
 
 namespace Neptune::Vulkan {
 
-	using ISwapChain = InfrastructureClass<class SwapChain, EInfrastructure::SwapChain>;
+	using ISwapChain = IInfrastructure<class SwapChain, EInfrastructure::SwapChain>;
 
 	/**
 	* @brief Vulkan::SwapChain Class.

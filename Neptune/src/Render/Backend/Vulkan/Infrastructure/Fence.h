@@ -14,8 +14,8 @@
 
 namespace Neptune::Vulkan {
 
-	using IGraphicFence     = InfrastructureClass<class Fence, EInfrastructure::GraphicFence>;
-	using IComputeFence     = InfrastructureClass<class Fence, EInfrastructure::ComputeFence>;
+	using IGraphicFence     = IInfrastructure<class Fence, EInfrastructure::GraphicFence>;
+	using IComputeFence     = IInfrastructure<class Fence, EInfrastructure::ComputeFence>;
 
 	/**
 	* @brief Vulkan::Fence Class.

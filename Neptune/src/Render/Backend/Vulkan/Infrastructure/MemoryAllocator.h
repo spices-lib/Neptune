@@ -41,7 +41,7 @@ namespace Neptune::Vulkan {
 
 	} VMAMemoryPropertyFlagExtendBits;
 
-	using IMemoryAllocator = InfrastructureClass<class MemoryAllocator, EInfrastructure::MemoryAllocator>;
+	using IMemoryAllocator = IInfrastructure<class MemoryAllocator, EInfrastructure::MemoryAllocator>;
 
 	/**
 	* @brief Vulkan::MemoryAllocator Class.

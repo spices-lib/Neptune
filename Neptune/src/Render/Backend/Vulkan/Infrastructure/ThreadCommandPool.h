@@ -17,12 +17,12 @@
 
 namespace Neptune::Vulkan {
 
-	using IGraphicThreadCommandPool     = InfrastructureClass<class ThreadCommandPool, EInfrastructure::GraphicThreadCommandPool>;
-	using IComputeThreadCommandPool     = InfrastructureClass<class ThreadCommandPool, EInfrastructure::ComputeThreadCommandPool>;
-	using ITransferThreadCommandPool    = InfrastructureClass<class ThreadCommandPool, EInfrastructure::TransferThreadCommandPool>;
-	using IVideoEncodeThreadCommandPool = InfrastructureClass<class ThreadCommandPool, EInfrastructure::VideoEncodeThreadCommandPool>;
-	using IVideoDecodeThreadCommandPool = InfrastructureClass<class ThreadCommandPool, EInfrastructure::VideoDecodeThreadCommandPool>;
-	using IOpticalFlowThreadCommandPool = InfrastructureClass<class ThreadCommandPool, EInfrastructure::OpticalFlowThreadCommandPool>;
+	using IGraphicThreadCommandPool     = IInfrastructure<class ThreadCommandPool, EInfrastructure::GraphicThreadCommandPool>;
+	using IComputeThreadCommandPool     = IInfrastructure<class ThreadCommandPool, EInfrastructure::ComputeThreadCommandPool>;
+	using ITransferThreadCommandPool    = IInfrastructure<class ThreadCommandPool, EInfrastructure::TransferThreadCommandPool>;
+	using IVideoEncodeThreadCommandPool = IInfrastructure<class ThreadCommandPool, EInfrastructure::VideoEncodeThreadCommandPool>;
+	using IVideoDecodeThreadCommandPool = IInfrastructure<class ThreadCommandPool, EInfrastructure::VideoDecodeThreadCommandPool>;
+	using IOpticalFlowThreadCommandPool = IInfrastructure<class ThreadCommandPool, EInfrastructure::OpticalFlowThreadCommandPool>;
 
 	/**
 	* @brief Vulkan::ThreadCommandPool Class.

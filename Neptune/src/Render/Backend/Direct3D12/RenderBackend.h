@@ -17,7 +17,7 @@ namespace Neptune {
     class Scene;
 }
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
     template<typename T>
     class Context;
@@ -33,7 +33,7 @@ namespace Neptune::Direct3D12 {
     {
     public:
 
-        using Context = Common::Context<EInfrastructure>;
+        using Context = Render::Common::Context<EInfrastructure>;
 
     public:
 

@@ -25,7 +25,7 @@ namespace Neptune::Vulkan {
 		NEPTUNE_CORE_ERROR(ss.str())                                                          \
 	}
 
-	using IFunctions = InfrastructureClass<class Functions, EInfrastructure::Functions>;
+	using IFunctions = IInfrastructure<class Functions, EInfrastructure::Functions>;
 
 	/**
 	* @brief Vulkan::Functions Class.

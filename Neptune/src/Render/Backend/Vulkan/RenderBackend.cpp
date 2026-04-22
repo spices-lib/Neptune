@@ -20,8 +20,6 @@
 #include "Data/Clock.h"
 
 namespace Neptune::Vulkan {
-
-	using namespace Common;
 	
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::Vulkan)

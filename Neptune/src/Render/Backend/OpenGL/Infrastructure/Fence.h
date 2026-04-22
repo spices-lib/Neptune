@@ -14,7 +14,7 @@
 
 namespace Neptune::OpenGL {
 
-	using IGraphicFence     = InfrastructureClass<class Fence, EInfrastructure::GraphicFence>;
+	using IGraphicFence     = IInfrastructure<class Fence, EInfrastructure::GraphicFence>;
 
 	/**
 	* @brief OpenGL::Fence Class.

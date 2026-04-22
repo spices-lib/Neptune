@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
 	/**
 	* @brief Common::Unit Class.

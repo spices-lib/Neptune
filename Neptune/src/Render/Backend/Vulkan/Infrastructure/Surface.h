@@ -15,7 +15,7 @@
 
 namespace Neptune::Vulkan {
 
-	using ISurface = InfrastructureClass<class Surface, EInfrastructure::Surface>;
+	using ISurface = IInfrastructure<class Surface, EInfrastructure::Surface>;
 
 	/**
 	* @brief Vulkan::Surface Class.

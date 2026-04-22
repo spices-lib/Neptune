@@ -15,12 +15,12 @@
 
 namespace Neptune::Vulkan {
 
-	using IGraphicThreadQueue     = InfrastructureClass<class ThreadQueue, EInfrastructure::GraphicThreadQueue>;
-	using IComputeThreadQueue     = InfrastructureClass<class ThreadQueue, EInfrastructure::ComputeThreadQueue>;
-	using ITransferThreadQueue    = InfrastructureClass<class ThreadQueue, EInfrastructure::TransferThreadQueue>;
-	using IVideoEncodeThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::VideoEncodeThreadQueue>;
-	using IVideoDecodeThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::VideoDecodeThreadQueue>;
-	using IOpticalFlowThreadQueue = InfrastructureClass<class ThreadQueue, EInfrastructure::OpticalFlowThreadQueue>;
+	using IGraphicThreadQueue     = IInfrastructure<class ThreadQueue, EInfrastructure::GraphicThreadQueue>;
+	using IComputeThreadQueue     = IInfrastructure<class ThreadQueue, EInfrastructure::ComputeThreadQueue>;
+	using ITransferThreadQueue    = IInfrastructure<class ThreadQueue, EInfrastructure::TransferThreadQueue>;
+	using IVideoEncodeThreadQueue = IInfrastructure<class ThreadQueue, EInfrastructure::VideoEncodeThreadQueue>;
+	using IVideoDecodeThreadQueue = IInfrastructure<class ThreadQueue, EInfrastructure::VideoDecodeThreadQueue>;
+	using IOpticalFlowThreadQueue = IInfrastructure<class ThreadQueue, EInfrastructure::OpticalFlowThreadQueue>;
 
 	/**
 	* @brief Vulkan::ThreadQueue Class.

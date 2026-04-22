@@ -65,7 +65,7 @@ namespace Neptune::Vulkan {
 		VkFormat                        dstFormat;          // @brief VkFormat.
 	};
 
-	using IPhysicalDevice = InfrastructureClass<class PhysicalDevice, EInfrastructure::PhysicalDevice>;
+	using IPhysicalDevice = IInfrastructure<class PhysicalDevice, EInfrastructure::PhysicalDevice>;
 
 	/**
 	* @brief Vulkan::PhysicalDevice Class.

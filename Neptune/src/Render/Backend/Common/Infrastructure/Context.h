@@ -7,16 +7,17 @@
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
+#include "Render/Backend/Common/Concept.h"
 
 #include <array>
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
     template<typename E>
     class Infrastructure;
 }
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
     /**
     * @brief Template of Infrastructure Class Definitions.
@@ -25,7 +26,7 @@ namespace Neptune::Common {
     * @tparam E_ EInfrastructure.
     */
     template<typename T_, auto E_>
-	struct InfrastructureClass
+	struct IInfrastructure
 	{
 		using T = T_;
 

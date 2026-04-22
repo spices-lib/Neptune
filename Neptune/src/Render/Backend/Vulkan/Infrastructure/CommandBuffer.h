@@ -16,8 +16,8 @@
 
 namespace Neptune::Vulkan {
 
-	using IGraphicCommandBuffer     = InfrastructureClass<class CommandBuffer, EInfrastructure::GraphicCommandBuffer>;
-	using IComputeCommandBuffer     = InfrastructureClass<class CommandBuffer, EInfrastructure::ComputeCommandBuffer>;
+	using IGraphicCommandBuffer     = IInfrastructure<class CommandBuffer, EInfrastructure::GraphicCommandBuffer>;
+	using IComputeCommandBuffer     = IInfrastructure<class CommandBuffer, EInfrastructure::ComputeCommandBuffer>;
 
 	/**
 	* @brief Vulkan::CommandBuffer Class.

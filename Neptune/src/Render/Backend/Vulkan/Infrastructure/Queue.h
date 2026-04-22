@@ -14,9 +14,9 @@
 
 namespace Neptune::Vulkan {
 
-	using IGraphicQueue     = InfrastructureClass<class Queue, EInfrastructure::GraphicQueue>;
-	using IPresentQueue     = InfrastructureClass<class Queue, EInfrastructure::PresentQueue>;
-	using IComputeQueue     = InfrastructureClass<class Queue, EInfrastructure::ComputeQueue>;
+	using IGraphicQueue     = IInfrastructure<class Queue, EInfrastructure::GraphicQueue>;
+	using IPresentQueue     = IInfrastructure<class Queue, EInfrastructure::PresentQueue>;
+	using IComputeQueue     = IInfrastructure<class Queue, EInfrastructure::ComputeQueue>;
 
 	/**
 	* @brief Vulkan::Queue Class.

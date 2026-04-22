@@ -16,7 +16,7 @@
 
 namespace Neptune::Vulkan {
 
-	using IInstance = InfrastructureClass<class Instance, EInfrastructure::Instance>;
+	using IInstance = IInfrastructure<class Instance, EInfrastructure::Instance>;
 
 	/**
 	* @brief Vulkan::Instance Class.

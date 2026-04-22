@@ -14,8 +14,8 @@
 
 namespace Neptune::Vulkan {
 
-	using IGraphicCommandPool     = InfrastructureClass<class CommandPool, EInfrastructure::GraphicCommandPool>;
-	using IComputeCommandPool     = InfrastructureClass<class CommandPool, EInfrastructure::ComputeCommandPool>;
+	using IGraphicCommandPool     = IInfrastructure<class CommandPool, EInfrastructure::GraphicCommandPool>;
+	using IComputeCommandPool     = IInfrastructure<class CommandPool, EInfrastructure::ComputeCommandPool>;
 
 	/**
 	* @brief Vulkan::CommandPool Class.

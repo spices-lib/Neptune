@@ -14,7 +14,7 @@
 
 namespace Neptune::OpenGL {
 
-	using IDebugUtilsObject = InfrastructureClass<class DebugUtilsObject, EInfrastructure::DebugUtilsObject>;
+	using IDebugUtilsObject = IInfrastructure<class DebugUtilsObject, EInfrastructure::DebugUtilsObject>;
 
 	/**
 	* @brief OpenGL::DebugUtilsObject Class.

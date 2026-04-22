@@ -18,7 +18,7 @@
 
 namespace Neptune::Vulkan {
 
-	using IDebugUtilsObject = InfrastructureClass<class DebugUtilsObject, EInfrastructure::DebugUtilsObject>;
+	using IDebugUtilsObject = IInfrastructure<class DebugUtilsObject, EInfrastructure::DebugUtilsObject>;
 
 	/**
 	* @brief Vulkan::DebugUtilsObject Class.

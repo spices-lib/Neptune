@@ -14,7 +14,7 @@
 
 namespace Neptune::Vulkan {
 
-	using IDescriptorPool = InfrastructureClass<class DescriptorPool, EInfrastructure::DescriptorPool>;
+	using IDescriptorPool = IInfrastructure<class DescriptorPool, EInfrastructure::DescriptorPool>;
 
 	/**
 	* @brief Vulkan::DescriptorPool Class.

@@ -14,7 +14,7 @@
 
 namespace Neptune::Vulkan {
 
-	using IDevice = InfrastructureClass<class Device, EInfrastructure::Device>;
+	using IDevice = IInfrastructure<class Device, EInfrastructure::Device>;
 
 	/**
 	* @brief Vulkan::Device Class.

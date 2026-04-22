@@ -14,7 +14,7 @@
 
 namespace Neptune::Direct3D12 {
 
-	using IDevice = InfrastructureClass<class Device, EInfrastructure::Device>;
+	using IDevice = IInfrastructure<class Device, EInfrastructure::Device>;
 
 	/**
 	* @brief Direct3D12::Device Class.

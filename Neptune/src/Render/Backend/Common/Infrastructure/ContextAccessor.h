@@ -5,15 +5,15 @@
 */
 
 #pragma once
-#include "Core/Core.h"
+#include "Render/Backend/Common/Concept.h"
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
     template<typename E>
     class Context;
 }
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
     /**
     * @brief ContextAccessor Class.

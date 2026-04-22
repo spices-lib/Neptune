@@ -15,9 +15,9 @@
 
 namespace Neptune::OpenGL {
 
-    using namespace Common;
+    using namespace Render::Common;
 
-    using CommonInfrastructure = Common::Infrastructure<EInfrastructure>;
+    using CommonInfrastructure = Render::Common::Infrastructure<EInfrastructure>;
 
     using Context = CommonInfrastructure::Context;
 

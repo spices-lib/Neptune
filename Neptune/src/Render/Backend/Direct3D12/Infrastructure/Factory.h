@@ -14,7 +14,7 @@
 
 namespace Neptune::Direct3D12 {
 
-	using IFactory = InfrastructureClass<class Factory, EInfrastructure::Factory>;
+	using IFactory = IInfrastructure<class Factory, EInfrastructure::Factory>;
 
 	/**
 	* @brief Direct3D12::Factory Class.

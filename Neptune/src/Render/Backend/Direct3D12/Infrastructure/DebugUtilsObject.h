@@ -14,7 +14,7 @@
 
 namespace Neptune::Direct3D12 {
 
-	using IDebugUtilsObject = InfrastructureClass<class DebugUtilsObject, EInfrastructure::DebugUtilsObject>;
+	using IDebugUtilsObject = IInfrastructure<class DebugUtilsObject, EInfrastructure::DebugUtilsObject>;
 
 	/**
 	* @brief Direct3D12::DebugUtilsObject Class.

@@ -5,12 +5,11 @@
 */
 
 #pragma once
-#include "Core/Core.h"
 #include "Core/NonCopyable.h"
 #include "Context.h"
 #include "ContextAccessor.h"
 
-namespace Neptune::Common {
+namespace Neptune::Render::Common {
 
     /**
     * @brief Common::Infrastructure Class.
