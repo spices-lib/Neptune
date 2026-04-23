@@ -14,5 +14,6 @@ namespace Neptune::Direct3D12::Unit {
 	using namespace Render::Common;
 
 	template<typename T>
+	requires IsUnit<Render::Common::Unit<T, 0>>
 	using Unit = Render::Common::Unit<T, 0>;
 }

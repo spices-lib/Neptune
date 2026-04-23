@@ -73,7 +73,7 @@ namespace Neptune::RHI {
 		/**
 		* @brief Interface of Add SwapChain Attachment.
 		*/
-		void AddSwapChainAttachment() const { RHIRenderPass::m_Impl->AddSwapChainAttachment(); }
+		void AddSwapChainAttachment() const { m_Impl->AddSwapChainAttachment(); }
 
 		/**
 		* @brief Interface of Add Color Attachment.
@@ -81,14 +81,14 @@ namespace Neptune::RHI {
 		* @param[in] renderTarget RenderTarget.
 		* @param[in] info RenderTargetAttachmentInfo.
 		*/
-		void AddColorAttachment(SP<class RenderTarget> renderTarget, const RenderTargetAttachmentInfo& info) const { RHIRenderPass::m_Impl->AddColorAttachment(renderTarget, info); }
+		void AddColorAttachment(SP<class RenderTarget> renderTarget, const RenderTargetAttachmentInfo& info) const { m_Impl->AddColorAttachment(renderTarget, info); }
 
 		/**
 		* @brief Interface of Build RenderPass.
 		*
 		* @param[in] count Flight Frames.
 		*/
-		void Build(uint32_t count = MaxFrameInFlight) const { RHIRenderPass::m_Impl->Build(count); }
+		void Build(uint32_t count = MaxFrameInFlight) const { m_Impl->Build(count); }
 
 	};
 }

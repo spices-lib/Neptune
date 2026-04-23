@@ -14,6 +14,7 @@
 namespace Neptune::Render::Common {
 
     template<typename E>
+    requires IsEnum<E>
     class Infrastructure;
 }
 
@@ -26,6 +27,7 @@ namespace Neptune::Render::Common {
     * @tparam E_ EInfrastructure.
     */
     template<typename T_, auto E_>
+    requires IsEnum<decltype(E_)>
 	struct IInfrastructure
 	{
 		using T = T_;
@@ -41,13 +43,13 @@ namespace Neptune::Render::Common {
     * 
     * @return Returns Infrastructure.
     */
-    template<typename T, typename... Args>
+    template<IsInfrastructure T, typename... Args>
     static SP<T> InfrastructureFactory(Args&&... args)
     {
         NEPTUNE_PROFILE_ZONE
         
         if constexpr (requires(Args... args) {
-            { T::Create(std::forward<Args>(args)...) } -> std::same_as<SP<T>>;
+            { T::Create(std::forward<Args>(args)...) } -> IsSame<SP<T>>;
         })
         {
             // Factory Version
@@ -66,6 +68,7 @@ namespace Neptune::Render::Common {
     * @tparam E EInfrastructure.
     */
     template<typename E>
+    requires IsEnum<E>
     class Context : NonCopyable
     {
     public:
@@ -86,7 +89,7 @@ namespace Neptune::Render::Common {
         * @tparam I Infrastructure Definitions.
         * @param[in] args Infrastructure Construct Params.
         */
-        template<typename I, typename... Args>
+        template<IsIInfrastructure I, typename... Args>
         void Registry(Args&&... args);
 
         /**
@@ -94,7 +97,7 @@ namespace Neptune::Render::Common {
         *
         * @tparam I Infrastructure Definitions.
         */
-        template<typename I>
+        template<IsIInfrastructure I>
         void UnRegistry();
 
         /**
@@ -109,7 +112,7 @@ namespace Neptune::Render::Common {
         * 
         * @return Returns registry Infrastructure.
         */
-        template<typename I>
+        template<IsIInfrastructure I>
         I::T* Get();
 
         /**
@@ -119,7 +122,7 @@ namespace Neptune::Render::Common {
         *
         * @return Returns true if registry.
         */
-        template<typename I>
+        template<IsIInfrastructure I>
         bool Has() const;
 
     private:
@@ -128,8 +131,8 @@ namespace Neptune::Render::Common {
 
     };
 
-    template<typename E>
-    template<typename I, typename... Args>
+    template<typename E> requires IsEnum<E>
+    template<IsIInfrastructure I, typename... Args>
     inline void Context<E>::Registry(Args&&... args)
     {
         NEPTUNE_PROFILE_ZONE
@@ -146,8 +149,8 @@ namespace Neptune::Render::Common {
         m_Infrastructures[position] = InfrastructureFactory<typename I::T>(*this, I::E, std::forward<Args>(args)...);
     }
 
-    template<typename E>
-    template<typename I>
+    template<typename E> requires IsEnum<E>
+    template<IsIInfrastructure I>
     inline void Context<E>::UnRegistry()
     {
         NEPTUNE_PROFILE_ZONE
@@ -164,7 +167,7 @@ namespace Neptune::Render::Common {
         m_Infrastructures[position].reset();
     }
 
-    template<typename E>
+    template<typename E> requires IsEnum<E>
     inline void Context<E>::UnRegistry()
     {
         NEPTUNE_PROFILE_ZONE
@@ -182,8 +185,8 @@ namespace Neptune::Render::Common {
         }
     }
 
-    template<typename E>
-    template<typename I>
+    template<typename E> requires IsEnum<E>
+    template<IsIInfrastructure I>
     I::T* Context<E>::Get()
     {
         NEPTUNE_PROFILE_ZONE
@@ -200,8 +203,8 @@ namespace Neptune::Render::Common {
         return std::dynamic_pointer_cast<typename I::T>(m_Infrastructures[position]).get();
     }
 
-    template<typename E>
-    template<typename I>
+    template<typename E> requires IsEnum<E>
+    template<IsIInfrastructure I>
     bool Context<E>::Has() const
     {
         NEPTUNE_PROFILE_ZONE

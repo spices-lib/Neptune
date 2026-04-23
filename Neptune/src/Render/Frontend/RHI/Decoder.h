@@ -97,39 +97,39 @@ namespace Neptune::RHI {
 		* @param[in] data .
 		* @param[in] size .
 		*/
-		void ParserDataChunk(uint8_t* data, uint64_t size) const { RHIDecoder::m_Impl->ParserDataChunk(data, size); }
+		void ParserDataChunk(uint8_t* data, uint64_t size) const { m_Impl->ParserDataChunk(data, size); }
 
 		/**
 		* @brief Interface of Get Decoded Picture Count.
 		*
 		* @return Returns Decoded Picture Count.
 		*/
-		uint32_t GetDecodedPictureCount() const { return RHIDecoder::m_Impl->GetDecodedPictureCount(); }
+		uint32_t GetDecodedPictureCount() const { return m_Impl->GetDecodedPictureCount(); }
 
 		/**
 		* @brief Interface of Set Decode RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget) const { return RHIDecoder::m_Impl->SetDecodeRenderTarget(renderTarget); }
+		void SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget) const { return m_Impl->SetDecodeRenderTarget(renderTarget); }
 
 		/**
 		* @brief Interface of Set Reference RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const { return RHIDecoder::m_Impl->SetReferenceRenderTarget(renderTarget); }
+		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const { return m_Impl->SetReferenceRenderTarget(renderTarget); }
 
 		/**
 		* @brief Interface of Set FlowVector RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const { return RHIDecoder::m_Impl->SetFlowVectorRenderTarget(renderTarget); }
+		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const { return m_Impl->SetFlowVectorRenderTarget(renderTarget); }
 
 		/**
 		* @brief Interface of Push NextFrame to RenderTarget.
 		*/
-		void PushNextFrameToRenderTarget() const { return RHIDecoder::m_Impl->PushNextFrameToRenderTarget(); }
+		void PushNextFrameToRenderTarget() const { return m_Impl->PushNextFrameToRenderTarget(); }
 	};
 }

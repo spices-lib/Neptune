@@ -18,6 +18,7 @@ namespace Neptune::Render::Common {
     * @tparam E EInfrastructure
     */
     template<typename E>
+    requires IsEnum<E>
     class Infrastructure : public ContextAccessor<E>, public NonCopyable
     {
     public:

@@ -68,13 +68,13 @@ namespace Neptune::RHI {
 		*
 		* @param[in] source Shader Source.
 		*/
-		void SetSource(const std::vector<uint8_t>& source) const { RHIShader::m_Impl->SetSource(source); }
+		void SetSource(const std::vector<uint8_t>& source) const { m_Impl->SetSource(source); }
 
 		/**
 		* @brief Interface of Set Shader Name.
 		*
 		* @param[in] name Shader Name.
 		*/
-		void SetName(const std::string& name) const { RHIShader::m_Impl->SetName(name); }
+		void SetName(const std::string& name) const { m_Impl->SetName(name); }
 	};
 }

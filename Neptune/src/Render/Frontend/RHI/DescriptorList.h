@@ -117,7 +117,7 @@ namespace Neptune::RHI {
 		* @param[in] binding .
 		* @param[in] bytes UniformBuffer bytes.
 		*/
-		void AddUniformBuffer(uint32_t set, uint32_t binding, uint32_t bytes) const { DescriptorList::m_Impl->AddUniformBuffer(set, binding, bytes); }
+		void AddUniformBuffer(uint32_t set, uint32_t binding, uint32_t bytes) const { m_Impl->AddUniformBuffer(set, binding, bytes); }
 
 		/**
 		* @brief Interface of Add UniformTexture.
@@ -126,7 +126,7 @@ namespace Neptune::RHI {
 		* @param[in] binding .
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void AddUniformTexture(uint32_t set, uint32_t binding, SP<class RenderTarget> renderTarget) const { DescriptorList::m_Impl->AddUniformTexture(set, binding, renderTarget); }
+		void AddUniformTexture(uint32_t set, uint32_t binding, SP<class RenderTarget> renderTarget) const { m_Impl->AddUniformTexture(set, binding, renderTarget); }
 
 		/**
 		* @brief Interface of Update UniformBuffer.
@@ -135,7 +135,7 @@ namespace Neptune::RHI {
 		* @param[in] binding .
 		* @param[in] data UniformBuffer data.
 		*/
-		void UpdateUniformBuffer(uint32_t set, uint32_t binding, void* data) const { DescriptorList::m_Impl->UpdateUniformBuffer(set, binding, data); }
+		void UpdateUniformBuffer(uint32_t set, uint32_t binding, void* data) const { m_Impl->UpdateUniformBuffer(set, binding, data); }
 
 		/**
 		* @brief Interface of Update UniformTexture.
@@ -144,12 +144,12 @@ namespace Neptune::RHI {
 		* @param[in] binding .
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void UpdateUniformTexture(uint32_t set, uint32_t binding, SP<class RenderTarget> renderTarget) const { DescriptorList::m_Impl->UpdateUniformTexture(set, binding, renderTarget); }
+		void UpdateUniformTexture(uint32_t set, uint32_t binding, SP<class RenderTarget> renderTarget) const { m_Impl->UpdateUniformTexture(set, binding, renderTarget); }
 
 		/**
 		* @brief Interface of Combine Shared DescriptorList.
 		*/
-		void CombineSharedLayout() { DescriptorList::m_Impl->CombineSharedLayout(GetSharedImpl()); }
+		void CombineSharedLayout() const { m_Impl->CombineSharedLayout(GetSharedImpl()); }
 
 		/**
 		* @brief Interface of Build DescriptorList.

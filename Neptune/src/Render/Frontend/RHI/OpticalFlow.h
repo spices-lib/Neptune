@@ -88,32 +88,32 @@ namespace Neptune::RHI {
 		*
 		* @param[in] rt RenderTarget.
 		*/
-		void SetInputRenderTarget(SP<RenderTarget> rt) const { RHIOpticalFlow::m_Impl->SetInputRenderTarget(rt); }
+		void SetInputRenderTarget(SP<RenderTarget> rt) const { m_Impl->SetInputRenderTarget(rt); }
 
 		/**
 		* @brief Interface of Set Reference RenderTarget.
 		*
 		* @param[in] rt RenderTarget.
 		*/
-		void SetReferenceRenderTarget(SP<RenderTarget> rt) const { RHIOpticalFlow::m_Impl->SetReferenceRenderTarget(rt); }
+		void SetReferenceRenderTarget(SP<RenderTarget> rt) const { m_Impl->SetReferenceRenderTarget(rt); }
 
 		/**
 		* @brief Interface of Set FlowVector RenderTarget.
 		*
 		* @param[in] rt RenderTarget.
 		*/
-		void SetFlowVectorRenderTarget(SP<RenderTarget> rt) const { RHIOpticalFlow::m_Impl->SetFlowVectorRenderTarget(rt); }
+		void SetFlowVectorRenderTarget(SP<RenderTarget> rt) const { m_Impl->SetFlowVectorRenderTarget(rt); }
 
 		/**
 		* @brief Interface of Create OpticalFlow Session.
 		* 
 		* @retrun Returns true if succeeded.
 		*/
-		bool CreateOpticalFlowSession() const { return RHIOpticalFlow::m_Impl->CreateOpticalFlowSession(); }
+		bool CreateOpticalFlowSession() const { return m_Impl->CreateOpticalFlowSession(); }
 
 		/**
 		* @brief Interface of OpticalFlow Execute.
 		*/
-		void OpticalFlowExecute() const { RHIOpticalFlow::m_Impl->OpticalFlowExecute(); }
+		void OpticalFlowExecute() const { m_Impl->OpticalFlowExecute(); }
 	};
 }

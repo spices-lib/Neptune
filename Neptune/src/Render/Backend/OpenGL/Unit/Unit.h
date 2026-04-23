@@ -17,6 +17,7 @@ namespace Neptune::OpenGL::Unit {
 	using namespace Render::Common;
 
 	template<typename T, auto E>
+	requires IsUnit<Render::Common::Unit<T, E>>
 	using Unit = Render::Common::Unit<T, E>;
 }
 

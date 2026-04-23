@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "Render/Backend/Common/Concept.h"
 
 namespace Neptune::Render::Common {
 
@@ -14,6 +15,7 @@ namespace Neptune::Render::Common {
 	* This class defines the Common::Unit behaves.
 	*/
 	template<typename H, auto E>
+	requires (IsUnitHandle<H> && IsUnitEUnit<decltype(E)>)
 	class Unit
 	{
 	public:

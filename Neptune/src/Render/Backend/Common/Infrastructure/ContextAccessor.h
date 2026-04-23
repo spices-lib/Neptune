@@ -10,6 +10,7 @@
 namespace Neptune::Render::Common {
 
     template<typename E>
+    requires IsEnum<E>
     class Context;
 }
 
@@ -22,6 +23,7 @@ namespace Neptune::Render::Common {
     * @tparam E EInfrastructure
     */
     template<typename E>
+    requires IsEnum<E>
     class ContextAccessor
     {
     public:

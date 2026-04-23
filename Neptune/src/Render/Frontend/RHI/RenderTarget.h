@@ -103,14 +103,14 @@ namespace Neptune::RHI {
 		*
 		* @param[in] info RenderTargetCreateInfo.
 		*/
-		void CreateRenderTarget(const RenderTargetCreateInfo& info) { RHIRenderTarget::m_Impl->CreateRenderTarget(info); }
+		void CreateRenderTarget(const RenderTargetCreateInfo& info) { m_Impl->CreateRenderTarget(info); }
 
 		/**
 		* @brief Interface of Create BindingID.
 		*
 		* @return Returns BindingID.
 		*/
-		void* CreateBindingID() const { return RHIRenderTarget::m_Impl->CreateBindingID(); }
+		void* CreateBindingID() const { return m_Impl->CreateBindingID(); }
 
 		/**
 		* @brief Interface of Copy To RenderTarget.
@@ -119,28 +119,28 @@ namespace Neptune::RHI {
 		*
 		* @return Returns true if succeeded.
 		*/
-		bool CopyToRenderTarget(const RenderTarget* target) const { return RHIRenderTarget::m_Impl->CopyToRenderTarget(target); }
+		bool CopyToRenderTarget(const RenderTarget* target) const { return m_Impl->CopyToRenderTarget(target); }
 
 		/**
 		* @brief Interface of Get Format.
 		*
 		* @return Returns format.
 		*/
-		TextureFormat GetFormat() const { return RHIRenderTarget::m_Impl->GetFormat(); }
+		TextureFormat GetFormat() const { return m_Impl->GetFormat(); }
 
 		/**
 		* @brief Interface of Get Width.
 		*
 		* @return Returns width.
 		*/
-		uint32_t GetWidth() const { return RHIRenderTarget::m_Impl->GetWidth(); }
+		uint32_t GetWidth() const { return m_Impl->GetWidth(); }
 
 		/**
 		* @brief Interface of Get Height.
 		*
 		* @return Returns height.
 		*/
-		uint32_t GetHeight() const { return RHIRenderTarget::m_Impl->GetHeight(); }
+		uint32_t GetHeight() const { return m_Impl->GetHeight(); }
 
 	};
 }

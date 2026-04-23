@@ -11,6 +11,7 @@
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
 #include "Infrastructure/Enum.h"
+#include "Render/Backend/Common/Concept.h"
 
 namespace Neptune {
 
@@ -20,6 +21,7 @@ namespace Neptune {
 namespace Neptune::Render::Common {
 
     template<typename T>
+    requires IsEnum<T>
     class Context;
 }
 

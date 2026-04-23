@@ -104,26 +104,26 @@ namespace Neptune::RHI {
 		*
 		* @param[in] renderPass RenderPass.
 		*/
-		void SetRenderPass(SP<class RenderPass> renderPass) const { RHIPipeline::m_Impl->SetRenderPass(renderPass); }
+		void SetRenderPass(SP<class RenderPass> renderPass) const { m_Impl->SetRenderPass(renderPass); }
 
 		/**
 		* @brief Interface of Set DescriptorList.
 		*
 		* @param[in] descriptorList DescriptorList.
 		*/
-		void SetDescriptorList(SP<class DescriptorList> descriptorList) const { RHIPipeline::m_Impl->SetDescriptorList(descriptorList); }
+		void SetDescriptorList(SP<class DescriptorList> descriptorList) const { m_Impl->SetDescriptorList(descriptorList); }
 
 		/**
 		* @brief Interface of Set VertexAttributeLayout.
 		*/
-		void SetVertexAttributeLayout() const { RHIPipeline::m_Impl->SetVertexAttributeLayout(); }
+		void SetVertexAttributeLayout() const { m_Impl->SetVertexAttributeLayout(); }
 
 		/**
 		* @brief Interface of Set CullMode.
 		*
 		* @param[in] mode CullMode.
 		*/
-		void SetCullMode(CullMode mode) const { RHIPipeline::m_Impl->SetCullMode(mode); }
+		void SetCullMode(CullMode mode) const { m_Impl->SetCullMode(mode); }
 
 		/**
 		* @brief Interface of Add Shader.
@@ -131,12 +131,12 @@ namespace Neptune::RHI {
 		* @param[in] stage ShaderStage.
 		* @param[in] shader Shader.
 		*/
-		void AddShader(ShaderStage stage, SP<class Shader> shader) const { RHIPipeline::m_Impl->AddShader(stage, shader); }
+		void AddShader(ShaderStage stage, SP<class Shader> shader) const { m_Impl->AddShader(stage, shader); }
 
 		/**
 		* @brief Interface of Build GraphicPipeline.
 		*/
-		void BuildGraphicPipeline() const { RHIPipeline::m_Impl->BuildGraphicPipeline(); }
+		void BuildGraphicPipeline() const { m_Impl->BuildGraphicPipeline(); }
 
 	};
 
