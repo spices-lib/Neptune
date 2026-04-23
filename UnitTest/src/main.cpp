@@ -4,13 +4,24 @@
 * @author Spices.
 */
 
+#include <Core/MetaProperty.h>
+
+#ifdef MetaProperty(...)
+#undef MetaProperty(...)
+#define MetaProperty(...) public:
+#endif
+
 #include "Instrumentor.h"
 
 // Container
 #include "Core/Container/BitSetTest.h"
 #include "Core/Container/TreeTest.h"
 
+#include "Render/Backend/Common/CommonTest.h"
+
 #include <gmock/gmock.h>
+
+
 
 /**
 * @brief The Entry of NeptuneUnitTest.

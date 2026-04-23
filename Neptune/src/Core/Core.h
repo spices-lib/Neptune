@@ -7,6 +7,7 @@
 #pragma once
 #include "Log/Log.h"
 #include "Debugger/Profiler/Profiler.h"
+#include "MetaProperty.h"
 
 #include <forward_list>
 

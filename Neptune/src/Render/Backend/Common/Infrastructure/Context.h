@@ -127,6 +127,7 @@ namespace Neptune::Render::Common {
 
     private:
 
+        MetaProperty(TEST)
         std::array<SP<Infrastructure<E>>, static_cast<uint8_t>(E::Count)> m_Infrastructures; // @brief Container of Infrastructure.
 
     };
