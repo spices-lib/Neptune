@@ -23,7 +23,7 @@ namespace Neptune::Render::Common {
     * @tparam T .
     */
     template<typename T>
-    concept IsUnitEUnit = IsEnum<T> || IsIntegral<T>;
+    concept IsUnitEUnit = std::is_enum_v<T> || IsIntegral<T>;
     
     /**
     * @brief Concept: Is Unit.

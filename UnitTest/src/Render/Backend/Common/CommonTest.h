@@ -122,15 +122,67 @@ namespace Neptune::Render::Common::Test {
 		
 		details::EnumTuple tuple;
 		
-		Container::IterTuple(tuple, []<typename EInfrastructure>(EInfrastructure & e) {
+		Container::IterTuple(tuple, []<typename EInfrastructure>(EInfrastructure& e) {
 
 			auto context = Context<EInfrastructure>{};
 
 			const auto contextAccessor = ContextAccessor<EInfrastructure>(context);
 
-			// ContextAccessor bytes equals to Context bytes
-			EXPECT_EQ(sizeof(decltype(contextAccessor)), sizeof(decltype(context)));
-
+			// ContextAccessor bytes equals to 2 * sizeof(size_t)
+			EXPECT_EQ(sizeof(decltype(contextAccessor)), 2 * sizeof(size_t));
 		});
+	}
+	
+	/**
+	* @brief Testing IInfrastructure Struct.
+	*/
+	TEST(IInfrastructureTest, Definition) {
+
+		NEPTUNE_TEST_PROFILE_FUNCTION
+		
+		details::EnumTuple tuple;
+		
+		Container::IterTuple(tuple, []<typename EInfrastructure>(EInfrastructure& e) {
+
+#define IINFRASTRUCTURE_DEFINE_WITH_ENUM(Id)                                                              \
+			if constexpr (requires{ { EInfrastructure::Id } -> std::convertible_to<EInfrastructure>; }) { \
+				                                                                                          \
+				const auto iInfrastructure = IInfrastructure<void, EInfrastructure::Id>{};                \
+				                                                                                          \
+				EXPECT_EQ(sizeof(decltype(iInfrastructure)), 1);                                          \
+			}
+			
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Count)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(One)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Two)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Three)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Four)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Five)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Six)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Seven)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Eight)
+			IINFRASTRUCTURE_DEFINE_WITH_ENUM(Nine)
+
+#undef IINFRASTRUCTURE_DEFINE_WITH_ENUM
+			
+		});
+	}
+	
+	/**
+	* @brief Testing Infrastructure Class.
+	*/
+	TEST(InfrastructureTest, Definition) {
+
+		NEPTUNE_TEST_PROFILE_FUNCTION
+		
+	}
+	
+	/**
+	* @brief Testing InfrastructureFactory Class.
+	*/
+	TEST(InfrastructureFactoryTest, Definition) {
+
+		NEPTUNE_TEST_PROFILE_FUNCTION
+		
 	}
 }
