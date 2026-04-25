@@ -41,8 +41,9 @@ namespace Neptune::Direct3D12::Unit {
 		* @param[in] factory DXGIFactory.
 		* @param[in] commandQueue D3D12CommandQueue.
 		* @param[in] desc DXGI_SWAP_CHAIN_DESC1.
+		* @param[in] hwnd Window HWND.
 		*/
-		void CreateSwapChain(DXGIFactory factory, D3D12CommandQueue commandQueue, const DXGI_SWAP_CHAIN_DESC1& desc);
+		void CreateSwapChain(DXGIFactory factory, D3D12CommandQueue commandQueue, const DXGI_SWAP_CHAIN_DESC1& desc, HWND hwnd);
 
 	};
 }

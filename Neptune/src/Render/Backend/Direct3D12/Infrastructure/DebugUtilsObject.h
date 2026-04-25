@@ -61,6 +61,29 @@ namespace Neptune::Direct3D12 {
 		void InsertLabel(D3D12GraphicsCommandList cmdList, const std::string& caption) const;
 
 		/**
+		* @brief Begin Queue Label.
+		*
+		* @param[in] queue VkQueue.
+		* @param[in] caption Label String.
+		*/
+		void BeginQueueLabel(D3D12CommandQueue queue, const std::string& caption) const;
+
+		/**
+		* @brief End Queue Label.
+		*
+		* @param[in] queue VkQueue.
+		*/
+		void EndQueueLabel(D3D12CommandQueue queue) const;
+
+		/**
+		* @brief Insert Queue Label.
+		*
+		* @param[in] queue VkQueue.
+		* @param[in] caption Label String.
+		*/
+		void InsertQueueLabel(D3D12CommandQueue queue, const std::string& caption) const;
+		
+		/**
 		* @brief Set Unit Name.
 		*
 		* @tparam Unit Unit.
@@ -77,6 +100,9 @@ namespace Neptune::Direct3D12 {
 #define DEBUGUTILS_BEGINLABEL(...)                 { GetContext().Get<IDebugUtilsObject>()->BeginLabel       (__VA_ARGS__)	; }
 #define DEBUGUTILS_ENDLABEL(...)                   { GetContext().Get<IDebugUtilsObject>()->EndLabel         (__VA_ARGS__)	; }
 #define DEBUGUTILS_INSERTLABEL(...)                { GetContext().Get<IDebugUtilsObject>()->InsertLabel      (__VA_ARGS__)	; }
+#define DEBUGUTILS_BEGINQUEUELABEL(...)            { GetContext().Get<IDebugUtilsObject>()->BeginQueueLabel  (__VA_ARGS__)	; }
+#define DEBUGUTILS_ENDQUEUELABEL(...)              { GetContext().Get<IDebugUtilsObject>()->EndQueueLabel    (__VA_ARGS__)	; }
+#define DEBUGUTILS_INSERTQUEUELABEL(...)           { GetContext().Get<IDebugUtilsObject>()->InsertQueueLabel (__VA_ARGS__)	; }
 #define DEBUGUTILS_SETOBJECTNAME(...)              { GetContext().Get<IDebugUtilsObject>()->SetObjectName    (__VA_ARGS__)	; }
 
 #endif
@@ -86,6 +112,9 @@ namespace Neptune::Direct3D12 {
 #define DEBUGUTILS_BEGINLABEL(...)      
 #define DEBUGUTILS_ENDLABEL(...)         
 #define DEBUGUTILS_INSERTLABEL(...)
+#define DEBUGUTILS_BEGINQUEUELABEL(...) 
+#define DEBUGUTILS_ENDQUEUELABEL(...)   
+#define DEBUGUTILS_INSERTQUEUELABEL(...)
 #define DEBUGUTILS_SETOBJECTNAME(...)                
 
 #endif
@@ -95,7 +124,7 @@ namespace Neptune::Direct3D12 {
 	{
 		NEPTUNE_PROFILE_ZONE
 		
-		if constexpr (requires() {
+		if constexpr (requires {
 			{ Unit::Handle::SetName() } -> std::convertible_to<void>;
 		})
 		{

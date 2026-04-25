@@ -1,6 +1,6 @@
 /**
-* @file CommandBuffer.h.
-* @brief The CommandBuffer Class Definitions.
+* @file CommandPool.h.
+* @brief The CommandPool Class Definitions.
 * @author Spices.
 */
 

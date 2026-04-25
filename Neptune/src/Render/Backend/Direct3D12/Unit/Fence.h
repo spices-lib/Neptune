@@ -42,6 +42,23 @@ namespace Neptune::Direct3D12::Unit {
 		*/
 		void CreateFence(D3D12Device device);
 
+		/**
+		* @brief Get Next wait value.
+		*
+		* @return Returns Next wait value.
+		*/
+		uint64_t IncreaseValue();
+		
+		/**
+		* @brief Fence wait idle.
+		*/
+		void Wait() const;
+		
+	private:
+
+		HANDLE m_Event;                 // @brief Fence Event.
+		uint64_t m_Value;               // @brief Wait value.
+		
 	};
 }
 

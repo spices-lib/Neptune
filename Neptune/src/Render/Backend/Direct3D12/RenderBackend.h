@@ -102,7 +102,7 @@ namespace Neptune::Direct3D12 {
         *
         * @return Returns Context.
         */
-        class Context& GetContext() const;
+        Context& GetContext() const;
 
     private:
 

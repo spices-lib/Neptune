@@ -21,15 +21,15 @@ namespace Neptune::Direct3D12::Unit {
 		m_Handle->Release();
 	}
 
-	void SwapChain::CreateSwapChain(DXGIFactory factory, D3D12CommandQueue commandQueue, const DXGI_SWAP_CHAIN_DESC1& desc)
+	void SwapChain::CreateSwapChain(DXGIFactory factory, D3D12CommandQueue commandQueue, const DXGI_SWAP_CHAIN_DESC1& desc, HWND hwnd)
 	{
 		NEPTUNE_PROFILE_ZONE
-
-		HWND hwnd{}; //= (HWND)_window.handle() };
 
 		IDXGISwapChain1* swapChain = nullptr;
 
 		DIRECT3D12_CHECK(factory->CreateSwapChainForHwnd(commandQueue, hwnd, &desc, nullptr, nullptr, &swapChain))
+
+		DIRECT3D12_CHECK(factory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER))
 
 		DIRECT3D12_CHECK(swapChain->QueryInterface(IID_PPV_ARGS(&m_Handle)))
 

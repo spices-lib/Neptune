@@ -42,6 +42,27 @@ namespace Neptune::Direct3D12 {
 
 		PIXSetMarker(cmdList, 0, caption.c_str());
 	}
+	
+	void DebugUtilsObject::BeginQueueLabel(D3D12CommandQueue queue, const std::string& caption) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		PIXBeginEvent(queue, 0, caption.c_str());
+	}
+
+	void DebugUtilsObject::EndQueueLabel(D3D12CommandQueue queue) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		PIXEndEvent(queue);
+	}
+
+	void DebugUtilsObject::InsertQueueLabel(D3D12CommandQueue queue, const std::string& caption) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		PIXSetMarker(queue, 0, caption.c_str());
+	}
 }
 
 #endif

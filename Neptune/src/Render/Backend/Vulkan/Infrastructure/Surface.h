@@ -25,6 +25,14 @@ namespace Neptune::Vulkan {
 	{
 	public:
 
+		/**
+		* @brief Factory of Create Surface with specific implement.
+		* 
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		* @param[in] implement WindowImplement.
+		* @param[in] window Native Window.
+		*/
 		static SP<Surface> Create(Context& context, EInfrastructure e, WindowImplement implement, void* window);
 
 	public:

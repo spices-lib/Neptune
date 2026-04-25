@@ -21,8 +21,9 @@ namespace Neptune::GLFW {
 
 		switch (backend)
 		{
-			case RenderBackendEnum::OpenGL: return CreateSP<OpenGLInterface>();
-			case RenderBackendEnum::Vulkan: return CreateSP<VulkanInterface>();
+			case RenderBackendEnum::OpenGL:     return CreateSP<OpenGLInterface>();
+			case RenderBackendEnum::Vulkan:     return CreateSP<VulkanInterface>();
+			case RenderBackendEnum::Direct3D12: return CreateSP<Direct3D12Interface>();
 			default:
 			{
 				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in GLFW Configuration.")
@@ -75,7 +76,7 @@ namespace Neptune::GLFW {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		// Set no OpenGL (use vulkan)
+		// Set no OpenGL (use Vulkan)
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	}
 	
@@ -87,6 +88,14 @@ namespace Neptune::GLFW {
 		const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 		
 		return std::vector(glfwExtensions, glfwExtensions + glfwExtensionCount);
+	}
+
+	void Direct3D12Interface::Hint() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		// Set no OpenGL (use Direct3D12)
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	}
 
 }
