@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Core/Core.h"
-#include "Core/NonCopyable.h"
 #include "Render/Backend/Common/Concept.h"
 
 #include <array>
@@ -28,7 +27,7 @@ namespace Neptune::Render::Common {
     */
     template<typename T_, auto E_>
     requires IsEnum<decltype(E_)>
-	struct IInfrastructure
+	struct IInfrastructure final
 	{
 		using T = T_;
 
@@ -69,10 +68,12 @@ namespace Neptune::Render::Common {
     */
     template<typename E>
     requires IsEnum<E>
-    class Context : NonCopyable
+    class Context final
     {
     public:
 
+        NONE_COPY(Context)
+        
         /**
         * @brief Constructor Function.
         */
@@ -81,7 +82,7 @@ namespace Neptune::Render::Common {
         /**
         * @brief Destructor Function.
         */
-        ~Context() override = default;
+        ~Context() = default;
 
         /**
         * @brief Registry Infrastructure.
@@ -128,7 +129,11 @@ namespace Neptune::Render::Common {
     private:
 
         MetaProperty(TEST)
-        std::array<SP<Infrastructure<E>>, static_cast<uint8_t>(E::Count)> m_Infrastructures; // @brief Container of Infrastructure.
+        [[no_unique_address]] std::conditional_t<
+            static_cast<uint8_t>(E::Count) == 0,
+            std::monostate,
+            std::array<SP<Infrastructure<E>>, static_cast<uint8_t>(E::Count)>
+        > m_Infrastructures;                   // @brief Container of Infrastructure.
 
     };
 

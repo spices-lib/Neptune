@@ -37,12 +37,7 @@ namespace Neptune::Render::Common {
         *
         * @param[in] context Context.
         */
-        ContextAccessor(Context& context) : m_Context(context) {}
-
-        /**
-        * @brief Destructor Function.
-        */
-        virtual ~ContextAccessor() = default;
+        explicit ContextAccessor(Context& context) : m_Context(context) {}
 
     protected:
 

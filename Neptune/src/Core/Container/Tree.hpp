@@ -11,7 +11,7 @@
 #include <queue>
 #include <shared_mutex>
 
-namespace Neptune {
+namespace Neptune::Container {
 
     /**
     * @brief simple tree.

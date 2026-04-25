@@ -32,7 +32,7 @@ namespace Neptune::Test {
 
 	protected:
 		
-		Tree<int> m_Tree;
+		Container::Tree<int> m_Tree;
 	};
 	
 	/**
@@ -47,13 +47,13 @@ namespace Neptune::Test {
 		}
 		
 		{
-			const Tree<float> tree;
+			const Container::Tree<float> tree;
 			
 			EXPECT_FLOAT_EQ(tree.GetData(), 0.0f);
 		}
 
 		{
-			const Tree<void*> tree;
+			const Container::Tree<void*> tree;
 			
 			EXPECT_EQ(tree.GetData(), nullptr);
 		}
@@ -65,7 +65,7 @@ namespace Neptune::Test {
 				float b = 2.0f;
 			};
 
-			const Tree<TestStruct> tree;
+			const Container::Tree<TestStruct> tree;
 
 			EXPECT_EQ(tree.GetData().a, 1);
 			EXPECT_FLOAT_EQ(tree.GetData().b, 2.0f);

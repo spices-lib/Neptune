@@ -28,6 +28,10 @@ namespace Neptune {
         }                                                                                                     \
     }                                                                                                         \
 
+#define NONE_COPY(T)                    \
+    T(const T&) = delete;               \
+    T& operator=(const T&) = delete;    \
+    
     /**
     * @brief MemoryPool's name.
     */
