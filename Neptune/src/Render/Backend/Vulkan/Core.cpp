@@ -41,30 +41,55 @@ namespace Neptune::Vulkan {
 		const char* label = "";
 		switch (result)
 		{
-			case VK_NOT_READY:                                           label = "Not Ready";                           break;
-			case VK_TIMEOUT:                                             label = "Time out";                            break;
-			case VK_EVENT_SET:                                           label = "Event Set";                           break;
-			case VK_EVENT_RESET:                                         label = "Event Reset";                         break;
-			case VK_INCOMPLETE:                                          label = "Incomplete";                          break;
-			case VK_ERROR_OUT_OF_HOST_MEMORY:                            label = "Out of Host Memory";                  break;
-			case VK_ERROR_OUT_OF_DEVICE_MEMORY:                          label = "Out of Device Memory";                break;
-			case VK_ERROR_INITIALIZATION_FAILED:                         label = "Initialization Failed";               break;
-			case VK_ERROR_DEVICE_LOST:                                   label = "Device Lost";                         break;
-			case VK_ERROR_MEMORY_MAP_FAILED:                             label = "Memory Map Failed";                   break;
-			case VK_ERROR_LAYER_NOT_PRESENT:                             label = "Layer not Present";                   break;
-			case VK_ERROR_EXTENSION_NOT_PRESENT:                         label = "Extension not Present";               break;
-			case VK_ERROR_FEATURE_NOT_PRESENT:                           label = "Feature not Present";                 break;
-			case VK_ERROR_INCOMPATIBLE_DRIVER:                           label = "Incompatible Driver";                 break;
-			case VK_ERROR_TOO_MANY_OBJECTS:                              label = "Too Many Objects";                    break;
-			case VK_ERROR_FORMAT_NOT_SUPPORTED:                          label = "Format not supported";                break;
-			case VK_ERROR_SURFACE_LOST_KHR:                              label = "Surface Lost";                        break;
-			case VK_SUBOPTIMAL_KHR:                                      label = "Suboptimal";                          break;
-			case VK_ERROR_OUT_OF_DATE_KHR:                               label = "Out of Data";                         break;
-			case VK_ERROR_INCOMPATIBLE_DISPLAY_KHR:                      label = "Incompatible Display";                break;
-			case VK_ERROR_NATIVE_WINDOW_IN_USE_KHR:                      label = "Native Window In Use";                break;
-			case VK_ERROR_VALIDATION_FAILED_EXT:                         label = "Validation Failed";                   break;
-			case VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR:        label = "Video Profile Format Not Supported";  break;
-			default:                                                     label = "Unknown Error";                       break;
+			case VK_NOT_READY:                                           label = "Not Ready";                                  break;
+			case VK_TIMEOUT:                                             label = "Time out";                                   break;
+			case VK_EVENT_SET:                                           label = "Event Set";                                  break;
+			case VK_EVENT_RESET:                                         label = "Event Reset";                                break;
+			case VK_INCOMPLETE:                                          label = "Incomplete";                                 break;
+			case VK_ERROR_OUT_OF_HOST_MEMORY:                            label = "Out of Host Memory";                         break;
+			case VK_ERROR_OUT_OF_DEVICE_MEMORY:                          label = "Out of Device Memory";                       break;
+			case VK_ERROR_INITIALIZATION_FAILED:                         label = "Initialization Failed";                      break;
+			case VK_ERROR_DEVICE_LOST:                                   label = "Device Lost";                                break;
+			case VK_ERROR_MEMORY_MAP_FAILED:                             label = "Memory Map Failed";                          break;
+			case VK_ERROR_LAYER_NOT_PRESENT:                             label = "Layer not Present";                          break;
+			case VK_ERROR_EXTENSION_NOT_PRESENT:                         label = "Extension not Present";                      break;
+			case VK_ERROR_FEATURE_NOT_PRESENT:                           label = "Feature not Present";                        break;
+			case VK_ERROR_INCOMPATIBLE_DRIVER:                           label = "Incompatible Driver";                        break;
+			case VK_ERROR_TOO_MANY_OBJECTS:                              label = "Too Many Objects";                           break;
+			case VK_ERROR_FORMAT_NOT_SUPPORTED:                          label = "Format not supported";                       break;
+			case VK_ERROR_SURFACE_LOST_KHR:                              label = "Surface Lost";                               break;
+			case VK_SUBOPTIMAL_KHR:                                      label = "Suboptimal";                                 break;
+			case VK_ERROR_OUT_OF_DATE_KHR:                               label = "Out of Data";                                break;
+			case VK_ERROR_INCOMPATIBLE_DISPLAY_KHR:                      label = "Incompatible Display";                       break;
+			case VK_ERROR_NATIVE_WINDOW_IN_USE_KHR:                      label = "Native Window In Use";                       break;
+			case VK_ERROR_VALIDATION_FAILED_EXT:                         label = "Validation Failed";                          break;
+			case VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR:        label = "Video Profile Format Not Supported";         break;
+			case VK_ERROR_FRAGMENTED_POOL:                               label = "Fragment Pool";                              break;
+			case VK_ERROR_OUT_OF_POOL_MEMORY:                            label = "Out of Pool Memory";                         break;
+			case VK_ERROR_INVALID_EXTERNAL_HANDLE:                       label = "Invalid External Handle";                    break;
+			case VK_ERROR_FRAGMENTATION:                                 label = "Fragmentation";                              break;
+			case VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS:                label = "Invalid Opaque Capture address";             break;
+			case VK_ERROR_NOT_PERMITTED:                                 label = "Not Permitted";                              break;
+			case VK_ERROR_INVALID_SHADER_NV:                             label = "Invalid Shader NV";                          break;
+			case VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR:                 label = "Image Usage not supported";                  break;
+			case VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR:        label = "Video Picture Layout not supported";         break;
+			case VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR:     label = "Video Profile Operation Not Supported";      break;
+			case VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR:         label = "Video Profile Codec Not Supported";          break;
+			case VK_ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR:           label = "Video STD Version Not Supported";            break;
+			case VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT:  label = "Invalid DRM format modifier plane layout";   break;
+			case VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT:           label = "Full screen exclusive mode lost";            break;
+			case VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR:              label = "Invalid Video STD Parameters";               break;
+			case VK_ERROR_COMPRESSION_EXHAUSTED_EXT:                     label = "Compression Exhausted";                      break;
+			case VK_INCOMPATIBLE_SHADER_BINARY_EXT:                      label = "Incompatible Shader Binary";                 break;
+			case VK_PIPELINE_BINARY_MISSING_KHR:                         label = "Pipeline Binary Missing";                    break;
+			case VK_ERROR_NOT_ENOUGH_SPACE_KHR:                          label = "Not enough space";                           break;
+			case VK_PIPELINE_COMPILE_REQUIRED:                           label = "Pipeline Compile Required";                  break;
+			case VK_THREAD_IDLE_KHR:                                     label = "Thread idle";                                break;
+			case VK_THREAD_DONE_KHR:                                     label = "Thread none";                                break;
+			case VK_OPERATION_DEFERRED_KHR:                              label = "Operation Deferred";                         break;
+			case VK_OPERATION_NOT_DEFERRED_KHR:                          label = "Operation not deferred";                     break;
+			case VK_ERROR_UNKNOWN:                                       label = "Unknown Error";                              break;
+			default:                                                     label = "Unknown Error";                              break;
 		}
 
 		std::stringstream ss;
@@ -75,7 +100,7 @@ namespace Neptune::Vulkan {
             VkDeviceFaultCountsEXT                      faultCounts{};
             faultCounts.sType                         = VK_STRUCTURE_TYPE_DEVICE_FAULT_COUNTS_EXT;
 
-            VkResult result = vkGetDeviceFaultInfoEXT(device, &faultCounts, nullptr);
+            result = vkGetDeviceFaultInfoEXT(device, &faultCounts, nullptr);
             if (result != VK_SUCCESS) 
             {
                 NEPTUNE_CORE_ERROR("Device Lost: Failed to Query Fault Counts.")
@@ -107,10 +132,13 @@ namespace Neptune::Vulkan {
                 const char* typeStr = "Unknown";
                 switch (addr.addressType) 
                 {
-                    case VK_DEVICE_FAULT_ADDRESS_TYPE_READ_INVALID_EXT: typeStr = "Invalid Read"; break;
-                    case VK_DEVICE_FAULT_ADDRESS_TYPE_WRITE_INVALID_EXT: typeStr = "Invalid Write"; break;
-                    case VK_DEVICE_FAULT_ADDRESS_TYPE_EXECUTE_INVALID_EXT: typeStr = "Invalid Execute"; break;
-                    case VK_DEVICE_FAULT_ADDRESS_TYPE_INSTRUCTION_POINTER_FAULT_EXT: typeStr = "Instruction Pointer Fault"; break;
+                    case VK_DEVICE_FAULT_ADDRESS_TYPE_READ_INVALID_EXT:                     typeStr = "Invalid Read";                break;
+                    case VK_DEVICE_FAULT_ADDRESS_TYPE_WRITE_INVALID_EXT:                    typeStr = "Invalid Write";               break;
+                    case VK_DEVICE_FAULT_ADDRESS_TYPE_EXECUTE_INVALID_EXT:                  typeStr = "Invalid Execute";             break;
+                    case VK_DEVICE_FAULT_ADDRESS_TYPE_INSTRUCTION_POINTER_FAULT_EXT:        typeStr = "Instruction Pointer Fault";   break;
+					case VK_DEVICE_FAULT_ADDRESS_TYPE_NONE_EXT:                             typeStr = "Invalid Read";                break;
+					case VK_DEVICE_FAULT_ADDRESS_TYPE_INSTRUCTION_POINTER_UNKNOWN_EXT:      typeStr = "Instruction Pointer unknown"; break;
+					case VK_DEVICE_FAULT_ADDRESS_TYPE_INSTRUCTION_POINTER_INVALID_EXT:      typeStr = "Instruction Pointer invalid"; break;
                 }
 
                 uint64_t lower = addr.reportedAddress & ~(addr.addressPrecision - 1);
@@ -129,11 +157,18 @@ namespace Neptune::Vulkan {
 
             if (faultCounts.vendorBinarySize > 0) 
             {
-                FILE* fp = fopen("DeviceLostDump.bin", "wb");
-                fwrite(vendorBinary.data(), 1, faultCounts.vendorBinarySize, fp);
-                fclose(fp);
-
-                NEPTUNE_CORE_ERROR("Device Lost Vendor binary crash dump saved to DeviceLostDump.bin")
+                FILE* fp = nullptr;
+            	auto err = fopen_s(&fp, "DeviceLostDump.bin", "wb");
+            	if (err == 0 && fp != nullptr)
+            	{
+            		fwrite(vendorBinary.data(), 1, faultCounts.vendorBinarySize, fp);
+            		fclose(fp);
+            		NEPTUNE_CORE_ERROR("Device Lost Vendor binary crash dump saved to DeviceLostDump.bin")
+				}
+	            else
+	            {
+	            	NEPTUNE_CORE_ERROR("Failed to save device lost dump file")
+	            }
             }
 
             NEPTUNE_CORE_ERROR(ss.str())
