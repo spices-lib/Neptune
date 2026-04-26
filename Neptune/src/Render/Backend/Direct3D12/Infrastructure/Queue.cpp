@@ -46,7 +46,7 @@ namespace Neptune::Direct3D12 {
         
         m_Queue.GetHandle()->ExecuteCommandLists(1, &handle);
         
-        m_Queue.GetHandle()->Signal(fence->GetHandle(), fence->IncreaseValue());
+        m_Queue.GetHandle()->Signal(fence->GetHandle(), fence->GetNextWaitValue());
     }
 
     D3D12_COMMAND_LIST_TYPE Queue::GetCommandListType() const

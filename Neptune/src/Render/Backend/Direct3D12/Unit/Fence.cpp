@@ -32,7 +32,7 @@ namespace Neptune::Direct3D12::Unit {
 		m_Event = CreateEventEx(nullptr, nullptr, 0, EVENT_ALL_ACCESS);
 	}
 	
-	uint64_t Fence::IncreaseValue()
+	uint64_t Fence::GetNextWaitValue()
 	{
 		m_Value = m_Handle->GetCompletedValue() + 1;
 		

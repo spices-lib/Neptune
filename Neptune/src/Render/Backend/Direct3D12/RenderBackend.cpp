@@ -37,11 +37,11 @@ namespace Neptune::Direct3D12 {
         m_Context->Registry<IFactory>();
         m_Context->Registry<IDevice>();
 
-        m_Context->Registry<ISwapChain>(MaxFrameInFlight, window.Implement(), window.NativeWindow());
-
         m_Context->Registry<IGraphicQueue>();
         m_Context->Registry<IComputeQueue>();
 
+    	m_Context->Registry<ISwapChain>(MaxFrameInFlight, window.Implement(), window.NativeWindow());
+    	
         m_Context->Registry<IGraphicFence>(MaxFrameInFlight);
 
         m_Context->Registry<IComputeFence>(MaxFrameInFlight);

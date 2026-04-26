@@ -47,7 +47,7 @@ namespace Neptune::Direct3D12::Unit {
 		*
 		* @return Returns Next wait value.
 		*/
-		uint64_t IncreaseValue();
+		uint64_t GetNextWaitValue();
 		
 		/**
 		* @brief Fence wait idle.
