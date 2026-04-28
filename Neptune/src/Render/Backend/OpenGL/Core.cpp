@@ -52,7 +52,7 @@ namespace Neptune::OpenGL {
 		}
 
 		std::stringstream ss;
-		ss << "OpenGL Error: [ " << label << " ]: ";
+		ss << "OpenGL Error: [ " << label << " ]";
 
         NEPTUNE_CORE_ERROR(ss.str())
 	}

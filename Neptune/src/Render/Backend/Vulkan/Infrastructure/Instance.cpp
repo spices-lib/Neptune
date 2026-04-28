@@ -37,7 +37,7 @@ namespace Neptune::Vulkan {
 			std::stringstream ss;
 
 			ss <<
-			"Validation layer:\n			" <<
+			"Vulkan Validation layer:\n			" <<
 			"MessageIdNumber: " <<
 			pCallbackData->messageIdNumber <<
 			"\n			MessageIdName: " <<

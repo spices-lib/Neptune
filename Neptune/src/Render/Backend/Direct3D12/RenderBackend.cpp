@@ -23,6 +23,7 @@ namespace Neptune::Direct3D12 {
     {
         NEPTUNE_PROFILE_ZONE
 
+    	HandleResultDelegate::SetHandler([&](HRESULT result) { HandleResult(result); });
     }
 
     void RenderBackend::OnInitialize()

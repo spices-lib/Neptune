@@ -27,7 +27,7 @@ namespace Neptune::StringLibrary {
     * 
     * @return Returns a string vector container.
     */
-    static std::vector<std::string> SplitKeepString(const std::string& input, char delimiter);
+    std::vector<std::string> SplitKeepString(const std::string& input, char delimiter);
 
     /**
     * @brief If string equal.
@@ -37,7 +37,7 @@ namespace Neptune::StringLibrary {
     * 
     * @return Returns true if equal.
     */
-    static bool StringsEqual(const char* str0, const char* str1);
+    bool StringsEqual(const char* str0, const char* str1);
 
     /**
     * @brief Convert char to wchar.
@@ -46,7 +46,7 @@ namespace Neptune::StringLibrary {
     * 
     * @return Returns wchar.
     */
-    static std::wstring CharToWChar(const char* c);
+    std::wstring CharToWChar(const char* c);
 
     /**
     * @brief Convert wchar to char.
@@ -55,5 +55,5 @@ namespace Neptune::StringLibrary {
     * 
     * @return Returns char.
     */
-    static std::string WCharToChar(const wchar_t* wc);
+    std::string WCharToChar(const wchar_t* wc);
 }

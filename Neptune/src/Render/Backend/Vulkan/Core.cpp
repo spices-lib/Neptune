@@ -93,7 +93,7 @@ namespace Neptune::Vulkan {
 		}
 
 		std::stringstream ss;
-		ss << "Vulkan Error: [ " << label << " ]: ";
+		ss << "Vulkan Error: [ " << label << " ]";
 
 		if (result == VK_ERROR_DEVICE_LOST && vkGetDeviceFaultInfoEXT && device)
 		{
@@ -124,7 +124,7 @@ namespace Neptune::Vulkan {
                 return;
             }
 
-            ss << "Description: " << faultInfo.description << "\n";
+            ss << "\n" << "Description: " << faultInfo.description << "\n";
 
             for (uint32_t i = 0; i < faultCounts.addressInfoCount; i++) 
             {
