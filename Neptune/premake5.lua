@@ -144,6 +144,7 @@ project "Neptune"
 			"GLFW",                               -- Dependency: GLFW
 			"ImGui_Vulkan",                       -- Dependency: imgui
 			"ImGui_OpenGL",                       -- Dependency: imgui
+			"ImGui_Direct3D12",                   -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 			"%{Library.dxgi}",                    -- Dependency: dxgi
 			"%{Library.d3d12}",                   -- Dependency: d3d12

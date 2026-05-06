@@ -154,6 +154,12 @@ namespace Neptune::Direct3D12 {
 
         std::unordered_map<std::string, std::any> infrastructure;
 
+        infrastructure["Device"]                     = static_cast<ID3D12Device*>(m_Context->Get<IDevice>()->Handle());
+		infrastructure["CommandQueue"]               = static_cast<ID3D12CommandQueue*>(m_Context->Get<IGraphicQueue>()->Handle());
+		infrastructure["RTVFormat"]                  = DXGI_FORMAT_B8G8R8A8_UNORM;
+		infrastructure["DSVFormat"]                  = DXGI_FORMAT_B8G8R8A8_UNORM;
+		infrastructure["SrvDescriptorHeap"]          = nullptr;
+
         return infrastructure;
     }
 }

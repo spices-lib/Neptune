@@ -367,7 +367,7 @@ namespace Neptune::Vulkan {
 		auto surface = GetContext().Get<ISurface>()->Handle();
 
 		SwapChainProperty property{};
-		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(Handle(), surface, &property.capabilities);
+		VK_CHECK(vkGetPhysicalDeviceSurfaceCapabilitiesKHR(Handle(), surface, &property.capabilities))
 
 		if (property.capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max())
 		{
@@ -379,12 +379,12 @@ namespace Neptune::Vulkan {
 		}
 
 		uint32_t formatCount;
-		vkGetPhysicalDeviceSurfaceFormatsKHR(Handle(), surface, &formatCount, nullptr);
+		VK_CHECK(vkGetPhysicalDeviceSurfaceFormatsKHR(Handle(), surface, &formatCount, nullptr))
 
 		if (formatCount != 0)
 		{
 			property.formats.resize(formatCount);
-			vkGetPhysicalDeviceSurfaceFormatsKHR(Handle(), surface, &formatCount, property.formats.data());
+			VK_CHECK(vkGetPhysicalDeviceSurfaceFormatsKHR(Handle(), surface, &formatCount, property.formats.data()))
 
 			property.format = property.formats[0];
 
@@ -400,12 +400,12 @@ namespace Neptune::Vulkan {
 		}
 
 		uint32_t presentModeCount;
-		vkGetPhysicalDeviceSurfacePresentModesKHR(Handle(), surface, &presentModeCount, nullptr);
+		VK_CHECK(vkGetPhysicalDeviceSurfacePresentModesKHR(Handle(), surface, &presentModeCount, nullptr))
 
 		if (presentModeCount != 0)
 		{
 			property.presentModes.resize(presentModeCount);
-			vkGetPhysicalDeviceSurfacePresentModesKHR(Handle(), surface, &presentModeCount, property.presentModes.data());
+			VK_CHECK(vkGetPhysicalDeviceSurfacePresentModesKHR(Handle(), surface, &presentModeCount, property.presentModes.data()))
 
 			property.presentMode = property.presentModes[0];
 

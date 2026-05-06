@@ -28,7 +28,6 @@ namespace Neptune::Direct3D12 {
         ComputeCommandList,                  // @brief Main Thread Compute CommandList.
 
         GraphicFence,                        // @brief Main Thread Graphic Fence.
-
         ComputeFence,                        // @brief Main Thread Compute Fence.
 
         Count

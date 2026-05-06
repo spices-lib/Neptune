@@ -8,8 +8,14 @@
 #include "RenderInterface.h"
 #include "Render/Frontend/Utils.h"
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
 #include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_opengl3.h>
+#endif
+
+#ifdef NP_PLATFORM_WINDOWS
+#include <backends/imgui_impl_dx12.h>
+#endif
 
 namespace Neptune::imgui {
 
@@ -19,8 +25,15 @@ namespace Neptune::imgui {
 
 		switch (backend)
 		{
+#ifdef NP_PLATFORM_WINDOWS
+			case RenderBackendEnum::Direct3D12: return CreateSP<Direct3D12Interface>();
+#endif
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
 			case RenderBackendEnum::OpenGL: return CreateSP<OpenGLInterface>();
 			case RenderBackendEnum::Vulkan: return CreateSP<VulkanInterface>();
+#endif
+
 			default:
 			{
 				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in ImGui Slate Configuration.")
@@ -85,6 +98,40 @@ namespace Neptune::imgui {
 		NEPTUNE_PROFILE_ZONE
 
 		ImGui_ImplVulkan_NewFrame();
+	}
+
+	void Direct3D12Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		ImGui_ImplDX12_InitInfo                       init_info{};
+		init_info.Device                            = std::any_cast<ID3D12Device*>                    (infrastructure.at("Device"));
+		init_info.CommandQueue                      = std::any_cast<ID3D12CommandQueue*>              (infrastructure.at("CommandQueue"));
+		init_info.NumFramesInFlight                 = MaxFrameInFlight;
+		init_info.RTVFormat                         = std::any_cast<DXGI_FORMAT>                      (infrastructure.at("RTVFormat"));
+		init_info.DSVFormat                         = std::any_cast<DXGI_FORMAT>                      (infrastructure.at("DSVFormat"));
+		init_info.UserData                          = nullptr;						       
+		init_info.SrvDescriptorHeap                 = nullptr;
+		init_info.SrvDescriptorAllocFn              = nullptr;
+		init_info.SrvDescriptorFreeFn               = nullptr;
+		init_info.LegacySingleSrvCpuDescriptor      = D3D12_CPU_DESCRIPTOR_HANDLE{};
+		init_info.LegacySingleSrvGpuDescriptor      = D3D12_GPU_DESCRIPTOR_HANDLE{};
+
+		ImGui_ImplDX12_Init(&init_info);
+	}
+	
+	void Direct3D12Interface::OnShutDown() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		ImGui_ImplDX12_Shutdown();
+	}
+
+	void Direct3D12Interface::BeginFrame() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		ImGui_ImplDX12_NewFrame();
 	}
 
 }
