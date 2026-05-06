@@ -178,7 +178,7 @@ namespace Neptune::Vulkan {
 
 		m_Layout.CreateDescriptorSetLayout(GetContext().Get<IDevice>()->Handle(), layoutCreateInfo);
 
-		DEBUGUTILS_SETOBJECTNAME(m_Layout, "DescriptorSetLayout");
+		DEBUGUTILS_SETOBJECTNAME(m_Layout, "DescriptorSetLayout")
 	}
 }
 

@@ -30,6 +30,11 @@ namespace Neptune::Direct3D12 {
         GraphicFence,                        // @brief Main Thread Graphic Fence.
         ComputeFence,                        // @brief Main Thread Compute Fence.
 
+        RTVDescriptorHeap,                   // @brief Render Target View DescriptorHeap.
+        DSVDescriptorHeap,                   // @brief Depth Stencil View DescriptorHeap.
+        SRVDescriptorHeap,                   // @brief Shader Resource View DescriptorHeap.
+        UAVDescriptorHeap,                   // @brief Unordered Access View DescriptorHeap.
+
         Count
     };
 

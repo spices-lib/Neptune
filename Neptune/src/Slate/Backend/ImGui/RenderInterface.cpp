@@ -104,18 +104,21 @@ namespace Neptune::imgui {
 	{
 		NEPTUNE_PROFILE_ZONE
 
+		const auto CPUHandle = std::any_cast<D3D12_CPU_DESCRIPTOR_HANDLE>(infrastructure.at("SRVCPUHandle"));
+		const auto GPUHandle = std::any_cast<D3D12_GPU_DESCRIPTOR_HANDLE>(infrastructure.at("SRVGPUHandle"));
+
 		ImGui_ImplDX12_InitInfo                       init_info{};
-		init_info.Device                            = std::any_cast<ID3D12Device*>                    (infrastructure.at("Device"));
-		init_info.CommandQueue                      = std::any_cast<ID3D12CommandQueue*>              (infrastructure.at("CommandQueue"));
-		init_info.NumFramesInFlight                 = MaxFrameInFlight;
-		init_info.RTVFormat                         = std::any_cast<DXGI_FORMAT>                      (infrastructure.at("RTVFormat"));
-		init_info.DSVFormat                         = std::any_cast<DXGI_FORMAT>                      (infrastructure.at("DSVFormat"));
-		init_info.UserData                          = nullptr;						       
-		init_info.SrvDescriptorHeap                 = nullptr;
-		init_info.SrvDescriptorAllocFn              = nullptr;
-		init_info.SrvDescriptorFreeFn               = nullptr;
-		init_info.LegacySingleSrvCpuDescriptor      = D3D12_CPU_DESCRIPTOR_HANDLE{};
-		init_info.LegacySingleSrvGpuDescriptor      = D3D12_GPU_DESCRIPTOR_HANDLE{};
+		init_info.Device                            = std::any_cast<ID3D12Device*>                (infrastructure.at("Device"));
+		init_info.CommandQueue                      = std::any_cast<ID3D12CommandQueue*>          (infrastructure.at("CommandQueue"));					                                                               
+		init_info.RTVFormat                         = std::any_cast<DXGI_FORMAT>                  (infrastructure.at("RTVFormat"));
+		init_info.DSVFormat                         = std::any_cast<DXGI_FORMAT>                  (infrastructure.at("DSVFormat"));	       
+		init_info.SrvDescriptorHeap                 = std::any_cast<ID3D12DescriptorHeap*>        (infrastructure.at("SRVDescriptorHeap"));
+		init_info.SrvDescriptorAllocFn              = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE* OCPUHandle, D3D12_GPU_DESCRIPTOR_HANDLE* OGPUHandle){};
+		init_info.SrvDescriptorFreeFn               = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE){};
+		init_info.LegacySingleSrvCpuDescriptor      = CPUHandle;
+		init_info.LegacySingleSrvGpuDescriptor      = GPUHandle;
+		init_info.NumFramesInFlight                 = MaxFrameInFlight;	
+		init_info.UserData                          = nullptr;	
 
 		ImGui_ImplDX12_Init(&init_info);
 	}

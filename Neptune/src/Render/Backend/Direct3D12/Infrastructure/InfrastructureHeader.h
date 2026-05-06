@@ -15,5 +15,6 @@
 #include "Render/Backend/Direct3D12/Infrastructure/CommandList.h"
 #include "Render/Backend/Direct3D12/Infrastructure/Fence.h"
 #include "Render/Backend/Direct3D12/Infrastructure/SwapChain.h"
+#include "Render/Backend/Direct3D12/Infrastructure/DescriptorHeap.h"
 
 #endif

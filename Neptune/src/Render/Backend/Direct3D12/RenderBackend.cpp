@@ -49,6 +49,11 @@ namespace Neptune::Direct3D12 {
         m_Context->Registry<IGraphicCommandList>(MaxFrameInFlight);
         m_Context->Registry<IComputeCommandList>(MaxFrameInFlight);
 
+        m_Context->Registry<IRTVDescriptorHeap>();
+        m_Context->Registry<IDSVDescriptorHeap>();
+        m_Context->Registry<ISRVDescriptorHeap>();
+        m_Context->Registry<IUAVDescriptorHeap>();
+
         RenderFrontend::OnInitialize();
     }
 
@@ -158,7 +163,9 @@ namespace Neptune::Direct3D12 {
 		infrastructure["CommandQueue"]               = static_cast<ID3D12CommandQueue*>(m_Context->Get<IGraphicQueue>()->Handle());
 		infrastructure["RTVFormat"]                  = DXGI_FORMAT_B8G8R8A8_UNORM;
 		infrastructure["DSVFormat"]                  = DXGI_FORMAT_B8G8R8A8_UNORM;
-		infrastructure["SrvDescriptorHeap"]          = nullptr;
+		infrastructure["SRVDescriptorHeap"]          = static_cast<ID3D12DescriptorHeap*>(m_Context->Get<ISRVDescriptorHeap>()->Handle());
+        infrastructure["SRVCPUHandle"]               = m_Context->Get<ISRVDescriptorHeap>()->Handle()->GetCPUDescriptorHandleForHeapStart();
+        infrastructure["SRVGPUHandle"]               = m_Context->Get<ISRVDescriptorHeap>()->Handle()->GetGPUDescriptorHandleForHeapStart();
 
         return infrastructure;
     }

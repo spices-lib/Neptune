@@ -57,7 +57,7 @@ namespace Neptune::Direct3D12::Unit {
 	private:
 
 		HANDLE m_Event;                 // @brief Fence Event.
-		uint64_t m_Value;               // @brief Wait value.
+		uint64_t m_Value = 0;           // @brief Wait value.
 		
 	};
 }

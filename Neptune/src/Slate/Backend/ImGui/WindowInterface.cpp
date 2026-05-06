@@ -33,6 +33,7 @@ namespace Neptune::imgui {
 
 		switch (e)
 		{
+#ifndef NP_PLATFORM_EMSCRIPTEN
 			case RenderBackendEnum::OpenGL:
 			{
 				ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
@@ -43,6 +44,14 @@ namespace Neptune::imgui {
 				ImGui_ImplGlfw_InitForVulkan(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
 				break;
 			}
+#endif
+#ifdef NP_PLATFORM_WINDOWS
+			case RenderBackendEnum::Direct3D12:
+			{
+				ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+				break;
+			}
+#endif
 			default:
 			{
 				NEPTUNE_CORE_ERROR("Unsupported RenderBackendEnum in GLFWInterface::OnInitialize.")

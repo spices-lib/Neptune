@@ -28,21 +28,30 @@ namespace Neptune::Direct3D12 {
 
         for (uint32_t i = 0; i < count; ++i)
         {
+
             auto commandAllocator = CreateSP<Unit::CommandAllocator>();
             
-            commandAllocator->CreateCommandAllocator(GetContext().Get<IDevice>()->Handle(), GetCommandListType());
+            {
 
-            m_CommandAllocators.emplace_back(commandAllocator);
-            
-            DEBUGUTILS_SETOBJECTNAME(*commandAllocator, ToString())
-            
-            auto commandList = CreateSP<Unit::GraphicsCommandList>();
+                commandAllocator->CreateCommandAllocator(GetContext().Get<IDevice>()->Handle(), GetCommandListType());
 
-            commandList->CreateGraphicsCommandList(GetContext().Get<IDevice>()->Handle(), commandAllocator->GetHandle(), GetCommandListType());
+                m_CommandAllocators.emplace_back(commandAllocator);
 
-            m_CommandLists.emplace_back(commandList);
+                DEBUGUTILS_SETOBJECTNAME(*commandAllocator, ToString())
 
-            DEBUGUTILS_SETOBJECTNAME(*commandList, ToString())
+            }
+
+            {
+
+                auto commandList = CreateSP<Unit::GraphicsCommandList>();
+
+                commandList->CreateGraphicsCommandList(GetContext().Get<IDevice>()->Handle(), commandAllocator->GetHandle(), GetCommandListType());
+
+                m_CommandLists.emplace_back(commandList);
+
+                DEBUGUTILS_SETOBJECTNAME(*commandList, ToString())
+
+            }
         }
     }
 
