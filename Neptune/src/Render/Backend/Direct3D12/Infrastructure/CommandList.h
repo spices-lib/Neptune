@@ -10,6 +10,7 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/Direct3D12/Unit/CommandAllocator.h"
 #include "Render/Backend/Direct3D12/Unit/GraphicsCommandList.h"
 
 #include <vector>
@@ -83,13 +84,6 @@ namespace Neptune::Direct3D12 {
 		void Create(uint32_t count);
 
 		/**
-		* @brief Get Unit CommandAllocator Handle which allocated this CommandList.
-		*
-		* @return Returns Unit CommandAllocator Handle which allocated this CommandList.
-		*/
-		const D3D12CommandAllocator& GetCommandAllocator() const;
-
-		/**
 		* @brief Get CommandListType.
 		*
 		* @return Returns CommandListType.
@@ -98,7 +92,8 @@ namespace Neptune::Direct3D12 {
 
 	private:
 
-		std::vector<SP<Unit::GraphicsCommandList>> m_CommandLists;  // @brief Container of this unit CommandList.
+		std::vector<SP<Unit::CommandAllocator>>    m_CommandAllocators; // @brief Container of this unit CommandAllocator.
+		std::vector<SP<Unit::GraphicsCommandList>> m_CommandLists;      // @brief Container of this unit CommandList.
 
 	};
 

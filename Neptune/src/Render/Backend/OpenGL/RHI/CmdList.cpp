@@ -9,7 +9,6 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "CmdList.h"
-#include "Render/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
 #include "Data/Clock.h"
 
 namespace Neptune::OpenGL {

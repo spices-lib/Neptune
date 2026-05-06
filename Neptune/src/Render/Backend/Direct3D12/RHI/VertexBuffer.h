@@ -6,18 +6,17 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "Render/Backend/OpenGL/Infrastructure/Infrastructure.h"
-#include "Render/Backend/OpenGL/Unit/VertexArray.h"
+#include "Render/Backend/Direct3D12/Infrastructure/Infrastructure.h"
 #include "Render/Frontend/RHI/VertexBuffer.h"
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
 	/**
-	* @brief OpenGL::VertexBuffer Class.
-	* This class defines the OpenGL::VertexBuffer behaves.
+	* @brief Direct3D12::VertexBuffer Class.
+	* This class defines the Direct3D12::VertexBuffer behaves.
 	*/
 	class VertexBuffer : public ContextAccessor, public RHI::RHIVertexBuffer::Impl
 	{
@@ -37,7 +36,6 @@ namespace Neptune::OpenGL {
 
 	private:
 
-		Unit::VertexArray m_Buffer;            // @brief This Buffer.
 	};
 }
 

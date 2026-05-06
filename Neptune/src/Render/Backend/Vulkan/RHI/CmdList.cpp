@@ -15,7 +15,6 @@
 #include "Render/Backend/Vulkan/RHI/DescriptorList.h"
 #include "Render/Backend/Vulkan/Resource/VideoSession.h"
 #include "Render/Backend/Vulkan/Resource/QueryPool.h"
-#include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 #include "Render/Frontend/RHI/RenderPass.h"
 #include "Data/Clock.h"
 

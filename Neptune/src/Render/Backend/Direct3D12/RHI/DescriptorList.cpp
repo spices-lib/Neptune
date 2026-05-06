@@ -6,11 +6,11 @@
 
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "DescriptorList.h"
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
 	void DescriptorList::AddUniformBuffer(uint32_t set, uint32_t binding, uint32_t bytes)
 	{

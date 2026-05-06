@@ -9,7 +9,6 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "CommandList.h"
-#include "CommandAllocator.h"
 #include "Device.h"
 #include "DebugUtilsObject.h"
 
@@ -29,26 +28,22 @@ namespace Neptune::Direct3D12 {
 
         for (uint32_t i = 0; i < count; ++i)
         {
+            auto commandAllocator = CreateSP<Unit::CommandAllocator>();
+            
+            commandAllocator->CreateCommandAllocator(GetContext().Get<IDevice>()->Handle(), GetCommandListType());
+
+            m_CommandAllocators.emplace_back(commandAllocator);
+            
+            DEBUGUTILS_SETOBJECTNAME(*commandAllocator, ToString())
+            
             auto commandList = CreateSP<Unit::GraphicsCommandList>();
 
-            commandList->CreateGraphicsCommandList(GetContext().Get<IDevice>()->Handle(), GetCommandAllocator(), GetCommandListType());
+            commandList->CreateGraphicsCommandList(GetContext().Get<IDevice>()->Handle(), commandAllocator->GetHandle(), GetCommandListType());
 
             m_CommandLists.emplace_back(commandList);
 
             DEBUGUTILS_SETOBJECTNAME(*commandList, ToString())
         }
-    }
-
-    const D3D12CommandAllocator& CommandList::GetCommandAllocator() const
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        switch (GetEInfrastructure())
-		{
-			case EInfrastructure::GraphicCommandList:		return GetContext().Get<IGraphicCommandAllocator>()->Handle();
-			case EInfrastructure::ComputeCommandList:       return GetContext().Get<IComputeCommandAllocator>()->Handle();
-			default: return nullptr;
-		}
     }
 
     D3D12_COMMAND_LIST_TYPE CommandList::GetCommandListType() const
@@ -67,7 +62,7 @@ namespace Neptune::Direct3D12 {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_CommandLists[index]->GetHandle()->Reset(GetCommandAllocator(), nullptr);
+        m_CommandLists[index]->GetHandle()->Reset(m_CommandAllocators[index]->GetHandle(), nullptr);
     }
 
     void CommandList::End(uint32_t index) const

@@ -6,10 +6,10 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "Render/Backend/OpenGL/Infrastructure/Infrastructure.h"
+#include "Render/Backend/Direct3D12/Infrastructure/Infrastructure.h"
 #include "Render/Frontend/RHI/Pipeline.h"
 
 namespace Neptune::RHI {
@@ -19,11 +19,11 @@ namespace Neptune::RHI {
 	class Shader;
 }
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
 	/**
-	* @brief OpenGL::Pipeline Class.
-	* This class defines the OpenGL::Pipeline behaves.
+	* @brief Direct3D12::Pipeline Class.
+	* This class defines the Direct3D12::Pipeline behaves.
 	*/
 	class Pipeline : public ContextAccessor, public RHI::RHIPipeline::Impl
 	{

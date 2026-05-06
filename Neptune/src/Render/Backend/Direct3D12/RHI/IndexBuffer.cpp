@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "IndexBuffer.h"
 

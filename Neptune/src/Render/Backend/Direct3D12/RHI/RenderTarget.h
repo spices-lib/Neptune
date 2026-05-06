@@ -6,17 +6,17 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "Core/Core.h"
-#include "Render/Backend/OpenGL/Infrastructure/Infrastructure.h"
+#include "Render/Backend/Direct3D12/Infrastructure/Infrastructure.h"
 #include "Render/Frontend/RHI/RenderTarget.h"
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
 	/**
-	* @brief OpenGL::RenderTarget Class.
-	* This class defines the OpenGL::RenderTarget behaves.
+	* @brief Direct3D12::RenderTarget Class.
+	* This class defines the Direct3D12::RenderTarget behaves.
 	*/
 	class RenderTarget : public ContextAccessor, public RHI::RHIRenderTarget::Impl
 	{

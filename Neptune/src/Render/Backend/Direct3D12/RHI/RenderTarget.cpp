@@ -6,11 +6,11 @@
 
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_PLATFORM_WINDOWS
 
 #include "RenderTarget.h"
 
-namespace Neptune::OpenGL {
+namespace Neptune::Direct3D12 {
 
 	void RenderTarget::CreateRenderTarget(const RenderTargetCreateInfo& info)
 	{
