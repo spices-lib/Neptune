@@ -79,7 +79,7 @@ namespace Neptune::Direct3D12 {
 	protected:
 
 		SP<Unit::SwapChain> m_SwapChain;           // @brief This SwapChain.
-		bool m_AllowTearing;                       // @brief Feature of AllowTearing.
+		BOOL m_AllowTearing;                       // @brief Feature of AllowTearing.
 
 	};
 

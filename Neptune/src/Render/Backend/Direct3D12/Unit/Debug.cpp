@@ -34,9 +34,7 @@ namespace Neptune::Direct3D12::Unit {
 
 		m_Handle->EnableDebugLayer();
 
-		m_Handle->SetEnableGPUBasedValidation(1);
-		
-		m_Handle->SetEnableGPUBasedValidation(true);
+		m_Handle->SetEnableGPUBasedValidation(TRUE);
 	}
 }
 

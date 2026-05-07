@@ -11,6 +11,7 @@
 #include "Core/Core.h"
 #include "Infrastructure.h"
 #include "Render/Backend/Direct3D12/Core.h"
+#include "Core/Library/StringLibrary.h"
 
 namespace Neptune::Direct3D12 {
 
@@ -123,12 +124,14 @@ namespace Neptune::Direct3D12 {
 	inline void DebugUtilsObject::SetObjectName(const Unit& unit, const std::string& caption)
 	{
 		NEPTUNE_PROFILE_ZONE
-		
-		if constexpr (requires {
-			{ Unit::Handle::SetName() } -> std::convertible_to<void>;
+
+		using Handle = std::remove_pointer_t<typename Unit::Handle>;
+
+		if constexpr (requires(Handle& h, LPCWSTR name) {
+			{ h.SetName(name) } -> std::convertible_to<HRESULT>;
 		})
 		{
-			unit.GetHandle()->SetName(caption.c_str());
+			DIRECT3D12_CHECK(unit.GetHandle()->SetName(StringLibrary::CharToWChar(caption.c_str()).c_str()))
 		}
 	}
 	

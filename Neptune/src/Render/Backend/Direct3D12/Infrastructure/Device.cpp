@@ -135,12 +135,14 @@ namespace Neptune::Direct3D12 {
 		infoQueue.GetHandle()->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
 		infoQueue.GetHandle()->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
 
-		infoQueue.GetHandle()->RegisterMessageCallback(
+		DWORD cookie = 0;
+		
+		DIRECT3D12_CHECK(infoQueue.GetHandle()->RegisterMessageCallback(
 			InstanceDebugCallback, 
 			D3D12_MESSAGE_CALLBACK_FLAG_NONE,
 			nullptr,
-			nullptr
-		);
+			&cookie
+		))
 		
 #endif
 		
