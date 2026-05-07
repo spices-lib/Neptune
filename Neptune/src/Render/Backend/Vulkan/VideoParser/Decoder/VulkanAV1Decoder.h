@@ -304,7 +304,7 @@ namespace Neptune::Vulkan {
     public:
         VulkanAV1Decoder(
             Context& context,
-            VideoSession& session,
+            Resource::VideoSession& session,
             ClientDelegate& client, bool annexB = false);
         virtual ~VulkanAV1Decoder();
 

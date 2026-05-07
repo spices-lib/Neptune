@@ -43,7 +43,7 @@ static inline int Max(int x, int y) { return (x >= y) ? x : y; } // (5-12)
 
 VulkanH264Decoder::VulkanH264Decoder(
     Context& context,
-    VideoSession& session,
+    Resource::VideoSession& session,
     ClientDelegate& client)
   : VulkanVideoDecoder(context, session, client),
     m_pParserData(NULL),

@@ -18,6 +18,11 @@
 #include <variant>
 
 namespace Neptune::Vulkan {
+	
+	class RenderTarget;
+}
+
+namespace Neptune::Vulkan::Resource {
 
 	/**
 	* @brief Vulkan::DescriptorSet Class.
@@ -76,7 +81,7 @@ namespace Neptune::Vulkan {
 		* @param[in] binding .
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void UpdateTexture(uint32_t binding, const class RenderTarget* renderTarget);
+		void UpdateTexture(uint32_t binding, const RenderTarget* renderTarget);
 
 		/**
 		* @brief Build DescriptorSet.

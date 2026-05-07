@@ -57,7 +57,7 @@ namespace Neptune::Vulkan {
 
         VulkanVideoDecoder(
             Context& context, 
-            VideoSession& session,
+            Resource::VideoSession& session,
             ClientDelegate& client);
 
         ~VulkanVideoDecoder() override = default;
@@ -135,7 +135,7 @@ namespace Neptune::Vulkan {
         int32_t                          m_lCheckPTS;                        // Run the m_bFilterTimestamps for the first few framew to look for out of order PTS
         NVCodecErrors                    m_eError;
         SIMD_ISA                         m_NextStartCode;
-        VideoSession&                    m_VideoSession;
+        Resource::VideoSession&          m_VideoSession;
         ClientDelegate                   m_Client;
 
     protected:

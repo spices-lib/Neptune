@@ -77,7 +77,7 @@ namespace Neptune::Vulkan {
 
 		for (size_t i = 0; i < count; ++i)
 		{
-			auto swapChainImage = CreateSP<Image>(GetContext());
+			auto swapChainImage = CreateSP<Resource::Image>(GetContext());
 			swapChainImage->SetImage(images[i]);
 
 			m_SwapChainImage.emplace_back(swapChainImage);

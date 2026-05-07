@@ -13,9 +13,7 @@
 #include "Render/Backend/Direct3D12/Unit/CommandAllocator.h"
 #include "Render/Backend/Direct3D12/Unit/GraphicsCommandList.h"
 
-#include <vector>
-
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D12::Resource {
 
 	/**
 	* @brief Direct3D12::CommandList Class.
@@ -30,7 +28,7 @@ namespace Neptune::Direct3D12 {
 		* 
 		* @param[in] context Context.
 		*/
-		CommandList(Context& context) : ContextAccessor(context)
+		explicit CommandList(Context& context) : ContextAccessor(context) {}
 
 		/**
 		* @brief Destructor Function.
@@ -66,7 +64,7 @@ namespace Neptune::Direct3D12 {
 
 		Unit::CommandAllocator    m_CommandAllocator; // @brief This unit CommandAllocator.
 		Unit::GraphicsCommandList m_CommandList;      // @brief This unit CommandList.
-		bool                      m_Open;             // @brief This unit CommandList State.
+		bool                      m_Open = false;     // @brief This unit CommandList State.
 
 	};
 

@@ -17,7 +17,7 @@
 #include "Render/Backend/Vulkan/RHI/RenderTarget.h"
 #include "Buffer.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	void DescriptorSet::AddBinding(const VkBufferCreateInfo& info, const VkDescriptorSetLayoutBinding& binding)
 	{
@@ -59,7 +59,7 @@ namespace Neptune::Vulkan {
 		buffer->Flush();
 	}
 
-	void DescriptorSet::UpdateTexture(uint32_t binding, const RenderTarget* renderTarget)
+	void DescriptorSet::UpdateTexture(uint32_t binding, const Vulkan::RenderTarget* renderTarget)
 	{
 		NEPTUNE_PROFILE_ZONE
 

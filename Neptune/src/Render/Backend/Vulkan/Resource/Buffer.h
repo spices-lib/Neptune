@@ -12,7 +12,7 @@
 #include "Render/Backend/Vulkan/Infrastructure/Infrastructure.h"
 #include "Render/Backend/Vulkan/Unit/Buffer.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	/**
 	* @brief Vulkan::Buffer Class.

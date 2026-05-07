@@ -22,6 +22,11 @@ namespace Neptune::RHI {
 
 namespace Neptune::Vulkan {
 
+	namespace Resource {
+		
+		class Image;
+	}
+	
 	/**
 	* @brief Vulkan::OpticalFlowSession Class.
 	* This class defines the Vulkan::OpticalFlowSession behaves.
@@ -96,7 +101,7 @@ namespace Neptune::Vulkan {
 	private:
 
 		Unit::OpticalFlowSession m_Session;                // @brief This OpticalFlowSession.
-		std::unordered_map<VkOpticalFlowSessionBindingPointNV, class Image*> m_SessionImages;  // @brief Container of Stage Image.
+		std::unordered_map<VkOpticalFlowSessionBindingPointNV, Resource::Image*> m_SessionImages;  // @brief Container of Stage Image.
 	};
 }
 

@@ -28,30 +28,11 @@ namespace Neptune::Direct3D12 {
 
         for (uint32_t i = 0; i < count; ++i)
         {
+            auto commandList = CreateSP<Resource::CommandList>(GetContext());
 
-            auto commandAllocator = CreateSP<Unit::CommandAllocator>();
-            
-            {
+            commandList->CreateCommandList(GetContext().Get<IDevice>()->Handle(), GetCommandListType());
 
-                commandAllocator->CreateCommandAllocator(GetContext().Get<IDevice>()->Handle(), GetCommandListType());
-
-                m_CommandAllocators.emplace_back(commandAllocator);
-
-                DEBUGUTILS_SETOBJECTNAME(*commandAllocator, ToString())
-
-            }
-
-            {
-
-                auto commandList = CreateSP<Unit::GraphicsCommandList>();
-
-                commandList->CreateGraphicsCommandList(GetContext().Get<IDevice>()->Handle(), commandAllocator->GetHandle(), GetCommandListType());
-
-                m_CommandLists.emplace_back(commandList);
-
-                DEBUGUTILS_SETOBJECTNAME(*commandList, ToString())
-
-            }
+            m_CommandLists.push_back(commandList);
         }
     }
 
@@ -71,14 +52,14 @@ namespace Neptune::Direct3D12 {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_CommandLists[index]->GetHandle()->Reset(m_CommandAllocators[index]->GetHandle(), nullptr);
+        m_CommandLists[index]->Begin();
     }
 
     void CommandList::End(uint32_t index) const
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_CommandLists[index]->GetHandle()->Close();
+        m_CommandLists[index]->End();
     }
 }
 

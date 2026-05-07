@@ -11,7 +11,7 @@
 #include "Core/Core.h"
 #include "Render/Backend/Direct3D12/Infrastructure/Infrastructure.h"
 
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D12::Resource {
 
 	/**
 	* @brief Direct3D12::Texture Class.

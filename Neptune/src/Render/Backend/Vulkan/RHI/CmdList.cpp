@@ -132,7 +132,7 @@ namespace Neptune::Vulkan {
 		m_RenderPass = renderPass->GetRHIImpl<RenderPass>();
 	}
 
-	void CmdList::SetQueryPool(const SP<QueryPool>& queryPool)
+	void CmdList::SetQueryPool(const SP<Resource::QueryPool>& queryPool)
 	{
 		NEPTUNE_PROFILE_ZONE
 
@@ -153,7 +153,7 @@ namespace Neptune::Vulkan {
 		m_CommandBuffer->PipelineBarrier(srcMask, dstMask, barrier);
 	}
 
-	void CmdList::CmdTransitionLayout(SP<Image> image, VkImageLayout newLayout) const
+	void CmdList::CmdTransitionLayout(SP<Resource::Image> image, VkImageLayout newLayout) const
 	{
 		NEPTUNE_PROFILE_ZONE
 		

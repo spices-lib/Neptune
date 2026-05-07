@@ -14,7 +14,7 @@
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	void Buffer::CreateBuffer(const VkBufferCreateInfo& info, VkMemoryPropertyFlags properties)
 	{

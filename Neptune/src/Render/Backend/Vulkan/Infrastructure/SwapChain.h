@@ -85,8 +85,8 @@ namespace Neptune::Vulkan {
 
 	private:
 
-		SP<Unit::SwapChain> m_SwapChain;           // @brief This SwapChain.
-		std::vector<SP<Image>> m_SwapChainImage;   // @brief Conatiner of SwapChainImage.
+		SP<Unit::SwapChain> m_SwapChain;                     // @brief This SwapChain.
+		std::vector<SP<Resource::Image>> m_SwapChainImage;   // @brief Containor of SwapChainImage.
 
 	};
 

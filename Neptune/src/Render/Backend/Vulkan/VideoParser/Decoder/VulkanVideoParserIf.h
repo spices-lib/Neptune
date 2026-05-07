@@ -369,7 +369,7 @@ namespace Neptune::Vulkan {
         uint32_t numSlices;
         size_t bitstreamDataOffset;                            // bitstream data offset in bitstreamData buffer
         size_t bitstreamDataLen;                               // Number of bytes in bitstream data buffer
-        DecodeBuffer* bitstreamData;  // bitstream data for this picture (slice-layer)
+        Resource::DecodeBuffer* bitstreamData;                 // bitstream data for this picture (slice-layer)
     } VkParserPictureData;
 
     // Packet input for parsing
@@ -465,7 +465,7 @@ namespace Neptune::Vulkan {
         virtual VkDeviceSize GetBitstreamBuffer(VkDeviceSize size, VkDeviceSize minBitstreamBufferOffsetAlignment,
             VkDeviceSize minBitstreamBufferSizeAlignment, const uint8_t* pInitializeBufferMemory,
             VkDeviceSize initializeBufferMemorySize,
-            SP<DecodeBuffer>& bitstreamBuffer) = 0;
+            SP<Resource::DecodeBuffer>& bitstreamBuffer) = 0;
 
     protected:
         virtual ~VkParserVideoDecodeClient() {}

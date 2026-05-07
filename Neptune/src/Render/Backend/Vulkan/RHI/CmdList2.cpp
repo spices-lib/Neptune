@@ -115,7 +115,7 @@ namespace Neptune::Vulkan {
 		m_ThreadQueue = GetContext().Get<IOpticalFlowThreadQueue>();
 	}
 
-	void CmdList2::SetVideoSession(const WP<VideoSession>& videoSession)
+	void CmdList2::SetVideoSession(const WP<Resource::VideoSession>& videoSession)
 	{
 		NEPTUNE_PROFILE_ZONE
 

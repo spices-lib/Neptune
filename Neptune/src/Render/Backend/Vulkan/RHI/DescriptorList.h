@@ -106,7 +106,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns DescriptorList.
 		*/
-		const std::map<uint32_t, SP<DescriptorSet>>& GetSets() const { return m_DescriptorSets; }
+		const std::map<uint32_t, SP<Resource::DescriptorSet>>& GetSets() const { return m_DescriptorSets; }
 
 	private:
 		
@@ -117,12 +117,12 @@ namespace Neptune::Vulkan {
 		* 
 		* @return Returns DescriptorSet.
 		*/
-		SP<DescriptorSet> AccessSet(uint32_t set);
+		SP<Resource::DescriptorSet> AccessSet(uint32_t set);
 
 	private:
 
-		std::map<uint32_t, SP<DescriptorSet>> m_DescriptorSets;         // @brief Container of DescriptorSet.
-		std::vector<VkDescriptorSetLayout> m_DescriptorSetLayouts;      // @brief Container of VkDescriptorSetLayout.
+		std::map<uint32_t, SP<Resource::DescriptorSet>> m_DescriptorSets;         // @brief Container of DescriptorSet.
+		std::vector<VkDescriptorSetLayout> m_DescriptorSetLayouts;                // @brief Container of VkDescriptorSetLayout.
 
 	};
 }

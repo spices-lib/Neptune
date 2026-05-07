@@ -44,7 +44,7 @@ namespace Neptune::Vulkan {
         : ContextAccessor(context)
         , m_dpb(3)
     {
-        m_VideoSession = CreateSP<VideoSession>(context);
+        m_VideoSession = CreateSP<Resource::VideoSession>(context);
     }
 
     int32_t Decoder::BeginSequence(const VkParserSequenceInfo* pnvsi)

@@ -22,11 +22,15 @@ namespace Neptune::RHI {
 
 namespace Neptune::Vulkan {
 
-	class RenderPass;
-	class VideoSession;
-	class Image;
-	class QueryPool;
+	namespace Resource {
 
+		class VideoSession;
+		class Image;
+		class QueryPool;
+	}
+
+	class RenderPass;
+	
 	/**
 	* @brief Vulkan::CmdList Class.
 	* This class defines the Vulkan::CmdList behaves.
@@ -111,7 +115,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] queryPool QueryPool.
 		*/
-		void SetQueryPool(const SP<QueryPool>& queryPool);
+		void SetQueryPool(const SP<Resource::QueryPool>& queryPool);
 
 		/**
 		* @brief Copy Image.
@@ -137,7 +141,7 @@ namespace Neptune::Vulkan {
 		* @param[in] image Image.
 		* @param[in] newLayout VkImageLayout.
 		*/
-		void CmdTransitionLayout(SP<Image> image, VkImageLayout newLayout) const;
+		void CmdTransitionLayout(SP<Resource::Image> image, VkImageLayout newLayout) const;
 
 		/**
 		* @brief Begin Query.
@@ -172,7 +176,7 @@ namespace Neptune::Vulkan {
 
 		SP<Unit::CommandBuffer>       m_CommandBuffer  = nullptr;                               // @brief CommandBuffer reference.
 		const RenderPass*             m_RenderPass     = nullptr;                               // @brief RenderPass reference.
-		const QueryPool*              m_QueryPool      = nullptr;                               // @brief QueryPool reference.
+		const Resource::QueryPool*    m_QueryPool      = nullptr;                               // @brief QueryPool reference.
 		VkPipelineBindPoint           m_BindPoint      = VK_PIPELINE_BIND_POINT_MAX_ENUM;       // @brief VkPipelineBindPoint.
 		VkPipelineLayout              m_PipelineLayout = VK_NULL_HANDLE;                        // @brief VkPipelineLayout.
 	};

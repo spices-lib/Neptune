@@ -630,7 +630,7 @@ namespace Neptune::Vulkan {
         uint32_t                    m_videoFrameNum;
         uint32_t                    m_videoStreamsCompleted : 1;
         SP<VulkanVideoDecoder>      m_Decoder = nullptr;
-        SP<VideoSession>            m_VideoSession;
+        SP<Resource::VideoSession>  m_VideoSession;
                                     
         uint32_t                    m_maxNumDecodeSurfaces;
         VkParserSequenceInfo        m_nvsi;

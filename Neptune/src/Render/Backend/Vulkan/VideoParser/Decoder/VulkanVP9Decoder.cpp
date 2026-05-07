@@ -6,7 +6,7 @@ namespace Neptune::Vulkan {
 
     VulkanVP9Decoder::VulkanVP9Decoder(
         Context& context,
-        VideoSession& session,
+        Resource::VideoSession& session,
         ClientDelegate& client)
         : VulkanVideoDecoder(context, session, client)
         , m_PicData()

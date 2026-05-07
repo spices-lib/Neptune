@@ -14,7 +14,7 @@
 #include "Render/Backend/Vulkan/Unit/ImageView.h"
 #include "Render/Backend/Vulkan/Unit/Sampler.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	/**
 	* @brief Vulkan::Image Class.

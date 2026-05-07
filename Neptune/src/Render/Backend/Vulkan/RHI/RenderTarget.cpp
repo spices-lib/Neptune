@@ -137,7 +137,7 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_Image = CreateSP<Image>(GetContext());
+		m_Image = CreateSP<Resource::Image>(GetContext());
 
 		{
 			VkImageCreateInfo                                  createInfo{};

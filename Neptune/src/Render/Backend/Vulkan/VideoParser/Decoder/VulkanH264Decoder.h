@@ -691,7 +691,7 @@ namespace Neptune::Vulkan {
 
     public:
         VulkanH264Decoder(Context& context,
-            VideoSession& session,
+            Resource::VideoSession& session,
             ClientDelegate& client);
         virtual ~VulkanH264Decoder();
 

@@ -11,7 +11,7 @@
 #include "CommandList.h"
 #include "Render/Backend/Direct3D12/Infrastructure/DebugUtilsObject.h"
 
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D12::Resource {
 
     void CommandList::CreateCommandList(D3D12Device device, D3D12_COMMAND_LIST_TYPE type)
     {
@@ -20,7 +20,7 @@ namespace Neptune::Direct3D12 {
         {
             m_CommandAllocator.CreateCommandAllocator(device, type);
 
-            DEBUGUTILS_SETOBJECTNAME(m_CommandAllocator, "CommmandAllocator")
+            DEBUGUTILS_SETOBJECTNAME(m_CommandAllocator, "CommandAllocator")
         }
 
         {

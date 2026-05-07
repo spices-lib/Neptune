@@ -10,8 +10,7 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
-#include "Render/Backend/Direct3D12/Unit/CommandAllocator.h"
-#include "Render/Backend/Direct3D12/Unit/GraphicsCommandList.h"
+#include "Render/Backend/Direct3D12/Resource/CommandList.h"
 
 #include <vector>
 
@@ -49,16 +48,7 @@ namespace Neptune::Direct3D12 {
 		* 
 		* @return Returns Unit Handle.
 		*/
-		const Unit::GraphicsCommandList::Handle& Handle(uint32_t index = 0) const { return m_CommandLists[index]->GetHandle(); }
-
-		/**
-		* @brief Get Unit Handle Interface.
-		*
-		* @param[in] index Handle index.
-		*
-		* @return Returns Unit Handle Interface.
-		*/
-		const SP<Unit::GraphicsCommandList> IHandle(uint32_t index = 0) const { return m_CommandLists[index]; }
+		const Unit::GraphicsCommandList::Handle& Handle(uint32_t index = 0) const { return m_CommandLists[index]->Handle(); }
 
 		/**
 		* @brief Begin CommandBuffer.
@@ -92,8 +82,7 @@ namespace Neptune::Direct3D12 {
 
 	private:
 
-		std::vector<SP<Unit::CommandAllocator>>    m_CommandAllocators; // @brief Container of this unit CommandAllocator.
-		std::vector<SP<Unit::GraphicsCommandList>> m_CommandLists;      // @brief Container of this unit CommandList.
+		std::vector<SP<Resource::CommandList>> m_CommandLists; // @brief Container of this resource CommandList.
 
 	};
 

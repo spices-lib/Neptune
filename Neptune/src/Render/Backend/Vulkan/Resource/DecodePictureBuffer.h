@@ -15,7 +15,7 @@
 #include <bitset>
 #include <queue>
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	/**
 	* @brief Vulkan::DecodePictureBuffer Class.

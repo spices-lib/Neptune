@@ -15,7 +15,7 @@
 #include "Render/Backend/Vulkan/Infrastructure/Device.h"
 #include "Render/Backend/Vulkan/RHI/CmdList2.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	void Image::SetImage(Unit::Image::Handle image)
 	{

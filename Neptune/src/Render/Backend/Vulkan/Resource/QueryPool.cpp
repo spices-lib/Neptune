@@ -12,7 +12,7 @@
 #include "Render/Backend/Vulkan/Infrastructure/Device.h"
 #include "Render/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	void QueryPool::CreateQueryPool(const VkQueryPoolCreateInfo& info, uint32_t stride)
 	{

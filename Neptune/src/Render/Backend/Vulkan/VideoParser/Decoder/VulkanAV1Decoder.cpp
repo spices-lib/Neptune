@@ -11,7 +11,7 @@ namespace Neptune::Vulkan {
 // constructor
 VulkanAV1Decoder::VulkanAV1Decoder(
     Context& context,
-    VideoSession& session,
+    Resource::VideoSession& session,
     ClientDelegate& client, bool annexB)
     : VulkanVideoDecoder(context, session, client)
     , m_sps()

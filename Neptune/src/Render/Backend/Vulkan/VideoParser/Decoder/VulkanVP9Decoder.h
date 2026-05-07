@@ -90,7 +90,7 @@ namespace Neptune::Vulkan {
 
     public:
         VulkanVP9Decoder(Context& context,
-            VideoSession& session,
+            Resource::VideoSession& session,
             ClientDelegate& client);
         ~VulkanVP9Decoder();
 

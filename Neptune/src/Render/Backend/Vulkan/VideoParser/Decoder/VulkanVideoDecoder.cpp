@@ -8,7 +8,7 @@ namespace Neptune::Vulkan {
 
     VulkanVideoDecoder::VulkanVideoDecoder(
         Context& context, 
-        VideoSession& session, 
+        Resource::VideoSession& session, 
         ClientDelegate& client)
         : ContextAccessor(context)
         , m_refCount(0)

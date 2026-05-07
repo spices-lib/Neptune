@@ -89,7 +89,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns image Image.
 		*/
-		void SetImage(SP<Image> image) { m_Image = image; }
+		void SetImage(SP<Resource::Image> image) { m_Image = image; }
 
 		/**
 		* @brief Get Unit Handle.
@@ -103,7 +103,7 @@ namespace Neptune::Vulkan {
 		*
 		* @return Returns Unit Handle Interface.
 		*/
-		SP<Image> IHandle() { return m_Image; }
+		SP<Resource::Image> IHandle() { return m_Image; }
 
 		/**
 		* @brief Get ImageView Unit Handle.
@@ -144,8 +144,8 @@ namespace Neptune::Vulkan {
 
 	private:
 
-		SP<Image> m_Image;                      // @brief This Image.
-		DescriptorSet m_DescriptorSet;          // @brief This DescriptorSet.
+		SP<Resource::Image> m_Image;                      // @brief This Image.
+		Resource::DescriptorSet m_DescriptorSet;          // @brief This DescriptorSet.
 	};
 }
 

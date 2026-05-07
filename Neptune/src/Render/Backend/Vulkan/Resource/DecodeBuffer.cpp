@@ -11,7 +11,7 @@
 #include "DecodeBuffer.h"
 #include "Render/Backend/Vulkan/Infrastructure/PhysicalDevice.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	namespace {
 

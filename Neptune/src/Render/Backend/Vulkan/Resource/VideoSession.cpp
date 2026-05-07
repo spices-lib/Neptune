@@ -17,7 +17,7 @@
 #include "Render/Backend/Vulkan/Resource/QueryPool.h"
 #include "Core/Math/Math.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	namespace {
 	

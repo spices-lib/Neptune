@@ -10,7 +10,7 @@
 
 #include "DecodePictureBuffer.h"
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	void DecodePictureBuffer::CreateImage(VkImageCreateInfo& info, uint32_t count)
 	{

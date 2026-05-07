@@ -175,9 +175,9 @@ namespace Neptune::Vulkan {
         // Bitstream data
         uint32_t firstSliceIndex;
         uint32_t numSlices;
-        size_t bitstreamDataOffset;      // bitstream data offset in bitstreamData buffer
-        size_t bitstreamDataLen;         // Number of bytes in bitstream data buffer
-        DecodeBuffer* bitstreamData;  // bitstream data for this picture (slice-layer)
+        size_t bitstreamDataOffset;             // bitstream data offset in bitstreamData buffer
+        size_t bitstreamDataLen;                // Number of bytes in bitstream data buffer
+        Resource::DecodeBuffer* bitstreamData;  // bitstream data for this picture (slice-layer)
         VkVideoDecodeInfoKHR decodeFrameInfo;
         VkVideoPictureResourceInfoKHR dpbSetupPictureResource;
         uint32_t numGopReferenceSlots;

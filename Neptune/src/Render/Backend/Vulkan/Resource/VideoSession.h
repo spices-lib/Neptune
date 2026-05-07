@@ -20,6 +20,11 @@
 #include <queue>
 
 namespace Neptune::Vulkan {
+	
+	class RenderTarget;
+}
+
+namespace Neptune::Vulkan::Resource {
 
 	class DecodeBuffer;
 	class QueryPool;
@@ -150,7 +155,7 @@ namespace Neptune::Vulkan {
 		* @param[in] width .
 		* @param[in] height .
 		*/
-		void CreateDecodeRenderTarget(class RenderTarget* rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const;
+		void CreateDecodeRenderTarget(RenderTarget* rt, const VkVideoProfileInfoKHR& profile, uint32_t width, uint32_t height) const;
 
 		/**
 		* @brief Create FlowVector RenderTarget.

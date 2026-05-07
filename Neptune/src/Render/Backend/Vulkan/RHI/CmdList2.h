@@ -14,8 +14,12 @@
 
 namespace Neptune::Vulkan {
 
+	namespace Resource {
+		
+		class VideoSession;
+	}
+	
 	class ThreadQueue;
-	class VideoSession;
 	class OpticalFlowSession;
 
 	/**
@@ -77,7 +81,7 @@ namespace Neptune::Vulkan {
 		* 
 		* @param[in] videoSession VideoSession.
 		*/
-		void SetVideoSession(const WP<VideoSession>& videoSession);
+		void SetVideoSession(const WP<Resource::VideoSession>& videoSession);
 
 		/**
 		* @brief Set OpticalFlowSession.
@@ -118,7 +122,7 @@ namespace Neptune::Vulkan {
 	private:
 
 		ThreadQueue*                 m_ThreadQueue;               // @brief ThreadQueue
-		WP<VideoSession>             m_VideoSession;              // @brief VideoSession
+		WP<Resource::VideoSession>   m_VideoSession;              // @brief VideoSession
 		const OpticalFlowSession*    m_OpticalFlowSession;        // @brief OpticalFlowSession
 	};
 }

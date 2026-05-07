@@ -96,13 +96,13 @@ namespace Neptune::Vulkan {
 		});
 	}
 
-	SP<DescriptorSet> DescriptorList::AccessSet(uint32_t set)
+	SP<Resource::DescriptorSet> DescriptorList::AccessSet(uint32_t set)
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		if (!m_DescriptorSets.contains(set))
 		{
-			m_DescriptorSets[set] = CreateSP<DescriptorSet>(GetContext());
+			m_DescriptorSets[set] = CreateSP<Resource::DescriptorSet>(GetContext());
 		}
 
 		return m_DescriptorSets.at(set);

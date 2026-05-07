@@ -10,7 +10,7 @@
 
 #include "Texture.h"
 
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D12::Resource {
 
 }
 

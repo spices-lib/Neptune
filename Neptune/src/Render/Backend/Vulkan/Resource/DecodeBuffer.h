@@ -13,7 +13,7 @@
 #include "Buffer.h"
 #include <vector>
 
-namespace Neptune::Vulkan {
+namespace Neptune::Vulkan::Resource {
 
 	/**
 	* @brief Vulkan::DecodeBuffer Class.
