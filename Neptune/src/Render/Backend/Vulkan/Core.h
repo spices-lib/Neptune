@@ -49,6 +49,23 @@ namespace Neptune::Vulkan {
     };
 
 	/**
+	* @brief Debug Callback Functor.
+	* 
+	* @param[in] messageSeverity VkDebugUtilsMessageSeverityFlagBitsEXT.
+	* @param[in] messageType VkDebugUtilsMessageTypeFlagsEXT.
+	* @param[in] pCallbackData VkDebugUtilsMessengerCallbackDataEXT.
+	* @param[in] pUserData Payload.
+	* 
+	* @return Returns resumed.
+	*/
+	VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
+		VkDebugUtilsMessageSeverityFlagBitsEXT         messageSeverity, 
+		VkDebugUtilsMessageTypeFlagsEXT                messageType, 
+		const VkDebugUtilsMessengerCallbackDataEXT*    pCallbackData, 
+		void*                                          pUserData
+	);
+	
+	/**
 	* @brief Handle Error Result.
 	*
 	* @param[in] result VkResult.

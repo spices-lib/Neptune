@@ -31,6 +31,53 @@ namespace Neptune::Direct3D12 {
 		return s_Handler;
 	}
 
+	void STDMETHODCALLTYPE DebugCallback(
+		D3D12_MESSAGE_CATEGORY category,
+		D3D12_MESSAGE_SEVERITY severity,
+		D3D12_MESSAGE_ID       id,
+		LPCSTR                 message,
+		void*                  context
+	) {
+		NEPTUNE_PROFILE_ZONE
+
+		std::stringstream ss;
+
+		ss <<
+		"Direct3D12 Validation layer:\n			" <<
+		"MessageIdNumber: " <<id <<
+		"\n			MessageIdName: " << category;
+		ss << "\n			Message: " << message;
+
+		switch (severity)
+		{
+		case D3D12_MESSAGE_SEVERITY_MESSAGE:
+			{
+				NEPTUNE_CORE_TRACE(ss.str())
+				break;
+			}
+		case D3D12_MESSAGE_SEVERITY_INFO:
+			{
+				NEPTUNE_CORE_INFO(ss.str())
+				break;
+			}
+		case D3D12_MESSAGE_SEVERITY_WARNING:
+			{
+				NEPTUNE_CORE_WARN(ss.str())
+				break;
+			}
+		case D3D12_MESSAGE_SEVERITY_ERROR:
+			{
+				NEPTUNE_CORE_ERROR(ss.str())
+				break;
+			}
+		default:
+			{
+				NEPTUNE_CORE_INFO(ss.str())
+				break;
+			}
+		}
+	}
+	
 	void HandleResult(HRESULT result)
 	{
         NEPTUNE_PROFILE_ZONE

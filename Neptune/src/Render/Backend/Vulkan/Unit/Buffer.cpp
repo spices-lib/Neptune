@@ -119,8 +119,8 @@ namespace Neptune::Vulkan::Unit {
 			}
 		}
 
-		VK_CHECK(vkAllocateMemory(device, &allocInfo, nullptr, &alloc.memory));
-		VK_CHECK(vkBindBufferMemory(device, m_Handle, alloc.memory, 0));
+		VK_CHECK(vkAllocateMemory(device, &allocInfo, nullptr, &alloc.memory))
+		VK_CHECK(vkBindBufferMemory(device, m_Handle, alloc.memory, 0))
 
 		if (info.usage & VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT)
 		{

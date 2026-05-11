@@ -55,6 +55,23 @@ namespace Neptune::Direct3D12 {
     };
 	
 	/**
+	* @brief Debug Callback Functor.
+	*
+	* @param[in] category D3D12_MESSAGE_CATEGORY.
+	* @param[in] severity D3D12_MESSAGE_SEVERITY.
+	* @param[in] id D3D12_MESSAGE_ID.
+	* @param[in] message D3D12_MESSAGE_ID.
+	* @param[in] context Callback.
+	*/
+	void STDMETHODCALLTYPE DebugCallback(
+		D3D12_MESSAGE_CATEGORY category,
+		D3D12_MESSAGE_SEVERITY severity,
+		D3D12_MESSAGE_ID       id,
+		LPCSTR                 message,
+		void*                  context
+	);
+	
+	/**
 	* @brief Handle Error Result.
 	*
 	* @param[in] result HRESULT.

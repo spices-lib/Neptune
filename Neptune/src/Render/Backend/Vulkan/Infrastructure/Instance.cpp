@@ -13,80 +13,6 @@
 
 namespace Neptune::Vulkan {
 
-	namespace {
-
-		/**
-		* @brief Debug Callback Functor.
-		* 
-		* @param[in] messageSeverity VkDebugUtilsMessageSeverityFlagBitsEXT.
-		* @param[in] messageType VkDebugUtilsMessageTypeFlagsEXT.
-		* @param[in] pCallbackData VkDebugUtilsMessengerCallbackDataEXT.
-		* @param[in] pUserData Payload.
-		* 
-		* @return Returns resumed.
-		*/
-		VKAPI_ATTR VkBool32 VKAPI_CALL InstanceDebugCallback(
-			VkDebugUtilsMessageSeverityFlagBitsEXT         messageSeverity, 
-			VkDebugUtilsMessageTypeFlagsEXT                messageType, 
-			const VkDebugUtilsMessengerCallbackDataEXT*    pCallbackData, 
-			void*                                          pUserData
-		)
-		{
-			NEPTUNE_PROFILE_ZONE
-
-			std::stringstream ss;
-
-			ss <<
-			"Vulkan Validation layer:\n			" <<
-			"MessageIdNumber: " <<
-			pCallbackData->messageIdNumber <<
-			"\n			MessageIdName: " <<
-			pCallbackData->pMessageIdName;
-
-			if (pCallbackData->cmdBufLabelCount != 0)
-			{
-				ss << "\n		CmdLabelName: " <<
-				pCallbackData->pCmdBufLabels->pLabelName;
-			}
-
-			ss <<
-			"\n			Message: " <<
-			pCallbackData->pMessage;
-
-			switch (messageSeverity)
-			{
-				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
-				{
-					NEPTUNE_CORE_TRACE(ss.str())
-					break;
-				}
-				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
-				{
-					NEPTUNE_CORE_INFO(ss.str())
-					break;
-				}
-				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
-				{
-					NEPTUNE_CORE_WARN(ss.str())
-					break;
-				}
-				case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
-				{
-					NEPTUNE_CORE_ERROR(ss.str())
-					break;
-				}
-				default:
-				{
-					NEPTUNE_CORE_INFO(ss.str())
-					break;
-				}
-			}
-	
-			return VK_FALSE;
-		}
-
-	}
-
     Instance::Instance(Context& context, EInfrastructure e, const std::vector<const char*>&  windodExtensions)
         : Infrastructure(context, e)
 		, m_ExtensionProperties(windodExtensions)
@@ -299,7 +225,7 @@ namespace Neptune::Vulkan {
 		m_DebugMessengerCreateInfo.messageType         = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT      
 			                                           | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT   
 			                                           | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-		m_DebugMessengerCreateInfo.pfnUserCallback     = InstanceDebugCallback;
+		m_DebugMessengerCreateInfo.pfnUserCallback     = DebugCallback;
 		m_DebugMessengerCreateInfo.pUserData           = nullptr;
 		m_DebugMessengerCreateInfo.pNext               = nullptr;
 

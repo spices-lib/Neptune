@@ -31,6 +31,49 @@ namespace Neptune::OpenGL {
 		return s_Handler;
 	}
 
+	void GLAPIENTRY DebugCallback(GLenum source, GLenum type, GLuint id,
+		GLenum severity, GLsizei length, const GLchar* message, const void* userParam
+	) {
+		NEPTUNE_PROFILE_ZONE
+
+		std::stringstream ss;
+
+		ss <<
+		"OpenGL Validation:\n			" <<
+		"MessageIdNumber: " << id <<
+		"\n			MessageIdName: " << source;
+		ss << "\n			Message: " << message;
+
+		switch (type)
+		{
+			case GL_DEBUG_SEVERITY_NOTIFICATION:
+			{
+				NEPTUNE_CORE_TRACE(ss.str())
+				break;
+			}
+			case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+			case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+			case GL_DEBUG_TYPE_PORTABILITY:
+			case GL_DEBUG_TYPE_PERFORMANCE:
+			{
+				NEPTUNE_CORE_WARN(ss.str())
+				break;
+			}
+			case GL_DEBUG_TYPE_ERROR:
+			{
+				NEPTUNE_CORE_ERROR(ss.str())
+				break;
+			}
+			case GL_DEBUG_TYPE_PUSH_GROUP: break;
+			case GL_DEBUG_TYPE_POP_GROUP: break;
+			default:
+			{
+				NEPTUNE_CORE_INFO(ss.str())
+				break;
+			}
+		}
+	}
+	
 	void HandleResult(GLenum result)
 	{
         NEPTUNE_PROFILE_ZONE

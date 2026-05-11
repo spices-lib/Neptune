@@ -43,6 +43,21 @@ namespace Neptune::OpenGL {
     };
 	
 	/**
+	* @brief Debug Callback Functor.
+	*
+	* @param[in] source Message Source.
+	* @param[in] type Message Type.
+	* @param[in] id Message unique id.
+	* @param[in] severity Message Level.
+	* @param[in] length Message bytes.
+	* @param[in] message Message data.
+	* @param[im] userParam Callback.
+	*/
+	void GLAPIENTRY DebugCallback(GLenum source, GLenum type, GLuint id,
+		GLenum severity, GLsizei length, const GLchar* message, const void* userParam
+	);
+	
+	/**
 	* @brief Handle Error Result.
 	*
 	* @param[in] result GLenum.

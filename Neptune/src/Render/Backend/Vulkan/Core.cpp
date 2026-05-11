@@ -32,6 +32,65 @@ namespace Neptune::Vulkan {
 		return s_Handler;
 	}
 
+	VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
+		VkDebugUtilsMessageSeverityFlagBitsEXT         messageSeverity, 
+		VkDebugUtilsMessageTypeFlagsEXT                messageType, 
+		const VkDebugUtilsMessengerCallbackDataEXT*    pCallbackData, 
+		void*                                          pUserData
+	) {
+		NEPTUNE_PROFILE_ZONE
+
+		std::stringstream ss;
+
+		ss <<
+		"Vulkan Validation layer:\n			" <<
+		"MessageIdNumber: " <<
+		pCallbackData->messageIdNumber <<
+		"\n			MessageIdName: " <<
+		pCallbackData->pMessageIdName;
+
+		if (pCallbackData->cmdBufLabelCount != 0)
+		{
+			ss << "\n		CmdLabelName: " <<
+			pCallbackData->pCmdBufLabels->pLabelName;
+		}
+
+		ss <<
+		"\n			Message: " <<
+		pCallbackData->pMessage;
+
+		switch (messageSeverity)
+		{
+			case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+			{
+				NEPTUNE_CORE_TRACE(ss.str())
+				break;
+			}
+			case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+			{
+				NEPTUNE_CORE_INFO(ss.str())
+				break;
+			}
+			case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+			{
+				NEPTUNE_CORE_WARN(ss.str())
+				break;
+			}
+			case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+			{
+				NEPTUNE_CORE_ERROR(ss.str())
+				break;
+			}
+			default:
+			{
+				NEPTUNE_CORE_INFO(ss.str())
+				break;
+			}
+		}
+
+		return VK_FALSE;
+	}
+	
 	void HandleResult(VkResult result, VkPhysicalDevice physicalDevice, VkDevice device, PFN_vkGetDeviceFaultInfoEXT vkGetDeviceFaultInfoEXT)
 	{
         NEPTUNE_PROFILE_ZONE
