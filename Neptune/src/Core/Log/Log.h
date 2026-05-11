@@ -8,6 +8,7 @@
 #include "Core/NonCopyable.h"
 
 #include <iostream>
+#include <memory>
 
 namespace Neptune {
 

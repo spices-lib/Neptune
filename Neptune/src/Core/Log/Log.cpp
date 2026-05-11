@@ -13,16 +13,16 @@ namespace Neptune {
 
     namespace {
         
-        std::shared_ptr<Log> s_Log = nullptr;
+        SP<Log> s_Log = nullptr;
     }
     
-    std::shared_ptr<Log> Log::Get()
+    SP<Log> Log::Get()
     {
         NEPTUNE_PROFILE_ZONE
 
         if(!s_Log)
         {
-            s_Log = std::make_shared<LogImpl>();
+            s_Log = CreateSP<LogImpl>();
         }
 
         return s_Log;

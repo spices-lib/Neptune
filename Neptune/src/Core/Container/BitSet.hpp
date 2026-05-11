@@ -9,6 +9,7 @@
 
 #include <bitset>
 #include <shared_mutex>
+#include <mutex>
 
 namespace Neptune::Container {
 

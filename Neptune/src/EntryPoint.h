@@ -12,7 +12,7 @@
 */
 int main() {
 
-    auto& engine = Neptune::Application::Instance();
+    const auto& engine = Neptune::Application::Instance();
     
     engine.Run();
     

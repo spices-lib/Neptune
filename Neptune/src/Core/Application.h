@@ -47,7 +47,7 @@ namespace Neptune {
         /**
         * @brief MainLoop entry.
         */
-        void Run();
+        void Run() const;
 
     private:
 
