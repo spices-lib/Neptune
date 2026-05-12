@@ -75,7 +75,7 @@ namespace Neptune {
         Log::Reset();
     }
 
-    void Application::Run()
+    void Application::Run() const
     {
         // on attach world to application.
         auto& world = World::Instance();
