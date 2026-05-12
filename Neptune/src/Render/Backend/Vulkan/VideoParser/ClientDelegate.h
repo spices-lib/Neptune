@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <functional>
 
 namespace Neptune::Vulkan {
@@ -12,3 +15,5 @@ namespace Neptune::Vulkan {
 	};
 
 }
+
+#endif

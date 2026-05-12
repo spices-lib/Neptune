@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "SIMD.h"
 
 #if defined(__aarch64__)
@@ -128,3 +131,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

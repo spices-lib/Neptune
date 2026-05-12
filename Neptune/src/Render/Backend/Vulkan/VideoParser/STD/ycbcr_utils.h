@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <string.h>
 #include <cassert>
 #include <math.h>
@@ -731,3 +733,6 @@ private:
 };
 
 }
+
+
+#endif

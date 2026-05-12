@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 enum class slice_type_e : uint8_t
 {
     P  = 0,
@@ -8,3 +10,5 @@ enum class slice_type_e : uint8_t
     SP = 3,
     SI = 4,
 };
+
+#endif

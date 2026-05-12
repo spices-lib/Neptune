@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <stdint.h>
 
 namespace Neptune::Vulkan {
@@ -38,3 +41,5 @@ namespace Neptune::Vulkan {
     SIMD_ISA GetSIMD();
 
 }
+
+#endif

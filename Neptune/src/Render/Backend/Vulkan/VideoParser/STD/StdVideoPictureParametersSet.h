@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include <vk_video/vulkan_video_codec_h264std.h>
 #include <vk_video/vulkan_video_codec_h265std.h>
@@ -78,3 +81,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

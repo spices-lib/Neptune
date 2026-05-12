@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "VulkanVideoParserIf.h"
 #include "Render/Backend/Vulkan/VideoParser/STD/nvVulkanh265ScalingList.h"
 #include "VulkanH265Decoder.h"
@@ -3039,3 +3042,5 @@ const char* hevc_seq_param_s::m_refClassId   = "h265SpsVideoPictureParametersSet
 const char* hevc_pic_param_s::m_refClassId   = "h265PpsVideoPictureParametersSet";
 
 }
+
+#endif

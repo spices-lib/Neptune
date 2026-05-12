@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Render/Backend/Vulkan/VideoParser/STD/StdVideoPictureParametersSet.h"
 #include "VulkanVideoDecoder.h"
 #include "VulkanH26xDecoder.h"
@@ -877,3 +880,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "VulkanVideoParserIf.h"
 #include "VulkanVP9Decoder.h"
 
@@ -904,3 +907,5 @@ namespace Neptune::Vulkan {
     }
 
 }
+
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <assert.h>
 #include <atomic>
 #include <stdint.h>
@@ -86,3 +88,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

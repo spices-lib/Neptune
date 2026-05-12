@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #if defined(__aarch64__) || defined(__ARM_ARCH_7A__) || defined(_M_ARM64)
 #include "arm_neon.h"
 #include <cpudetect.h>
@@ -77,4 +80,6 @@ size_t VulkanVideoDecoder::next_start_code<SIMD_ISA::NEON>(const uint8_t *pdatai
     found_start_code = ((bfr & 0x00ffffff) == 1);
     return i;
 }
+#endif
+
 #endif

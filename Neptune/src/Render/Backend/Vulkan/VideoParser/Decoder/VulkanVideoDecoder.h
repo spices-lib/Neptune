@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Render/Backend/Vulkan/VideoParser/SIMD/SIMD.h"
 #include "Render/Backend/Vulkan/VideoParser/PictureBufferBase.h"
 #include "VulkanVideoParserIf.h"
@@ -173,3 +176,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

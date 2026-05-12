@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #if defined(__aarch64__) // || defined(_M_ARM64)
 #include "arm_sve.h"
 #include <cpudetect.h>
@@ -75,4 +78,6 @@ size_t VulkanVideoDecoder::next_start_code<SIMD_ISA::SVE>(const uint8_t *pdatain
     return datasize;
 }
 #undef SVE_REGISTER_MAX_BYTES
+#endif
+
 #endif

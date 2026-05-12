@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Render/Backend/Vulkan/Resource/DecodeBuffer.h"
 #include <assert.h>
 #include <atomic>
@@ -307,3 +310,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

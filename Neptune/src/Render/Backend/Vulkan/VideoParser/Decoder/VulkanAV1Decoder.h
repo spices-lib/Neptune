@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "VulkanVideoDecoder.h"
 #include <array>
 #include <vector>
@@ -427,3 +430,6 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <algorithm>
 #include <limits.h>
 
@@ -80,3 +82,5 @@ namespace Neptune::Vulkan {
     }
 
 }
+
+#endif

@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Render/Backend/Vulkan/VideoParser/PictureBufferBase.h"
 #include "Render/Backend/Vulkan/VideoParser/STD/StdVideoPictureParametersSet.h"
 #include "Render/Backend/Vulkan/Resource/DecodeBuffer.h"
@@ -500,3 +503,5 @@ namespace Neptune::Vulkan {
     };
 
 }
+
+#endif

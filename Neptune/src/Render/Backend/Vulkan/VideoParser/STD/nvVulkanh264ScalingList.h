@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <stdint.h>
 
 namespace Neptune::Vulkan {
@@ -23,3 +26,5 @@ namespace Neptune::Vulkan {
         uint8_t pWeightScale8x8[2][8][8]);
 
 }
+
+#endif

@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <stdio.h>
 #include "Render/Backend/Vulkan/VideoParser/Decoder/VulkanVideoParserIf.h"
 #include "VulkanH264Decoder.h"
@@ -4594,3 +4597,5 @@ const char* seq_parameter_set_s::m_refClassId = "h264SpsVideoPictureParametersSe
 const char* pic_parameter_set_s::m_refClassId = "h264PpsVideoPictureParametersSet";
 
 }
+
+#endif

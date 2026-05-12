@@ -1,4 +1,7 @@
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include <cstdint>
 #include <climits>
 #include "VulkanVideoParserIf.h"
@@ -2464,3 +2467,5 @@ bool VulkanAV1Decoder::ParseByteStream(const VkParserBitstreamPacket* pck, size_
 const char* av1_seq_param_s::m_refClassId = "av1SpsVideoPictureParametersSet";
 
 }
+
+#endif
