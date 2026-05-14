@@ -9,35 +9,19 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackend.h"
-#include "Instance.h"
-#include "Adapter.h"
-#include "Device.h"
-#include "Surface.h"
-#include "Queue.h"
-
-#include <emscripten.h>
-#include <emscripten/emscripten.h>
-#include <emscripten/html5.h>
-
-#include <GLFW/glfw3.h>
-#include <GLFW/emscripten_glfw3.h>
-
+#include "Infrastructure/InfrastructureHeader.h"
+#include "RHI/RHIHeader.h"
 #include "Window/Window.h"
+#include "World/Scene/Scene.h"
+#include "Data/Clock.h"
+#include "World/Component/Component.h"
 
 namespace Neptune::WebGPU {
 
-    RenderBackend::RenderBackend(RenderBackendEnum backend)
-        : RenderFrontend(backend)
+    RenderBackend::RenderBackend()
+        : RenderFrontend(RenderBackendEnum::WebGPU)
     {
         NEPTUNE_PROFILE_ZONE
-
-        m_Context = CreateSP<Context>();
-
-        m_Context->Registry<Instance>();
-        m_Context->Registry<Adapter>();
-        m_Context->Registry<Device>();
-        m_Context->Registry<Surface>();
-        m_Context->Registry<Queue>();
 
         /*GLFWwindow* window = static_cast<GLFWwindow*>(Window::Instance().NativeWindow());*/
 
@@ -61,11 +45,6 @@ namespace Neptune::WebGPU {
         init_info.RenderTargetFormat = m_Device->GetSwapChainSupport().format;
         init_info.DepthStencilFormat = WGPUTextureFormat_Undefined;
         ImGui_ImplWGPU_Init(&init_info);*/
-    }
-
-    RenderBackend::~RenderBackend()
-    {
-        NEPTUNE_PROFILE_ZONE
 
         // Cleanup
         /*ImGui_ImplWGPU_Shutdown();
@@ -73,23 +52,44 @@ namespace Neptune::WebGPU {
         ImGui::DestroyContext();*/
     }
 
-    static WGPUCommandEncoder graphicCommandEncoder = nullptr;
+    void RenderBackend::OnInitialize()
+    {
+        NEPTUNE_PROFILE_ZONE
 
-    void RenderBackend::BeginFrame()
+        m_Context = CreateSP<Context>();
+
+        RenderFrontend::OnInitialize();
+    }
+
+    void RenderBackend::OnShutDown()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        RenderFrontend::OnShutDown();
+
+        m_Context->UnRegistry();
+    }
+
+    Context& RenderBackend::GetContext() const
+    {
+        return *m_Context;
+    }
+
+    void RenderBackend::BeginFrame(Scene* scene)
     {
         NEPTUNE_PROFILE_ZONE
 
         // Create CommandEncoder.
-        WGPUCommandEncoderDescriptor desc = {};
-        graphicCommandEncoder = wgpuDeviceCreateCommandEncoder(m_Context->Get<Device>()->Handle(), &desc);
+        //WGPUCommandEncoderDescriptor desc{};
+        //graphicCommandEncoder = wgpuDeviceCreateCommandEncoder(m_Context->Get<Device>()->Handle(), &desc);
     }
 
-    void RenderBackend::EndFrame()
+    void RenderBackend::EndFrame(Scene* scene)
     {
         NEPTUNE_PROFILE_ZONE
 
         // Get Command Buffer.
-        WGPUCommandBufferDescriptor desc     = {};
+/*        WGPUCommandBufferDescriptor desc     = {};
         WGPUCommandBuffer commandBuffer      = wgpuCommandEncoderFinish(graphicCommandEncoder, &desc);
 
         // Submit CommandBuffer to Queue.
@@ -97,15 +97,39 @@ namespace Neptune::WebGPU {
 
         // Release CommandEncoder and CommandBuffer.
         wgpuCommandEncoderRelease(graphicCommandEncoder);
-        wgpuCommandBufferRelease(commandBuffer);
+        wgpuCommandBufferRelease(commandBuffer);*/
     }
+
+    void RenderBackend::Wait()
+    {
+        NEPTUNE_PROFILE_ZONE
+    }
+
+    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
+	{
+        NEPTUNE_PROFILE_ZONE
+
+        switch(e)
+		{
+			default:                          NEPTUNE_CORE_ERROR("WebGPU do not support this RHI.")          return nullptr;
+		}
+	}
+
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+	{
+        NEPTUNE_PROFILE_ZONE
+
+		std::unordered_map<std::string, std::any> infrastructure;
+
+		return infrastructure;
+	}
 
 /*    void RenderBackend::RenderFrame()
     {
         NEPTUNE_PROFILE_ZONE
 
         // Start the Dear ImGui frame
-        /*ImGui_ImplWGPU_NewFrame();
+        ImGui_ImplWGPU_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
@@ -113,7 +137,7 @@ namespace Neptune::WebGPU {
         ImGui::ShowDemoWindow(&show_demo_window);
 
         // Rendering
-        ImGui::Render();*/
+        ImGui::Render();
 
         WGPUSurfaceTexture swapChainTexture;
         wgpuSurfaceGetCurrentTexture(m_Context->Get<Surface>()->Handle(), &swapChainTexture);

@@ -5,14 +5,27 @@
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
+#include "Infrastructure/Enum.h"
+#include "Render/Backend/Common/Concept.h"
+
+namespace Neptune {
+
+    class Scene;
+}
+
+namespace Neptune::Render::Common {
+
+    template<typename T>
+    requires IsEnum<T>
+    class Context;
+}
 
 namespace Neptune::WebGPU {
-
-    class Context;
 
     /**
     * @brief RenderBackend Class.
@@ -22,33 +35,78 @@ namespace Neptune::WebGPU {
     {
     public:
 
+        using Context = Render::Common::Context<EInfrastructure>;
+
+    public:
+
         /**
         * @brief Constructor Function.
-        * @param[in] backend RenderBackendEnum.
         */
-        RenderBackend(RenderBackendEnum backend);
+        RenderBackend();
 
         /**
         * @brief Destructor Function.
         */
-        ~RenderBackend() override;
+        ~RenderBackend() override = default;
+
+        /**
+        * @brief Interface of Initialize.
+        */
+        void OnInitialize() override;
+
+        /**
+        * @brief Interface of ShutDown.
+        */
+        void OnShutDown() override;
 
         /**
         * @brief Interface of Begin a frame.
+        *
+        * @param[in] scene Scene.
         */
-        void BeginFrame() override;
+        void BeginFrame(Scene* scene) override;
 
         /**
         * @brief Interface of End a frame.
+        *
+        * @param[in] scene Scene.
         */
-        void EndFrame() override;
+        void EndFrame(Scene* scene) override;
+
+        /**
+        * @brief Interface of Wait RenderBackend idle.
+        */
+        void Wait() override;
+
+        /**
+        * @brief Interface of CreateRHI.
+        *
+        * @param[in] e ERHI.
+        * @param[in] payload RHI Payload.
+        *
+        * @return Returns RHI::Impl
+        */
+        std::any CreateRHI(RHI::ERHI e, void* payload) override;
+
+        /**
+        * @brief Interface of Access Infrastructure.
+        *
+        * @return Returns Infrastructure.
+        */
+        std::unordered_map<std::string, std::any> AccessInfrastructure() override;
 
     private:
 
         /**
-        * @brief WebGPU Context.
+        * @brief Get Context.
+        *
+        * @return Returns Context.
         */
-        SP<Context> m_Context;
+        Context& GetContext() const;
+
+    private:
+
+        SP<Context> m_Context;                        // @brief This Context.
     };
 }
 

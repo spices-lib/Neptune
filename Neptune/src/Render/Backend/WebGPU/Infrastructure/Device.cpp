@@ -9,26 +9,23 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Device.h"
-#include "Adapter.h"
 #include "Instance.h"
 
 namespace Neptune::WebGPU {
 
-    Device::Device(Context& context)
-        : Infrastructure(context)
+    Device::Device(Context& context, EInfrastructure e)
+        : Infrastructure(context, e)
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Handle = m_Context.Get<Adapter>()->RequestDevice();
+        Create();
+    }
 
-        if (m_Handle)
-        {
-            NEPTUNE_CORE_INFO("WGPUDevice created succeed.")
-        }
-        else
-        {
-            NEPTUNE_CORE_CRITICAL("WGPUDevice created failed.")
-        }
+    void Device::Create()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        m_Device.CreateDevice(GetContext().Get<IInstance>()->Handle());
     }
 
     void Device::CreateBindGroup()
@@ -37,7 +34,7 @@ namespace Neptune::WebGPU {
 
         WGPUBindGroupDescriptor descriptor{};
 
-        wgpuDeviceCreateBindGroup(m_Handle, &descriptor);
+        wgpuDeviceCreateBindGroup(m_Handle.GetHandle(), &descriptor);
     }
 
     void Device::CreateBindGroupLayout()
@@ -46,7 +43,7 @@ namespace Neptune::WebGPU {
 
         WGPUBindGroupLayoutDescriptor desc{};
 
-        wgpuDeviceCreateBindGroupLayout(m_Handle, &desc);
+        wgpuDeviceCreateBindGroupLayout(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateBuffer()
@@ -55,7 +52,7 @@ namespace Neptune::WebGPU {
 
         WGPUBufferDescriptor desc{};
 
-        wgpuDeviceCreateBuffer(m_Handle, &desc);
+        wgpuDeviceCreateBuffer(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateCommandEncoder()
@@ -64,7 +61,7 @@ namespace Neptune::WebGPU {
 
         WGPUCommandEncoderDescriptor desc{};
 
-        wgpuDeviceCreateCommandEncoder(m_Handle, &desc);
+        wgpuDeviceCreateCommandEncoder(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateComputePipeline()
@@ -73,7 +70,7 @@ namespace Neptune::WebGPU {
 
         WGPUComputePipelineDescriptor desc{};
 
-        wgpuDeviceCreateComputePipeline(m_Handle, &desc);
+        wgpuDeviceCreateComputePipeline(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateComputePipelineAsync()
@@ -97,7 +94,7 @@ namespace Neptune::WebGPU {
         info.userdata1                             = nullptr;
         info.callback                              = request;
 
-        wgpuDeviceCreateComputePipelineAsync(m_Handle, &desc, info);
+        wgpuDeviceCreateComputePipelineAsync(m_Handle.GetHandle(), &desc, info);
     }
 
     void Device::CreatePipelineLayout()
@@ -106,7 +103,7 @@ namespace Neptune::WebGPU {
 
         WGPUPipelineLayoutDescriptor desc{};
 
-        wgpuDeviceCreatePipelineLayout(m_Handle, &desc);
+        wgpuDeviceCreatePipelineLayout(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateQuerySet()
@@ -115,7 +112,7 @@ namespace Neptune::WebGPU {
 
         WGPUQuerySetDescriptor desc{};
 
-        wgpuDeviceCreateQuerySet(m_Handle, &desc);
+        wgpuDeviceCreateQuerySet(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateRenderBundleEncoder()
@@ -124,7 +121,7 @@ namespace Neptune::WebGPU {
 
         WGPURenderBundleEncoderDescriptor desc{};
 
-        wgpuDeviceCreateRenderBundleEncoder(m_Handle, &desc);
+        wgpuDeviceCreateRenderBundleEncoder(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateRenderPipeline()
@@ -133,7 +130,7 @@ namespace Neptune::WebGPU {
 
         WGPURenderPipelineDescriptor desc{};
 
-        wgpuDeviceCreateRenderPipeline(m_Handle, &desc);
+        wgpuDeviceCreateRenderPipeline(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateRenderPipelineAsync()
@@ -157,7 +154,7 @@ namespace Neptune::WebGPU {
         info.userdata1                             = nullptr;
         info.callback                              = request;
 
-        Wait(wgpuDeviceCreateRenderPipelineAsync(m_Handle, &desc, info));
+        //Wait(wgpuDeviceCreateRenderPipelineAsync(m_Handle.GetHandle(), &desc, info));
     }
 
     void Device::CreateSampler()
@@ -166,7 +163,7 @@ namespace Neptune::WebGPU {
 
         WGPUSamplerDescriptor desc{};
 
-        wgpuDeviceCreateSampler(m_Handle, &desc);
+        wgpuDeviceCreateSampler(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateShaderModule()
@@ -175,7 +172,7 @@ namespace Neptune::WebGPU {
 
         WGPUShaderModuleDescriptor desc{};
 
-        wgpuDeviceCreateShaderModule(m_Handle, &desc);
+        wgpuDeviceCreateShaderModule(m_Handle.GetHandle(), &desc);
     }
 
     void Device::CreateTexture()
@@ -184,14 +181,14 @@ namespace Neptune::WebGPU {
 
         WGPUTextureDescriptor desc{};
 
-        wgpuDeviceCreateTexture(m_Handle, &desc);
+        wgpuDeviceCreateTexture(m_Handle.GetHandle(), &desc);
     }
 
     void Device::Destroy()
     {
         NEPTUNE_PROFILE_ZONE
 
-        wgpuDeviceDestroy(m_Handle);
+        wgpuDeviceDestroy(m_Handle.GetHandle());
     }
 
     void Device::GetAdapterInfo()
@@ -200,7 +197,7 @@ namespace Neptune::WebGPU {
 
         WGPUAdapterInfo info{};
 
-        wgpuDeviceGetAdapterInfo(m_Handle, &info);
+        wgpuDeviceGetAdapterInfo(m_Handle.GetHandle(), &info);
     }
 
     void Device::GetFeatures()

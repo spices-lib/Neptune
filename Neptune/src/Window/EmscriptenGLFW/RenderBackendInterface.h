@@ -6,14 +6,14 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
 #include "Render/Frontend/Enum.h"
 
 struct GLFWwindow;
 
-namespace Neptune::GLFW {
+namespace Neptune::EmscriptenGLFW {
 
     /**
     * @brief APIInterface Class.
@@ -64,16 +64,16 @@ namespace Neptune::GLFW {
     SP<APIInterface> CreateInterface(RenderBackendEnum backend);
 
     /**
-    * @brief OpenGL APIInterface.
+    * @brief WebGL APIInterface.
     */
-    class OpenGLInterface : public APIInterface
+    class WebGLInterface : public APIInterface
     {
     public:
 
         /**
         * @brief Interface of GLFW Hint Configuration with RenderBackend.
         */
-        void Hint() const override;
+        void Hint() const override {}
 
         /**
         * @brief Interface of GLFW API Load Configuration with RenderBackend.
@@ -87,7 +87,7 @@ namespace Neptune::GLFW {
         * 
         * @param[in] handle GLFWwindow.
         */
-        void SwapBuffers(GLFWwindow* handle) const override;
+        void SwapBuffers(GLFWwindow* handle) const override {}
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -98,50 +98,16 @@ namespace Neptune::GLFW {
     };
 
     /**
-    * @brief Vulkan APIInterface.
+    * @brief WebGPU APIInterface.
     */
-    class VulkanInterface : public APIInterface
+    class WebGPUInterface : public APIInterface
     {
     public:
 
         /**
         * @brief Interface of GLFW Hint Configuration with RenderBackend.
         */
-        void Hint() const override;
-
-        /**
-        * @brief Interface of GLFW API Load Configuration with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void APILoad(GLFWwindow* handle) const override {}
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override {}
-        
-        /**
-        * @brief Interface of Get GLFW Window Extension.
-        *
-        * @return Returns Window Extension.
-        */
-        std::vector<const char*> Extension() const override;
-    };
-
-    /**
-    * @brief Direct3D12 APIInterface.
-    */
-    class Direct3D12Interface : public APIInterface
-    {
-    public:
-
-        /**
-        * @brief Interface of GLFW Hint Configuration with RenderBackend.
-        */
-        void Hint() const override;
+        void Hint() const override {}
 
         /**
         * @brief Interface of GLFW API Load Configuration with RenderBackend.

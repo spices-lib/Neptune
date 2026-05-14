@@ -9,177 +9,170 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/WebGPU/Unit/Device.h"
 
 namespace Neptune::WebGPU {
 
+    using IDevice = IInfrastructure<class Device, EInfrastructure::Device>;
+
     /**
-    * @brief Device Class.
+    * @brief WebGPU::Device Class.
+    * This class defines the WebGPU::Device behaves.
     */
-    class Device : public Infrastructure<WGPUDevice, EInfrastructure::Device>
+    class Device : public Infrastructure
     {
-    public:
-        
-        /**
-        * @brief Mark as Device Infrastructure Type.
-        */
-        static constexpr EInfrastructure Type = Infrastructure<WGPUDevice, EInfrastructure::Device>::Type;
-        
     public:
 
         /**
         * @brief Constructor Function.
-        * 
-        * @param[in] context The global WebGPU Context.
+        *
+        * @param[in] context Context.
+        * @param[in] e EInfrastructure.
         */
-        explicit Device(Context& context);
+        Device(Context& context, EInfrastructure e);
 
         /**
         * @brief Destructor Function.
         */
         ~Device() override = default;
 
+        /**
+        * @brief Get Unit Handle.
+        *
+        * @return Returns Unit Handle.
+        */
+        const Unit::Instance::Handle& Handle() const { return m_Instance.GetHandle(); }
+
     public:
 
         /**
-        * @brief Create WebGPU Bind Group.
+        * @brief Create Bind Group.
         */
         void CreateBindGroup();
 
         /**
-        * @brief Create WebGPU Bind Group Layout.
+        * @brief Create Bind Group Layout.
         */
         void CreateBindGroupLayout();
 
         /**
-        * @brief Create WebGPU Buffer.
+        * @brief Create Buffer.
         */
         void CreateBuffer();
 
         /**
-        * @brief Create WebGPU CommandEncoder.
+        * @brief Create CommandEncoder.
         */
         void CreateCommandEncoder();
 
         /**
-        * @brief Create WebGPU ComputePipeline.
+        * @brief Create ComputePipeline.
         */
         void CreateComputePipeline();
 
         /**
-        * @brief Create WebGPU ComputePipeline Async.
+        * @brief Create ComputePipeline Async.
         */
         void CreateComputePipelineAsync();
 
         /**
-        * @brief Create WebGPU PipelineLayout.
+        * @brief Create PipelineLayout.
         */
         void CreatePipelineLayout();
 
         /**
-        * @brief Create WebGPU QuerySet.
+        * @brief Create QuerySet.
         */
         void CreateQuerySet();
 
         /**
-        * @brief Create WebGPU RenderBundle Encoder.
+        * @brief Create RenderBundle Encoder.
         */
         void CreateRenderBundleEncoder();
 
         /**
-        * @brief Create WebGPU Render Pipeline.
+        * @brief Create Render Pipeline.
         */
         void CreateRenderPipeline();
 
         /**
-        * @brief Create WebGPU Render Pipeline Async.
+        * @brief Create Render Pipeline Async.
         */
         void CreateRenderPipelineAsync();
 
         /**
-        * @brief Create WebGPU Sampler.
+        * @brief Create Sampler.
         */
         void CreateSampler();
 
         /**
-        * @brief Create WebGPU ShaderModule.
+        * @brief Create ShaderModule.
         */
         void CreateShaderModule();
 
         /**
-        * @brief Create WebGPU Texture.
+        * @brief Create Texture.
         */
         void CreateTexture();
 
         /**
-        * @brief Destroy WebGPU Device.
+        * @brief Destroy Device.
         */
         void Destroy();
 
         /**
-        * @brief Get WebGPU Adapter Information.
+        * @brief Get Adapter Information.
         */
         void GetAdapterInfo();
 
         /**
-        * @brief Get WebGPU Device Features.
+        * @brief Get Device Features.
         */
         void GetFeatures();
 
         /**
-        * @brief Get WebGPU Device Limits.
+        * @brief Get Device Limits.
         */
         void GetLimits();
 
         /**
-        * @brief Get WebGPU Lost Future.
+        * @brief Get Lost Future.
         */
         void GetLostFuture();
 
         /**
-        * @brief Get WebGPU Queue.
+        * @brief Get Queue.
         * 
-        * @return Returns WebGPU Queue.
+        * @return Returns Queue.
         */
         WGPUQueue GetQueue();
 
         /**
-        * @brief Is WebGPU Device has Feature.
+        * @brief Is Device has Feature.
         */
         void HasFeature();
 
         /**
-        * @brief Pop Error Scope from WebGPU Device.
+        * @brief Pop Error Scope from Device.
         */
         void PopErrorScope();
 
         /**
-        * @brief Push Error Scope to WebGPU Device.
+        * @brief Push Error Scope to Device.
         */
         void PushErrorScope();
         
+    private:
+
+        /**
+        * @brief Create Device.
+        */
+        void Create();
+
+    private:
+
+        Unit::Device m_Device;                                             // @brief This Device.
     };
-
-    template<>
-    inline void InfrastructureBase::AddRef(Device* object)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        wgpuDeviceAddRef(object->Handle());
-    }
-    
-    template<>
-    inline void InfrastructureBase::Release(Device* object)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        if (!object->Handle())
-        {
-            return;
-        }
-
-        wgpuDeviceRelease(object->Handle());
-        object->SetHandleNullptr();
-    }
 
     template<>
     inline void InfrastructureBase::SetLabel(Device* object, const std::string& label)

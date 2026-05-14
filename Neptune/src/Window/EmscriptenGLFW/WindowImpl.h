@@ -5,6 +5,7 @@
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
@@ -13,6 +14,8 @@
 struct GLFWwindow;
 
 namespace Neptune::EmscriptenGLFW {
+
+    class APIInterface;
 
     /**
     * @brief WindowImpl Class.
@@ -40,24 +43,36 @@ namespace Neptune::EmscriptenGLFW {
         *
         * @return Returns true if window is active.
         */
-        bool IsWindowActive() override;
+        bool IsWindowActive() const override;
 
         /**
         * @brief Interface of window poll events.
         */
-        void PollEvents() override;
+        void PollEvents() const override;
 
         /**
         * @brief Interface of window swap buffers.
         */
-        void SwapBuffers() override {};
+        void SwapBuffers() const override {};
+
+        /**
+        * @brief Interface of window get extent.
+        */
+        glm::ivec2 Extent() const override;
+
+        /**
+        * @brief Get Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        std::vector<const char*> Extension() const override;
 
         /**
         * @brief Interface of get native window pointer.
         *
         * @return Returns native window pointer.
         */
-        void* NativeWindow() override;
+        void* NativeWindow() const override;
 
     private:
 
@@ -68,10 +83,8 @@ namespace Neptune::EmscriptenGLFW {
 
     private:
 
-        /**
-        * @brief native window.
-        */
-        GLFWwindow* m_Windows;
+        GLFWwindow* m_Windows;             // @brief native window.
+        SP<APIInterface> m_APIInterface;   // @brief render backend interface.
     };
 }
 

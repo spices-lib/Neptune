@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "WindowImpl.h"
+#include "RenderBackendInterface.h"
 #include "Core/Event/WindowEvent.h"
 #include "Core/Event/KeyEvent.h"
 #include "Core/Event/MouseEvent.h"
@@ -19,7 +20,8 @@
 namespace Neptune::EmscriptenGLFW {
 
     WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement)
-            : Window(initInfo, implement)
+        : Window(initInfo, implement)
+        , m_APIInterface(CreateInterface(backend))
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -28,6 +30,9 @@ namespace Neptune::EmscriptenGLFW {
         {
             NEPTUNE_CORE_CRITICAL("glfw init failed.")
         }
+
+        // Set Hint
+        m_APIInterface->Hint();
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);        // @brief no OpenGL (use canvas2D)
         glfwWindowHint(GLFW_SCALE_FRAMEBUFFER, GLFW_FALSE);  // @brief make it not Hi DPI Aware (simplify rendering code a bit)
@@ -48,6 +53,9 @@ namespace Neptune::EmscriptenGLFW {
         {
             NEPTUNE_CORE_CRITICAL("Window create failed.")
         }
+
+        // Load APIs.
+        m_APIInterface->APILoad(m_Windows);
 
         // Set glfw call back object pointer.
         glfwSetWindowUserPointer(m_Windows, this);
@@ -71,21 +79,52 @@ namespace Neptune::EmscriptenGLFW {
         glfwTerminate();
     }
 
-    bool WindowImpl::IsWindowActive()
+    bool WindowImpl::IsWindowActive() const
     {
         NEPTUNE_PROFILE_ZONE
 
         return !glfwWindowShouldClose(m_Windows);
     }
 
-    void WindowImpl::PollEvents()
+    void WindowImpl::PollEvents() const
     {
         NEPTUNE_PROFILE_ZONE
 
         glfwPollEvents();
     }
 
-    void* WindowImpl::NativeWindow()
+    void WindowImpl::SwapBuffers() const
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        m_APIInterface->SwapBuffers(m_Windows);
+    }
+
+    glm::ivec2 WindowImpl::Extent() const
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        int width = 0, height = 0;
+        glfwGetFramebufferSize(m_Windows, &width, &height);
+
+        while (width == 0 || height == 0)
+        {
+            glfwGetFramebufferSize(m_Windows, &width, &height);
+
+            glfwWaitEvents();
+        }
+
+        return { width , height };
+    }
+
+    std::vector<const char*> WindowImpl::Extension() const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        return m_APIInterface->Extension();
+    }
+
+    void* WindowImpl::NativeWindow() const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -116,11 +155,6 @@ namespace Neptune::EmscriptenGLFW {
         {
             // reinterpret the pointer to this class.
             const auto thisWindows = static_cast<WindowImpl*>(glfwGetWindowUserPointer(window));
-
-            // Set this class's variable.
-            thisWindows->m_WindowsResized    = true;
-            thisWindows->m_WindowInfo.width  = width;
-            thisWindows->m_WindowInfo.height = height;
 
             WindowResizeEvent event(width, height);
             Event::GetEventCallbackFn()(event);
