@@ -34,7 +34,7 @@ namespace Neptune::WebGPU {
 
         WGPUSupportedFeatures features{};
 
-        wgpuAdapterGetFeatures(m_Handle.GetHandle(), &features);
+        wgpuAdapterGetFeatures(m_Adapter.GetHandle(), &features);
     }
 
     void Adapter::GetInfo()
@@ -43,7 +43,7 @@ namespace Neptune::WebGPU {
 
         WGPUAdapterInfo info{};
 
-        WEBGPU_CHECK(wgpuAdapterGetInfo(m_Handle.GetHandle(), &info))
+        WEBGPU_CHECK(wgpuAdapterGetInfo(m_Adapter.GetHandle(), &info))
     }
 
     void Adapter::GetLimits()
@@ -52,7 +52,7 @@ namespace Neptune::WebGPU {
 
         WGPULimits limits{};
 
-        WEBGPU_CHECK(wgpuAdapterGetLimits(m_Handle.GetHandle(), &limits))
+        WEBGPU_CHECK(wgpuAdapterGetLimits(m_Adapter.GetHandle(), &limits))
     }
 
     void Adapter::HasFeature()
@@ -61,7 +61,7 @@ namespace Neptune::WebGPU {
 
         WGPUFeatureName feature = WGPUFeatureName_CoreFeaturesAndLimits;
 
-        wgpuAdapterHasFeature(m_Handle.GetHandle(), feature);
+        wgpuAdapterHasFeature(m_Adapter.GetHandle(), feature);
     }
 
 }

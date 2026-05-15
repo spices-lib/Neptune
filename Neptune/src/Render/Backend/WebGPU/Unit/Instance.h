@@ -38,7 +38,7 @@ namespace Neptune::WebGPU::Unit {
 		/**
 		* @brief Create Instance.
 		*
-		* @param[in] createInfo descriptor.
+		* @param[in] descriptor WGPUInstanceDescriptor.
 		*/
 		void CreateInstance(const WGPUInstanceDescriptor& descriptor);
 	};

@@ -37,7 +37,10 @@ namespace Neptune::WebGPU::Unit {
             if (auto p = static_cast<WGPUAdapter*>(userdata1)) 
             {
                 *p = adapter;
+            	return;
             }
+        	
+        	NEPTUNE_CORE_ERROR(message.data)
         };
 
         WGPURequestAdapterCallbackInfo       info{};

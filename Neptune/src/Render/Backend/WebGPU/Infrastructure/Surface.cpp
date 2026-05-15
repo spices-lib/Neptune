@@ -15,33 +15,39 @@
 
 namespace Neptune::WebGPU {
 
-    Surface::Surface(Context& context)
-        : Infrastructure(context)
+    Surface::Surface(Context& context, EInfrastructure e)
+        : Infrastructure(context, e)
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Handle = m_Context.Get<Instance>()->CreateSurface("#nepnep");
-
-        if (m_Handle)
-        {
-            NEPTUNE_CORE_INFO("WGPUSurface created succeed.")
-        }
-        else
-        {
-            NEPTUNE_CORE_CRITICAL("WGPUSurface created failed.")
-        }
+        Create();
 
         Configure();
     }
 
-    void Surface::Configure()
+    void Surface::Create()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        WGPUEmscriptenSurfaceSourceCanvasHTMLSelector                 htmlSelector{};
+        htmlSelector.chain.sType                                    = WGPUSType_EmscriptenSurfaceSourceCanvasHTMLSelector;
+        htmlSelector.chain.next                                     = nullptr;
+        htmlSelector.selector                                       = { HTMLCanvas.data(), HTMLCanvas.length() };
+
+        WGPUSurfaceDescriptor                                         desc{};
+        desc.nextInChain                                            = &htmlSelector.chain;
+
+        m_Surface.CreateSurface(GetContext().Get<IInstance>()->Handle(), desc);
+    }
+
+    void Surface::Configure() const
     {
         NEPTUNE_PROFILE_ZONE
 
         WGPUTextureFormat viewFormats[] = { WGPUTextureFormat_RGBA8Unorm };
         
         WGPUSurfaceConfiguration configure                          = {};
-        configure.device                                            = m_Context.Get<Device>()->Handle();
+        configure.device                                            = GetContext().Get<IDevice>()->Handle();
         configure.format                                            = WGPUTextureFormat_RGBA8Unorm;
         configure.usage                                             = WGPUTextureUsage_RenderAttachment;
         configure.width                                             = 1920;
@@ -51,39 +57,39 @@ namespace Neptune::WebGPU {
         configure.alphaMode                                         = WGPUCompositeAlphaMode_Premultiplied;
         configure.presentMode                                       = WGPUPresentMode_Fifo;
         
-        wgpuSurfaceConfigure(m_Handle, &configure);
+        wgpuSurfaceConfigure(m_Surface.GetHandle(), &configure);
     }
 
-    void Surface::GetCapabilities()
+    void Surface::GetCapabilities() const
     {
         NEPTUNE_PROFILE_ZONE
 
         WGPUSurfaceCapabilities capabilities{};
 
-        WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_Handle, m_Context.Get<Adapter>()->Handle(), &capabilities))
+        WEBGPU_CHECK(wgpuSurfaceGetCapabilities(m_Surface.GetHandle(), GetContext().Get<IAdapter>()->Handle(), &capabilities))
     }
 
-    void Surface::GetCurrentTexture()
+    void Surface::GetCurrentTexture() const
     {
         NEPTUNE_PROFILE_ZONE
 
         WGPUSurfaceTexture texture{};
 
-        wgpuSurfaceGetCurrentTexture(m_Handle, &texture);
+        wgpuSurfaceGetCurrentTexture(m_Surface.GetHandle(), &texture);
     }
 
-    void Surface::Present()
+    void Surface::Present() const
     {
         NEPTUNE_PROFILE_ZONE
 
-        WEBGPU_CHECK(wgpuSurfacePresent(m_Handle))
+        WEBGPU_CHECK(wgpuSurfacePresent(m_Surface.GetHandle()))
     }
 
-    void Surface::Unconfigure()
+    void Surface::Unconfigure() const
     {
         NEPTUNE_PROFILE_ZONE
 
-        wgpuSurfaceUnconfigure(m_Handle);
+        wgpuSurfaceUnconfigure(m_Surface.GetHandle());
     }
 
 }

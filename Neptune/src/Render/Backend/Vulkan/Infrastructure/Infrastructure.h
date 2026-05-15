@@ -27,7 +27,7 @@ namespace Neptune::Vulkan {
     * @brief Vulkan::Infrastructure Class.
     * This class defines the Vulkan::Infrastructure behaves.
     */
-    class Infrastructure : public CommonInfrastructure, public NonCopyable
+    class Infrastructure : public CommonInfrastructure
     {
     public:
 

@@ -27,7 +27,7 @@ namespace Neptune::OpenGL {
     * @brief OpenGL::Infrastructure Class.
     * This class defines the OpenGL::Infrastructure behaves.
     */
-    class Infrastructure : public CommonInfrastructure, public NonCopyable
+    class Infrastructure : public CommonInfrastructure
     {
     public:
 

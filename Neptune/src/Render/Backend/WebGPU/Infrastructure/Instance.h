@@ -92,7 +92,7 @@ namespace Neptune::WebGPU {
 
     private:
 
-        Unit::Instance m_Instance;                                             // @brief This Instance.
+        Unit::Instance m_Instance; // @brief This Instance.
 
     };
     

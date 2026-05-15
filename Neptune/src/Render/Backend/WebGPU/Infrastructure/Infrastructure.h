@@ -27,7 +27,7 @@ namespace Neptune::WebGPU {
     * @brief WebGPU::Infrastructure Class.
     * This class defines the WebGPU::Infrastructure behaves.
     */
-    class Infrastructure : public CommonInfrastructure, public NonCopyable
+    class Infrastructure : public CommonInfrastructure
     {
     public:
 

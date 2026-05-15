@@ -5,6 +5,7 @@
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
@@ -41,7 +42,7 @@ namespace Neptune::WebGPU {
         *
         * @return Returns Unit Handle.
         */
-        const Unit::Instance::Handle& Handle() const { return m_Instance.GetHandle(); }
+        const Unit::Device::Handle& Handle() const { return m_Device.GetHandle(); }
 
     public:
 
@@ -141,13 +142,6 @@ namespace Neptune::WebGPU {
         void GetLostFuture();
 
         /**
-        * @brief Get Queue.
-        * 
-        * @return Returns Queue.
-        */
-        WGPUQueue GetQueue();
-
-        /**
         * @brief Is Device has Feature.
         */
         void HasFeature();
@@ -171,18 +165,8 @@ namespace Neptune::WebGPU {
 
     private:
 
-        Unit::Device m_Device;                                             // @brief This Device.
+        Unit::Device m_Device;  // @brief This Device.
     };
-
-    template<>
-    inline void InfrastructureBase::SetLabel(Device* object, const std::string& label)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        WGPUStringView view{ label.c_str() };
-
-        wgpuDeviceSetLabel(object->Handle(), view);
-    }
     
 }
 

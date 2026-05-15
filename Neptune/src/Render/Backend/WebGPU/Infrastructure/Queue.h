@@ -9,75 +9,56 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/WebGPU/Unit/Queue.h"
 
 namespace Neptune::WebGPU {
 
+    using IGraphicQueue = IInfrastructure<class Queue, EInfrastructure::GraphicQueue>;
+    
     /**
-    * @brief Queue Class.
+    * @brief WebGPU::Queue Class.
+    * This class defines the WebGPU::Queue behaves.
     */
-    class Queue : public Infrastructure<WGPUQueue, EInfrastructure::Queue>
+    class Queue : public Infrastructure
     {
-    public:
-
-        /**
-        * @brief Mark as Queue Infrastructure Type.
-        */
-        static constexpr EInfrastructure Type = Infrastructure<WGPUQueue, EInfrastructure::Queue>::Type;
-
     public:
 
         /**
         * @brief Constructor Function.
         *
-        * @param[in] context The global WebGPU Context.
+        * @param[in] context Context.
+        * @param[in] e EInfrastructure.
         */
-        explicit Queue(Context& context);
+        Queue(Context& context, EInfrastructure e);
 
         /**
         * @brief Destructor Function.
         */
         ~Queue() override = default;
 
+        /**
+        * @brief Get Unit Handle.
+        *
+        * @return Returns Unit Handle.
+        */
+        const Unit::Queue::Handle& Handle() const { return m_Queue.GetHandle(); }
+        
     private:
 
+        /**
+        * @brief Create Surface.
+        */
+        void Create();
+        
         void OnSubmittedWorkDone();
-        void Submit();
-        void WriteBuffer();
-        void WriteTexture();
+        void Submit() const;
+        void WriteBuffer() const;
+        void WriteTexture() const;
 
+    private:
+
+        Unit::Queue m_Queue; // @brief This Queue.
     };
-
-    template<>
-    inline void InfrastructureBase::AddRef(Queue* object)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        wgpuQueueAddRef(object->Handle());
-    }
-
-    template<>
-    inline void InfrastructureBase::Release(Queue* object)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        if (!object->Handle())
-        {
-            return;
-        }
-
-        wgpuQueueRelease(object->Handle());
-        object->SetHandleNullptr();
-    }
-
-    template<>
-    inline void InfrastructureBase::SetLabel(Queue* object, const std::string& label)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        WGPUStringView view{ label.c_str() };
-
-        wgpuQueueSetLabel(object->Handle(), view);
-    }
 
 }
 

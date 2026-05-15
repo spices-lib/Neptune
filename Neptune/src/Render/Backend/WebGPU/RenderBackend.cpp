@@ -57,6 +57,14 @@ namespace Neptune::WebGPU {
         NEPTUNE_PROFILE_ZONE
 
         m_Context = CreateSP<Context>();
+        
+        m_Context->Registry<IInstance>();
+        m_Context->Registry<IDebugUtilsObject>();
+        m_Context->Registry<ISurface>();
+        m_Context->Registry<IAdapter>();
+        m_Context->Registry<IDevice>();
+        
+        m_Context->Registry<IGraphicQueue>();
 
         RenderFrontend::OnInitialize();
     }

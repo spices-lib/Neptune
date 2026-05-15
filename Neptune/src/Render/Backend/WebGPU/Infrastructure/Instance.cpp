@@ -63,17 +63,7 @@ namespace Neptune::WebGPU {
 
     WGPUSurface Instance::CreateSurface(const std::string& htmlCanvas)
     {
-        NEPTUNE_PROFILE_ZONE
-
-        WGPUEmscriptenSurfaceSourceCanvasHTMLSelector                 htmlSelector{};
-        htmlSelector.chain.sType                                    = WGPUSType_EmscriptenSurfaceSourceCanvasHTMLSelector;
-        htmlSelector.chain.next                                     = nullptr;
-        htmlSelector.selector                                       = { htmlCanvas.c_str()};
-
-        WGPUSurfaceDescriptor                                         desc{};
-        desc.nextInChain                                            = &htmlSelector.chain;
-
-        return wgpuInstanceCreateSurface(m_Instance.GetHandle(), &desc);
+        
     }
 
     void Instance::GetWGSLFeatures()

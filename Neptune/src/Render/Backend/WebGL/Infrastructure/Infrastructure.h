@@ -27,7 +27,7 @@ namespace Neptune::WebGL {
     * @brief WebGL::Infrastructure Class.
     * This class defines the WebGL::Infrastructure behaves.
     */
-    class Infrastructure : public CommonInfrastructure, public NonCopyable
+    class Infrastructure : public CommonInfrastructure
     {
     public:
 

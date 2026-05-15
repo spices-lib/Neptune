@@ -10,6 +10,7 @@
 
 #include "Device.h"
 #include "Instance.h"
+#include "Adapter.h"
 
 namespace Neptune::WebGPU {
 
@@ -25,7 +26,7 @@ namespace Neptune::WebGPU {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Device.CreateDevice(GetContext().Get<IInstance>()->Handle());
+        m_Device.CreateDevice(GetContext().Get<IInstance>()->Handle(), GetContext().Get<IAdapter>()->Handle());
     }
 
     void Device::CreateBindGroup()
@@ -34,7 +35,7 @@ namespace Neptune::WebGPU {
 
         WGPUBindGroupDescriptor descriptor{};
 
-        wgpuDeviceCreateBindGroup(m_Handle.GetHandle(), &descriptor);
+        wgpuDeviceCreateBindGroup(m_Device.GetHandle(), &descriptor);
     }
 
     void Device::CreateBindGroupLayout()
@@ -43,7 +44,7 @@ namespace Neptune::WebGPU {
 
         WGPUBindGroupLayoutDescriptor desc{};
 
-        wgpuDeviceCreateBindGroupLayout(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateBindGroupLayout(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateBuffer()
@@ -52,7 +53,7 @@ namespace Neptune::WebGPU {
 
         WGPUBufferDescriptor desc{};
 
-        wgpuDeviceCreateBuffer(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateBuffer(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateCommandEncoder()
@@ -61,7 +62,7 @@ namespace Neptune::WebGPU {
 
         WGPUCommandEncoderDescriptor desc{};
 
-        wgpuDeviceCreateCommandEncoder(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateCommandEncoder(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateComputePipeline()
@@ -70,7 +71,7 @@ namespace Neptune::WebGPU {
 
         WGPUComputePipelineDescriptor desc{};
 
-        wgpuDeviceCreateComputePipeline(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateComputePipeline(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateComputePipelineAsync()
@@ -94,7 +95,7 @@ namespace Neptune::WebGPU {
         info.userdata1                             = nullptr;
         info.callback                              = request;
 
-        wgpuDeviceCreateComputePipelineAsync(m_Handle.GetHandle(), &desc, info);
+        wgpuDeviceCreateComputePipelineAsync(m_Device.GetHandle(), &desc, info);
     }
 
     void Device::CreatePipelineLayout()
@@ -103,7 +104,7 @@ namespace Neptune::WebGPU {
 
         WGPUPipelineLayoutDescriptor desc{};
 
-        wgpuDeviceCreatePipelineLayout(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreatePipelineLayout(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateQuerySet()
@@ -112,7 +113,7 @@ namespace Neptune::WebGPU {
 
         WGPUQuerySetDescriptor desc{};
 
-        wgpuDeviceCreateQuerySet(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateQuerySet(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateRenderBundleEncoder()
@@ -121,7 +122,7 @@ namespace Neptune::WebGPU {
 
         WGPURenderBundleEncoderDescriptor desc{};
 
-        wgpuDeviceCreateRenderBundleEncoder(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateRenderBundleEncoder(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateRenderPipeline()
@@ -130,7 +131,7 @@ namespace Neptune::WebGPU {
 
         WGPURenderPipelineDescriptor desc{};
 
-        wgpuDeviceCreateRenderPipeline(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateRenderPipeline(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateRenderPipelineAsync()
@@ -163,7 +164,7 @@ namespace Neptune::WebGPU {
 
         WGPUSamplerDescriptor desc{};
 
-        wgpuDeviceCreateSampler(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateSampler(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateShaderModule()
@@ -172,7 +173,7 @@ namespace Neptune::WebGPU {
 
         WGPUShaderModuleDescriptor desc{};
 
-        wgpuDeviceCreateShaderModule(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateShaderModule(m_Device.GetHandle(), &desc);
     }
 
     void Device::CreateTexture()
@@ -181,14 +182,14 @@ namespace Neptune::WebGPU {
 
         WGPUTextureDescriptor desc{};
 
-        wgpuDeviceCreateTexture(m_Handle.GetHandle(), &desc);
+        wgpuDeviceCreateTexture(m_Device.GetHandle(), &desc);
     }
 
     void Device::Destroy()
     {
         NEPTUNE_PROFILE_ZONE
 
-        wgpuDeviceDestroy(m_Handle.GetHandle());
+        wgpuDeviceDestroy(m_Device.GetHandle());
     }
 
     void Device::GetAdapterInfo()
@@ -197,7 +198,7 @@ namespace Neptune::WebGPU {
 
         WGPUAdapterInfo info{};
 
-        wgpuDeviceGetAdapterInfo(m_Handle.GetHandle(), &info);
+        wgpuDeviceGetAdapterInfo(m_Device.GetHandle(), &info);
     }
 
     void Device::GetFeatures()
@@ -206,7 +207,7 @@ namespace Neptune::WebGPU {
 
         WGPUSupportedFeatures features{};
 
-        wgpuDeviceGetFeatures(m_Handle, &features);
+        wgpuDeviceGetFeatures(m_Device.GetHandle(), &features);
     }
 
     void Device::GetLimits()
@@ -215,21 +216,14 @@ namespace Neptune::WebGPU {
 
         WGPULimits limits{};
 
-        wgpuDeviceGetLimits(m_Handle, &limits);
+        wgpuDeviceGetLimits(m_Device.GetHandle(), &limits);
     }
 
     void Device::GetLostFuture()
     {
         NEPTUNE_PROFILE_ZONE
 
-        wgpuDeviceGetLostFuture(m_Handle);
-    }
-
-    WGPUQueue Device::GetQueue()
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        return wgpuDeviceGetQueue(m_Handle);
+        wgpuDeviceGetLostFuture(m_Device.GetHandle());
     }
 
     void Device::HasFeature()
@@ -238,7 +232,7 @@ namespace Neptune::WebGPU {
 
         WGPUFeatureName feature = WGPUFeatureName_CoreFeaturesAndLimits;
 
-        wgpuDeviceHasFeature(m_Handle, feature);
+        wgpuDeviceHasFeature(m_Device.GetHandle(), feature);
     }
 
     void Device::PopErrorScope()
@@ -247,7 +241,7 @@ namespace Neptune::WebGPU {
 
         WGPUPopErrorScopeCallbackInfo info{};
 
-        wgpuDevicePopErrorScope(m_Handle, info);
+        wgpuDevicePopErrorScope(m_Device.GetHandle(), info);
     }
 
     void Device::PushErrorScope()
@@ -256,7 +250,7 @@ namespace Neptune::WebGPU {
 
         WGPUErrorFilter filter{};
 
-        wgpuDevicePushErrorScope(m_Handle, filter);
+        wgpuDevicePushErrorScope(m_Device.GetHandle(), filter);
     }
 
 }

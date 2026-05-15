@@ -27,7 +27,7 @@ namespace Neptune::Direct3D12 {
     * @brief Direct3D12::Infrastructure Class.
     * This class defines the Direct3D12::Infrastructure behaves.
     */
-    class Infrastructure : public CommonInfrastructure, public NonCopyable
+    class Infrastructure : public CommonInfrastructure
     {
     public:
 

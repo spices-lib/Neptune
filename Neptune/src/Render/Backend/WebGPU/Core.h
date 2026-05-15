@@ -20,6 +20,8 @@ namespace Neptune::WebGPU {
 
 	constexpr uint64_t WaitTimeoutNS = 5E9;                                // @brief wgpuInstanceWaitAny timeoutNS.
 
+	constexpr std::string_view HTMLCanvas = "#nepnep";                     // @brief Surface Html Canvas.
+
 	#define WEBGPUGL_VERSION                                               // @brief Use WEBGPU .
 
 	/**
@@ -56,9 +58,25 @@ namespace Neptune::WebGPU {
 		*
 		* @return Returns WaitHandler.
 		*/
-		static const Handler& GetWaitHandler();
+		static const WaitHandler& GetWaitHandler();
     };
 	
+	/**
+    * @brief WebGPU Device Lost Callback.
+    *
+    * @param[in] type WGPUDeviceLostReason.
+    * @param[in] message WGPUStringView.
+    */
+    void DeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*);
+
+    /**
+    * @brief WebGPU Uncaptured Error Callback.
+    *
+    * @param[in] type WGPUErrorType.
+    * @param[in] message WGPUStringView.
+    */
+    void UncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*);
+
 	/**
 	* @brief Handle Error Result.
 	*

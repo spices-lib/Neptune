@@ -21,16 +21,16 @@ namespace Neptune::WebGPU::Unit {
         wgpuDeviceRelease(m_Handle);
 	}
 
-	void Device::CreateDevice(WGPUInstance instance)
+	void Device::CreateDevice(WGPUInstance instance, WGPUAdapter adapter)
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		WGPUDeviceLostCallbackInfo                  deviceLostInfo{};
         deviceLostInfo.mode                       = WGPUCallbackMode_WaitAnyOnly;
-        deviceLostInfo.callback                   = Callback::DeviceLostCallback;
+        deviceLostInfo.callback                   = DeviceLostCallback;
                                                   
         WGPUUncapturedErrorCallbackInfo             errorInfo{};
-        errorInfo.callback                        = Callback::UncapturedErrorCallback;
+        errorInfo.callback                        = UncapturedErrorCallback;
                                                   
         WGPUDeviceDescriptor                        desc{};
         desc.deviceLostCallbackInfo               = deviceLostInfo;
@@ -46,7 +46,10 @@ namespace Neptune::WebGPU::Unit {
             if (auto p = static_cast<WGPUDevice*>(userdata1))
             {
                 *p = device;
+            	return;
             }
+        	
+        	NEPTUNE_CORE_ERROR(message.data)
         };
 
         WGPURequestDeviceCallbackInfo               info{};
@@ -54,7 +57,7 @@ namespace Neptune::WebGPU::Unit {
         info.userdata1                            = &m_Handle;
         info.callback                             = request;
 
-        auto future = wgpuAdapterRequestDevice(m_Handle.GetHandle(), &desc, info);
+        auto future = wgpuAdapterRequestDevice(adapter, &desc, info);
 
         WGPUFutureWaitInfo                          waitInfo{};
         waitInfo.future                           = future;

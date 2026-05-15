@@ -5,6 +5,7 @@
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
@@ -41,7 +42,7 @@ namespace Neptune::WebGPU {
         *
         * @return Returns Unit Handle.
         */
-        const Unit::Instance::Handle& Handle() const { return m_Instance.GetHandle(); }
+        const Unit::Adapter::Handle& Handle() const { return m_Adapter.GetHandle(); }
 
     private:
 

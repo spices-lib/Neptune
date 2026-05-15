@@ -9,76 +9,57 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
+#include "Render/Backend/WebGPU/Unit/Surface.h"
 
 namespace Neptune::WebGPU {
 
+    using ISurface = IInfrastructure<class Surface, EInfrastructure::Surface>;
+
     /**
-    * @brief Surface Class.
+    * @brief WebGPU::Surface Class.
+    * This class defines the WebGPU::Surface behaves.
     */
-    class Surface : public Infrastructure<WGPUSurface, EInfrastructure::Surface>
+    class Surface : public Infrastructure
     {
-    public:
-
-        /**
-        * @brief Mark as Surface Infrastructure Type.
-        */
-        static constexpr EInfrastructure Type = Infrastructure<WGPUSurface, EInfrastructure::Surface>::Type;
-
     public:
 
         /**
         * @brief Constructor Function.
         *
-        * @param[in] context The global WebGPU Context.
+        * @param[in] context Context.
+        * @param[in] e EInfrastructure.
         */
-        explicit Surface(Context& context);
+        Surface(Context& context, EInfrastructure e);
 
         /**
         * @brief Destructor Function.
         */
         ~Surface() override = default;
 
+        /**
+        * @brief Get Unit Handle.
+        *
+        * @return Returns Unit Handle.
+        */
+        const Unit::Surface::Handle& Handle() const { return m_Surface.GetHandle(); }
+
     private:
 
-        void Configure();
-        void GetCapabilities();
-        void GetCurrentTexture();
-        void Present();
-        void Unconfigure();
+        /**
+        * @brief Create Surface.
+        */
+        void Create();
 
+        void Configure() const;
+        void GetCapabilities() const;
+        void GetCurrentTexture() const;
+        void Present() const;
+        void Unconfigure() const;
+
+    private:
+
+        Unit::Surface m_Surface;  // @brief This Surface.
     };
-
-    template<>
-    inline void InfrastructureBase::AddRef(Surface* object)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        wgpuSurfaceAddRef(object->Handle());
-    }
-
-    template<>
-    inline void InfrastructureBase::Release(Surface* object)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        if (!object->Handle())
-        {
-            return;
-        }
-
-        wgpuSurfaceRelease(object->Handle());
-        object->SetHandleNullptr();
-    }
-
-    template<>
-    inline void InfrastructureBase::SetLabel(Surface* object, const std::string& label)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        WGPUStringView view{ label.c_str() };
-
-        wgpuSurfaceSetLabel(object->Handle(), view);
-    }
 
 }
 

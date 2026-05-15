@@ -32,20 +32,65 @@ namespace Neptune::WebGPU {
 		return s_Handler;
 	}
 
-	void HandleResultDelegate::SetWaitHandler(const Handler& fn)
+	void HandleResultDelegate::SetWaitHandler(const WaitHandler& fn)
 	{
         NEPTUNE_PROFILE_ZONE
 
 		s_WaitHandler = fn;
 	}
 
-	const HandleResultDelegate::Handler& HandleResultDelegate::GetWaitHandler()
+	const HandleResultDelegate::WaitHandler& HandleResultDelegate::GetWaitHandler()
 	{
         NEPTUNE_PROFILE_ZONE
 
 		return s_WaitHandler;
 	}
 	
+	void DeviceLostCallback(WGPUDevice const*, WGPUDeviceLostReason reason, WGPUStringView message, void*, void*)
+	{
+        NEPTUNE_PROFILE_ZONE
+
+        const char* label = "";
+        switch (reason)
+        {
+            case WGPUDeviceLostReason_Unknown:            label = "Unknown"; break;
+            case WGPUDeviceLostReason_Destroyed:          label = "Destroyed"; break;
+            case WGPUDeviceLostReason_CallbackCancelled:  label = "CallbackCancelled"; break;
+            case WGPUDeviceLostReason_FailedCreation:     label = "FailedCreation"; break;
+            default:                                      label = "Unknown";
+        }
+
+        std::stringstream ss;
+        ss << "WebGPU DeviceLost: [ " << label << " ]: " << message.data;
+
+        NEPTUNE_CORE_ERROR(ss.str())
+	}
+
+	void UncapturedErrorCallback(WGPUDevice const*, WGPUErrorType type, WGPUStringView message, void*, void*)
+	{
+        NEPTUNE_PROFILE_ZONE
+
+		if (type == WGPUErrorType_NoError)
+        {
+            return;
+        }
+
+        const char* label = "";
+        switch (type)
+        {
+            case WGPUErrorType_Validation:  label = "Validation"; break;
+            case WGPUErrorType_OutOfMemory: label = "Out of memory"; break;
+            case WGPUErrorType_Internal:    label = "Internal"; break;
+            case WGPUErrorType_Unknown:     label = "Unknown"; break;
+            default:                        label = "Unknown";
+        }
+
+        std::stringstream ss;
+        ss << "WebGPU UncapturedError: [ " << label << " ]: " << message.data;
+
+        NEPTUNE_CORE_ERROR(ss.str())
+	}
+
 	void HandleResult(WGPUStatus result)
 	{
         NEPTUNE_PROFILE_ZONE

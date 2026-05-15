@@ -13,23 +13,21 @@
 
 namespace Neptune::WebGPU {
 
-    Queue::Queue(Context& context)
-        : Infrastructure(context)
+    Queue::Queue(Context& context, EInfrastructure e)
+        : Infrastructure(context, e)
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Handle = m_Context.Get<Device>()->GetQueue();
-
-        if (m_Handle)
-        {
-            NEPTUNE_CORE_INFO("WGPUQueue created succeed.")
-        }
-        else
-        {
-            NEPTUNE_CORE_CRITICAL("WGPUQueue created failed.")
-        }
+        Create();
     }
 
+    void Queue::Create()
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        m_Queue.CreateQueue(GetContext().Get<IDevice>()->Handle());
+    }
+    
     void Queue::OnSubmittedWorkDone()
     {
         NEPTUNE_PROFILE_ZONE
@@ -48,29 +46,29 @@ namespace Neptune::WebGPU {
         info.userdata1                  = nullptr;
         info.callback                   = callback;
 
-        Wait(wgpuQueueOnSubmittedWorkDone(m_Handle, info));
+        //Wait(wgpuQueueOnSubmittedWorkDone(m_Handle, info));
     }
 
-    void Queue::Submit()
+    void Queue::Submit() const
     {
         NEPTUNE_PROFILE_ZONE
 
         WGPUCommandBuffer commandBuffer[1];
 
-        wgpuQueueSubmit(m_Handle, 1, commandBuffer);
+        wgpuQueueSubmit(m_Queue.GetHandle(), 1, commandBuffer);
     }
 
-    void Queue::WriteBuffer()
+    void Queue::WriteBuffer() const
     {
         NEPTUNE_PROFILE_ZONE
 
         WGPUBuffer buffer{};
         void* data;
 
-        wgpuQueueWriteBuffer(m_Handle, buffer, 0, data, 0);
+        wgpuQueueWriteBuffer(m_Queue.GetHandle(), buffer, 0, data, 0);
     }
 
-    void Queue::WriteTexture()
+    void Queue::WriteTexture() const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -79,7 +77,7 @@ namespace Neptune::WebGPU {
         WGPUTexelCopyBufferLayout layout{};
         WGPUExtent3D extent{};
 
-        wgpuQueueWriteTexture(m_Handle, &info, data, 0, &layout, &extent);
+        wgpuQueueWriteTexture(m_Queue.GetHandle(), &info, data, 0, &layout, &extent);
     }
 
 

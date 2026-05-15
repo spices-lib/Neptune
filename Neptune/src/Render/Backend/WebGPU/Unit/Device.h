@@ -39,8 +39,9 @@ namespace Neptune::WebGPU::Unit {
 		* @brief Create Device.
 		* 
 		* @param[in] instance WGPUInstance.
+		* @param[in] adapter WGPUAdapter.
 		*/
-		void CreateDevice(WGPUInstance instance);
+		void CreateDevice(WGPUInstance instance, WGPUAdapter adapter);
 
 	};
 }

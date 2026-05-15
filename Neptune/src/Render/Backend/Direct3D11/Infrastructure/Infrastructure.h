@@ -24,10 +24,10 @@ namespace Neptune::Direct3D11 {
     using ContextAccessor = CommonInfrastructure::ContextAccessor;
 
     /**
-    * @brief Direct3D12::Infrastructure Class.
-    * This class defines the Direct3D12::Infrastructure behaves.
+    * @brief Direct3D11::Infrastructure Class.
+    * This class defines the Direct3D11::Infrastructure behaves.
     */
-    class Infrastructure : public CommonInfrastructure, public NonCopyable
+    class Infrastructure : public CommonInfrastructure
     {
     public:
 
