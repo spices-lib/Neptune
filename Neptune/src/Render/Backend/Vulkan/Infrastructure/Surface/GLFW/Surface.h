@@ -5,6 +5,9 @@
 */
 
 #pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Core/Core.h"
 #include "Render/Backend/Vulkan/Infrastructure/Surface.h"
 
@@ -44,3 +47,5 @@ namespace Neptune::Vulkan::GLFW {
 	};
 	
 }
+
+#endif

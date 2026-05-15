@@ -31,7 +31,7 @@ namespace Neptune {
 #ifdef NP_PLATFORM_EMSCRIPTEN
             case WindowImplement::emscripten_glfw:
             {
-                S_Instance = CreateUP<EmscriptenGLFW::WindowImpl>(initInfo, implement);
+                S_Instance = CreateUP<EmscriptenGLFW::WindowImpl>(initInfo, implement, backend);
                 break;
             }
 #endif

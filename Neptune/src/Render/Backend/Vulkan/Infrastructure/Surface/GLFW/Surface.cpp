@@ -5,6 +5,9 @@
 */
 
 #include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
 #include "Surface.h"
 #include "Render/Backend/Vulkan/Infrastructure/Instance.h"
 
@@ -36,3 +39,5 @@ namespace Neptune::Vulkan::GLFW {
     }
 
 }
+
+#endif

@@ -48,6 +48,25 @@ namespace Neptune {
     };
     
     /**
+    * @brief Concept: Is Empty Enum.
+    * 
+    * @tparam T .
+    */
+    template<typename T>
+    concept IsEmptyEnum = IsEnum<T> && requires {
+        { T::Count } -> std::convertible_to<T>;
+        requires std::bool_constant<static_cast<uint32_t>(T::Count) == 0>::value;
+    };
+    
+    /**
+    * @brief Concept: Is Not Empty Enum.
+    * 
+    * @tparam T .
+    */
+    template<typename T>
+    concept IsNotEmptyEnum = !IsEmptyEnum<T>;
+    
+    /**
     * @brief Concept: Is Pointer.
     * 
     * @tparam T .

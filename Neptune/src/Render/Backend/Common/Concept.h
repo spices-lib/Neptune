@@ -33,7 +33,7 @@ namespace Neptune::Render::Common {
     template<typename T>
     concept IsUnit = requires(T t) {
         typename T::Handle;
-        typename decltype(T::E_);
+        t.E_;
         IsUnitHandle<typename T::Handle>;
         IsUnitEUnit<decltype(T::E_)>;
     };
@@ -67,7 +67,7 @@ namespace Neptune::Render::Common {
     template<typename T>
     concept IsIInfrastructure = requires(T t) {
         typename T::T;
-        typename decltype(T::E);
+        t.E;
         IsInfrastructure<typename T::T>;
         IsEnum<decltype(T::E)>;
     };

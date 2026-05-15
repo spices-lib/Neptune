@@ -42,6 +42,8 @@ namespace Neptune::imgui {
 		}
 	}
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+	
 	void OpenGLInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -100,6 +102,10 @@ namespace Neptune::imgui {
 		ImGui_ImplVulkan_NewFrame();
 	}
 
+#endif
+
+#ifdef NP_PLATFORM_WINDOWS
+	
 	void Direct3D12Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -137,4 +143,5 @@ namespace Neptune::imgui {
 		ImGui_ImplDX12_NewFrame();
 	}
 
+#endif
 }

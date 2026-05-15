@@ -45,6 +45,8 @@ namespace Neptune::imgui {
     */
     SP<RenderInterface> CreateRenderInterface(RenderBackendEnum backend);
 
+#ifndef NP_PLATFORM_EMSCRIPTEN
+    
     /**
     * @brief OpenGL Interface.
     */
@@ -107,6 +109,10 @@ namespace Neptune::imgui {
 
     };
 
+#endif
+
+#ifdef NP_PLATFORM_WINDOWS
+    
     /**
     * @brief Direct3D12 Interface.
     */
@@ -137,5 +143,7 @@ namespace Neptune::imgui {
         void BeginFrame() const override;
 
     };
+    
+#endif
 
 }

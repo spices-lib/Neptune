@@ -91,6 +91,7 @@ namespace Neptune::Render::Common {
         * @param[in] args Infrastructure Construct Params.
         */
         template<IsIInfrastructure I, typename... Args>
+        requires IsNotEmptyEnum<E>
         void Registry(Args&&... args);
 
         /**
@@ -99,6 +100,7 @@ namespace Neptune::Render::Common {
         * @tparam I Infrastructure Definitions.
         */
         template<IsIInfrastructure I>
+        requires IsNotEmptyEnum<E>
         void UnRegistry();
 
         /**
@@ -114,6 +116,7 @@ namespace Neptune::Render::Common {
         * @return Returns registry Infrastructure.
         */
         template<IsIInfrastructure I>
+        requires IsNotEmptyEnum<E>
         I::T* Get();
 
         /**
@@ -124,6 +127,7 @@ namespace Neptune::Render::Common {
         * @return Returns true if registry.
         */
         template<IsIInfrastructure I>
+        requires IsNotEmptyEnum<E>
         bool Has() const;
 
     private:
@@ -139,6 +143,7 @@ namespace Neptune::Render::Common {
 
     template<typename E> requires IsEnum<E>
     template<IsIInfrastructure I, typename... Args>
+    requires IsNotEmptyEnum<E>
     inline void Context<E>::Registry(Args&&... args)
     {
         NEPTUNE_PROFILE_ZONE
@@ -157,6 +162,7 @@ namespace Neptune::Render::Common {
 
     template<typename E> requires IsEnum<E>
     template<IsIInfrastructure I>
+    requires IsNotEmptyEnum<E>
     inline void Context<E>::UnRegistry()
     {
         NEPTUNE_PROFILE_ZONE
@@ -178,21 +184,25 @@ namespace Neptune::Render::Common {
     {
         NEPTUNE_PROFILE_ZONE
 
-        for (int i = static_cast<int>(E::Count) - 1; i >= 0; --i)
+        if constexpr (IsNotEmptyEnum<E>)
         {
-            if (!m_Infrastructures[i])
+            for (int i = static_cast<int>(E::Count) - 1; i >= 0; --i)
             {
-                NEPTUNE_CORE_ERROR("Infrastructure is not registered yet, can not be unregister.")
+                if (!m_Infrastructures[i])
+                {
+                    NEPTUNE_CORE_ERROR("Infrastructure is not registered yet, can not be unregister.")
 
-                continue;
+                    continue;
+                }
+
+                m_Infrastructures[i].reset();
             }
-
-            m_Infrastructures[i].reset();
-        }
+        } 
     }
 
     template<typename E> requires IsEnum<E>
     template<IsIInfrastructure I>
+    requires IsNotEmptyEnum<E>
     I::T* Context<E>::Get()
     {
         NEPTUNE_PROFILE_ZONE
@@ -211,6 +221,7 @@ namespace Neptune::Render::Common {
 
     template<typename E> requires IsEnum<E>
     template<IsIInfrastructure I>
+    requires IsNotEmptyEnum<E>
     bool Context<E>::Has() const
     {
         NEPTUNE_PROFILE_ZONE

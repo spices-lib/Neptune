@@ -30,8 +30,9 @@ namespace Neptune::EmscriptenGLFW {
         * @brief Constructor Function.
         * @param[in] initInfo WindowInfo.
         * @param[in] implement WindowImplement.
+        * @param[in] backend RenderBackendEnum.
         */
-        WindowImpl(const WindowInfo& initInfo, WindowImplement implement);
+        WindowImpl(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend);
 
         /**
         * @brief Destructor Function.
@@ -53,7 +54,7 @@ namespace Neptune::EmscriptenGLFW {
         /**
         * @brief Interface of window swap buffers.
         */
-        void SwapBuffers() const override {};
+        void SwapBuffers() const override;
 
         /**
         * @brief Interface of window get extent.

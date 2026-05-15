@@ -19,8 +19,8 @@
 
 namespace Neptune::EmscriptenGLFW {
 
-    WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement)
-        : Window(initInfo, implement)
+    WindowImpl::WindowImpl(const WindowInfo& initInfo, WindowImplement implement, RenderBackendEnum backend)
+        : Window(implement)
         , m_APIInterface(CreateInterface(backend))
     {
         NEPTUNE_PROFILE_ZONE
