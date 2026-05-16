@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackendInterface.h"
+#include "Window/Core.h"
 
 #include <emscripten.h>
 #include <emscripten/emscripten.h>
@@ -30,7 +31,7 @@ namespace Neptune::EmscriptenGLFW {
 			case RenderBackendEnum::WebGPU:     return CreateSP<WebGPUInterface>();
 			default:
 			{
-				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in GLFW Configuration.")
+				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in Emscripten GLFW Configuration.")
 				return nullptr;
 			}
 		}
@@ -44,7 +45,7 @@ namespace Neptune::EmscriptenGLFW {
 
         emscripten_webgl_init_context_attributes(&attrs);
 
-        auto ctx = emscripten_webgl_create_context("#nepnep", &attrs);
+        auto ctx = emscripten_webgl_create_context(HTMLCanvas.data(), &attrs);
 
         emscripten_webgl_make_context_current(ctx);
 	}

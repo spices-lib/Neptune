@@ -10,6 +10,7 @@
 
 #include "Core/Core.h"
 #include "Render/Frontend/Utils.h"
+#include "Window/Core.h"
 
 #include <functional>
 #include <webgpu.h>
@@ -20,7 +21,7 @@ namespace Neptune::WebGPU {
 
 	constexpr uint64_t WaitTimeoutNS = 5E9;                                // @brief wgpuInstanceWaitAny timeoutNS.
 
-	constexpr std::string_view HTMLCanvas = "#nepnep";                     // @brief Surface Html Canvas.
+	constexpr std::string_view HTMLCanvas = Neptune::HTMLCanvas;           // @brief Surface Html Canvas.
 
 	#define WEBGPUGL_VERSION                                               // @brief Use WEBGPU .
 

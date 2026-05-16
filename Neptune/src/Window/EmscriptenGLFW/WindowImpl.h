@@ -1,5 +1,5 @@
 /**
-* @file WWindowImpl.h.
+* @file WindowImpl.h.
 * @brief The WindowImpl Class Definitions.
 * @author Spices.
 */

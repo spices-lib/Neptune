@@ -45,7 +45,7 @@ namespace Neptune::EmscriptenGLFW {
         glfwWindowHint(GLFW_REFRESH_RATE , mode->refreshRate );
 
         // Setting the association window <-> canvas
-        emscripten_glfw_set_next_window_canvas_selector("#nepnep");
+        emscripten_glfw_set_next_window_canvas_selector(HTMLCanvas.data());
 
         // Create the only window
         m_Windows = glfwCreateWindow(initInfo.width, initInfo.height, initInfo.name.c_str(), nullptr, nullptr);
@@ -61,7 +61,7 @@ namespace Neptune::EmscriptenGLFW {
         glfwSetWindowUserPointer(m_Windows, this);
 
         // Makes the canvas resizable and match the full window size
-        emscripten_glfw_make_canvas_resizable(m_Windows, "#nepnep-div", nullptr);
+        emscripten_glfw_make_canvas_resizable(m_Windows, HTMLDiv.data(), nullptr);
 
         // Set gltf event call back.
         SetInternalCallBack();
