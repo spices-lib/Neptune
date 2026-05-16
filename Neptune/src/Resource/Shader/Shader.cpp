@@ -2,11 +2,17 @@
 #include "Shader.h"
 #include "Render/Frontend/RHI/Shader.h"
 
+#ifdef NP_PLATFORM_WINDOWS
+
 #include <glslc/src/file_includer.h>
 #include <libshaderc_util/include/libshaderc_util/file_finder.h>
 
+#endif
+
 namespace Neptune {
 
+#ifdef NP_PLATFORM_WINDOWS
+	
 	namespace {
 	
 		shaderc_shader_kind ToShaderCKind(ShaderStage stage)
@@ -25,8 +31,13 @@ namespace Neptune {
 	
 	}
 
+#endif
+	
 	void Shader::SetSource(const std::filesystem::path& path)
 	{
+		
+#ifdef NP_PLATFORM_WINDOWS
+		
 		if (!std::filesystem::exists(path))
 		{
 			std::stringstream ss;
@@ -48,10 +59,16 @@ namespace Neptune {
 		m_RHIResource = CreateSP<RHI::Shader>();
 		m_RHIResource->SetSource(spirv);
 		m_RHIResource->SetName(m_Name);
+		
+#endif
+		
 	}
 
 	std::vector<uint8_t> Shader::Compile(const std::string& data)
 	{
+		
+#ifdef NP_PLATFORM_WINDOWS
+		
 		shaderc::Compiler compiler;
 		shaderc::CompileOptions options;
 
@@ -85,6 +102,12 @@ namespace Neptune {
 		memcpy(spirv.data(), code32.data(), spirv.size());
 
 		return std::move(spirv);
+	
+#else
+		
+		return {};
+		
+#endif
 	}
 
 }

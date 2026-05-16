@@ -30,7 +30,7 @@ namespace Neptune::WebGPU {
 		* @param[in] context Context.
 		* @param[in] e EInfrastructure.
 		*/
-		DebugUtilsObject(Context& context, EInfrastructure e);
+		DebugUtilsObject(Context& context, EInfrastructure e) : Infrastructure(context, e) {}
 
 		/**
 		* @brief Destructor Function.

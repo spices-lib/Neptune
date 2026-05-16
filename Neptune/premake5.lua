@@ -158,6 +158,26 @@ project "Neptune"
 		{ 
 			"/utf-8",                             -- Using utf-8 encode
 		}
+    
+        -- Configuration: Debug
+        filter {"system:windows", "configurations:Debug"}
+
+            -- Debug Specific Solution Dependency
+            links
+            {
+                "%{Library.shaderc_debug}",               -- Dependency: shaderc_debug
+                "%{Library.shaderc_utils_debug}",         -- Dependency: shaderc_utils_debug
+            }
+        
+        -- Configuration: Release
+        filter {"system:windows", "configurations:Release"}
+
+            -- Release Specific Solution Dependency
+            links
+            {
+                "%{Library.shaderc_release}",             -- Dependency: shaderc_release
+                "%{Library.shaderc_utils_release}",       -- Dependency: shaderc_utils_release
+            }
 
 	-- Platform: Emscripten
 	filter "system:emscripten"
@@ -214,10 +234,7 @@ project "Neptune"
 
 		-- Debug Specific Solution Dependency
 		links
-		{
-			"%{Library.shaderc_debug}",               -- Dependency: shaderc_debug
-			"%{Library.shaderc_utils_debug}",         -- Dependency: shaderc_utils_debug
-		}
+		{}
 
 		runtime "Debug"
 		symbols "On"
@@ -233,10 +250,7 @@ project "Neptune"
 
 		-- Release Specific Solution Dependency
 		links
-		{
-			"%{Library.shaderc_release}",             -- Dependency: shaderc_release
-			"%{Library.shaderc_utils_release}",       -- Dependency: shaderc_utils_release
-		}
+		{}
 
 		runtime "Release"
 		optimize "On"
