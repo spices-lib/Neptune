@@ -53,10 +53,6 @@ project "UnitTest"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
-		"%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
-		"%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
-		"%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
-		"%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
@@ -80,8 +76,12 @@ project "UnitTest"
 		-- The Solution Additional Include Folder.
 		includedirs
 		{
-			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
-			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
+            "%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
+            "%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
+            "%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
+            "%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
+			"%{IncludeDir.GLFW}",                                 -- Library: GLFW Source Folder.
+			"%{IncludeDir.VulkanSDK}",                            -- Library: VulkanSDK Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.

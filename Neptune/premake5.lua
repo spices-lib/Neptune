@@ -77,10 +77,6 @@ project "Neptune"
 		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
 		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
 		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
-		"%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
-		"%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
-		"%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
-		"%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
 	}
 
 	-- The Solution Dependency
@@ -115,10 +111,14 @@ project "Neptune"
 		-- The Solution Additional Include Folder.
 		includedirs
 		{
-			"%{IncludeDir.GLFW}",                            -- Library: GLFW Source Folder.
-			"%{IncludeDir.VulkanSDK}",                       -- Library: VulkanSDK Source Folder.
-			"%{IncludeDir.Glad}",                            -- Library: Glad Source Folder.
-			"%{IncludeDir.WinPixEventRuntime}",              -- Library: WinPixEventRuntime Source Folder.
+            "%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
+            "%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
+            "%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
+            "%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
+			"%{IncludeDir.GLFW}",                                 -- Library: GLFW Source Folder.
+			"%{IncludeDir.VulkanSDK}",                            -- Library: VulkanSDK Source Folder.
+			"%{IncludeDir.Glad}",                                 -- Library: Glad Source Folder.
+			"%{IncludeDir.WinPixEventRuntime}",                   -- Library: WinPixEventRuntime Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -196,6 +196,12 @@ project "Neptune"
 		{
 			"-pthread"       -- Enable pthread
 		}
+
+		-- The Solution make settings
+		makesettings 
+		{
+            "LINKCMD = $(file > $(OBJDIR)objects.rsp,$(OBJECTS)) emar rcs $(TARGET) @$(OBJDIR)objects.rsp"   -- Enable response file
+        }
 
 	-- Configuration: Debug
 	filter "configurations:Debug"
