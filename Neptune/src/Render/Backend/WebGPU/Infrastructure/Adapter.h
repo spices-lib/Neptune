@@ -73,7 +73,7 @@ namespace Neptune::WebGPU {
 
     private:
 
-        Unit::Adapter m_Adapter;                                             // @brief This Adapter.
+        Unit::Adapter m_Adapter;  // @brief This Adapter.
     };
     
 }

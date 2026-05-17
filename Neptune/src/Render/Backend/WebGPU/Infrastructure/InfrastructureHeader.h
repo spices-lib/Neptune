@@ -14,5 +14,7 @@
 #include "Render/Backend/WebGPU/Infrastructure/Adapter.h"
 #include "Render/Backend/WebGPU/Infrastructure/Device.h"
 #include "Render/Backend/WebGPU/Infrastructure/Queue.h"
+#include "Render/Backend/WebGPU/Infrastructure/Future.h"
+#include "Render/Backend/WebGPU/Infrastructure/CommandEncoder.h"
 
 #endif

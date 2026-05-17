@@ -9,7 +9,7 @@
 #include "World/Scene/Scene.h"
 #include "World/Component/Component.h"
 #include "Data/Clock.h"
-#include "Render/Frontend/Utils.h"
+#include "Render/Frontend/Core.h"
 #include "Core/Timer/Timer.h"
 
 namespace Neptune {

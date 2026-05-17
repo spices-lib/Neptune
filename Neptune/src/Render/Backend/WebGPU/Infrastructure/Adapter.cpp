@@ -10,6 +10,7 @@
 
 #include "Adapter.h"
 #include "Instance.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::WebGPU {
 
@@ -26,6 +27,8 @@ namespace Neptune::WebGPU {
         NEPTUNE_PROFILE_ZONE
 
         m_Adapter.CreateAdapter(GetContext().Get<IInstance>()->Handle());
+        
+        DEBUGUTILS_SETOBJECTNAME(m_Adapter, ToString())
     }
 
     void Adapter::GetFeatures()

@@ -13,7 +13,12 @@
 
 namespace Neptune::WebGPU {
 
-    using IGraphicQueue = IInfrastructure<class Queue, EInfrastructure::GraphicQueue>;
+    namespace Unit {
+        
+        class CommandBuffer;
+    }
+    
+    using IQueue = IInfrastructure<class Queue, EInfrastructure::Queue>;
     
     /**
     * @brief WebGPU::Queue Class.
@@ -43,6 +48,18 @@ namespace Neptune::WebGPU {
         */
         const Unit::Queue::Handle& Handle() const { return m_Queue.GetHandle(); }
         
+        /**
+        * @brief Wait Queue Idle.
+        */
+        void OnSubmittedWorkDone() const;
+        
+        /**
+        * @brief Submit CommandEncoder to Queue.
+        * 
+        * @param[in] commandBuffer Unit::CommandBuffer.
+        */
+        void Submit(const SP<Unit::CommandBuffer>& commandBuffer) const;
+        
     private:
 
         /**
@@ -50,8 +67,6 @@ namespace Neptune::WebGPU {
         */
         void Create();
         
-        void OnSubmittedWorkDone();
-        void Submit() const;
         void WriteBuffer() const;
         void WriteTexture() const;
 

@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Instance.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::WebGPU {
 
@@ -32,6 +33,8 @@ namespace Neptune::WebGPU {
         descriptor.requiredFeatures          = feature;
 
         m_Instance.CreateInstance(descriptor);
+        
+        DEBUGUTILS_SETOBJECTNAME(m_Instance, ToString())
     }
 
     void Instance::GetFeatures()

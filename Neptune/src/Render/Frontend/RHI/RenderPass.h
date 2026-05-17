@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "RHI.h"
 #include "Resource/Texture/RenderTarget.h"
-#include "Render/Frontend/Utils.h"
+#include "Render/Frontend/Core.h"
 
 namespace Neptune::RHI {
 	

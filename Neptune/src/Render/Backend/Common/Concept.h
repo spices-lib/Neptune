@@ -15,7 +15,7 @@ namespace Neptune::Render::Common {
     * @tparam T .
     */
     template<typename T>
-    concept IsUnitHandle = IsPointer<T> || IsIntegral<T>;
+    concept IsUnitHandle = IsPointer<T> || IsIntegral<T> || IntegerWrapper<T>;
     
     /**
     * @brief Concept: Is Unit EUnit.

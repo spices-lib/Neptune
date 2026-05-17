@@ -24,11 +24,11 @@ namespace Neptune::Direct3D12 {
 
         SwapChain,                           // @brief SwapChain.
 
-        GraphicCommandList,                  // @brief Main Thread Graphic CommandList.
-        ComputeCommandList,                  // @brief Main Thread Compute CommandList.
-
         GraphicFence,                        // @brief Main Thread Graphic Fence.
         ComputeFence,                        // @brief Main Thread Compute Fence.
+
+        GraphicCommandList,                  // @brief Main Thread Graphic CommandList.
+        ComputeCommandList,                  // @brief Main Thread Compute CommandList.
 
         RTVDescriptorHeap,                   // @brief Render Target View DescriptorHeap.
         DSVDescriptorHeap,                   // @brief Depth Stencil View DescriptorHeap.

@@ -11,6 +11,7 @@
 #include "Device.h"
 #include "Instance.h"
 #include "Adapter.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::WebGPU {
 
@@ -27,6 +28,8 @@ namespace Neptune::WebGPU {
         NEPTUNE_PROFILE_ZONE
 
         m_Device.CreateDevice(GetContext().Get<IInstance>()->Handle(), GetContext().Get<IAdapter>()->Handle());
+        
+        DEBUGUTILS_SETOBJECTNAME(m_Device, ToString())
     }
 
     void Device::CreateBindGroup()

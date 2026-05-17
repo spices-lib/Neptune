@@ -10,6 +10,10 @@
 
 #include "Queue.h"
 #include "Device.h"
+#include "Instance.h"
+#include "DebugUtilsObject.h"
+#include "Render/Backend/WebGPU/Unit/CommandBuffer.h"
+#include "Render/Backend/WebGPU/Unit/Future.h"
 
 namespace Neptune::WebGPU {
 
@@ -26,9 +30,11 @@ namespace Neptune::WebGPU {
         NEPTUNE_PROFILE_ZONE
 
         m_Queue.CreateQueue(GetContext().Get<IDevice>()->Handle());
+        
+        DEBUGUTILS_SETOBJECTNAME(m_Queue, ToString())
     }
     
-    void Queue::OnSubmittedWorkDone()
+    void Queue::OnSubmittedWorkDone() const
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -38,24 +44,33 @@ namespace Neptune::WebGPU {
             void*                   userdata1,
             void* 
         ) {
-
+            if (status == WGPUQueueWorkDoneStatus_CallbackCancelled)
+            {
+                NEPTUNE_CORE_INFO("Queue::OnSubmittedWorkDone::CallbackCancelled")
+            }
+            else if (status == WGPUQueueWorkDoneStatus_Error)
+            {
+                NEPTUNE_CORE_ERROR("Queue::OnSubmittedWorkDone::Error")
+            }
         };
 
-        WGPUQueueWorkDoneCallbackInfo     info{};
-        info.mode                       = WGPUCallbackMode_WaitAnyOnly;
-        info.userdata1                  = nullptr;
-        info.callback                   = callback;
+        WGPUQueueWorkDoneCallbackInfo        info{};
+        info.mode                          = WGPUCallbackMode_WaitAnyOnly;
+        info.userdata1                     = nullptr;
+        info.callback                      = callback;
 
-        //Wait(wgpuQueueOnSubmittedWorkDone(m_Handle, info));
+        Unit::Future future;
+        
+        future.SetHandle(wgpuQueueOnSubmittedWorkDone(m_Queue.GetHandle(), info));
+
+        future.Wait(GetContext().Get<IInstance>()->Handle());
     }
 
-    void Queue::Submit() const
+    void Queue::Submit(const SP<Unit::CommandBuffer>& commandBuffer) const
     {
         NEPTUNE_PROFILE_ZONE
 
-        WGPUCommandBuffer commandBuffer[1];
-
-        wgpuQueueSubmit(m_Queue.GetHandle(), 1, commandBuffer);
+        wgpuQueueSubmit(m_Queue.GetHandle(), 1, &commandBuffer->GetHandle());
     }
 
     void Queue::WriteBuffer() const

@@ -146,4 +146,39 @@ namespace Neptune::imgui {
     
 #endif
 
+#ifdef NP_PLATFORM_EMSCRIPTEN
+    
+    /**
+    * @brief WebGPU Interface.
+    */
+    class WebGPUInterface : public RenderInterface
+    {
+    public:
+
+        /**
+        * @brief Destructor Function.
+        */
+        ~WebGPUInterface() = default;
+
+        /**
+        * @brief Interface of Initialize.
+        *
+        * @param[in] infrastructure RenderFrontend Infrastructure.
+        */
+        void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const override;
+
+        /**
+        * @brief Interface of ShutDown.
+        */
+        void OnShutDown() const override;
+
+        /**
+        * @brief Interface of Begin a frame.
+        */
+        void BeginFrame() const override;
+
+    };
+    
+#endif
+    
 }

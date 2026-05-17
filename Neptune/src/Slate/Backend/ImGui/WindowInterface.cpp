@@ -56,6 +56,14 @@ namespace Neptune::imgui {
 				break;
 			}
 #endif
+#ifdef NP_PLATFORM_EMSCRIPTEN
+			case RenderBackendEnum::WebGL:
+			case RenderBackendEnum::WebGPU:
+			{
+				ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+				break;
+			}
+#endif
 			default:
 			{
 				NEPTUNE_CORE_ERROR("Unsupported RenderBackendEnum in GLFWInterface::OnInitialize.")

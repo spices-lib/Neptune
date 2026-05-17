@@ -21,8 +21,12 @@ namespace Neptune::WebGPU {
         Adapter,                             // @brief Adapter.
         Device,                              // @brief LogicalDevice.
 
-        GraphicQueue,                        // @brief Main Thread Graphic Queue.
+        Queue,                               // @brief Queue.
+        
+        Future,                              // @brief Queue Fence.
 
+        CommandEncoder,                      // @brief CommandEncoder.
+        
         Count
     };
 

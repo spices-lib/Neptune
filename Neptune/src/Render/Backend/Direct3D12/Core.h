@@ -10,7 +10,7 @@
 
 #include "Core/Core.h"
 #include "Version.h"
-#include "Render/Frontend/Utils.h"
+#include "Render/Frontend/Core.h"
 
 #include <functional>
 

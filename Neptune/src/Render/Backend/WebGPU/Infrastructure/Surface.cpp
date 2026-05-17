@@ -12,6 +12,7 @@
 #include "Instance.h"
 #include "Device.h"
 #include "Adapter.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::WebGPU {
 
@@ -38,6 +39,8 @@ namespace Neptune::WebGPU {
         desc.nextInChain                                            = &htmlSelector.chain;
 
         m_Surface.CreateSurface(GetContext().Get<IInstance>()->Handle(), desc);
+        
+        DEBUGUTILS_SETOBJECTNAME(m_Surface, ToString())
     }
 
     void Surface::Configure() const

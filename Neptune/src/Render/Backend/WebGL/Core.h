@@ -9,7 +9,7 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Frontend/Utils.h"
+#include "Render/Frontend/Core.h"
 
 #include <functional>
 #include <GLES2/gl2.h>

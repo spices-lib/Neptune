@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Adapter.h"
+#include "Future.h"
 
 namespace Neptune::WebGPU::Unit {
 
@@ -48,12 +49,11 @@ namespace Neptune::WebGPU::Unit {
         info.userdata1                     = &m_Handle;
         info.callback                      = request;
 
-        auto future = wgpuInstanceRequestAdapter(instance, &options, info);
+		Future future;
 
-        WGPUFutureWaitInfo                   waitInfo{};
-        waitInfo.future                    = future;
+		future.SetHandle(wgpuInstanceRequestAdapter(instance, &options, info));
 
-        WEBGPU_WAIT_CHECK(wgpuInstanceWaitAny(instance, 1, &waitInfo, WaitTimeoutNS))
+		future.Wait(instance);
 	}
 
 }

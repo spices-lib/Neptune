@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 #include "RenderInterface.h"
-#include "Render/Frontend/Utils.h"
+#include "Render/Frontend/Core.h"
 
 #ifndef NP_PLATFORM_EMSCRIPTEN
 #include <backends/imgui_impl_vulkan.h>
@@ -15,6 +15,10 @@
 
 #ifdef NP_PLATFORM_WINDOWS
 #include <backends/imgui_impl_dx12.h>
+#endif
+
+#ifdef NP_PLATFORM_EMSCRIPTEN
+#include <backends/imgui_impl_wgpu.h>
 #endif
 
 namespace Neptune::imgui {
@@ -34,6 +38,10 @@ namespace Neptune::imgui {
 			case RenderBackendEnum::Vulkan: return CreateSP<VulkanInterface>();
 #endif
 
+#ifdef NP_PLATFORM_EMSCRIPTEN
+		case RenderBackendEnum::WebGPU: return CreateSP<WebGPUInterface>();
+#endif
+			
 			default:
 			{
 				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in ImGui Slate Configuration.")
@@ -144,4 +152,36 @@ namespace Neptune::imgui {
 	}
 
 #endif
+	
+#ifdef NP_PLATFORM_EMSCRIPTEN
+	
+	void WebGPUInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		/*ImGui_ImplWGPU_InitInfo                      init_info{};
+		init_info.Device                           = std::any_cast<WGPUDevice>(infrastructure["Device"]);
+		init_info.NumFramesInFlight                = MaxFrameInFlight;
+		init_info.RenderTargetFormat               = std::any_cast<WGPUTextureFormat>(infrastructure["RTVFormat"]);
+		init_info.DepthStencilFormat               = std::any_cast<WGPUTextureFormat>(infrastructure["DSVFormat"]);
+		
+		ImGui_ImplWGPU_Init(&init_info);*/
+	}
+	
+	void WebGPUInterface::OnShutDown() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		/*ImGui_ImplWGPU_Shutdown();*/
+	}
+
+	void WebGPUInterface::BeginFrame() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		/*ImGui_ImplWGPU_NewFrame();*/
+	}
+
+#endif
+	
 }

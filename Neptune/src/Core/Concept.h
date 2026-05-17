@@ -82,4 +82,31 @@ namespace Neptune {
     template<typename T>
     concept IsIntegral = std::is_integral_v<T>;
     
+    /**
+    * @brief Concept: Is Class.
+    * 
+    * @tparam T .
+    */
+    template<typename T>
+    concept IsClass = std::is_class_v<T>;
+    
+    /**
+    * @brief Concept: Is Wrapper of MemberType.
+    * 
+    * @tparam T .
+    * @tparam MemberType Wrappered Type.
+    */
+    template<typename T, typename MemberType>
+    concept IsWrapperOf = std::is_standard_layout_v<T> && 
+        (sizeof(T) == sizeof(MemberType)) &&
+        std::is_trivially_copyable_v<T>;
+    
+    /**
+    * @brief Concept: Is Wrapper of Integer.
+    * 
+    * @tparam T .
+    */
+    template<typename T>
+    concept IntegerWrapper = IsWrapperOf<T, int> || IsWrapperOf<T, short> ||
+        IsWrapperOf<T, long> || IsWrapperOf<T, long long> || IsWrapperOf<T, short>;
 }
