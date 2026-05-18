@@ -27,6 +27,14 @@ namespace Neptune::WebGPU::Unit {
 
         m_Handle = wgpuInstanceCreateSurface(instance, &descriptor);
 	}
+	
+	void Surface::SetName(const std::string& name) const
+	{
+		NEPTUNE_PROFILE_ZONE
+    	
+		wgpuSurfaceSetLabel(m_Handle, { name.c_str(), name.size() });
+	}
+	
 }
 
 #endif

@@ -42,6 +42,14 @@ namespace Neptune::WebGPU::Unit {
 		* @param[in] desc WGPUCommandEncoderDescriptor.
 		*/
 		void CreateCommandEncoder(WGPUDevice device,  const WGPUCommandEncoderDescriptor& desc);
+		
+		/**
+		* @brief Set Unit name.
+		* 
+		* @param[in] name Unit name.
+		*/
+		void SetName(const std::string& name) const;
+		
 	};
 }
 

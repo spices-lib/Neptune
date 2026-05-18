@@ -64,6 +64,13 @@ namespace Neptune::WebGPU::Unit {
 
     	future.Wait(instance);
 	}
+	
+	void Device::SetName(const std::string& name) const
+	{
+    	NEPTUNE_PROFILE_ZONE
+    	
+    	wgpuDeviceSetLabel(m_Handle, { name.c_str(), name.size() });
+    }
 
 }
 

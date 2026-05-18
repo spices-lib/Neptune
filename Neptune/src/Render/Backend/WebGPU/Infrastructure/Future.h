@@ -53,7 +53,7 @@ namespace Neptune::WebGPU {
         * @param[in] index Handle index.
         * @param[in] handle WGPUFuture.
         */
-        void SetHandle(uint32_t index = 0, WGPUFuture handle);
+        void SetHandle(uint32_t index, WGPUFuture handle);
         
         /**
         * @brief Wait Future idle.

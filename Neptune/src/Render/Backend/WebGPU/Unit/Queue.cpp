@@ -27,6 +27,14 @@ namespace Neptune::WebGPU::Unit {
 
         m_Handle = wgpuDeviceGetQueue(device);
 	}
+	
+	void Queue::SetName(const std::string& name) const
+	{
+		NEPTUNE_PROFILE_ZONE
+    	
+		wgpuQueueSetLabel(m_Handle, { name.c_str(), name.size() });
+	}
+	
 }
 
 #endif

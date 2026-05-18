@@ -18,7 +18,7 @@
 #endif
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-#include <backends/imgui_impl_wgpu.h>
+//#include <backends/imgui_impl_wgpu.h>
 #endif
 
 namespace Neptune::imgui {

@@ -66,11 +66,18 @@ namespace Neptune::WebGPU {
         future.Wait(GetContext().Get<IInstance>()->Handle());
     }
 
-    void Queue::Submit(const SP<Unit::CommandBuffer>& commandBuffer) const
+    WGPUFuture Queue::Submit(const SP<Unit::CommandBuffer>& commandBuffer) const
     {
         NEPTUNE_PROFILE_ZONE
 
         wgpuQueueSubmit(m_Queue.GetHandle(), 1, &commandBuffer->GetHandle());
+        
+        WGPUQueueWorkDoneCallbackInfo        info{};
+        info.mode                          = WGPUCallbackMode_WaitAnyOnly;
+        info.userdata1                     = nullptr;
+        info.callback                      = nullptr;
+        
+        return wgpuQueueOnSubmittedWorkDone(m_Queue.GetHandle(), info);
     }
 
     void Queue::WriteBuffer() const

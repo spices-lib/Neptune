@@ -41,6 +41,14 @@ namespace Neptune::WebGPU::Unit {
 		* @param[in] device WGPUDevice.
 		*/
 		void CreateQueue(WGPUDevice device);
+		
+		/**
+		* @brief Set Unit name.
+		* 
+		* @param[in] name Unit name.
+		*/
+		void SetName(const std::string& name) const;
+		
 	};
 }
 

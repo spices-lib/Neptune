@@ -47,6 +47,13 @@ namespace Neptune::WebGPU::Unit {
 		* @brief End RenderPassEncoder.
 		*/
 		void End() const;
+		
+		/**
+		* @brief Set Unit name.
+		* 
+		* @param[in] name Unit name.
+		*/
+		void SetName(const std::string& name) const;
 
 	};
 }

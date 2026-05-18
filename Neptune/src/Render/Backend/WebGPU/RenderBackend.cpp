@@ -83,7 +83,7 @@ namespace Neptune::WebGPU {
 		{
 			DEBUGUTILS_BEGINLABEL(m_Context->Get<IQueue>()->Handle(), "MainQueue")
 
-			m_Context->Get<IQueue>()->Submit(m_Context->Get<ICommandEncoder>()->End(clock.m_FrameIndex));
+			m_Context->Get<IFuture>()->SetHandle(clock.m_FrameIndex, m_Context->Get<IQueue>()->Submit(m_Context->Get<ICommandEncoder>()->End(clock.m_FrameIndex)));
 
 			DEBUGUTILS_ENDLABEL(m_Context->Get<IQueue>()->Handle())
 		}

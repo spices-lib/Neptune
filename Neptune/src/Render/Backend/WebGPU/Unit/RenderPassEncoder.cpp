@@ -35,6 +35,13 @@ namespace Neptune::WebGPU::Unit {
 		wgpuRenderPassEncoderEnd(m_Handle);
 	}
 	
+	void RenderPassEncoder::SetName(const std::string& name) const
+	{
+		NEPTUNE_PROFILE_ZONE
+    	
+		wgpuRenderPassEncoderSetLabel(m_Handle, { name.c_str(), name.size() });
+	}
+	
 }
 
 #endif

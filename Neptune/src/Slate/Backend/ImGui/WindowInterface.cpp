@@ -60,7 +60,7 @@ namespace Neptune::imgui {
 			case RenderBackendEnum::WebGL:
 			case RenderBackendEnum::WebGPU:
 			{
-				ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+				//ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
 				break;
 			}
 #endif

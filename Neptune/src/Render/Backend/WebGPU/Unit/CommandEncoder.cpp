@@ -27,6 +27,13 @@ namespace Neptune::WebGPU::Unit {
 
 		m_Handle = wgpuDeviceCreateCommandEncoder(device, &desc);
 	}
+	
+	void CommandEncoder::SetName(const std::string& name) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		wgpuCommandEncoderSetLabel(m_Handle, { name.c_str(), name.size() });
+	}
 }
 
 #endif

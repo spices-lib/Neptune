@@ -21,6 +21,7 @@ namespace Neptune::WebGPU::Unit {
 	template<typename T>
 	requires IsUnit<Render::Common::Unit<T, entt::type_hash<T>::value()>>
 	using Unit = Render::Common::Unit<T, entt::type_hash<T>::value()>;
+
 }
 
 #endif

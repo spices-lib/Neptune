@@ -57,8 +57,10 @@ namespace Neptune::WebGPU {
         * @brief Submit CommandEncoder to Queue.
         * 
         * @param[in] commandBuffer Unit::CommandBuffer.
+        * 
+        * @return Returns Future.
         */
-        void Submit(const SP<Unit::CommandBuffer>& commandBuffer) const;
+        WGPUFuture Submit(const SP<Unit::CommandBuffer>& commandBuffer) const;
         
     private:
 

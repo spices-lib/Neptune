@@ -69,9 +69,12 @@ namespace Neptune::WebGPU {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		WGPUStringView view{ caption.c_str() };
-
-		wgpuDeviceSetLabel(unit.GetHandle(), view);
+		if constexpr (requires(Unit& u, const std::string& name) {
+			{ u.SetName(name) } -> std::convertible_to<void>;
+		})
+		{
+			unit.SetName(caption);
+		}
 	}
 
 }
