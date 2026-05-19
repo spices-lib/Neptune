@@ -9,15 +9,11 @@
 #include "RenderInterface.h"
 #include "WindowInterface.h"
 
-#ifdef NP_PLATFORM_WINDOWS
-
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
 #include <imgui.cpp>
 #include <imgui_internal.h>
 #include <imgui_widgets.cpp>
-
-#endif
 
 namespace Neptune::imgui {
 
@@ -32,8 +28,6 @@ namespace Neptune::imgui {
     void SlateBackend::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure)
     {
         NEPTUNE_PROFILE_ZONE
-
-#ifdef NP_PLATFORM_WINDOWS
         
 		ImGui::CreateContext();
 
@@ -47,31 +41,21 @@ namespace Neptune::imgui {
 
         m_WindowInterface->OnInitialize(m_RenderBackendEnum);
         m_RenderInterface->OnInitialize(infrastructure);
-        
-#endif
-        
     }
 
     void SlateBackend::OnShutDown()
     {
         NEPTUNE_PROFILE_ZONE
-
-#ifdef NP_PLATFORM_WINDOWS
         
         m_WindowInterface->OnShutDown();
         m_RenderInterface->OnShutDown();
         
 		ImGui::DestroyContext();
-        
-#endif
-        
     }
 
     void SlateBackend::BeginFrame()
     {
         NEPTUNE_PROFILE_ZONE
-
-#ifdef NP_PLATFORM_WINDOWS
         
         m_RenderInterface->BeginFrame();
         m_WindowInterface->BeginFrame();
@@ -131,9 +115,6 @@ namespace Neptune::imgui {
         ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), dockspaceFlags);
         ImGui::PopStyleColor();
         ImGui::End();
-        
-#endif
-        
     }
 
     void SlateBackend::EndFrame()

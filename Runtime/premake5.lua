@@ -122,7 +122,7 @@ project "Runtime"
 		-- Emscripten Specific Solution Dependency.
 		links
 		{
-		  --"ImGui_WebGPU",                               -- Dependency: imgui
+		    "ImGui_WebGPU",                               -- Dependency: imgui
 		  --"LuaLibrary",                                 -- Dependency: LuaLibrary
 		}
 

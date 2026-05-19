@@ -18,7 +18,7 @@
 #endif
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-//#include <backends/imgui_impl_wgpu.h>
+#include <backends/imgui_impl_wgpu.h>
 #endif
 
 namespace Neptune::imgui {
@@ -159,27 +159,27 @@ namespace Neptune::imgui {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		/*ImGui_ImplWGPU_InitInfo                      init_info{};
-		init_info.Device                           = std::any_cast<WGPUDevice>(infrastructure["Device"]);
+		ImGui_ImplWGPU_InitInfo                      init_info{};
+		init_info.Device                           = std::any_cast<WGPUDevice>(infrastructure.at("Device"));
 		init_info.NumFramesInFlight                = MaxFrameInFlight;
-		init_info.RenderTargetFormat               = std::any_cast<WGPUTextureFormat>(infrastructure["RTVFormat"]);
-		init_info.DepthStencilFormat               = std::any_cast<WGPUTextureFormat>(infrastructure["DSVFormat"]);
+		init_info.RenderTargetFormat               = std::any_cast<WGPUTextureFormat>(infrastructure.at("RTVFormat"));
+		init_info.DepthStencilFormat               = std::any_cast<WGPUTextureFormat>(infrastructure.at("DSVFormat"));
 		
-		ImGui_ImplWGPU_Init(&init_info);*/
+		ImGui_ImplWGPU_Init(&init_info);
 	}
 	
 	void WebGPUInterface::OnShutDown() const
 	{
 		NEPTUNE_PROFILE_ZONE
 		
-		/*ImGui_ImplWGPU_Shutdown();*/
+		ImGui_ImplWGPU_Shutdown();
 	}
 
 	void WebGPUInterface::BeginFrame() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		/*ImGui_ImplWGPU_NewFrame();*/
+		ImGui_ImplWGPU_NewFrame();
 	}
 
 #endif

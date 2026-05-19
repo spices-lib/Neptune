@@ -8,11 +8,7 @@
 #include "WindowInterface.h"
 #include "Window/Window.h"
 
-#ifdef NP_PLATFORM_WINDOWS
-
 #include <backends/imgui_impl_glfw.h>
-
-#endif
 
 namespace Neptune::imgui {
 
@@ -60,7 +56,7 @@ namespace Neptune::imgui {
 			case RenderBackendEnum::WebGL:
 			case RenderBackendEnum::WebGPU:
 			{
-				//ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
+				ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);
 				break;
 			}
 #endif
@@ -76,25 +72,15 @@ namespace Neptune::imgui {
 	void GLFWInterface::OnShutDown() const
 	{
 		NEPTUNE_PROFILE_ZONE
-
-#ifdef NP_PLATFORM_WINDOWS
 		
 		ImGui_ImplGlfw_Shutdown();
-		
-#endif
-		
 	}
 
 	void GLFWInterface::BeginFrame() const
 	{
 		NEPTUNE_PROFILE_ZONE
-
-#ifdef NP_PLATFORM_WINDOWS
 		
 		ImGui_ImplGlfw_NewFrame();
-		
-#endif
-		
 	}
 
 }

@@ -122,7 +122,7 @@ project "Editor"
 		-- Emscripten Specific Solution Dependency.
 		links
 		{
-		  --"ImGui_WebGPU",                               -- Dependency: imgui
+		    "ImGui_WebGPU",                               -- Dependency: imgui
 		}
 
 		-- The Solution link options
