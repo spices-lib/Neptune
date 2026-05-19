@@ -24,12 +24,12 @@
 #include "Render/Backend/Vulkan/RenderBackend.h"
 #endif
 
-#include "Render/FrontEnd/Pass/BasePass.h"
-#include "Render/FrontEnd/Pass/SlatePass.h"
-#include "Render/FrontEnd/Pass/PrePass.h"
+#include "Render/Frontend/Pass/BasePass.h"
+#include "Render/Frontend/Pass/SlatePass.h"
+#include "Render/Frontend/Pass/PrePass.h"
 #include "Window/Window.h"
 #include "Core/Event/WindowEvent.h"
-#include "Render/FrontEnd/Pass/Pass.h"
+#include "Render/Frontend/Pass/Pass.h"
 #include "Render/Frontend/RHI/RHI.h"
 
 namespace Neptune {

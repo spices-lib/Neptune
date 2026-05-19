@@ -47,15 +47,6 @@ namespace Neptune::WebGPU {
     private:
 
         /**
-        * @brief Create WebGPU Surface.
-        *
-        * @param[in] htmlCanvas HTML Canvas id.
-        *
-        * @return Returns WGPUSurface.
-        */
-        WGPUSurface CreateSurface(const std::string& htmlCanvas);
-
-        /**
         * @brief Create Instance.
         */
         void Create();

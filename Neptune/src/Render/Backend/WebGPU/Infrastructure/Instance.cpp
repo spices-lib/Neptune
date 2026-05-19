@@ -64,11 +64,6 @@ namespace Neptune::WebGPU {
         wgpuHasInstanceFeature(name);
     }
 
-    WGPUSurface Instance::CreateSurface(const std::string& htmlCanvas)
-    {
-        
-    }
-
     void Instance::GetWGSLFeatures()
     {
         NEPTUNE_PROFILE_ZONE

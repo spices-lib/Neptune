@@ -30,7 +30,7 @@ namespace Neptune::StringLibrary {
         return result;
     }
 
-    std::vector<std::string> StringLibrary::SplitKeepString(const std::string& input, char delimiter)
+    std::vector<std::string> SplitKeepString(const std::string& input, char delimiter)
     {
         NEPTUNE_PROFILE_ZONE
         
@@ -49,14 +49,14 @@ namespace Neptune::StringLibrary {
         return result;
     }
 
-    bool StringLibrary::StringsEqual(const char* str0, const char* str1)
+    bool StringsEqual(const char* str0, const char* str1)
     {
         NEPTUNE_PROFILE_ZONE
         
         return strcmp(str0, str1) == 0;
     }
 
-    std::wstring StringLibrary::CharToWChar(const char* c)
+    std::wstring CharToWChar(const char* c)
     {
         NEPTUNE_PROFILE_ZONE
         
@@ -65,7 +65,7 @@ namespace Neptune::StringLibrary {
         return converter.from_bytes(c);
     }
 
-    std::string StringLibrary::WCharToChar(const wchar_t* wc)
+    std::string WCharToChar(const wchar_t* wc)
     {
         NEPTUNE_PROFILE_ZONE
         
