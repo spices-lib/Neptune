@@ -13,7 +13,7 @@
 #include "Window/Core.h"
 
 #include <functional>
-#include <webgpu.h>
+#include <webgpu/webgpu.h>
 
 namespace Neptune::WebGPU {
 

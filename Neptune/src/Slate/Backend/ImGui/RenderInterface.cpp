@@ -39,7 +39,7 @@ namespace Neptune::imgui {
 #endif
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-		case RenderBackendEnum::WebGPU: return CreateSP<WebGPUInterface>();
+			case RenderBackendEnum::WebGPU: return CreateSP<WebGPUInterface>();
 #endif
 			
 			default:

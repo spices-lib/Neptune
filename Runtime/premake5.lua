@@ -130,7 +130,7 @@ project "Runtime"
 		linkoptions
 		{
 			"--use-port=%{IncludeDir.emscripten_glfw}/port/emscripten-glfw3.py",     -- Dependency: emscripten-glfw
-			"--use-port=%{IncludeDir.emdawnwebgpu}/../../../emdawnwebgpu.port.py",   -- Dependency: WebGPU
+			"--use-port=%{IncludeDir.emdawnwebgpu}/../../emdawnwebgpu.port.py",      -- Dependency: WebGPU
 			"-pthread",                                                              -- Compile emscripten-glfw with pthread
 			"-s USE_WEBGL2=1",                                                       -- Dependency: WebGL
 	      --"-s USE_WEBGPU=1",                                                       -- This flag is deprecated
