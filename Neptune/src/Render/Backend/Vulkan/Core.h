@@ -21,6 +21,8 @@ namespace Neptune::Vulkan {
 	constexpr uint32_t NThreadQueue = 4;                                   // @brief Thread Queue Counts.
 
 	constexpr uint32_t MaxDPBSlots = 16;                                   // @brief DPB Slot Counts.
+	
+	constexpr uint32_t DescriptorPoolSize = 1000;                          // @brief DescriptorPool Size.
 
 	#define VK_VERSION VK_API_VERSION_1_4                                  // @brief Use Vulkan 1.4.
 

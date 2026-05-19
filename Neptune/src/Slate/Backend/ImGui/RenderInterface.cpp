@@ -9,6 +9,8 @@
 #include "Render/Frontend/Core.h"
 
 #ifndef NP_PLATFORM_EMSCRIPTEN
+#include "Render/Backend/Vulkan/Core.h"
+
 #include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_opengl3.h>
 #endif
@@ -77,21 +79,23 @@ namespace Neptune::imgui {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		ImGui_ImplVulkan_InitInfo             init_info{};
-		init_info.Instance                  = std::any_cast<VkInstance>                    (infrastructure.at("Instance"));
-		init_info.PhysicalDevice            = std::any_cast<VkPhysicalDevice>              (infrastructure.at("PhysicalDevice"));
-		init_info.Device                    = std::any_cast<VkDevice>                      (infrastructure.at("Device"));
-		init_info.QueueFamily               = std::any_cast<uint32_t>                      (infrastructure.at("GraphicQueueFamily"));
-		init_info.Queue                     = std::any_cast<VkQueue>                       (infrastructure.at("GraphicQueue"));
-		init_info.PipelineCache             = VK_NULL_HANDLE;						       
-		init_info.DescriptorPool            = std::any_cast<VkDescriptorPool>              (infrastructure.at("DescriptorPool"));
-		init_info.RenderPass                = std::any_cast<VkRenderPass>                  (infrastructure.at("RenderPass"));
-		init_info.Subpass                   = 0;
-		init_info.MinImageCount             = MaxFrameInFlight;
-		init_info.ImageCount                = MaxFrameInFlight;
-		init_info.MSAASamples               = std::any_cast<VkSampleCountFlagBits>         (infrastructure.at("MSAASamples"));
-		init_info.Allocator                 = VK_NULL_HANDLE;
-		init_info.CheckVkResultFn           = std::any_cast<void(*)(VkResult)>             (infrastructure.at("CheckVkResultFn"));
+		ImGui_ImplVulkan_InitInfo                       init_info{};
+		init_info.ApiVersion                          = VK_VERSION;
+		init_info.Instance                            = std::any_cast<VkInstance>                    (infrastructure.at("Instance"));
+		init_info.PhysicalDevice                      = std::any_cast<VkPhysicalDevice>              (infrastructure.at("PhysicalDevice"));
+		init_info.Device                              = std::any_cast<VkDevice>                      (infrastructure.at("Device"));
+		init_info.QueueFamily                         = std::any_cast<uint32_t>                      (infrastructure.at("GraphicQueueFamily"));
+		init_info.Queue                               = std::any_cast<VkQueue>                       (infrastructure.at("GraphicQueue"));
+		init_info.PipelineCache                       = VK_NULL_HANDLE;						       
+		init_info.DescriptorPool                      = std::any_cast<VkDescriptorPool>              (infrastructure.at("DescriptorPool"));
+		init_info.PipelineInfoMain.RenderPass         = std::any_cast<VkRenderPass>                  (infrastructure.at("RenderPass"));
+		init_info.PipelineInfoMain.Subpass            = 0;
+		init_info.MinImageCount                       = MaxFrameInFlight;
+		init_info.ImageCount                          = MaxFrameInFlight;
+		init_info.PipelineInfoMain.MSAASamples        = std::any_cast<VkSampleCountFlagBits>         (infrastructure.at("MSAASamples"));
+		init_info.UseDynamicRendering                 = false;
+		init_info.Allocator                           = VK_NULL_HANDLE;
+		init_info.CheckVkResultFn                     = std::any_cast<void(*)(VkResult)>             (infrastructure.at("CheckVkResultFn"));
 
 		ImGui_ImplVulkan_Init(&init_info);
 	}
