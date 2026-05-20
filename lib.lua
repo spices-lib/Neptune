@@ -39,6 +39,7 @@ LibraryDir["WinPixEventRuntime"]          = "%{IncludeDir.WinPixEventRuntime}/..
 Library                                   = {}
 Library["VulkanSDK"]                      = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"                                      -- Library Directries: VulkanSDK
 Library["dxgi"]                           = "dxgi.lib"                                                                  -- Library Directries: dxgi
+Library["d3d11"]                          = "d3d11.lib"                                                                 -- Library Directries: d3d11
 Library["d3d12"]                          = "d3d12.lib"                                                                 -- Library Directries: d3d12
 Library["WinPixEventRuntime"]             = "%{LibraryDir.WinPixEventRuntime}/WinPixEventRuntime.lib"                   -- Library Directries: WinPixEventRuntime
 

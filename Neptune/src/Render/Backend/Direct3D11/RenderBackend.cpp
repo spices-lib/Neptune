@@ -9,6 +9,12 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "RenderBackend.h"
+#include "Infrastructure/InfrastructureHeader.h"
+#include "RHI/RHIHeader.h"
+#include "Window/Window.h"
+#include "World/Scene/Scene.h"
+#include "Data/Clock.h"
+#include "World/Component/Component.h"
 
 namespace Neptune::Direct3D11 {
 
@@ -16,12 +22,21 @@ namespace Neptune::Direct3D11 {
         : RenderFrontend(RenderBackendEnum::Direct3D11)
     {
         NEPTUNE_PROFILE_ZONE
+        
+        HandleResultDelegate::SetHandler([&](HRESULT result) { HandleResult(result); });
     }
 
     void RenderBackend::OnInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
+        m_Context = CreateSP<Context>();
+
+        m_Context->Registry<IDebugUtilsObject>();
+        m_Context->Registry<IDeviceContext>();
+        m_Context->Registry<IFactory>();
+        m_Context->Registry<IDevice>();
+        
         RenderFrontend::OnInitialize();
     }
 
@@ -32,6 +47,11 @@ namespace Neptune::Direct3D11 {
         RenderFrontend::OnShutDown();
     }
 
+    Context& RenderBackend::GetContext() const
+    {
+        return *m_Context;
+    }
+    
     void RenderBackend::BeginFrame(Scene* scene)
     {
         NEPTUNE_PROFILE_ZONE

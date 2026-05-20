@@ -10,15 +10,15 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
-#include "Render/Backend/Direct3D12/Unit/Device.h"
+#include "Render/Backend/Direct3D11/Unit/Device.h"
 
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D11 {
 
 	using IDevice = IInfrastructure<class Device, EInfrastructure::Device>;
 
 	/**
-	* @brief Direct3D12::Device Class.
-	* This class defines the Direct3D12::Device behaves.
+	* @brief Direct3D11::Device Class.
+	* This class defines the Direct3D11::Device behaves.
 	*/
 	class Device : public Infrastructure
 	{
@@ -35,7 +35,7 @@ namespace Neptune::Direct3D12 {
 		/**
 		* @brief Destructor Function.
 		*/
-		~Device() override;
+		~Device() override = default;
 
 		/**
 		* @brief Get Unit Handle.
@@ -51,18 +51,9 @@ namespace Neptune::Direct3D12 {
 		*/
 		void Create();
 
-		/**
-		* @brief Get Device Max FeatureLevel.
-		* 
-		* @param[in] adapter DXGIAdapter.
-		* 
-		* @return Returns D3D_FEATURE_LEVEL.
-		*/
-		D3D_FEATURE_LEVEL GetMaxFeatureLevel(DXGIAdapter adapter) const;
-
 	private:
 
-		Unit::Device m_Device;  // @brief this Device.
+		Unit::Device m_Device; // @brief this Device.
 	};
 	
 }

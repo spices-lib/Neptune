@@ -147,6 +147,7 @@ project "Neptune"
 			"ImGui_Direct3D12",                   -- Dependency: imgui
 			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
 			"%{Library.dxgi}",                    -- Dependency: dxgi
+			"%{Library.d3d11}",                   -- Dependency: d3d11
 			"%{Library.d3d12}",                   -- Dependency: d3d12
 			"%{Library.WinPixEventRuntime}",      -- Dependency: WinPixEventRuntime
 			"Glad",                               -- Dependency: Glad

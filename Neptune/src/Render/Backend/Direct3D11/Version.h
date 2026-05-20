@@ -17,16 +17,17 @@ namespace Neptune::Direct3D11 {
 	using D3DBlob                  = ID3DBlob*;
 	using DXGISwapChain            = IDXGISwapChain4*;
 
-	using Device                   = ID3D11Device5*;
-	using DeviceContext            = ID3D11DeviceContext4*;
-	using RenderTargetView         = ID3D11RenderTargetView1*;
-	using DepthStencilView         = ID3D11DepthStencilView*;
-	using VertexShader             = ID3D11VertexShader*;
-	using PixelShader              = ID3D11PixelShader*;
-	using InputLayout              = ID3D11InputLayout*;
-	using DepthStencilState        = ID3D11DepthStencilState*;
-	using Texture2D                = ID3D11Texture2D1*;
-	using Buffer                   = ID3D11Buffer*;
+	using D3D11Device              = ID3D11Device5*;
+	using D3D11DeviceContext       = ID3D11DeviceContext4*;
+	using D3DUserDefinedAnnotation = ID3DUserDefinedAnnotation*;
+	using D3D11RenderTargetView    = ID3D11RenderTargetView1*;
+	using D3D11DepthStencilView    = ID3D11DepthStencilView*;
+	using D3D11VertexShader        = ID3D11VertexShader*;
+	using D3D11PixelShader         = ID3D11PixelShader*;
+	using D3D11InputLayout         = ID3D11InputLayout*;
+	using D3D11DepthStencilState   = ID3D11DepthStencilState*;
+	using D3D11Texture2D           = ID3D11Texture2D1*;
+	using D3D11Buffer              = ID3D11Buffer*;
 }
 
 #endif

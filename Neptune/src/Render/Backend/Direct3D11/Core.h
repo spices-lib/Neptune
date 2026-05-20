@@ -18,7 +18,18 @@ namespace Neptune::Direct3D11 {
 
 	constexpr uint32_t MaxFrameInFlight = Neptune::MaxFrameInFlight;       // @brief Frames In Flight.
 
-	#define DIRECT3D11_VERSION
+	constexpr D3D_FEATURE_LEVEL MinimumLevel { 
+		D3D_FEATURE_LEVEL_10_0 
+	};
+
+	constexpr D3D_FEATURE_LEVEL FeatureLevels[5] {
+		D3D_FEATURE_LEVEL_10_0,
+		D3D_FEATURE_LEVEL_10_1,
+		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_11_1,
+	};
+
+	#define DIRECT3D11_VERSION  D3D_FEATURE_LEVEL_11_1
 
 	/**
 	* @brief Result Delegate Class.

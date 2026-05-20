@@ -30,7 +30,7 @@ namespace Neptune::Direct3D12 {
 		D3D_FEATURE_LEVEL_12_2,
 	};
 
-	#define DIRECT3D12_VERSION
+	#define DIRECT3D12_VERSION  D3D_FEATURE_LEVEL_12_2
 
 	/**
 	* @brief Result Delegate Class.

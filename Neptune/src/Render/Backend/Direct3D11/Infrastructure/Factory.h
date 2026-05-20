@@ -10,15 +10,15 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
-#include "Render/Backend/Direct3D12/Unit/Factory.h"
+#include "Render/Backend/Direct3D11/Unit/Factory.h"
 
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D11 {
 
 	using IFactory = IInfrastructure<class Factory, EInfrastructure::Factory>;
 
 	/**
-	* @brief Direct3D12::Factory Class.
-	* This class defines the Direct3D12::Factory behaves.
+	* @brief Direct3D11::Factory Class.
+	* This class defines the Direct3D11::Factory behaves.
 	*/
 	class Factory : public Infrastructure
 	{
@@ -53,7 +53,7 @@ namespace Neptune::Direct3D12 {
 
 	private:
 
-		Unit::Factory m_Factory;  // @brief this Factory.
+		Unit::Factory m_Factory; // @brief this Factory.
 	};
 
 }

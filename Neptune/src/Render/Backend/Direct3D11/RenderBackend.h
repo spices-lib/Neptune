@@ -97,6 +97,17 @@ namespace Neptune::Direct3D11 {
 
     private:
 
+        /**
+        * @brief Get Context.
+        *
+        * @return Returns Context.
+        */
+        Context& GetContext() const;
+
+    private:
+
+        SP<Context> m_Context; // @brief This Context.
+
     };
 }
 

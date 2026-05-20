@@ -74,7 +74,7 @@ namespace Neptune::Direct3D12 {
 
 	private:
 
-		Unit::CommandQueue m_Queue;    // @brief This Queue.
+		Unit::CommandQueue m_Queue;  // @brief This Queue.
 	};
 
 }

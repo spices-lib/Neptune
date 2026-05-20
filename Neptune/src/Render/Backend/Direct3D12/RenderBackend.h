@@ -106,7 +106,7 @@ namespace Neptune::Direct3D12 {
 
     private:
 
-        SP<Context> m_Context;                        // @brief This Context.
+        SP<Context> m_Context; // @brief This Context.
 
     };
 }

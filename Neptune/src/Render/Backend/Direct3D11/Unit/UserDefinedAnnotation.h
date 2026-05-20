@@ -1,0 +1,41 @@
+/**
+* @file UserDefinedAnnotation.h.
+* @brief The UserDefinedAnnotation Class Definitions.
+* @author Spices.
+*/
+
+#pragma once
+
+#ifdef NP_PLATFORM_WINDOWS
+
+#include "Core/Core.h"
+#include "Unit.h"
+
+namespace Neptune::Direct3D11::Unit {
+
+	/**
+	* @brief Direct3D11::Unit::UserDefinedAnnotation Class.
+	* This class defines the Direct3D11::Unit::UserDefinedAnnotation behaves.
+	*/
+	class UserDefinedAnnotation : public Unit<D3DUserDefinedAnnotation>
+	{
+	public:
+
+		using Handle = Unit::Handle;
+
+	public:
+
+		/**
+		* @brief Constructor Function.
+		*/
+		UserDefinedAnnotation() : Unit() {}
+
+		/**
+		* @brief Destructor Function.
+		*/
+		~UserDefinedAnnotation() override = default;
+
+	};
+}
+
+#endif
