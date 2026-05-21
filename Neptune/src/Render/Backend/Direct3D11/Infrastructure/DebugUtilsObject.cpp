@@ -27,6 +27,8 @@ namespace Neptune::Direct3D11 {
 		NEPTUNE_PROFILE_ZONE
 
 		m_UserDefinedAnnotation.SetHandle(handle);
+		
+		DEBUGUTILS_SETOBJECTNAME(m_UserDefinedAnnotation, ToString())
 	}
 
 	void DebugUtilsObject::BeginLabel(const std::string& caption) const

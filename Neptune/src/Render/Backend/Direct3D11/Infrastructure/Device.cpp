@@ -47,6 +47,8 @@ namespace Neptune::Direct3D11 {
     	
 		m_Device.CreateDevice(adapter.GetHandle(), drivenType, flags, DIRECT3D11_VERSION, deviceContext);
     	
+    	DEBUGUTILS_SETOBJECTNAME(m_Device, ToString())
+    	
     	GetContext().Get<IDeviceContext>()->SetHandle(deviceContext);
     	
     	const auto annotation = reinterpret_cast<D3DUserDefinedAnnotation>(deviceContext);

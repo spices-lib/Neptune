@@ -37,6 +37,14 @@ namespace Neptune::Direct3D11 {
         m_Context->Registry<IFactory>();
         m_Context->Registry<IDevice>();
         
+        m_Context->Registry<ISwapChain>();
+        
+        m_Context->Registry<IGraphicFence>();
+        m_Context->Registry<IComputeFence>();
+        
+        m_Context->Registry<IGraphicCommandList>();
+        m_Context->Registry<IComputeCommandList>();
+        
         RenderFrontend::OnInitialize();
     }
 

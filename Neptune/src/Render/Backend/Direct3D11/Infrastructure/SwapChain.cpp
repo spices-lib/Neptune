@@ -10,11 +10,11 @@
 
 #include "SwapChain.h"
 #include "Factory.h"
-#include "Queue.h"
+#include "Device.h"
 #include "DebugUtilsObject.h"
 #include "SwapChain/GLFW/SwapChain.h"
 
-namespace Neptune::Direct3D12 {
+namespace Neptune::Direct3D11 {
 
 	SP<SwapChain> SwapChain::Create(Context& context, EInfrastructure e, uint32_t count, WindowImplement implement, void* window)
     {
@@ -50,7 +50,7 @@ namespace Neptune::Direct3D12 {
 
         m_SwapChain = CreateSP<Unit::SwapChain>();
 
-		m_SwapChain->CreateSwapChain(factory, GetContext().Get<IGraphicQueue>()->Handle(), desc, hwnd);
+		m_SwapChain->CreateSwapChain(factory, GetContext().Get<IDevice>()->Handle(), desc, hwnd);
 
 		DEBUGUTILS_SETOBJECTNAME(*m_SwapChain, ToString())
 
@@ -64,7 +64,7 @@ namespace Neptune::Direct3D12 {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		DIRECT3D12_CHECK(m_SwapChain->GetHandle()->Present(0, m_AllowTearing ? DXGI_PRESENT_ALLOW_TEARING : 0))
+		DIRECT3D11_CHECK(m_SwapChain->GetHandle()->Present(0, m_AllowTearing ? DXGI_PRESENT_ALLOW_TEARING : 0))
 
 		return true;
 	}

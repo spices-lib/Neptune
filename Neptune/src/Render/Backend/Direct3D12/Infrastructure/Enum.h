@@ -1,6 +1,6 @@
 /**
-* @file Context.h.
-* @brief The Context Class Definitions.
+* @file Enum.h.
+* @brief The Enum Class Definitions.
 * @author Spices.
 */
 

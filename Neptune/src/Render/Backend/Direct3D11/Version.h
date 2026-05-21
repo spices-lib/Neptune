@@ -19,6 +19,8 @@ namespace Neptune::Direct3D11 {
 
 	using D3D11Device              = ID3D11Device5*;
 	using D3D11DeviceContext       = ID3D11DeviceContext4*;
+	using D3D11CommandList         = ID3D11CommandList*;
+	using D3D11Fence               = ID3D11Fence*;
 	using D3DUserDefinedAnnotation = ID3DUserDefinedAnnotation*;
 	using D3D11RenderTargetView    = ID3D11RenderTargetView1*;
 	using D3D11DepthStencilView    = ID3D11DepthStencilView*;

@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "DeviceContext.h"
+#include "DebugUtilsObject.h"
 
 namespace Neptune::Direct3D11 {
 
@@ -17,6 +18,8 @@ namespace Neptune::Direct3D11 {
         NEPTUNE_PROFILE_ZONE
 
         m_DeviceContext.SetHandle(handle);
+        
+        DEBUGUTILS_SETOBJECTNAME(m_DeviceContext, ToString())
     }
 
 }

@@ -12,5 +12,8 @@
 #include "Render/Backend/Direct3D11/Infrastructure/DeviceContext.h"
 #include "Render/Backend/Direct3D11/Infrastructure/Factory.h"
 #include "Render/Backend/Direct3D11/Infrastructure/Device.h"
+#include "Render/Backend/Direct3D11/Infrastructure/CommandList.h"
+#include "Render/Backend/Direct3D11/Infrastructure/Fence.h"
+#include "Render/Backend/Direct3D11/Infrastructure/SwapChain.h"
 
 #endif
