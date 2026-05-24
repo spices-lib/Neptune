@@ -18,35 +18,35 @@ namespace Neptune::Video {
 		m_Impl = CreateSP<RHI::OpticalFlow>();
 	}
 
-	void OpticalFlow::SetInputRenderTarget(const SP<RenderTarget>& renderTarget)
+	void OpticalFlow::SetInputRenderTarget(const SP<RenderTarget>& renderTarget) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->SetInputRenderTarget(renderTarget->GetRHIResource());
 	}
 
-	void OpticalFlow::SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget)
+	void OpticalFlow::SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->SetReferenceRenderTarget(renderTarget->GetRHIResource());
 	}
 
-	void OpticalFlow::SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget)
+	void OpticalFlow::SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->SetFlowVectorRenderTarget(renderTarget->GetRHIResource());
 	}
 
-	bool OpticalFlow::CreateOpticalFlowSession()
+	bool OpticalFlow::CreateOpticalFlowSession() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		return m_Impl->CreateOpticalFlowSession();
 	}
 
-	void OpticalFlow::OpticalFlowExecute()
+	void OpticalFlow::OpticalFlowExecute() const
 	{
 		NEPTUNE_PROFILE_ZONE
 

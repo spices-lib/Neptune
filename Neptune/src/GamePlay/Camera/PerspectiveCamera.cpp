@@ -24,10 +24,10 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
         return PerspectiveMatrix(
-                m_PerspectiveParam.fov        ,
-                m_PerspectiveParam.nearPlane  ,
-                100000000.0f,
-                m_PerspectiveParam.aspectRatio
+            m_PerspectiveParam.fov        ,
+            m_PerspectiveParam.nearPlane  ,
+            100000000.0f,
+            m_PerspectiveParam.aspectRatio
         );
     }
 
@@ -36,9 +36,9 @@ namespace Neptune {
         NEPTUNE_PROFILE_ZONE
 
         m_ProjectionMatrix = PerspectiveMatrixInverseZ(
-                m_PerspectiveParam.fov        ,
-                m_PerspectiveParam.nearPlane  ,
-                m_PerspectiveParam.aspectRatio
+            m_PerspectiveParam.fov        ,
+            m_PerspectiveParam.nearPlane  ,
+            m_PerspectiveParam.aspectRatio
         );
     }
 }

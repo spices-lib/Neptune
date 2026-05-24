@@ -163,7 +163,7 @@ namespace Neptune::Container {
         *
         * @param[in] fn Visitor.
         *
-        * @return Returns true if needs to continue.
+        * @return Returns true if it needs to continue.
         */
         template<typename F>
         requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>

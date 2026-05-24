@@ -159,7 +159,9 @@ namespace Neptune {
         }
 
         T& component = m_Scene->AddComponent<T>(m_Handle, std::forward<Args>(args)...);
+        
         m_Scene->OnComponentAttached<T>(this, component);
+        
         return component;
     }
 
@@ -174,7 +176,9 @@ namespace Neptune {
         }
 
         T& component = m_Scene->ReplaceComponent<T>(m_Handle, std::forward<Args>(args)...);
+        
         m_Scene->OnComponentAttached<T>(this, component);
+        
         return component;
     }
 
@@ -203,6 +207,7 @@ namespace Neptune {
         T& component = GetComponent<T>();
             
         m_Scene->OnComponentDetached<T>(this, component);
+        
         m_Scene->RemoveComponent<T>(m_Handle);
     }
 

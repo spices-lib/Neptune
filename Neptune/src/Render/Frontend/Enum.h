@@ -20,6 +20,8 @@ namespace Neptune {
         OpenGLES,             // @brief Mobile
         OpenGLSC,             // @brief Safety Critical
         Direct2D,             // @brief Windows 2D
+        Direct3D9,            // @brief Windows
+        Direct3D10,           // @brief Windows
         Direct3D11,           // @brief Windows
         Direct3D12,           // @brief Windows
         Vulkan,               // @brief Any

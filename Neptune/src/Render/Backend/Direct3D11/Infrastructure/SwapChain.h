@@ -61,7 +61,7 @@ namespace Neptune::Direct3D11 {
 		/**
 		* @brief Present to surface.
 		*
-		* @return Returns true if succeed.
+		* @return Returns true if succeeded.
 		*/
 		bool Present() const;
 
@@ -79,7 +79,7 @@ namespace Neptune::Direct3D11 {
 	protected:
 
 		SP<Unit::SwapChain> m_SwapChain;           // @brief This SwapChain.
-		BOOL m_AllowTearing;                       // @brief Feature of AllowTearing.
+		BOOL m_AllowTearing = FALSE;               // @brief Feature of AllowTearing.
 
 	};
 

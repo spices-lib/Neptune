@@ -14,6 +14,7 @@ namespace Neptune {
 		NEPTUNE_PROFILE_ZONE
 		
 		m_StartTime = std::chrono::high_resolution_clock::now();
+		
 		m_LastTime  = std::chrono::high_resolution_clock::now();
 	}
 

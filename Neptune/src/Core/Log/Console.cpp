@@ -68,7 +68,8 @@ namespace Neptune {
         switch (msg.level)
         {
             case spdlog::level::level_enum::trace:
-                helper.level = "trace";
+            {
+                helper.level = "Trace";
                 helper.color = glm::vec4(0.83f, 0.83f, 0.83f, 1.0f);
                 ss << "[" << times << "] [" << msg.logger_name.data() << "] [" << helper.level << "] " << msg.payload.data();
                 helper.str = ss.str();
@@ -78,9 +79,10 @@ namespace Neptune {
                 }
                 m_InfoData.m_TraceLogInfos.push(helper);
                 break;
-
+            }
             case spdlog::level::level_enum::info:
-                helper.level = "info";
+            {
+                helper.level = "Info";
                 helper.color = glm::vec4(0.574f, 0.829f, 1.0f, 1.0f);
                 ss << "[" << times << "] [" << msg.logger_name.data() << "] [" << helper.level << "] " << msg.payload.data();
                 helper.str = ss.str();
@@ -90,9 +92,10 @@ namespace Neptune {
                 }
                 m_InfoData.m_InfoLogInfos.push(helper);
                 break;
-
+            }
             case spdlog::level::level_enum::warn:
-                helper.level = "warn";
+            {
+                helper.level = "Warn";
                 helper.color = glm::vec4(0.974f, 0.896f, 0.39f, 1.0f);
                 ss << "[" << times << "] [" << msg.logger_name.data() << "] [" << helper.level << "] " << msg.payload.data();
                 helper.str = ss.str();
@@ -102,9 +105,10 @@ namespace Neptune {
                 }
                 m_InfoData.m_WarnLogInfos.push(helper);
                 break;
-
+            }
             case spdlog::level::level_enum::err:
-                helper.level = "error";
+            {
+                helper.level = "Error";
                 helper.color = glm::vec4(1.0f, 0.641f, 0.59f, 1.0f);
                 ss << "[" << times << "] [" << msg.logger_name.data() << "] [" << helper.level << "] " << msg.payload.data();
                 helper.str = ss.str();
@@ -114,9 +118,10 @@ namespace Neptune {
                 }
                 m_InfoData.m_ErrorLogInfos.push(helper);
                 break;
-
+            }
             case spdlog::level::level_enum::critical:
-                helper.level = "critical";
+            {
+                helper.level = "Critical";
                 helper.color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
                 ss << "[" << times << "] [" << msg.logger_name.data() << "] [" << helper.level << "] " << msg.payload.data();
                 helper.str = ss.str();
@@ -126,7 +131,7 @@ namespace Neptune {
                 }
                 m_InfoData.m_CriticalLogInfos.push(helper);
                 break;
-
+            }
             default:
                 break;
         }

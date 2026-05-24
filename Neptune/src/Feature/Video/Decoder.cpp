@@ -18,42 +18,42 @@ namespace Neptune::Video {
 		m_Impl = CreateSP<RHI::Decoder>(&op);
 	}
 
-	void Decoder::PushNextFrameToRenderTarget()
+	void Decoder::PushNextFrameToRenderTarget() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->PushNextFrameToRenderTarget();
 	}
 
-	void Decoder::ParserDataChunk(uint8_t* data, uint64_t size)
+	void Decoder::ParserDataChunk(uint8_t* data, uint64_t size) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->ParserDataChunk(data, size);
 	}
 
-	uint32_t Decoder::GetDecodedTextureCount()
+	uint32_t Decoder::GetDecodedTextureCount() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		return m_Impl->GetDecodedPictureCount();
 	}
 
-	void Decoder::SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget)
+	void Decoder::SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->SetDecodeRenderTarget(renderTarget->GetRHIResource());
 	}
 
-	void Decoder::SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget)
+	void Decoder::SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		m_Impl->SetReferenceRenderTarget(renderTarget->GetRHIResource());
 	}
 
-	void Decoder::SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget)
+	void Decoder::SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const
 	{
 		NEPTUNE_PROFILE_ZONE
 

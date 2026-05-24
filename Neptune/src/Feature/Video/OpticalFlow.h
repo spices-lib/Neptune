@@ -41,33 +41,33 @@ namespace Neptune::Video {
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetInputRenderTarget(const SP<RenderTarget>& renderTarget);
+		void SetInputRenderTarget(const SP<RenderTarget>& renderTarget) const;
 
 		/**
 		* @brief Set Reference RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget);
+		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const;
 
 		/**
 		* @brief Set FlowVector RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget);
+		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const;
 
 		/**
 		* @brief Create OpticalFlow Session.
 		* 
-		* @return Returns true if succeed.
+		* @return Returns true if succeeded.
 		*/
-		bool CreateOpticalFlowSession();
+		bool CreateOpticalFlowSession() const;
 
 		/**
 		* @brief OpticalFlow Execute.
 		*/
-		void OpticalFlowExecute();
+		void OpticalFlowExecute() const;
 
 	private:
 

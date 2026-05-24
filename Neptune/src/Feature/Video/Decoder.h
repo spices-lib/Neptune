@@ -42,7 +42,7 @@ namespace Neptune::Video {
 		/**
 		* @brief Push next frame to RT.
 		*/
-		void PushNextFrameToRenderTarget();
+		void PushNextFrameToRenderTarget() const;
 
 		/**
 		* @brief Parse DataChunk.
@@ -50,36 +50,33 @@ namespace Neptune::Video {
 		* @param[in] data Video data.
 		* @param[in] size Video data size.
 		*/
-		void ParserDataChunk(uint8_t* data, uint64_t size);
+		void ParserDataChunk(uint8_t* data, uint64_t size) const;
 
 		/**
 		* @brief Get Decoded Texture Count.
-		*
-		* @param[in] data Video data.
-		* @param[in] size Video data size.
 		*/
-		uint32_t GetDecodedTextureCount();
+		uint32_t GetDecodedTextureCount() const;
 
 		/**
 		* @brief Set Decode RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget);
+		void SetDecodeRenderTarget(const SP<RenderTarget>& renderTarget) const;
 
 		/**
 		* @brief Set Reference RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget);
+		void SetReferenceRenderTarget(const SP<RenderTarget>& renderTarget) const;
 
 		/**
 		* @brief Set FlowVector RenderTarget.
 		*
 		* @param[in] renderTarget RenderTarget.
 		*/
-		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget);
+		void SetFlowVectorRenderTarget(const SP<RenderTarget>& renderTarget) const;
 
 	private:
 

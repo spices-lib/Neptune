@@ -67,8 +67,8 @@ namespace Neptune {
         * @param[in] repeatCount Input Key repeat count.
         */
         KeyPressedEvent(KeyCode keycode, int repeatCount)
-                : KeyEvent(keycode)
-                , m_RepeatCount(repeatCount)
+            : KeyEvent(keycode)
+            , m_RepeatCount(repeatCount)
         {}
 
         /**

@@ -23,10 +23,10 @@ namespace Neptune {
     * @return Returns true if split succeed.
     */
     bool DecomposeTransform(
-            const glm::mat4& transform,
-            glm::vec3&       outTranslation,
-            glm::vec3&       outRotation,
-            glm::vec3&       outScale
+        const glm::mat4& transform,
+        glm::vec3&       outTranslation,
+        glm::vec3&       outRotation,
+        glm::vec3&       outScale
     );
 
     /**
