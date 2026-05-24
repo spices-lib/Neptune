@@ -16,6 +16,7 @@
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
+#include <backends/imgui_impl_dx11.h>
 #include <backends/imgui_impl_dx12.h>
 #endif
 
@@ -32,6 +33,7 @@ namespace Neptune::imgui {
 		switch (backend)
 		{
 #ifdef NP_PLATFORM_WINDOWS
+			case RenderBackendEnum::Direct3D11: return CreateSP<Direct3D11Interface>();
 			case RenderBackendEnum::Direct3D12: return CreateSP<Direct3D12Interface>();
 #endif
 
@@ -117,6 +119,30 @@ namespace Neptune::imgui {
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
+	
+	void Direct3D11Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		const auto device = std::any_cast<ID3D11Device*>(infrastructure.at("Device"));
+		const auto deviceContext = std::any_cast<ID3D11DeviceContext*>(infrastructure.at("DeviceContext"));
+
+		ImGui_ImplDX11_Init(device, deviceContext);
+	}
+	
+	void Direct3D11Interface::OnShutDown() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		ImGui_ImplDX11_Shutdown();
+	}
+
+	void Direct3D11Interface::BeginFrame() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		ImGui_ImplDX11_NewFrame();
+	}
 	
 	void Direct3D12Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{

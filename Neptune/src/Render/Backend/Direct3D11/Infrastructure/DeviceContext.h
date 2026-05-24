@@ -12,6 +12,11 @@
 #include "Infrastructure.h"
 #include "Render/Backend/Direct3D11/Unit/DeviceContext.h"
 
+namespace Neptune::Direct3D11::Unit {
+
+	class Fence;
+}
+
 namespace Neptune::Direct3D11 {
 
 	using IDeviceContext = IInfrastructure<class DeviceContext, EInfrastructure::DeviceContext>;
@@ -51,6 +56,13 @@ namespace Neptune::Direct3D11 {
 		* @param[in] handle Unit::DeviceContext::Handle.
 		*/
 		void SetHandle(Unit::DeviceContext::Handle handle);
+
+		/**
+		* @brief Single Fence.
+		*
+		* @param[in] fence Unit::Fence.
+		*/
+		void Signal(const SP<Unit::Fence>& fence) const;
 
 	private:
 

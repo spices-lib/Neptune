@@ -46,6 +46,7 @@ namespace Neptune::imgui {
 			}
 #endif
 #ifdef NP_PLATFORM_WINDOWS
+			case RenderBackendEnum::Direct3D11:
 			case RenderBackendEnum::Direct3D12:
 			{
 				ImGui_ImplGlfw_InitForOther(static_cast<GLFWwindow*>(Window::Instance().NativeWindow()), true);

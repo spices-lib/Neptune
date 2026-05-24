@@ -114,6 +114,37 @@ namespace Neptune::imgui {
 #ifdef NP_PLATFORM_WINDOWS
     
     /**
+    * @brief Direct3D11 Interface.
+    */
+    class Direct3D11Interface : public RenderInterface
+    {
+    public:
+
+        /**
+        * @brief Destructor Function.
+        */
+        ~Direct3D11Interface() = default;
+
+        /**
+        * @brief Interface of Initialize.
+        *
+        * @param[in] infrastructure RenderFrontend Infrastructure.
+        */
+        void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const override;
+
+        /**
+        * @brief Interface of ShutDown.
+        */
+        void OnShutDown() const override;
+
+        /**
+        * @brief Interface of Begin a frame.
+        */
+        void BeginFrame() const override;
+
+    };
+    
+    /**
     * @brief Direct3D12 Interface.
     */
     class Direct3D12Interface : public RenderInterface

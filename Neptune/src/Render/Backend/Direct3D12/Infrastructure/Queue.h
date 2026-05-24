@@ -56,7 +56,7 @@ namespace Neptune::Direct3D12 {
 		* @param[in] commandList D3D12GraphicsCommandList.
 		* @param[in] fence Unit::Fence.
 		*/
-		void Submit(D3D12GraphicsCommandList commandList, const SP<Unit::Fence>& fence = nullptr) const;
+		void Submit(D3D12GraphicsCommandList commandList, const SP<Unit::Fence>& fence) const;
 
 	private:
 
