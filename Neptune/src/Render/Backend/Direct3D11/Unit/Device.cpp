@@ -32,8 +32,8 @@ namespace Neptune::Direct3D11::Unit {
 		
 		DIRECT3D11_CHECK(D3D11CreateDevice(adapter, drivenType, nullptr, flags, &level, 1, D3D11_SDK_VERSION, &baseDevice, &supportLevel, &baseContext))
 		
-		m_Handle = dynamic_cast<Handle>(baseDevice);
-		context  = dynamic_cast<D3D11DeviceContext>(baseContext);
+		m_Handle = static_cast<D3D11Device>(baseDevice);
+		context  = static_cast<D3D11DeviceContext>(baseContext);
 	}
 
 }

@@ -22,7 +22,7 @@ namespace Neptune::Direct3D11::Resource {
 
         GetContext().Get<IDevice>()->Handle()->CreateDeferredContext(0, &baseContext);
 
-        m_Context.SetHandle(dynamic_cast<Unit::DeviceContext::Handle>(baseContext));
+        m_Context.SetHandle(static_cast<Unit::DeviceContext::Handle>(baseContext));
         
         DEBUGUTILS_SETOBJECTNAME(m_Context, "Deferred Device Context")
     }

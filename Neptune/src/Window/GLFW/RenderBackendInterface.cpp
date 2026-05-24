@@ -23,6 +23,7 @@ namespace Neptune::GLFW {
 		{
 			case RenderBackendEnum::OpenGL:     return CreateSP<OpenGLInterface>();
 			case RenderBackendEnum::Vulkan:     return CreateSP<VulkanInterface>();
+			case RenderBackendEnum::Direct3D11: return CreateSP<Direct3D11Interface>();
 			case RenderBackendEnum::Direct3D12: return CreateSP<Direct3D12Interface>();
 			default:
 			{
@@ -90,6 +91,14 @@ namespace Neptune::GLFW {
 		return std::vector(glfwExtensions, glfwExtensions + glfwExtensionCount);
 	}
 
+	void Direct3D11Interface::Hint() const
+	{
+		NEPTUNE_PROFILE_ZONE
+
+		// Set no OpenGL (use Direct3D11)
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	}
+	
 	void Direct3D12Interface::Hint() const
 	{
 		NEPTUNE_PROFILE_ZONE

@@ -35,7 +35,6 @@ namespace Neptune::Direct3D11 {
 #ifdef NEPTUNE_DEBUG
 
 		flags |= D3D11_CREATE_DEVICE_DEBUG;
-    	drivenType = D3D_DRIVER_TYPE_WARP;
     	
 #endif
 
@@ -45,7 +44,7 @@ namespace Neptune::Direct3D11 {
 
     	Unit::DeviceContext::Handle deviceContext;
     	
-		m_Device.CreateDevice(adapter.GetHandle(), drivenType, flags, DIRECT3D11_VERSION, deviceContext);
+		m_Device.CreateDevice(adapter.GetHandle(), drivenType, flags, MinimumLevel, deviceContext);
     	
     	DEBUGUTILS_SETOBJECTNAME(m_Device, ToString())
     	

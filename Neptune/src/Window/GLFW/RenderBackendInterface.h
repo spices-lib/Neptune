@@ -132,6 +132,40 @@ namespace Neptune::GLFW {
     };
 
     /**
+    * @brief Direct3D11 APIInterface.
+    */
+    class Direct3D11Interface : public APIInterface
+    {
+    public:
+
+        /**
+        * @brief Interface of GLFW Hint Configuration with RenderBackend.
+        */
+        void Hint() const override;
+
+        /**
+        * @brief Interface of GLFW API Load Configuration with RenderBackend.
+        * 
+        * @param[in] handle GLFWwindow.
+        */
+        void APILoad(GLFWwindow* handle) const override {}
+
+        /**
+        * @brief Interface of GLFW SwapBuffers with RenderBackend.
+        * 
+        * @param[in] handle GLFWwindow.
+        */
+        void SwapBuffers(GLFWwindow* handle) const override {}
+        
+        /**
+        * @brief Interface of Get GLFW Window Extension.
+        *
+        * @return Returns Window Extension.
+        */
+        std::vector<const char*> Extension() const override { return {}; }
+    };
+    
+    /**
     * @brief Direct3D12 APIInterface.
     */
     class Direct3D12Interface : public APIInterface
