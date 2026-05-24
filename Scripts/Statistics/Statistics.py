@@ -58,6 +58,8 @@ ignoreFolders: dict = {
     'node_modules':     1,
     '.next':            1,
     'public':           1,
+    'obj':              1,
+    'packages':         1,
 }
 
 '''
