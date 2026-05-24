@@ -50,9 +50,7 @@ namespace Neptune::Direct3D11 {
     	
     	GetContext().Get<IDeviceContext>()->SetHandle(deviceContext);
     	
-    	const auto annotation = reinterpret_cast<D3DUserDefinedAnnotation>(deviceContext);
-    	
-    	GetContext().Get<IDebugUtilsObject>()->SetHandle(annotation);
+    	GetContext().Get<IDebugUtilsObject>()->Create();
     	
     	DXGI_ADAPTER_DESC3 desc{};
     	adapter.GetHandle()->GetDesc3(&desc);

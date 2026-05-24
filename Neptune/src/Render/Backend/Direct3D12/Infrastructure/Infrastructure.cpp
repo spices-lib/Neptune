@@ -28,10 +28,10 @@ namespace Neptune::Direct3D12 {
             case EInfrastructure::GraphicQueue:                       return "GraphicQueue";
             case EInfrastructure::ComputeQueue:                       return "ComputeQueue";
             case EInfrastructure::SwapChain:                          return "SwapChain";
-            case EInfrastructure::GraphicCommandList:                 return "GraphicCommandList";
-            case EInfrastructure::ComputeCommandList:                 return "ComputeCommandList";
             case EInfrastructure::GraphicFence:                       return "GraphicFence";
             case EInfrastructure::ComputeFence:                       return "ComputeFence";
+            case EInfrastructure::GraphicCommandList:                 return "GraphicCommandList";
+            case EInfrastructure::ComputeCommandList:                 return "ComputeCommandList";
             case EInfrastructure::RTVDescriptorHeap:                  return "RTVDescriptorHeap";
             case EInfrastructure::DSVDescriptorHeap:                  return "DSVDescriptorHeap";
             case EInfrastructure::SRVDescriptorHeap:                  return "SRVDescriptorHeap";

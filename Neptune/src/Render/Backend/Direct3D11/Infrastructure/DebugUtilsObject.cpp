@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "DebugUtilsObject.h"
+#include "DeviceContext.h"
 
 #ifdef NEPTUNE_DEBUG
 #define USE_PIX
@@ -22,11 +23,11 @@ namespace Neptune::Direct3D11 {
         : Infrastructure(context, e)
     {}
 
-	void DebugUtilsObject::SetHandle(Unit::UserDefinedAnnotation::Handle handle)
+	void DebugUtilsObject::Create()
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_UserDefinedAnnotation.SetHandle(handle);
+		m_UserDefinedAnnotation.CreateUserDefinedAnnotation(GetContext().Get<IDeviceContext>()->Handle());
 		
 		DEBUGUTILS_SETOBJECTNAME(m_UserDefinedAnnotation, ToString())
 	}

@@ -40,11 +40,9 @@ namespace Neptune::Direct3D11 {
 		~DebugUtilsObject() override = default;
 
 		/**
-		* @brief Set Unit Handle.
-		*
-		* @param[in] handle Unit::UserDefinedAnnotation::Handle.
+		* @brief Create DebugUtilsObject.
 		*/
-		void SetHandle(Unit::UserDefinedAnnotation::Handle handle);
+		void Create();
 
 		/**
 		* @brief Begin CommandBuffer Label.
@@ -87,9 +85,6 @@ namespace Neptune::Direct3D11 {
 #define DEBUGUTILS_BEGINLABEL(...)                 { GetContext().Get<IDebugUtilsObject>()->BeginLabel       (__VA_ARGS__)	; }
 #define DEBUGUTILS_ENDLABEL(...)                   { GetContext().Get<IDebugUtilsObject>()->EndLabel         (__VA_ARGS__)	; }
 #define DEBUGUTILS_INSERTLABEL(...)                { GetContext().Get<IDebugUtilsObject>()->InsertLabel      (__VA_ARGS__)	; }
-#define DEBUGUTILS_BEGINQUEUELABEL(...)            { GetContext().Get<IDebugUtilsObject>()->BeginQueueLabel  (__VA_ARGS__)	; }
-#define DEBUGUTILS_ENDQUEUELABEL(...)              { GetContext().Get<IDebugUtilsObject>()->EndQueueLabel    (__VA_ARGS__)	; }
-#define DEBUGUTILS_INSERTQUEUELABEL(...)           { GetContext().Get<IDebugUtilsObject>()->InsertQueueLabel (__VA_ARGS__)	; }
 #define DEBUGUTILS_SETOBJECTNAME(...)              { GetContext().Get<IDebugUtilsObject>()->SetObjectName    (__VA_ARGS__)	; }
 
 #endif
@@ -99,9 +94,6 @@ namespace Neptune::Direct3D11 {
 #define DEBUGUTILS_BEGINLABEL(...)      
 #define DEBUGUTILS_ENDLABEL(...)         
 #define DEBUGUTILS_INSERTLABEL(...)
-#define DEBUGUTILS_BEGINQUEUELABEL(...) 
-#define DEBUGUTILS_ENDQUEUELABEL(...)   
-#define DEBUGUTILS_INSERTQUEUELABEL(...)
 #define DEBUGUTILS_SETOBJECTNAME(...)                
 
 #endif
@@ -117,7 +109,7 @@ namespace Neptune::Direct3D11 {
 			{ h.SetName(name) } -> std::convertible_to<HRESULT>;
 		})
 		{
-			DIRECT3D11_CHECK(unit.GetHandle()->SetName(StringLibrary::CharToWChar(caption.c_str()).c_str()));
+			DIRECT3D11_CHECK(unit.GetHandle()->SetName(StringLibrary::CharToWChar(caption.c_str()).c_str()))
 		}
 	}
 	

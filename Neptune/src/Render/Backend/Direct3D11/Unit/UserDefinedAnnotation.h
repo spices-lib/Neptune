@@ -33,8 +33,15 @@ namespace Neptune::Direct3D11::Unit {
 		/**
 		* @brief Destructor Function.
 		*/
-		~UserDefinedAnnotation() override = default;
+		~UserDefinedAnnotation() override;
 
+		/**
+		* @brief Create UserDefinedAnnotation.
+		*
+		* @param[in] deviceContext D3D11DeviceContext.
+		*/
+		void CreateUserDefinedAnnotation(D3D11DeviceContext deviceContext);
+		
 	};
 }
 
