@@ -112,7 +112,7 @@ namespace Neptune::Vulkan {
 			WP<ThreadCommandPool> m_Guard;              // @brief ThreadCommandPool Guard.
 		};
 
-		_declspec(thread) ThreadID s_TLSThreadID;       // @brief Thread id instance.
+		thread_local ThreadID s_TLSThreadID;            // @brief Thread id instance.
 
 		std::mutex s_Mutex;                             // @brief CommandPool mutex.
 	}

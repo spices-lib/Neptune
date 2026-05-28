@@ -35,8 +35,8 @@ namespace Neptune::Direct3D12::GLFW {
         glfwGetWindowSize(glfwWindow, &w, &h);
 
 		DXGI_SWAP_CHAIN_DESC1                desc{};
-		desc.Height                        = w;
-		desc.Width                         = h;
+		desc.Width                         = w;
+		desc.Height                        = h;
         
         Direct3D12::SwapChain::Create(desc, count, glfwGetWin32Window(glfwWindow));
     }

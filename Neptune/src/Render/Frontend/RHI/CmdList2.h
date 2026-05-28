@@ -97,7 +97,7 @@ namespace Neptune::RHI {
 		/**
 		* @brief Interface of End CommandList.
 		*/
-		void End() const { RHICmdList2::m_Impl->Begin(); }
+		void End() const { RHICmdList2::m_Impl->End(); }
 
 		/**
 		* @brief Interface of Submit CommandList and Wait.

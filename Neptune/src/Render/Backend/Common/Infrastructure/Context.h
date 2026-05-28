@@ -216,7 +216,7 @@ namespace Neptune::Render::Common {
             return nullptr;
         }
 
-        return std::dynamic_pointer_cast<typename I::T>(m_Infrastructures[position]).get();
+        return static_cast<I::T*>(m_Infrastructures[position].get());
     }
 
     template<typename E> requires IsEnum<E>
