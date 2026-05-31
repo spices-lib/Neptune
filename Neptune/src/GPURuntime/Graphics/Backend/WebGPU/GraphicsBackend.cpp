@@ -1,6 +1,6 @@
 /**
-* @file RenderBackend.cpp.
-* @brief The RenderBackend Class Implementation.
+* @file GraphicsBackend.cpp.
+* @brief The GraphicsBackend Class Implementation.
 * @author Spices.
 */
 
@@ -8,7 +8,7 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "RenderBackend.h"
+#include "GraphicsBackend.h"
 #include "Infrastructure/InfrastructureHeader.h"
 #include "RHI/RHIHeader.h"
 #include "World/Scene/Scene.h"
@@ -17,13 +17,13 @@
 
 namespace Neptune::WebGPU {
 
-    RenderBackend::RenderBackend()
-        : RenderFrontend(RenderBackendEnum::WebGPU)
+    GraphicsBackend::GraphicsBackend()
+        : GraphicsFrontend(GraphicsBackendEnum::WebGPU)
     {
         NEPTUNE_PROFILE_ZONE
     }
 
-    void RenderBackend::OnInitialize()
+    void GraphicsBackend::OnInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
@@ -41,26 +41,26 @@ namespace Neptune::WebGPU {
         m_Context->Registry<ICommandEncoder>(MaxFrameInFlight);
     }
 
-    void RenderBackend::OnShutDown()
+    void GraphicsBackend::OnShutDown()
     {
         NEPTUNE_PROFILE_ZONE
 
         m_Context->UnRegistry();
     }
 
-    Context& RenderBackend::GetContext() const
+    Context& GraphicsBackend::GetContext() const
     {
         return *m_Context;
     }
 
-    void RenderBackend::Wait() const
+    void GraphicsBackend::Wait() const
     {
         NEPTUNE_PROFILE_ZONE
         
         m_Context->Get<IQueue>()->OnSubmittedWorkDone();
     }
 
-    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload) const
+    std::any GraphicsBackend::CreateRHI(RHI::ERHI e, void* payload) const
 	{
         NEPTUNE_PROFILE_ZONE
 
@@ -70,7 +70,7 @@ namespace Neptune::WebGPU {
 		}
 	}
 
-    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure() const
+    std::unordered_map<std::string, std::any> GraphicsBackend::AccessInfrastructure() const
 	{
         NEPTUNE_PROFILE_ZONE
 

@@ -52,11 +52,11 @@ namespace Neptune {
 #endif
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
-            case RenderBackendEnum::WebGPU: sp = CreateSP<WebGPU::RenderBackend>(); break;
             case RenderBackendEnum::WebGL:  sp = CreateSP<WebGL::RenderBackend>();  break;
+            case RenderBackendEnum::WebGPU: sp = CreateSP<WebGPU::RenderBackend>(); break;
 #else
-            case RenderBackendEnum::Vulkan: sp = CreateSP<Vulkan::RenderBackend>(); break;
             case RenderBackendEnum::OpenGL: sp = CreateSP<OpenGL::RenderBackend>(); break;
+            case RenderBackendEnum::Vulkan: sp = CreateSP<Vulkan::RenderBackend>(); break;
 #endif
             
             default:

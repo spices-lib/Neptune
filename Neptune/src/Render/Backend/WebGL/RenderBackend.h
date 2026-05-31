@@ -5,6 +5,7 @@
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"

@@ -11,7 +11,7 @@
 #include "CommandEncoder.h"
 #include "Device.h"
 #include "DebugUtilsObject.h"
-#include "Render/Backend/WebGPU/Unit/CommandBuffer.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Unit/CommandBuffer.h"
 
 namespace Neptune::WebGPU {
 

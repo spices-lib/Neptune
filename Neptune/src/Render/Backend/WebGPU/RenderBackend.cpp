@@ -10,7 +10,6 @@
 
 #include "RenderBackend.h"
 #include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/InfrastructureHeader.h"
-#include "RHI/RHIHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/Component.h"

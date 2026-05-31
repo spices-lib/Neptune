@@ -9,6 +9,7 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
+#include "Render/Frontend/RenderFrontend.h"
 #include "GPURuntime/Graphics/Backend/WebGPU/GraphicsBackend.h"
 
 namespace Neptune {

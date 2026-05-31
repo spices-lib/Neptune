@@ -8,13 +8,13 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "Render/Backend/WebGPU/Infrastructure/Instance.h"
-#include "Render/Backend/WebGPU/Infrastructure/DebugUtilsObject.h"
-#include "Render/Backend/WebGPU/Infrastructure/Surface.h"
-#include "Render/Backend/WebGPU/Infrastructure/Adapter.h"
-#include "Render/Backend/WebGPU/Infrastructure/Device.h"
-#include "Render/Backend/WebGPU/Infrastructure/Queue.h"
-#include "Render/Backend/WebGPU/Infrastructure/Future.h"
-#include "Render/Backend/WebGPU/Infrastructure/CommandEncoder.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/Instance.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/DebugUtilsObject.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/Surface.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/Adapter.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/Device.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/Queue.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/Future.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/CommandEncoder.h"
 
 #endif

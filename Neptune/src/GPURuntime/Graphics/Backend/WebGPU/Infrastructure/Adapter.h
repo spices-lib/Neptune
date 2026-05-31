@@ -10,7 +10,7 @@
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
-#include "Render/Backend/WebGPU/Unit/Adapter.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Unit/Adapter.h"
 
 namespace Neptune::WebGPU {
 

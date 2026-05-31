@@ -1,16 +1,17 @@
 /**
-* @file RenderBackend.h.
-* @brief The RenderBackend Class Definitions.
+* @file GraphicsBackend.h.
+* @brief The GraphicsBackend Class Definitions.
 * @author Spices.
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Frontend/RenderFrontend.h"
+#include "GPURuntime/Graphics/Frontend/GraphicsFrontend.h"
 #include "Infrastructure/Enum.h"
-#include "Render/Backend/Common/Concept.h"
+#include "GPURuntime/Graphics/Backend/Common/Concept.h"
 
 namespace Neptune {
 
@@ -27,10 +28,10 @@ namespace Neptune::Render::Common {
 namespace Neptune::WebGL {
 
     /**
-    * @brief RenderBackend Class.
-    * This class defines the RenderBackend behaves.
+    * @brief WebGL::GraphicsBackend Class.
+    * This class defines the WebGL::GraphicsBackend behaves.
     */
-    class RenderBackend : public RenderFrontend
+    class GraphicsBackend : public GraphicsFrontend
     {
     public:
 
@@ -41,12 +42,12 @@ namespace Neptune::WebGL {
         /**
         * @brief Constructor Function.
         */
-        RenderBackend();
+        GraphicsBackend();
 
         /**
         * @brief Destructor Function.
         */
-        ~RenderBackend() override = default;
+        ~GraphicsBackend() override = default;
 
         /**
         * @brief Interface of Initialize.
@@ -79,8 +80,6 @@ namespace Neptune::WebGL {
         * @return Returns Infrastructure.
         */
         std::unordered_map<std::string, std::any> AccessInfrastructure() const override;
-
-    private:
 
         /**
         * @brief Get Context.

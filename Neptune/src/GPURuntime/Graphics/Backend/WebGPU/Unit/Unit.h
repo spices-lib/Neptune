@@ -9,8 +9,8 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Backend/WebGPU/Core.h"
-#include "Render/Backend/Common/Unit/Unit.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Core.h"
+#include "GPURuntime/Graphics/Backend/Common/Unit/Unit.h"
 
 #include <entt.hpp>
 

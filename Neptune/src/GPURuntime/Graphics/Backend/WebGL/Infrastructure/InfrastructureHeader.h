@@ -8,6 +8,6 @@
 
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
-#include "Render/Backend/WebGL/Infrastructure/Infrastructure.h"
+#include "GPURuntime/Graphics/Backend/WebGL/Infrastructure/Infrastructure.h"
 
 #endif

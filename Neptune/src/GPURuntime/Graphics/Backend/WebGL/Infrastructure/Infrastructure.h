@@ -11,7 +11,7 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 #include "Enum.h"
-#include "Render/Backend/Common/Infrastructure/Infrastructure.h"
+#include "GPURuntime/Graphics/Backend/Common/Infrastructure/Infrastructure.h"
 
 namespace Neptune::WebGL {
 

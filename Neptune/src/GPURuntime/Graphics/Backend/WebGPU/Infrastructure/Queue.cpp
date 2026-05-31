@@ -12,8 +12,8 @@
 #include "Device.h"
 #include "Instance.h"
 #include "DebugUtilsObject.h"
-#include "Render/Backend/WebGPU/Unit/CommandBuffer.h"
-#include "Render/Backend/WebGPU/Unit/Future.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Unit/CommandBuffer.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Unit/Future.h"
 
 namespace Neptune::WebGPU {
 

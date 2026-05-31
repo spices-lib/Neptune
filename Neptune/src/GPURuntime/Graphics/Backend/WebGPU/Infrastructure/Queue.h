@@ -5,11 +5,12 @@
 */
 
 #pragma once
+
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
 #include "Infrastructure.h"
-#include "Render/Backend/WebGPU/Unit/Queue.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Unit/Queue.h"
 
 namespace Neptune::WebGPU {
 

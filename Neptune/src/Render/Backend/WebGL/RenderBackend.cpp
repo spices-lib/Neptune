@@ -10,7 +10,6 @@
 
 #include "RenderBackend.h"
 #include "GPURuntime/Graphics/Backend/Vulkan/Infrastructure/InfrastructureHeader.h"
-#include "RHI/RHIHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/Component.h"
@@ -39,11 +38,6 @@ namespace Neptune::WebGL {
         RenderFrontend::OnShutDown();
 
         m_GraphicsBackend->OnShutDown();
-    }
-
-    Context& RenderBackend::GetContext() const
-    {
-        return *m_Context;
     }
 
     void RenderBackend::BeginFrame(Scene* scene) const
