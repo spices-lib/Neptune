@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 #include "RenderTarget.h"
-#include "Render/Frontend/RHI/RenderTarget.h"
+#include "GPURuntime/Graphics/Frontend/RHI/RenderTarget.h"
 
 namespace Neptune {
 
@@ -18,7 +18,7 @@ namespace Neptune {
 		m_RHIResource->CreateRenderTarget(info);
 	}
 
-	bool RenderTarget::CopyToRenderTarget(SP<RenderTarget> target)
+	bool RenderTarget::CopyToRenderTarget(SP<RenderTarget> target) const
 	{
 		return m_RHIResource->CopyToRenderTarget(target->GetRHIResource().get());
 	}

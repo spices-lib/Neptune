@@ -24,13 +24,13 @@
 #include "Render/Backend/Vulkan/RenderBackend.h"
 #endif
 
-#include "Render/Frontend/Pass/BasePass.h"
-#include "Render/Frontend/Pass/SlatePass.h"
-#include "Render/Frontend/Pass/PrePass.h"
+#include "GPURuntime/Graphics/Frontend/Pass/BasePass.h"
+#include "GPURuntime/Graphics/Frontend/Pass/SlatePass.h"
+#include "GPURuntime/Graphics/Frontend/Pass/PrePass.h"
+#include "GPURuntime/Graphics/Frontend/Pass/Pass.h"
+#include "GPURuntime/Graphics/Frontend/RHI/RHI.h"
 #include "Window/Window.h"
 #include "Core/Event/WindowEvent.h"
-#include "Render/Frontend/Pass/Pass.h"
-#include "Render/Frontend/RHI/RHI.h"
 
 namespace Neptune {
 
@@ -98,7 +98,7 @@ namespace Neptune {
         });
     }
 
-    void RenderFrontend::RecreateSwapChain()
+    void RenderFrontend::RecreateSwapChain() const
     {
         NEPTUNE_PROFILE_ZONE
 

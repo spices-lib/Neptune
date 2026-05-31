@@ -9,27 +9,18 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
-#include "Render/Frontend/RenderFrontend.h"
-#include "Infrastructure/Enum.h"
-#include "Render/Backend/Common/Concept.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/GraphicsBackend.h"
 
 namespace Neptune {
 
     class Scene;
 }
 
-namespace Neptune::Render::Common {
-
-    template<typename T>
-    requires IsEnum<T>
-    class Context;
-}
-
 namespace Neptune::WebGPU {
 
     /**
-    * @brief RenderBackend Class.
-    * This class defines the RenderBackend behaves.
+    * @brief WebGPU::RenderBackend Class.
+    * This class defines the WebGPU::RenderBackend behaves.
     */
     class RenderBackend : public RenderFrontend
     {
@@ -64,19 +55,19 @@ namespace Neptune::WebGPU {
         *
         * @param[in] scene Scene.
         */
-        void BeginFrame(Scene* scene) override;
+        void BeginFrame(Scene* scene) const override;
 
         /**
         * @brief Interface of End a frame.
         *
         * @param[in] scene Scene.
         */
-        void EndFrame(Scene* scene) override;
+        void EndFrame(Scene* scene) const override;
 
         /**
         * @brief Interface of Wait RenderBackend idle.
         */
-        void Wait() override;
+        void Wait() const override;
 
         /**
         * @brief Interface of CreateRHI.
@@ -86,14 +77,14 @@ namespace Neptune::WebGPU {
         *
         * @return Returns RHI::Impl
         */
-        std::any CreateRHI(RHI::ERHI e, void* payload) override;
+        std::any CreateRHI(RHI::ERHI e, void* payload) const override;
 
         /**
         * @brief Interface of Access Infrastructure.
         *
         * @return Returns Infrastructure.
         */
-        std::unordered_map<std::string, std::any> AccessInfrastructure() override;
+        std::unordered_map<std::string, std::any> AccessInfrastructure() const override;
 
     private:
 
@@ -102,11 +93,11 @@ namespace Neptune::WebGPU {
         *
         * @return Returns Context.
         */
-        Context& GetContext() const;
+        GraphicsBackend::Context& GetContext() const;
 
     private:
 
-        SP<Context> m_Context; // @brief This Context.
+        UP<GraphicsBackend> m_GraphicsBackend; // @brief This GraphicsBackend.
     };
 }
 

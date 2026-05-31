@@ -9,51 +9,29 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "RenderBackend.h"
-#include "Infrastructure/InfrastructureHeader.h"
-#include "RHI/RHIHeader.h"
+#include "GPURuntime/Graphics/Backend/Direct3D12/Infrastructure/InfrastructureHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
-#include "Data/Clock.h"
 #include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::Direct3D12 {
 
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::Direct3D12)
-    {
-        NEPTUNE_PROFILE_ZONE
-
-    	HandleResultDelegate::SetHandler([&](HRESULT result) { HandleResult(result); });
-    }
+		, m_GraphicsBackend(CreateUP<GraphicsBackend>())
+    {}
 
     void RenderBackend::OnInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
+    	m_GraphicsBackend->OnInitialize();
+    	
         const auto& window = Window::Instance();
 
-        m_Context = CreateSP<Context>();
-
-        m_Context->Registry<IDebugUtilsObject>();
-        m_Context->Registry<IFactory>();
-        m_Context->Registry<IDevice>();
-
-        m_Context->Registry<IGraphicQueue>();
-        m_Context->Registry<IComputeQueue>();
-
-    	m_Context->Registry<ISwapChain>(MaxFrameInFlight, window.Implement(), window.NativeWindow());
+    	GetContext().Registry<ISwapChain>(MaxFrameInFlight, window.Implement(), window.NativeWindow());
     	
-        m_Context->Registry<IGraphicFence>(MaxFrameInFlight);
-        m_Context->Registry<IComputeFence>(MaxFrameInFlight);
-
-        m_Context->Registry<IGraphicCommandList>(MaxFrameInFlight);
-        m_Context->Registry<IComputeCommandList>(MaxFrameInFlight);
-
-        m_Context->Registry<IRTVDescriptorHeap>();
-        m_Context->Registry<IDSVDescriptorHeap>();
-        m_Context->Registry<ISRVDescriptorHeap>();
-        m_Context->Registry<IUAVDescriptorHeap>();
-
         RenderFrontend::OnInitialize();
     }
 
@@ -63,112 +41,97 @@ namespace Neptune::Direct3D12 {
 
         RenderFrontend::OnShutDown();
 
-        m_Context->UnRegistry();
+    	m_GraphicsBackend->OnShutDown();
     }
 
-    Context& RenderBackend::GetContext() const
-    {
-        return *m_Context;
-    }
-
-    void RenderBackend::BeginFrame(Scene* scene)
+    void RenderBackend::BeginFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
 
         auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
+    	auto& context = m_GraphicsBackend->GetContext();
+    	
 		{
-			m_Context->Get<IComputeFence>()->Wait(clock.m_FrameIndex);
+			context.Get<IComputeFence>()->Wait(clock.m_FrameIndex);
 
-			m_Context->Get<IGraphicFence>()->Wait(clock.m_FrameIndex);
+			context.Get<IGraphicFence>()->Wait(clock.m_FrameIndex);
 		}
 
 		{
-            m_Context->Get<IComputeCommandList>()->Begin(clock.m_FrameIndex);
+            context.Get<IComputeCommandList>()->Begin(clock.m_FrameIndex);
 
-            m_Context->Get<IGraphicCommandList>()->Begin(clock.m_FrameIndex);
+            context.Get<IGraphicCommandList>()->Begin(clock.m_FrameIndex);
 		}
     }
 
-    void RenderBackend::EndFrame(Scene* scene)
+    void RenderBackend::EndFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
 
         const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
+    	auto& context = m_GraphicsBackend->GetContext();
+    	
 		{
-			m_Context->Get<IComputeCommandList>()->End(clock.m_FrameIndex);
+			context.Get<IComputeCommandList>()->End(clock.m_FrameIndex);
 
-			m_Context->Get<IGraphicCommandList>()->End(clock.m_FrameIndex);
+			context.Get<IGraphicCommandList>()->End(clock.m_FrameIndex);
 		}
 
 		{
-            DEBUGUTILS_BEGINQUEUELABEL(m_Context->Get<IComputeQueue>()->Handle(), "MainComputeQueue")
+            DEBUGUTILS_BEGINQUEUELABEL(context.Get<IComputeQueue>()->Handle(), "MainComputeQueue")
 
-			m_Context->Get<IComputeQueue>()->Submit(m_Context->Get<IComputeCommandList>()->Handle(clock.m_FrameIndex), m_Context->Get<IComputeFence>()->IHandle(clock.m_FrameIndex));
+			context.Get<IComputeQueue>()->Submit(context.Get<IComputeCommandList>()->Handle(clock.m_FrameIndex), context.Get<IComputeFence>()->IHandle(clock.m_FrameIndex));
         	
-			DEBUGUTILS_ENDQUEUELABEL(m_Context->Get<IComputeQueue>()->Handle())
+			DEBUGUTILS_ENDQUEUELABEL(context.Get<IComputeQueue>()->Handle())
 		}
 
 		{
-			DEBUGUTILS_BEGINQUEUELABEL(m_Context->Get<IGraphicQueue>()->Handle(), "MainGraphicQueue")
+			DEBUGUTILS_BEGINQUEUELABEL(context.Get<IGraphicQueue>()->Handle(), "MainGraphicQueue")
 
-			m_Context->Get<IGraphicQueue>()->Submit(m_Context->Get<IGraphicCommandList>()->Handle(clock.m_FrameIndex), m_Context->Get<IGraphicFence>()->IHandle(clock.m_FrameIndex));
+			context.Get<IGraphicQueue>()->Submit(context.Get<IGraphicCommandList>()->Handle(clock.m_FrameIndex), context.Get<IGraphicFence>()->IHandle(clock.m_FrameIndex));
         	
-			DEBUGUTILS_ENDQUEUELABEL(m_Context->Get<IGraphicQueue>()->Handle())
+			DEBUGUTILS_ENDQUEUELABEL(context.Get<IGraphicQueue>()->Handle())
 		}
 
 		{
-			DEBUGUTILS_BEGINQUEUELABEL(m_Context->Get<IGraphicQueue>()->Handle(), "MainGraphicQueue")
+			DEBUGUTILS_BEGINQUEUELABEL(context.Get<IGraphicQueue>()->Handle(), "MainGraphicQueue")
 
-			auto result = m_Context->Get<ISwapChain>()->Present();
+			auto result = context.Get<ISwapChain>()->Present();
 
-			DEBUGUTILS_ENDQUEUELABEL(m_Context->Get<IGraphicQueue>()->Handle())
+			DEBUGUTILS_ENDQUEUELABEL(context.Get<IGraphicQueue>()->Handle())
 		}
     }
 
-    void RenderBackend::Wait()
+    void RenderBackend::Wait() const
     {
         NEPTUNE_PROFILE_ZONE
+    	
+    	m_GraphicsBackend->Wait();
     }
 
-    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
+	GraphicsBackend::Context& RenderBackend::GetContext() const
+    {
+    	NEPTUNE_PROFILE_ZONE
+    	
+		return m_GraphicsBackend->GetContext();
+    }
+	
+    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload) const
 	{
         NEPTUNE_PROFILE_ZONE
 
-        switch(e)
-		{
-            case RHI::ERHI::RenderPass:       return std::dynamic_pointer_cast<RHI::RHIRenderPass::Impl>        (CreateSP<RenderPass>           (*m_Context));
-			case RHI::ERHI::DescriptorList:   return std::dynamic_pointer_cast<RHI::RHIDescriptorList::Impl>    (CreateSP<DescriptorList>       (*m_Context));
-			case RHI::ERHI::Pipeline:         return std::dynamic_pointer_cast<RHI::RHIPipeline::Impl>          (CreateSP<Pipeline>             (*m_Context));
-			case RHI::ERHI::Shader:           return std::dynamic_pointer_cast<RHI::RHIShader::Impl>            (CreateSP<Shader>               (*m_Context));
-			case RHI::ERHI::RenderTarget:     return std::dynamic_pointer_cast<RHI::RHIRenderTarget::Impl>      (CreateSP<RenderTarget>         (*m_Context));
-			case RHI::ERHI::VertexBuffer:     return std::dynamic_pointer_cast<RHI::RHIVertexBuffer::Impl>      (CreateSP<VertexBuffer>         (*m_Context));
-			case RHI::ERHI::IndexBuffer:      return std::dynamic_pointer_cast<RHI::RHIIndexBuffer::Impl>       (CreateSP<IndexBuffer>          (*m_Context));
-            case RHI::ERHI::CmdList:          return std::dynamic_pointer_cast<RHI::RHICmdList::Impl>           (CreateSP<CmdList>              (*m_Context));
-			case RHI::ERHI::CmdList2:         return std::dynamic_pointer_cast<RHI::RHICmdList2::Impl>          (CreateSP<CmdList2>             (*m_Context));
-            case RHI::ERHI::Decoder:          NEPTUNE_CORE_ERROR("Direct3D12 do not support Decoder RHI.")       return nullptr;
-            case RHI::ERHI::OpticalFlow:      NEPTUNE_CORE_ERROR("Direct3D12 do not support OpticalFlow RHI.")   return nullptr;
-            default:                          NEPTUNE_CORE_ERROR("Direct3D12 do not support this RHI.")          return nullptr;
-		}
+    	return m_GraphicsBackend->CreateRHI(e, payload);
 	}
 
-    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure() const
     {
         NEPTUNE_PROFILE_ZONE
-
-        std::unordered_map<std::string, std::any> infrastructure;
-
-        infrastructure["Device"]                     = static_cast<ID3D12Device*>(m_Context->Get<IDevice>()->Handle());
-		infrastructure["CommandQueue"]               = static_cast<ID3D12CommandQueue*>(m_Context->Get<IGraphicQueue>()->Handle());
-		infrastructure["RTVFormat"]                  = DXGI_FORMAT_B8G8R8A8_UNORM;
-		infrastructure["DSVFormat"]                  = DXGI_FORMAT_B8G8R8A8_UNORM;
-		infrastructure["SRVDescriptorHeap"]          = static_cast<ID3D12DescriptorHeap*>(m_Context->Get<ISRVDescriptorHeap>()->Handle());
-        infrastructure["SRVCPUHandle"]               = m_Context->Get<ISRVDescriptorHeap>()->Handle()->GetCPUDescriptorHandleForHeapStart();
-        infrastructure["SRVGPUHandle"]               = m_Context->Get<ISRVDescriptorHeap>()->Handle()->GetGPUDescriptorHandleForHeapStart();
-
-        return infrastructure;
+    	
+        return m_GraphicsBackend->AccessInfrastructure();
     }
+	
 }
 
 #endif

@@ -1,0 +1,44 @@
+/**
+* @file VertexBuffer.h.
+* @brief The VertexBuffer Class Definitions.
+* @author Spices.
+*/
+
+#pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
+#include "Core/Core.h"
+#include "GPURuntime/Graphics/Backend/Vulkan/Infrastructure/Infrastructure.h"
+#include "GPURuntime/Graphics/Backend/Vulkan/Unit/Buffer.h"
+#include "GPURuntime/Graphics/Frontend/RHI/VertexBuffer.h"
+
+namespace Neptune::Vulkan {
+
+	/**
+	* @brief Vulkan::VertexBuffer Class.
+	* This class defines the Vulkan::VertexBuffer behaves.
+	*/
+	class VertexBuffer : public ContextAccessor, public RHI::RHIVertexBuffer::Impl
+	{
+	public:
+
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		*/
+		explicit VertexBuffer(Context& context) : ContextAccessor(context) {}
+
+		/**
+		* @brief Destructor Function.
+		*/
+		~VertexBuffer() override = default;
+
+	private:
+
+		Unit::Buffer m_Buffer;            // @brief This Buffer.
+	};
+}
+
+#endif

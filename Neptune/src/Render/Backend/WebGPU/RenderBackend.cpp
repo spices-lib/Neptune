@@ -9,38 +9,27 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackend.h"
-#include "Infrastructure/InfrastructureHeader.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/Infrastructure/InfrastructureHeader.h"
 #include "RHI/RHIHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
-#include "Data/Clock.h"
 #include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::WebGPU {
 
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::WebGPU)
-    {
-        NEPTUNE_PROFILE_ZONE
-    }
+        , m_GraphicsBackend(CreateUP<GraphicsBackend>())
+    {}
 
     void RenderBackend::OnInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Context = CreateSP<Context>();
+        m_GraphicsBackend->OnInitialize();
         
-        m_Context->Registry<IInstance>();
-        m_Context->Registry<IDebugUtilsObject>();
-        m_Context->Registry<ISurface>();
-        m_Context->Registry<IAdapter>();
-        m_Context->Registry<IDevice>();
-        
-        m_Context->Registry<IQueue>();
-        
-        m_Context->Registry<IFuture>(MaxFrameInFlight);
-        
-        m_Context->Registry<ICommandEncoder>(MaxFrameInFlight);
+        GetContext().Registry<ISurface>();
 
         RenderFrontend::OnInitialize();
     }
@@ -51,74 +40,71 @@ namespace Neptune::WebGPU {
 
         RenderFrontend::OnShutDown();
 
-        m_Context->UnRegistry();
+        m_GraphicsBackend->OnShutDown();
     }
 
-    Context& RenderBackend::GetContext() const
-    {
-        return *m_Context;
-    }
-
-    void RenderBackend::BeginFrame(Scene* scene)
+    void RenderBackend::BeginFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
 
         auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
+        auto& context = m_GraphicsBackend->GetContext();
+        
         {
-            m_Context->Get<IFuture>()->Wait(clock.m_FrameIndex);
+            context.Get<IFuture>()->Wait(clock.m_FrameIndex);
         }
 
         {
-            m_Context->Get<ICommandEncoder>()->Begin(clock.m_FrameIndex);
+            context.Get<ICommandEncoder>()->Begin(clock.m_FrameIndex);
         }
     }
 
-    void RenderBackend::EndFrame(Scene* scene)
+    void RenderBackend::EndFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
 
         const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
+        auto& context = m_GraphicsBackend->GetContext();
+        
 		{
-			DEBUGUTILS_BEGINLABEL(m_Context->Get<IQueue>()->Handle(), "MainQueue")
+			DEBUGUTILS_BEGINLABEL(context.Get<IQueue>()->Handle(), "MainQueue")
 
-			m_Context->Get<IFuture>()->SetHandle(clock.m_FrameIndex, m_Context->Get<IQueue>()->Submit(m_Context->Get<ICommandEncoder>()->End(clock.m_FrameIndex)));
+			context.Get<IFuture>()->SetHandle(clock.m_FrameIndex, context.Get<IQueue>()->Submit(context.Get<ICommandEncoder>()->End(clock.m_FrameIndex)));
 
-			DEBUGUTILS_ENDLABEL(m_Context->Get<IQueue>()->Handle())
+			DEBUGUTILS_ENDLABEL(context.Get<IQueue>()->Handle())
 		}
         
         // Present ?
     }
 
-    void RenderBackend::Wait()
+    void RenderBackend::Wait() const
     {
         NEPTUNE_PROFILE_ZONE
         
-        m_Context->Get<IQueue>()->OnSubmittedWorkDone();
+        m_GraphicsBackend->Wait();
     }
 
-    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
+    GraphicsBackend::Context& RenderBackend::GetContext() const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        return m_GraphicsBackend->GetContext();
+    }
+    
+    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload) const
 	{
         NEPTUNE_PROFILE_ZONE
 
-        switch(e)
-		{
-			default:                          NEPTUNE_CORE_ERROR("WebGPU do not support this RHI.")          return nullptr;
-		}
+        return m_GraphicsBackend->CreateRHI(e, payload);
 	}
 
-    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure() const
 	{
         NEPTUNE_PROFILE_ZONE
-
-		std::unordered_map<std::string, std::any> infrastructure;
-
-        infrastructure["Device"]                     = m_Context->Get<IDevice>()->Handle();
-        infrastructure["RTVFormat"]                  = WGPUTextureFormat_RGBA8Unorm;
-        infrastructure["DSVFormat"]                  = WGPUTextureFormat_Undefined;
         
-		return infrastructure;
+		return m_GraphicsBackend->AccessInfrastructure();
 	}
 
 /*    void RenderBackend::RenderFrame()

@@ -9,26 +9,25 @@
 #ifdef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackend.h"
-#include "Infrastructure/InfrastructureHeader.h"
+#include "GPURuntime/Graphics/Backend/Vulkan/Infrastructure/InfrastructureHeader.h"
 #include "RHI/RHIHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
-#include "Data/Clock.h"
 #include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::WebGL {
 
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::WebGL)
-    {
-        NEPTUNE_PROFILE_ZONE
-    }
+        , m_GraphicsBackend(CreateUP<GraphicsBackend>())
+    {}
 
     void RenderBackend::OnInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_Context = CreateSP<Context>();
+        m_GraphicsBackend->OnInitialize();
 
         RenderFrontend::OnInitialize();
     }
@@ -39,7 +38,7 @@ namespace Neptune::WebGL {
 
         RenderFrontend::OnShutDown();
 
-        m_Context->UnRegistry();
+        m_GraphicsBackend->OnShutDown();
     }
 
     Context& RenderBackend::GetContext() const
@@ -47,40 +46,44 @@ namespace Neptune::WebGL {
         return *m_Context;
     }
 
-    void RenderBackend::BeginFrame(Scene* scene)
+    void RenderBackend::BeginFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
 
         const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
     }
 
-    void RenderBackend::EndFrame(Scene* scene)
+    void RenderBackend::EndFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
     }
 
-    void RenderBackend::Wait()
+    void RenderBackend::Wait() const
     {
         NEPTUNE_PROFILE_ZONE
+        
+        m_GraphicsBackend->Wait();
     }
 
-    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
+    GraphicsBackend::Context& RenderBackend::GetContext() const
+    {
+        NEPTUNE_PROFILE_ZONE
+    	
+        return m_GraphicsBackend->GetContext();
+    }
+    
+    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload) const
 	{
         NEPTUNE_PROFILE_ZONE
 
-        switch(e)
-		{
-			default:                          NEPTUNE_CORE_ERROR("WebGL do not support this RHI.")          return nullptr;
-		}
+        return m_GraphicsBackend->CreateRHI(e, payload);
 	}
 
-    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure()
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure() const
 	{
         NEPTUNE_PROFILE_ZONE
 
-		std::unordered_map<std::string, std::any> infrastructure;
-
-		return infrastructure;
+		return m_GraphicsBackend->AccessInfrastructure();
 	}
 }
 

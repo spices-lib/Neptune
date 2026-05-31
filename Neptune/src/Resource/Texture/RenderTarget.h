@@ -65,7 +65,7 @@ namespace Neptune {
 
 		void SetName(const std::string& name) { m_Name = name; }
 
-		bool CopyToRenderTarget(SP<RenderTarget> target);
+		bool CopyToRenderTarget(SP<RenderTarget> target) const;
 
 	private:
 

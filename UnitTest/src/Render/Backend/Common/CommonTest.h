@@ -7,8 +7,8 @@
 #pragma once
 #include "Instrumentor.h"
 
-#include <Render/Backend/Common/Unit/Unit.h>
-#include <Render/Backend/Common/Infrastructure/Infrastructure.h>
+#include <GPURuntime/Graphics/Backend/Common/Unit/Unit.h>
+#include <GPURuntime/Graphics/Backend/Common/Infrastructure/Infrastructure.h>
 #include <Core/Container/Tuple.h>
 
 #include <gmock/gmock.h>

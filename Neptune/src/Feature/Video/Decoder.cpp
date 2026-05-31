@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 #include "Decoder.h"
-#include "Render/Frontend/RHI/Decoder.h"
+#include "GPURuntime/Graphics/Frontend/RHI/Decoder.h"
 #include "Resource/Texture/RenderTarget.h"
 
 namespace Neptune::Video {

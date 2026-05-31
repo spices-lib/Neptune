@@ -1,0 +1,61 @@
+/**
+* @file Shader.h.
+* @brief The Shader Class Definitions.
+* @author Spices.
+*/
+
+#pragma once
+
+#ifdef NP_PLATFORM_WINDOWS
+
+#include "Core/Core.h"
+#include "GPURuntime/Graphics/Backend/Direct3D11/Infrastructure/Infrastructure.h"
+#include "GPURuntime/Graphics/Frontend/RHI/Shader.h"
+
+namespace Neptune::Direct3D11 {
+
+	/**
+	* @brief Direct3D11::Shader Class.
+	* This class defines the Direct3D11::Shader behaves.
+	*/
+	class Shader : public ContextAccessor, public RHI::RHIShader::Impl
+	{
+	public:
+
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		*/
+		explicit Shader(Context& context) : ContextAccessor(context) {}
+
+		/**
+		* @brief Destructor Function.
+		*/
+		~Shader() override = default;
+
+	public:
+
+		/**
+		* @brief Interface of Set Shader Source.
+		*
+		* @param[in] source Shader Source.
+		*/
+		void SetSource(const std::vector<uint8_t>& source) override;
+
+		/**
+		* @brief Interface of Set Shader Name.
+		*
+		* @param[in] name Shader Name.
+		*/
+		void SetName(const std::string& name) override;
+
+	public:
+
+
+	private:
+
+	};
+}
+
+#endif

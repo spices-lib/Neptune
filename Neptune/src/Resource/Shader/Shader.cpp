@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 #include "Shader.h"
-#include "Render/Frontend/RHI/Shader.h"
+#include "GPURuntime/Graphics/Frontend/RHI/Shader.h"
 
 #ifdef NP_PLATFORM_WINDOWS
 

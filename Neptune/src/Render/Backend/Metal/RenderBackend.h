@@ -10,6 +10,7 @@
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
+#include "GPURuntime/Graphics/Backend/Metal/GraphicsBackend.h"
 
 namespace Neptune {
 
@@ -19,8 +20,8 @@ namespace Neptune {
 namespace Neptune::Metal {
 
     /**
-    * @brief RenderBackend Class.
-    * This class defines the RenderBackend behaves.
+    * @brief Metal::RenderBackend Class.
+    * This class defines the Metal::RenderBackend behaves.
     */
     class RenderBackend : public RenderFrontend
     {
@@ -51,19 +52,19 @@ namespace Neptune::Metal {
         *
         * @param[in] scene Scene.
         */
-        void BeginFrame(Scene* scene) override;
+        void BeginFrame(Scene* scene) const override;
 
         /**
         * @brief Interface of End a frame.
         *
         * @param[in] scene Scene.
         */
-        void EndFrame(Scene* scene) override;
+        void EndFrame(Scene* scene) const override;
 
         /**
         * @brief Interface of Wait RenderBackend idle.
         */
-        void Wait() override;
+        void Wait() const override;
 
         /**
         * @brief Interface of CreateRHI.
@@ -73,10 +74,28 @@ namespace Neptune::Metal {
         *
         * @return Returns RHI::Impl
         */
-        std::any CreateRHI(RHI::ERHI e, void* payload) override;
+        std::any CreateRHI(RHI::ERHI e, void* payload) const override;
 
+        /**
+        * @brief Interface of Access Infrastructure.
+        *
+        * @return Returns Infrastructure.
+        */
+        std::unordered_map<std::string, std::any> AccessInfrastructure() const override;
+        
     private:
 
+        /**
+        * @brief Get Context.
+        * 
+        * @return Returns Context.
+        */
+        GraphicsBackend::Context& GetContext() const;
+        
+    private:
+
+        UP<GraphicsBackend> m_GraphicsBackend; // @brief This GraphicsBackend.
+        
     };
 }
 

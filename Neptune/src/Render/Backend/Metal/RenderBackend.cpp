@@ -9,19 +9,25 @@
 #ifdef NP_PLATFORM_MACOS
 
 #include "RenderBackend.h"
+#include "GPURuntime/Graphics/Backend/Metal/Infrastructure/InfrastructureHeader.h"
+#include "Window/Window.h"
+#include "World/Scene/Scene.h"
+#include "World/Component/Component.h"
+#include "Data/Clock.h"
 
 namespace Neptune::Metal {
 
     RenderBackend::RenderBackend()
         : RenderFrontend(RenderBackendEnum::Metal)
-    {
-        NEPTUNE_PROFILE_ZONE
-    }
+        , m_GraphicsBackend(CreateUP<GraphicsBackend>())
+    {}
 
     void RenderBackend::OnInitialize()
     {
         NEPTUNE_PROFILE_ZONE
 
+        m_GraphicsBackend->OnInitialize();
+        
         RenderFrontend::OnInitialize();
     }
 
@@ -30,29 +36,45 @@ namespace Neptune::Metal {
         NEPTUNE_PROFILE_ZONE
 
         RenderFrontend::OnShutDown();
+        
+        m_GraphicsBackend->OnShutDown();
     }
 
-    void RenderBackend::BeginFrame(Scene* scene)
+    void RenderBackend::BeginFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
     }
 
-    void RenderBackend::EndFrame(Scene* scene)
+    void RenderBackend::EndFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
     }
 
-    void RenderBackend::Wait()
+    void RenderBackend::Wait() const
     {
         NEPTUNE_PROFILE_ZONE
     }
+    
+    GraphicsBackend::Context& RenderBackend::GetContext() const
+    {
+        NEPTUNE_PROFILE_ZONE
+    	
+        return m_GraphicsBackend->GetContext();
+    }
 
-    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload)
+    std::any RenderBackend::CreateRHI(RHI::ERHI e, void* payload) const
 	{
         NEPTUNE_PROFILE_ZONE
 
-        return nullptr;
+        return m_GraphicsBackend->CreateRHI(e, payload);
 	}
+    
+    std::unordered_map<std::string, std::any> RenderBackend::AccessInfrastructure() const
+    {
+        NEPTUNE_PROFILE_ZONE
+
+        return m_GraphicsBackend->AccessInfrastructure();
+    }
 }
 
 #endif

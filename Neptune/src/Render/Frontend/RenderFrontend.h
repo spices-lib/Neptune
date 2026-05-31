@@ -8,7 +8,7 @@
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
 #include "Core/Event/Event.h"
-#include "RHI/RHI.h"
+#include "GPURuntime/Graphics/Frontend/RHI/RHI.h"
 #include "Enum.h"
 
 #include <vector>
@@ -61,19 +61,19 @@ namespace Neptune {
         * 
         * @param[in] scene Scene.
         */
-        virtual void BeginFrame(class Scene* scene) = 0;
+        virtual void BeginFrame(class Scene* scene) const = 0;
 
         /**
         * @brief Interface of End a frame.
         * 
         * @param[in] scene Scene.
         */
-        virtual void EndFrame(class Scene* scene) = 0;
+        virtual void EndFrame(class Scene* scene) const = 0;
 
         /**
         * @brief Interface of Wait RenderBackend idle.
         */
-        virtual void Wait() = 0;
+        virtual void Wait() const = 0;
 
         /**
         * @brief Interface of CreateRHI.
@@ -83,14 +83,14 @@ namespace Neptune {
         * 
         * @return Returns RHI::Impl
         */
-        virtual std::any CreateRHI(RHI::ERHI e, void* payload) = 0;
+        virtual std::any CreateRHI(RHI::ERHI e, void* payload) const = 0;
 
         /**
         * @brief Interface of Access Infrastructure.
         *
         * @return Returns Infrastructure.
         */
-        virtual std::unordered_map<std::string, std::any> AccessInfrastructure() = 0;
+        virtual std::unordered_map<std::string, std::any> AccessInfrastructure() const = 0;
 
         /**
         * @brief Render a frame.
@@ -123,7 +123,7 @@ namespace Neptune {
         /**
         * @brief Recreate SwapChain.
         */
-        virtual void RecreateSwapChain();
+        virtual void RecreateSwapChain() const;
 
     private:
 
