@@ -22,24 +22,9 @@ namespace Neptune::Container {
     class BitSet
     {
     public:
-
-        /**
-        * @brief Size Type of T.
-        */
-        using TSize = std::underlying_type_t<T>;
-
-    private:
-
-        /**
-        * @brief Stored bitset.
-        */
-        std::bitset<static_cast<size_t>(T::Count)> m_Bits{};
-
-        /**
-        * @brief Mutex.
-        */
-        mutable std::shared_mutex m_Mutex;
-
+        
+        using TSize = std::underlying_type_t<T>; // @brief Size Type of T.
+        
     public:
 
         /**
@@ -363,6 +348,11 @@ namespace Neptune::Container {
 
             return m_Bits.none();
         }
+        
+    private:
+        
+        std::bitset<static_cast<size_t>(T::Count)> m_Bits{};  // @brief Stored bitset.
+        mutable std::shared_mutex m_Mutex;                    // @brief Mutex.
 
     };
 

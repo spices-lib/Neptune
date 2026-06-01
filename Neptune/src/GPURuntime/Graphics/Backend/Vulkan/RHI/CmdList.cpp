@@ -32,19 +32,11 @@ namespace Neptune::Vulkan {
 		m_BindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
 	}
 
-	void CmdList::CmdDrawSlate() const
+	void* CmdList::GetCommandList() const
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		/*const ImGuiIO& io = ImGui::GetIO();
-
-		ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), m_CommandBuffer->GetHandle());
-
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-		}*/
+		return m_CommandBuffer->GetHandle();
 	}
 
 	void CmdList::CmdBeginRenderPass() const

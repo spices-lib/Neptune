@@ -47,6 +47,13 @@ namespace Neptune::Direct3D12 {
 		NEPTUNE_PROFILE_ZONE
 
 	}
+	
+	void* CmdList2::GetCommandList() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		return nullptr;
+	}
 
 }
 

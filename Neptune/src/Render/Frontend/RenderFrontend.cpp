@@ -24,10 +24,10 @@
 #include "Render/Backend/Vulkan/RenderBackend.h"
 #endif
 
-#include "GPURuntime/Graphics/Frontend/Pass/BasePass.h"
-#include "GPURuntime/Graphics/Frontend/Pass/SlatePass.h"
-#include "GPURuntime/Graphics/Frontend/Pass/PrePass.h"
-#include "GPURuntime/Graphics/Frontend/Pass/Pass.h"
+#include "Render/Frontend/Pass/BasePass.h"
+#include "Render/Frontend/Pass/SlatePass.h"
+#include "Render/Frontend/Pass/PrePass.h"
+#include "Render/Frontend/Pass/Pass.h"
 #include "GPURuntime/Graphics/Frontend/RHI/RHI.h"
 #include "Window/Window.h"
 #include "Core/Event/WindowEvent.h"
@@ -132,6 +132,8 @@ namespace Neptune {
         {
             auto pass = CreateSP<Render::SlatePass>();
 
+            pass->SetDelegateDrawSlate(m_RenderDelegate.onDrawSlate);
+            
             AddPass(pass);
         }
     }
@@ -142,9 +144,11 @@ namespace Neptune {
 
         m_RenderPasses.pop_back();
 
-        auto slatePass = CreateSP<Render::SlatePass>();
+        auto pass = CreateSP<Render::SlatePass>();
 
-        AddPass(slatePass);
+        pass->SetDelegateDrawSlate(m_RenderDelegate.onDrawSlate);
+        
+        AddPass(pass);
     }
 
     void RenderFrontend::AddPass(SP<Render::Pass> pass)

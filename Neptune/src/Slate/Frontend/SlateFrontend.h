@@ -47,23 +47,39 @@ namespace Neptune {
         * 
         * @param[in] infrastructure RenderFrontend Infrastructure.
         */
-		virtual void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) = 0;
+		virtual void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const = 0;
 
         /**
         * @brief Interface of ShutDown.
         */
-		virtual void OnShutDown() = 0;
+		virtual void OnShutDown() const = 0;
 
         /**
         * @brief Interface of Begin a frame.
         */
-        virtual void BeginFrame() = 0;
+        virtual void BeginFrame() const = 0;
+
+		/**
+	    * @brief Interface of On Layout.
+	    * 
+	    * @TODO: Remove it, for debug used.
+	    */
+		virtual void OnLayout() const = 0;
 
         /**
         * @brief Interface of End a frame.
         */
-        virtual void EndFrame() = 0;
+        virtual void EndFrame() const = 0;
 
+		/**
+		* @brief Interface of Render a frame.
+		* 
+		* @param[in] payload RenderFrontend Payload.
+		* 
+		* @note Order: BeginFrame -> EndFrame -> RenderFrame
+		*/
+		virtual void RenderFrame(void* payload = nullptr) const = 0;
+		
     protected:
 
         /**

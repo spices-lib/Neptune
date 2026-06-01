@@ -129,6 +129,13 @@ namespace Neptune::Vulkan {
 		m_OpticalFlowSession = opticalFlowSession;
 	}
 
+	void* CmdList2::GetCommandList() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		return m_CommandBuffer->GetHandle();
+	}
+	
 	void CmdList2::CmdBeginVideoCoding(const VkVideoBeginCodingInfoKHR& info) const
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -175,6 +182,7 @@ namespace Neptune::Vulkan {
 
 		m_CommandBuffer->OpticalFlowExecute(GetContext().Get<IFunctions>()->vkCmdOpticalFlowExecuteNV, m_OpticalFlowSession->Handle(), info);
 	}
+	
 }
 
 #endif

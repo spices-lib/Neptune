@@ -25,7 +25,7 @@ namespace Neptune::imgui {
         , m_WindowImplement(windowImpl)
     {}
 
-    void SlateBackend::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure)
+    void SlateBackend::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
     {
         NEPTUNE_PROFILE_ZONE
         
@@ -43,7 +43,7 @@ namespace Neptune::imgui {
         m_RenderInterface->OnInitialize(infrastructure);
     }
 
-    void SlateBackend::OnShutDown()
+    void SlateBackend::OnShutDown() const
     {
         NEPTUNE_PROFILE_ZONE
         
@@ -53,7 +53,7 @@ namespace Neptune::imgui {
 		ImGui::DestroyContext();
     }
 
-    void SlateBackend::BeginFrame()
+    void SlateBackend::BeginFrame() const
     {
         NEPTUNE_PROFILE_ZONE
         
@@ -117,7 +117,25 @@ namespace Neptune::imgui {
         ImGui::End();
     }
 
-    void SlateBackend::EndFrame()
-    {}
+    void SlateBackend::OnLayout() const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        ImGui::ShowDemoWindow();
+    }
+    
+    void SlateBackend::EndFrame() const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        ImGui::Render();
+    }
+    
+    void SlateBackend::RenderFrame(void* payload) const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        m_RenderInterface->RenderFrame(payload);
+    }
 
 }

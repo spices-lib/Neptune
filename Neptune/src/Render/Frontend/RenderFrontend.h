@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Core/NonCopyable.h"
+#include "RenderDelegate.h"
 #include "Core/Event/Event.h"
 #include "GPURuntime/Graphics/Frontend/RHI/RHI.h"
 #include "Enum.h"
@@ -96,6 +97,8 @@ namespace Neptune {
         * @brief Render a frame.
         *
         * @param[in] scene Scene.
+        * 
+        * @note Order: BeginFrame -> RenderFrame -> EndFrame
         */
         void RenderFrame(class Scene* scene);
 
@@ -111,6 +114,13 @@ namespace Neptune {
         */
         void ConstructSlatePass();
 
+        /**
+        * @brief Get RenderDelegate.
+        * 
+        * @return Returns RenderDelegate.
+        */
+        RenderDelegate& GetRenderDelegate() { return m_RenderDelegate; } 
+        
     protected:
 
         /**
@@ -138,5 +148,6 @@ namespace Neptune {
 
         RenderBackendEnum m_RenderBackendEnum;                 // @brief RenderBackendEnum.
         std::vector<SP<Render::Pass>> m_RenderPasses;          // @brief Container of Passes.
+        RenderDelegate m_RenderDelegate;                       // @brief RenderDelegate.
     };
 }

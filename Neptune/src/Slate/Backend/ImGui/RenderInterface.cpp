@@ -77,6 +77,21 @@ namespace Neptune::imgui {
 		ImGui_ImplOpenGL3_NewFrame();
 	}
 
+	void OpenGLInterface::RenderFrame(void* payload) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		const ImGuiIO& io = ImGui::GetIO();
+
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
+	}
+	
 	void VulkanInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -116,6 +131,21 @@ namespace Neptune::imgui {
 		ImGui_ImplVulkan_NewFrame();
 	}
 
+	void VulkanInterface::RenderFrame(void* payload) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		const ImGuiIO& io = ImGui::GetIO();
+
+		ImGui_ImplVulkan_RenderDrawData(ImGui::GetDrawData(), static_cast<VkCommandBuffer>(payload));
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
+	}
+	
 #endif
 
 #ifdef NP_PLATFORM_WINDOWS
@@ -142,6 +172,21 @@ namespace Neptune::imgui {
 		NEPTUNE_PROFILE_ZONE
 
 		ImGui_ImplDX11_NewFrame();
+	}
+	
+	void Direct3D11Interface::RenderFrame(void* payload) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		const ImGuiIO& io = ImGui::GetIO();
+
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
 	}
 	
 	void Direct3D12Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
@@ -180,6 +225,21 @@ namespace Neptune::imgui {
 
 		ImGui_ImplDX12_NewFrame();
 	}
+	
+	void Direct3D12Interface::RenderFrame(void* payload) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		const ImGuiIO& io = ImGui::GetIO();
+		
+		ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), static_cast<ID3D12GraphicsCommandList*>(payload));
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
+	}
 
 #endif
 	
@@ -212,6 +272,21 @@ namespace Neptune::imgui {
 		ImGui_ImplWGPU_NewFrame();
 	}
 
+	void WebGPUInterface::RenderFrame(void* payload) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		const ImGuiIO& io = ImGui::GetIO();
+		
+		ImGui_ImplWGPU_RenderDrawData(ImGui::GetDrawData(), static_cast<WGPURenderPassEncoder>(payload));
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
+	}
+	
 #endif
 	
 }

@@ -49,6 +49,14 @@ namespace Neptune {
                 });
             }
         }
+        
+        {
+            m_SlateFrontend->BeginFrame();
+        
+            m_SlateFrontend->OnLayout();
+            
+            m_SlateFrontend->EndFrame();
+        }
     }
 
     void LogicalSystem::OnEvent(Event& event)
@@ -87,6 +95,8 @@ namespace Neptune {
             auto renderSystem = static_cast<RenderSystem*>(GetSystem(ESystem::Render));
 
             m_SlateFrontend->OnInitialize(renderSystem->GetRenderFrontend()->AccessInfrastructure());
+            
+            renderSystem->GetRenderFrontend()->GetRenderDelegate().onDrawSlate.Bind([p = m_SlateFrontend.get()](void* payload){ p->RenderFrame(payload); });
         }
 
         if (e.Has(EngineEventBit::ShutdownSlateFrontend))

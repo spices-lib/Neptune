@@ -61,16 +61,18 @@ namespace Neptune::Vulkan {
 		void SetGraphicCmdList(const Data::Clock& clock) override;
 
 		/**
+		* @brief Interface of Get Current CommandList.
+		* 
+		* @return Returns Current CommandList.
+		*/
+		void* GetCommandList() const override;
+		
+		/**
 		* @brief Interface of Set RenderPass Reference.
 		*
 		* @param[in] renderPass RenderPass.
 		*/
 		void SetRenderPass(const SP<RHI::RenderPass>& renderPass) override;
-
-		/**
-		* @brief Interface of DrawSlate.
-		*/
-		void CmdDrawSlate() const override;
 
 		/**
 		* @brief Interface of BeginRenderPass.

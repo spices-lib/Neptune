@@ -21,23 +21,6 @@ namespace Neptune::Container {
     template<typename T>
     class Tree
     {
-    private:
-
-        /**
-        * @brief Children node.
-        */
-        std::vector<std::unique_ptr<Tree>> m_Child {};
-
-        /**
-        * @brief This node stored data.
-        */
-        T m_Data;
-
-        /**
-        * @brief Mutex.
-        */
-        mutable std::shared_mutex m_Mutex;
-
     public:
 
         /**
@@ -168,7 +151,13 @@ namespace Neptune::Container {
         template<typename F>
         requires std::is_same_v<std::invoke_result_t<F, T, uint32_t>, bool>
         bool ViewWSFImpl(F&& fn) const;
+
+    private:
         
+        std::vector<std::unique_ptr<Tree>> m_Child {};  // @brief Children node.
+        T m_Data;                                       // @brief This node stored data.
+        mutable std::shared_mutex m_Mutex;              // @brief Mutex.
+
     };
 
     template <typename T>

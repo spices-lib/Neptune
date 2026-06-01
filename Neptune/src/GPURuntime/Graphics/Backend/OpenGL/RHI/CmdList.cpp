@@ -21,10 +21,11 @@ namespace Neptune::OpenGL {
 		m_ImageIndex = clock.m_ImageIndex;
 	}
 
-	void CmdList::CmdDrawSlate() const
+	void* CmdList::GetCommandList() const
 	{
 		NEPTUNE_PROFILE_ZONE
 		
+		return nullptr;
 	}
 
 	void CmdList::CmdBeginRenderPass() const

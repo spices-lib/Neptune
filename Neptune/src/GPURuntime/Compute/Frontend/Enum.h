@@ -15,6 +15,7 @@ namespace Neptune {
     enum class ComputeBackendEnum : uint8_t
     {
         OpenCL = 0,            // @brief Limited Cross Platform
+        SYCL,                  // @brief Limited Cross Platform
         CUDA,                  // @brief Limited Desktop
 
         Count

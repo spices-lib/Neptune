@@ -38,7 +38,7 @@ namespace Neptune::Render {
 
 		cmdList.CmdBeginRenderPass();
 
-		cmdList.CmdDrawSlate();
+		m_OnDelegateDrawSlate.Broadcast(cmdList.GetCommandList());
 
 		cmdList.CmdEndRenderPass();
 	}

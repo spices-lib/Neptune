@@ -74,6 +74,13 @@ namespace Neptune::Vulkan {
 		*/
 		void SetOpticalFlowCmdList() override;
 
+		/**
+		* @brief Interface of Get Current CommandList.
+		* 
+		* @return Returns Current CommandList.
+		*/
+		void* GetCommandList() const override;
+		
 	public:
 
 		/**

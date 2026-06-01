@@ -39,22 +39,34 @@ namespace Neptune::imgui {
         * 
         * @param[in] infrastructure RenderFrontend Infrastructure.
         */
-		void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) override;
+		void OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const override;
 
         /**
         * @brief Interface of ShutDown.
         */
-		void OnShutDown() override;
+		void OnShutDown() const override;
 
         /**
         * @brief Interface of Begin a frame.
         */
-        void BeginFrame() override;
+        void BeginFrame() const override;
 
+		/**
+		* @brief Interface of On Layout.
+		*/
+		void OnLayout() const override;
+		
         /**
         * @brief Interface of End a frame.
         */
-        void EndFrame() override;
+        void EndFrame() const override;
+
+		/**
+		* @brief Interface of Render a frame.
+		* 
+		* @param[in] payload RenderFrontend Payload.
+		*/
+		void RenderFrame(void* payload = nullptr) const override;
 
 	private:
 

@@ -67,6 +67,13 @@ namespace Neptune::Direct3D12 {
 		*/
 		void SetOpticalFlowCmdList() override;
 
+		/**
+		* @brief Interface of Get Current CommandList.
+		* 
+		* @return Returns Current CommandList.
+		*/
+		void* GetCommandList() const override;
+		
 	};
 }
 

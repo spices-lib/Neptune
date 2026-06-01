@@ -48,6 +48,13 @@ namespace Neptune::RHI {
 		*/
 		virtual void SetGraphicCmdList(const Data::Clock& clock) = 0;
 
+		/**
+		* @brief Interface of Get Current CommandList.
+		* 
+		* @return Returns Current CommandList.
+		*/
+		virtual void* GetCommandList() const = 0;
+		
 		/***********************************************************************************/
 
 		/********************************* Reference ***************************************/
@@ -62,11 +69,6 @@ namespace Neptune::RHI {
 		/***********************************************************************************/
 
 		/********************************* Commands ****************************************/
-
-		/**
-		* @brief Interface of DrawSlate.
-		*/
-		virtual void CmdDrawSlate() const = 0;
 
 		/**
 		* @brief Interface of BeginRenderPass.
@@ -132,16 +134,18 @@ namespace Neptune::RHI {
 		void SetGraphicCmdList(const Data::Clock& clock) const { m_Impl->SetGraphicCmdList(clock); }
 
 		/**
+		* @brief Interface of Get Current CommandList.
+		* 
+		* @return Returns Current CommandList.
+		*/
+		void* GetCommandList() const { return m_Impl->GetCommandList(); }
+		
+		/**
 		* @brief Interface of Set RenderPass Reference.
 		*
 		* @param[in] renderPass RenderPass.
 		*/
 		void SetRenderPass(const SP<class RenderPass>& renderPass) const { m_Impl->SetRenderPass(renderPass); }
-
-		/**
-		* @brief Interface of DrawSlate.
-		*/
-		void CmdDrawSlate() const { m_Impl->CmdDrawSlate(); }
 
 		/**
 		* @brief Interface of BeginRenderPass.

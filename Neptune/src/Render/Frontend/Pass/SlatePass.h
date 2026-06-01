@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Core/Core.h"
+#include "Render/Frontend/RenderDelegate.h"
 #include "Pass.h"
 
 namespace Neptune::RHI {
@@ -53,8 +54,16 @@ namespace Neptune::Render {
 		*/
 		SP<RHI::RenderPass> GetRenderPass() { return m_RenderPass; }
 
+		/**
+		* @brief Set DelegateDrawSlate.
+		*
+		* @param[in] delegate DelegateDrawSlate.
+		*/
+		void SetDelegateDrawSlate(const DelegateDrawSlate& delegate) { m_OnDelegateDrawSlate = delegate; }
+		
 	private:
 
-		SP<RHI::RenderPass> m_RenderPass;      // @brief This RenderPass.
+		SP<RHI::RenderPass> m_RenderPass;          // @brief This RenderPass
+		DelegateDrawSlate m_OnDelegateDrawSlate;   // @brief DelegateDrawSlate
 	};
 }

@@ -14,13 +14,6 @@ namespace Neptune::Container {
     */
     class SpinLock
     {
-    private:
-
-        /**
-        * @brief Spin Lock atomic flag.
-        */
-        std::atomic_flag m_Flag = ATOMIC_FLAG_INIT;
-
     public:
 
         /**
@@ -62,6 +55,10 @@ namespace Neptune::Container {
         {
             m_Flag.clear(std::memory_order_release);
         }
+        
+    private:
+        
+        std::atomic_flag m_Flag = ATOMIC_FLAG_INIT;  // @brief Spin Lock atomic flag.
 
     };
 
