@@ -37,6 +37,25 @@ namespace Neptune::WebGPU {
 		*/
 		~DebugUtilsObject() override = default;
 
+    	/**
+		* @brief Begin Label.
+		* 
+		* @param[in] caption Label String.
+		*/
+    	void BeginLabel(const std::string& caption) const;
+
+    	/**
+		* @brief End Label.
+		*/
+    	void EndLabel() const;
+
+    	/**
+		* @brief Insert Label.
+		*
+		* @param[in] caption Label String.
+		*/
+    	void InsertLabel(const std::string& caption) const;
+    	
 		/**
 		* @brief Set Unit Name.
 		*
@@ -50,8 +69,9 @@ namespace Neptune::WebGPU {
 
 #ifdef NEPTUNE_DEBUG
 
-#define DEBUGUTILS_BEGINLABEL(...)                 
-#define DEBUGUTILS_ENDLABEL(...)                   
+#define DEBUGUTILS_BEGINLABEL(...)                 { GetContext().Get<IDebugUtilsObject>()->BeginLabel       (__VA_ARGS__)	; }
+#define DEBUGUTILS_ENDLABEL(...)                   { GetContext().Get<IDebugUtilsObject>()->EndLabel         (__VA_ARGS__)	; }
+#define DEBUGUTILS_INSERTLABEL(...)                { GetContext().Get<IDebugUtilsObject>()->InsertLabel      (__VA_ARGS__)	; }
 #define DEBUGUTILS_SETOBJECTNAME(...)              { GetContext().Get<IDebugUtilsObject>()->SetObjectName    (__VA_ARGS__)	; }
 
 #endif
@@ -60,6 +80,7 @@ namespace Neptune::WebGPU {
 
 #define DEBUGUTILS_BEGINLABEL(...)      
 #define DEBUGUTILS_ENDLABEL(...)         
+#define DEBUGUTILS_INSERTLABEL(...)
 #define DEBUGUTILS_SETOBJECTNAME(...)                
 
 #endif

@@ -103,7 +103,7 @@ namespace Neptune::RHI {
 		*
 		* @param[in] info RenderTargetCreateInfo.
 		*/
-		void CreateRenderTarget(const RenderTargetCreateInfo& info) { m_Impl->CreateRenderTarget(info); }
+		void CreateRenderTarget(const RenderTargetCreateInfo& info) const { m_Impl->CreateRenderTarget(info); }
 
 		/**
 		* @brief Interface of Create BindingID.

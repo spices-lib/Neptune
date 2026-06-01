@@ -12,7 +12,22 @@
 
 namespace Neptune::WebGPU {
 
+	void DebugUtilsObject::BeginLabel(const std::string& caption) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+	}
 	
+	void DebugUtilsObject::EndLabel() const
+	{
+		NEPTUNE_PROFILE_ZONE
+	}
+	
+	void DebugUtilsObject::InsertLabel(const std::string& caption) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+	}
 
 }
 
