@@ -69,9 +69,9 @@ namespace Neptune::WebGPU {
 
 #ifdef NEPTUNE_DEBUG
 
-#define DEBUGUTILS_BEGINLABEL(...)                 { GetContext().Get<IDebugUtilsObject>()->BeginLabel       (__VA_ARGS__)	; }
-#define DEBUGUTILS_ENDLABEL(...)                   { GetContext().Get<IDebugUtilsObject>()->EndLabel         (__VA_ARGS__)	; }
-#define DEBUGUTILS_INSERTLABEL(...)                { GetContext().Get<IDebugUtilsObject>()->InsertLabel      (__VA_ARGS__)	; }
+#define DEBUGUTILS_BEGINLABEL(...)                 
+#define DEBUGUTILS_ENDLABEL(...)                   
+#define DEBUGUTILS_INSERTLABEL(...)               
 #define DEBUGUTILS_SETOBJECTNAME(...)              { GetContext().Get<IDebugUtilsObject>()->SetObjectName    (__VA_ARGS__)	; }
 
 #endif

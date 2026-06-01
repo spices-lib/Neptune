@@ -10,7 +10,7 @@
 
 namespace Neptune {
 
-    DELEGATE_ONE_PARAM(DrawSlate, void*)
+    DELEGATE(DrawSlate, void*)
 
     /**
     * @brief Delegate for RenderFrontend.

@@ -132,125 +132,17 @@ namespace Neptune {
 			return false;
 		});
 	}
-	
-/**
-* @brief Use this macro to instance a Delegate Class.
-* None Parameter Specific.
-*/
-#define DELEGATE_NONE_PARAM(name)                                      \
-	class Delegate##name : public Neptune::Delegate_Basic<>            \
-	{                                                                  \
-	public:                                                            \
-		Delegate##name() : Neptune::Delegate_Basic<>() {}              \
-		virtual ~Delegate##name() = default;                           \
-	};
 
 /**
 * @brief Use this macro to instance a Delegate Class.
-* One Parameter Specific.
+* Any Parameter Specific.
 */
-#define DELEGATE_ONE_PARAM(name, p0)                                       \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0>            \
+#define DELEGATE(name, ...)                                                \
+	class Delegate##name : public Neptune::Delegate_Basic<__VA_ARGS__>     \
 	{                                                                      \
 	public:                                                                \
-		Delegate##name() : Neptune::Delegate_Basic<##p0>() {}              \
+		Delegate##name() : Neptune::Delegate_Basic<__VA_ARGS__>() {}       \
 		virtual ~Delegate##name() = default;                               \
 	}; 
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Two Parameter Specific.
-*/
-#define DELEGATE_TWO_PARAM(name, p0, p1)                                                 \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1>                    \
-	{                                                                                    \
-	public:                                                                              \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1>() {}                      \
-		virtual ~Delegate##name() = default;                                             \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Three Parameter Specific.
-*/
-#define DELEGATE_THREE_PARAM(name, p0, p1, p2)                                                 \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2>                    \
-	{                                                                                          \
-	public:                                                                                    \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2>() {}                      \
-		virtual ~Delegate##name() = default;                                                   \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Four Parameter Specific.
-*/
-#define DELEGATE_FOUR_PARAM(name, p0, p1, p2, p3)                                                    \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3>                    \
-	{                                                                                                \
-	public:                                                                                          \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3>() {}                      \
-		virtual ~Delegate##name() = default;                                                         \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Five Parameter Specific.
-*/
-#define DELEGATE_FIVE_PARAM(name, p0, p1, p2, p3, p4)                                                      \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4>                    \
-	{                                                                                                      \
-	public:                                                                                                \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4>() {}                      \
-		virtual ~Delegate##name() = default;                                                               \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Six Parameter Specific.
-*/
-#define DELEGATE_SIX_PARAM(name, p0, p1, p2, p3, p4, p5)                                                         \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5>                    \
-	{                                                                                                            \
-	public:                                                                                                      \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5>() {}                      \
-		virtual ~Delegate##name() = default;                                                                     \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Seven Parameter Specific.
-*/
-#define DELEGATE_SEVEN_PARAM(name, p0, p1, p2, p3, p4, p5, p6)                                                         \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6>                    \
-	{                                                                                                                  \
-	public:                                                                                                            \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6>() {}                      \
-		virtual ~Delegate##name() = default;                                                                           \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Eight Parameter Specific.
-*/
-#define DELEGATE_EIGHT_PARAM(name, p0, p1, p2, p3, p4, p5, p6, p7)                                                           \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7>                    \
-	{                                                                                                                        \
-	public:                                                                                                                  \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7>() {}                      \
-		virtual ~Delegate##name() = default;                                                                                 \
-	};
-
-/**
-* @brief Use this macro to instance a Delegate Class.
-* Nine Parameter Specific.
-*/
-#define DELEGATE_NINE_PARAM(name, p0, p1, p2, p3, p4, p5, p6, p7, p8)                                                              \
-	class Delegate##name : public Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7, ##p8>                    \
-	{                                                                                                                              \
-	public:                                                                                                                        \
-		Delegate##name() : Neptune::Delegate_Basic<##p0, ##p1, ##p2, ##p3, ##p4, ##p5, ##p6, ##p7, ##p8>() {}                      \
-		virtual ~Delegate##name() = default;                                                                                       \
-	};
 
 }
