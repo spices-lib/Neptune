@@ -22,7 +22,7 @@ namespace Neptune::OpenGL {
         HandleResultDelegate::SetHandler([&](GLenum result) { HandleResult(result); });
     }
 
-    void GraphicsBackend::OnInitialize()
+    void GraphicsBackend::OnInitialize(const Window* window)
     {
         NEPTUNE_PROFILE_ZONE
 

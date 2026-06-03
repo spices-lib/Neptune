@@ -169,10 +169,9 @@ namespace Neptune::Render::Common {
 
         const auto position = static_cast<uint8_t>(I::E);
 
-        if (m_Infrastructures[position])
-        {
-            m_Infrastructures[position].reset();
-        }
+        if (!m_Infrastructures[position]) return;
+
+        m_Infrastructures[position].reset();
     }
 
     template<typename E> requires IsEnum<E>
@@ -184,10 +183,9 @@ namespace Neptune::Render::Common {
         {
             for (int i = static_cast<int>(E::Count) - 1; i >= 0; --i)
             {
-                if (m_Infrastructures[i])
-                {
-                    m_Infrastructures[i].reset();
-                }
+                if (!m_Infrastructures[i]) continue;
+
+                m_Infrastructures[i].reset();
             }
         } 
     }

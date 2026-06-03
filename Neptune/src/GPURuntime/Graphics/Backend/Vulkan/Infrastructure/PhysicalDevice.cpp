@@ -31,7 +31,7 @@ namespace Neptune::Vulkan {
         const auto instance = GetContext().Get<IInstance>()->Handle();
 
         uint32_t deviceCount = 0;
-        vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+        VK_CHECK(vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr))
 
         if (deviceCount == 0) 
 		{
@@ -40,14 +40,16 @@ namespace Neptune::Vulkan {
 		}
 
         std::vector<VkPhysicalDevice> PhysicalDevices(deviceCount);
-        vkEnumeratePhysicalDevices(instance, &deviceCount, PhysicalDevices.data());
+        VK_CHECK(vkEnumeratePhysicalDevices(instance, &deviceCount, PhysicalDevices.data()))
 
+		auto* surface = GetContext().Has<ISurface>() ? GetContext().Get<ISurface>()->Handle() : nullptr;
+		
 		// Iter all physical and select one suitable.
 		for (const auto& physicalDevice : PhysicalDevices)
 		{
 			// All this condition need satisfied.
 			if (IsExtensionMeetDemand(physicalDevice) && IsPropertyMeetDemand(physicalDevice) && IsFeatureMeetDemand(physicalDevice) &&
-				IsQueueMeetDemand(physicalDevice, GetContext().Get<ISurface>()->Handle()))
+				IsQueueMeetDemand(physicalDevice, surface))
 			{
 				m_PhysicalDevice.SetHandle(physicalDevice);
 
@@ -64,10 +66,10 @@ namespace Neptune::Vulkan {
 		NEPTUNE_PROFILE_ZONE
 
 		uint32_t extensionCount;
-		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+		VK_CHECK(vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr))
 
 		std::vector<VkExtensionProperties> availableExtensions(extensionCount);
-		vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
+		VK_CHECK(vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data()))
 
 		auto requiredList = GetExtensionRequirements();
 		std::set<std::string> requiredExtensions(requiredList.begin(), requiredList.end());
@@ -141,18 +143,27 @@ namespace Neptune::Vulkan {
 		std::vector<VkQueueFamilyProperties2> queueFamilies(queueFamilyCount,{ VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 });
 		vkGetPhysicalDeviceQueueFamilyProperties2(device, &queueFamilyCount, queueFamilies.data());
 
-		for (uint32_t i = 0; i < queueFamilyCount; i++) 
+		for (int i = 0; i < queueFamilyCount; ++i)
 		{
 			const auto& queueFamily = queueFamilies[i];
-
-			if (queueFamily.queueFamilyProperties.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			
+			if (queueFamily.queueFamilyProperties.queueFlags & VK_QUEUE_GRAPHICS_BIT && (!m_QueueFamilies.graphic || !m_QueueFamilies.present))
 			{
+				// Get graphic queue identify.
 				m_QueueFamilies.graphic = i;
+				
+				if (surface)
+				{
+					VkBool32 presentSupport = false;
+					VK_CHECK(vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport))
 
-				VkBool32 presentSupport = false;
-				VK_CHECK(vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport))
-
-				if (presentSupport) 
+					// Get present queue identify.
+					if (presentSupport) 
+					{
+						m_QueueFamilies.present = i;
+					}
+				}
+				else
 				{
 					m_QueueFamilies.present = i;
 				}
@@ -190,7 +201,7 @@ namespace Neptune::Vulkan {
 				}
 			}
 
-			if (m_QueueFamilies.isComplete()) return true;
+			if (m_QueueFamilies.IsComplete()) return true;
 		}
 
 		return false;

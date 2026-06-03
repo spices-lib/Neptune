@@ -33,7 +33,7 @@ namespace Neptune::Vulkan {
 		* @param[in] e EInfrastructure.
 		* @param[in] windodExtensions Windod Extensions.
 		*/
-		Instance(Context& context, EInfrastructure e, const std::vector<const char*>&  windodExtensions);
+		Instance(Context& context, EInfrastructure e, const std::vector<const char*>& windodExtensions = {});
 
 		/**
 		* @brief Destructor Function.

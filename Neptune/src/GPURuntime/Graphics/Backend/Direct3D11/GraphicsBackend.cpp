@@ -22,7 +22,7 @@ namespace Neptune::Direct3D11 {
         HandleResultDelegate::SetHandler([&](HRESULT result) { HandleResult(result); });
     }
 
-    void GraphicsBackend::OnInitialize()
+    void GraphicsBackend::OnInitialize(const Window* window)
     {
         NEPTUNE_PROFILE_ZONE
 

@@ -55,7 +55,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] queue Queue.
 		*/
-		void Push(SP<Unit::Queue> queue) { m_Queues.Push(queue); }
+		void Push(const SP<Unit::Queue>& queue) { m_Queues.Push(queue); }
 
 		/**
 		* @brief Add a Queue to this.

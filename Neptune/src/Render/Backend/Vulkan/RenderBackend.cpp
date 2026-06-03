@@ -29,9 +29,13 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
     	
-    	m_GraphicsBackend->OnInitialize();
-    	
+		const auto& window = Window::Instance();
+
+    	m_GraphicsBackend->OnInitialize(&window);
+		
 		GetContext().Registry<ISwapChain>(MaxFrameInFlight);
+
+		GetContext().Registry<IGraphicImageSemaphore>(MaxFrameInFlight);
 
 		RenderFrontend::OnInitialize();
 	}

@@ -33,8 +33,10 @@ namespace Neptune::Metal {
 
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] window Window.
         */
-        void OnInitialize() override;
+        void OnInitialize(const Window* window = nullptr) override;
 
         /**
         * @brief Interface of ShutDown.

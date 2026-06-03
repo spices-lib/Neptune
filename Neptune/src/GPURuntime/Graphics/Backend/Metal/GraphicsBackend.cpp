@@ -18,7 +18,7 @@ namespace Neptune::Metal {
         NEPTUNE_PROFILE_ZONE
     }
 
-    void GraphicsBackend::OnInitialize()
+    void GraphicsBackend::OnInitialize(const Window* window)
     {
         NEPTUNE_PROFILE_ZONE
 

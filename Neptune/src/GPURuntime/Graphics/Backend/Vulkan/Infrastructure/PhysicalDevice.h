@@ -31,11 +31,11 @@ namespace Neptune::Vulkan {
 		std::optional<uint32_t> opticalFlow;                // @brief OpticalFlow Queue Family.
 
 		/**
-		* @brief Is all familites are found.
+		* @brief Is all families are found.
 		* 
 		* @return Returns true if found.
 		*/
-		bool isComplete() const
+		bool IsComplete() const
 		{
 			return graphic && present && transfer && compute && videoEncode && videoDecode && opticalFlow;
 		}

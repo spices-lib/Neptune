@@ -21,7 +21,7 @@ namespace Neptune::Vulkan {
         Init(queue);
     }
 
-    void Queue::Init(VkQueue queue)
+    void Queue::Init(Unit::Queue::Handle queue)
     {
         NEPTUNE_PROFILE_ZONE
 

@@ -13,7 +13,7 @@
 
 namespace Neptune::Vulkan {
 
-    Instance::Instance(Context& context, EInfrastructure e, const std::vector<const char*>&  windodExtensions)
+    Instance::Instance(Context& context, EInfrastructure e, const std::vector<const char*>& windodExtensions)
         : Infrastructure(context, e)
 		, m_ExtensionProperties(windodExtensions)
     {
@@ -31,6 +31,7 @@ namespace Neptune::Vulkan {
 		GetContext().Get<IFunctions>()->vkDestroyDebugUtilsMessengerEXT(Handle(), DebugMessenger(), nullptr);
 
 #endif
+
     }
 
     void Instance::Create()
@@ -85,12 +86,16 @@ namespace Neptune::Vulkan {
 
 		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_DEBUG_PRINTF_EXT);
 	
-#endif
+#if 0
 
-		/*validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT);
+		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_EXT);
 		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_GPU_ASSISTED_RESERVE_BINDING_SLOT_EXT);
 		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT);
-		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT);*/
+		validationFeatureEnable.push_back(VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT);
+
+#endif
+
+#endif
 
 #ifdef NEPTUNE_DEBUG
 

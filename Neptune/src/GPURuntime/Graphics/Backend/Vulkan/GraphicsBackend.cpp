@@ -31,23 +31,23 @@ namespace Neptune::Vulkan {
 		});
 	}
 
-	void GraphicsBackend::OnInitialize()
+	void GraphicsBackend::OnInitialize(const Window* window)
 	{
 		NEPTUNE_PROFILE_ZONE
-
-    	const auto& window = Window::Instance();
     	
 		m_Context = CreateSP<Context>();
 
-		m_Context->Registry<IInstance>(window.Extension());
+		m_Context->Registry<IInstance>(window ? window->Extension() : std::vector<const char*>{});
 		m_Context->Registry<IDebugUtilsObject>();
-		m_Context->Registry<ISurface>(window.Implement(), window.NativeWindow());
+		if (window)
+		{
+			m_Context->Registry<ISurface>(window->Implement(), window->NativeWindow());
+		}
 		m_Context->Registry<IPhysicalDevice>();
 		m_Context->Registry<IDevice>();
 
 		m_Context->Registry<IMemoryAllocator>();
 					  
-		m_Context->Registry<IGraphicImageSemaphore>(MaxFrameInFlight);
 		m_Context->Registry<IGraphicQueueSemaphore>(MaxFrameInFlight);
 		m_Context->Registry<IGraphicFence>(MaxFrameInFlight);
 

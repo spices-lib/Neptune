@@ -40,8 +40,10 @@ namespace Neptune {
 
         /**
         * @brief Interface of Initialize.
+        * 
+        * @param[in] window Window.
         */
-        virtual void OnInitialize() = 0;
+        virtual void OnInitialize(const class Window* window = nullptr) = 0;
 
         /**
         * @brief Interface of ShutDown.
