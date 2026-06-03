@@ -79,7 +79,7 @@ namespace Neptune::Vulkan {
 		/**
 		* @brief Check Layer Requirements Satisfied.
 		*/
-		bool ChecklayerRequirementsSatisfied();
+		bool CheckLayerRequirementsSatisfied();
 
 		/**
 		* @brief Set DebugCallback.

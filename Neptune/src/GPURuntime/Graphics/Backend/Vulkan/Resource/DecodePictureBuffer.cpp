@@ -56,7 +56,7 @@ namespace Neptune::Vulkan::Resource {
 		}
 	}
 
-	const uint8_t DecodePictureBuffer::PopDecodeSlot()
+	uint8_t DecodePictureBuffer::PopDecodeSlot()
 	{
 		NEPTUNE_PROFILE_ZONE
 

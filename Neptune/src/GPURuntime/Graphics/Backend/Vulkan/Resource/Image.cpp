@@ -54,7 +54,7 @@ namespace Neptune::Vulkan::Resource {
 		DEBUGUTILS_SETOBJECTNAME(m_ImageView, "ImageView")
 	}
 
-	void Image::CreateSampler(VkSamplerCreateInfo& info)
+	void Image::CreateSampler(const VkSamplerCreateInfo& info)
 	{
 		NEPTUNE_PROFILE_ZONE
 

@@ -142,13 +142,13 @@ namespace Neptune::Vulkan {
 
 		const auto result = m_SwapChain->GetNextImage(semaphore, imageIndex);
 
-		VK_CHECK(result);
+		VK_CHECK(result)
 
 		if (result == VK_ERROR_OUT_OF_DATE_KHR)
 		{
 			return false;
 		}
-		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+    	if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
 		{
 			NEPTUNE_CORE_ERROR("Failed to Acquire SwapChain Image.")
 		}
@@ -168,7 +168,7 @@ namespace Neptune::Vulkan {
 		{
 			return false;
 		}
-		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+    	if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
 		{
 			NEPTUNE_CORE_ERROR("Failed to Present SwapChain Image.")
 		}

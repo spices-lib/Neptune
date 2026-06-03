@@ -133,14 +133,14 @@ namespace Neptune::Vulkan::Resource {
 
 		m_StreamMarkers.emplace_back(streamOffset);
 
-		return (uint32_t)(m_StreamMarkers.size() - 1);
+		return static_cast<uint32_t>(m_StreamMarkers.size() - 1);
 	}
 
 	uint32_t DecodeBuffer::ResetStreamMarkers()
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		uint32_t oldSize = (uint32_t)m_StreamMarkers.size();
+		uint32_t oldSize = static_cast<uint32_t>(m_StreamMarkers.size());
 
 		m_StreamMarkers.clear();
 
@@ -151,7 +151,7 @@ namespace Neptune::Vulkan::Resource {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		maxCount = (uint32_t)m_StreamMarkers.size() - startIndex;
+		maxCount = static_cast<uint32_t>(m_StreamMarkers.size()) - startIndex;
 
 		return m_StreamMarkers.data() + startIndex;
 	}

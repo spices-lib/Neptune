@@ -56,7 +56,7 @@ namespace Neptune::Vulkan {
 			std::stringstream ss;
 			ss << "Instance Extension not Satisfied";
 
-			NEPTUNE_CORE_ERROR(ss.str());
+			NEPTUNE_CORE_ERROR(ss.str())
 			return;
 		}
 
@@ -64,12 +64,13 @@ namespace Neptune::Vulkan {
 		createInfo.ppEnabledExtensionNames       = m_ExtensionProperties.data();
 
 		GetLayerRequirements();
-		if (!ChecklayerRequirementsSatisfied())
+    	
+		if (!CheckLayerRequirementsSatisfied())
 		{
 			std::stringstream ss;
 			ss << "Instance Layer not Satisfied";
 
-			NEPTUNE_CORE_ERROR(ss.str());
+			NEPTUNE_CORE_ERROR(ss.str())
 			return;
 		}
 
@@ -174,15 +175,15 @@ namespace Neptune::Vulkan {
 
 	}
 
-	bool Instance::ChecklayerRequirementsSatisfied()
+	bool Instance::CheckLayerRequirementsSatisfied()
 	{
 		NEPTUNE_PROFILE_ZONE
 
 		uint32_t layerCount;
-		vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+		VK_CHECK(vkEnumerateInstanceLayerProperties(&layerCount, nullptr))
 
 		std::vector<VkLayerProperties> availableLayers(layerCount);
-		vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+		VK_CHECK(vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data()))
 
 		std::set<std::string> requiredLayers(m_LayerProperties.begin(), m_LayerProperties.end());
 

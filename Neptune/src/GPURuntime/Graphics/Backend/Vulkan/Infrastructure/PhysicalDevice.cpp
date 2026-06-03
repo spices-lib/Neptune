@@ -143,7 +143,7 @@ namespace Neptune::Vulkan {
 		std::vector<VkQueueFamilyProperties2> queueFamilies(queueFamilyCount,{ VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2 });
 		vkGetPhysicalDeviceQueueFamilyProperties2(device, &queueFamilyCount, queueFamilies.data());
 
-		for (int i = 0; i < queueFamilyCount; ++i)
+		for (uint32_t i = 0; i < queueFamilyCount; ++i)
 		{
 			const auto& queueFamily = queueFamilies[i];
 			

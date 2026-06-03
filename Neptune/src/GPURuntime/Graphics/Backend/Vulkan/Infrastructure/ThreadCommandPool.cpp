@@ -95,7 +95,7 @@ namespace Neptune::Vulkan {
 			*
 			* @param[in] guard Thread CommandPool.
 			*/
-			void SetGuard(SP<ThreadCommandPool> guard)
+			void SetGuard(const SP<ThreadCommandPool>& guard)
 			{
 				m_Guard = guard;
 			}

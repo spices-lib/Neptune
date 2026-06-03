@@ -70,7 +70,7 @@ namespace Neptune::Vulkan {
 		*
 		* @param[in] info VkPresentInfoKHR.
 		*
-		* @return Returns true if succeed.
+		* @return Returns true if succeeded.
 		*/
 		bool Present(VkPresentInfoKHR& info) const;
 

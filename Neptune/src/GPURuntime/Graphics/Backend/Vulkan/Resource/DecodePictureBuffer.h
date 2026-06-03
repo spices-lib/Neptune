@@ -92,14 +92,14 @@ namespace Neptune::Vulkan::Resource {
 		*
 		* @return Returns a DecodeSlot.
 		*/
-		const uint8_t PopDecodeSlot();
+		uint8_t PopDecodeSlot();
 
 		/**
 		* @brief Get current DecodeSlot.
 		*
 		* @return Returns current DecodeSlot.
 		*/
-		const uint8_t DecodeSlot() const { return m_DecodeSlot; }
+		uint8_t DecodeSlot() const { return m_DecodeSlot; }
 
 		/**
 		* @brief Push DecodeSlot.

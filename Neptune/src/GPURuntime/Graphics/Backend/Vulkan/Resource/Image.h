@@ -70,7 +70,7 @@ namespace Neptune::Vulkan::Resource {
 		*
 		* @param[in] info VkSamplerCreateInfo.
 		*/
-		void CreateSampler(VkSamplerCreateInfo& info);
+		void CreateSampler(const VkSamplerCreateInfo& info);
 
 		/**
 		* @brief Set Image name.

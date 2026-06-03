@@ -43,7 +43,7 @@ namespace Neptune::Vulkan::Resource {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		DEBUGUTILS_SETOBJECTNAME(m_Buffer, name);
+		DEBUGUTILS_SETOBJECTNAME(m_Buffer, name)
 	}
 }
 
