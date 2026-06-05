@@ -13,15 +13,19 @@
 
 #include "Instrumentor.h"
 
-// Container
 #include "Core/Container/BitSetTest.h"
 #include "Core/Container/TreeTest.h"
 
-#include "Render/Backend/Common/CommonTest.h"
+#include "GPURuntime/Graphics/Backend/Common/CommonTest.h"
+#include "GPURuntime/Graphics/Backend/Direct3D11/GraphicsBackendTest.h"
+#include "GPURuntime/Graphics/Backend/Direct3D12/GraphicsBackendTest.h"
+#include "GPURuntime/Graphics/Backend/Metal/GraphicsBackendTest.h"
+#include "GPURuntime/Graphics/Backend/OpenGL/GraphicsBackendTest.h"
+#include "GPURuntime/Graphics/Backend/Vulkan/GraphicsBackendTest.h"
+#include "GPURuntime/Graphics/Backend/WebGL/GraphicsBackendTest.h"
+#include "GPURuntime/Graphics/Backend/WebGPU/GraphicsBackendTest.h"
 
-#include <gmock/gmock.h>
-
-
+#include <Core/Log/Log.h>
 
 /**
 * @brief The Entry of NeptuneUnitTest.
@@ -44,8 +48,12 @@ int main(int argc, char** argv)
     {
         NEPTUNE_CORE_ERROR(ex.what())
 
+        Neptune::Log::Reset();
+        
         return EXIT_FAILURE;
     }
 
+    Neptune::Log::Reset();
+    
     return EXIT_SUCCESS;
 }

@@ -23,17 +23,6 @@ namespace Neptune {
     public:
 
         /**
-        * @brief Create Graphics Frontend.
-        *
-        * @param[in] backend GraphicsBackendEnum.
-        *
-        * @return Returns Graphics Frontend pointer.
-        */
-        static SP<GraphicsFrontend> Create(GraphicsBackendEnum backend);
-
-    public:
-
-        /**
         * @brief Destructor Function.
         */
         ~GraphicsFrontend() override = default;

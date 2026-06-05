@@ -175,14 +175,15 @@ namespace Neptune::Render::Common::Test {
 
 		NEPTUNE_TEST_PROFILE_FUNCTION
 		
+		details::EnumTuple tuple;
+		
+		Container::IterTuple(tuple, []<typename EInfrastructure>(EInfrastructure& e) {
+			
+			using infrastructure = Infrastructure<EInfrastructure>;
+
+			// Infrastructure bytes ContextAccessor + virtual table + member variables
+			EXPECT_EQ(sizeof(infrastructure), 2 * sizeof(size_t) + sizeof(size_t) + sizeof(size_t));
+		});
 	}
 	
-	/**
-	* @brief Testing InfrastructureFactory Class.
-	*/
-	TEST(InfrastructureFactoryTest, Definition) {
-
-		NEPTUNE_TEST_PROFILE_FUNCTION
-		
-	}
 }
