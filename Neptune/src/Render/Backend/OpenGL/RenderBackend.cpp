@@ -30,6 +30,10 @@ namespace Neptune::OpenGL {
 
         m_GraphicsBackend->OnInitialize(&window);
 
+        GetContext().Registry<IPresentWindowContext>(window.Implement(), window.NativeWindow());
+        
+        GetContext().Get<IWindowContext>()->MakeContextCurrent();
+        
         RenderFrontend::OnInitialize();
     }
 
@@ -48,6 +52,8 @@ namespace Neptune::OpenGL {
 
         GetContext().Get<IWindowContext>()->MakeContextCurrent();
 
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        
         const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
         {
@@ -69,10 +75,12 @@ namespace Neptune::OpenGL {
 
         {
             DEBUGUTILS_BEGINLABEL(0, "PresentQueue")
-
-            /*const auto& window = Window::Instance();
-
-            window.SwapBuffers();*/
+            
+            GetContext().Get<IPresentWindowContext>()->MakeContextCurrent();
+            
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            
+            GetContext().Get<IPresentWindowContext>()->SwapBuffers();
 
             DEBUGUTILS_ENDLABEL()
         }

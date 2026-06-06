@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackendInterface.h"
 
@@ -22,8 +22,10 @@ namespace Neptune::GLFW {
 		{
 			case RenderBackendEnum::OpenGL:     return CreateSP<OpenGLInterface>();
 			case RenderBackendEnum::Vulkan:     return CreateSP<VulkanInterface>();
+#ifdef NP_PLATFORM_WINDOWS
 			case RenderBackendEnum::Direct3D11: return CreateSP<Direct3D11Interface>();
 			case RenderBackendEnum::Direct3D12: return CreateSP<Direct3D12Interface>();
+#endif
 			default:
 			{
 				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in GLFW Configuration.")
@@ -56,13 +58,6 @@ namespace Neptune::GLFW {
 		glfwMakeContextCurrent(handle);
 	}
 
-	void OpenGLInterface::SwapBuffers(GLFWwindow* handle) const
-	{
-		NEPTUNE_PROFILE_ZONE
-
-		glfwSwapBuffers(handle);
-	}
-
 	void VulkanInterface::Hint() const
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -80,6 +75,8 @@ namespace Neptune::GLFW {
 		
 		return std::vector(glfwExtensions, glfwExtensions + glfwExtensionCount);
 	}
+	
+#ifdef NP_PLATFORM_WINDOWS
 
 	void Direct3D11Interface::Hint() const
 	{
@@ -97,6 +94,8 @@ namespace Neptune::GLFW {
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	}
 
+#endif
+	
 }
 
 #endif

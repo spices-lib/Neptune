@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
 #include "Window/Window.h"
@@ -50,11 +50,6 @@ namespace Neptune::GLFW {
         * @brief Interface of window poll events.
         */
         void PollEvents() const override;
-
-        /**
-        * @brief Interface of window swap buffers.
-        */
-        void SwapBuffers() const override;
 
         /**
         * @brief Interface of window get extent.

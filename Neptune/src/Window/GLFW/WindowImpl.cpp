@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "WindowImpl.h"
 #include "RenderBackendInterface.h"
@@ -85,13 +85,6 @@ namespace Neptune::GLFW {
         NEPTUNE_PROFILE_ZONE
 
         glfwPollEvents();
-    }
-
-    void WindowImpl::SwapBuffers() const
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        m_APIInterface->SwapBuffers(m_Windows);
     }
 
     glm::ivec2 WindowImpl::Extent() const

@@ -26,8 +26,9 @@ namespace Neptune::OpenGL::GLFW {
 		*
 		* @param[in] context Context.
 		* @param[in] e EInfrastructure.
+		* @param[in] window Window.
 		*/
-		WindowContext(Context& context, EInfrastructure e);
+		WindowContext(Context& context, EInfrastructure e, void* window = nullptr);
 
 		/**
 		* @brief Destructor Function.
@@ -39,12 +40,26 @@ namespace Neptune::OpenGL::GLFW {
 		*/
 		void MakeContextCurrent() override;
 
+		/**
+		* @brief Interface of SwapBuffers.
+		*/
+		void SwapBuffers() override;
+		
 	private:
 
 		/**
-		* @brief Create Surface.
+		* @brief Create WindowContext.
+		* 
+		* @param[in] window Window.
 		*/
-		void Create();
+		void Create(void* window = nullptr);
+		
+		/**
+		* @brief Create Window.
+		* 
+		* @return Returns Window.
+		*/
+		void* CreateWindow() const;
 
 	};
 

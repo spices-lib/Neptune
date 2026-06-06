@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "Core/Core.h"
 #include "Render/Frontend/Enum.h"
@@ -38,13 +38,6 @@ namespace Neptune::GLFW {
         * @param[in] handle GLFWwindow.
         */
         virtual void APILoad(GLFWwindow* handle) const = 0;
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        virtual void SwapBuffers(GLFWwindow* handle) const = 0;
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -81,13 +74,6 @@ namespace Neptune::GLFW {
         * @param[in] handle GLFWwindow.
         */
         void APILoad(GLFWwindow* handle) const override;
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override;
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -115,13 +101,6 @@ namespace Neptune::GLFW {
         * @param[in] handle GLFWwindow.
         */
         void APILoad(GLFWwindow* handle) const override {}
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override {}
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -131,6 +110,8 @@ namespace Neptune::GLFW {
         std::vector<const char*> Extension() const override;
     };
 
+#ifdef NP_PLATFORM_WINDOWS
+    
     /**
     * @brief Direct3D11 APIInterface.
     */
@@ -149,13 +130,6 @@ namespace Neptune::GLFW {
         * @param[in] handle GLFWwindow.
         */
         void APILoad(GLFWwindow* handle) const override {}
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override {}
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -183,13 +157,6 @@ namespace Neptune::GLFW {
         * @param[in] handle GLFWwindow.
         */
         void APILoad(GLFWwindow* handle) const override {}
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override {}
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -198,6 +165,8 @@ namespace Neptune::GLFW {
         */
         std::vector<const char*> Extension() const override { return {}; }
     };
+    
+#endif
 
 }
 

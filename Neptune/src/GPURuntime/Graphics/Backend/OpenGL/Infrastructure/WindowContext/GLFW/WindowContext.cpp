@@ -14,18 +14,61 @@
 
 namespace Neptune::OpenGL::GLFW {
 
-    WindowContext::WindowContext(Context& context, EInfrastructure e)
+    WindowContext::WindowContext(Context& context, EInfrastructure e, void* window)
         : OpenGL::WindowContext(context, e)
     {
         NEPTUNE_PROFILE_ZONE
 
-        Create();
+        Create(window);
     }
 
-    void WindowContext::Create()
+    WindowContext::~WindowContext()
     {
         NEPTUNE_PROFILE_ZONE
         
+        switch (GetEInfrastructure())
+        {
+            case EInfrastructure::WindowContext:
+            {
+                if (m_Window)
+                {
+                    glfwDestroyWindow(static_cast<GLFWwindow*>(m_Window));;
+                    break;
+                }
+            }
+            case EInfrastructure::PresentWindowContext:
+            {
+                break;
+            }
+        }
+    }
+
+    void WindowContext::Create(void* window)
+    {
+        m_Window = window ? window : CreateWindow();
+
+        MakeContextCurrent();
+
+        // Turn off v-sync.
+        glfwSwapInterval(0);
+
+        // Use glad to load OpenGL APIs.
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            NEPTUNE_CORE_CRITICAL("Failed to initialize GLAD")
+        }
+    }
+
+    void* WindowContext::CreateWindow() const
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        // Initialize the library
+        if (!glfwInit())
+        {
+            NEPTUNE_CORE_CRITICAL("glfw init failed.")
+        }
+
         // Hidden Window.
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
@@ -40,28 +83,13 @@ namespace Neptune::OpenGL::GLFW {
 
 #endif
 
-        m_Window = glfwCreateWindow(1, 1, "OpenGLContext", nullptr, nullptr);
-
-        MakeContextCurrent();
-
-        // Turn off v-sync.
-        glfwSwapInterval(0);
-
-        // Use glad to load OpenGL APIs.
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        auto window = glfwCreateWindow(1, 1, "OpenGLContext", nullptr, nullptr);
+        if (!window)
         {
-            NEPTUNE_CORE_CRITICAL("Failed to initialize GLAD")
+            NEPTUNE_CORE_CRITICAL("Failed to Create glfwWindow")
         }
-    }
 
-    WindowContext::~WindowContext()
-    {
-        NEPTUNE_PROFILE_ZONE
-        
-        if (m_Window)
-        {
-            glfwDestroyWindow(static_cast<GLFWwindow*>(m_Window));
-        }
+        return window;
     }
     
     void WindowContext::MakeContextCurrent()
@@ -69,6 +97,13 @@ namespace Neptune::OpenGL::GLFW {
         NEPTUNE_PROFILE_ZONE
 
         glfwMakeContextCurrent(static_cast<GLFWwindow*>(m_Window));
+    }
+    
+    void WindowContext::SwapBuffers()
+    {
+        NEPTUNE_PROFILE_ZONE
+        
+        glfwSwapBuffers(static_cast<GLFWwindow*>(m_Window));
     }
     
 }

@@ -38,13 +38,6 @@ namespace Neptune::EmscriptenGLFW {
         * @param[in] handle GLFWwindow.
         */
         virtual void APILoad(GLFWwindow* handle) const = 0;
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        virtual void SwapBuffers(GLFWwindow* handle) const = 0;
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -81,13 +74,6 @@ namespace Neptune::EmscriptenGLFW {
         * @param[in] handle GLFWwindow.
         */
         void APILoad(GLFWwindow* handle) const override;
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override {}
         
         /**
         * @brief Interface of Get GLFW Window Extension.
@@ -115,13 +101,6 @@ namespace Neptune::EmscriptenGLFW {
         * @param[in] handle GLFWwindow.
         */
         void APILoad(GLFWwindow* handle) const override {}
-
-        /**
-        * @brief Interface of GLFW SwapBuffers with RenderBackend.
-        * 
-        * @param[in] handle GLFWwindow.
-        */
-        void SwapBuffers(GLFWwindow* handle) const override {}
         
         /**
         * @brief Interface of Get GLFW Window Extension.

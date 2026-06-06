@@ -11,7 +11,7 @@
 #include "Window/EmscriptenGLFW/WindowImpl.h"
 #endif
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
 #include "Window/GLFW/WindowImpl.h"
 #endif
 
@@ -36,7 +36,7 @@ namespace Neptune {
             }
 #endif
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifndef NP_PLATFORM_EMSCRIPTEN
             case WindowImplement::GLFW:
             {
                 S_Instance = CreateUP<GLFW::WindowImpl>(initInfo, implement, backend);

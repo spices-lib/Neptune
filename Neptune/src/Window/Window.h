@@ -81,11 +81,6 @@ namespace Neptune {
         virtual void PollEvents() const = 0;
 
         /**
-        * @brief Interface of window swap buffers.
-        */
-        virtual void SwapBuffers() const = 0;
-
-        /**
         * @brief Interface of window get extent.
         */
         virtual glm::ivec2 Extent() const = 0;

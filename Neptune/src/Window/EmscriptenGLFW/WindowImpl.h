@@ -52,11 +52,6 @@ namespace Neptune::EmscriptenGLFW {
         void PollEvents() const override;
 
         /**
-        * @brief Interface of window swap buffers.
-        */
-        void SwapBuffers() const override;
-
-        /**
         * @brief Interface of window get extent.
         */
         glm::ivec2 Extent() const override;

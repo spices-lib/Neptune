@@ -22,6 +22,8 @@ namespace Neptune::OpenGL {
 
         switch (m_EInfrastructure)
         {
+            case EInfrastructure::WindowContext:                      return "WindowContext";
+            case EInfrastructure::PresentWindowContext:               return "PresentWindowContext";
             case EInfrastructure::DebugUtilsObject:                   return "DebugUtilsObject";
             case EInfrastructure::GraphicFence:                       return "GraphicFence";
 

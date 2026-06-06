@@ -93,13 +93,6 @@ namespace Neptune::EmscriptenGLFW {
         glfwPollEvents();
     }
 
-    void WindowImpl::SwapBuffers() const
-    {
-        NEPTUNE_PROFILE_ZONE
-
-        m_APIInterface->SwapBuffers(m_Windows);
-    }
-
     glm::ivec2 WindowImpl::Extent() const
     {
         NEPTUNE_PROFILE_ZONE

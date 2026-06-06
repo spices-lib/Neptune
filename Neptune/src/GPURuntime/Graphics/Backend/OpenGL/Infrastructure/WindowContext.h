@@ -14,7 +14,8 @@
 
 namespace Neptune::OpenGL {
 
-    using IWindowContext = IInfrastructure<class WindowContext, EInfrastructure::WindowContext>;
+    using IWindowContext        = IInfrastructure<class WindowContext, EInfrastructure::WindowContext>;
+    using IPresentWindowContext = IInfrastructure<class WindowContext, EInfrastructure::PresentWindowContext>;
 
     /**
     * @brief OpenGL::WindowContext Class.
@@ -30,8 +31,9 @@ namespace Neptune::OpenGL {
         * @param[in] context Context.
         * @param[in] e EInfrastructure.
         * @param[in] implement WindowImplement.
+        * @param[in] window Window.
         */
-        static SP<WindowContext> Create(Context& context, EInfrastructure e, WindowImplement implement);
+        static SP<WindowContext> Create(Context& context, EInfrastructure e, WindowImplement implement, void* window = nullptr);
 
     public:
 
@@ -56,10 +58,15 @@ namespace Neptune::OpenGL {
         const void* Handle() const { return m_Window; }
 
         /**
-        * @brief Make Context Current.
+        * @brief Interface of Make Context Current.
         */
         virtual void MakeContextCurrent() = 0;
 
+		/**
+	    * @brief Interface of SwapBuffers.
+	    */
+	    virtual void SwapBuffers() = 0;
+		
     protected:
 
         void* m_Window;  // @brief This Window.

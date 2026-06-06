@@ -12,13 +12,13 @@
 
 namespace Neptune::OpenGL {
 
-	SP<WindowContext> WindowContext::Create(Context& context, EInfrastructure e, WindowImplement implement)
+	SP<WindowContext> WindowContext::Create(Context& context, EInfrastructure e, WindowImplement implement, void* window)
 	{
         NEPTUNE_PROFILE_ZONE
 
         switch (implement)
         {
-            case WindowImplement::GLFW: return CreateSP<GLFW::WindowContext>(context, e);
+            case WindowImplement::GLFW: return CreateSP<GLFW::WindowContext>(context, e, window);
             default:
             {
                 NEPTUNE_CORE_ERROR("WindowContext Create with WindowImplement that not supported.")
