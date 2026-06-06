@@ -23,6 +23,8 @@ namespace Neptune {
 
 		/**
 		* @brief Agent Function.
+		* 
+		* @tparam Args
 		*/
 		using Agent = std::function<void(Args...)>;
 
@@ -71,7 +73,7 @@ namespace Neptune {
 		* 
 		* @return Returns true if empty.
 		*/
-		bool empty() const { return m_Agents->size() == 0; }
+		bool Empty() const { return m_Agents->size() == 0; }
 
 		/**
 		* @brief Execute all function pointer. 
@@ -142,7 +144,7 @@ namespace Neptune {
 	{                                                                      \
 	public:                                                                \
 		Delegate##name() : Neptune::Delegate_Basic<__VA_ARGS__>() {}       \
-		virtual ~Delegate##name() = default;                               \
+		~Delegate##name() override = default;                              \
 	}; 
 
 }

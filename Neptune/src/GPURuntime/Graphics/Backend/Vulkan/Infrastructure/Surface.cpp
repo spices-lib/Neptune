@@ -20,7 +20,7 @@ namespace Neptune::Vulkan {
 
         switch (implement)
         {
-            case WindowImplement::GLFW:            return CreateSP<GLFW::Surface>(context, e, window);
+            case WindowImplement::GLFW: return CreateSP<GLFW::Surface>(context, e, window);
             default:
             {
                 NEPTUNE_CORE_ERROR("Surface Create with WindowImplement that not supported.")

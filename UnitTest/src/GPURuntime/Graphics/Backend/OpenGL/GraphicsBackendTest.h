@@ -25,9 +25,9 @@ namespace Neptune::OpenGL::Test {
 		
         GraphicsBackend graphicsBackend;
 		
-        //graphicsBackend.OnInitialize();
+        graphicsBackend.OnInitialize();
 		
-        //graphicsBackend.OnShutDown();
+        graphicsBackend.OnShutDown();
     }
 	
 }

@@ -1,0 +1,31 @@
+/**
+* @file WindowContext.cpp.
+* @brief The WindowContext Class Implementation.
+* @author Spices.
+*/
+#include "Pchheader.h"
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
+#include "WindowContext.h"
+#include "WindowContext/GLFW/WindowContext.h"
+
+namespace Neptune::OpenGL {
+
+	SP<WindowContext> WindowContext::Create(Context& context, EInfrastructure e, WindowImplement implement)
+	{
+        NEPTUNE_PROFILE_ZONE
+
+        switch (implement)
+        {
+            case WindowImplement::GLFW: return CreateSP<GLFW::WindowContext>(context, e);
+            default:
+            {
+                NEPTUNE_CORE_ERROR("WindowContext Create with WindowImplement that not supported.")
+                return nullptr;
+            }
+        }
+	}
+}
+
+#endif

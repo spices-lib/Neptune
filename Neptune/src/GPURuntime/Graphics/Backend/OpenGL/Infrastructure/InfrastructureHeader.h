@@ -10,5 +10,6 @@
 
 #include "GPURuntime/Graphics/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
 #include "GPURuntime/Graphics/Backend/OpenGL/Infrastructure/Fence.h"
+#include "GPURuntime/Graphics/Backend/OpenGL/Infrastructure/WindowContext.h"
 
 #endif

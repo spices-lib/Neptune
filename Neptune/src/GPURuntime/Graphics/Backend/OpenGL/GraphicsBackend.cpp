@@ -11,6 +11,7 @@
 #include "GraphicsBackend.h"
 #include "Infrastructure/InfrastructureHeader.h"
 #include "RHI/RHIHeader.h"
+#include "Window/Window.h"
 
 namespace Neptune::OpenGL {
 
@@ -29,6 +30,7 @@ namespace Neptune::OpenGL {
         m_Context = CreateSP<Context>();
 
         m_Context->Registry<IDebugUtilsObject>();
+        m_Context->Registry<IWindowContext>(window->Implement());
 
         m_Context->Registry<IGraphicFence>(MaxFrameInFlight);
     }

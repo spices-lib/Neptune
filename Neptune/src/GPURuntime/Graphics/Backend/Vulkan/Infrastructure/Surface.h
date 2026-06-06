@@ -59,7 +59,7 @@ namespace Neptune::Vulkan {
 
 	protected:
 
-		Unit::Surface m_Surface;         // @brief This Surface.
+		Unit::Surface m_Surface; // @brief This Surface.
 
 	};
 	

@@ -22,7 +22,9 @@ namespace Neptune {
         MacOSNative,
         LinuxNative,
 
-        Count
+        Count,
+
+        Default = GLFW
     };
 
 }

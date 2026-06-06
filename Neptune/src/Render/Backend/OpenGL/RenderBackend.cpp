@@ -26,7 +26,9 @@ namespace Neptune::OpenGL {
     {
         NEPTUNE_PROFILE_ZONE
 
-        m_GraphicsBackend->OnInitialize();
+        const auto& window = Window::Instance();
+
+        m_GraphicsBackend->OnInitialize(&window);
 
         RenderFrontend::OnInitialize();
     }
@@ -43,6 +45,8 @@ namespace Neptune::OpenGL {
     void RenderBackend::BeginFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
+
+        GetContext().Get<IWindowContext>()->MakeContextCurrent();
 
         const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
@@ -66,9 +70,9 @@ namespace Neptune::OpenGL {
         {
             DEBUGUTILS_BEGINLABEL(0, "PresentQueue")
 
-            const auto& window = Window::Instance();
+            /*const auto& window = Window::Instance();
 
-            window.SwapBuffers();
+            window.SwapBuffers();*/
 
             DEBUGUTILS_ENDLABEL()
         }

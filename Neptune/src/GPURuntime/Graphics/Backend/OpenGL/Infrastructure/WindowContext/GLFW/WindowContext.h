@@ -1,0 +1,53 @@
+/**
+* @file WindowContext.h.
+* @brief The WindowContext Class Definitions.
+* @author Spices.
+*/
+
+#pragma once
+
+#ifndef NP_PLATFORM_EMSCRIPTEN
+
+#include "Core/Core.h"
+#include "GPURuntime/Graphics/Backend/OpenGL/Infrastructure/WindowContext.h"
+
+namespace Neptune::OpenGL::GLFW {
+
+	/**
+	* @brief OpenGL::GLFW::WindowContext Class.
+	* This class defines the OpenGL::GLFW::WindowContext behaves.
+	*/
+	class WindowContext : public OpenGL::WindowContext
+	{
+	public:
+
+		/**
+		* @brief Constructor Function.
+		*
+		* @param[in] context Context.
+		* @param[in] e EInfrastructure.
+		*/
+		WindowContext(Context& context, EInfrastructure e);
+
+		/**
+		* @brief Destructor Function.
+		*/
+		~WindowContext() override;
+
+		/**
+		* @brief Make Context Current.
+		*/
+		void MakeContextCurrent() override;
+
+	private:
+
+		/**
+		* @brief Create Surface.
+		*/
+		void Create();
+
+	};
+
+}
+
+#endif

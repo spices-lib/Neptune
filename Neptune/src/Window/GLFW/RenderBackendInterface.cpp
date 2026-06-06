@@ -55,15 +55,6 @@ namespace Neptune::GLFW {
 		NEPTUNE_PROFILE_ZONE
 
 		glfwMakeContextCurrent(handle);
-
-		// Turn off v-sync.
-		glfwSwapInterval(0);
-
-		// Use glad to load OpenGL APIs.
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			NEPTUNE_CORE_CRITICAL("Failed to initialize GLAD")
-		}
 	}
 
 	void OpenGLInterface::SwapBuffers(GLFWwindow* handle) const
