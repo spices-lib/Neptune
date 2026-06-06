@@ -131,56 +131,56 @@ namespace Neptune::RHI {
 		*
 		* @param[in] clock Clock.
 		*/
-		void SetGraphicCmdList(const Data::Clock& clock) const { m_Impl->SetGraphicCmdList(clock); }
+		void SetGraphicCmdList(const Data::Clock& clock) const { RHICmdList::m_Impl->SetGraphicCmdList(clock); }
 
 		/**
 		* @brief Interface of Get Current CommandList.
 		* 
 		* @return Returns Current CommandList.
 		*/
-		void* GetCommandList() const { return m_Impl->GetCommandList(); }
+		void* GetCommandList() const { return RHICmdList::m_Impl->GetCommandList(); }
 		
 		/**
 		* @brief Interface of Set RenderPass Reference.
 		*
 		* @param[in] renderPass RenderPass.
 		*/
-		void SetRenderPass(const SP<class RenderPass>& renderPass) const { m_Impl->SetRenderPass(renderPass); }
+		void SetRenderPass(const SP<class RenderPass>& renderPass) const { RHICmdList::m_Impl->SetRenderPass(renderPass); }
 
 		/**
 		* @brief Interface of BeginRenderPass.
 		*/
-		void CmdBeginRenderPass() const { m_Impl->CmdBeginRenderPass(); }
+		void CmdBeginRenderPass() const { RHICmdList::m_Impl->CmdBeginRenderPass(); }
 
 		/**
 		* @brief Interface of EndRenderPass.
 		*/
-		void CmdEndRenderPass() const { m_Impl->CmdEndRenderPass(); }
+		void CmdEndRenderPass() const { RHICmdList::m_Impl->CmdEndRenderPass(); }
 
 		/**
 		* @brief Interface of BindDescriptor.
 		*
 		* @param[in] descriptorList DescriptorList.
 		*/
-		void CmdBindDescriptor(const SP<class DescriptorList>& descriptorList) const { m_Impl->CmdBindDescriptor(descriptorList); }
+		void CmdBindDescriptor(const SP<class DescriptorList>& descriptorList) const { RHICmdList::m_Impl->CmdBindDescriptor(descriptorList); }
 
 		/**
 		* @brief Interface of BindPipeline.
 		*
 		* @param[in] pipeline Pipeline.
 		*/
-		void CmdBindPipeline(const SP<class Pipeline>& pipeline) const { m_Impl->CmdBindPipeline(pipeline); }
+		void CmdBindPipeline(const SP<class Pipeline>& pipeline) const { RHICmdList::m_Impl->CmdBindPipeline(pipeline); }
 
 		/**
 		* @brief Interface of DrawFullScreenTriangle.
 		*/
-		void CmdDrawFullScreenTriangle() const { m_Impl->CmdDrawFullScreenTriangle(); }
+		void CmdDrawFullScreenTriangle() const { RHICmdList::m_Impl->CmdDrawFullScreenTriangle(); }
 
 		/**
 		* @brief Interface of SetViewport.
 		*
 		* @param[in] viewPortSize .
 		*/
-		void CmdSetViewport(const glm::vec2& viewPortSize) const { m_Impl->CmdSetViewport(viewPortSize); }
+		void CmdSetViewport(const glm::vec2& viewPortSize) const { RHICmdList::m_Impl->CmdSetViewport(viewPortSize); }
 	};
 }

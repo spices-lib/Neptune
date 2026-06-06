@@ -16,14 +16,14 @@ namespace Neptune::OpenGL::Unit {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		glDeleteFramebuffers(1, &m_Handle);
+		glDeleteSamplers(1, &m_Handle);
 	}
 
 	void Sampler::CreateSampler()
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		glGenFramebuffers(1, &m_Handle);
+		glGenSamplers(1, &m_Handle);
 	}
 }
 

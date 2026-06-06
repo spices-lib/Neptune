@@ -78,6 +78,7 @@ namespace Neptune::Vulkan {
 	private:
 
 		std::unordered_map<UUID, SP<Unit::CommandPool>> m_CommandPools;    // @brief Container of CommandPool.
+		std::mutex m_Mutex;                                                // @brief CommandPool mutex.
 	};
 
 }

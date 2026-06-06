@@ -114,7 +114,6 @@ namespace Neptune::Vulkan {
 
 		thread_local ThreadID s_TLSThreadID;            // @brief Thread id instance.
 
-		std::mutex s_Mutex;                             // @brief CommandPool mutex.
 	}
 
 	ThreadCommandPool::ThreadCommandPool(Context& context, EInfrastructure e)
@@ -140,7 +139,7 @@ namespace Neptune::Vulkan {
 
 		auto commandPool = Create();
 
-		std::unique_lock lock(s_Mutex);
+		std::unique_lock lock(m_Mutex);
 
 		m_CommandPools[uuid] = commandPool;
 
@@ -151,7 +150,7 @@ namespace Neptune::Vulkan {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		std::unique_lock lock(s_Mutex);
+		std::unique_lock lock(m_Mutex);
 
 		m_CommandPools.erase(id);
 	}
