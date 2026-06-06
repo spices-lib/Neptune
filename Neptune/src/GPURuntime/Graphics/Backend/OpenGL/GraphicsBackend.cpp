@@ -29,8 +29,8 @@ namespace Neptune::OpenGL {
 
         m_Context = CreateSP<Context>();
 
+        m_Context->Registry<IWindowContext>(window ? window->Implement() : WindowImplement::Default);
         m_Context->Registry<IDebugUtilsObject>();
-        m_Context->Registry<IWindowContext>(window->Implement());
 
         m_Context->Registry<IGraphicFence>(MaxFrameInFlight);
     }
