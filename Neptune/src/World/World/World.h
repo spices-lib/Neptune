@@ -46,7 +46,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~World() override = default;
+        virtual ~World() = default;
 
         /**
         * @brief Interface of World attached to Application.

@@ -34,7 +34,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~ScriptInterface() override = default;
+        virtual ~ScriptInterface() = default;
 
         /**
         * @brief This interface defines to behave on specific component on construct.

@@ -18,11 +18,6 @@ public:
     NonCopyable() = default;
 
     /**
-    * @brief Destructor Function.
-    */
-    virtual ~NonCopyable() = default;
-
-    /**
     * @brief Copy Constructor Function.
     * 
     * @note This Class not allowed copy behaves.

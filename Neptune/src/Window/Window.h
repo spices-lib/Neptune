@@ -66,7 +66,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~Window() override = default;
+        virtual ~Window() = default;
 
         /**
         * @brief Interface of determine if window is still active.

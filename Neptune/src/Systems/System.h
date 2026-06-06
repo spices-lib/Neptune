@@ -33,7 +33,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~System() override = default;
+        virtual ~System() = default;
 
         /**
         * @brief Interface of system initialize.

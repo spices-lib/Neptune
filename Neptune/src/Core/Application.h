@@ -42,7 +42,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~Application() override;
+        virtual ~Application();
 
         /**
         * @brief MainLoop entry.

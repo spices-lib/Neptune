@@ -35,7 +35,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~Component() override = default;
+        virtual ~Component() = default;
 
         /**
         * @brief This interface defines the behaves on specific component attached.

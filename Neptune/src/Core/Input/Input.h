@@ -25,7 +25,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~Input() override = default;
+        virtual ~Input() = default;
 
         /**
         * @brief Query If given Key is Pressed.

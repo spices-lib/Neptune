@@ -45,7 +45,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~RenderFrontend() override = default;
+        virtual ~RenderFrontend() = default;
 
         /**
         * @brief Interface of Initialize.

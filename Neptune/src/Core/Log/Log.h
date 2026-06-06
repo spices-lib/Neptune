@@ -41,7 +41,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~Log() override = default;
+        virtual ~Log() = default;
 
         virtual void CoreTrace   (const std::string& msg) = 0;
         virtual void CoreInfo    (const std::string& msg) = 0;

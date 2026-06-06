@@ -30,7 +30,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-    	~SystemManager() override = default;
+    	virtual ~SystemManager() = default;
 
         /**
         * @brief Initialize Systems.

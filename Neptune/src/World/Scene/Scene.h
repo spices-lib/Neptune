@@ -35,7 +35,7 @@ namespace Neptune {
         /**
         * @brief Destructor Function.
         */
-        ~Scene() override = default;
+        virtual ~Scene() = default;
 
         /**
         * @brief Create a new empty entity in this world.
