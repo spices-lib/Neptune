@@ -9,7 +9,7 @@
 #ifdef NP_PLATFORM_WINDOWS
 
 #include "RenderBackend.h"
-#include "GPURuntime/Graphics/Backend/Direct3D11/Infrastructure/InfrastructureHeader.h"
+#include "Device/Graphics/Backend/Direct3D11/Infrastructure/InfrastructureHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/Component.h"

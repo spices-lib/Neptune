@@ -9,7 +9,7 @@
 #include "Core/NonCopyable.h"
 #include "RenderDelegate.h"
 #include "Core/Event/Event.h"
-#include "GPURuntime/Graphics/Frontend/RHI/RHI.h"
+#include "Device/Graphics/Frontend/RHI/RHI.h"
 #include "Enum.h"
 
 #include <vector>

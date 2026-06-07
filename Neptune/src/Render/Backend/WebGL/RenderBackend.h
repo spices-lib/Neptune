@@ -10,7 +10,7 @@
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"
-#include "GPURuntime/Graphics/Backend/WebGL/GraphicsBackend.h"
+#include "Device/Graphics/Backend/WebGL/GraphicsBackend.h"
 
 namespace Neptune {
 

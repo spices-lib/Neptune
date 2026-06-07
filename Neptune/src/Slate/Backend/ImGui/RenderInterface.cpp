@@ -9,7 +9,7 @@
 #include "Render/Frontend/Core.h"
 
 #ifndef NP_PLATFORM_EMSCRIPTEN
-#include "GPURuntime/Graphics/Backend/Vulkan/Core.h"
+#include "Device/Graphics/Backend/Vulkan/Core.h"
 
 #include <backends/imgui_impl_vulkan.h>
 #include <backends/imgui_impl_opengl3.h>

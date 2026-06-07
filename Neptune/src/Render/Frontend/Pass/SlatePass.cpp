@@ -6,9 +6,9 @@
 
 #include "Pchheader.h"
 #include "SlatePass.h"
-#include "GPURuntime/Graphics/Frontend/RHI/Pipeline.h"
-#include "GPURuntime/Graphics/Frontend/RHI/RenderPass.h"
-#include "GPURuntime/Graphics/Frontend/RHI/CmdList.h"
+#include "Device/Graphics/Frontend/RHI/Pipeline.h"
+#include "Device/Graphics/Frontend/RHI/RenderPass.h"
+#include "Device/Graphics/Frontend/RHI/CmdList.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/Component.h"
 #include "Data/Clock.h"

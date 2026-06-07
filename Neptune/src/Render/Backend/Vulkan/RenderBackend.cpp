@@ -9,9 +9,9 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackend.h"
-#include "GPURuntime/Graphics/Frontend/RHI/RenderPass.h"
-#include "GPURuntime/Graphics/Backend/Vulkan/Infrastructure/InfrastructureHeader.h"
-#include "GPURuntime/Graphics/Backend/Vulkan/RHI/RenderPass.h"
+#include "Device/Graphics/Frontend/RHI/RenderPass.h"
+#include "Device/Graphics/Backend/Vulkan/Infrastructure/InfrastructureHeader.h"
+#include "Device/Graphics/Backend/Vulkan/RHI/RenderPass.h"
 #include "Render/Frontend/Pass/SlatePass.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"

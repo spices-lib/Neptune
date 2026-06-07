@@ -16,14 +16,14 @@
 #include "Core/Container/BitSetTest.h"
 #include "Core/Container/TreeTest.h"
 
-#include "GPURuntime/Graphics/Backend/Common/CommonTest.h"
-#include "GPURuntime/Graphics/Backend/Direct3D11/GraphicsBackendTest.h"
-#include "GPURuntime/Graphics/Backend/Direct3D12/GraphicsBackendTest.h"
-#include "GPURuntime/Graphics/Backend/Metal/GraphicsBackendTest.h"
-#include "GPURuntime/Graphics/Backend/OpenGL/GraphicsBackendTest.h"
-#include "GPURuntime/Graphics/Backend/Vulkan/GraphicsBackendTest.h"
-#include "GPURuntime/Graphics/Backend/WebGL/GraphicsBackendTest.h"
-#include "GPURuntime/Graphics/Backend/WebGPU/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/Common/CommonTest.h"
+#include "Device/Graphics/Backend/Direct3D11/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/Direct3D12/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/Metal/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/OpenGL/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/Vulkan/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/WebGL/GraphicsBackendTest.h"
+#include "Device/Graphics/Backend/WebGPU/GraphicsBackendTest.h"
 
 #include <Core/Log/Log.h>
 

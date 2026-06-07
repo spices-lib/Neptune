@@ -9,7 +9,7 @@
 #ifndef NP_PLATFORM_EMSCRIPTEN
 
 #include "RenderBackend.h"
-#include "GPURuntime/Graphics/Backend/OpenGL/Infrastructure/InfrastructureHeader.h"
+#include "Device/Graphics/Backend/OpenGL/Infrastructure/InfrastructureHeader.h"
 #include "Window/Window.h"
 #include "World/Scene/Scene.h"
 #include "World/Component/Component.h"

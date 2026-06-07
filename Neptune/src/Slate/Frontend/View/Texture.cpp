@@ -2,7 +2,7 @@
 #include "Texture.h"
 #include "Resource/ResourcePool.h"
 #include "Resource/Texture/RenderTarget.h"
-#include "GPURuntime/Graphics/Frontend/RHI/RenderTarget.h"
+#include "Device/Graphics/Frontend/RHI/RenderTarget.h"
 
 namespace Neptune::View {
 

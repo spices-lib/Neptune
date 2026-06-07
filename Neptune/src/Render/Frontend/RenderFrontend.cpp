@@ -28,7 +28,7 @@
 #include "Render/Frontend/Pass/SlatePass.h"
 #include "Render/Frontend/Pass/PrePass.h"
 #include "Render/Frontend/Pass/Pass.h"
-#include "GPURuntime/Graphics/Frontend/RHI/RHI.h"
+#include "Device/Graphics/Frontend/RHI/RHI.h"
 #include "Window/Window.h"
 #include "Core/Event/WindowEvent.h"
 

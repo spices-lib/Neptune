@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 #include "OpticalFlow.h"
-#include "GPURuntime/Graphics/Frontend/RHI/OpticalFlow.h"
+#include "Device/Graphics/Frontend/RHI/OpticalFlow.h"
 #include "Resource/Texture/RenderTarget.h"
 
 namespace Neptune::Video {
