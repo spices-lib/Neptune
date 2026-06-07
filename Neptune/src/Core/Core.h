@@ -59,7 +59,7 @@ namespace Neptune {
     template<typename T, typename ...Args>
     SP<T> CreateSP(Args&&... args)
     {
-        return std::move(std::make_shared<T>(std::forward<Args>(args)...));
+        return std::make_shared<T>(std::forward<Args>(args)...);
     }
 
     /**
@@ -88,6 +88,6 @@ namespace Neptune {
     template<typename T, typename ...Args>
     UP<T> CreateUP(Args&&... args)
     {
-        return std::move(std::make_unique<T>(std::forward<Args>(args)...));
+        return std::make_unique<T>(std::forward<Args>(args)...);
     }
 }
