@@ -16,7 +16,8 @@ namespace Neptune {
     {
         OpenCL = 0,            // @brief Limited Cross Platform
         SYCL,                  // @brief Limited Cross Platform
-        CUDA,                  // @brief Limited Desktop
+        CUDA,                  // @brief Nvidia GPU Desktop
+        ROCm,                  // @brief AMD GPU Desktop
 
         Count
     };
