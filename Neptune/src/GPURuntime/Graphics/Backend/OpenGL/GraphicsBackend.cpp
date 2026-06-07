@@ -29,6 +29,10 @@ namespace Neptune::OpenGL {
 
         m_Context = CreateSP<Context>();
 
+    	if (window)
+    	{
+    		m_Context->Registry<IPresentWindowContext>(window->Implement(), window->NativeWindow());
+    	}
         m_Context->Registry<IWindowContext>(window ? window->Implement() : WindowImplement::Default);
         m_Context->Registry<IDebugUtilsObject>();
 

@@ -72,7 +72,7 @@ namespace Neptune::Container {
 		* 
 		* @return Returns true if it has key inside the container.
 		*/
-		bool Contains(const K& key);
+		bool Contains(const K& key) const;
 
 		/**
 		* @brief Remove an element inside the container if founded by key.
@@ -189,7 +189,7 @@ namespace Neptune::Container {
 	}
 
 	template<typename K, typename V>
-	inline bool LinkedUnorderedMap<K, V>::Contains(const K& key)
+	inline bool LinkedUnorderedMap<K, V>::Contains(const K& key) const
 	{
 		std::shared_lock lock(m_Mutex);
 

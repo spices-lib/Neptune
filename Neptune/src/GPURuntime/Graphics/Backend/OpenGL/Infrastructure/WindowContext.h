@@ -55,7 +55,7 @@ namespace Neptune::OpenGL {
         *
         * @return Returns WindowContext.
         */
-        const void* Handle() const { return m_Window; }
+		void* Handle() const { return m_Window; }
 
         /**
         * @brief Interface of Make Context Current.
@@ -69,7 +69,8 @@ namespace Neptune::OpenGL {
 		
     protected:
 
-        void* m_Window;  // @brief This Window.
+        void* m_Window = nullptr;  // @brief This Window.
+
 	};
 
 }

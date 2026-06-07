@@ -611,7 +611,7 @@ namespace Neptune::Vulkan {
 
 	private:
 
-		void ParseVideoStreamData(const uint8_t* pData, size_t size, size_t *pnVideoBytes, bool doPartialParsing, uint32_t flags = 0, int64_t timestamp = 0);
+		void ParseVideoStreamData(const uint8_t* pData, size_t size, size_t *pnVideoBytes, bool doPartialParsing, uint32_t flags = 0, int64_t timestamp = 0) const;
 
         void ParseVideoData(VkParserSourceDataPacket* pPacket, size_t* pParsedBytes, bool doPartialParsing) const;
 

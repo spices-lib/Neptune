@@ -29,10 +29,6 @@ namespace Neptune::OpenGL {
         const auto& window = Window::Instance();
 
         m_GraphicsBackend->OnInitialize(&window);
-
-        GetContext().Registry<IPresentWindowContext>(window.Implement(), window.NativeWindow());
-        
-        GetContext().Get<IWindowContext>()->MakeContextCurrent();
         
         RenderFrontend::OnInitialize();
     }

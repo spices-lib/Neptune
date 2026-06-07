@@ -443,8 +443,8 @@ namespace Neptune::Vulkan {
         }
 	}
 
-	void Decoder::ParseVideoStreamData(const uint8_t* pData, size_t size, size_t *pnVideoBytes, bool doPartialParsing, uint32_t flags, int64_t timestamp)
-	{
+	void Decoder::ParseVideoStreamData(const uint8_t* pData, size_t size, size_t *pnVideoBytes, bool doPartialParsing, uint32_t flags, int64_t timestamp) const
+    {
         VkParserSourceDataPacket packet = { 0 };
 
         packet.payload            = pData;

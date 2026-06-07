@@ -32,7 +32,7 @@ namespace Neptune::OpenGL::GLFW {
             {
                 if (m_Window)
                 {
-                    glfwDestroyWindow(static_cast<GLFWwindow*>(m_Window));;
+                    glfwDestroyWindow(static_cast<GLFWwindow*>(m_Window));
                     break;
                 }
             }
@@ -83,7 +83,8 @@ namespace Neptune::OpenGL::GLFW {
 
 #endif
 
-        auto window = glfwCreateWindow(1, 1, "OpenGLContext", nullptr, nullptr);
+        auto shared = GetContext().Has<IWindowContext>() ? static_cast<GLFWwindow*>(GetContext().Get<IWindowContext>()->Handle()) : nullptr;
+        auto window = glfwCreateWindow(1, 1, "OpenGLContext", nullptr, shared);
         if (!window)
         {
             NEPTUNE_CORE_CRITICAL("Failed to Create glfwWindow")

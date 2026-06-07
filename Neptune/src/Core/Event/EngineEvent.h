@@ -87,7 +87,7 @@ namespace Neptune {
         }
 
         EVENT_CLASS_TYPE(Engine)
-        EVENT_CLASS_CATEGORY(EventCategorySlate)
+        EVENT_CLASS_CATEGORY(EventCategoryEngine)
 
     private:
 

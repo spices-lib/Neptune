@@ -237,13 +237,13 @@ namespace Neptune::Container {
                 {
                     Flip();
                 }
+                
+                return;
             }
-            else 
-            {
-                std::unique_lock lock(m_Mutex);
 
-                m_Bits.set(static_cast<size_t>(static_cast<TSize>(bit)), value);
-            }
+            std::unique_lock lock(m_Mutex);
+
+            m_Bits.set(static_cast<size_t>(static_cast<TSize>(bit)), value);
         }
 
         /**
@@ -259,12 +259,10 @@ namespace Neptune::Container {
             {
                 return !None();
             }
-            else
-            {
-                std::shared_lock lock(m_Mutex);
 
-                return m_Bits.test(static_cast<size_t>(static_cast<TSize>(bit)));
-            }
+            std::shared_lock lock(m_Mutex);
+
+            return m_Bits.test(static_cast<size_t>(static_cast<TSize>(bit)));
         }
 
         /**
@@ -287,13 +285,13 @@ namespace Neptune::Container {
             if (bit == T::Count)
             {
                 Reset();
+                
+                return; 
             }
-            else
-            {
-                std::unique_lock lock(m_Mutex);
 
-                m_Bits.reset(static_cast<size_t>(static_cast<TSize>(bit)));
-            }
+            std::unique_lock lock(m_Mutex);
+
+            m_Bits.reset(static_cast<size_t>(static_cast<TSize>(bit)));
         }
 
         /**
@@ -313,16 +311,16 @@ namespace Neptune::Container {
         */
         void Flip(T bit)
         {
-            if (bit == T::ALL)
+            if (bit == T::Count)
             {
                 Flip();
+                
+                return;
             }
-            else
-            {
-                std::unique_lock lock(m_Mutex);
 
-                m_Bits.flip(static_cast<size_t>(static_cast<TSize>(bit)));
-            }
+            std::unique_lock lock(m_Mutex);
+
+            m_Bits.flip(static_cast<size_t>(static_cast<TSize>(bit)));
         }
 
         /**
