@@ -33,8 +33,9 @@ namespace Neptune::GLFW {
         // Set Hint
         m_APIInterface->Hint();
 
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);           // @brief Set glfw enable resize feature.
-        glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);           // @brief Set glfw enable title tab.
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);                                  // @brief Set glfw enable resize feature.
+        glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);                                  // @brief Set glfw enable title tab.
+        glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_NONE);  // @brief Set glfw release behavior(no flush).
 
         const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 

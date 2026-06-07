@@ -26,20 +26,9 @@ namespace Neptune::OpenGL::GLFW {
     {
         NEPTUNE_PROFILE_ZONE
         
-        switch (GetEInfrastructure())
+        if (m_Window && m_OffScreen)
         {
-            case EInfrastructure::WindowContext:
-            {
-                if (m_Window)
-                {
-                    glfwDestroyWindow(static_cast<GLFWwindow*>(m_Window));
-                    break;
-                }
-            }
-            case EInfrastructure::PresentWindowContext:
-            {
-                break;
-            }
+            glfwDestroyWindow(static_cast<GLFWwindow*>(m_Window));
         }
     }
 
@@ -59,7 +48,7 @@ namespace Neptune::OpenGL::GLFW {
         }
     }
 
-    void* WindowContext::CreateWindow() const
+    void* WindowContext::CreateWindow()
     {
         NEPTUNE_PROFILE_ZONE
         
@@ -90,6 +79,8 @@ namespace Neptune::OpenGL::GLFW {
             NEPTUNE_CORE_CRITICAL("Failed to Create glfwWindow")
         }
 
+        m_OffScreen = true;
+        
         return window;
     }
     

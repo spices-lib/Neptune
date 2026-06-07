@@ -34,8 +34,9 @@ namespace Neptune::EmscriptenGLFW {
         // Set Hint
         m_APIInterface->Hint();
 
-        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);        // @brief no OpenGL (use canvas2D)
-        glfwWindowHint(GLFW_SCALE_FRAMEBUFFER, GLFW_FALSE);  // @brief make it not Hi DPI Aware (simplify rendering code a bit)
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);                               // @brief no OpenGL (use canvas2D)
+        glfwWindowHint(GLFW_SCALE_FRAMEBUFFER, GLFW_FALSE);                         // @brief make it not Hi DPI Aware (simplify rendering code a bit)
+        glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_NONE);  // @brief Set glfw release behavior(no flush).
 
         const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 

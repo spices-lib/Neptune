@@ -181,8 +181,8 @@ namespace Neptune::Render::Common::Test {
 			
 			using infrastructure = Infrastructure<EInfrastructure>;
 
-			// Infrastructure bytes ContextAccessor + virtual table + member variables
-			EXPECT_EQ(sizeof(infrastructure), 2 * sizeof(size_t) + sizeof(size_t) + sizeof(size_t));
+			// Infrastructure bytes ContextAccessor + member variables (no unique vtable)
+			EXPECT_EQ(sizeof(infrastructure), 2 * sizeof(size_t) + sizeof(size_t));
 		});
 	}
 	

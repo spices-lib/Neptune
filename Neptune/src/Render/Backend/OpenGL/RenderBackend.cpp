@@ -45,10 +45,6 @@ namespace Neptune::OpenGL {
     void RenderBackend::BeginFrame(Scene* scene) const
     {
         NEPTUNE_PROFILE_ZONE
-
-        GetContext().Get<IWindowContext>()->MakeContextCurrent();
-
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
         
         const auto& clock = scene->GetComponent<Component<Data::Clock>>(scene->GetRoot()).GetModel();
 
@@ -58,6 +54,12 @@ namespace Neptune::OpenGL {
 
         {
             DEBUGUTILS_BEGINLABEL(0, "MainGraphicQueue")
+            
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            
+            glClearDepth(1.0f);
+            
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
     }
 
@@ -72,11 +74,7 @@ namespace Neptune::OpenGL {
         {
             DEBUGUTILS_BEGINLABEL(0, "PresentQueue")
             
-            GetContext().Get<IPresentWindowContext>()->MakeContextCurrent();
-            
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            
-            GetContext().Get<IPresentWindowContext>()->SwapBuffers();
+            GetContext().Get<IWindowContext>()->SwapBuffers();
 
             DEBUGUTILS_ENDLABEL()
         }

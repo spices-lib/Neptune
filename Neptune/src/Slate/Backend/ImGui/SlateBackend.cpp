@@ -135,7 +135,16 @@ namespace Neptune::imgui {
     {
         NEPTUNE_PROFILE_ZONE
         
+        auto last = m_WindowInterface->Handle();
+        
         m_RenderInterface->RenderFrame(payload);
+        
+        auto now = m_WindowInterface->Handle();
+        
+        if (last != now)
+        {
+            m_WindowInterface->MakeCurrent(last);
+        }
     }
 
 }

@@ -45,6 +45,8 @@ namespace Neptune::OpenGL {
 		glDebugMessageCallback(DebugCallback, nullptr);
 
 		glEnable(GL_DEBUG_OUTPUT);
+		
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
 	}
 }
 

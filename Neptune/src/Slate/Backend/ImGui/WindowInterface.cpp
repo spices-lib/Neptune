@@ -9,6 +9,7 @@
 #include "Window/Window.h"
 
 #include <backends/imgui_impl_glfw.h>
+#include "GLFW/glfw3.h"
 
 namespace Neptune::imgui {
 
@@ -82,6 +83,20 @@ namespace Neptune::imgui {
 		NEPTUNE_PROFILE_ZONE
 		
 		ImGui_ImplGlfw_NewFrame();
+	}
+	
+	void* GLFWInterface::Handle() const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		return glfwGetCurrentContext();
+	}
+	
+	void GLFWInterface::MakeCurrent(void* window) const
+	{
+		NEPTUNE_PROFILE_ZONE
+		
+		glfwMakeContextCurrent(static_cast<GLFWwindow*>(window));
 	}
 
 }

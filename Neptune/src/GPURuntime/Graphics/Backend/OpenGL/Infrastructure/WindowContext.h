@@ -14,8 +14,7 @@
 
 namespace Neptune::OpenGL {
 
-    using IWindowContext        = IInfrastructure<class WindowContext, EInfrastructure::WindowContext>;
-    using IPresentWindowContext = IInfrastructure<class WindowContext, EInfrastructure::PresentWindowContext>;
+    using IWindowContext = IInfrastructure<class WindowContext, EInfrastructure::WindowContext>;
 
     /**
     * @brief OpenGL::WindowContext Class.
@@ -69,7 +68,8 @@ namespace Neptune::OpenGL {
 		
     protected:
 
-        void* m_Window = nullptr;  // @brief This Window.
+        void* m_Window = nullptr;   // @brief This Window.
+		bool  m_OffScreen = false;  // @brief Is OffScreen.
 
 	};
 

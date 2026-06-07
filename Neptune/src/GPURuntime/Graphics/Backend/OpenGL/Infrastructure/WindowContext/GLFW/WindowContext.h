@@ -59,7 +59,7 @@ namespace Neptune::OpenGL::GLFW {
 		* 
 		* @return Returns Window.
 		*/
-		void* CreateWindow() const;
+		void* CreateWindow();
 
 	};
 

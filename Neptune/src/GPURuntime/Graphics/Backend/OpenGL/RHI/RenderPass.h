@@ -65,8 +65,8 @@ namespace Neptune::OpenGL {
 
 	private:
 
-		std::vector<SP<Unit::RenderBuffer>>               m_RenderBuffers;                    // @brief Container of RenderBuffer.
 		std::vector<SP<Unit::FrameBuffer>>                m_FrameBuffers;                    // @brief Container of FrameBuffer.
+		std::vector<SP<Unit::RenderBuffer>>               m_RenderBuffers;                   // @brief Container of RenderBuffer.
 
 	};
 }

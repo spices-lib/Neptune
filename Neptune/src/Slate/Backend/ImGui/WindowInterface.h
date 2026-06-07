@@ -39,6 +39,20 @@ namespace Neptune::imgui {
         * @brief Interface of Begin a frame.
         */
         virtual void BeginFrame() const = 0;
+        
+        /**
+        * @brief Interface of Get Handle.
+        *
+        * @return Returns Window Handle.
+        */
+        virtual void* Handle() const = 0;
+        
+        /**
+        * @brief Interface of Make Current Window.
+        *
+        * @param[in] window Window.
+        */
+        virtual void MakeCurrent(void* window) const = 0;
     };
 
     /**
@@ -78,6 +92,20 @@ namespace Neptune::imgui {
         * @brief Interface of Begin a frame.
         */
         void BeginFrame() const override;
+        
+        /**
+        * @brief Interface of Get Handle.
+        *
+        * @return Returns Window Handle.
+        */
+        void* Handle() const override;
+        
+        /**
+        * @brief Interface of Make Current Window.
+        *
+        * @param[in] window Window.
+        */
+        void MakeCurrent(void* window) const override;
     };
 
 }
