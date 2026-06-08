@@ -16,6 +16,7 @@ namespace Neptune::Vulkan {
     }
 
     template<>
+    SIMD_ATTRIBUTE(ssse3)
     size_t VulkanVideoDecoder::next_start_code<SIMD_ISA::SSSE3>(const uint8_t* pdatain, size_t datasize, bool& found_start_code)
     {
         size_t i = 0;

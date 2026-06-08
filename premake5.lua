@@ -14,11 +14,12 @@ workspace "Neptune"
 
 	-- Web App
 	filter "system:emscripten"
-		architecture "wasm64"
+		architecture "wasm64"                 -- Architecture wasm64
 
 	-- Windows App
 	filter "system:windows"
-		architecture "x64"
+		architecture "x64"                    -- Architecture x64
+		toolset "clang"                       -- Use clang
 
 -- Building Output Folder.
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"

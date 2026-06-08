@@ -16,6 +16,7 @@ bool VulkanVideoDecoder::ParseByteStreamSVE(const VkParserBitstreamPacket* pck, 
 
 #define SVE_REGISTER_MAX_BYTES 256 // 2048 bits
 template<>
+SIMD_ATTRIBUTE(+sve)
 size_t VulkanVideoDecoder::next_start_code<SIMD_ISA::SVE>(const uint8_t *pdatain, size_t datasize, bool& found_start_code)
 {
     size_t i = 0;

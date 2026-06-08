@@ -119,6 +119,7 @@ project "Neptune"
 			"%{IncludeDir.VulkanSDK}",                            -- Library: VulkanSDK Source Folder.
 			"%{IncludeDir.Glad}",                                 -- Library: Glad Source Folder.
 			"%{IncludeDir.WinPixEventRuntime}",                   -- Library: WinPixEventRuntime Source Folder.
+			"%{IncludeDir.AdaptiveCpp}",                          -- Library: AdaptiveCpp Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -127,6 +128,12 @@ project "Neptune"
 			-- Use winsock2.h instead of winsock.h.
 			"WIN32_LEAN_AND_MEAN",
 
+			-- Use M_PI Macro.
+			"_USE_MATH_DEFINES",
+
+			-- NO MIN MAX Macro
+			"NOMINMAX",
+			
 			-- Define Platform : Windows.
 			"NP_PLATFORM_WINDOWS"
 		}
@@ -257,4 +264,10 @@ project "Neptune"
 		runtime "Release"
 		optimize "On"
 
-	
+	-- Configuration: MSVC
+	filter { "toolset:msc" }
+        buildoptions { "/wd4838" }                 -- Disable Warning: 4838
+
+	-- Configuration: GCC/Clang
+    filter { "toolset:gcc or toolset:clang" }
+        buildoptions { "-Wno-narrowing" }          -- Disable Warning: 4838

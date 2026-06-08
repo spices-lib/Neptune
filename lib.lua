@@ -26,6 +26,7 @@ IncludeDir["IconFontCppHeaders"]          = "%{wks.location}/Neptune/vendor/Icon
 IncludeDir["shaderc"]                     = "%{wks.location}/Neptune/vendor/shaderc"                                    -- Include: shaderc
 IncludeDir["glslang"]                     = "%{IncludeDir.VulkanSDK}/glslang"                                           -- Include: glslang
 IncludeDir["WinPixEventRuntime"]          = "%{wks.location}/packages/WinPixEventRuntime.1.0.240308001/include"         -- Include: WinPixEventRuntime
+IncludeDir["AdaptiveCpp"]                 = "C:/AdaptiveCpp/include"                                                    -- Include: AdaptiveCpp
 IncludeDir["googletest"]                  = "%{wks.location}/UnitTest/vendor/googletest/googletest/include"             -- Include: googletest
 IncludeDir["googlemock"]                  = "%{wks.location}/UnitTest/vendor/googletest/googlemock/include"             -- Include: googlemock
 
