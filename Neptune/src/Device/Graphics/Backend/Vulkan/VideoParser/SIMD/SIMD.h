@@ -40,7 +40,7 @@ namespace Neptune::Vulkan {
 
     SIMD_ISA GetSIMD();
 
-#if defined(__GNUC__) || defined(__clang__)
+#if defined(NP_COMPILER_GCC) || defined(NP_COMPILER_CLANG)
 #define SIMD_ATTRIBUTE(...) __attribute__((target(#__VA_ARGS__)))
 #else
 #define SIMD_ATTRIBUTE(...)

@@ -14,8 +14,8 @@ namespace Neptune {
     */
     enum class ComputeBackendEnum : uint8_t
     {
-        OpenCL = 0,            // @brief Limited Desktop & Mobile
-        SYCL,                  // @brief Limited Desktop
+        OpenCL = 0,            // @brief Any Desktop, Limited Mobile(android: support, ios: not support)
+        SYCL,                  // @brief Any Desktop, Limited Mobile(basically not support)
         CUDA,                  // @brief Nvidia GPU Desktop
         ROCm,                  // @brief AMD GPU Desktop
         OpenMP,                // @brief CPU Cross Platform

@@ -16,6 +16,7 @@
 #include "Core/Container/BitSetTest.h"
 #include "Core/Container/TreeTest.h"
 
+#include "Device/Compute/Backend/SYCL/SYCLTest.h"
 #include "Device/Graphics/Backend/Common/CommonTest.h"
 #include "Device/Graphics/Backend/Direct3D11/GraphicsBackendTest.h"
 #include "Device/Graphics/Backend/Direct3D12/GraphicsBackendTest.h"
