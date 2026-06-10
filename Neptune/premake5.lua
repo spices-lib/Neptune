@@ -263,11 +263,3 @@ project "Neptune"
 
 		runtime "Release"
 		optimize "On"
-
-	-- Configuration: MSVC
-	filter { "toolset:msc" }
-        buildoptions { "/wd4838" }                 -- Disable Warning: 4838
-
-	-- Configuration: GCC/Clang
-    filter { "toolset:gcc or toolset:clang" }
-        buildoptions { "-Wno-narrowing" }          -- Disable Warning: 4838

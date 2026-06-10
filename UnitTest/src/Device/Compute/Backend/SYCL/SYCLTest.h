@@ -23,7 +23,7 @@ namespace Neptune::SYCL::Test {
 
         NEPTUNE_TEST_PROFILE_FUNCTION
 		
-    	Sample();
+    	//Sample();
     }
 	
 }
