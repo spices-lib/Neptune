@@ -21,7 +21,7 @@ namespace Neptune {
         OpenGLSC,             // @brief Safety Critical
         Direct2D,             // @brief Windows 2D
         Direct3D9,            // @brief Windows
-        Direct3D10,           // @brief Windows
+        Direct3D10,           // @brief Windows Vista/7
         Direct3D11,           // @brief Windows
         Direct3D12,           // @brief Windows
         Vulkan,               // @brief Any
@@ -29,6 +29,7 @@ namespace Neptune {
         Metal,                // @brief Ios Macos Ipados
         GNM,                  // @brief PlayStation
         GNMX,                 // @brief PlayStation
+        GDK,                  // @brief Xbox
         GDKX,                 // @brief Xbox
         NVN,                  // @brief Nintendo Switch
 
