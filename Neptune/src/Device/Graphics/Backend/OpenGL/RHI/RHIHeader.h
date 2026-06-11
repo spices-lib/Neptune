@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_OPENGL
 
 #include "Device/Graphics/Backend/OpenGL/RHI/RenderPass.h"
 #include "Device/Graphics/Backend/OpenGL/RHI/DescriptorList.h"

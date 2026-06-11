@@ -5,7 +5,7 @@
 */
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_OPENGL
 
 #include "WindowContext.h"
 #include "Device/Graphics/Backend/OpenGL/Core.h"

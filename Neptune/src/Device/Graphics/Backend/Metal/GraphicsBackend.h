@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_MACOS
+#ifdef NP_GRAPHICS_METAL
 
 #include "Core/Core.h"
 #include "GPURuntime/Graphic/Frontend/GraphicsFrontend.h"

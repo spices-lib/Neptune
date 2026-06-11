@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_OPENGL
 
 #include "CmdList2.h"
 #include "Device/Graphics/Backend/OpenGL/Infrastructure/DebugUtilsObject.h"
