@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <Device/Compute/Backend/SYCL/Sample.h>
-
 #ifdef NP_COMPUTE_SYCL
 
 #include "Instrumentor.h"
+
+#include <Device/Compute/Backend/SYCL/Sample.h>
 
 #include <gmock/gmock.h>
 

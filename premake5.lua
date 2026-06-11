@@ -2,9 +2,10 @@
 -- @brief Defines all Solutions Building.
 -- @author Spices.
 
-local compiler   = require "compiler"
-local project    = require "project"
-      vendor     = require "vendor"
+local project  = require "project"
+compiler       = require "compiler"
+vendor         = require "vendor"
+platform       = require "platform"
 
 workspace "Neptune"
 	startproject "Editor"              -- Start with Editor
@@ -16,6 +17,9 @@ workspace "Neptune"
 		"Release",
 	}
 
+	compiler.SetClang()
+	compiler.Initialize()
+
 	-- Web App
 	filter "system:emscripten"
 		architecture "wasm64"                 -- Architecture wasm64
@@ -23,9 +27,7 @@ workspace "Neptune"
 	-- Windows App
 	filter "system:windows"
 		architecture "x64"                    -- Architecture x64
-		toolset "clang"                       -- Use clang
-
-	compiler.Initialize()
+		toolset(compiler.GetToolset())        -- Toolset: Clang
 
 -- Building Output Folder.
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"

@@ -1,7 +1,8 @@
 ﻿#include "Pchheader.h"
-#include "Sample.h"
 
 #ifdef NP_COMPUTE_SYCL
+
+#include "Sample.h"
 
 #include <CL/sycl.hpp>
 

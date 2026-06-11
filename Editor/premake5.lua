@@ -31,10 +31,7 @@ project "Editor"
 		-- Define Editor Assets Folder.
 		'EDITOR_ASSETS_PATH=std::string("%{wks.location}/Editor/assets/")',
 
-		"TRACY_ENABLE",                  -- tracy Feature Enable.
-		"TRACY_ON_DEMAND",               -- Used if want profile on demand.
-		"TRACY_FIBERS",                  -- Enable fiber thread.
-		"TRACY_IMPORT",                  -- Multi dll.
+		platform.GetProfileFeatures(),
 	}
 
 	-- The Solution Additional Include Folder.

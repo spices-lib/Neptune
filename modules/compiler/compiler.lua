@@ -5,6 +5,20 @@
 -- Define module
 local module = {}
 
+module.toolset = ""
+
+-- @brief Set Clang.
+module.SetClang = function()
+	module.toolset = "clang"
+end
+
+-- @brief Get Toolset.
+--
+-- @return Returns Toolset.
+module.GetToolset = function()
+	return module.toolset
+end
+
 -- @brief module Initialize.
 module.Initialize = function()
 
