@@ -14,7 +14,7 @@ module.GetComputeFeatures = function(toolset)
 
     local list = {}
 
-    if toolset == "clang" then
+    if os.target() == "windows" and toolset == "clang" then
         table.insert(list, "NP_COMPUTE_SYCL")
     end
 
