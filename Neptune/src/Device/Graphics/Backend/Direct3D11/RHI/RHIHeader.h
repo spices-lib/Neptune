@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 
 #include "Device/Graphics/Backend/Direct3D11/RHI/RenderPass.h"
 #include "Device/Graphics/Backend/Direct3D11/RHI/DescriptorList.h"

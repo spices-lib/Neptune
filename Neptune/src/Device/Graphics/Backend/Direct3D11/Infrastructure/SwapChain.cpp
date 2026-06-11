@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 
 #include "SwapChain.h"
 #include "Factory.h"

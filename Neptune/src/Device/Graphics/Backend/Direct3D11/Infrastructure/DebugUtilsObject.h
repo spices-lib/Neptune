@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 
 #include "Core/Core.h"
 #include "Infrastructure.h"

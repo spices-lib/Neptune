@@ -5,10 +5,11 @@
 */
 
 #pragma once
+
+#ifdef NP_GRAPHICS_DIRECT3D11
+
 #include <d3d11_4.h>
 #include <dxgi1_6.h>
-
-#ifdef NP_PLATFORM_WINDOWS
 
 namespace Neptune::Direct3D11 {
 	
