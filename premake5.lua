@@ -4,7 +4,7 @@
 
 local compiler   = require "compiler"
 local project    = require "project"
-local dependency = require "dependency"
+      vendor     = require "vendor"
 
 workspace "Neptune"
 	startproject "Editor"              -- Start with Editor
@@ -30,9 +30,6 @@ workspace "Neptune"
 -- Building Output Folder.
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
--- Libraries of this Solution.
-include "lib.lua"
-
 project.Load()
 
-dependency.Load()
+vendor.LoadThirdPartyProjects()

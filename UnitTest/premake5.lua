@@ -37,22 +37,12 @@ project "UnitTest"
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
-		"%{IncludeDir.Neptune}",                              -- Neptune Source Folder.
-		"%{IncludeDir.NeptuneShader}",                        -- Neptune Shader Source Folder.
-		"%{IncludeDir.googletest}",			                  -- Library: googletest Source Folder.
-		"%{IncludeDir.googlemock}",			                  -- Library: googlemock Source Folder.
-		"src",                                                -- UnitTest Source Folder.
-		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
-		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
-		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
-		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
-		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
-		"%{IncludeDir.rapidyaml}",                            -- Library: rapidyaml Source Folder.
-		"%{IncludeDir.ImPlot}",                               -- Library: ImPlot Source Folder.
-		"%{IncludeDir.spdlog}",                               -- Library: spdlog Source Folder.
-		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
-		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
-		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
+		"%{vendor.includes.Neptune}",                              -- Neptune Source Folder.
+		"%{vendor.includes.googletest}",			               -- Library: googletest Source Folder.
+		"%{vendor.includes.googlemock}",			               -- Library: googlemock Source Folder.
+		"src",                                                     -- UnitTest Source Folder.
+		"%{vendor.includes.glm}",                                  -- Library: glm Source Folder.
+		"%{vendor.includes.entt}",                                 -- Library: entt Source Folder.
 	}
 
 	-- In Visual Studio, it only works when generated a new solution, remember update solution will not works.
@@ -75,14 +65,7 @@ project "UnitTest"
 		
 		-- The Solution Additional Include Folder.
 		includedirs
-		{
-            "%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
-            "%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
-            "%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
-            "%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
-			"%{IncludeDir.GLFW}",                                 -- Library: GLFW Source Folder.
-			"%{IncludeDir.VulkanSDK}",                            -- Library: VulkanSDK Source Folder.
-		}
+		{}
 
 		-- Windows Specific Solution Macro Definitions.
 		defines
@@ -108,9 +91,9 @@ project "UnitTest"
 		-- The Solution Additional Include Folder.
 		includedirs
 		{
-			"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
-			"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-			"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+			"%{vendor.includes.emscripten}",                           -- Library: emscripten Header Folder.
+			"%{vendor.includes.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+			"%{vendor.includes.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
 		}
 
 		-- Emscripten Specific Solution Macro Definitions.

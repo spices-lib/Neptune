@@ -16,7 +16,7 @@ project "Glad"
     
     includedirs
     {
-        "%{IncludeDir.Glad}",                            -- Library: Glad Source Folder.
+        "include",                            -- Library: Glad Source Folder.
     }
 
     filter "configurations:Debug"

@@ -64,19 +64,19 @@ project "Neptune"
 	-- The Solution Additional Include Folder.
 	includedirs
 	{
-		"src",                                                -- Neptune Source Folder.
-		"%{IncludeDir.NeptuneShader}",                        -- Neptune Shader Source Folder.
-		"%{IncludeDir.glm}",                                  -- Library: glm Source Folder.
-		"%{IncludeDir.stb_image}",                            -- Library: stb_image Source Folder.
-		"%{IncludeDir.ImGui}",                                -- Library: ImGui Source Folder.
-		"%{IncludeDir.entt}",                                 -- Library: entt Source Folder.
-		"%{IncludeDir.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
-		"%{IncludeDir.rapidyaml}",                            -- Library: rapidyaml Source Folder.
-		"%{IncludeDir.ImPlot}",                               -- Library: ImPlot Source Folder.
-		"%{IncludeDir.spdlog}",                               -- Library: spdlog Source Folder.
-		"%{IncludeDir.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
-		"%{IncludeDir.tracy}",                                -- Library: tracy Source Folder.
-		"%{IncludeDir.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
+		"src",                                                     -- Neptune Source Folder.
+		"%{vendor.includes.NeptuneShader}",                        -- Neptune Shader Source Folder.
+		"%{vendor.includes.glm}",                                  -- Library: glm Source Folder.
+		"%{vendor.includes.stb_image}",                            -- Library: stb_image Source Folder.
+		"%{vendor.includes.ImGui}",                                -- Library: ImGui Source Folder.
+		"%{vendor.includes.entt}",                                 -- Library: entt Source Folder.
+		"%{vendor.includes.yaml_cpp}",                             -- Library: yaml_cpp Source Folder.
+		"%{vendor.includes.rapidyaml}",                            -- Library: rapidyaml Source Folder.
+		"%{vendor.includes.ImPlot}",                               -- Library: ImPlot Source Folder.
+		"%{vendor.includes.spdlog}",                               -- Library: spdlog Source Folder.
+		"%{vendor.includes.ImGuizmo}",                             -- Library: ImGuizmo Source Folder.
+		"%{vendor.includes.tracy}",                                -- Library: tracy Source Folder.
+		"%{vendor.includes.IconFontCppHeaders}",                   -- Library: IconFontCppHeaders Source Folder.
 	}
 
 	-- The Solution Dependency
@@ -85,7 +85,6 @@ project "Neptune"
       --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
-		"shaderc",                            -- Dependency：shaderc
 	}
 
 	-- Library: std_image is included this solution, do not use PreCompiler Header.
@@ -111,15 +110,15 @@ project "Neptune"
 		-- The Solution Additional Include Folder.
 		includedirs
 		{
-            "%{IncludeDir.shaderc}",                              -- Library: shaderc Source Folder.
-            "%{IncludeDir.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
-            "%{IncludeDir.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
-            "%{IncludeDir.glslang}",                              -- Library: glslang Source Folder.
-			"%{IncludeDir.GLFW}",                                 -- Library: GLFW Source Folder.
-			"%{IncludeDir.VulkanSDK}",                            -- Library: VulkanSDK Source Folder.
-			"%{IncludeDir.Glad}",                                 -- Library: Glad Source Folder.
-			"%{IncludeDir.WinPixEventRuntime}",                   -- Library: WinPixEventRuntime Source Folder.
-			"%{IncludeDir.AdaptiveCpp}",                          -- Library: AdaptiveCpp Source Folder.
+            "%{vendor.includes.shaderc}",                              -- Library: shaderc Source Folder.
+            "%{vendor.includes.shaderc}/libshaderc/include",           -- Library: shaderc libshaderc Source Folder.
+            "%{vendor.includes.shaderc}/libshaderc_util/include",      -- Library: shaderc libshaderc_util Source Folder.
+            "%{vendor.includes.glslang}",                              -- Library: glslang Source Folder.
+			"%{vendor.includes.GLFW}",                                 -- Library: GLFW Source Folder.
+			"%{vendor.includes.VulkanSDK}",                            -- Library: VulkanSDK Source Folder.
+			"%{vendor.includes.Glad}",                                 -- Library: Glad Source Folder.
+			"%{vendor.includes.WinPixEventRuntime}",                   -- Library: WinPixEventRuntime Source Folder.
+			"%{vendor.includes.AdaptiveCpp}",                          -- Library: AdaptiveCpp Source Folder.
 		}
 
 		-- Windows Specific Solution Macro Definitions.
@@ -141,25 +140,27 @@ project "Neptune"
 		-- Windows nuget packages.
 		nuget
 		{
-			"%{Nugets.DirectX12AgilitySDK}",      -- Dependency: Direct3D12
-			"%{Nugets.WinPixEventRuntime}",       -- Dependency: WinPixEventRuntime
+			"%{vendor.nugets.DirectX12AgilitySDK}",      -- Dependency: Direct3D12
+			"%{vendor.nugets.WinPixEventRuntime}",       -- Dependency: WinPixEventRuntime
 		}
 
 		-- Windows Specific Solution Dependency.
 		links
 		{
-			"GLFW",                               -- Dependency: GLFW
-			"ImGui_Vulkan",                       -- Dependency: imgui
-			"ImGui_OpenGL",                       -- Dependency: imgui
-			"ImGui_Direct3D11",                   -- Dependency: imgui
-			"ImGui_Direct3D12",                   -- Dependency: imgui
-			"%{Library.VulkanSDK}",               -- Dependency: VulkanSDK
-			"%{Library.dxgi}",                    -- Dependency: dxgi
-			"%{Library.d3d11}",                   -- Dependency: d3d11
-			"%{Library.d3d12}",                   -- Dependency: d3d12
-			"%{Library.WinPixEventRuntime}",      -- Dependency: WinPixEventRuntime
-			"Glad",                               -- Dependency: Glad
-			"tracy",                              -- Dependency: tracy  
+			"%{vendor.libraries.VulkanSDK}",                           -- Dependency: VulkanSDK
+			"%{vendor.libraries.dxgi}",                                -- Dependency: dxgi
+			"%{vendor.libraries.d3d11}",                               -- Dependency: d3d11
+			"%{vendor.libraries.d3d12}",                               -- Dependency: d3d12
+			"%{vendor.libraries.WinPixEventRuntime}",                  -- Dependency: WinPixEventRuntime
+			
+			"ImGui_Vulkan",                                            -- Dependency: imgui
+			"ImGui_OpenGL",                                            -- Dependency: imgui
+			"ImGui_Direct3D11",                                        -- Dependency: imgui
+			"ImGui_Direct3D12",                                        -- Dependency: imgui
+			"GLFW",                                                    -- Dependency: GLFW
+			"Glad",                                                    -- Dependency: Glad
+			"tracy",                                                   -- Dependency: tracy
+			"shaderc",                                                 -- Dependency：shaderc 
 		}
 
 		-- The Solution build options
@@ -174,8 +175,8 @@ project "Neptune"
             -- Debug Specific Solution Dependency
             links
             {
-                "%{Library.shaderc_debug}",               -- Dependency: shaderc_debug
-                "%{Library.shaderc_utils_debug}",         -- Dependency: shaderc_utils_debug
+                "%{vendor.libraries.shaderc_debug}",               -- Dependency: shaderc_debug
+                "%{vendor.libraries.shaderc_utils_debug}",         -- Dependency: shaderc_utils_debug
             }
         
         -- Configuration: Release
@@ -184,8 +185,8 @@ project "Neptune"
             -- Release Specific Solution Dependency
             links
             {
-                "%{Library.shaderc_release}",             -- Dependency: shaderc_release
-                "%{Library.shaderc_utils_release}",       -- Dependency: shaderc_utils_release
+                "%{vendor.libraries.shaderc_release}",             -- Dependency: shaderc_release
+                "%{vendor.libraries.shaderc_utils_release}",       -- Dependency: shaderc_utils_release
             }
 
 	-- Platform: Emscripten
@@ -203,10 +204,10 @@ project "Neptune"
 		-- The Solution Additional Include Folder.
 		includedirs
 		{
-			"%{IncludeDir.emscripten}",                           -- Library: emscripten Header Folder.
-			"%{IncludeDir.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-			"%{IncludeDir.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
-			"%{IncludeDir.emdawnwebgpu}",                         -- Library: emdawnwebgpu Header Folder.
+			"%{vendor.includes.emscripten}",                           -- Library: emscripten Header Folder.
+			"%{vendor.includes.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
+			"%{vendor.includes.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
+			"%{vendor.includes.emdawnwebgpu}",                         -- Library: emdawnwebgpu Header Folder.
 		}
 
 		-- Emscripten Specific Solution Macro Definitions.
