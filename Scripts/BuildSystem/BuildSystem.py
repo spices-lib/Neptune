@@ -16,7 +16,7 @@ class BuildSystem(BasicObject, ABC):
     @brief Base class for build systems
     """
 
-    def __init__(self, solution_root: Path, platform: str = "emscripten", toolset: str = "GNU"):
+    def __init__(self, solution_root: Path, platform: str = "emscripten", ide: str = "", toolset: str = "gcc"):
         """
         @brief Construct function.
         @param[in] solution_root Solution root folder.
@@ -26,9 +26,11 @@ class BuildSystem(BasicObject, ABC):
         super().__init__()
         self.solutionDirectory = solution_root
         self.platform = platform
+        self.ide = ide
         self.toolset = toolset
         self.dependencyGraph = DependencyGraph()
         self.dependencyGraph.add_node(GitDependency())
+        print(f"..............{solution_root} {platform} {ide} {toolset}")
 
     def generate(self) -> bool:
         """

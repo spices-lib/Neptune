@@ -8,7 +8,8 @@ import sys
 from BuildSystem import BuildSystem
 from Scripts.BuildDependencies.PremakeDependency import PremakeDependency
 from Scripts.BuildDependencies.EmsdkDependency import EmsdkDependency
-from Scripts.BuildDependencies.GCCMakeDependency import GCCMakeDependency
+from Scripts.BuildDependencies.GNUDependency import GNUDependency
+from Scripts.BuildDependencies.LLVMDependency import LLVMDependency
 
 if sys.platform == 'win32':
     from Scripts.BuildDependencies.MSVCDependency import MSVCDependency
@@ -18,20 +19,19 @@ from pathlib import Path
 import os
 import subprocess
 
-
 class PremakeBuildSystem(BuildSystem):
     """
     @brief Premake-based build system implementation
     """
 
-    def __init__(self, solution_root: Path, platform: str = "emscripten", toolset: str = "GNU"):
+    def __init__(self, solution_root: Path, platform: str = "emscripten", ide: str = None, toolset: str = "gcc"):
         """
         @brief Construct function.
         @param[in] solution_root Solution root folder.
         @param[in] platform
         @param[in] toolset
         """
-        super().__init__(solution_root, platform, toolset)
+        super().__init__(solution_root, platform, ide, toolset)
         self.dependencyGraph.add_node(PremakeDependency())
 
         if self.platform == "emscripten":
@@ -40,10 +40,12 @@ class PremakeBuildSystem(BuildSystem):
         if self.platform == "windows":
             self.dependencyGraph.add_node(TracyDependency())
 
-        if self.toolset == "GNU":
-            self.dependencyGraph.add_node(GCCMakeDependency())
-        elif self.toolset == "vs" and sys.platform == 'win32':
+        if self.toolset == "gcc":
+            self.dependencyGraph.add_node(GNUDependency())
+        elif self.toolset == "vs":
             self.dependencyGraph.add_node(MSVCDependency())
+        elif self.toolset == "clang":
+            self.dependencyGraph.add_node(LLVMDependency())
 
     def _generate(self) -> bool:
         """
@@ -71,12 +73,22 @@ class PremakeBuildSystem(BuildSystem):
             print("Not support platform.")
             sys.exit(1)
 
-        if self.toolset == "GNU":
-            args.append("gmake")
-        elif self.toolset == "vs":
+        if self.ide == "vs":
             args.append("vs2026")
-        elif self.toolset == "xcode":
+        elif self.ide == "xcode":
             args.append("xcode4")
+        elif self.ide == None:
+            args.append("gmake")
+        else:
+            print("Not support ide.")
+            sys.exit(1)
+
+        if self.toolset == "gcc":
+            args.append("--cc=gcc")
+        elif self.toolset == "msvc":
+            args.append("--cc=msc-v145")
+        elif self.toolset == "clang":
+            args.append("--cc=clang")
         else:
             print("Not support toolset.")
             sys.exit(1)
@@ -98,10 +110,10 @@ class PremakeBuildSystem(BuildSystem):
         print(f"\nBuilding {config} configuration...")
         os.chdir(self.solutionDirectory)
 
-        if self.toolset == "GNU":
+        if self.ide == None:
             return self.build_gmake(config)
-        elif self.toolset == "vs":
-            print("Not support toolset.")
+        else:
+            print("Please build it in ide.")
             sys.exit(1)
 
     def _clean(self) -> bool:
@@ -111,7 +123,7 @@ class PremakeBuildSystem(BuildSystem):
         """
         os.chdir(self.solutionDirectory)
 
-        if self.toolset == "GNU":
+        if self.ide == None:
             make_cmd = "make"
             try:
                 subprocess.run([make_cmd, "clean"], check=True)
@@ -120,8 +132,8 @@ class PremakeBuildSystem(BuildSystem):
             except subprocess.CalledProcessError:
                 print("Error: clean failed!")
                 return False
-        elif self.toolset == "vs":
-            print("MAVC do not Run Clean")
+        else:
+            print("No needs to do clean.")
             return True
 
     def build_gmake(self, config: str) -> bool:

@@ -20,7 +20,6 @@ sys.path.insert(0, str(solutionFolder))
 from BuildSystem import BuildSystem
 from PremakeBuildSystem import PremakeBuildSystem
 
-
 class SolutionBuilder:
     """
     @brief High-level build system interface
@@ -84,9 +83,15 @@ action:
         macos           Not support yet
         emscripten      .wasm .js
         
-    --toolset        
-        GNU             Generate GNU makefiles for POSIX, MinGW, and Cygwin
+    --ide        
         vs              Generate Visual Studio project files
+        xcode           Generate XCode project files
+        none            None defined ide
+
+    --toolset        
+        gcc             GNU GCC
+        msvc            Visual Studio MSVC
+        clang           LLVM Clang
     
     --behave
         generate        Generate solution files
@@ -105,6 +110,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description='SolutionBuilder Args')
     parser.add_argument('--build_system', type=str, required=False)
     parser.add_argument('--platform', type=str, required=False)
+    parser.add_argument('--ide', type=str, required=False)
     parser.add_argument('--toolset', type=str, required=False)
     parser.add_argument('--behave', type=str, required=False)
     parser.add_argument('--show_help', type=bool, required=False)
@@ -117,7 +123,7 @@ def main() -> None:
         sys.exit(1)
 
     if args.build_system == "premake":
-        builder.initialize_build_system(PremakeBuildSystem(solutionFolder, args.platform, args.toolset))
+        builder.initialize_build_system(PremakeBuildSystem(solutionFolder, args.platform, args.ide, args.toolset))
     else:
         print("Not supported build system.")
         sys.exit(1)

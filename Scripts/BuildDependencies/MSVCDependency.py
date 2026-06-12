@@ -9,7 +9,6 @@ import os
 import subprocess
 import winreg
 
-
 class MSVCDependency(Dependency):
     """
     @brief Base class for solution MSVC dependency.
@@ -19,7 +18,7 @@ class MSVCDependency(Dependency):
         """
         @brief Construct function.
         """
-        super().__init__("msvc", ["git"])
+        super().__init__("MSVC", ["git"])
 
         # MSVC tools we need to check
         self.requiredTools = ["cl.exe", "link.exe", "lib.exe", "nmake.exe"]

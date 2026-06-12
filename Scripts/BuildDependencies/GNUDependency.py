@@ -1,23 +1,22 @@
 """
-@file GCCMakeDependency.py.
-@brief The GCCMakeDependency Class Definitions.
+@file GNUDependency.py.
+@brief The GNUDependency Class Definitions.
 @author Spices
 """
 
 from Scripts.BuildSystem.Dependency import Dependency
 import shutil
 
-
-class GCCMakeDependency(Dependency):
+class GNUDependency(Dependency):
     """
-    @brief Base class for solution GCC Make dependency.
+    @brief Base class for solution GNU GCC Make dependency.
     """
 
     def __init__(self):
         """
         @brief Construct function.
         """
-        super().__init__("gccmake", ["git"])
+        super().__init__("GNU", ["git"])
 
         # Set required commands
         self.requiredCommands = {
