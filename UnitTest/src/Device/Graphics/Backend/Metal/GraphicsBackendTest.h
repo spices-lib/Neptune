@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_MACOS
+#ifdef NP_GRAPHICS_METAL
 
 #include "Instrumentor.h"
 

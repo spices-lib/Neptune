@@ -1,12 +1,12 @@
 /**
-* @file Image.cpp.
-* @brief The Image Class Implementation.
+* @file Texture.cpp.
+* @brief The Texture Class Implementation.
 * @author Spices.
 */
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D12
 
 #include "Texture.h"
 

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D12
 
 #include "Device/Graphics/Backend/Direct3D12/Infrastructure/DebugUtilsObject.h"
 #include "Device/Graphics/Backend/Direct3D12/Infrastructure/Factory.h"

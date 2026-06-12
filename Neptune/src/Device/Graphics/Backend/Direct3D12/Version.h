@@ -6,10 +6,10 @@
 
 #pragma once
 
+#ifdef NP_GRAPHICS_DIRECT3D12
+
 #include <d3d12.h>
 #include <dxgi1_6.h>
-
-#ifdef NP_PLATFORM_WINDOWS
 
 namespace Neptune::Direct3D12 {
 	
