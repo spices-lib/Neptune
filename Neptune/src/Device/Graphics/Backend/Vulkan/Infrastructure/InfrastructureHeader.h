@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "Device/Graphics/Backend/Vulkan/Infrastructure/Instance.h"
 #include "Device/Graphics/Backend/Vulkan/Infrastructure/Functions.h"

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "Core/Core.h"
 #include "Render/Frontend/Core.h"

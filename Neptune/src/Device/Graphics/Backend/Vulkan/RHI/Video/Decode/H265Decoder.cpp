@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "H265Decoder.h"
 #include "Device/Graphics/Backend/Vulkan/VideoParser/Decoder/VulkanH265Decoder.h"

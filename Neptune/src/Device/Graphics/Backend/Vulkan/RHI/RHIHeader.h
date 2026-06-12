@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "Device/Graphics/Backend/Vulkan/RHI/RenderPass.h"
 #include "Device/Graphics/Backend/Vulkan/RHI/DescriptorList.h"

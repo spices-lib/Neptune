@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "VulkanVideoParserIf.h"
 #include "Device/Graphics/Backend/Vulkan/VideoParser/STD/nvVulkanh265ScalingList.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "Device/Graphics/Backend/Vulkan/VideoParser/PictureBufferBase.h"
 #include "Device/Graphics/Backend/Vulkan/VideoParser/STD/StdVideoPictureParametersSet.h"

@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #if defined(__x86_64__) || defined(_M_X64)
 #include "SIMD.h"

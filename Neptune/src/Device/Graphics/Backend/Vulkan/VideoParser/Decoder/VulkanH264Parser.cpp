@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include <stdio.h>
 #include "Device/Graphics/Backend/Vulkan/VideoParser/Decoder/VulkanVideoParserIf.h"

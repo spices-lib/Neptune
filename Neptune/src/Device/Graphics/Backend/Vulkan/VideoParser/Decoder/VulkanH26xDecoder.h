@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 enum class slice_type_e : uint8_t
 {

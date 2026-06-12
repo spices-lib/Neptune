@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "VP9Decoder.h"
 #include "Device/Graphics/Backend/Vulkan/VideoParser/Decoder/VulkanAV1Decoder.h"

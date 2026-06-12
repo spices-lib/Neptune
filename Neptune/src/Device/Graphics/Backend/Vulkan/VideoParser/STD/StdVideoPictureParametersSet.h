@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "Core/Core.h"
 #include <vk_video/vulkan_video_codec_h264std.h>

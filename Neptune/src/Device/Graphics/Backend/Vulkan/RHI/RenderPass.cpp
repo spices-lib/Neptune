@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #include "RenderPass.h"
 #include "Device/Graphics/Backend/Vulkan/Infrastructure/DebugUtilsObject.h"

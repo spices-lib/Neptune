@@ -1,6 +1,6 @@
 #include "Pchheader.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 
 #if defined(__aarch64__) // || defined(_M_ARM64)
 #include "arm_sve.h"
