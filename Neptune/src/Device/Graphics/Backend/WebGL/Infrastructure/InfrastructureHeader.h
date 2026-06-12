@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGL
 
 #include "Device/Graphics/Backend/WebGL/Infrastructure/Infrastructure.h"
 

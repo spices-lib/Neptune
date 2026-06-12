@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGPU
 
 #include "Core.h"
 

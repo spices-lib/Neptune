@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGL
 
 #include "GraphicsBackend.h"
 #include "Infrastructure/InfrastructureHeader.h"

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGPU
 
 #include "Device/Graphics/Backend/WebGPU/Infrastructure/Instance.h"
 #include "Device/Graphics/Backend/WebGPU/Infrastructure/DebugUtilsObject.h"
