@@ -8,19 +8,24 @@
 #include "RenderInterface.h"
 #include "Render/Frontend/Core.h"
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_VULKAN
 #include "Device/Graphics/Backend/Vulkan/Core.h"
-
 #include <backends/imgui_impl_vulkan.h>
+#endif
+
+#ifdef NP_GRAPHICS_OPENGL
 #include <backends/imgui_impl_opengl3.h>
 #endif
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 #include <backends/imgui_impl_dx11.h>
+#endif
+
+#ifdef NP_GRAPHICS_DIRECT3D12
 #include <backends/imgui_impl_dx12.h>
 #endif
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGPU
 #include <backends/imgui_impl_wgpu.h>
 #endif
 
@@ -32,17 +37,23 @@ namespace Neptune::imgui {
 
 		switch (backend)
 		{
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 			case RenderBackendEnum::Direct3D11: return CreateSP<Direct3D11Interface>();
+#endif
+			
+#ifdef NP_GRAPHICS_DIRECT3D12
 			case RenderBackendEnum::Direct3D12: return CreateSP<Direct3D12Interface>();
 #endif
-
-#ifndef NP_PLATFORM_EMSCRIPTEN
+			
+#ifdef NP_GRAPHICS_OPENGL
 			case RenderBackendEnum::OpenGL: return CreateSP<OpenGLInterface>();
+#endif
+			
+#ifdef NP_GRAPHICS_VULKAN
 			case RenderBackendEnum::Vulkan: return CreateSP<VulkanInterface>();
 #endif
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGPU
 			case RenderBackendEnum::WebGPU: return CreateSP<WebGPUInterface>();
 #endif
 			
@@ -54,7 +65,7 @@ namespace Neptune::imgui {
 		}
 	}
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_OPENGL
 	
 	void OpenGLInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
@@ -91,6 +102,10 @@ namespace Neptune::imgui {
 			ImGui::RenderPlatformWindowsDefault();
 		}
 	}
+	
+#endif
+    
+#ifdef NP_GRAPHICS_VULKAN
 	
 	void VulkanInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
@@ -148,7 +163,7 @@ namespace Neptune::imgui {
 	
 #endif
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 	
 	void Direct3D11Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
@@ -188,6 +203,10 @@ namespace Neptune::imgui {
 			ImGui::RenderPlatformWindowsDefault();
 		}
 	}
+	
+#endif
+    
+#ifdef NP_GRAPHICS_DIRECT3D12
 	
 	void Direct3D12Interface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{
@@ -243,7 +262,7 @@ namespace Neptune::imgui {
 
 #endif
 	
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGPU
 	
 	void WebGPUInterface::OnInitialize(const std::unordered_map<std::string, std::any>& infrastructure) const
 	{

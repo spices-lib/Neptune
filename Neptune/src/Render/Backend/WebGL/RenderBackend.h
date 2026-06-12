@@ -6,7 +6,7 @@
 
 #pragma once
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGL
 
 #include "Core/Core.h"
 #include "Render/Frontend/RenderFrontend.h"

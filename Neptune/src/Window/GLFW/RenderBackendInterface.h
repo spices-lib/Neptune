@@ -56,6 +56,8 @@ namespace Neptune::GLFW {
     */
     SP<APIInterface> CreateInterface(RenderBackendEnum backend);
 
+#ifdef NP_GRAPHICS_OPENGL
+    
     /**
     * @brief OpenGL APIInterface.
     */
@@ -83,6 +85,10 @@ namespace Neptune::GLFW {
         std::vector<const char*> Extension() const override { return {}; }
     };
 
+#endif
+    
+#ifdef NP_GRAPHICS_VULKAN
+    
     /**
     * @brief Vulkan APIInterface.
     */
@@ -110,7 +116,9 @@ namespace Neptune::GLFW {
         std::vector<const char*> Extension() const override;
     };
 
-#ifdef NP_PLATFORM_WINDOWS
+#endif
+    
+#ifdef NP_GRAPHICS_DIRECT3D11
     
     /**
     * @brief Direct3D11 APIInterface.
@@ -138,6 +146,10 @@ namespace Neptune::GLFW {
         */
         std::vector<const char*> Extension() const override { return {}; }
     };
+    
+#endif
+    
+#ifdef NP_GRAPHICS_DIRECT3D12
     
     /**
     * @brief Direct3D12 APIInterface.

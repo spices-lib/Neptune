@@ -27,8 +27,14 @@ namespace Neptune::EmscriptenGLFW {
 
 		switch (backend)
 		{
+#ifdef NP_GRAPHICS_WEBGL
 			case RenderBackendEnum::WebGL:      return CreateSP<WebGLInterface>();
+#endif
+			
+#ifdef NP_GRAPHICS_WEBGPU
 			case RenderBackendEnum::WebGPU:     return CreateSP<WebGPUInterface>();
+#endif
+			
 			default:
 			{
 				NEPTUNE_CORE_CRITICAL("Not supported RenderBackend in Emscripten GLFW Configuration.")
@@ -37,6 +43,8 @@ namespace Neptune::EmscriptenGLFW {
 		}
 	}
 
+#ifdef NP_GRAPHICS_WEBGL
+	
 	void WebGLInterface::APILoad(GLFWwindow* handle) const
 	{
 		NEPTUNE_PROFILE_ZONE
@@ -49,6 +57,8 @@ namespace Neptune::EmscriptenGLFW {
 
         emscripten_webgl_make_context_current(ctx);
 	}
+	
+#endif
 
 }
 

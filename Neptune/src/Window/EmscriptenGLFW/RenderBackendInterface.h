@@ -56,6 +56,8 @@ namespace Neptune::EmscriptenGLFW {
     */
     SP<APIInterface> CreateInterface(RenderBackendEnum backend);
 
+#ifdef NP_GRAPHICS_WEBGL
+    
     /**
     * @brief WebGL APIInterface.
     */
@@ -83,6 +85,10 @@ namespace Neptune::EmscriptenGLFW {
         std::vector<const char*> Extension() const override { return {}; }
     };
 
+#endif
+    
+#ifdef NP_GRAPHICS_WEBGPU
+    
     /**
     * @brief WebGPU APIInterface.
     */
@@ -109,6 +115,8 @@ namespace Neptune::EmscriptenGLFW {
         */
         std::vector<const char*> Extension() const override { return {}; }
     };
+    
+#endif
 
 }
 

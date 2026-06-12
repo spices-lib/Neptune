@@ -7,20 +7,31 @@
 #include "Pchheader.h"
 #include "RenderFrontend.h"
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
 #include "Render/Backend/Direct3D11/RenderBackend.h"
+#endif
+
+#ifdef NP_GRAPHICS_DIRECT3D12
 #include "Render/Backend/Direct3D12/RenderBackend.h"
 #endif
 
-#ifdef NP_PLATFORM_MACOS
+#ifdef NP_GRAPHICS_METAL
 #include "Render/Backend/Metal/RenderBackend.h"
 #endif
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
-#include "Render/Backend/WebGPU/RenderBackend.h"
+#ifdef NP_GRAPHICS_WEBGL
 #include "Render/Backend/WebGL/RenderBackend.h"
-#else
+#endif
+
+#ifdef NP_GRAPHICS_WEBGPU
+#include "Render/Backend/WebGPU/RenderBackend.h"
+#endif
+
+#ifdef NP_GRAPHICS_OPENGL
 #include "Render/Backend/OpenGL/RenderBackend.h"
+#endif
+
+#ifdef NP_GRAPHICS_VULKAN
 #include "Render/Backend/Vulkan/RenderBackend.h"
 #endif
 
@@ -42,20 +53,31 @@ namespace Neptune {
 
         switch(backend)
         {
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
             case RenderBackendEnum::Direct3D11: sp = CreateSP<Direct3D11::RenderBackend>(); break;
+#endif
+            
+#ifdef NP_GRAPHICS_DIRECT3D12
             case RenderBackendEnum::Direct3D12: sp = CreateSP<Direct3D12::RenderBackend>(); break;
 #endif
 
-#ifdef NP_PLATFORM_MACOS
+#ifdef NP_GRAPHICS_METAL
             case RenderBackendEnum::Metal: sp = CreateSP<Metal::RenderBackend>(); break;
 #endif
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGL
             case RenderBackendEnum::WebGL:  sp = CreateSP<WebGL::RenderBackend>();  break;
+#endif
+            
+#ifdef NP_GRAPHICS_WEBGPU
             case RenderBackendEnum::WebGPU: sp = CreateSP<WebGPU::RenderBackend>(); break;
-#else
+#endif
+            
+#ifdef NP_GRAPHICS_OPENGL
             case RenderBackendEnum::OpenGL: sp = CreateSP<OpenGL::RenderBackend>(); break;
+#endif
+            
+#ifdef NP_GRAPHICS_VULKAN
             case RenderBackendEnum::Vulkan: sp = CreateSP<Vulkan::RenderBackend>(); break;
 #endif
             

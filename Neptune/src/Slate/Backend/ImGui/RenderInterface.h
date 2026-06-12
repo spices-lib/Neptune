@@ -52,7 +52,7 @@ namespace Neptune::imgui {
     */
     SP<RenderInterface> CreateRenderInterface(RenderBackendEnum backend);
 
-#ifndef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_OPENGL
     
     /**
     * @brief OpenGL Interface.
@@ -92,6 +92,10 @@ namespace Neptune::imgui {
         
     };
 
+#endif
+    
+#ifdef NP_GRAPHICS_VULKAN
+    
     /**
     * @brief Vulkan Interface.
     */
@@ -132,7 +136,7 @@ namespace Neptune::imgui {
 
 #endif
 
-#ifdef NP_PLATFORM_WINDOWS
+#ifdef NP_GRAPHICS_DIRECT3D11
     
     /**
     * @brief Direct3D11 Interface.
@@ -171,6 +175,10 @@ namespace Neptune::imgui {
         void RenderFrame(void* payload = nullptr) const override;
         
     };
+    
+#endif
+    
+#ifdef NP_GRAPHICS_DIRECT3D12
     
     /**
     * @brief Direct3D12 Interface.
@@ -212,7 +220,7 @@ namespace Neptune::imgui {
     
 #endif
 
-#ifdef NP_PLATFORM_EMSCRIPTEN
+#ifdef NP_GRAPHICS_WEBGPU
     
     /**
     * @brief WebGPU Interface.

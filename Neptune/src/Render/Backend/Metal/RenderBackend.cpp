@@ -6,7 +6,7 @@
 
 #include "Pchheader.h"
 
-#ifdef NP_PLATFORM_MACOS
+#ifdef NP_GRAPHICS_METAL
 
 #include "RenderBackend.h"
 #include "GPURuntime/Graphics/Backend/Metal/Infrastructure/InfrastructureHeader.h"
