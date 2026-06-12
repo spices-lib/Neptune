@@ -27,7 +27,11 @@ project "UnitTest"
 
 	-- Macros Definitions
 	defines
-	{}
+	{
+		-- UnitTest needs test features directly
+		platform.GetComputeFeatures(compiler.GetToolset()),
+		platform.GetGraphicsFeatures(),
+	}
 
 	-- The Solution Additional Include Folder.
 	includedirs
@@ -87,8 +91,6 @@ project "UnitTest"
 		includedirs
 		{
 			"%{vendor.includes.emscripten}",                           -- Library: emscripten Header Folder.
-			"%{vendor.includes.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-			"%{vendor.includes.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
 		}
 
 		-- Emscripten Specific Solution Macro Definitions.
@@ -100,7 +102,54 @@ project "UnitTest"
 
 		-- Emscripten Specific Solution Dependency.
 		links
-		{}
+		{
+			"ImGui_WebGPU",                               -- Dependency: imgui
+		}
+
+		-- The Solution link options
+		linkoptions
+		{
+			"--use-port=%{vendor.includes.emscripten_glfw}/port/emscripten-glfw3.py",     -- Dependency: emscripten-glfw
+			"--use-port=%{vendor.includes.emdawnwebgpu}/../../emdawnwebgpu.port.py",      -- Dependency: WebGPU
+			"-s USE_WEBGL2=1",                                                            -- Dependency: WebGL
+	      --"-s USE_WEBGPU=1",                                                            -- This flag is deprecated(use emdawnwebgpu instead of official)
+	        "--closure=1",                                                                -- Reduce code size
+			"-s DISABLE_EXCEPTION_CATCHING",                                              -- Disable Exception catch
+			"-s ALLOW_MEMORY_GROWTH",                                                     -- Allow Memory growth
+			"-s WASM_BIGINT",                                                             -- Enable BigInt in JS
+			"-s WASM=1",                                                                  -- Output wasm
+			"-s STACK_SIZE=4194304",                                                      -- Expand stack size to 4M
+			"-s TOTAL_MEMORY=64MB",                                                       -- Wasm total memory to 64M
+		    "-s PROXY_TO_PTHREAD",                                                        -- Run in pthread(not main thread)
+		    "-s ASYNCIFY=1",                                                              -- Async between Wasm and Js
+			"-s PTHREAD_POOL_SIZE=12",                                                    -- Js thread size 12
+			"-pthread",                                                                   -- Enable pthread(required in both link and compile)
+			"-s USE_PTHREADS=1",                                                          -- Use pthread
+			"-s EXIT_RUNTIME=1",                                                          -- Allow return in runtime
+			"-s SHARED_MEMORY",                                                           -- Shared memory
+			"-s OFFSCREENCANVAS_SUPPORT",                                                 -- Transform canvas to pthread
+			"-s OFFSCREENCANVASES_TO_PTHREAD='nepnep'",                                   -- Agent canvas to pthread
+			"-o %{cfg.targetdir}/%{prj.name}.js"                                          -- Generate js file
+		}
+
+		-- The Solution build options
+		buildoptions
+		{
+			"-pthread",                                                                   -- Enable pthread
+			"-matomics",                                                                  -- Enable atomics
+    		"-mbulk-memory",                                                              -- Enable bulk-memory
+		}
+
+		-- Configuration: Debug
+		filter {"system:emscripten", "configurations:Debug"}
+
+			-- The Solution debug link options
+			linkoptions
+			{
+				"-gsource-map",                                              -- Map Source to c++
+				"-gseparate-dwarf=%{cfg.targetdir}/%{prj.name}.debug.wasm",  -- Generate debug symbol version wasm
+				"--emit-symbol-map",                                         -- Export symbol
+			}
 
 	-- Configuration: Debug
 	filter "configurations:Debug"
@@ -114,6 +163,20 @@ project "UnitTest"
 		runtime "Debug"
 		symbols "On"
 		
+		-- Platform: Emscripten
+		filter {"configurations:Debug", "system:emscripten"}
+
+			-- The Solution PostCommands
+			postbuildcommands {
+
+				-- Create target directory.
+				--os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Debug/"',
+
+				-- Copy js and wasm to Nepnep.
+				--os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Debug\\"'
+				--	or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Debug/"'
+			}
+
 	-- Configuration: Release.
 	filter "configurations:Release"
 
@@ -125,4 +188,18 @@ project "UnitTest"
 
 		runtime "Release"
 		optimize "On"
+
+		-- Platform: Emscripten
+		filter {"configurations:Release", "system:emscripten"}
+
+			-- The Solution PostCommands
+			postbuildcommands {
+
+				-- Create target directory.
+				--os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Release/"',
+
+				-- Copy js and wasm to Nepnep.
+				--os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Release\\"'
+				--	or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Release/"'
+			}
 		

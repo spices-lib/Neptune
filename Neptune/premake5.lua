@@ -81,7 +81,6 @@ project "Neptune"
 	-- The Solution Dependency
 	links
 	{
-      --"imgui",                              -- Dependency: imgui (Do not known why can not link here as a lib)
 		"yaml-cpp",                           -- Dependency: yaml-cpp
 		"implot",                             -- Dependency: implot
 	}
@@ -218,12 +217,16 @@ project "Neptune"
 
 		-- Emscripten Specific Solution Dependency.
 		links
-		{}
+		{
+			--"ImGui_WebGPU",                              -- Dependency: imgui(emscripten require must link in .wasm project)
+		}
 
 		-- The Solution build options
 		buildoptions
 		{
-			"-pthread"       -- Enable pthread
+			"-pthread",                                    -- Enable pthread
+			"-matomics",                                   -- Enable atomics
+    		"-mbulk-memory",                               -- Enable bulk-memory
 		}
 
 		-- The Solution make settings

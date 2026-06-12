@@ -7,6 +7,8 @@
 #pragma once
 #include "Core/Core.h"
 
+#include <cstdint>
+
 namespace Neptune {
 
     enum class WorldMarkBit : uint32_t

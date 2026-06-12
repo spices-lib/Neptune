@@ -4,6 +4,6 @@ REM To build system directory
 cd "../../BuildSystem"
 
 REM Build with configure
-call python SolutionBuilder.py --build_system=premake --platform=emscripten --toolset=gcc --behave=generate
+call python SolutionBuilder.py --build_system=premake --platform=emscripten --behave=generate
 
 #PAUSE

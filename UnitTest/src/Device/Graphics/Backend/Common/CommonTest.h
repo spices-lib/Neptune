@@ -55,17 +55,17 @@ namespace Neptune::Render::Common::Test {
 		
 		Container::IterTuple(tuple, []<typename EInfrastructure>(EInfrastructure& e) {
 		
-#define UNIT_DEFINE_WITH_ENUM(Id)                                                                         \
-			if constexpr (requires{ { EInfrastructure::Id } -> std::convertible_to<EInfrastructure>; }) { \
-				                                                                                          \
-				const auto unit0 = Unit<size_t*, static_cast<uint8_t>(EInfrastructure::Id)>{};            \
-				const auto unit1 = Unit<size_t , EInfrastructure::Id>{};                                  \
-				                                                                                          \
-				EXPECT_EQ(sizeof(decltype(unit0)), sizeof(decltype(unit0)::Handle) + sizeof(size_t));     \
-				EXPECT_EQ(sizeof(decltype(unit1)), sizeof(decltype(unit1)::Handle) + sizeof(size_t));     \
-			                                                                                              \
-				EXPECT_LE(sizeof(decltype(unit0)::Handle), sizeof(size_t));                               \
-				EXPECT_LE(sizeof(decltype(unit1)::Handle), sizeof(size_t));                               \
+#define UNIT_DEFINE_WITH_ENUM(Id)                                                                                  \
+			if constexpr (requires{ { EInfrastructure::Id } -> std::convertible_to<EInfrastructure>; }) {          \
+				                                                                                                   \
+				const auto unit0 = Unit<size_t*, static_cast<uint8_t>(EInfrastructure::Id)>{};                     \
+				const auto unit1 = Unit<size_t , EInfrastructure::Id>{};                                           \
+				                                                                                                   \
+				EXPECT_EQ(sizeof(decltype(unit0)), sizeof(typename decltype(unit0)::Handle) + sizeof(size_t));     \
+				EXPECT_EQ(sizeof(decltype(unit1)), sizeof(typename decltype(unit1)::Handle) + sizeof(size_t));     \
+			                                                                                                       \
+				EXPECT_LE(sizeof(typename decltype(unit0)::Handle), sizeof(size_t));                               \
+				EXPECT_LE(sizeof(typename decltype(unit1)::Handle), sizeof(size_t));                               \
 			}
 			
 			UNIT_DEFINE_WITH_ENUM(Count)

@@ -90,9 +90,6 @@ project "Editor"
 		includedirs
 		{
 			"%{vendor.includes.emscripten}",                           -- Library: emscripten Header Folder.
-			"%{vendor.includes.emscripten_glfw}/include",              -- Library: emscripten_glfw Header Folder.
-			"%{vendor.includes.emscripten_glfw}/external",             -- Library: emscripten_glfw Header Folder.
-			"%{vendor.includes.emdawnwebgpu}",                         -- Library: emdawnwebgpu Header Folder.
 		}
 
 		-- Emscripten Specific Solution Macro Definitions.
@@ -113,9 +110,8 @@ project "Editor"
 		{
 			"--use-port=%{vendor.includes.emscripten_glfw}/port/emscripten-glfw3.py",     -- Dependency: emscripten-glfw
 			"--use-port=%{vendor.includes.emdawnwebgpu}/../../emdawnwebgpu.port.py",      -- Dependency: WebGPU
-			"-pthread",                                                                   -- Compile emscripten-glfw with pthread
 			"-s USE_WEBGL2=1",                                                            -- Dependency: WebGL
-	      --"-s USE_WEBGPU=1",                                                            -- This flag is deprecated
+	      --"-s USE_WEBGPU=1",                                                            -- This flag is deprecated(use emdawnwebgpu instead of official)
 	        "--closure=1",                                                                -- Reduce code size
 			"-s DISABLE_EXCEPTION_CATCHING",                                              -- Disable Exception catch
 			"-s ALLOW_MEMORY_GROWTH",                                                     -- Allow Memory growth
@@ -126,6 +122,7 @@ project "Editor"
 		    "-s PROXY_TO_PTHREAD",                                                        -- Run in pthread(not main thread)
 		    "-s ASYNCIFY=1",                                                              -- Async between Wasm and Js
 			"-s PTHREAD_POOL_SIZE=12",                                                    -- Js thread size 12
+			"-pthread",                                                                   -- Enable pthread(required in both link and compile)
 			"-s USE_PTHREADS=1",                                                          -- Use pthread
 			"-s EXIT_RUNTIME=1",                                                          -- Allow return in runtime
 			"-s SHARED_MEMORY",                                                           -- Shared memory
@@ -137,7 +134,9 @@ project "Editor"
 		-- The Solution build options
 		buildoptions
 		{
-			"-pthread"       -- Enable pthread
+			"-pthread",                                                                   -- Enable pthread
+			"-matomics",                                                                  -- Enable atomics
+    		"-mbulk-memory",                                                              -- Enable bulk-memory
 		}
 
 		-- Configuration: Debug
@@ -170,11 +169,11 @@ project "Editor"
 			postbuildcommands {
 
 				-- Create target directory.
-				os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Debug/"',
+				--os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Debug/"',
 
 				-- Copy js and wasm to Nepnep.
-				os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Debug\\"'
-					or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Debug/"'
+				--os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Debug\\"'
+				--	or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Debug/"'
 			}
 
 	-- Configuration: Release.
@@ -196,9 +195,9 @@ project "Editor"
 			postbuildcommands {
 
 				-- Create target directory.
-				os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Release/"',
+				--os.host() == "windows" and '' or 'mkdir -p "%{wks.location}/Nepnep/public/wasm/Release/"',
 
 				-- Copy js and wasm to Nepnep.
-				os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Release\\"'
-					or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Release/"'
+				--os.host() == "windows" and 'xcopy /Y /I "%{cfg.targetdir}\\" "%{wks.location}/Nepnep/public/wasm/Release\\"'
+				--	or 'cp -rf "%{cfg.targetdir}/." "%{wks.location}/Nepnep/public/wasm/Release/"'
 			}

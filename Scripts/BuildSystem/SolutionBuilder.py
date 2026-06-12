@@ -86,13 +86,15 @@ action:
     --ide        
         vs              Generate Visual Studio project files
         xcode           Generate XCode project files
-        none            None defined ide
+        none            None defined ide(do not pass value)
 
-    --toolset        
+    --toolset
         gcc             GNU GCC
         msvc            Visual Studio MSVC
         clang           LLVM Clang
     
+                        if platform == emscripten, please do not pass value, for emscripten use it's own compiler(emcc em++)
+
     --behave
         generate        Generate solution files
         build-debug     Build solution in debug

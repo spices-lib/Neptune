@@ -24,7 +24,7 @@ class PremakeBuildSystem(BuildSystem):
     @brief Premake-based build system implementation
     """
 
-    def __init__(self, solution_root: Path, platform: str = "emscripten", ide: str = None, toolset: str = "gcc"):
+    def __init__(self, solution_root: Path, platform: str = None, ide: str = None, toolset: str = None):
         """
         @brief Construct function.
         @param[in] solution_root Solution root folder.
@@ -36,6 +36,7 @@ class PremakeBuildSystem(BuildSystem):
 
         if self.platform == "emscripten":
             self.dependencyGraph.add_node(EmsdkDependency())
+            self.dependencyGraph.add_node(GNUDependency())
 
         if self.platform == "windows":
             self.dependencyGraph.add_node(TracyDependency())
@@ -89,7 +90,7 @@ class PremakeBuildSystem(BuildSystem):
             args.append("--cc=msc-v145")
         elif self.toolset == "clang":
             args.append("--cc=clang")
-        else:
+        elif self.platform != "emscripten":
             print("Not support toolset.")
             sys.exit(1)
 

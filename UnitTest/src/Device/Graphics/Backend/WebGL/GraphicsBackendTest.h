@@ -10,7 +10,7 @@
 
 #include "Instrumentor.h"
 
-#include <GPURuntime/Graphics/Backend/WebGL/GraphicsBackend.h>
+#include <Device/Graphics/Backend/WebGL/GraphicsBackend.h>
 
 #include <gmock/gmock.h>
 

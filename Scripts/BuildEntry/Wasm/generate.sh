@@ -7,7 +7,7 @@ set -e
 cd "../../BuildSystem"
 
 # Build with configure
-python3 SolutionBuilder.py --build_system=premake --platform=emscripten --toolset=gcc --behave=generate
+python3 SolutionBuilder.py --build_system=premake --platform=emscripten --behave=generate
 
 # Optional: Add a pause equivalent (Linux doesn't have PAUSE, so we can use read)
 # read -p "Press [Enter] to continue..."

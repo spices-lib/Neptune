@@ -16,7 +16,7 @@ class BuildSystem(BasicObject, ABC):
     @brief Base class for build systems
     """
 
-    def __init__(self, solution_root: Path, platform: str = "emscripten", ide: str = "", toolset: str = "gcc"):
+    def __init__(self, solution_root: Path, platform: str = None, ide: str = None, toolset: str = None):
         """
         @brief Construct function.
         @param[in] solution_root Solution root folder.

@@ -27,7 +27,8 @@ class DependencyGraph(BasicObject):
         @brief Add a Dependency to this graph.
         @param[in] dependency Dependency.
         """
-        self.nodes[dependency.name] = dependency
+        if dependency.name not in self.nodes:
+            self.nodes[dependency.name] = dependency
         self.executed = False
 
     def find(self, name: str) -> Optional[Dependency]:
