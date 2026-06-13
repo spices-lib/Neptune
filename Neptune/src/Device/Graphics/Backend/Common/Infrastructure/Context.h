@@ -7,6 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Device/Graphics/Backend/Common/Concept.h"
+#include "Core/Container/KVTuple.h"
 
 #include <array>
 
@@ -27,11 +28,13 @@ namespace Neptune::Render::Common {
     */
     template<typename T_, auto E_>
     requires IsEnum<decltype(E_)>
-	struct IInfrastructure final
+	struct IInfrastructure final : Container::KVTuple<T_, E_>
 	{
-		using T = T_;
+        using KVTuple = Container::KVTuple<T_, E_>;
+        
+		using T = KVTuple::T;
 
-        static constexpr auto E = E_;
+        static constexpr auto E = KVTuple::E;
 	};
 
     /**

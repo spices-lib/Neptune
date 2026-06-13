@@ -77,6 +77,8 @@ namespace Neptune {
 
 		/**
 		* @brief Execute all function pointer. 
+		* 
+		* @param[in] args .
 		*/
 		void Broadcast(Args&&... args);
 
@@ -127,7 +129,7 @@ namespace Neptune {
 	{
 		NEPTUNE_PROFILE_ZONE
 
-		m_Agents->ForEach([&](const auto& k, const auto& v) {
+		m_Agents->ForEach([&](const auto& k, const auto& v) -> bool {
 			
 			std::invoke(v, std::forward<Args>(args)...);
 			

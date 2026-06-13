@@ -11,12 +11,6 @@
 #include "DebugUtilsObject.h"
 #include "DeviceContext.h"
 
-#ifdef NEPTUNE_DEBUG
-#define USE_PIX
-#endif
-
-#include <WinPixEventRuntime/pix3.h>
-
 namespace Neptune::Direct3D11 {
 
 	DebugUtilsObject::DebugUtilsObject(Context& context, EInfrastructure e)
