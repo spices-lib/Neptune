@@ -7,7 +7,7 @@
 #pragma once
 #include "Core/Core.h"
 
-namespace Neptune::Graphics::RHI {
+namespace Neptune::RHI {
     
     /**
     * @brief Enum of RHI.

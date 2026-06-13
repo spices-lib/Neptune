@@ -11,7 +11,7 @@
 #include <functional>
 #include <any>
 
-namespace Neptune::Graphics::RHI {
+namespace Neptune::RHI {
 
 	/**
 	* @brief Delegate of RHI.
